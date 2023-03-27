@@ -24,5 +24,11 @@
 }
 
 .text-color-light {
-  color: #acacac;
+  color: #acacac !important;
+}
+
+@media(max-width:767px) {
+  .heading {
+    text-align: center;
+  }
 }

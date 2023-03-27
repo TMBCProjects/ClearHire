@@ -23,3 +23,9 @@
     width: 630px;
     color: #ACACAC;
 }
+
+@media(max-width:767px) {
+    .banner-text {
+        width: 100%;
+    }
+}

@@ -70,7 +70,7 @@ const About = () => {
       </div>
       <div className="row d-flex justify-content-center align-items-center my-5">
         <div className="col-md-6">
-          <img src={Team} alt="" />
+          <img src={Team} alt="" className="team-img" />
         </div>
         <div className="col-md-6">
           <h2>About Us</h2>

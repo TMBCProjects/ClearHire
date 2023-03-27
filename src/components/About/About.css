@@ -38,3 +38,13 @@
     width: 50%;
     height: 50%;
 }
+
+.team-img {
+    width: 587px;
+}
+
+@media(max-width:767px) {
+    .team-img {
+        width: 100%;
+    }
+}
