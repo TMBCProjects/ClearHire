@@ -1,0 +1,52 @@
+.logo {
+    width: 200px;
+}
+
+.nav-link {
+    font-size: 16px;
+    font-weight: 500 !important;
+}
+
+.btn {
+    width: 150px;
+    border-radius: 0 !important;
+    transition: all .3s ease-in-out;
+    font-weight: 500 !important;
+}
+
+#login-btn {
+    border: 0 !important;
+    background: var(--primary-color);
+    color: #fff;
+    padding: 10px;
+}
+
+#login-btn:hover {
+    background: var(--bg-dark);
+}
+
+#signup-btn {
+    border: 0 !important;
+    background: var(--bg-dark);
+    color: #fff;
+    padding: 10px;
+}
+
+#signup-btn:hover {
+    background: var(--primary-color);
+}
+
+@media(max-width:767px) {
+    .mobile-menu {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        height: 100vh;
+        max-height: 500px;
+    }
+
+    .mobile-menu li {
+        margin: 15px auto;
+    }
+}
