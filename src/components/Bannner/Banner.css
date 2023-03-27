@@ -1,0 +1,25 @@
+#banner {
+    position: relative;
+}
+
+#banner .banner-image {
+    background: url("../../assets/images/bg-dots.svg");
+    background-position: 100% 25%;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner-heading {
+    font-size: 55px;
+    font-weight: 600;
+}
+
+
+.banner-text {
+    font-weight: normal;
+    font-size: 16px;
+    width: 630px;
+    color: #ACACAC;
+}
