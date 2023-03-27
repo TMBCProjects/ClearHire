@@ -16,9 +16,6 @@ export default class Rating {
   skill = "";
   teamPlayer = "";
   note = "";
-  // designation = "";
   // companyId = "";
   // companyName = "";
-  // typeOfEmployment = "";
-  // salary = "";
 }
