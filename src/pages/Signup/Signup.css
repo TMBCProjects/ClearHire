@@ -1,3 +1,6 @@
+.signupHeader{
+    font-size: xx-large;
+}
 
 .showPass{
     float: right;
@@ -6,4 +9,25 @@
     z-index: 2;
     margin-right: 1vh;
     cursor: pointer;
+}
+
+.container-fluid{
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+    padding: 2vh;
+    gap: 5vh;
+}
+
+form{
+    width: 70vh;
+}
+
+label.control-label {
+    padding: 1vh;
+    font-weight: 700;
+}
+
+input{
+    border: 1px solid #00823B !important
 }
