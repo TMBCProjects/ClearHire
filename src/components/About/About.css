@@ -9,9 +9,28 @@
     padding: 0;
 }
 
+
+
 .about-text {
     margin-top: 15px;
 }
+
+@media(max-width:767px) {
+    .about-team {
+        text-align: center;
+        margin-top: 20px !important;
+    }
+
+    .text-heading {
+        font-size: 35px;
+        margin-bottom: 10px;
+    }
+
+    .about-text {
+        text-align: center;
+    }
+}
+
 
 #about .card {
     padding: 20px 0 20px 20px;
@@ -22,6 +41,7 @@
     border-radius: 35px;
 
 }
+
 
 .card-icon {
     width: 80px;
@@ -44,7 +64,24 @@
 }
 
 @media(max-width:767px) {
+    #about .card {
+        text-align: center;
+    }
+
+    #about .card-text {
+        text-align: center;
+        padding: 0 30px;
+    }
+
+    .card-icon {
+        margin: auto;
+    }
+
     .team-img {
-        width: 100%;
+        width: 90%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
     }
 }

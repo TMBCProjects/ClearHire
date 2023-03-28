@@ -46,7 +46,7 @@ const About = () => {
             </div>{" "}
             <div className="card-heading">
               <h5 className="card-title mt-3">Voluptate velit esse cillum.</h5>
-              <p className="card-text  text-color-light">
+              <p className="card-text text-color-light">
                 Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
                 aut fugit, sed quia consequuntur magni.
               </p>
@@ -72,7 +72,7 @@ const About = () => {
         <div className="col-md-6">
           <img src={Team} alt="" className="team-img" />
         </div>
-        <div className="col-md-6">
+        <div className="col-md-6 about-team">
           <h2>About Us</h2>
           <h3 className="text-heading">
             <span className="text-color-green">voluptate velit</span> esse
