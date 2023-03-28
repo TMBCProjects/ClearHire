@@ -4,9 +4,9 @@ import Home from "./pages/Home/Home";
 import Footer from "./components/Footer/Footer";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import SignupEmployer from './pages/Signup/SignupEmployer';
-import Signup_Options from './pages/Signup_Options';
-import Signup_Choose_User from './pages/Signup_Choose_User';
-import Signup_Done from './pages/Signup_Done';
+import Signup_Options from './pages/Signup/Signup_Options';
+import Signup_Choose_User from './pages/Signup/Signup_Choose_User';
+import Signup_Done from './pages/Signup/Signup_Done';
 
 function App() {
   return (
