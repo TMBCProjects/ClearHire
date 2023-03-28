@@ -1,7 +1,12 @@
 export default class Employee {
-  designation = "";
-  companyId = "";
-  companyName = "";
   isActive = false;
   employeeName = "";
+  employeeEmail = "";
+  country = "";
+  state = "";
+  profileImage = "";
+  dateOfBirth = "";
+  // designation = "";
+  // companyId = "";
+  // companyName = "";
 }

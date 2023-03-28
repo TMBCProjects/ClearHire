@@ -1,7 +1,11 @@
 export default class Employer {
-  designation = "";
-  companyId = "";
-  companyName = "";
   isActive = false;
   employerName = "";
+  employerEmail = "";
+  companyName = "";
+  companyWebsite = "";
+  companyLocation = "";
+  companyLogo = "";
+  companyEstablishmentDate = "";
+  // companyId = "";
 }
