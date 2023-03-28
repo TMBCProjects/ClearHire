@@ -19,12 +19,22 @@
   padding: 0;
 }
 
+@media(max-width:767px) {
+  .heading {
+    text-align: center;
+  }
+}
+
 .text-color-green {
   color: var(--primary-color);
 }
 
 .text-color-light {
   color: #acacac !important;
+}
+
+.text-gray {
+  color: #5e5e5e;
 }
 
 @media(max-width:767px) {

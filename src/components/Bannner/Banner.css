@@ -9,13 +9,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    overflow: hidden;
 }
 
-.banner-heading {
+#banner .banner-image .image {
+    width: 520px;
+    height: 586px;
+}
+
+#banner .banner-heading {
     font-size: 55px;
     font-weight: 600;
 }
-
 
 .banner-text {
     font-weight: normal;
@@ -25,7 +31,22 @@
 }
 
 @media(max-width:767px) {
+    .banner-heading {
+        font-size: 35px;
+        text-align: center;
+    }
+
     .banner-text {
+        text-align: center;
         width: 100%;
+    }
+
+    #banner .banner-image {
+        background: none;
+    }
+
+    #banner .banner-image .image {
+        width: 80%;
+        height: 100%;
     }
 }

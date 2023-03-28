@@ -1,9 +1,9 @@
 import "./App.css";
 import Header from "./components/Header/Header";
-import Home from "./pages/Home/Home";
+import Home from "./Pages/Home/Home";
 import Footer from "./components/Footer/Footer";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import Signup from "./pages/Signup/Signup";
+import Signup from "./Pages/Signup/Signup";
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
           <Route path="/" element={<Home />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
         </Routes>
-        <div className="footer">
+        <div className="footer shadow shadow-sm bg-light">
           <Footer />
         </div>
       </Router>
