@@ -42,7 +42,7 @@ const Header = () => {
               </li>
               <li className="nav-item  px-3">
                 <a
-                  href="/#contact"
+                  href="/#login"
                   className="btn"
                   id="login-btn"
                   type="submit"
