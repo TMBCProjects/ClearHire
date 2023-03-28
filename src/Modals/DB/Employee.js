@@ -6,7 +6,11 @@ export default class Employee {
   state = "";
   profileImage = "";
   dateOfBirth = "";
-  // designation = "";
   // companyId = "";
   // companyName = "";
+  // typeOfEmployment = "";
+  // dateOfBirth = "";
+  // portfolioLink = "";
+  // resume = "";
+  // skillsAndPercentage = [];
 }

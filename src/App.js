@@ -1,9 +1,9 @@
 import "./App.css";
 import Header from "./components/Header/Header";
-import Home from "./Pages/Home/Home";
+import Home from "./pages/Home/Home";
 import Footer from "./components/Footer/Footer";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import Signup from "./Pages/Signup/Signup";
+import Signup from "./pages/Signup/Signup";
 
 function App() {
   return (
