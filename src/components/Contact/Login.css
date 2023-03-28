@@ -16,6 +16,7 @@
     background-color: white;
     width: 625px;
     padding: 20px;
+    
 }
 
 .contact-form input {
@@ -44,6 +45,7 @@
     background: #000;
     color: white;
 }
+
 
 @media(max-width:767px) {
     .contact-form {

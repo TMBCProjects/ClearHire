@@ -1,74 +1,48 @@
-import React from "react";
-import { Button, Form, Input } from "antd";
-
+import React, { useState } from "react";
+import eye from "../../../src/assets/images/eye.svg"
+import eyeStrike from "../../../src/assets/images/eyeStrike.svg"
+import "../Signup/Signup.css"
 export default function Signup() {
-  const onFinish = (values) => {
-    console.log("Success:", values);
-  };
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
-  return (
-    <div className="container">
-      <div>
-        <span>Employer Signup</span>
-      </div>
-      <Form
-        name="basic"
-        labelCol={{
-          span: 8,
-        }}
-        wrapperCol={{
-          span: 16,
-        }}
-        style={{
-          maxWidth: 600,
-        }}
-        initialValues={{
-          remember: true,
-        }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off"
-        layout="vertical"
-      >
-        <Form.Item
-          label="Username"
-          name="username"
-          rules={[
-            {
-              required: true,
-              message: "Please input your username!",
-            },
-          ]}
-        >
-          <Input placeholder="Input your company mail id, use an official email address." />
-        </Form.Item>
+    const [showPassword, setShowPassword] = useState(true);
 
-        <Form.Item
-          label="Password"
-          name="password"
-          rules={[
-            {
-              required: true,
-              message: "Please input your password!",
-            },
-          ]}
-        >
-          <Input.Password placeholder="Input your password in here." />
-        </Form.Item>
+    function showPass() {
+        setShowPassword(true)
+        var x = document.getElementById("password-field");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
 
-        <Form.Item
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
-        >
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-        </Form.Item>
-      </Form>
-    </div>
-  );
+    function hidePass() {
+        setShowPassword(false)
+    }
+    return (
+        <div className="container">
+            <div className="signupHeader">
+                <span>Employer Signup</span>
+            </div>
+            <form className="form-horizontal" method="" action="">
+
+                <div className="form-group">
+                    <label className="col-md-4 control-label">Email</label>
+                    <div className="col-md-6">
+                        <input type="email" className="form-control" name="email" value="" />
+                    </div>
+                </div>
+                <div className="form-group">
+                    <label className="col-md-4 control-label">Password</label>
+                    <div className="col-md-6">
+                        <input id="password-field" type="password" className="form-control" name="password" value="secret" />
+                        {showPassword ?
+                            <img src={eyeStrike} alt={'show pass'} width={20} className="showPass" onClick={hidePass}></img>
+                            :
+                            <img src={eye} alt={'show pass'} width={20} className="showPass" onClick={showPass}></img>
+                        }
+                    </div>
+                </div>
+            </form>
+        </div>
+    );
 }

@@ -18,8 +18,11 @@ const Banner = () => {
             fugit, sed quia consequuntur magni dolores eos qui ratione
             voluptatem sequ.
           </p>
-          <div className="row justify-content-start align-items-start mt-3">
-            <div className="col-md-3">
+          <div
+            className="row justify-content-start align-items-start mt-3"
+            id="banner-btn"
+          >
+            <div className="col-md-3 col-5">
               <button className="btn" id="login-btn">
                 Login
               </button>
