@@ -8,9 +8,9 @@ const Header = () => {
     <div id="header">
       <nav className="navbar navbar-expand-lg shadow shadow-sm py-3">
         <div className="container">
-          <a className="navbar-brand" href="/">
+          <Link className="navbar-brand" to="/">
             <img src={Logo} alt="clear-hire-logo" className="logo" />
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -42,7 +42,7 @@ const Header = () => {
               </li>
               <li className="nav-item  px-3">
                 <a
-                  href="/#contact"
+                  href="/#login"
                   className="btn"
                   id="login-btn"
                   type="submit"
@@ -51,8 +51,8 @@ const Header = () => {
                 </a>
               </li>
               <li className="nav-item">
-                <Link to={"/signup"}>
-                  <a className="btn" id="signup-btn" type="submit" href="/signup">
+                <Link to={"/signup-options"}>
+                  <a className="btn" id="signup-btn" type="submit">
                     Signup
                   </a>
                 </Link>

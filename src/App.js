@@ -1,6 +1,6 @@
 import "./App.css";
 import Header from "./components/Header/Header";
-import Home from "./pages/Home/Home";
+import Home from './pages/Home/Home';
 import Footer from "./components/Footer/Footer";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import SignupEmployer from './pages/Signup/SignupEmployer';
@@ -9,7 +9,7 @@ import Signup_Choose_User from './pages/Signup/Signup_Choose_User';
 import Signup_Done from './pages/Signup/Signup_Done';
 
 function App() {
-  return (
+  return(
     <div>
       <Router>
         <Header />
