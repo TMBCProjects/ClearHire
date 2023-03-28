@@ -1,9 +1,9 @@
 import React from "react";
 import "./Login.css";
 
-const Contact = () => {
+const Login = () => {
   return (
-    <div className="container-fluid" id="contact">
+    <div className="container-fluid" id="login">
       <div className="container">
         <div className="row d-flex justify-content-center align-items-center">
           <div className="col-md-5">
@@ -19,8 +19,8 @@ const Contact = () => {
             </p>
           </div>
           <div className="col-md-6">
-            <div className="contact-form">
-              <p className="contact-heading">Login to your account</p>
+            <div className="login-form">
+              <p className="login-heading">Login to your account</p>
 
               <div className="w-75 mx-auto">
                 <div className="mb-3">
@@ -46,7 +46,7 @@ const Contact = () => {
                 </div>
 
                 <div className="mb-3">
-                  <button type="submit" className="btn contact-btn">
+                  <button type="submit" className="btn login-btn">
                     Login
                   </button>
                 </div>
@@ -67,4 +67,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default Login;
