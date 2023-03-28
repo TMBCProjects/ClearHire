@@ -1,15 +1,14 @@
 import React from "react";
+import "./footer.css";
 
 const Footer = () => {
   return (
-    <footer>
-      <div className="container" id="footer">
-        <div className="row d-flex justify-content-center align-items-center py-3">
-          <div className="col-md-8 col-sm-12">
-            <a className="mx-3 text-decoration-none text-gray" href="/">
-              About
-            </a>
-            <a className="mx-3 text-decoration-none text-gray" href="/">
+    <footer className="bg-white">
+      <div className="container my-3" id="footer">
+        <div className="row d-flex justify-content-center align-items-center py-3 foot-con">
+          <div className="col-md-8 col-12 foot-item">
+            <a className=" mx-3 text-decoration-none text-color-light" href="/">About</a>
+            <a className="mx-3 text-decoration-none text-color-light" href="/">
               Careers
             </a>
             <a className="mx-3 text-decoration-none text-gray" href="/">
@@ -29,7 +28,7 @@ const Footer = () => {
             </a>
           </div>
           <div className="col-md-2">
-            <p className="text-gray my-0">Copyright &copy; clearhire</p>
+            <p className="text-color-light px-3 my-0 copy">Copyright &copy; clearhire</p>
           </div>
         </div>
       </div>
