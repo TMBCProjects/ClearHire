@@ -36,19 +36,26 @@ const Header = () => {
               </li>
 
               <li className="nav-item px-3">
-                <a className="nav-link" href="/">Support</a>
+                <a className="nav-link" href="/">
+                  Support
+                </a>
               </li>
               <li className="nav-item  px-3">
-                <button className="btn" id="login-btn" type="submit">
+                <a
+                  href="/#contact"
+                  className="btn"
+                  id="login-btn"
+                  type="submit"
+                >
                   Login
-                </button>
+                </a>
               </li>
               <li className="nav-item">
-              <Link to={"/signup"}>
-                <button className="btn " id="signup-btn" type="submit">
-                  Signup
-                </button>
-              </Link>
+                <Link to={"/signup"}>
+                  <a className="btn" id="signup-btn" type="submit">
+                    Signup
+                  </a>
+                </Link>
               </li>
             </ul>
           </div>

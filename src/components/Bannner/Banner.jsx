@@ -5,8 +5,8 @@ import "./Banner.css";
 const Banner = () => {
   return (
     <div className="container" id="banner">
-      <div className="row">
-        <div className="col-md-6 align-items-center justify-content-center d-flex flex-column">
+      <div className="row align-items-center d-flex">
+        <div className="col-md-6 ">
           <h1 className="banner-heading">
             Eprehenderit in{" "}
             <span className="text-color-green">voluptate velit </span>esse
@@ -17,10 +17,22 @@ const Banner = () => {
             fugit, sed quia consequuntur magni dolores eos qui ratione
             voluptatem sequ.
           </p>
+          <div className="row justify-content-start align-items-start mt-3">
+            <div className="col-md-3">
+              <button className="btn" id="login-btn">
+                Login
+              </button>
+            </div>
+            <div className="col-md-3">
+              <button className="btn" id="signup-btn">
+                Signup
+              </button>
+            </div>
+          </div>
         </div>
         <div className="col-md-6">
           <div className="banner-image">
-            <img src={BannerImage} alt="" width={520} height={586} />
+            <img src={BannerImage} alt="" className="image" />
           </div>
         </div>
       </div>

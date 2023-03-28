@@ -3,10 +3,12 @@ import React from "react";
 const Footer = () => {
   return (
     <footer>
-      <div className="container my-3">
+      <div className="container" id="footer">
         <div className="row d-flex justify-content-center align-items-center py-3">
-          <div className="col-md-8 col-12">
-            <a className="mx-3 text-decoration-none text-color-light" href="/">About</a>
+          <div className="col-md-8 col-sm-12">
+            <a className="mx-3 text-decoration-none text-color-light" href="/">
+              About
+            </a>
             <a className="mx-3 text-decoration-none text-color-light" href="/">
               Careers
             </a>
@@ -16,8 +18,12 @@ const Footer = () => {
             <a className="mx-3 text-decoration-none text-color-light" href="/">
               Cookies
             </a>
-            <a className="mx-3 text-decoration-none text-color-light" href="/">Terms</a>
-            <a className="mx-3 text-decoration-none text-color-light" href="/">Help</a>
+            <a className="mx-3 text-decoration-none text-color-light" href="/">
+              Terms
+            </a>
+            <a className="mx-3 text-decoration-none text-color-light" href="/">
+              Help
+            </a>
             <a className="mx-3 text-decoration-none text-color-light" href="/">
               Feedback
             </a>

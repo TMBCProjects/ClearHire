@@ -19,6 +19,12 @@
   padding: 0;
 }
 
+@media(max-width:767px) {
+  .heading {
+    text-align: center;
+  }
+}
+
 .text-color-green {
   color: var(--primary-color);
 }
