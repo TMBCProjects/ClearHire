@@ -53,7 +53,7 @@ const Contact = () => {
                 <div className="mb-3">
                   <p>
                     Don't have an account?{" "}
-                    <a href="#" className="text-decoration-none">
+                    <a href="/" className="text-decoration-none">
                       <span className="text-color-green fw-bold">Sign up</span>
                     </a>
                   </p>
