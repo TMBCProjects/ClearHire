@@ -6,19 +6,19 @@ const Footer = () => {
       <div className="container my-3">
         <div className="row d-flex justify-content-center align-items-center py-3">
           <div className="col-md-8 col-12">
-            <a className="mx-3 text-decoration-none text-color-light">About</a>
-            <a className="mx-3 text-decoration-none text-color-light">
+            <a className="mx-3 text-decoration-none text-color-light" href="/">About</a>
+            <a className="mx-3 text-decoration-none text-color-light" href="/">
               Careers
             </a>
-            <a className="mx-3 text-decoration-none text-color-light">
+            <a className="mx-3 text-decoration-none text-color-light" href="/">
               Privacy
             </a>
-            <a className="mx-3 text-decoration-none text-color-light">
+            <a className="mx-3 text-decoration-none text-color-light" href="/">
               Cookies
             </a>
-            <a className="mx-3 text-decoration-none text-color-light">Terms</a>
-            <a className="mx-3 text-decoration-none text-color-light">Help</a>
-            <a className="mx-3 text-decoration-none text-color-light">
+            <a className="mx-3 text-decoration-none text-color-light" href="/">Terms</a>
+            <a className="mx-3 text-decoration-none text-color-light" href="/">Help</a>
+            <a className="mx-3 text-decoration-none text-color-light" href="/">
               Feedback
             </a>
           </div>
