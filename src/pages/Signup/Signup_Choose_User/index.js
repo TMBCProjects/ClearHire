@@ -1,7 +1,7 @@
 import React from "react";
 import './main.css'
-import employer from '../../assets/images/employer.svg'
-import employee from '../../assets/images/employee.svg'
+import employer from '../../../assets/images/employer.svg'
+import employee from '../../../assets/images/employee.svg'
 import { Link } from "react-router-dom";
 const index = () => {
     return (
