@@ -5,7 +5,7 @@ const Home = () => {
         <div>
             <Banner />
             <About />
-            <Contact />
+            <Login />
         </div>
     );
 };
