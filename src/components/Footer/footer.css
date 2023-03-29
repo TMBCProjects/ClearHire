@@ -1,20 +1,16 @@
+.footer{
+    position: relative;
+}
+
 @media(max-width:567px) {
     
-    .foot-con{
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        background-color: rgb(255, 255, 255);
-        padding: 0%;
-
-    }
     .foot-item{
         display:grid;
         grid-template-columns: repeat(4,auto);  
 
+        
     }
-        #footer{
+    #footer{
         height: 100%;
         width: 100%;
         margin:0%;
