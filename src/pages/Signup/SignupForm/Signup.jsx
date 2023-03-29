@@ -115,7 +115,7 @@ export default function Signup() {
     return (
         <div className="container-fluid">
             <div className="signupHeader">
-                {user === "employer" ?
+                {user === "Employer" ?
                     <span style={{ fontWeight: "bold" }}>Employer Signup</span>
                     :
                     <span style={{ fontWeight: "bold" }}>Employee Signup</span>
@@ -173,7 +173,7 @@ export default function Signup() {
                     </>
                 }
 
-                {user === "employer" ?
+                {user === "Employer" ?
                     <label className="control-label">Company Location</label>
                     :
                     <label className="control-label">Your Location</label>
@@ -195,14 +195,14 @@ export default function Signup() {
                         onChange={handleStateChange}
                     />
                 </div>
-                {user === "employer" ?
+                {user === "Employer" ?
                     <label className="control-label">Company Logo</label>
                     :
                     <label className="control-label">Profile Image</label>
                 }
                 <UploadPic />
 
-                {user === "employer" ?
+                {user === "Employer" ?
                     <>
                         <label className="control-label">Company Establishment Date</label>
                         <div className="dropdowns">
