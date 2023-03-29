@@ -5,11 +5,11 @@
 //   where,
 // } from 'firebase/firestore'
 // import { firestoreDB } from '../../firebase-config'
-// import Company from '../../Modals/DB/Company'
-// import Manager from '../../Modals/DB/Manager'
-// import { Collections } from '../../utils/Collections'
-// import { Fields } from '../../utils/Fields'
-// import { addDocument, createUser, getDocuments, getDocument, updateDocument, updateUser } from '../../utils/FirebaseUtils'
+import Employee from '../../Modals/DB/Employee'
+import Employer from '../../Modals/DB/Employer'
+import { Collections } from '../../utils/Collections'
+import { Fields } from '../../utils/Fields'
+import { addDocument, createUser, getDocuments, getDocument, updateDocument, updateUser } from '../../utils/FirebaseUtils'
 
 // export default async function defaultFn() {
 // }
@@ -33,64 +33,71 @@
 //   return data
 // }
 // //WRITES
-// export async function writeCompany(name) {
-//   var company = new Company()
-//   company = {
-//     companyName: name,
-//     isActive: true,
-//   }
-//   const cred = await addDocument(Collections.companies, company)
-//   return cred.id
-// }
 
-// export async function writeDesignation(companyId, name) {
-//   await updateDocument(Collections.companies, { designations: arrayUnion(name) }, companyId)
-// }
+export async function addNewEmployee(docId, user) {
+  var employee = new Employee()
+  employee = {
+    employeeName: user.employeeName || "",
+    role: user.role,
+    employeeCountry: user.country,
+    employeeState: user.state,
+    profileImage: user?.profileImage || "",
+    isActive: true,
+    employeeEmail: user.email,
+    dateOfBirth: user.dateOfBirth,
+  };
+  await addDocument(Collections.employees, employee, docId)
+}
 
-// export async function addNewManager(docId, user) {
-//   var manager = new Manager()
-//   manager = {
-//     managerName: user.name || "",
-//     companyName: user.companyName,
-//     companyId: user.companyId,
-//     designation: user.designation,
-//     profileImage:user?.profileImage || "",
-//     isActive: true,
-//     managerEmail: user.email,
-//     whatsappNumber: user.whatsappNumber,
-//   }
-//   await addDocument(Collections.managers, manager, docId)
-// }
-
-// export async function addNewTeammate(docId, user) {
-//   var teammate = new Manager()
-//   teammate = {
-//     teammateName: user.name || "",
-//     companyName: user.companyName,
-//     profileImage: user?.profileImage || "",
-//     companyId: user.companyId,
-//     designation: user.designation,
-//     isActive: true,
-//     teammateEmail: user.email,
-//     whatsappNumber: user.whatsappNumber,
-//   };
-//   await addDocument(Collections.teammates, teammate, docId)
-// }
+export async function addNewEmployer(docId, user) {
+  var employer = new Employer()
+  employer = {
+    companyWebsite: user.companyWebsite,
+    companyName: user.companyName,
+    companyLogo: user.companyLogo || "",
+    companyCountry: user.country,
+    companyState: user.state,
+    isActive: true,
+    employerEmail: user.email,
+    companyEstablishmentYear: user.companyEstablishmentYear,
+  };
+  await addDocument(Collections.employers, employer, docId)
+}
 // //SIGNUP
-// export async function registerUser(doc, user) {
-//   if (user.designation === Collections.Manager) {
-//     await addNewManager(doc, user)
-//   } else {
-//     await addNewTeammate(doc, user)
-//   }
-// }
+export async function registerUser(doc, user) {
+  if (user.role === Collections.Employer) {
+    await addNewEmployer(doc, user);
+  }
+  else if (user.role === Collections.Employee) {
+    await addNewEmployee(doc, user);
+  }
+}
 
-// export async function registerLogin(user) {
-//   const cred = await createUser(user)
-//   updateUser(user)
-//   await registerUser(cred.user.uid, user)
-// }
+export async function registerLogin(user) {
+  const cred = await createUser(user)
+  updateUser(user)
+  await registerUser(cred.user.uid, user)
+}
 
+
+    // employeeName: user.employeeName || "",
+    // role: user.role,
+    // employeeCountry: user.country,
+    // employeeState: user.state,
+    // profileImage: user?.profileImage || "",
+    // isActive: true,
+    // employeeEmail: user.email,
+    // dateOfBirth: user.dateOfBirth,
+    // companyWebsite: user.companyWebsite,
+    // companyName: user.companyName,
+    // companyLogo: user.companyLogo || "",
+    // companyCountry: user.country,
+    // companyState: user.state,
+    // isActive: true,
+    // employerEmail: user.email,
+    // companyEstablishmentYear: user.companyEstablishmentYear,
+        
+        
 // export async function checkUser(email) {
 //   let user = {};
 //   const querySnapshot = await getDocuments(query(
@@ -122,5 +129,4 @@
 //       return null;
 //     }
 //   }
-
 // }

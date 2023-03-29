@@ -6,7 +6,7 @@ export default class Employee {
   state = "";
   profileImage = "";
   dateOfBirth = "";
-  // companyId = "";
+  role = "";
   // companyName = "";
   // typeOfEmployment = "";
   // dateOfBirth = "";
