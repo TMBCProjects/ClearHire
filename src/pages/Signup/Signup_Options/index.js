@@ -1,7 +1,7 @@
 import React from "react";
 import './main.css'
-import linkedin_icon from '../../assets/images/linkedin-icon.svg'
-import mail_icon from '../../assets/images/mail-icon.svg'
+import linkedin_icon from '../../../assets/images/linkedin-icon.svg'
+import mail_icon from '../../../assets/images/mail-icon.svg'
 import { useNavigate } from "react-router-dom";
 
 const Index = () => {
