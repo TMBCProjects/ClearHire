@@ -1,3 +1,4 @@
+import { Button } from "antd";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import Dropdown from "../../../components/Dropdrowns/Dropdown";
@@ -8,7 +9,6 @@ import "../SignupForm/Signup.css"
 const initialValues = {
     email: "",
     password: "",
-    companyWebsite: "",
     name: "",
     state: "",
     country: "",
@@ -46,7 +46,6 @@ export default function Signup() {
             ...values,
             [name]: value,
         });
-        console.log(values)
     };
     const handleDOBChange = (e) => {
         const { name, value } = e.target;
@@ -55,6 +54,9 @@ export default function Signup() {
             [name]: value,
         });
         console.log(dob)
+    };
+    const handleSubmit = () => {
+        console.log(values)
     };
 
     const handleCountryChange = (e) => {
@@ -66,7 +68,6 @@ export default function Signup() {
             ...values,
             "country": selectedCountry,
         });
-        console.log(values)
     }
     const handleStateChange = (e) => {
         selectedState = e.target.value
@@ -74,7 +75,6 @@ export default function Signup() {
             ...values,
             "state": selectedState,
         });
-        console.log(values)
     }
     const handleYearChange = (e) => {
         selectedYear = e.target.value
@@ -82,7 +82,6 @@ export default function Signup() {
             ...values,
             "companyEstablishmentYear": selectedYear,
         });
-        console.log(values)
     }
 
     return (
@@ -183,7 +182,7 @@ export default function Signup() {
                             <Dropdown
                                 values={year}
                                 type={"number"}
-                                name={"companyEstablishmentYear"}
+                                name={"Year"}
                                 id={"Year"}
                                 onChange={handleYearChange}
                             />
@@ -197,27 +196,27 @@ export default function Signup() {
                             <Dropdown
                                 values={dob.date}
                                 type={"number"}
-                                name={"date"}
+                                name={"Date"}
                                 onChange={handleDOBChange}
                             />
 
                             <Dropdown
                                 values={dob.month}
                                 type={"number"}
-                                name={"month"}
+                                name={"Month"}
                                 onChange={handleDOBChange}
                             />
 
                             <Dropdown
                                 values={dob.year}
                                 type={"number"}
-                                name={"year"}
+                                name={"Year"}
                                 onChange={handleDOBChange}
                             />
                         </div>
                     </>
                 }
-                <button className="signupBtn">Signup</button>
+                <Button className="signupBtn" onClick={handleSubmit}>Signup</Button>
             </form>
         </div>
     );

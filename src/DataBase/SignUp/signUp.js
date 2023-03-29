@@ -35,33 +35,33 @@ import { addDocument, createUser, getDocuments, getDocument, updateDocument, upd
 // //WRITES
 
 export async function addNewEmployee(docId, user) {
-  var employee = new Employee()
+  var employee = new Employee();
   employee = {
-    employeeName: user.employeeName || "",
+    employeeName: user.name,
     role: user.role,
     employeeCountry: user.country,
     employeeState: user.state,
-    profileImage: user?.profileImage || "",
+    profileImage: user.profileImage,
     isActive: true,
     employeeEmail: user.email,
     dateOfBirth: user.dateOfBirth,
   };
-  await addDocument(Collections.employees, employee, docId)
+  await addDocument(Collections.employees, employee, docId);
 }
 
 export async function addNewEmployer(docId, user) {
-  var employer = new Employer()
+  var employer = new Employer();
   employer = {
     companyWebsite: user.companyWebsite,
-    companyName: user.companyName,
-    companyLogo: user.companyLogo || "",
+    companyName: user.name,
+    companyLogo: user.profileImage,
     companyCountry: user.country,
     companyState: user.state,
     isActive: true,
     employerEmail: user.email,
     companyEstablishmentYear: user.companyEstablishmentYear,
   };
-  await addDocument(Collections.employers, employer, docId)
+  await addDocument(Collections.employers, employer, docId);
 }
 // //SIGNUP
 export async function registerUser(doc, user) {
@@ -79,24 +79,6 @@ export async function registerLogin(user) {
   await registerUser(cred.user.uid, user)
 }
 
-
-    // employeeName: user.employeeName || "",
-    // role: user.role,
-    // employeeCountry: user.country,
-    // employeeState: user.state,
-    // profileImage: user?.profileImage || "",
-    // isActive: true,
-    // employeeEmail: user.email,
-    // dateOfBirth: user.dateOfBirth,
-    // companyWebsite: user.companyWebsite,
-    // companyName: user.companyName,
-    // companyLogo: user.companyLogo || "",
-    // companyCountry: user.country,
-    // companyState: user.state,
-    // isActive: true,
-    // employerEmail: user.email,
-    // companyEstablishmentYear: user.companyEstablishmentYear,
-        
         
 // export async function checkUser(email) {
 //   let user = {};
