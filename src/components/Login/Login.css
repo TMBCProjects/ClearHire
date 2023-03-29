@@ -1,5 +1,5 @@
 #login {
-    margin: 30px auto 55px;
+    margin: 30px auto 0px;
     background: var(--bg-dark);
     padding: 60px 0;
 }
@@ -12,24 +12,24 @@
 }
 
 .login-form {
-    border-radius: 0;
-    background-color: white;
+    border-radius: 0    ;
+    background-color: white !important;
     width: 625px;
     padding: 20px;
     
 }
 
 .login-form input {
-    border: 0;
-    border-bottom: 1px solid #acacac;
-    border-radius: 0;
-    margin-bottom: 30px;
+    border: 0 !important;
+    border-bottom: 1px solid #acacac !important;
+    border-radius: 0 !important;
+    margin-bottom: 30px !important;
 }
 
 .login-form input:focus {
-    outline: 0;
-    border-color: none;
-    box-shadow: none;
+    outline: 0 !important;
+    border-color: none !important;
+    box-shadow: none !important;
 }
 
 .login-btn {
