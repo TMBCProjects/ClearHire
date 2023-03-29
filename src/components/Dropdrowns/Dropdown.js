@@ -8,7 +8,7 @@ export default function Dropdowns(props) {
         <select className="dropdown" onChange={props.onChange}>
             {props.type === "country"?
             <>
-            <option value="" disabled selected>{props.name}</option>
+            <option value="" disabled selected>{props.id? props.id : props.name}</option>
                 {props.values.map((country, index) => {
                     return(
                         <option key={index} value={country.name}>{country.name}</option>
