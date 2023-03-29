@@ -28,7 +28,10 @@ const Index = () => {
           </p>
         </div>
         <div className="buttons">
-          <button href="/">
+          <button
+            onClick={() => {
+              window.location.href = "/";
+            }}>
             <HomeOutlined style={{ fontSize: "1.4rem", marginRight: "1rem" }} />
             BACK TO HOME
           </button>
