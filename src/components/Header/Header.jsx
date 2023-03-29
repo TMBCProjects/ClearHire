@@ -52,7 +52,7 @@ const Header = () => {
               </li>
               <li className="nav-item">
                 <Link to={"/signup-options"}>
-                  <a className="btn" id="signup-btn" type="submit">
+                  <a className="btn" id="signup-btn" type="submit" href="/signup-options">
                     Signup
                   </a>
                 </Link>

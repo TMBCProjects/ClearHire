@@ -1,11 +1,11 @@
 import React from "react";
 import "./main.css";
 import check from "../../../assets/images/Check.svg";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import { HomeOutlined } from "@ant-design/icons";
 
 const Index = () => {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   return (
     <div className="signup-options-container">
       <div className="options-box">

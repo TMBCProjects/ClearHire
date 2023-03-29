@@ -1,0 +1,17 @@
+.dropdown{
+    width: 100%;
+    padding: 1vh;
+    border: 1px solid #00823B !important;
+    border-radius: 0.375rem;
+    outline: none;
+    background: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url("../../../src/assets/images/dropdownIcon.svg") no-repeat right #fff ;
+    overflow: hidden;
+}
+
+.dropdown svg{
+    margin-right: 2vh;
+}
