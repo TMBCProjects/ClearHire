@@ -42,16 +42,9 @@ export default function Signup() {
             [name]: value,
         });
     };
-    // const handleDOBChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setDob({
-    //         ...values,
-    //         [name]: value,
-    //     });
-    //     console.log(dob)
-    // };
     const handleSubmit = () => {
         console.log(values)
+        // registerLogin(values)
     };
 
     const handleCountryChange = (e) => {
