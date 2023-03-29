@@ -16,7 +16,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />}></Route>
-          <Route path="/signupEmployer" element={<SignupEmployer />}></Route>
+          {/* <Route path="/signupEmployer" element={<SignupEmployer />}></Route> */}
           <Route path="/signup-options" element={<Signup_Options />}></Route>
           <Route path="/user-options" element={<Signup_Choose_User />}></Route>
           <Route path="/signup-done" element={<Signup_Done />}></Route>
