@@ -9,7 +9,7 @@ import SignupChooseUser from './pages/Signup/SignupChooseUser';
 import SignupDone from './pages/Signup/SignupDone';
 
 function App() {
-  return(
+  return (
     <div>
       <Router>
         <Header />
