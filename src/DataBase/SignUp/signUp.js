@@ -8,8 +8,7 @@
 import Employee from '../../Modals/DB/Employee'
 import Employer from '../../Modals/DB/Employer'
 import { Collections } from '../../utils/Collections'
-import { Fields } from '../../utils/Fields'
-import { addDocument, createUser, getDocuments, getDocument, updateDocument, updateUser } from '../../utils/FirebaseUtils'
+import { addDocument, createUser, updateUser } from "../../utils/FirebaseUtils";
 
 // export default async function defaultFn() {
 // }

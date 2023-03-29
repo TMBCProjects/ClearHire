@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Dropdown from "../../../components/Dropdrowns/Dropdown";
 import InputField from "../../../components/Input/InputField";
 import UploadPic from "../../../components/UploadPic/UploadPic";
+import { registerLogin } from "../../../DataBase/SignUp/signUp";
 import "../SignupForm/Signup.css"
 
 const initialValues = {
@@ -13,7 +14,7 @@ const initialValues = {
     state: "",
     country: "",
     profileImage: "",
-    role: sessionStorage.getItem("user"),
+    role: "",
 };
 
 export default function Signup() {
@@ -42,9 +43,14 @@ export default function Signup() {
             [name]: value,
         });
     };
+
     const handleSubmit = () => {
-        console.log(values)
-        // registerLogin(values)
+        values.profileImage = sessionStorage.getItem("profileImage");
+        values.role = sessionStorage.getItem("user");
+        registerLogin(values).then(() => {
+            sessionStorage.removeItem("profileImage");
+            window.location.href = "/signup-done";
+        });
     };
 
     const handleCountryChange = (e) => {
@@ -74,7 +80,6 @@ export default function Signup() {
     const handleDOBYearChange = (e) => {
         const selectedYear = e.target.value;
         values.dateOfBirth = values.dateOfBirth === undefined ? "" : values.dateOfBirth
-        console.log(values)
         const newDateOfBirth = `${values.dateOfBirth.split("/")[0]}/${values.dateOfBirth.split("/")[1]}/${selectedYear}`;
         setValues({
             ...values,
@@ -85,7 +90,6 @@ export default function Signup() {
     const handleMonthChange = (e) => {
         const selectedMonth = e.target.value;
         values.dateOfBirth = values.dateOfBirth === undefined ? "" : values.dateOfBirth
-        console.log(values)
         const newDateOfBirth = `${selectedMonth}/${values.dateOfBirth.split("/")[1]}/${values.dateOfBirth.split("/")[2]}`;
         setValues({
             ...values,
@@ -96,7 +100,6 @@ export default function Signup() {
     const handleDateChange = (e) => {
         const selectedDate = e.target.value;
         values.dateOfBirth = values.dateOfBirth === undefined ? "" : values.dateOfBirth
-        console.log(values)
         const newDateOfBirth = `${values.dateOfBirth.split("/")[0]}/${selectedDate}/${values.dateOfBirth.split("/")[2]}`;
         setValues({
             ...values,
@@ -134,17 +137,7 @@ export default function Signup() {
                     onChange={handleInputChange}
                     placeholder={"Input your password in here."}
                 />
-                {user === "employee" ?
-                    <InputField
-                        label={"Your Name"}
-                        type={"text"}
-                        name={"name"}
-                        value={values.name}
-                        onChange={handleInputChange}
-                        placeholder={"Input your full name."}
-                    />
-                    :
-
+                {user === "Employer" ?
                     <>
                         <InputField
                             label={"Company Name"}
@@ -164,6 +157,17 @@ export default function Signup() {
                             placeholder={"Input your official company website link."}
                         />
                     </>
+                    :
+                    <InputField
+                        label={"Your Name"}
+                        type={"text"}
+                        name={"name"}
+                        value={values.name}
+                        onChange={handleInputChange}
+                        placeholder={"Input your full name."}
+                    />
+
+
                 }
 
                 {user === "Employer" ?
