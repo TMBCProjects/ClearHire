@@ -18,20 +18,15 @@ const initialValues = {
 
 export default function Signup() {
     const [values, setValues] = useState(initialValues)
-    const [dob, setDob] = useState({ date: "", month: "", year: "" })
     const [countries, setCountries] = useState([""]);
     const [states, setStates] = useState([""]);
-    let year = [];
+    let year = Array.from({ length: 123 }, (_, i) => (new Date()).getFullYear() - i);
+    let date = Array.from({ length: 31 }, (_, i) => i + 1);
+    let month = Array.from({ length: 12 }, (_, i) => i + 1);
     var selectedCountry = ""
     var selectedState = ""
     var selectedYear = ""
     var user = sessionStorage.getItem("user")
-    let maxOffset = 123;
-    let thisYear = (new Date()).getFullYear();
-    for (let x = 0; x <= maxOffset; x++) {
-        var years = thisYear - x;
-        year.push(years)
-    }
     useEffect(() => {
         fetch("https://restcountries.com/v2/all?fields=name")
             .then((res) => res.json())
@@ -47,16 +42,9 @@ export default function Signup() {
             [name]: value,
         });
     };
-    const handleDOBChange = (e) => {
-        const { name, value } = e.target;
-        setDob({
-            ...values,
-            [name]: value,
-        });
-        console.log(dob)
-    };
     const handleSubmit = () => {
         console.log(values)
+        // registerLogin(values)
     };
 
     const handleCountryChange = (e) => {
@@ -83,11 +71,44 @@ export default function Signup() {
             "companyEstablishmentYear": selectedYear,
         });
     }
+    const handleDOBYearChange = (e) => {
+        const selectedYear = e.target.value;
+        values.dateOfBirth = values.dateOfBirth === undefined ? "" : values.dateOfBirth
+        console.log(values)
+        const newDateOfBirth = `${values.dateOfBirth.split("/")[0]}/${values.dateOfBirth.split("/")[1]}/${selectedYear}`;
+        setValues({
+            ...values,
+            "dateOfBirth": newDateOfBirth,
+        });
+    };
+
+    const handleMonthChange = (e) => {
+        const selectedMonth = e.target.value;
+        values.dateOfBirth = values.dateOfBirth === undefined ? "" : values.dateOfBirth
+        console.log(values)
+        const newDateOfBirth = `${selectedMonth}/${values.dateOfBirth.split("/")[1]}/${values.dateOfBirth.split("/")[2]}`;
+        setValues({
+            ...values,
+            "dateOfBirth": newDateOfBirth,
+        });
+    };
+
+    const handleDateChange = (e) => {
+        const selectedDate = e.target.value;
+        values.dateOfBirth = values.dateOfBirth === undefined ? "" : values.dateOfBirth
+        console.log(values)
+        const newDateOfBirth = `${values.dateOfBirth.split("/")[0]}/${selectedDate}/${values.dateOfBirth.split("/")[2]}`;
+        setValues({
+            ...values,
+            "dateOfBirth": newDateOfBirth,
+        });
+    };
+
 
     return (
         <div className="container-fluid">
             <div className="signupHeader">
-                {user === "employer" ?
+                {user === "Employer" ?
                     <span style={{ fontWeight: "bold" }}>Employer Signup</span>
                     :
                     <span style={{ fontWeight: "bold" }}>Employee Signup</span>
@@ -145,7 +166,7 @@ export default function Signup() {
                     </>
                 }
 
-                {user === "employer" ?
+                {user === "Employer" ?
                     <label className="control-label">Company Location</label>
                     :
                     <label className="control-label">Your Location</label>
@@ -167,14 +188,14 @@ export default function Signup() {
                         onChange={handleStateChange}
                     />
                 </div>
-                {user === "employer" ?
+                {user === "Employer" ?
                     <label className="control-label">Company Logo</label>
                     :
                     <label className="control-label">Profile Image</label>
                 }
                 <UploadPic />
 
-                {user === "employer" ?
+                {user === "Employer" ?
                     <>
                         <label className="control-label">Company Establishment Date</label>
                         <div className="dropdowns">
@@ -194,24 +215,22 @@ export default function Signup() {
                         <div className="dropdowns">
 
                             <Dropdown
-                                values={dob.date}
+                                values={date}
                                 type={"number"}
                                 name={"Date"}
-                                onChange={handleDOBChange}
+                                onChange={handleDateChange}
                             />
-
                             <Dropdown
-                                values={dob.month}
+                                values={month}
                                 type={"number"}
                                 name={"Month"}
-                                onChange={handleDOBChange}
+                                onChange={handleMonthChange}
                             />
-
                             <Dropdown
-                                values={dob.year}
+                                values={year}
                                 type={"number"}
                                 name={"Year"}
-                                onChange={handleDOBChange}
+                                onChange={handleDOBYearChange}
                             />
                         </div>
                     </>
