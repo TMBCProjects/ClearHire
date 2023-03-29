@@ -7,5 +7,6 @@ export default class Employer {
   companyCountry = "";
   companyState = "";
   companyLogo = "";
-  companyEstablishmentDate = "";
+  companyEstablishmentYear = "";
+  role = "";
 }

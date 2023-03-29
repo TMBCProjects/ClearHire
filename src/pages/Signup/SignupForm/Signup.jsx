@@ -8,13 +8,17 @@ import "../SignupForm/Signup.css"
 const initialValues = {
     email: "",
     password: "",
-    companyName: "",
     companyWebsite: "",
-    name: ""
+    name: "",
+    state: "",
+    country: "",
+    profileImage: "",
+    role: sessionStorage.getItem("user"),
 };
 
 export default function Signup() {
     const [values, setValues] = useState(initialValues)
+    const [dob, setDob] = useState({ date: "", month: "", year: "" })
     const [countries, setCountries] = useState([""]);
     const [states, setStates] = useState([""]);
     let year = [];
@@ -42,6 +46,15 @@ export default function Signup() {
             ...values,
             [name]: value,
         });
+        console.log(values)
+    };
+    const handleDOBChange = (e) => {
+        const { name, value } = e.target;
+        setDob({
+            ...values,
+            [name]: value,
+        });
+        console.log(dob)
     };
 
     const handleCountryChange = (e) => {
@@ -49,15 +62,27 @@ export default function Signup() {
         const data = { "country": e.target.value }
         axios.post("https://countriesnow.space/api/v0.1/countries/states", data)
             .then((res) => setStates(res.data.data.states))
-        console.log(selectedCountry)
+        setValues({
+            ...values,
+            "country": selectedCountry,
+        });
+        console.log(values)
     }
     const handleStateChange = (e) => {
         selectedState = e.target.value
-        console.log(selectedState)
+        setValues({
+            ...values,
+            "state": selectedState,
+        });
+        console.log(values)
     }
     const handleYearChange = (e) => {
         selectedYear = e.target.value
-        console.log(selectedYear)
+        setValues({
+            ...values,
+            "companyEstablishmentYear": selectedYear,
+        });
+        console.log(values)
     }
 
     return (
@@ -93,8 +118,8 @@ export default function Signup() {
                     <InputField
                         label={"Your Name"}
                         type={"text"}
-                        name={"companyName"}
-                        value={values.companyName}
+                        name={"name"}
+                        value={values.name}
                         onChange={handleInputChange}
                         placeholder={"Input your full name."}
                     />
@@ -104,8 +129,8 @@ export default function Signup() {
                         <InputField
                             label={"Company Name"}
                             type={"text"}
-                            name={"companyName"}
-                            value={values.companyName}
+                            name={"name"}
+                            value={values.name}
                             onChange={handleInputChange}
                             placeholder={"Input your company name."}
                         />
@@ -127,7 +152,6 @@ export default function Signup() {
                     <label className="control-label">Your Location</label>
                 }
                 <div className="dropdowns">
-
                     <Dropdown
                         values={countries}
                         type={"country"}
@@ -159,7 +183,7 @@ export default function Signup() {
                             <Dropdown
                                 values={year}
                                 type={"number"}
-                                name={"Year"}
+                                name={"companyEstablishmentYear"}
                                 id={"Year"}
                                 onChange={handleYearChange}
                             />
@@ -171,24 +195,24 @@ export default function Signup() {
                         <div className="dropdowns">
 
                             <Dropdown
-                                values={year}
+                                values={dob.date}
                                 type={"number"}
-                                name={"Date"}
-                                onChange={handleYearChange}
+                                name={"date"}
+                                onChange={handleDOBChange}
                             />
 
                             <Dropdown
-                                values={year}
+                                values={dob.month}
                                 type={"number"}
-                                name={"Month"}
-                                onChange={handleYearChange}
+                                name={"month"}
+                                onChange={handleDOBChange}
                             />
 
                             <Dropdown
-                                values={year}
+                                values={dob.year}
                                 type={"number"}
-                                name={"Year"}
-                                onChange={handleYearChange}
+                                name={"year"}
+                                onChange={handleDOBChange}
                             />
                         </div>
                     </>

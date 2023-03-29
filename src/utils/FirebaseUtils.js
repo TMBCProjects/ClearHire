@@ -99,10 +99,10 @@ export function createUser(user) {
 export function updateUser(user) {
   return updateProfile(auth.currentUser, {
     photoURL:
-      user.designation === Collections.Manager
-        ? Collections.Manager
-        : Collections.Teammate,
-    displayName: user.name,
+      user.role === Collections.Employee
+        ? Collections.Employee
+        : Collections.Employer,
+    // displayName: user.name,
   });
 }
 export function signIn(email, password) {
