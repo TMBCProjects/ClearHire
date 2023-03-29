@@ -18,10 +18,12 @@ const index = () => {
                             EMPLOYER SIGNUP
                         </button>
                     </Link>
+                    <Link to={"/signupEmployee"}>
                     <button>
                         <img src={employee} alt="icon" />
                         EMPLOYEE SIGNUP
                     </button>
+                    </Link>
                 </div>
             </div>
         </div>

@@ -4,9 +4,10 @@ import Home from './pages/Home/Home';
 import Footer from "./components/Footer/Footer";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import SignupEmployer from './pages/Signup/SignupForm/SignupEmployer';
-import Signup_Options from './pages/Signup/Signup_Options';
-import Signup_Choose_User from './pages/Signup/Signup_Choose_User';
-import Signup_Done from './pages/Signup/Signup_Done';
+import SignupEmployee from './pages/Signup/SignupForm/SignupEmployee';
+import SignupOptions from './pages/Signup/SignupOptions';
+import SignupChooseUser from './pages/Signup/SignupChooseUser';
+import SignupDone from './pages/Signup/SignupDone';
 
 function App() {
   return(
@@ -16,9 +17,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/signupEmployer" element={<SignupEmployer />}></Route>
-          <Route path="/signup-options" element={<Signup_Options />}></Route>
-          <Route path="/user-options" element={<Signup_Choose_User />}></Route>
-          <Route path="/signup-done" element={<Signup_Done />}></Route>
+          <Route path="/signupEmployee" element={<SignupEmployee />}></Route>
+          <Route path="/signup-options" element={<SignupOptions />}></Route>
+          <Route path="/user-options" element={<SignupChooseUser />}></Route>
+          <Route path="/signup-done" element={<SignupDone />}></Route>
         </Routes>
         <div className="footer shadow shadow-sm bg-light">
           <Footer />
