@@ -5,6 +5,7 @@ import search from "../../../assets/images/search.svg"
 import onBoard from "../../../assets/images/onBoard.svg"
 import verification from "../../../assets/images/verification.svg"
 import "../NavBar/EmployerNavbar.css"
+import { logOut } from '../../../utils/FirebaseUtils';
 
 export default function EmployerNavbar() {
   const [open, setOpen] = useState(false)
@@ -54,7 +55,7 @@ export default function EmployerNavbar() {
         {open ?
           <ul className='navbarDropdown'>
             <li><Link to={"/"}>View Profile</Link></li> <hr />
-            <li><button onClick={()=>{sessionStorage.clear()}}>Signout</button></li>
+            <li><center><div style={{ cursor: "pointer" }} onClick={() => { logOut(); }}>Signout</div></center></li>
           </ul>
 
           :
