@@ -4,8 +4,8 @@ export default class Employer {
   employerEmail = "";
   companyName = "";
   companyWebsite = "";
-  companyLocation = "";
+  companyCountry = "";
+  companyState = "";
   companyLogo = "";
   companyEstablishmentDate = "";
-  // companyId = "";
 }

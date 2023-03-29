@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Dropdown from "../../../components/Dropdrowns/Dropdown";
 import InputField from "../../../components/Input/InputField";
 import UploadPic from "../../../components/UploadPic/UploadPic";
+import { uploadPhoto } from "../../../utils/FirebaseUtils";
 import "../SignupForm/Signup.css"
 
 const initialValues = {
@@ -41,6 +42,7 @@ export default function Signup() {
             ...values,
             [name]: value,
         });
+        console.log(values)
     };
 
     const handleCountryChange = (e) => {
@@ -48,16 +50,36 @@ export default function Signup() {
         const data = { "country": e.target.value }
         axios.post("https://countriesnow.space/api/v0.1/countries/states", data)
             .then((res) => setStates(res.data.data.states))
-        console.log(selectedCountry)
+        setValues({
+            ...values,
+            "companyCountry": selectedCountry,
+        });
+        console.log(values)
     }
     const handleStateChange = (e) => {
         selectedState = e.target.value
-        console.log(selectedState)
+        setValues({
+            ...values,
+            "companyState": selectedState,
+        });
+        console.log(values)
     }
     const handleYearChange = (e) => {
         selectedYear = e.target.value
-        console.log(selectedYear)
+        setValues({
+            ...values,
+            "companyEstablishmentDate": selectedYear,
+        });
+        console.log(values)
     }
+    const handleSubmit = async (file) => {
+        try {
+            const downloadURL = await uploadPhoto(file);
+            console.log('Download URL:', downloadURL);
+        } catch (error) {
+            console.error('Error uploading file:', error);
+        }
+    };
 
     return (
         <div className="container-fluid">
@@ -69,8 +91,8 @@ export default function Signup() {
                 <InputField
                     label={"Email"}
                     type={"email"}
-                    name={"email"}
-                    value={values.email}
+                    name={"employerEmail"}
+                    value={values.employerEmail}
                     onChange={handleInputChange}
                     placeholder={"Input your company mail id, use an official email address."}
                 />
@@ -132,7 +154,10 @@ export default function Signup() {
                         name={"year"}
                         onChange={handleYearChange}
                     />
-                </div>
+                </div><br />
+                <button type="submit" onClick={() => { handleSubmit() }} className="btn login-btn">
+                    Login
+                </button><br /><br /><br /><br /><br />
             </form>
         </div>
     );

@@ -147,10 +147,10 @@ export async function changePasswordWithCurrentPassword(
     console.error(error);
   }
 }
-export async function uploadPhoto(id, file) {
+export async function uploadPhoto(file) {
   try {
     const fileName = file.name;
-    const storage = ref(storageRef, `profileImages/${id}/${fileName}`);
+    const storage = ref(storageRef, `profileImages/${fileName}`);
     await uploadBytes(storage, file);
     const downloadURL = await getDownloadURL(storage);
     return downloadURL;
