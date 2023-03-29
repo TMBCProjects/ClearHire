@@ -23,7 +23,12 @@ import { auth, firestoreDB, storageRef } from "../firebase-config";
 import { Collections } from "./Collections";
 // import speakeasy from "speakeasy";
 import { Buffer } from "buffer";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytes,
+} from "firebase/storage";
 // import sendEmail from "./Email";
 global.Buffer = Buffer;
 
@@ -160,6 +165,19 @@ export async function uploadPhoto(file) {
   }
 }
 
+export async function deletePhoto(url) {
+  const storage = ref(
+    storageRef,
+    `profileImages/${url.split("%2F")[1].split("?")[0]}`
+  );
+  deleteObject(storage)
+    .then(() => {
+      return "";
+    })
+    .catch((e) => {
+      console.log(url);
+    });
+}
 // const generateOTP = () => {
 //   try {
 //     const secret = speakeasy.generateSecret({ length: 20 });
