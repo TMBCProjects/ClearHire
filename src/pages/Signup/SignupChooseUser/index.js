@@ -12,14 +12,14 @@ const index = () => {
                     <p>clearhire helps you find that best employee you've been looking all along</p>
                 </div>
                 <div className="buttons choose-user-buttons">
-                    <Link to={"/signupEmployer"}>
-                        <button>
+                    <Link to={"/signup"}>
+                        <button onClick={()=>sessionStorage.setItem("user", "employer")}>
                             <img src={employer} alt="icon" />
                             EMPLOYER SIGNUP
                         </button>
                     </Link>
-                    <Link to={"/signupEmployee"}>
-                    <button>
+                    <Link to={"/signup"}>
+                    <button onClick={()=>sessionStorage.setItem("user", "employee")}>
                         <img src={employee} alt="icon" />
                         EMPLOYEE SIGNUP
                     </button>
