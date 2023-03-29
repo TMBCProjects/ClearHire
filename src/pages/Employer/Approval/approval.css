@@ -24,11 +24,14 @@
     font-weight: normal;
 }
 
-
+#employer-approval .form-check-input {
+    border: 2px solid black;
+}
 
 #employer-approval .form-check-input:checked {
     background-color: #00823B;
     border-color: #00823B;
+    border: 2px solid #00823B;
 }
 
 #employer-approval .form-check-input:focus {
