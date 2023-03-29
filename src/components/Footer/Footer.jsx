@@ -4,7 +4,7 @@ import "./footer.css";
 const Footer = () => {
   return (
     <footer className="bg-white footer">
-      <div className="container py-3" id="footer">
+      <div className="container " id="footer">
         <div className="row d-flex justify-content-center align-items-center py-3 foot-con">
           <div className="col-md-8 col-12 foot-item">
             <a className=" mx-3 text-decoration-none text-gray" href="/">About</a>
@@ -27,7 +27,7 @@ const Footer = () => {
               Feedback
             </a>
           </div>
-          <div className="col-md-2">
+          <div className="col-md-3">
             <p className=" px-3 my-0 text-gray">Copyright &copy; clearhire</p>
           </div>
         </div>
