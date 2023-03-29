@@ -7,6 +7,7 @@ import Signup from './pages/Signup/SignupForm/Signup';
 import SignupOptions from './pages/Signup/SignupOptions';
 import SignupChooseUser from './pages/Signup/SignupChooseUser';
 import SignupDone from './pages/Signup/SignupDone';
+import Approval from "./pages/Employer/Approval/Approval";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/signup-options" element={<SignupOptions />}></Route>
           <Route path="/user-options" element={<SignupChooseUser />}></Route>
           <Route path="/signup-done" element={<SignupDone />}></Route>
+          <Route path="/employer-approval" element={<Approval />}></Route>
         </Routes>
         <div className="footer shadow shadow-sm bg-light">
           <Footer />

@@ -137,7 +137,7 @@ export default function Signup() {
 
                         <InputField
                             label={"Company Website"}
-                            type={"text"}
+                            type={"url"}
                             name={"companyWebsite"}
                             value={values.companyWebsite}
                             onChange={handleInputChange}
