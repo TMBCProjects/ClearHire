@@ -3,7 +3,6 @@ import "./main.css";
 import check from "../../../assets/images/Check.svg";
 //import { useNavigate } from "react-router-dom";
 import { HomeOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
 
 const Index = () => {
   //const navigate = useNavigate();
@@ -29,10 +28,10 @@ const Index = () => {
           </p>
         </div>
         <div className="buttons">
-          <Link to={"/"}>
+          <button href="/">
             <HomeOutlined style={{ fontSize: "1.4rem", marginRight: "1rem" }} />
             BACK TO HOME
-          </Link>
+          </button>
         </div>
       </div>
     </div>
