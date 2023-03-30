@@ -9,11 +9,13 @@ export default function UploadPic() {
   const handleFileUpload = async (event) => {
     const imageUrl = await uploadPhoto(event.target.files[0]);
     setProfileImage(imageUrl);
+    sessionStorage.setItem("profileImage", imageUrl);
     setPhotoLoading(true);
   };
   const removeImg = async (e) => {
     e.preventDefault();
     setProfileImage(await deletePhoto(profileImage));
+    sessionStorage.removeItem("profileImage");
     setPhotoLoading(false);
   };
   return (
