@@ -1,0 +1,121 @@
+.back {
+    background: #E2F0E8 0% 0% no-repeat padding-box;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.backIcon {
+    color: #9EC2AD;
+    margin-left: 8px;
+}
+
+.downIcon {
+    color: #9EC2AD;
+}
+
+.employeeDetailsText {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.viewIcon,
+.linkIcon {
+    width: 20px;
+    margin-right: 5px;
+}
+
+.portfolio-btn {
+    background-color: #E2F0E8 !important;
+    padding: 6px 12px;
+    margin-left: 20px;
+    border-radius: 9px !important;
+}
+
+.employeeDetails {
+    margin-left: 20px;
+}
+
+.employeeImg {
+    width: 165px;
+}
+
+.employeeImg .empImg {
+    width: 100%;
+}
+
+.employeeDetails h3 {
+    font-size: 35px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.employeeDetails p {
+    font-size: 30px;
+    margin: 0;
+}
+
+.progressbar {
+    width: 124px;
+    height: 124px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #CCD3CB !important;
+    margin-right: 40px;
+}
+
+
+.progressContent {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.progressContent p {
+    margin: 0;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.companyLogo {
+    width: 164px;
+    height: 164px;
+    border: 1px solid #00823B;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: white;
+}
+
+.companyLogo .logo {
+    width: 100%;
+    text-align: center;
+}
+
+.font-size-39 {
+    font-size: 30px;
+}
+
+.font-size-25 {
+    font-size: 25px;
+}
+
+
+.divider {
+    border: 1px solid #C1C1C1;
+    opacity: 0.7;
+    margin: 25px auto;
+}
+
+.companies-section {
+    background-color: #f5f7f9;
+    padding: 30px 0;
+}
