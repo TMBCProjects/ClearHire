@@ -1,10 +1,73 @@
-import React from "react";
+import { message } from "antd";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import LoginUser, {
+  readEmployee,
+  readEmployer,
+} from "../../DataBase/Login/login";
 import "./Login.css";
 import { Link } from "react-router-dom";
 
+const initialValues = {
+  email: "",
+  password: "",
+};
 const Login = () => {
+  const [values, setValues] = useState(initialValues);
+  const [messageApi, contextHolder] = message.useMessage();
+  const navigate = useNavigate();
+
+  const success = () => {
+    messageApi.open({
+      type: "success",
+      content: "Login successful",
+    });
+  };
+  const error = (err) => {
+    messageApi.open({
+      type: "error",
+      content: "Login failed. Invalid email or password.",
+    });
+  };
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
+  const handleSubmit = async () => {
+    try {
+      let user = await LoginUser(values.email, values.password);
+      if (user.photoURL === "Employer") {
+        sessionStorage.setItem("LoggedIn", "Employer");
+        const myObj = await readEmployer(user.uid);
+        const objStr = JSON.stringify(myObj);
+        sessionStorage.setItem("userData", objStr);
+        success();
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+
+        navigate("/");
+      } else if (user.photoURL === "Employee") {
+        sessionStorage.setItem("LoggedIn", "Employee");
+        const myObj = await readEmployee(user.uid);
+        const objStr = JSON.stringify(myObj);
+        sessionStorage.setItem("userData", objStr);
+        success();
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+        navigate("/");
+      }
+    } catch (err) {
+      error(err.message);
+    }
+  };
   return (
     <div className="container-fluid" id="login">
+      {contextHolder}
       <div className="container">
         <div className="row d-flex justify-content-center align-items-center">
           <div className="col-md-5">
@@ -27,15 +90,19 @@ const Login = () => {
                 <div className="mb-3">
                   <input
                     type="email"
+                    name="email"
                     className="form-control"
                     placeholder="Email address"
+                    onChange={handleInputChange}
                   />
                 </div>
                 <div className="mb-3">
                   <input
                     type="password"
+                    name="password"
                     className="form-control"
                     placeholder="Password"
+                    onChange={handleInputChange}
                   />
                 </div>
 
@@ -47,7 +114,11 @@ const Login = () => {
                 </div>
 
                 <div className="mb-3">
-                  <button type="submit" className="btn login-btn">
+                  <button
+                    type="submit"
+                    onClick={handleSubmit}
+                    className="btn login-btn"
+                  >
                     Login
                   </button>
                 </div>

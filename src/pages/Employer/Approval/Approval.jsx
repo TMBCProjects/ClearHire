@@ -60,7 +60,11 @@ const Approval = () => {
           </div>
           <div className="form-check form-check-inline">
             <Link to={"/"} className="btn add-recruit">
+<<<<<<< HEAD
               <img src={Add} className="mr-5 add-icon" /> New Recruit
+=======
+              <img src={Add} className="mr-5 add-icon" alt="addIcons" /> New Recruit
+>>>>>>> d7564f105da3caa5145856bc0027eed8c119a1ff
             </Link>
           </div>
         </div>
@@ -206,4 +210,8 @@ const Approval = () => {
   );
 };
 
+<<<<<<< HEAD
 export default Approval;
+=======
+export default Approval;
+>>>>>>> d7564f105da3caa5145856bc0027eed8c119a1ff
