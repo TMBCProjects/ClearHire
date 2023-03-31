@@ -1,17 +1,18 @@
 import "./App.css";
 import Header from "./components/Header/Header";
-import Home from './pages/Home/Home';
+import Home from "./pages/Home/Home";
 import Footer from "./components/Footer/Footer";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import Signup from './pages/Signup/SignupForm/Signup';
-import SignupOptions from './pages/Signup/SignupOptions';
-import SignupChooseUser from './pages/Signup/SignupChooseUser';
-import SignupDone from './pages/Signup/SignupDone';
+import Signup from "./pages/Signup/SignupForm/Signup";
+import SignupOptions from "./pages/Signup/Signup_Options";
+import SignupChooseUser from "./pages/Signup/Signup_Choose_User";
+import SignupDone from "./pages/Signup/Signup_Done";
 import Approval from "./pages/Employer/Approval/Approval";
 import SearchEmployee from "./pages/Employer/SearchEmployee/SearchEmployee";
 import Navbar from "./components/NavBar/Navbar";
 import VerficationRequest from "./pages/Employer/VerficationRequest/VerficationRequest";
 import Assessment from "./pages/Employer/Assessment/Assessment";
+import Employee from "./pages/Employee/Employee_Details/index";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
                     <Route path="/employer-approval" element={<Approval />}></Route>
                     <Route path="/verification-request" element={<VerficationRequest />}></Route>
                     <Route path="/assessment" element={<Assessment />}></Route>
+                    <Route path="/employee-details" element={<Employee />}></Route>
                   </Routes>
                 </div>
               )
