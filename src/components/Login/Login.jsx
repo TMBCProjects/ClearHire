@@ -48,8 +48,8 @@ const Login = () => {
         setTimeout(() => {
           window.location.reload();
         }, 1000);
-
         navigate("/");
+        
       } else if (user.photoURL === "Employee") {
         sessionStorage.setItem("LoggedIn", "Employee");
         const myObj = await readEmployee(user.uid);
