@@ -5,6 +5,7 @@ import search from "../../../assets/images/search.svg"
 import onBoard from "../../../assets/images/onBoard.svg"
 import verification from "../../../assets/images/verification.svg"
 import "../NavBar/EmployerNavbar.css"
+import { FileDoneOutlined } from "@ant-design/icons" 
 
 export default function EmployerNavbar() {
   const [open, setOpen] = useState(false)
@@ -26,24 +27,31 @@ export default function EmployerNavbar() {
 
       <div className='navbarBody'>
 
-        <NavLink activeclassname="navbaractive" to={"/"} className="navlink">
+        <NavLink activeclassname="active" to={"/"} className="navlink">
           <div className='navitem'>
             <img src={search} alt="search-logo" className="logo navLink" />&nbsp;
             Your Employees
           </div>
         </NavLink>
 
-        <NavLink activeclassname="navbaractive" to={"/employer-approval"} className="navlink">
+        <NavLink activeclassname="active" to={"/employer-approval"} className="navlink">
           <div className='navitem'>
             <img src={onBoard} alt="search-logo" className="logo navLink" />&nbsp;
             On-Board
           </div>
         </NavLink>
 
-        <NavLink activeclassname="navbaractive" to={"/verfication-request"} className="navlink">
+        <NavLink activeclassname="active" to={"/verification-request"} className="navlink">
           <div className='navitem'>
             <img src={verification} alt="search-logo" className="logo navLink" />&nbsp;
-            Verification Request
+            Verification / Request
+          </div>
+        </NavLink>
+
+        <NavLink activeclassname="active" to={"/assessment"} className="navlink">
+          <div className='navitem'>
+          <FileDoneOutlined />&nbsp;
+          Assessment
           </div>
         </NavLink>
 
@@ -54,7 +62,7 @@ export default function EmployerNavbar() {
         {open ?
           <ul className='navbarDropdown'>
             <li><Link to={"/"}>View Profile</Link></li> <hr />
-            <li><button onClick={()=>{sessionStorage.clear()}}>Signout</button></li>
+            <li><a href='/' onClick={()=>{sessionStorage.clear(); window.location.reload()}}>Signout</a></li>
           </ul>
 
           :

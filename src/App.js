@@ -11,6 +11,7 @@ import Approval from "./pages/Employer/Approval/Approval";
 import SearchEmployee from "./pages/Employer/SearchEmployee/SearchEmployee";
 import EmployerNavbar from "./pages/Employer/NavBar/EmployerNavbar";
 import VerficationRequest from "./pages/Employer/VerficationRequest/VerficationRequest";
+import Assessment from "./pages/Employer/Assessment/Assessment";
 
 function App() {
   return (
@@ -31,13 +32,14 @@ function App() {
           :
           (
             <>
-              {sessionStorage.getItem("LoggedIn") === "Employee" ? (
+              {sessionStorage.getItem("LoggedIn") === "Employer" ? (
                 <div style={{ backgroundColor: "#F5F7F9" }}>
                   <EmployerNavbar />
                   <Routes>
                     <Route path="/" element={<SearchEmployee />}></Route>
                     <Route path="/employer-approval" element={<Approval />}></Route>
                     <Route path="/verification-request" element={<VerficationRequest />}></Route>
+                    <Route path="/assessment" element={<Assessment />}></Route>
                   </Routes>
                 </div>
               )
