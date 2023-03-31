@@ -1,5 +1,6 @@
 import React from "react";
 import { MdArrowBackIos, MdOutlineKeyboardArrowDown } from "react-icons/md";
+import { FaQuoteLeft } from "react-icons/fa";
 import ViewFile from "../../../assets/images/view-doc.svg";
 import UrlLink from "../../../assets/images/link.svg";
 import Employee1 from "../../../assets/images/person-1.png";
@@ -247,6 +248,7 @@ const index = () => {
         <div className="row employerResult">
           <div>
             <p>
+              <FaQuoteLeft size={30} className="quoteLeft" />
               This employee is marked as a{" "}
               <span className="text-color-green">good employee </span> by{" "}
               <strong>The Madras Branding Company</strong>
