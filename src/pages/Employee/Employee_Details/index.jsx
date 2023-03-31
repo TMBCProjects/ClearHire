@@ -40,23 +40,61 @@ const index = () => {
               <p>Chennai, India</p>
             </div>
           </div>
-          <div className="col-4 d-flex justify-content-center align-items-center">
-            <div className="progressbar">
-              <div className="progress-light-orange">
-                <div className="progressContent">
-                  <p>75%</p>
+          <div className="col-4 d-flex justify-content-center align-items-center empDetailsProgress">
+            <div class="circle-wrap ">
+              <div class="circle">
+                <div class="mask full">
+                  <div class="fill"></div>
                 </div>
+                <div class="mask half">
+                  <div class="fill"></div>
+                </div>
+                <div class="inside-circle"> 75% </div>
               </div>
             </div>
-            <div className="progressbar">
-              <div className="progress-green">
-                <div className="progressContent">
-                  <p>85%</p>
+            <div class="circle-wrap">
+              <div class="circle">
+                <div class="mask full">
+                  <div class="fill"></div>
                 </div>
+                <div class="mask half">
+                  <div class="fill"></div>
+                </div>
+                <div class="inside-circle"> 75% </div>
               </div>
             </div>
           </div>
         </div>
+
+        {/* skills section  starts */}
+        <div className="d-flex justify-content-center align-items-center skillsContainer">
+          <div className="skills">
+            <p className="title">Photoshop</p>
+            <div className="progressbar">
+              <p className="progress-percent">90%</p>
+            </div>
+          </div>
+          <div className="skills">
+            <p className="title">Illustrator</p>
+            <div className="progressbar">
+              <p className="progress-percent">80%</p>
+            </div>
+          </div>
+          <div className="skills">
+            <p className="title">Premiere Pro</p>
+            <div className="progressbar">
+              <p className="progress-percent">70%</p>
+            </div>
+          </div>
+          <div className="skills">
+            <p className="title">After Effects</p>
+            <div className="progressbar">
+              <p className="progress-percent">60%</p>
+            </div>
+          </div>
+        </div>
+        {/* skills section ends */}
+
         <div className="row d-flex align-items-center">
           <div className="col-12">
             <h1>Current Company</h1>
@@ -74,6 +112,147 @@ const index = () => {
           </div>
         </div>
         <div className="divider"></div>
+        <div className="row d-flex justify-content-center align-items-center progressBars">
+          <div className="col-md-8">
+            <div className="row">
+              <div className="col-md-3 mb-3">
+                <div class="circle-wrap">
+                  <div class="circle">
+                    <div class="mask full">
+                      <div class="fill"></div>
+                    </div>
+                    <div class="mask half">
+                      <div class="fill"></div>
+                    </div>
+                    <div class="inside-circle"> 75% </div>
+                  </div>
+                </div>
+                <p>Communitcation</p>
+              </div>
+              <div className="col-md-3 mb-3">
+                <div class="circle-wrap">
+                  <div class="circle">
+                    <div class="mask full">
+                      <div class="fill"></div>
+                    </div>
+                    <div class="mask half">
+                      <div class="fill"></div>
+                    </div>
+                    <div class="inside-circle"> 75% </div>
+                  </div>
+                </div>
+                <p>Attitude</p>
+              </div>
+              <div className="col-md-3 mb-3">
+                <div class="circle-wrap">
+                  <div class="circle">
+                    <div class="mask full">
+                      <div class="fill"></div>
+                    </div>
+                    <div class="mask half">
+                      <div class="fill"></div>
+                    </div>
+                    <div class="inside-circle"> 75% </div>
+                  </div>
+                </div>
+                <p>Ability To Learn</p>
+              </div>
+              <div className="col-md-3 mb-3">
+                <div class="circle-wrap">
+                  <div class="circle">
+                    <div class="mask full">
+                      <div class="fill"></div>
+                    </div>
+                    <div class="mask half">
+                      <div class="fill"></div>
+                    </div>
+                    <div class="inside-circle"> 75% </div>
+                  </div>
+                </div>
+                <p>Punctuality</p>
+              </div>
+              <div className="col-md-3 mb-3">
+                <div class="circle-wrap">
+                  <div class="circle">
+                    <div class="mask full">
+                      <div class="fill"></div>
+                    </div>
+                    <div class="mask half">
+                      <div class="fill"></div>
+                    </div>
+                    <div class="inside-circle"> 75% </div>
+                  </div>
+                </div>
+                <p>Commitment</p>
+              </div>
+              <div className="col-md-3 mb-3">
+                <div class="circle-wrap">
+                  <div class="circle">
+                    <div class="mask full">
+                      <div class="fill"></div>
+                    </div>
+                    <div class="mask half">
+                      <div class="fill"></div>
+                    </div>
+                    <div class="inside-circle"> 75% </div>
+                  </div>
+                </div>
+                <p>Trustworthiness</p>
+              </div>
+              <div className="col-md-3 mb-3">
+                <div class="circle-wrap">
+                  <div class="circle">
+                    <div class="mask full">
+                      <div class="fill"></div>
+                    </div>
+                    <div class="mask half">
+                      <div class="fill"></div>
+                    </div>
+                    <div class="inside-circle"> 75% </div>
+                  </div>
+                </div>
+                <p>Skill</p>
+              </div>
+              <div className="col-md-3 mb-3">
+                <div class="circle-wrap">
+                  <div class="circle">
+                    <div class="mask full">
+                      <div class="fill"></div>
+                    </div>
+                    <div class="mask half">
+                      <div class="fill"></div>
+                    </div>
+                    <div class="inside-circle"> 75% </div>
+                  </div>
+                </div>
+                <p>Team Player</p>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-4 align-items-center d-flex flex-column">
+            <p className="mb-0">Total</p>
+            <div class="circle-wrap">
+              <div class="circle">
+                <div class="mask full">
+                  <div class="fill"></div>
+                </div>
+                <div class="mask half">
+                  <div class="fill"></div>
+                </div>
+                <div class="inside-circle"> 75% </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="row employerResult">
+          <div>
+            <p>
+              This employee is marked as a{" "}
+              <span className="text-color-green">good employee </span> by{" "}
+              <strong>The Madras Branding Company</strong>
+            </p>
+          </div>
+        </div>
       </div>
       <section className="companies-section">
         <div className="container">
@@ -99,7 +278,7 @@ const index = () => {
                 <MdOutlineKeyboardArrowDown size={35} className="downIcon" />
               </div>
             </div>
-            <div className="divider"></div>
+            <div className="divider my-3"></div>
             <div className="col-md-2">
               <div className="companyLogo">
                 <img src={CompanyLogo} alt="" className="logo" />
