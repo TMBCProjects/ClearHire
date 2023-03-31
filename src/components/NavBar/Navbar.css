@@ -39,7 +39,7 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background: url("../../../assets/images/user.svg")no-repeat center #fff;
+    background: url("../../assets/images/user.svg")no-repeat center #fff;
     width: 5vh;
     height: 5vh;
     border-radius: 0.35rem;

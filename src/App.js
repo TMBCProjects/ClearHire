@@ -9,7 +9,7 @@ import SignupChooseUser from './pages/Signup/SignupChooseUser';
 import SignupDone from './pages/Signup/SignupDone';
 import Approval from "./pages/Employer/Approval/Approval";
 import SearchEmployee from "./pages/Employer/SearchEmployee/SearchEmployee";
-import EmployerNavbar from "./pages/Employer/NavBar/EmployerNavbar";
+import Navbar from "./components/NavBar/Navbar";
 import VerficationRequest from "./pages/Employer/VerficationRequest/VerficationRequest";
 import Assessment from "./pages/Employer/Assessment/Assessment";
 
@@ -34,7 +34,7 @@ function App() {
             <>
               {sessionStorage.getItem("LoggedIn") === "Employer" ? (
                 <div style={{ backgroundColor: "#F5F7F9" }}>
-                  <EmployerNavbar />
+                  <Navbar />
                   <Routes>
                     <Route path="/" element={<SearchEmployee />}></Route>
                     <Route path="/employer-approval" element={<Approval />}></Route>
