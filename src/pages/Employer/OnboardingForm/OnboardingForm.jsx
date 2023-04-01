@@ -79,13 +79,6 @@ export default function OnboardingForm() {
                     onChange={handleInputChange}
                     placeholder={"Email ID"}
                 />
-                <InputField
-                    type={"text"}
-                    name={"aadharNumber"}
-                    value={values.aadharNumber}
-                    onChange={handleInputChange}
-                    placeholder={"Aadhar Number"}
-                />
                 <label className="control-label"></label>
                 <div className="dropdowns">
                     <Dropdown
