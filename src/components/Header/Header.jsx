@@ -25,34 +25,34 @@ const Header = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0 mobile-menu">
               <li className="nav-item px-3">
-                <a className="nav-link active" aria-current="page" href="/">
+                <Link className="nav-link active" aria-current="page" to="/">
                   Home
-                </a>
+                </Link>
               </li>
               <li className="nav-item px-3">
-                <a className="nav-link" href="/">
+                <Link className="nav-link" to="/">
                   How it works
-                </a>
+                </Link>
               </li>
 
               <li className="nav-item px-3">
-                <a className="nav-link" href="/">
+                <Link className="nav-link" to="/">
                   Support
-                </a>
+                </Link>
               </li>
               <li className="nav-item  px-3">
-                <a
-                  href="/#login"
-                  className="btn"
-                  id="login-btn"
-                  type="submit"
-                >
+                <a href="/#login" className="btn" id="login-btn" type="submit">
                   Login
                 </a>
               </li>
               <li className="nav-item">
                 <Link to={"/signup-options"}>
-                  <a className="btn" id="signup-btn" type="submit" href="/signup-options">
+                  <a
+                    className="btn"
+                    id="signup-btn"
+                    type="submit"
+                    href="/signup-options"
+                  >
                     Signup
                   </a>
                 </Link>

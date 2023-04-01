@@ -1,15 +1,19 @@
 import { message } from "antd";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LoginUser, { readEmployee, readEmployer } from "../../DataBase/Login/login";
+import LoginUser, {
+  readEmployee,
+  readEmployer,
+} from "../../DataBase/Login/login";
 import "./Login.css";
+import { Link } from "react-router-dom";
 
 const initialValues = {
   email: "",
-  password: ""
+  password: "",
 };
 const Login = () => {
-  const [values, setValues] = useState(initialValues)
+  const [values, setValues] = useState(initialValues);
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
 
@@ -110,16 +114,20 @@ const Login = () => {
                 </div>
 
                 <div className="mb-3">
-                  <button type="submit" onClick={handleSubmit} className="btn login-btn">
+                  <button
+                    type="submit"
+                    onClick={handleSubmit}
+                    className="btn login-btn"
+                  >
                     Login
                   </button>
                 </div>
                 <div className="mb-3">
                   <p>
                     Don't have an account?{" "}
-                    <a href="/signup-options" className="text-decoration-none">
+                    <Link to="/signup-options" className="text-decoration-none">
                       <span className="text-color-green fw-bold">Sign up</span>
-                    </a>
+                    </Link>
                   </p>
                 </div>
               </div>

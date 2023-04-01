@@ -3,6 +3,7 @@
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
     padding-block: 2vh;
     justify-content: space-around;
+    background: white;
 }
 
 .logo.navLink{
@@ -14,7 +15,7 @@
     color: black;
 }
 
-.navbaractive{
+.active{
     font-weight: 600;
     text-decoration: none;
     color: black;
@@ -26,7 +27,7 @@
 .navbarBody {
     display: flex;
     align-items: center;
-    gap: 20vh;
+    gap: 10vh;
 }
 
 .navbarBody a:hover {
@@ -38,7 +39,7 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background: url("../../../assets/images/user.svg")no-repeat center #fff;
+    background: url("../../assets/images/user.svg")no-repeat center #fff;
     width: 5vh;
     height: 5vh;
     border-radius: 0.35rem;
