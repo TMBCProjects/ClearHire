@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Document, Page, pdfjs } from "react-pdf";
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+import { Document, Page } from "react-pdf";
 
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import 'react-pdf/dist/esm/Page/TextLayer.css';
+const options = {
+  cMapUrl: 'cmaps/',
+  cMapPacked: true,
+  standardFontDataUrl: 'standard_fonts/',
+};
 const PdfViewer = ({ pdfUrl }) => {
   const [file, setFile] = useState('');
   const [numPages, setNumPages] = useState(1);
@@ -10,6 +16,7 @@ const PdfViewer = ({ pdfUrl }) => {
   useEffect(() => {
     setFile('' + pdfUrl)
   }, [pdfUrl])
+
   const onNextPage = () => {
     setCurrentPage(Math.min(currentPage + 1, numPages));
   };
@@ -34,7 +41,9 @@ const PdfViewer = ({ pdfUrl }) => {
         <div style={{ width: "500px" }}>
           <Document
             file={file}
-            onLoadSuccess={onDocumentLoadSuccess}>
+            options={options}
+            onLoadSuccess={onDocumentLoadSuccess}
+          >
             <Page pageNumber={currentPage} />
           </Document>
         </div>
