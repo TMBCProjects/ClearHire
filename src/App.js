@@ -8,7 +8,7 @@ import SignupOptions from "./pages/Signup/SignupOptions";
 import SignupChooseUser from "./pages/Signup/SignupChooseUser";
 import SignupDone from "./pages/Signup/SignupDone";
 import Approval from "./pages/Employer/Approval/Approval";
-import SearchEmployee from "./pages/Employer/SearchEmployee/SearchEmployee";
+import SearchEmployee from "./pages/SearchEmployee/SearchEmployee";
 import Navbar from "./components/NavBar/Navbar";
 import VerficationRequest from "./pages/Employer/VerficationRequest/VerficationRequest";
 import OnboardingForm from "./pages/Employer/OnboardingForm/OnboardingForm";
@@ -88,6 +88,9 @@ function App() {
                     <Route
                       path="/employeeOfferLetter"
                       element={<EmployeeOfferLetter />}></Route>
+                    <Route
+                      path="/colleagues"
+                      element={<SearchEmployee />}></Route>
                     {/* <Route path="/employer-approval" element={<Approval />}></Route>
                   <Route path="/verification-request" element={<VerficationRequest />}></Route>
                   <Route path="/assessment" element={<Assessment />}></Route>
