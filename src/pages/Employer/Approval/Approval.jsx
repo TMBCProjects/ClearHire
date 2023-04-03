@@ -59,9 +59,8 @@ const Approval = () => {
             </label>
           </div>
           <div className="form-check form-check-inline">
-            <Link to={"/"} className="btn add-recruit">
-              <img src={Add} className="mr-5 add-icon" alt="addIcons" /> New
-              Recruit
+            <Link to={"/onboarding-form"} className="btn add-recruit">
+              <img src={Add} className="mr-5 add-icon" alt="addIcons" /> New Recruit
             </Link>
           </div>
         </div>

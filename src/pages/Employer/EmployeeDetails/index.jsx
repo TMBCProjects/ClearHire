@@ -1,11 +1,13 @@
 import React from "react";
 import { MdArrowBackIos, MdOutlineKeyboardArrowDown } from "react-icons/md";
+import { FaQuoteLeft } from "react-icons/fa";
 import ViewFile from "../../../assets/images/view-doc.svg";
 import UrlLink from "../../../assets/images/link.svg";
 import Employee1 from "../../../assets/images/person-1.png";
 import CompanyLogo from "../../../assets/images/company-logo.png";
 
 import "./style.css";
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 
 const index = () => {
   return (
@@ -68,6 +70,14 @@ const index = () => {
 
         {/* skills section  starts */}
         <div className="d-flex justify-content-center align-items-center skillsContainer">
+          <div className="arrowLeft">
+            <LeftOutlined
+              style={{
+                fontSize: "22px",
+                color: "#8E8E8E",
+              }}
+            />
+          </div>
           <div className="skills">
             <p className="title">Photoshop</p>
             <div className="progressbar">
@@ -91,6 +101,20 @@ const index = () => {
             <div className="progressbar">
               <p className="progress-percent">60%</p>
             </div>
+          </div>
+          <div className="skills">
+            <p className="title">Photoshop</p>
+            <div className="progressbar">
+              <p className="progress-percent">90%</p>
+            </div>
+          </div>
+          <div className="arrowRight">
+            <RightOutlined
+              style={{
+                fontSize: "22px",
+                color: "#8E8E8E",
+              }}
+            />
           </div>
         </div>
         {/* skills section ends */}
@@ -247,6 +271,7 @@ const index = () => {
         <div className="row employerResult">
           <div>
             <p>
+              <FaQuoteLeft size={30} className="quoteLeft" />
               This employee is marked as a{" "}
               <span className="text-color-green">good employee </span> by{" "}
               <strong>The Madras Branding Company</strong>
