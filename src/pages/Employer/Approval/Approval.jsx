@@ -65,7 +65,7 @@ const Approval = () => {
           </div>
         </div>
       </div>
-      <div className="row mt-3 mb-5">
+      <div className="row mt-3">
         <div className="col-md-3 gy-3">
           <div className="card">
             <div className="card-body">

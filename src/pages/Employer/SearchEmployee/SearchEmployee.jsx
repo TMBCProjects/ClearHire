@@ -6,7 +6,7 @@ import job from "../../../assets/images/job.svg";
 import salary from "../../../assets/images/salary.svg";
 import cross from "../../../assets/images/cross.svg";
 import { Select, Checkbox, Slider } from "antd";
-import Assesment_Card from "../../../components/Cards/Assesment_Card";
+import AssesmentCard from "../../../components/Cards/AssesmentCard";
 const handleChange = (value) => {
   console.log(`selected ${value}`);
 };
@@ -217,7 +217,7 @@ export default function SearchEmployee() {
               />
             </div>
           </div>
-          <a className="clear-filter">
+          <a className="clear-filter" href="/">
             {" "}
             <img src={cross} alt="cross" /> Clear all filters
           </a>
@@ -256,12 +256,12 @@ export default function SearchEmployee() {
             <div className="result-count">56 results</div>
           </div>
           <div className="row2">
-          <Assesment_Card value={30}/>
-          <Assesment_Card value={40}/>
-          <Assesment_Card value={50}/>
-          <Assesment_Card value={60}/>
-          <Assesment_Card value={70}/>
-          <Assesment_Card value={80}/>
+          <AssesmentCard value={30}/>
+          <AssesmentCard value={40}/>
+          <AssesmentCard value={50}/>
+          <AssesmentCard value={60}/>
+          <AssesmentCard value={70}/>
+          <AssesmentCard value={80}/>
           
           </div>
         </div>
