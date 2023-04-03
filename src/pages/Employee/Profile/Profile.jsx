@@ -109,8 +109,6 @@ export default function Profile() {
 
                     <div className='profileFooter'>
                         <button><img src={Check} alt="submit-logo" ></img>&nbsp;Done</button>
-                            />
-                        </Col>
                     </div>
                 </div>
             </div>
