@@ -1,41 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import "./EmployeeOfferLetter.css";
 
 const EmployeeOfferLetter = () => {
-    let { pdfUrl } = "https://firebasestorage.googleapis.com/v0/b/clearhire-d91d9.appspot.com/o/profileImages%2FTeambo%20changes%20(1).pdf?alt=media&token=8d8d7c79-683f-4156-8815-e5f1dec5e5d9";
-    let currentPage = 1;
-    let totalPages = 6;
+    let pdfUrl = "https://firebasestorage.googleapis.com/v0/b/clearhire-d91d9.appspot.com/o/profileImages%2FTeambo%20changes%20(1).pdf?alt=media&token=8d8d7c79-683f-4156-8815-e5f1dec5e5d9";
+    const [currentPage, setCurrentPage] = useState(1);
+    let totalPages = 2;
     const prevPage = async () => {
-        if (this.state.currentPage > 1) {
-            const pageNumber = currentPage - 1;
-            const currentPage = await pdfUrl.getPage(pageNumber);
-            const viewport = currentPage.getViewport({ scale: 1.5 });
-            this.canvas.height = viewport.height;
-            this.canvas.width = viewport.width;
-            const renderContext = {
-                canvasContext: this.canvas.getContext("2d"),
-                viewport: viewport,
-            };
-            await currentPage.render(renderContext);
-            this.setState({ currentPage: pageNumber });
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1)
         }
     };
 
     const nextPage = async () => {
-        if (this.state.currentPage < this.state.numPages) {
-            const pageNumber = this.state.currentPage + 1;
-            const currentPage = await this.state.pdf.getPage(pageNumber);
-            const viewport = currentPage.getViewport({ scale: 1.5 });
-            this.canvas.height = viewport.height;
-            this.canvas.width = viewport.width;
-            const renderContext = {
-                canvasContext: this.canvas.getContext("2d"),
-                viewport: viewport,
-            };
-            await currentPage.render(renderContext);
-            this.setState({ currentPage: pageNumber });
+        if (currentPage < totalPages) {
+            setCurrentPage(currentPage + 1)
         }
     };
+
     return (
         <div className="container" id="offerletter">
             <div className="row align-items-center d-flex">
@@ -90,8 +71,8 @@ const EmployeeOfferLetter = () => {
                 </div>
                 <div className="col-md-8">
                     <div className="offerletter-pdf">
-                        <iframe title=""
-                            src={"https://firebasestorage.googleapis.com/v0/b/clearhire-d91d9.appspot.com/o/profileImages%2FTeambo%20changes%20(1).pdf?alt=media&token=8d8d7c79-683f-4156-8815-e5f1dec5e5d9"}
+                        <iframe
+                            src={pdfUrl + "#toolbar=0" + "&" + "page=" + currentPage}
                         ></iframe>
                     </div>
 
