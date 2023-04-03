@@ -41,7 +41,7 @@ input{
 
 .dropdowns select{
     border: 1px solid transparent !important;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px !important;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     padding: 1.3vh;
 }
 

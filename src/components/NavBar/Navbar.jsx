@@ -6,6 +6,7 @@ import onBoard from "../../assets/images/onBoard.svg"
 import verification from "../../assets/images/verification.svg"
 import "../NavBar/Navbar.css"
 import { FileDoneOutlined } from "@ant-design/icons"
+import { logOut } from '../../utils/FirebaseUtils';
 
 export default function EmployerNavbar() {
   const [open, setOpen] = useState(false)
@@ -92,11 +93,11 @@ export default function EmployerNavbar() {
             {user === "Employer" ?
               <>
                 <li><Link to={"/"}>View Profile</Link></li> <hr />
-                <li><a href='/' onClick={() => { sessionStorage.clear(); window.location.reload() }}>Signout</a></li>
+                <li><a href='/' onClick={() => { logOut(); window.location.reload() }}>Signout</a></li>
               </>
               :
 
-              <li><a href='/' onClick={() => { sessionStorage.clear(); window.location.reload() }}>Signout</a></li>
+              <li><a href='/' onClick={() => { logOut(); window.location.reload() }}>Signout</a></li>
             }
           </ul>
 

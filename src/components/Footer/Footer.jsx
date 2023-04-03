@@ -1,5 +1,6 @@
 import React from "react";
 import "./footer.css";
+import { logOut } from "../../utils/FirebaseUtils";
 
 const Footer = () => {
   return (

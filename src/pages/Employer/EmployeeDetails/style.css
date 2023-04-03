@@ -126,6 +126,35 @@
     padding: 40px 0;
     border-radius: 24px;
     background: #EFF6F2;
+    position: relative;
+}
+
+.skillsContainer .arrowLeft {
+    position: absolute;
+    left: 10%;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 11px #00000024;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.skillsContainer .arrowRight {
+    position: absolute;
+    right: 10%;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 11px #00000024;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
 .skillsContainer p {
