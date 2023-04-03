@@ -8,13 +8,11 @@ function Profile() {
     var a =10
     let [file,setFile] = useState('')
     let [adhar,setAdhar]  = useState('')
- 
-    // const slider = document.querySelector("input");
-    // const value = document.querySelector(".value");
-    // value.textContent = slider.value;
-    // slider.oninput = function(){
-    //     value.textContent = this.value;
-    // }
+    let [rangeSkill_1,setRangeSkill_1] = useState(0)
+    let [rangeSkill_2,setRangeSkill_2] = useState(0)
+
+    
+   
 
 
   return (
@@ -72,29 +70,36 @@ function Profile() {
                         <h5>Your Skill</h5>
                     </div>
                     <div className="col-12 skill-item-1">
-                        <div className="col-5 s-name">
+                        <div className="col-4 s-name">
                             <input type="text" name="s-name" id="s-name"
                             placeholder='Skill Name 1'
                             />
                         </div>
-                        <div className="col-6 s-range">
+                        <div className="col-7 s-range">
                             <div className="slider">
-                                <input type="range"/>
+                                <input type="range" className='range' min="0" max="100" defaultValue={rangeSkill_1}
+                                onChange = {(e)=>{
+                                    setRangeSkill_1(e.target.value)
+                                }}/>
                             </div>
-                            <div className="value">100%</div>
+                            <div className="value" id="rangeValue">{rangeSkill_1}%</div>
                         </div>
                     </div>
                     <div className="col-12 skill-item-1">
-                        <div className="col-5 s-name">
+                        <div className="col-4 s-name">
                             <input type="text" name="s-name" id="s-name"
                             placeholder='Skill Name 2'
                             />
                         </div>
-                        <div className="col-6  s-range">
+                        <div className="col-7  s-range">
                             <div className="slider">
-                                <input type="range"/>
+                               <input type="range" className='range' min="0" max="100" defaultValue={rangeSkill_2}
+                                onChange = {(e)=>{
+                                    setRangeSkill_2(e.target.value)
+                                }}/>
+                                
                             </div>
-                            <div className="value">100%</div>
+                            <div className="value">{rangeSkill_2}%</div>
                         </div>
                         <div className="col-1 add">
                             <button><i class="fa-solid fa-plus"></i></button> 

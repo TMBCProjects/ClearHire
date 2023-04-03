@@ -1,0 +1,67 @@
+.empnavbar{
+    display: flex;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    padding-block: 2vh;
+    justify-content: space-around;
+    background: white;
+}
+
+.logo.navLink{
+    width: 3vh;
+}
+
+.navlink{
+    text-decoration: none;
+    color: black;
+}
+
+.active{
+    font-weight: 600;
+    text-decoration: none;
+    color: black;
+    border-bottom: 5px solid #00823B;
+    border-radius: 3px;
+    height: 192%;
+}
+
+.navbarBody {
+    display: flex;
+    align-items: center;
+    gap: 10vh;
+}
+
+.navbarBody a:hover {
+    color: black;
+    font-weight: 600;
+}
+
+.navbarFoot button{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url("../../assets/images/user.svg")no-repeat center #fff;
+    width: 5vh;
+    height: 5vh;
+    border-radius: 0.35rem;
+    border: 1px solid #c9c9c9;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.navitem{
+    position: relative;
+    top: 40%;
+}
+
+.navbarDropdown{
+    list-style-type: none;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    padding: 2vh;
+    position: absolute;
+    background: white;
+    border-radius: 0.4rem;
+}
+
+.navbarDropdown li a{
+    text-decoration: none;
+    color: black;
+}

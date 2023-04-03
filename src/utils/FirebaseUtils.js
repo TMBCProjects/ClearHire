@@ -23,7 +23,12 @@ import { auth, firestoreDB, storageRef } from "../firebase-config";
 import { Collections } from "./Collections";
 // import speakeasy from "speakeasy";
 import { Buffer } from "buffer";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytes,
+} from "firebase/storage";
 // import sendEmail from "./Email";
 global.Buffer = Buffer;
 
@@ -99,10 +104,10 @@ export function createUser(user) {
 export function updateUser(user) {
   return updateProfile(auth.currentUser, {
     photoURL:
-      user.designation === Collections.Manager
-        ? Collections.Manager
-        : Collections.Teammate,
-    displayName: user.name,
+      user.role === Collections.Employee
+        ? Collections.Employee
+        : Collections.Employer,
+    // displayName: user.name,
   });
 }
 export function signIn(email, password) {
@@ -147,10 +152,10 @@ export async function changePasswordWithCurrentPassword(
     console.error(error);
   }
 }
-export async function uploadPhoto(id, file) {
+export async function uploadPhoto(file) {
   try {
     const fileName = file.name;
-    const storage = ref(storageRef, `profileImages/${id}/${fileName}`);
+    const storage = ref(storageRef, `profileImages/${fileName}`);
     await uploadBytes(storage, file);
     const downloadURL = await getDownloadURL(storage);
     return downloadURL;
@@ -160,6 +165,19 @@ export async function uploadPhoto(id, file) {
   }
 }
 
+export async function deletePhoto(url) {
+  const storage = ref(
+    storageRef,
+    `profileImages/${url.split("%2F")[1].split("?")[0]}`
+  );
+  deleteObject(storage)
+    .then(() => {
+      return "";
+    })
+    .catch((e) => {
+      console.log(url);
+    });
+}
 // const generateOTP = () => {
 //   try {
 //     const secret = speakeasy.generateSecret({ length: 20 });
