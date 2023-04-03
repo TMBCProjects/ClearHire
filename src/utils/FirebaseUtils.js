@@ -178,6 +178,32 @@ export async function deletePhoto(url) {
       console.log(url);
     });
 }
+export async function uploadOfferLetter(name, file) {
+  try {
+    const fileName = file.name;
+    const storage = ref(storageRef, `offerLetter/${name}_${fileName}`);
+    await uploadBytes(storage, file);
+    const downloadURL = await getDownloadURL(storage);
+    return downloadURL;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Error uploading photo");
+  }
+}
+
+export async function deleteOfferLetter(url) {
+  const storage = ref(
+    storageRef,
+    `offerLetter/${url.split("%2F")[1].split("?")[0]}`
+  );
+  deleteObject(storage)
+    .then(() => {
+      return "";
+    })
+    .catch((e) => {
+      console.log(url);
+    });
+}
 // const generateOTP = () => {
 //   try {
 //     const secret = speakeasy.generateSecret({ length: 20 });
