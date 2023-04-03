@@ -16,7 +16,7 @@ import OfferLetterSent from "./pages/Employer/OfferLetterSent";
 import Assessment from "./pages/Employer/Assessment/Assessment";
 import Employee from "./pages/Employer/EmployeeDetails/index";
 import CREATE_EMPLOYEE from "./pages/Onboard/CREATE_EMPLOYEE";
-import Profile from "./pages/Profile/Profile";
+import Profile from "./pages/Employee/Profile/Profile";
 
 function App() {
   return (

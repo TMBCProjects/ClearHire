@@ -70,7 +70,7 @@ function CREATE_EMPLOYEE() {
                         // alert(e.target.files[0].name)
                         setFile(e.target.files[0].name)
                       }}/>
-                      <label for="file" class="custom-file-upload">{file!='' ? file : 'Upload Offer Letter'}</label>
+                      <label for="file" class="custom-file-upload">{file!=='' ? file : 'Upload Offer Letter'}</label>
                       <span id="filename"></span>
                       <img src={add} alt="" />  
                        
