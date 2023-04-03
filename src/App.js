@@ -13,6 +13,7 @@ import Navbar from "./components/NavBar/Navbar";
 import VerficationRequest from "./pages/Employer/VerficationRequest/VerficationRequest";
 import Assessment from "./pages/Employer/Assessment/Assessment";
 import Employee from "./pages/Employer/EmployeeDetails/index";
+import Profile from "./pages/Employee/Profile/Profile";
 
 function App() {
   return (
@@ -48,7 +49,28 @@ function App() {
                 :
                 ""
               }
+
+              <>
+                {sessionStorage.getItem("LoggedIn") === "Employee" ? (
+                  <div style={{ backgroundColor: "#F5F7F9" }}>
+                    <Navbar />
+                    <Routes>
+                      <Route path="/" element={<Profile />}></Route>
+                      {/* <Route path="/employer-approval" element={<Approval />}></Route>
+                      <Route path="/verification-request" element={<VerficationRequest />}></Route>
+                      <Route path="/assessment" element={<Assessment />}></Route>
+                      <Route path="/employee-details" element={<Employee />}></Route> */}
+                    </Routes>
+                  </div>
+                )
+                  :
+                  ""
+                }
+              </>
+
             </>
+
+
           )}
         <div className="footer shadow shadow-sm bg-light">
           <Footer />
