@@ -1,3 +1,10 @@
+#header{
+    position: sticky !important;
+    background-color: #fff;
+    top: 0;
+    z-index: 11;
+}
+
 .logo {
     width: 200px;
 }

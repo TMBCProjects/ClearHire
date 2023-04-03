@@ -75,7 +75,7 @@ export default function Profile() {
                             <Slider
                                 min={1}
                                 max={100}
-                                onChange={onChange}
+                                // onChange={onChange}
                                 value={typeof inputValue === 'number' ? inputValue : 0}
                                 trackStyle={{ backgroundColor: "#00823B" }}
                                 handleStyle={{ backgroundColor: "#00823B" }}
@@ -97,7 +97,7 @@ export default function Profile() {
                             <Slider
                                 min={1}
                                 max={100}
-                                onChange={onChange}
+                                // onChange={onChange}
                                 value={typeof inputValue === 'number' ? inputValue : 0}
                                 trackStyle={{ backgroundColor: "#00823B" }}
                                 handleStyle={{ backgroundColor: "#00823B" }}
