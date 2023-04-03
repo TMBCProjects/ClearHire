@@ -37,37 +37,41 @@ function App() {
           </>
         ) : (
           <>
-            {sessionStorage.getItem("LoggedIn") === "Employer" ? (
+          {sessionStorage.getItem("LoggedIn") === "Employer" ? (
+            <div style={{ backgroundColor: "#F5F7F9" }}>
+              <Navbar />
+              <Routes>
+                <Route path="/" element={<SearchEmployee />}></Route>
+                <Route path="/employer-approval" element={<Approval />}></Route>
+                <Route path="/verification-request" element={<VerficationRequest />}></Route>
+                <Route path="/assessment" element={<Assessment />}></Route>
+                <Route path="/employee-details" element={<Employee />}></Route>
+              </Routes>
+            </div>
+          )
+            :
+            ""
+          }
+
+          <>
+            {sessionStorage.getItem("LoggedIn") === "Employee" ? (
               <div style={{ backgroundColor: "#F5F7F9" }}>
                 <Navbar />
                 <Routes>
-                  <Route
-                    path="/"
-                    element={<SearchEmployee />}></Route>
-                  <Route
-                    path="/employer-approval"
-                    element={<Approval />}></Route>
-                  <Route
-                    path="/verification-request"
-                    element={<VerficationRequest />}></Route>
-                  <Route
-                    path="/assessment"
-                    element={<Assessment />}></Route>
-                  <Route
-                    path="/onboarding-form"
-                    element={<OnboardingForm />}></Route>
-                  <Route
-                    path="/offerletter-sent"
-                    element={<OfferLetterSent />}></Route>
-                  <Route
-                    path="/employee-details"
-                    element={<Employee />}></Route>
+                  <Route path="/" element={<Profile />}></Route>
+                  {/* <Route path="/employer-approval" element={<Approval />}></Route>
+                  <Route path="/verification-request" element={<VerficationRequest />}></Route>
+                  <Route path="/assessment" element={<Assessment />}></Route>
+                  <Route path="/employee-details" element={<Employee />}></Route> */}
                 </Routes>
               </div>
-            ) : (
+            )
+              :
               ""
-            )}
+            }
           </>
+
+        </>
         )}
         <div className="footer shadow shadow-sm bg-light">
           <Footer />
