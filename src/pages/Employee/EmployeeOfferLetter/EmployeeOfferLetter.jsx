@@ -1,10 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./EmployeeOfferLetter.css";
+import PdfViewer from "../../../components/PdfViewer/PdfViewer";
 
 const EmployeeOfferLetter = () => {
     let pdfUrl = "https://firebasestorage.googleapis.com/v0/b/clearhire-d91d9.appspot.com/o/profileImages%2FTeambo%20changes%20(1).pdf?alt=media&token=8d8d7c79-683f-4156-8815-e5f1dec5e5d9";
     const [currentPage, setCurrentPage] = useState(1);
     let totalPages = 2;
+    const iframeRef = useRef(null);
+
+
+    useEffect(() => {
+        const iframe = iframeRef.current;
+        const url = `${pdfUrl}#toolbar=0&page=${currentPage}`;
+        // iframe.onload = () => {
+        //     const win = iframe.contentWindow || iframe.contentDocument.defaultView;
+        //     win.scrollTo(0, 0);
+        // };
+        iframe.src = url;
+    }, [currentPage, pdfUrl]);
+
     const prevPage = async () => {
         if (currentPage > 1) {
             setCurrentPage(currentPage - 1)
@@ -71,23 +85,7 @@ const EmployeeOfferLetter = () => {
                 </div>
                 <div className="col-md-8">
                     <div className="offerletter-pdf">
-                        <iframe
-                            src={pdfUrl + "#toolbar=0" + "&" + "page=" + currentPage}
-                        ></iframe>
-                    </div>
-
-                    <div style={{ marginTop: "20px", textAlign: "center" }}>
-                        <button onClick={() => { prevPage() }}
-                            disabled={currentPage === 1}
-                        >
-                            Previous
-                        </button>{" "}
-                        Page {currentPage} of {totalPages}{" "}
-                        <button onClick={() => { nextPage() }}
-                            disabled={currentPage === totalPages}
-                        >
-                            Next
-                        </button>
+                        <PdfViewer pdfUrl={pdfUrl} />
                     </div>
                 </div>
             </div>
