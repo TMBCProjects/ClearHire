@@ -7,6 +7,8 @@ import verification from "../../assets/images/verification.svg"
 import "../NavBar/Navbar.css"
 import { FileDoneOutlined } from "@ant-design/icons"
 import { logOut } from '../../utils/FirebaseUtils';
+import users from "../../assets/images/users.png"
+import job from "../../assets/images/job.svg";
 
 export default function EmployerNavbar() {
   const [open, setOpen] = useState(false)
@@ -72,14 +74,14 @@ export default function EmployerNavbar() {
 
           <NavLink activeclassname="active" to={"/employer-approval"} className="navlink">
             <div className='navitem'>
-              <img src={onBoard} alt="search-logo" className="logo navLink" />&nbsp;
+              <img src={job} alt="search-logo" className="logo navLink" />&nbsp;
               Offer Letter
             </div>
           </NavLink>
 
-          <NavLink activeclassname="active" to={"/verification-request"} className="navlink">
+          <NavLink activeclassname="active" to={"/colleagues"} className="navlink">
             <div className='navitem'>
-              <img src={verification} alt="search-logo" className="logo navLink" />&nbsp;
+              <img src={users} alt="search-logo" className="logo navLink" />&nbsp;
               Colleagues
             </div>
           </NavLink>

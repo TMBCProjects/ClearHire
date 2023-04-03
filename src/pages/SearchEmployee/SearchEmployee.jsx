@@ -1,12 +1,12 @@
 import React from "react";
 import "./styles.css";
-import search from "../../../assets/images/search.svg";
-import location from "../../../assets/images/location.svg";
-import job from "../../../assets/images/job.svg";
-import salary from "../../../assets/images/salary.svg";
-import cross from "../../../assets/images/cross.svg";
+import search from "../../assets/images/search.svg";
+import location from "../../assets/images/location.svg";
+import job from "../../assets/images/job.svg";
+import salary from "../../assets/images/salary.svg";
+import cross from "../../assets/images/cross.svg";
 import { Select, Checkbox, Slider } from "antd";
-import AssesmentCard from "../../../components/Cards/AssesmentCard";
+import AssesmentCard from "../../components/Cards/AssesmentCard";
 const handleChange = (value) => {
   console.log(`selected ${value}`);
 };
@@ -38,6 +38,7 @@ const options = [
   },
 ];
 export default function SearchEmployee() {
+  const user = sessionStorage.getItem("user")
   return (
     <div className="employer-home">
       <div className="search-inputs">
@@ -49,14 +50,19 @@ export default function SearchEmployee() {
             placeholder="Job title, company and keyword"
           />
         </div>
+        {user === "Employer" ? 
         <div className="input-box2 input-box">
           <img src={location} alt="Search" />
           <input type="text" className="box-input" placeholder="Location" />
         </div>
+        :
+        ""
+  }
         <div className="input-box3 input-box">
           <img src={job} alt="Search" />
           <input type="text" className="box-input" placeholder="Job Type" />
         </div>
+        {user === "Employer" ? 
         <div className="input-box4 input-box">
           <img src={salary} alt="Search" />
           <input
@@ -65,6 +71,9 @@ export default function SearchEmployee() {
             placeholder="Salary"
           />
         </div>
+        :
+        ""
+        }
 
         <button>Search</button>
       </div>
@@ -77,7 +86,7 @@ export default function SearchEmployee() {
               letterSpacing: "-.47x",
             }}
           >
-            Employee Search Settings
+          {user === "Employer" ? "Employee" : "Colleague"} Search Settings
           </p>
           <div className="dropdowns">
             <div className="dropdown-select">
@@ -174,6 +183,7 @@ export default function SearchEmployee() {
               </Checkbox>
             </div>
           </div>
+          {user === "Employer" ? 
           <div className="ranges">
             <p
               style={{
@@ -217,6 +227,9 @@ export default function SearchEmployee() {
               />
             </div>
           </div>
+          :
+          ""
+              }
           <a className="clear-filter" href="/">
             {" "}
             <img src={cross} alt="cross" /> Clear all filters
@@ -224,6 +237,7 @@ export default function SearchEmployee() {
         </div>
         <div className="result-employees">
           <div className="row1">
+          {user === "Employer" ? 
             <div className="row1-checkboxes">
               <Checkbox
                 style={{
@@ -253,6 +267,9 @@ export default function SearchEmployee() {
                 All
               </Checkbox>
             </div>
+            :
+            ""
+              }
             <div className="result-count">56 results</div>
           </div>
           <div className="row2">
