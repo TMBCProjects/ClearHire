@@ -6,7 +6,7 @@ import "./approval.css";
 
 const Approval = () => {
   return (
-    <div className="container" id="employer-approval">
+    <div id="employer-approval">
       <div className="row d-flex justify-content-between align-items-center">
         <div className="col-md-6">
           <h3 className="fw-bold fs-30">Sent Approvals (Pending)</h3>
