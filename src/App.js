@@ -15,6 +15,8 @@ import OnboardingForm from "./pages/Employer/OnboardingForm/OnboardingForm";
 import OfferLetterSent from "./pages/Employer/OfferLetterSent";
 import Assessment from "./pages/Employer/Assessment/Assessment";
 import Employee from "./pages/Employer/EmployeeDetails/index";
+import CREATE_EMPLOYEE from "./pages/Onboard/CREATE_EMPLOYEE";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
   return (
@@ -24,21 +26,13 @@ function App() {
           <>
             <Header />
             <Routes>
-              <Route
-                path="/"
-                element={<Home />}></Route>
-              <Route
-                path="/signup"
-                element={<Signup />}></Route>
-              <Route
-                path="/signup-options"
-                element={<SignupOptions />}></Route>
-              <Route
-                path="/user-options"
-                element={<SignupChooseUser />}></Route>
-              <Route
-                path="/signup-done"
-                element={<SignupDone />}></Route>
+              <Route path="/" element={<Home />}></Route>
+              <Route path="/signup" element={<Signup />}></Route>
+              <Route path="/signup-options" element={<SignupOptions />}></Route>
+              <Route path="/user-options" element={<SignupChooseUser />}></Route>
+              <Route path="/signup-done" element={<SignupDone />}></Route>
+              <Route path="/create-employee" element={<CREATE_EMPLOYEE />}></Route>
+              <Route path="/Profile" element={<Profile/>}></Route>
             </Routes>
           </>
         ) : (
