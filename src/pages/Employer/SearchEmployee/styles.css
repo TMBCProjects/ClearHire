@@ -3,6 +3,7 @@
   flex-direction: column;
   width: 100%;
   height: auto;
+  padding-bottom: 3vh
 }
 .search-inputs {
   width: inherit;
@@ -116,4 +117,8 @@ font-size: 1.2rem;
   flex-wrap: wrap;
   gap: 2rem;
 }
-
+.ranges-div{
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+}
