@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../../assets/images/logo.svg";
-import search from "../../assets/images/search.svg"
+import search from "../../assets/images/search2.svg"
 import onBoard from "../../assets/images/onBoard.svg"
 import verification from "../../assets/images/verification.svg"
 import "../NavBar/Navbar.css"
