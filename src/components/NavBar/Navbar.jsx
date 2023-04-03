@@ -70,7 +70,7 @@ export default function EmployerNavbar() {
             </div>
           </NavLink>
 
-          <NavLink activeclassname="active" to={"/employer-approval"} className="navlink">
+          <NavLink activeclassname="active" to={"/employeeOfferLetter"} className="navlink">
             <div className='navitem'>
               <img src={onBoard} alt="search-logo" className="logo navLink" />&nbsp;
               Offer Letter
