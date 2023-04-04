@@ -1,4 +1,4 @@
-.profile{
+.profile {
     text-align: center;
     display: flex;
     align-items: center;
@@ -8,12 +8,12 @@
     gap: 3vh;
 }
 
-.profileHeader img{
+.profileHeader img {
     width: 15vh;
     border-radius: 10vh;
 }
 
-.profilePic{
+.profilePic {
     background-color: white;
     border-radius: 10vh;
     border: 1px solid;
@@ -30,13 +30,13 @@
 }
 
 
-.profileBody{
+.profileBody {
     display: flex;
     flex-direction: column;
     gap: 2vh;
 }
 
-.profileBody button{
+.profileBody button {
     padding: 1vh;
     color: var(--primary-color);
     background: white;
@@ -46,7 +46,7 @@
     font-weight: 600;
 }
 
-.profileBody button img{
+.profileBody button img {
     width: 2vh;
 }
 
@@ -55,43 +55,46 @@
     padding: 1.5vh;
 }
 
-.skills{
+.skills {
     margin-top: 5vh;
     font-size: larger;
 }
 
-.skillList{
+.skillList {
     display: flex;
     align-items: center;
     gap: 2vh;
     margin-top: 2vh;
 }
 
-.skillList .form-group{
+.skillList .form-group {
     width: 25vh;
 }
 
-.skillList input{
+.skillList input {
     width: 25vh;
-    
+
 }
 
-.sliderpercent{
+.sliderpercent {
     background-color: #E2F0E8;
     width: 5vh;
     height: 5vh;
     border-radius: 5vh;
     padding: 1vh;
     color: #00823B;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
 }
 
-.profileFooter{
+.profileFooter {
     margin-top: 5vh;
 }
 
-.profileFooter button{
+.profileFooter button {
     width: 25%;
     border: none;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
-
