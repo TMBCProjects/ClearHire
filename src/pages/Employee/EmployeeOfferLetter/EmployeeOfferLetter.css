@@ -1,0 +1,52 @@
+#offerletter {
+    position: relative;
+    margin-top: 5em;
+}
+
+#offerletter .offerletter-heading {
+    font-size: 50px;
+    font-weight: 600;
+}
+.text-color-green{
+    color: #00823b;
+
+}
+
+.offerletter-text {
+    font-weight: 1000;
+    font-size: 20px;
+    width: 630px;
+    color: #ACACAC;
+    line-height:50%;
+}
+#offerletter-btn{
+  width: 100%;
+  height: 100vh;
+}
+.offerletter-pdf {
+    margin-top: -500px;
+  width: 55vw;
+  height: 100vh;
+}
+ .iframe-no-scroll {
+    width: 55vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+@media(max-width:767px) {
+    .offerletter-heading {
+        font-size: 30px;
+        text-align: center;
+    }
+
+    .offerletter-text {
+        text-align: center;
+        width: 100%;
+    }
+
+    #offerletter-btn {
+        justify-content: center !important;
+        margin: auto;
+        width: 100%;
+    }
+}
