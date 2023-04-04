@@ -1,5 +1,6 @@
 import React from "react";
 import "./footer.css";
+import { logOut } from "../../utils/FirebaseUtils";
 
 const Footer = () => {
   return (
@@ -26,6 +27,9 @@ const Footer = () => {
             <a className="mx-3 text-decoration-none text-gray" href="/">
               Feedback
             </a>
+            <button className="mx-3 text-decoration-none text-gray" onClick={() => { logOut(); window.location.reload() }}>
+              Signout
+            </button>
           </div>
           <div className="col-md-3">
             <p className=" px-3 my-0 text-gray">Copyright &copy; clearhire</p>
