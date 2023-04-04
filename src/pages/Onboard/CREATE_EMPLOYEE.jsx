@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import "./Onboard.css";
+import add from "../../images/add.svg";
+
 function CREATE_EMPLOYEE() {
 
   let [file,setFile] = useState('')
@@ -64,13 +66,15 @@ function CREATE_EMPLOYEE() {
 
                     </div>
                     <div className="form-item f-3">
-                    <input type="file" id="file" name="file" accept=".txt, .pdf" onChange={(e)=>{
-                       // alert(e.target.files[0].name)
-                       setFile(e.target.files[0].name)
-                    }}/>
-                    <label for="file" class="custom-file-upload">{file!='' ? file : 'Upload Offer Letter'}</label>
-                    <span id="filename"></span>
-                      <i class="fa-solid fa-plus s-2"></i>
+                      <input type="file" id="file" name="file" accept=".txt, .pdf" onChange={(e)=>{
+                        // alert(e.target.files[0].name)
+                        setFile(e.target.files[0].name)
+                      }}/>
+                      <label for="file" class="custom-file-upload">{file!='' ? file : 'Upload Offer Letter'}</label>
+                      <span id="filename"></span>
+                      <img src={add} alt="" />  
+                       
+                      
                     </div>
 
 

@@ -29,8 +29,6 @@ function Profile() {
              <div className="round">
                 <input type="file"/>
                 <img src={cam} alt="" />
-
-                {/* <i class="fa-solid fa-camera"></i> */}
              </div>
              <h1>Govarthan, 24</h1>
              <h2>Chennai, India</h2>
@@ -111,8 +109,7 @@ function Profile() {
                             <div className="value">{rangeSkill_2}%</div>
                         </div>
                         <div className="col-1 add">
-                           <img src={add} alt="" />
-                            
+                           <img src={add} alt="" />  
                         </div>
                     </div>
                 </div>
