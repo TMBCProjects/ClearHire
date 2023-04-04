@@ -74,7 +74,6 @@ function CREATE_EMPLOYEE() {
                       <span id="filename"></span>
                       <img src={add} alt="" />  
                        
-                      
                     </div>
 
 
