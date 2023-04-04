@@ -56,7 +56,11 @@
     top: 40%;
 }
 
-.navbarDropdown {
+.navitem svg{
+    color: #00823B;
+}
+
+.navbarDropdown{
     list-style-type: none;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     padding: 2vh;

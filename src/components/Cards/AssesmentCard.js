@@ -1,5 +1,5 @@
 import React from 'react'
-import image from "../../assets/images/Image.png"
+//import image from "../../assets/images/Image.png"
 import pic from "../../assets/images/pic.png"
 import ProgressBar from '../ProgressBar'
 import './styles.css'
