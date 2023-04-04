@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Document, Page } from "react-pdf";
 
-import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
-import 'react-pdf/dist/esm/Page/TextLayer.css';
+
 const options = {
   cMapUrl: 'cmaps/',
   cMapPacked: true,
@@ -18,11 +17,11 @@ const PdfViewer = ({ pdfUrl }) => {
   }, [pdfUrl])
 
   const onNextPage = () => {
-    setCurrentPage(Math.min(currentPage + 1, numPages));
+    setCurrentPage(currentPage + 1);
   };
 
   const onPrevPage = () => {
-    setCurrentPage(Math.max(currentPage - 1, 1));
+    setCurrentPage(currentPage - 1);
   };
 
   const onDocumentLoadSuccess = ({ numPages }) => {
