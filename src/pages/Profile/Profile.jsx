@@ -1,6 +1,12 @@
 import React, { useState } from 'react'
 import "./Profile.css";
 import pic from "../../images/download.jpg";
+import cam from "../../images/cam.svg";
+import check from "../../images/check-circle.svg";
+import add from "../../images/add.svg";
+
+
+
 import './text.jsx'
 import { onSubmit } from './text.jsx';
 function Profile() {
@@ -19,9 +25,12 @@ function Profile() {
     <div className='profile' id='profile'>
         <div className="profile-img">
              <img src={pic} alt="" />
+
              <div className="round">
                 <input type="file"/>
-                <i class="fa-solid fa-camera"></i>
+                <img src={cam} alt="" />
+
+                {/* <i class="fa-solid fa-camera"></i> */}
              </div>
              <h1>Govarthan, 24</h1>
              <h2>Chennai, India</h2>
@@ -102,13 +111,14 @@ function Profile() {
                             <div className="value">{rangeSkill_2}%</div>
                         </div>
                         <div className="col-1 add">
-                            <button><i class="fa-solid fa-plus"></i></button> 
+                           <img src={add} alt="" />
+                            
                         </div>
                     </div>
                 </div>
             </div>
             <div className="done" onClick={onSubmit()}>
-                        <i class="fa-regular fa-circle-check"></i>
+                         <img src={check} alt="" />      
                         <button onClick={onSubmit}>Done</button>
                         
                     </div>
