@@ -60,8 +60,8 @@ const EmployeeOfferLetter = () => {
                 </div>
                 <div className="col-md-8">
                     <div className="offerletter-pdf">
-                        {/* <iframe className="iframe-no-scroll" src={`${pdfUrl}#toolbar=0&scrollbar=0&page=${currentPage}`} /> */}
-                        <PdfViewer pdfUrl={`${pdfUrl}`} />
+                        <iframe className="iframe-no-scroll" src={`${pdfUrl}#toolbar=0&scrollbar=0&page=${currentPage}`} />
+                        {/* <PdfViewer pdfUrl={`${pdfUrl}`} /> */}
                     </div>
                 </div>
             </div>
