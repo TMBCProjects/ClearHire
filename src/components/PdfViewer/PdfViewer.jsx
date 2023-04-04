@@ -43,7 +43,7 @@ const PdfViewer = ({ pdfUrl }) => {
             options={options}
             onLoadSuccess={onDocumentLoadSuccess}
           >
-            <Page pageNumber={currentPage} />
+            <Page size="A4" pageNumber={currentPage} />
           </Document>
         </div>
       </div>
