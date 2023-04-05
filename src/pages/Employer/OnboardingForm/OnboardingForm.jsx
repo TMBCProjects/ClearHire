@@ -1,37 +1,19 @@
-import { SendOutlined } from "@ant-design/icons";
-import { Button } from "antd";
-import axios from "axios";
-import React, { useState, useEffect } from "react";
-import Dropdown from "../../../components/Dropdrowns/Dropdown";
-import InputField from "../../../components/Input/InputField";
-import UploadOfferLetter from "../../../components/UploadOfferLetter/UploadOfferLetter";
-import UploadPic from "../../../components/UploadPic/UploadPic";
-import "../OnboardingForm/OnboardingForm.css"
+import React, { useState } from 'react'
+import "./OnboardingForm.css";
+import add from "../../../images/add.svg";
+import { onboardEmployee } from '../../../DataBase/Employer/employer';
 
 const initialValues = {
-    email: "",
-    password: "",
     name: "",
-    state: "",
-    country: "",
-    profileImage: "",
-    role: "",
+    email: "",
+    aadhaarNumber: "",
+    designation: "",
+    dateOfJoining: "",
+    salary: "",
+    offerLetter: "",
 };
-
-export default function OnboardingForm() {
+function OnboardingForm() {
     const [values, setValues] = useState(initialValues)
-    const [designations, setDesignations] = useState([""]);
-    let year = Array.from({ length: 123 }, (_, i) => (new Date()).getFullYear() - i);
-    var selectedCountry = ""
-    var selectedState = ""
-    var selectedYear = ""
-    useEffect(() => {
-        fetch("https://api.securevan.com/v4/designations")
-            .then((res) => res.json())
-            .then((data) => {
-                setDesignations(data);
-            });
-    }, []);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -41,75 +23,126 @@ export default function OnboardingForm() {
         });
     };
 
-    const handleSubmit = () => {
-        values.profileImage = sessionStorage.getItem("offerLetter");
-        // values.role = sessionStorage.getItem("user");
-        // registerLogin(values).then(() => {
-        //     sessionStorage.removeItem("profileImage");
-        window.location.href = "/offerletter-sent";
-        // });
-    };
-
-    const handleYearChange = (e) => {
-        selectedYear = e.target.value
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        const name = e.target.name;
+        setFile(file.name)
         setValues({
             ...values,
-            "dateOfJoining": selectedYear,
+            [name]: file,
         });
-    }
+    };
+
+    const handleSubmit = () => {
+        onboardEmployee(values).then(() => {
+            window.location.href = "/offerletter-sent";
+        });
+    };
+
+
+    let [file, setFile] = useState('')
 
     return (
-        <div className="container-fluid">
-            <div className="signupHeader">
-                <span style={{ fontWeight: "bold" }}>On-Board New Employee</span>
+        <div className="createemp">
+            <div className="row back">
+                <div className="col-12 back-item">
+                    <i className="fa-solid fa-circle-chevron-left"></i>
+                    <h4>Back</h4>
+                </div>
 
+                <div className="container-fluid" id="On-board">
+
+                    <div className="container">
+                        <div className="row d-flex  align-items-center">
+                            <div className="col-12">
+                                <div className="onboard-form-1">
+                                    <p className="onboard-heading">On-Board New Employee</p>
+
+                                    <div className="mx-auto">
+                                        <div className="form-item">
+                                            <input
+                                                type="text"
+                                                className="form-control-1"
+                                                placeholder="Name"
+                                                name="name"
+                                                onChange={handleInputChange}
+                                            />
+                                        </div>
+                                        <div className="form-item email">
+                                            <input
+                                                type="email"
+                                                className="form-control-1"
+                                                placeholder="Email address"
+                                                name="email"
+                                                onChange={handleInputChange}
+                                            />
+                                            <p>Not on clearhire - an email will be sent to them instead</p>
+                                        </div>
+                                        <div className="form-item">
+                                            <input
+                                                type="number"
+                                                className="form-control-1"
+                                                placeholder="Aadhaar Number"
+                                                name="aadhaarNumber"
+                                                onChange={handleInputChange}
+                                            />
+                                        </div>
+                                        <div className="form-item ">
+                                            <select name="designation" id=""
+                                                onChange={handleInputChange}>
+                                                <option value="">Designation*</option>
+                                                <option value="Graphics Designer">Graphics Designer</option>
+                                                <option value="Developer">Developer</option>
+                                                <option value="Video Editor">Video Editor</option>
+                                            </select>
+                                        </div>
+                                        <div className="form-item">
+                                            <input
+                                                type="date"
+                                                className="form-control-1"
+                                                placeholder="Date of Joining*"
+                                                name="dateOfJoining"
+                                                onChange={handleInputChange}
+                                            />
+                                        </div>
+                                        <div className="form-item">
+                                            <input
+                                                type="number"
+                                                className="form-control-1"
+                                                placeholder="Salary*"
+                                                name="salary"
+                                                onChange={handleInputChange}
+                                            />
+
+                                        </div>
+                                        <div className="form-item f-3">
+                                            <input type="file" id="file" name="offerLetter" accept=".txt, .pdf" onChange={(e) => {
+                                                handleFileChange(e)
+                                            }} />
+                                            <label for="file" className="custom-file-upload">{file !== '' ? file : 'Upload Offer Letter'}</label>
+                                            <span id="filename"></span>
+                                            <img src={add} alt="" />
+
+                                        </div>
+
+
+                                        <div className="form-item">
+
+                                            <button type="submit" onClick={handleSubmit} className="send-btn">
+                                                <i className="fa-solid fa-plus s-1"></i>
+                                                Send Offer Letter
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <form className="form-horizontal">
-                <InputField
-                    type={"text"}
-                    name={"name"}
-                    value={values.name}
-                    onChange={handleInputChange}
-                    placeholder={"Name"}
-                />
-                <InputField
-                    type={"email"}
-                    name={"email"}
-                    value={values.email}
-                    onChange={handleInputChange}
-                    placeholder={"Email ID"}
-                />
-                <label className="control-label"></label>
-                <div className="dropdowns">
-                    <Dropdown
-                        values={designations}
-                        type={"number"}
-                        name={"Designation"}
-                        id={"Designation"}
-                        onChange={handleYearChange}
-                    />
-                </div>
-                <label className="control-label"></label>
-                <div className="dropdowns">
-                    <Dropdown
-                        values={year}
-                        type={"number"}
-                        name={"Date Of Joining"}
-                        id={"doj"}
-                        onChange={handleYearChange}
-                    />
-                </div>
-                <InputField
-                    type={"text"}
-                    name={"salary"}
-                    value={values.salary}
-                    onChange={handleInputChange}
-                    placeholder={"Salary"}
-                />
-                <label className="control-label"></label>
-                <UploadOfferLetter name={values.name} />
-                <Button className="signupBtn" onClick={handleSubmit}><SendOutlined /> Send Offer Letter</Button>
-            </form>
         </div>
-    );
+    )
 }
+
+export default OnboardingForm;

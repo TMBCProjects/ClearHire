@@ -2,9 +2,7 @@ export default class Offer {
   isActive = false;
   employeeName = "";
   employeeEmail = "";
-  country = "";
-  state = "";
-  profileImage = "";
+  employeeAadhaarCardNumber = "";
   dateOfJoining = "";
   designation = "";
   salary = "";
