@@ -15,9 +15,7 @@ import OnboardingForm from "./pages/Employer/OnboardingForm/OnboardingForm";
 import OfferLetterSent from "./pages/Employer/OfferLetterSent/OfferLetterSent";
 import Assessment from "./pages/Employer/Assessment/Assessment";
 import Employee from "./pages/Employer/EmployeeDetails/index";
-import CREATE_EMPLOYEE from "./pages/Onboard/CREATE_EMPLOYEE";
 import Profile from "./pages/Employee/Profile/Profile";
-import UserProfile from "./pages/Employer/Profile/Profile";
 import EmployeeOfferLetter from "./pages/Employee/EmployeeOfferLetter/EmployeeOfferLetter";
 function App() {
   return (
@@ -42,9 +40,6 @@ function App() {
               <Route
                 path="/signup-done"
                 element={<SignupDone />}></Route>
-              <Route
-                path="/create-employee"
-                element={<CREATE_EMPLOYEE />}></Route>
               <Route
                 path="/Profile"
                 element={<Profile />}></Route>
