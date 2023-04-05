@@ -38,7 +38,7 @@ const options = [
   },
 ];
 export default function SearchEmployee() {
-  const user = sessionStorage.getItem("user")
+  const user = sessionStorage.getItem("LoggedIn")
   return (
     <div className="employer-home">
       <div className="search-inputs">
