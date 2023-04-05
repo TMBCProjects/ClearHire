@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Document, Page } from "react-pdf";
-
+import { Document, Page, pdfjs } from "react-pdf";
+pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const options = {
   cMapUrl: 'cmaps/',
@@ -9,11 +9,13 @@ const options = {
 };
 const PdfViewer = ({ pdfUrl }) => {
   const [file, setFile] = useState('');
-  const [numPages, setNumPages] = useState(1);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [numPages, setNumPages] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
-    setFile('' + pdfUrl)
+    setFile('' + pdfUrl);
+    setCurrentPage(1);
+    setNumPages(1);
   }, [pdfUrl])
 
   const onNextPage = () => {
@@ -26,7 +28,6 @@ const PdfViewer = ({ pdfUrl }) => {
 
   const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
-    setCurrentPage(1);
   };
 
   return (

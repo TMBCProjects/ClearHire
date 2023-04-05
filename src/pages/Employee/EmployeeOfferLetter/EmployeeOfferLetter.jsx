@@ -3,6 +3,7 @@ import "./EmployeeOfferLetter.css";
 import PdfViewer from "../../../components/PdfViewer/PdfViewer";
 
 const EmployeeOfferLetter = () => {
+    const currentPage = useState(1);
     let pdfUrl = "https://firebasestorage.googleapis.com/v0/b/clearhire-d91d9.appspot.com/o/profileImages%2FTeambo%20changes%20(1).pdf?alt=media&token=8d8d7c79-683f-4156-8815-e5f1dec5e5d9";
 
     return (
@@ -59,8 +60,7 @@ const EmployeeOfferLetter = () => {
                 </div>
                 <div className="col-md-8">
                     <div className="offerletter-pdf">
-                        <iframe className="iframe-no-scroll" src={`${pdfUrl}#toolbar=0&scrollbar=0&page=2`} />
-
+                        <iframe className="iframe-no-scroll" src={`${pdfUrl}#toolbar=0&scrollbar=0&page=${currentPage}`} />
                         {/* <PdfViewer pdfUrl={`${pdfUrl}`} /> */}
                     </div>
                 </div>
