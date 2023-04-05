@@ -46,6 +46,7 @@ function App() {
                 <Route path="/verification-request" element={<VerficationRequest />}></Route>
                 <Route path="/assessment" element={<Assessment />}></Route>
                 <Route path="/employee-details" element={<Employee />}></Route>
+                <Route path="/onboarding-form" element={<CREATE_EMPLOYEE />}></Route>
               </Routes>
             </div>
           )

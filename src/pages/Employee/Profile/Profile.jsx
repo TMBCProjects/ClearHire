@@ -76,7 +76,7 @@ export default function Profile() {
                                 min={1}
                                 max={100}
                                 // onChange={onChange}
-                                value={typeof inputValue === 'number' ? inputValue : 0}
+                                // value={typeof inputValue === 'number' ? inputValue : 0}
                                 trackStyle={{ backgroundColor: "#00823B" }}
                                 handleStyle={{ backgroundColor: "#00823B" }}
                             />
@@ -98,7 +98,7 @@ export default function Profile() {
                                 min={1}
                                 max={100}
                                 // onChange={onChange}
-                                value={typeof inputValue === 'number' ? inputValue : 0}
+                                // value={typeof inputValue === 'number' ? inputValue : 0}
                                 trackStyle={{ backgroundColor: "#00823B" }}
                                 handleStyle={{ backgroundColor: "#00823B" }}
                             />

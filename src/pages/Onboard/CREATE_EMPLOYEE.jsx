@@ -7,6 +7,7 @@ function CREATE_EMPLOYEE() {
   let [file,setFile] = useState('')
 
   return (
+    <div className="createemp">
     <div className="row back">
       <div className="col-12 back-item">
         <i class="fa-solid fa-circle-chevron-left"></i>
@@ -92,6 +93,7 @@ function CREATE_EMPLOYEE() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   )
 }
