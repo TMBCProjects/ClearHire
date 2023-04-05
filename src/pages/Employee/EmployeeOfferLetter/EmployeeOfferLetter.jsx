@@ -1,10 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import "./EmployeeOfferLetter.css";
 import PdfViewer from "../../../components/PdfViewer/PdfViewer";
 
 const EmployeeOfferLetter = () => {
-  const currentPage = useState(1);
-
   return (
     <div className="container" id="offerletter">
       <div className="row align-items-center d-flex">
