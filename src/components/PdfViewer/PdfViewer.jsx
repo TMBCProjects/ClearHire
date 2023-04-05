@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import Sample from "../../assets/pdf/sample.pdf";
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import 'react-pdf/dist/esm/Page/TextLayer.css';
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-// const options = {
-//   cMapUrl: "cmaps/",
-//   cMapPacked: true,
-//   standardFontDataUrl: "standard_fonts/",
-// };
 const PdfViewer = () => {
   const [numPages, setNumPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -35,7 +32,7 @@ const PdfViewer = () => {
       >
         <div style={{ width: "500px" }}>
           <Document file={Sample} onLoadSuccess={onDocumentLoadSuccess}>
-            <Page size="A4" pageNumber={currentPage} />
+            <Page pageNumber={currentPage} />
           </Document>
         </div>
       </div>
