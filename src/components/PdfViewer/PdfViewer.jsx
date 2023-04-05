@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import Sample from "../../assets/pdf/sample.pdf";
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
