@@ -17,7 +17,8 @@ import Assessment from "./pages/Employer/Assessment/Assessment";
 import Employee from "./pages/Employer/EmployeeDetails/index";
 import CREATE_EMPLOYEE from "./pages/Onboard/CREATE_EMPLOYEE";
 import Profile from "./pages/Employee/Profile/Profile";
-
+import UserProfile from "./pages/Employer/Profile/Profile";
+import EmployeeOfferLetter from "./pages/Employee/EmployeeOfferLetter/EmployeeOfferLetter";
 function App() {
   return (
     <div>
@@ -26,54 +27,84 @@ function App() {
           <>
             <Header />
             <Routes>
-              <Route path="/" element={<Home />}></Route>
-              <Route path="/signup" element={<Signup />}></Route>
-              <Route path="/signup-options" element={<SignupOptions />}></Route>
-              <Route path="/user-options" element={<SignupChooseUser />}></Route>
-              <Route path="/signup-done" element={<SignupDone />}></Route>
-              <Route path="/create-employee" element={<CREATE_EMPLOYEE />}></Route>
-              <Route path="/Profile" element={<Profile/>}></Route>
+              <Route
+                path="/"
+                element={<Home />}></Route>
+              <Route
+                path="/signup"
+                element={<Signup />}></Route>
+              <Route
+                path="/signup-options"
+                element={<SignupOptions />}></Route>
+              <Route
+                path="/user-options"
+                element={<SignupChooseUser />}></Route>
+              <Route
+                path="/signup-done"
+                element={<SignupDone />}></Route>
+              <Route
+                path="/create-employee"
+                element={<CREATE_EMPLOYEE />}></Route>
+              <Route
+                path="/Profile"
+                element={<Profile />}></Route>
             </Routes>
           </>
         ) : (
           <>
-          {sessionStorage.getItem("LoggedIn") === "Employer" ? (
-            <div style={{ backgroundColor: "#F5F7F9" }}>
-              <Navbar />
-              <Routes>
-                <Route path="/" element={<SearchEmployee />}></Route>
-                <Route path="/employer-approval" element={<Approval />}></Route>
-                <Route path="/verification-request" element={<VerficationRequest />}></Route>
-                <Route path="/assessment" element={<Assessment />}></Route>
-                <Route path="/employee-details" element={<Employee />}></Route>
-                <Route path="/onboarding-form" element={<CREATE_EMPLOYEE />}></Route>
-              </Routes>
-            </div>
-          )
-            :
-            ""
-          }
-
-          <>
-            {sessionStorage.getItem("LoggedIn") === "Employee" ? (
+            {sessionStorage.getItem("LoggedIn") === "Employer" ? (
               <div style={{ backgroundColor: "#F5F7F9" }}>
                 <Navbar />
                 <Routes>
-                  <Route path="/" element={<Profile />}></Route>
-                  {/* <Route path="/employer-approval" element={<Approval />}></Route>
+                  <Route
+                    path="/"
+                    element={<SearchEmployee />}></Route>
+                  <Route
+                    path="/employer-approval"
+                    element={<Approval />}></Route>
+                  <Route
+                    path="/verification-request"
+                    element={<VerficationRequest />}></Route>
+                  <Route
+                    path="/assessment"
+                    element={<Assessment />}></Route>
+                  <Route
+                    path="/employee-details"
+                    element={<Employee />}></Route>
+                  <Route 
+                    path="/onboarding-form" 
+                    element={<CREATE_EMPLOYEE />}></Route>
+                </Routes>
+              </div>
+            ) : (
+              ""
+            )}
+
+            <>
+              {sessionStorage.getItem("LoggedIn") === "Employee" ? (
+                <div style={{ backgroundColor: "#F5F7F9" }}>
+                  <Navbar />
+                  <Routes>
+                    <Route
+                      path="/"
+                      element={<Profile />}></Route>
+                    <Route
+                      path="/employeeOfferLetter"
+                      element={<EmployeeOfferLetter />}></Route>
+                    <Route
+                      path="/colleagues"
+                      element={<SearchEmployee />}></Route>
+                    {/* <Route path="/employer-approval" element={<Approval />}></Route>
                   <Route path="/verification-request" element={<VerficationRequest />}></Route>
                   <Route path="/assessment" element={<Assessment />}></Route>
                   <Route path="/employee-details" element={<Employee />}></Route> */}
-                  <Route path="/colleagues" element={<SearchEmployee />}></Route>
-                </Routes>
-              </div>
-            )
-              :
-              ""
-            }
+                  </Routes>
+                </div>
+              ) : (
+                ""
+              )}
+            </>
           </>
-
-        </>
         )}
         <div className="footer shadow shadow-sm bg-light">
           <Footer />
