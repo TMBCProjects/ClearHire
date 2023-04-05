@@ -44,11 +44,11 @@ const PdfViewer = () => {
           justifyContent: "center",
         }}
       >
-        <LeftCircleOutlined onClick={() => { currentPage !== 1 && onPrevPage() }} />
-        <div style={{ textAlign: "center", marginTop: "10px" }}>
-          {currentPage} / {numPages}
+        <LeftCircleOutlined style={{ fontSize: "30px", margin: "10px", color: "#00823b" }} onClick={() => { currentPage !== 1 && onPrevPage() }} />
+        <div style={{ fontSize: "20px", fontWeight: "900", textAlign: "center", margin: "10px" }}>
+          {currentPage}/{numPages}
         </div>
-        <RightCircleOutlined onClick={() => { currentPage !== numPages && onNextPage() }} />
+        <RightCircleOutlined style={{ fontSize: "30px", margin: "10px", color: "#00823b" }} onClick={() => { currentPage !== numPages && onNextPage() }} />
       </div>
     </div>
   );
