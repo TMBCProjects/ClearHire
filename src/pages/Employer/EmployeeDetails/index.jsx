@@ -42,27 +42,39 @@ const index = () => {
               <p>Chennai, India</p>
             </div>
           </div>
-          <div className="col-4 d-flex justify-content-center align-items-center empDetailsProgress">
-            <div className="circle-wrap">
-              <div className="circle">
-                <div className="mask full">
-                  <div className="fill"></div>
+          <div className="col-xl-4 col-lg-5 col-md-6 col-12 employe-score">
+            <div className="col-12 circles">
+              <div className="circle mx-5" data-prog="95">
+                <svg width={250} height="250">
+                  <circle
+                    class="progress-ring__circle"
+                    stroke="#00823B"
+                    stroke-width="15"
+                    // fill="transparent"
+                    r="35"
+                    cx="125"
+                    cy="125"
+                  ></circle>
+                </svg>
+                <div className="circle-inner">
+                  <h1>95%</h1>
                 </div>
-                <div className="mask half">
-                  <div className="fill"></div>
-                </div>
-                <div className="inside-circle" > 75 % </div >
               </div>
-            </div>
-            <div className="circle-wrap" >
-              <div className="circle" >
-                <div className="mask full" >
-                  <div className="fill" ></div >
+              <div className="circle" data-prog="75">
+                <svg width={250} height="250">
+                  <circle
+                    class="progress-ring__circle"
+                    stroke="#00823B"
+                    stroke-width="15"
+                    // fill="transparent"
+                    r="35"
+                    cx="125"
+                    cy="125"
+                  ></circle>
+                </svg>
+                <div className="circle-inner">
+                  <h1>75%</h1>
                 </div>
-                <div className="mask half" >
-                  <div className="fill" ></div >
-                </div>
-                <div className="inside-circle" > 75 % </div >
               </div>
             </div>
           </div>
@@ -140,113 +152,153 @@ const index = () => {
           <div className="col-md-8">
             <div className="row">
               <div className="col-md-3 mb-3">
-                <div className="circle-wrap">
-                  <div className="circle">
-                    <div className="mask full">
-                      <div className="fill"></div>
-                    </div>
-                    <div className="mask half">
-                      <div className="fill"></div>
-                    </div>
-                    <div className="inside-circle" > 75 % </div >
+                <div className="circle skillsCircle" data-prog="75">
+                  <svg width={250} height="250">
+                    <circle
+                      class="progress-ring__circle"
+                      stroke="#00823B"
+                      stroke-width="15"
+                      // fill="transparent"
+                      r="35"
+                      cx="125"
+                      cy="125"
+                    ></circle>
+                  </svg>
+                  <div className="circle-inner">
+                    <h1>75%</h1>
                   </div>
                 </div>
                 <p>Communitcation</p>
               </div>
               <div className="col-md-3 mb-3">
-                <div className="circle-wrap">
-                  <div className="circle">
-                    <div className="mask full">
-                      <div className="fill"></div>
-                    </div>
-                    <div className="mask half" >
-                      <div className="fill" ></div >
-                    </div>
-                    <div className="inside-circle" > 75 % </div >
+                <div className="circle skillsCircle" data-prog="75">
+                  <svg width={250} height="250">
+                    <circle
+                      class="progress-ring__circle"
+                      stroke="#00823B"
+                      stroke-width="15"
+                      // fill="transparent"
+                      r="35"
+                      cx="125"
+                      cy="125"
+                    ></circle>
+                  </svg>
+                  <div className="circle-inner">
+                    <h1>75%</h1>
                   </div>
                 </div>
                 <p>Attitude</p>
               </div>
               <div className="col-md-3 mb-3">
-                <div className="circle-wrap">
-                  <div className="circle">
-                    <div className="mask full">
-                      <div className="fill"></div>
-                    </div>
-                    <div className="mask half" >
-                      <div className="fill" ></div >
-                    </div>
-                    <div className="inside-circle" > 75 % </div >
+                <div className="circle skillsCircle" data-prog="75">
+                  <svg width={250} height="250">
+                    <circle
+                      class="progress-ring__circle"
+                      stroke="#00823B"
+                      stroke-width="15"
+                      // fill="transparent"
+                      r="35"
+                      cx="125"
+                      cy="125"
+                    ></circle>
+                  </svg>
+                  <div className="circle-inner">
+                    <h1>75%</h1>
                   </div>
                 </div>
                 <p>Ability To Learn</p>
               </div>
               <div className="col-md-3 mb-3">
-                <div className="circle-wrap">
-                  <div className="circle">
-                    <div className="mask full">
-                      <div className="fill"></div>
-                    </div>
-                    <div className="mask half" >
-                      <div className="fill" ></div >
-                    </div>
-                    <div className="inside-circle" > 75 % </div >
+                <div className="circle skillsCircle" data-prog="75">
+                  <svg width={250} height="250">
+                    <circle
+                      class="progress-ring__circle"
+                      stroke="#00823B"
+                      stroke-width="15"
+                      // fill="transparent"
+                      r="35"
+                      cx="125"
+                      cy="125"
+                    ></circle>
+                  </svg>
+                  <div className="circle-inner">
+                    <h1>75%</h1>
                   </div>
                 </div>
                 <p>Punctuality</p>
               </div>
               <div className="col-md-3 mb-3">
-                <div className="circle-wrap">
-                  <div className="circle">
-                    <div className="mask full">
-                      <div className="fill"></div>
-                    </div>
-                    <div className="mask half" >
-                      <div className="fill" ></div >
-                    </div>
-                    <div className="inside-circle" > 75 % </div >
+                <div className="circle skillsCircle" data-prog="75">
+                  <svg width={250} height="250">
+                    <circle
+                      class="progress-ring__circle"
+                      stroke="#00823B"
+                      stroke-width="15"
+                      // fill="transparent"
+                      r="35"
+                      cx="125"
+                      cy="125"
+                    ></circle>
+                  </svg>
+                  <div className="circle-inner">
+                    <h1>75%</h1>
                   </div>
                 </div>
                 <p>Commitment</p>
               </div>
               <div className="col-md-3 mb-3">
-                <div className="circle-wrap">
-                  <div className="circle">
-                    <div className="mask full">
-                      <div className="fill"></div>
-                    </div>
-                    <div className="mask half" >
-                      <div className="fill" ></div >
-                    </div>
-                    <div className="inside-circle" > 75 % </div >
+                <div className="circle skillsCircle" data-prog="75">
+                  <svg width={250} height="250">
+                    <circle
+                      class="progress-ring__circle"
+                      stroke="#00823B"
+                      stroke-width="15"
+                      // fill="transparent"
+                      r="35"
+                      cx="125"
+                      cy="125"
+                    ></circle>
+                  </svg>
+                  <div className="circle-inner">
+                    <h1>75%</h1>
                   </div>
                 </div>
                 <p>Trustworthiness</p>
               </div>
               <div className="col-md-3 mb-3">
-                <div className="circle-wrap">
-                  <div className="circle">
-                    <div className="mask full">
-                      <div className="fill"></div>
-                    </div>
-                    <div className="mask half" >
-                      <div className="fill" ></div >
-                    </div>
-                    <div className="inside-circle" > 75 % </div >
+                <div className="circle skillsCircle" data-prog="75">
+                  <svg width={250} height="250">
+                    <circle
+                      class="progress-ring__circle"
+                      stroke="#00823B"
+                      stroke-width="15"
+                      // fill="transparent"
+                      r="35"
+                      cx="125"
+                      cy="125"
+                    ></circle>
+                  </svg>
+                  <div className="circle-inner">
+                    <h1>75%</h1>
                   </div>
                 </div>
                 <p>Skill</p>
               </div>
               <div className="col-md-3 mb-3">
-                <div className="circle-wrap">
-                  <div className="circle">
-                    <div className="mask full">
-                      <div className="fill"></div>
-                    </div>
-                    <div className="mask half" >
-                      <div className="fill" ></div >
-                    </div>
-                    <div className="inside-circle" > 75 % </div >
+                <div className="circle skillsCircle" data-prog="75">
+                  <svg width={250} height="250">
+                    <circle
+                      class="progress-ring__circle"
+                      stroke="#00823B"
+                      stroke-width="15"
+                      // fill="transparent"
+                      r="35"
+                      cx="125"
+                      cy="125"
+                    ></circle>
+                  </svg>
+                  <div className="circle-inner">
+                    <h1>75%</h1>
                   </div>
                 </div>
                 <p>Team Player</p>
@@ -255,15 +307,20 @@ const index = () => {
           </div>
           <div className="col-md-4 align-items-center d-flex flex-column">
             <p className="mb-0">Total</p>
-            <div className="circle-wrap">
-              <div className="circle">
-                <div className="mask full">
-                  <div className="fill"></div>
-                </div>
-                <div className="mask half" >
-                  <div className="fill" ></div >
-                </div>
-                <div className="inside-circle" > 75 % </div >
+            <div className="circle " data-prog="75">
+              <svg width={250} height="250">
+                <circle
+                  class="progress-ring__circle"
+                  stroke="#00823B"
+                  stroke-width="15"
+                  // fill="transparent"
+                  r="35"
+                  cx="125"
+                  cy="125"
+                ></circle>
+              </svg>
+              <div className="circle-inner">
+                <h1>75%</h1>
               </div>
             </div>
           </div>

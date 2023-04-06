@@ -22,8 +22,9 @@
     }
 
     .text-heading {
-        font-size: 35px;
-        margin-bottom: 10px;
+        font-size: 1.8rem;
+        margin-bottom: 0;
+        text-align: center;
     }
 
     .about-text {

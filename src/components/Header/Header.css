@@ -1,4 +1,4 @@
-#header{
+#header {
     position: sticky !important;
     background-color: #fff;
     top: 0;
@@ -6,7 +6,13 @@
 }
 
 .logo {
-    width: 200px;
+    width: 12rem;
+}
+
+@media(max-width:767px) {
+    .logo {
+        width: 9rem;
+    }
 }
 
 .nav-link {
