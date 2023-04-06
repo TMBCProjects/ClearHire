@@ -17,6 +17,8 @@ import Assessment from "./pages/Employer/Assessment/Assessment";
 import Employee from "./pages/Employer/EmployeeDetails/index";
 import CREATE_EMPLOYEE from "./pages/Onboard/CREATE_EMPLOYEE";
 import Profile from "./pages/Profile/Profile";
+import EmployeeAssessment from "./pages/EmployeeAssessment/EmployeeAssessment";
+
 
 function App() {
   return (
@@ -33,6 +35,8 @@ function App() {
               <Route path="/signup-done" element={<SignupDone />}></Route>
               <Route path="/create-employee" element={<CREATE_EMPLOYEE />}></Route>
               <Route path="/Profile" element={<Profile/>}></Route>
+              <Route path="/EmployeeAssessment" element={<EmployeeAssessment/>}></Route>
+
             </Routes>
           </>
         ) : (

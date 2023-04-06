@@ -142,27 +142,30 @@ label{
 }
 .range{
     width: 100%;
-    height: 10px;
+    height: 7px;
     appearance: none;
     outline: none;
     border-radius: 15px;
     overflow: hidden;
     margin-left: 15px;
     margin-top: 20px;
+
 }
 .slider{
     width: 100%;
 }
+
 .range::-webkit-slider-thumb{
     appearance: none;
-    width: 10px;
-    height: 10px;
+    width: 7px;
+    height: 7px;
     background: #fff;
     border-radius: 50%;
     border: 2px solid green;
     box-shadow: -407px 0 0 400px #00823B ;
     cursor: pointer;
 }
+
 .s-name input:focus{
     width: 100%;
     outline: 0 !important;
