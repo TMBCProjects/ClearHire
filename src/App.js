@@ -13,7 +13,6 @@ import Navbar from "./components/NavBar/Navbar";
 import VerficationRequest from "./pages/Employer/VerficationRequest/VerficationRequest";
 import OnboardingForm from "./pages/Employer/OnboardingForm/OnboardingForm";
 import OfferLetterSent from "./pages/Employer/OfferLetterSent/OfferLetterSent";
-import Assessment from "./pages/Employer/Assessment/Assessment";
 import Employee from "./pages/Employer/EmployeeDetails/index";
 import Profile from "./pages/Employee/Profile/Profile";
 import EmployeeOfferLetter from "./pages/Employee/EmployeeOfferLetter/EmployeeOfferLetter";
@@ -62,9 +61,6 @@ function App() {
                   <Route
                     path="/verification-request"
                     element={<VerficationRequest />}></Route>
-                  <Route
-                    path="/assessment"
-                    element={<Assessment />}></Route>
                   <Route
                     path="/EmployeeAssessment"
                     element={<EmployeeAssessment />}></Route>
