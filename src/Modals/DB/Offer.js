@@ -1,10 +1,10 @@
 export default class Offer {
   isActive = false;
-  employeeName = "";
+  companyName = "";
+  employerEmail = "";
+  employerId = "";
   employeeEmail = "";
-  country = "";
-  state = "";
-  profileImage = "";
+  employeeAadhaarCardNumber = "";
   dateOfJoining = "";
   designation = "";
   salary = "";

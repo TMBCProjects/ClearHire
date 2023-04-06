@@ -12,12 +12,10 @@ import SearchEmployee from "./pages/SearchEmployee/SearchEmployee";
 import Navbar from "./components/NavBar/Navbar";
 import VerficationRequest from "./pages/Employer/VerficationRequest/VerficationRequest";
 import OnboardingForm from "./pages/Employer/OnboardingForm/OnboardingForm";
-import OfferLetterSent from "./pages/Employer/OfferLetterSent";
+import OfferLetterSent from "./pages/Employer/OfferLetterSent/OfferLetterSent";
 import Assessment from "./pages/Employer/Assessment/Assessment";
 import Employee from "./pages/Employer/EmployeeDetails/index";
-import CREATE_EMPLOYEE from "./pages/Onboard/CREATE_EMPLOYEE";
 import Profile from "./pages/Employee/Profile/Profile";
-import UserProfile from "./pages/Employer/Profile/Profile";
 import EmployeeOfferLetter from "./pages/Employee/EmployeeOfferLetter/EmployeeOfferLetter";
 import EmployeeAssessment from "./pages/EmployeeAssessment/EmployeeAssessment";
 
@@ -45,14 +43,8 @@ function App() {
                 path="/signup-done"
                 element={<SignupDone />}></Route>
               <Route
-                path="/create-employee"
-                element={<CREATE_EMPLOYEE />}></Route>
-              <Route
                 path="/Profile"
                 element={<Profile />}></Route>
-              <Route path="/EmployeeAssessment" 
-              element={<EmployeeAssessment/>}></Route>
-
             </Routes>
           </>
         ) : (
@@ -74,11 +66,17 @@ function App() {
                     path="/assessment"
                     element={<Assessment />}></Route>
                   <Route
+                    path="/EmployeeAssessment"
+                    element={<EmployeeAssessment />}></Route>
+                  <Route
                     path="/employee-details"
                     element={<Employee />}></Route>
-                  <Route 
-                    path="/onboarding-form" 
-                    element={<CREATE_EMPLOYEE />}></Route>
+                  <Route
+                    path="/onboarding-form"
+                    element={<OnboardingForm />}></Route>
+                  <Route
+                    path="/offerletter-sent"
+                    element={<OfferLetterSent />}></Route>
                 </Routes>
               </div>
             ) : (

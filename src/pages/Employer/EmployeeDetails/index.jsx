@@ -43,26 +43,26 @@ const index = () => {
             </div>
           </div>
           <div className="col-4 d-flex justify-content-center align-items-center empDetailsProgress">
-            <div class="circle-wrap">
-              <div class="circle">
-                <div class="mask full">
-                  <div class="fill"></div>
+            <div className="circle-wrap">
+              <div className="circle">
+                <div className="mask full">
+                  <div className="fill"></div>
                 </div>
-                <div class="mask half">
-                  <div class="fill"></div>
+                <div className="mask half">
+                  <div className="fill"></div>
                 </div>
-                <div class="inside-circle"> 75% </div>
+                <div className="inside-circle" > 75 % </div >
               </div>
             </div>
-            <div class="circle-wrap">
-              <div class="circle">
-                <div class="mask full">
-                  <div class="fill"></div>
+            <div className="circle-wrap" >
+              <div className="circle" >
+                <div className="mask full" >
+                  <div className="fill" ></div >
                 </div>
-                <div class="mask half">
-                  <div class="fill"></div>
+                <div className="mask half" >
+                  <div className="fill" ></div >
                 </div>
-                <div class="inside-circle"> 75% </div>
+                <div className="inside-circle" > 75 % </div >
               </div>
             </div>
           </div>
@@ -140,113 +140,113 @@ const index = () => {
           <div className="col-md-8">
             <div className="row">
               <div className="col-md-3 mb-3">
-                <div class="circle-wrap">
-                  <div class="circle">
-                    <div class="mask full">
-                      <div class="fill"></div>
+                <div className="circle-wrap">
+                  <div className="circle">
+                    <div className="mask full">
+                      <div className="fill"></div>
                     </div>
-                    <div class="mask half">
-                      <div class="fill"></div>
+                    <div className="mask half">
+                      <div className="fill"></div>
                     </div>
-                    <div class="inside-circle"> 75% </div>
+                    <div className="inside-circle" > 75 % </div >
                   </div>
                 </div>
                 <p>Communitcation</p>
               </div>
               <div className="col-md-3 mb-3">
-                <div class="circle-wrap">
-                  <div class="circle">
-                    <div class="mask full">
-                      <div class="fill"></div>
+                <div className="circle-wrap">
+                  <div className="circle">
+                    <div className="mask full">
+                      <div className="fill"></div>
                     </div>
-                    <div class="mask half">
-                      <div class="fill"></div>
+                    <div className="mask half" >
+                      <div className="fill" ></div >
                     </div>
-                    <div class="inside-circle"> 75% </div>
+                    <div className="inside-circle" > 75 % </div >
                   </div>
                 </div>
                 <p>Attitude</p>
               </div>
               <div className="col-md-3 mb-3">
-                <div class="circle-wrap">
-                  <div class="circle">
-                    <div class="mask full">
-                      <div class="fill"></div>
+                <div className="circle-wrap">
+                  <div className="circle">
+                    <div className="mask full">
+                      <div className="fill"></div>
                     </div>
-                    <div class="mask half">
-                      <div class="fill"></div>
+                    <div className="mask half" >
+                      <div className="fill" ></div >
                     </div>
-                    <div class="inside-circle"> 75% </div>
+                    <div className="inside-circle" > 75 % </div >
                   </div>
                 </div>
                 <p>Ability To Learn</p>
               </div>
               <div className="col-md-3 mb-3">
-                <div class="circle-wrap">
-                  <div class="circle">
-                    <div class="mask full">
-                      <div class="fill"></div>
+                <div className="circle-wrap">
+                  <div className="circle">
+                    <div className="mask full">
+                      <div className="fill"></div>
                     </div>
-                    <div class="mask half">
-                      <div class="fill"></div>
+                    <div className="mask half" >
+                      <div className="fill" ></div >
                     </div>
-                    <div class="inside-circle"> 75% </div>
+                    <div className="inside-circle" > 75 % </div >
                   </div>
                 </div>
                 <p>Punctuality</p>
               </div>
               <div className="col-md-3 mb-3">
-                <div class="circle-wrap">
-                  <div class="circle">
-                    <div class="mask full">
-                      <div class="fill"></div>
+                <div className="circle-wrap">
+                  <div className="circle">
+                    <div className="mask full">
+                      <div className="fill"></div>
                     </div>
-                    <div class="mask half">
-                      <div class="fill"></div>
+                    <div className="mask half" >
+                      <div className="fill" ></div >
                     </div>
-                    <div class="inside-circle"> 75% </div>
+                    <div className="inside-circle" > 75 % </div >
                   </div>
                 </div>
                 <p>Commitment</p>
               </div>
               <div className="col-md-3 mb-3">
-                <div class="circle-wrap">
-                  <div class="circle">
-                    <div class="mask full">
-                      <div class="fill"></div>
+                <div className="circle-wrap">
+                  <div className="circle">
+                    <div className="mask full">
+                      <div className="fill"></div>
                     </div>
-                    <div class="mask half">
-                      <div class="fill"></div>
+                    <div className="mask half" >
+                      <div className="fill" ></div >
                     </div>
-                    <div class="inside-circle"> 75% </div>
+                    <div className="inside-circle" > 75 % </div >
                   </div>
                 </div>
                 <p>Trustworthiness</p>
               </div>
               <div className="col-md-3 mb-3">
-                <div class="circle-wrap">
-                  <div class="circle">
-                    <div class="mask full">
-                      <div class="fill"></div>
+                <div className="circle-wrap">
+                  <div className="circle">
+                    <div className="mask full">
+                      <div className="fill"></div>
                     </div>
-                    <div class="mask half">
-                      <div class="fill"></div>
+                    <div className="mask half" >
+                      <div className="fill" ></div >
                     </div>
-                    <div class="inside-circle"> 75% </div>
+                    <div className="inside-circle" > 75 % </div >
                   </div>
                 </div>
                 <p>Skill</p>
               </div>
               <div className="col-md-3 mb-3">
-                <div class="circle-wrap">
-                  <div class="circle">
-                    <div class="mask full">
-                      <div class="fill"></div>
+                <div className="circle-wrap">
+                  <div className="circle">
+                    <div className="mask full">
+                      <div className="fill"></div>
                     </div>
-                    <div class="mask half">
-                      <div class="fill"></div>
+                    <div className="mask half" >
+                      <div className="fill" ></div >
                     </div>
-                    <div class="inside-circle"> 75% </div>
+                    <div className="inside-circle" > 75 % </div >
                   </div>
                 </div>
                 <p>Team Player</p>
@@ -255,15 +255,15 @@ const index = () => {
           </div>
           <div className="col-md-4 align-items-center d-flex flex-column">
             <p className="mb-0">Total</p>
-            <div class="circle-wrap">
-              <div class="circle">
-                <div class="mask full">
-                  <div class="fill"></div>
+            <div className="circle-wrap">
+              <div className="circle">
+                <div className="mask full">
+                  <div className="fill"></div>
                 </div>
-                <div class="mask half">
-                  <div class="fill"></div>
+                <div className="mask half" >
+                  <div className="fill" ></div >
                 </div>
-                <div class="inside-circle"> 75% </div>
+                <div className="inside-circle" > 75 % </div >
               </div>
             </div>
           </div>
