@@ -227,6 +227,7 @@ circle, svg{
 .note-text{
     border: 1px solid #B2B2B2;
     margin-left: 15px;
+    cursor: pointer;
     margin-top: 15px;
     border-radius: 5px;
 }

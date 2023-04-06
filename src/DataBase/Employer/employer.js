@@ -1,31 +1,9 @@
-// import { query, where } from "firebase/firestore";
-// import Client from "../../Modals/DB/Client";
-// import Communication from "../../Modals/DB/Communication";
-// import Request from "../../Modals/DB/Request";
-// import NewTask from "../../Modals/DB/NewTask";
-// import Type from "../../Modals/DB/Type";
-// import Notification from "../../Modals/DB/Notification";
-// import { Collections } from "../../utils/Collections";
-// import { Fields } from "../../utils/Fields";
-// import {
-//   addDocument,
-//   addSubDocument,
-//   getDocument,
-//   getDocuments,
-//   setCollection,
-//   setDocument,
-//   setSubCollection,
-//   updateDocument,
-//   uploadPhoto,
-// } from "../../utils/FirebaseUtils";
-// import { Notifications } from "../../utils/Notifications";
-// import { message } from "antd";
-
+import Rating from "../../Modals/DB/Rating";
 import Offer from "../../Modals/DB/Offer";
 import { Collections } from "../../utils/Collections";
 import { addDocument, uploadOfferLetter } from "../../utils/FirebaseUtils";
 
-// export default async function defaultFn() {}
+export default async function defaultFn() {}
 
 // //READS
 // export async function readTasksByManager(managerId) {
@@ -365,6 +343,29 @@ export async function onboardEmployee(offerData) {
     offerLetter: offerLetterFileUrl,
   };
   return await addDocument(Collections.offers, offer);
+}
+export async function rateEmployee(ratingData) {
+  let rating = new Rating();
+  rating = {
+    isActive: true,
+    companyName: ratingData.companyName,
+    ratedById: ratingData.ratedById,
+    ratedByEmail: ratingData.ratedByEmail,
+    employeeId: ratingData.employeeId,
+    employeeName: ratingData.employeeName,
+    employeeEmail: ratingData.employeeEmail,
+    dateOfReview: ratingData.dateOfReview,
+    communication: ratingData.communication,
+    attitude: ratingData.attitude,
+    abilityToLearn: ratingData.abilityToLearn,
+    punctuality: ratingData.punctuality,
+    commitment: ratingData.commitment,
+    trustworthiness: ratingData.trustworthiness,
+    skill: ratingData.skill,
+    teamPlayer: ratingData.teamPlayer,
+    note: ratingData.note,
+  };
+  return await addDocument(Collections.ratings, rating);
 }
 // export async function switchTask(id, oldTeammate, newTeammate, data) {
 //   addNotification({
