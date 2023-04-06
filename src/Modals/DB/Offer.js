@@ -1,6 +1,8 @@
 export default class Offer {
   isActive = false;
-  employeeName = "";
+  companyName = "";
+  employerEmail = "";
+  employerId = "";
   employeeEmail = "";
   employeeAadhaarCardNumber = "";
   dateOfJoining = "";

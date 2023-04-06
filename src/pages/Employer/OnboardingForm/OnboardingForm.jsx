@@ -34,6 +34,10 @@ function OnboardingForm() {
     };
 
     const handleSubmit = () => {
+        let userDatas = JSON.parse(sessionStorage.getItem("userData"));
+        values.companyName = userDatas.data.companyName;
+        values.employerEmail = userDatas.data.employerEmail;
+        values.employerId = userDatas.id;
         onboardEmployee(values).then(() => {
             window.location.href = "/offerletter-sent";
         });
@@ -49,15 +53,12 @@ function OnboardingForm() {
                     <i className="fa-solid fa-circle-chevron-left"></i>
                     <h4>Back</h4>
                 </div>
-
                 <div className="container-fluid" id="On-board">
-
                     <div className="container">
                         <div className="row d-flex  align-items-center">
                             <div className="col-12">
                                 <div className="onboard-form-1">
                                     <p className="onboard-heading">On-Board New Employee</p>
-
                                     <div className="mx-auto">
                                         <div className="form-item">
                                             <input
@@ -113,7 +114,6 @@ function OnboardingForm() {
                                                 name="salary"
                                                 onChange={handleInputChange}
                                             />
-
                                         </div>
                                         <div className="form-item f-3">
                                             <input type="file" id="file" name="offerLetter" accept=".txt, .pdf" onChange={(e) => {
@@ -122,17 +122,12 @@ function OnboardingForm() {
                                             <label for="file" className="custom-file-upload">{file !== '' ? file : 'Upload Offer Letter'}</label>
                                             <span id="filename"></span>
                                             <img src={add} alt="" />
-
                                         </div>
-
-
                                         <div className="form-item">
-
                                             <button type="submit" onClick={handleSubmit} className="send-btn">
                                                 <i className="fa-solid fa-plus s-1"></i>
                                                 Send Offer Letter
                                             </button>
-
                                         </div>
                                     </div>
                                 </div>
