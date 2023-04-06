@@ -24,7 +24,6 @@ function EmployeeAssessment() {
 
             <div className="back-cont">
                 <img src={arrow} alt="" />
-                
                 <h4>Employee Assessment</h4>
             </div>
             <div className="row employe-details">
@@ -222,7 +221,6 @@ function EmployeeAssessment() {
                             </div>
                         </div>
                         <div className="or">
-                            <h6></h6>
                            <h3>or</h3>
                         </div>   
                         <div className="assessment-text">
