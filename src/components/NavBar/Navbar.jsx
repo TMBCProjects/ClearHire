@@ -54,7 +54,7 @@ export default function EmployerNavbar() {
             </div>
           </NavLink>
 
-          <NavLink activeclassname="active" to={"/assessment"} className="navlink">
+          <NavLink activeclassname="active" to={"/EmployeeAssessment"} className="navlink">
             <div className='navitem'>
               <FileDoneOutlined />&nbsp;
               Assessment

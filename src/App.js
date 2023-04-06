@@ -66,6 +66,9 @@ function App() {
                     path="/assessment"
                     element={<Assessment />}></Route>
                   <Route
+                    path="/EmployeeAssessment"
+                    element={<EmployeeAssessment />}></Route>
+                  <Route
                     path="/employee-details"
                     element={<Employee />}></Route>
                   <Route
@@ -74,9 +77,6 @@ function App() {
                   <Route
                     path="/offerletter-sent"
                     element={<OfferLetterSent />}></Route>
-                  <Route
-                    path="/EmployeeAssessment"
-                    element={<EmployeeAssessment />}></Route>
                 </Routes>
               </div>
             ) : (
