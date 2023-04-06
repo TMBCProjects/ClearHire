@@ -4,6 +4,7 @@ import pic from "../../images/download.jpg";
 import check_1 from "../../images/Check-1.svg";
 import quote from "../../images/quote-left.svg";
 import arrow from "../../images/arrow-dropup.svg";
+import { rateEmployee } from '../../DataBase/Employer/employer';
 
 
 const initialValues = {
@@ -47,10 +48,9 @@ function EmployeeAssessment() {
         values.companyName = userDatas.data.companyName;
         values.ratedByEmail = userDatas.data.employerEmail;
         values.ratedById = userDatas.id;
-        console.log(values)
-        // onboardEmployee(values).then(() => {
-        //     window.location.href = "/offerletter-sent";
-        // });
+        rateEmployee(values).then(() => {
+            window.location.href = "/";
+        });
     };
     let [rangeSkill_1,setRangeSkill_1] = useState(0)
     let [rangeSkill_2,setRangeSkill_2] = useState(0)
@@ -61,10 +61,8 @@ function EmployeeAssessment() {
     let [rangeSkill_7,setRangeSkill_7] = useState(0)
     let [rangeSkill_8,setRangeSkill_8] = useState(0)
 
-
     return(
         <div className='assesment'>
-
             <div className="back-cont">
                 <img src={arrow} alt="" />
                 <h4>Employee Assessment</h4>
@@ -73,14 +71,12 @@ function EmployeeAssessment() {
                 <div className="col-xl-8 col-lg-7 col-md-6 col-12 employe-prof">
                     <div className="prof-img">
                         <img src={pic} alt="" />
-                    
                     </div>
                     <div className="prof-text">
                         <h3>Govarthan, 24</h3>
                         <h6>Project Manager at The example company</h6>
                         <h6>Chennai, India</h6>
                     </div>
-
                 </div>
                 <div className="col-xl-4 col-lg-5 col-md-6 col-12 employe-score">
                     <div className="col-12 circles">
@@ -94,8 +90,7 @@ function EmployeeAssessment() {
                                     // fill="transparent"
                                     r="35"
                                     cx="125"
-                                    cy="125">
-
+                                        cy="125">
                                     </circle>
                                 </svg>
                                 <div className="circle-inner">
@@ -116,8 +111,7 @@ function EmployeeAssessment() {
                                     // fill="transparent"
                                     r="35"
                                     cx="125"
-                                    cy="125">
-
+                                        cy="125">
                                     </circle>
                                 </svg>
                                 <div className="circle-inner">
@@ -128,9 +122,7 @@ function EmployeeAssessment() {
                                 <h6>Score</h6>
                             </div>
                         </div>
-                        
                     </div>
-                     
                 </div>
             </div>
             <div className="row skill-assessment">
@@ -188,7 +180,6 @@ function EmployeeAssessment() {
                         <div className="col-2 value-1" id="rangeValue"><h5>{rangeSkill_4}%</h5></div>
                     </div>
                 </div>
-
                 <div className="col-xl-6 col-lg-6 skill-box-2">
                     <div className="col-12 slider-1">
                         <div className="col-xl-3 col-4 heading">
@@ -250,7 +241,6 @@ function EmployeeAssessment() {
                         </div>
                         <div className="quote-img">
                             <img src={quote} alt="" />
-
                         </div>
                         <div className="col-xl-8 col-md-8 col-sm-8  note-1">
                             <div className="col-xl-3 col-md-4 col-sm-5 note-text"
@@ -317,7 +307,6 @@ function EmployeeAssessment() {
                 <img src={check_1} alt="" />
                 <button>Submit Assessment</button>
             </div>
-
         </div>    
     )
 }

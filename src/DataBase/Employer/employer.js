@@ -366,6 +366,29 @@ export async function onboardEmployee(offerData) {
   };
   return await addDocument(Collections.offers, offer);
 }
+export async function rateEmployee(ratingData) {
+  let rating = new Offer();
+  rating = {
+    isActive: true,
+    companyName: ratingData.companyName,
+    ratedById: ratingData.ratedById,
+    ratedByEmail: ratingData.ratedByEmail,
+    employeeId: ratingData.employeeId,
+    employeeName: ratingData.employeeName,
+    employeeEmail: ratingData.employeeEmail,
+    dateOfReview: ratingData.dateOfReview,
+    communication: ratingData.communication,
+    attitude: ratingData.attitude,
+    abilityToLearn: ratingData.abilityToLearn,
+    punctuality: ratingData.punctuality,
+    commitment: ratingData.commitment,
+    trustworthiness: ratingData.trustworthiness,
+    skill: ratingData.skill,
+    teamPlayer: ratingData.teamPlayer,
+    note: ratingData.note,
+  };
+  return await addDocument(Collections.ratings, rating);
+}
 // export async function switchTask(id, oldTeammate, newTeammate, data) {
 //   addNotification({
 //     createdAt: newTeammate.createdAt,
