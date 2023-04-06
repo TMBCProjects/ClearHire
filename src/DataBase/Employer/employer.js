@@ -21,6 +21,10 @@
 // import { Notifications } from "../../utils/Notifications";
 // import { message } from "antd";
 
+import Offer from "../../Modals/DB/Offer";
+import { Collections } from "../../utils/Collections";
+import { addDocument, uploadOfferLetter } from "../../utils/FirebaseUtils";
+
 // export default async function defaultFn() {}
 
 // //READS
@@ -341,50 +345,27 @@
 //   return new Date(year, month, day, hours, minutes, seconds);
 // }
 
-// export async function addNewTask(taskList) {
-//   let deadline = new Date(convertStringToDate(taskList.deadline, "0:0:0"));
-//   // if (taskList.estimatedTime) {
-//   //   deadline = new Date(
-//   //     convertStringToDate(taskList.deadline, taskList.estimatedTime)
-//   //   );
-//   // }
-
-//   let task = new NewTask();
-//   task = {
-//     assigned: taskList.assigned,
-//     companyName: taskList.companyName,
-//     companyId: taskList.companyId,
-//     clientId: taskList.clientId,
-//     clientName: taskList.clientName,
-//     clientEmail: taskList.clientEmail,
-//     corrections: taskList.corrections,
-//     createdAt: taskList.createdAt,
-//     createdBy: taskList.createdBy,
-//     profileImage: taskList.profileImage,
-//     createdByEmail: taskList.createdByEmail,
-//     deadline: deadline,
-//     isLive: true,
-//     highPriority: taskList.highPriority,
-//     managerId: taskList.managerId,
-//     taskId: taskList.taskId,
-//     teammateId: taskList.teammateId,
-//     totalHours: 0,
-//     teammateName: taskList.teammateName,
-//     title: taskList.title,
-//     type: taskList.type,
-//     status: taskList.status,
-//   };
-//   addNotification({
-//     createdAt: taskList.createdAt,
-//     createdBy: taskList.createdBy,
-//     createdByEmail: taskList.createdByEmail,
-//     managerId: taskList.managerId,
-//     teammateId: taskList.teammateId,
-//     title: taskList.title,
-//     type: Notifications.NEW_TASK,
-//   });
-//   return await addDocument(Collections.tasks, task);
-// }
+export async function onboardEmployee(offerData) {
+  const offerLetterFileUrl = await uploadOfferLetter(
+    offerData.name,
+    offerData.offerLetter
+  );
+  let offer = new Offer();
+  offer = {
+    isActive: true,
+    employeeName: offerData.name,
+    employeeEmail: offerData.email,
+    employeeAadhaarNumber: offerData.aadhaarNumber,
+    dateOfJoining: offerData.dateOfJoining,
+    employerEmail: offerData.employerEmail,
+    employerId: offerData.employerId,
+    companyName: offerData.companyName,
+    designation: offerData.designation,
+    salary: offerData.salary,
+    offerLetter: offerLetterFileUrl,
+  };
+  return await addDocument(Collections.offers, offer);
+}
 // export async function switchTask(id, oldTeammate, newTeammate, data) {
 //   addNotification({
 //     createdAt: newTeammate.createdAt,

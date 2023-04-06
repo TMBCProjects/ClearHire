@@ -127,10 +127,8 @@ circle, svg{
 
 .circle-box{
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
-
-
 
 .skill-assessment{
     padding: 2%;

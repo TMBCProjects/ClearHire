@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import Sample from "../../assets/pdf/sample.pdf";
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import 'react-pdf/dist/esm/Page/TextLayer.css';
+import { LeftCircleOutlined, RightCircleOutlined } from "@ant-design/icons";
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-// const options = {
-//   cMapUrl: "cmaps/",
-//   cMapPacked: true,
-//   standardFontDataUrl: "standard_fonts/",
-// };
 const PdfViewer = () => {
   const [numPages, setNumPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -33,9 +31,9 @@ const PdfViewer = () => {
           justifyContent: "center",
         }}
       >
-        <div style={{ width: "500px" }}>
+        <div>
           <Document file={Sample} onLoadSuccess={onDocumentLoadSuccess}>
-            <Page size="A4" pageNumber={currentPage} />
+            <Page pageNumber={currentPage} />
           </Document>
         </div>
       </div>
@@ -46,15 +44,11 @@ const PdfViewer = () => {
           justifyContent: "center",
         }}
       >
-        <button disabled={currentPage === 1} onClick={onPrevPage}>
-          Prev
-        </button>
-        <div style={{ textAlign: "center", marginTop: "10px" }}>
-          {currentPage} / {numPages}
+        <LeftCircleOutlined style={{ fontSize: "30px", margin: "10px", color: "#00823b" }} onClick={() => { currentPage !== 1 && onPrevPage() }} />
+        <div style={{ fontSize: "20px", fontWeight: "900", textAlign: "center", margin: "10px" }}>
+          {currentPage}/{numPages}
         </div>
-        <button disabled={currentPage === numPages} onClick={onNextPage}>
-          Next
-        </button>
+        <RightCircleOutlined style={{ fontSize: "30px", margin: "10px", color: "#00823b" }} onClick={() => { currentPage !== numPages && onNextPage() }} />
       </div>
     </div>
   );
