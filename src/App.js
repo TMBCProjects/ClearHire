@@ -18,6 +18,7 @@ import Employee from "./pages/Employer/EmployeeDetails/index";
 import Profile from "./pages/Employee/Profile/Profile";
 import EmployeeOfferLetter from "./pages/Employee/EmployeeOfferLetter/EmployeeOfferLetter";
 import EmployeeAssessment from "./pages/EmployeeAssessment/EmployeeAssessment";
+import EmployerProfile from "./pages/Employer/Profile/Profile";
 
 function App() {
   return (
@@ -27,24 +28,15 @@ function App() {
           <>
             <Header />
             <Routes>
-              <Route
-                path="/"
-                element={<Home />}></Route>
-              <Route
-                path="/signup"
-                element={<Signup />}></Route>
-              <Route
-                path="/signup-options"
-                element={<SignupOptions />}></Route>
+              <Route path="/" element={<Home />}></Route>
+              <Route path="/signup" element={<Signup />}></Route>
+              <Route path="/signup-options" element={<SignupOptions />}></Route>
               <Route
                 path="/user-options"
-                element={<SignupChooseUser />}></Route>
-              <Route
-                path="/signup-done"
-                element={<SignupDone />}></Route>
-              <Route
-                path="/Profile"
-                element={<Profile />}></Route>
+                element={<SignupChooseUser />}
+              ></Route>
+              <Route path="/signup-done" element={<SignupDone />}></Route>
+              <Route path="/Profile" element={<Profile />}></Route>
             </Routes>
           </>
         ) : (
@@ -53,30 +45,33 @@ function App() {
               <div style={{ backgroundColor: "#F5F7F9" }}>
                 <Navbar />
                 <Routes>
-                  <Route
-                    path="/"
-                    element={<SearchEmployee />}></Route>
+                  <Route path="/" element={<SearchEmployee />}></Route>
+                  <Route path="/profile" element={<EmployerProfile />}></Route>
                   <Route
                     path="/employer-approval"
-                    element={<Approval />}></Route>
+                    element={<Approval />}
+                  ></Route>
                   <Route
                     path="/verification-request"
-                    element={<VerficationRequest />}></Route>
-                  <Route
-                    path="/assessment"
-                    element={<Assessment />}></Route>
+                    element={<VerficationRequest />}
+                  ></Route>
+                  <Route path="/assessment" element={<Assessment />}></Route>
                   <Route
                     path="/EmployeeAssessment"
-                    element={<EmployeeAssessment />}></Route>
+                    element={<EmployeeAssessment />}
+                  ></Route>
                   <Route
                     path="/employee-details"
-                    element={<Employee />}></Route>
+                    element={<Employee />}
+                  ></Route>
                   <Route
                     path="/onboarding-form"
-                    element={<OnboardingForm />}></Route>
+                    element={<OnboardingForm />}
+                  ></Route>
                   <Route
                     path="/offerletter-sent"
-                    element={<OfferLetterSent />}></Route>
+                    element={<OfferLetterSent />}
+                  ></Route>
                 </Routes>
               </div>
             ) : (
@@ -88,15 +83,15 @@ function App() {
                 <div style={{ backgroundColor: "#F5F7F9" }}>
                   <Navbar />
                   <Routes>
-                    <Route
-                      path="/"
-                      element={<Profile />}></Route>
+                    <Route path="/" element={<Profile />}></Route>
                     <Route
                       path="/employeeOfferLetter"
-                      element={<EmployeeOfferLetter />}></Route>
+                      element={<EmployeeOfferLetter />}
+                    ></Route>
                     <Route
                       path="/colleagues"
-                      element={<SearchEmployee />}></Route>
+                      element={<SearchEmployee />}
+                    ></Route>
                     {/* <Route path="/employer-approval" element={<Approval />}></Route>
                   <Route path="/verification-request" element={<VerficationRequest />}></Route>
                   <Route path="/assessment" element={<Assessment />}></Route>
