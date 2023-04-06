@@ -10,6 +10,17 @@
     padding: 2% 3%;
     height: 100%;
 }
+.back-cont{
+    display: flex;
+    column-gap: 10px;
+}
+.back-cont img{
+    transform: rotate(90deg);
+}
+.back-cont h4{
+    font-size: 17px;
+    font-weight: 600;
+}
 .employe-details{
     padding: 4% 7%;
 }
@@ -37,16 +48,11 @@
 }
   
 
-/* .progress-ring__circle {
-  } */
 
 .circles{
     display: flex;
-    /* justify-content: center; */
     text-align: center;
     flex-wrap: wrap;
-    /* align-items: center; */
-    /* column-gap: 5%; */
 }
 .circle-box{
     display: flex;
@@ -109,12 +115,20 @@ circle, svg{
 .progress-ring__circle{
     stroke-dasharray: 40 3 ;
     
-    /* stroke-dashoffset: 630; */
+
 }
 
+.text h6{
+    font-size: 16px;
+    font-weight: 600;
+    margin-left: 10px;
+    margin-top: 25px;
+}
 
-
-
+.circle-box{
+    display: flex;
+    justify-content: end;
+}
 
 
 
@@ -277,4 +291,32 @@ textarea:focus{
     height: 20px;
     left: 3.5%;
     font-size: 18px;
+}
+
+@media (max-width:576px) {
+    .employe-score{
+        padding: 5% 0%;
+
+    }
+    .skill-assessment {
+        padding: 2% 0%;
+        margin: 0% 0% !important;
+    }
+
+    .note-head h3 {
+        margin-top: -5.5%;
+    }
+    .note-1, .note-2 {
+        display: block;
+    }
+    .or h3 {
+        margin-top: -11%;
+    }
+    .submit img {
+        margin-top: 15px;
+        left: 15%;
+    }
+    .submit {
+        margin: 20px 0px !important;
+    }
 }

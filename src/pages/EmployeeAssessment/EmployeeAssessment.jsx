@@ -3,7 +3,7 @@ import "./Assessment.css";
 import pic from "../../images/download.jpg";
 import check_1 from "../../images/Check-1.svg";
 import quote from "../../images/quote-left.svg";
-
+import arrow from "../../images/arrow-dropup.svg";
 
 
 
@@ -23,10 +23,12 @@ function EmployeeAssessment() {
         <div className='assesment'>
 
             <div className="back-cont">
+                <img src={arrow} alt="" />
+                
                 <h4>Employee Assessment</h4>
             </div>
             <div className="row employe-details">
-                <div className="col employe-prof">
+                <div className="col-xl-8 col-lg-7 col-md-6 col-12 employe-prof">
                     <div className="prof-img">
                         <img src={pic} alt="" />
                     
@@ -38,10 +40,10 @@ function EmployeeAssessment() {
                     </div>
 
                 </div>
-                <div className="col employe-score">
+                <div className="col-xl-4 col-lg-5 col-md-6 col-12 employe-score">
                     <div className="col-12 circles">
                        <div className="col-6 circle-box">
-                        <div className="circle" data-prog="95">
+                            <div className="circle" data-prog="95">
                                 <svg width={250} height="250">
                                 <circle
                                     class="progress-ring__circle"
@@ -81,7 +83,7 @@ function EmployeeAssessment() {
                                 </div>
                             </div>
                             <div className="text">
-                                <h6>Colleague Score</h6>
+                                <h6>Score</h6>
                             </div>
                         </div>
                         
@@ -90,9 +92,9 @@ function EmployeeAssessment() {
                 </div>
             </div>
             <div className="row skill-assessment">
-                <div className="col skill-box-1">
+                <div className="col-xl-6 col-lg-6 skill-box-1">
                     <div className="col-12 slider-1">
-                        <div className="col-3 heading">
+                        <div className="col-3  heading">
                             <h3>Communication</h3>
                         </div>
                         <div className="col-6 slied">
@@ -101,7 +103,7 @@ function EmployeeAssessment() {
                                 setRangeSkill_1(e.target.value)
                             }}/>
                         </div>
-                        <div className="col-2 value-1" id="rangeValue"><h5>{rangeSkill_1}%</h5></div>
+                        <div className="col-2    value-1" id="rangeValue"><h5>{rangeSkill_1}%</h5></div>
                     </div>
                     <div className="slider-1">
                         <div className="col-3 heading">
@@ -139,14 +141,14 @@ function EmployeeAssessment() {
                         </div>
                         <div className="col-2 value-1" id="rangeValue"><h5>{rangeSkill_4}%</h5></div>
                     </div>
-                    
                 </div>
-                <div className="col skill-box-2">
-                    <div className="slider-1">
-                        <div className="col-3 heading">
+
+                <div className="col-xl-6 col-lg-6 skill-box-2">
+                    <div className="col-12 slider-1">
+                        <div className="col-xl-3 col-4 heading">
                             <h3>Commitment</h3>
                         </div>
-                        <div className="col-6 slied">
+                        <div className="col-xl-6 col-5 slied">
                             <input type="range" className='range-1' min="0" max="100" defaultValue={rangeSkill_5}
                             onChange = {(e)=>{
                                 setRangeSkill_5(e.target.value)
@@ -200,22 +202,22 @@ function EmployeeAssessment() {
                             <img src={quote} alt="" />
 
                         </div>
-                        <div className="col-8 note-1">
-                            <div className="col-3 note-text">
+                        <div className="col-xl-8 col-md-8 col-sm-8  note-1">
+                            <div className="col-xl-3 col-md-4 col-sm-5 note-text">
                                 <h4>good employee</h4>
                             </div>
-                            <div className="col-3 note-text">
+                            <div className="col-xl-3 col-md-4 col-sm-5  note-text">
                                 <h4>great employee</h4>
                             </div>
-                            <div className="col-3 note-text">
+                            <div className="col-xl-3 col-md-4 col-sm-5  note-text">
                                 <h4>poor employee</h4>
                             </div>
                         </div>
-                        <div className="col-8 note-2">
-                            <div className="col-3 note-text">
+                        <div className="col-xl-8 col-md-8 col-sm-8 note-2">
+                            <div className="col-xl-3 col-md-4 col-sm-5  note-text">
                                 <h4>good employee</h4>
                             </div>
-                            <div className="col-3 note-text">
+                            <div className="col-xl-3 col-md-4 col-sm-5  note-text">
                                 <h4>great employee</h4>
                             </div>
                         </div>

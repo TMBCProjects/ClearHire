@@ -17,6 +17,8 @@ import Assessment from "./pages/Employer/Assessment/Assessment";
 import Employee from "./pages/Employer/EmployeeDetails/index";
 import Profile from "./pages/Employee/Profile/Profile";
 import EmployeeOfferLetter from "./pages/Employee/EmployeeOfferLetter/EmployeeOfferLetter";
+import EmployeeAssessment from "./pages/EmployeeAssessment/EmployeeAssessment";
+
 function App() {
   return (
     <div>
@@ -72,6 +74,9 @@ function App() {
                   <Route
                     path="/offerletter-sent"
                     element={<OfferLetterSent />}></Route>
+                  <Route
+                    path="/EmployeeAssessment"
+                    element={<EmployeeAssessment />}></Route>
                 </Routes>
               </div>
             ) : (
