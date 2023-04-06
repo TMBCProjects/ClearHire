@@ -20,7 +20,7 @@ const index = ({ value }) => {
                 startStep={0}
                 step={value / 10}
                 steps={10}
-                text={function text(steps, proportion) { return "".concat(Math.floor(100 * proportion), "%") }}
+                text={function text( proportion) { return "".concat(Math.floor(100 * proportion), "%") }}
                 width="100%"
             />
         </div >

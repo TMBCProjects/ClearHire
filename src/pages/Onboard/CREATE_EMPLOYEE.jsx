@@ -87,15 +87,15 @@ function CREATE_EMPLOYEE() {
                       </button>
 
                     </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
     </div>
     </div>
   )
 }
 
-export default CREATE_EMPLOYEE
+export default CREATE_EMPLOYEE;
