@@ -19,6 +19,8 @@ import CREATE_EMPLOYEE from "./pages/Onboard/CREATE_EMPLOYEE";
 import Profile from "./pages/Employee/Profile/Profile";
 import UserProfile from "./pages/Employer/Profile/Profile";
 import EmployeeOfferLetter from "./pages/Employee/EmployeeOfferLetter/EmployeeOfferLetter";
+import EmployeeAssessment from "./pages/EmployeeAssessment/EmployeeAssessment";
+
 function App() {
   return (
     <div>
@@ -48,6 +50,9 @@ function App() {
               <Route
                 path="/Profile"
                 element={<Profile />}></Route>
+              <Route path="/EmployeeAssessment" 
+              element={<EmployeeAssessment/>}></Route>
+
             </Routes>
           </>
         ) : (
