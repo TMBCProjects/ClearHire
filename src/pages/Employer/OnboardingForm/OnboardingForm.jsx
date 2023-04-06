@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./OnboardingForm.css";
 import add from "../../../images/add.svg";
+import { GoChevronLeft } from "react-icons/go";
 import { onboardEmployee } from "../../../DataBase/Employer/employer";
 
 const initialValues = {
@@ -46,12 +47,9 @@ function OnboardingForm() {
   let [file, setFile] = useState("");
 
   return (
-    <div className="createemp">
-      <div className="row back">
-        <div className="col-12 back-item">
-          <i className="fa-solid fa-circle-chevron-left"></i>
-          <h4>Back</h4>
-        </div>
+    <div className="createemp container">
+      <div className="back mt-2">
+        <GoChevronLeft style={{ color: "#9EC2AD" }} size={25} />
       </div>
       <div className="container-fluid" id="On-board">
         <div className="row d-flex  align-items-center">
