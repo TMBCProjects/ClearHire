@@ -4,7 +4,7 @@ import pic from "../../images/download.jpg";
 import check_1 from "../../images/Check-1.svg";
 import quote from "../../images/quote-left.svg";
 import arrow from "../../images/arrow-dropup.svg";
-
+import ProgressBar from '../../components/ProgressBar'
 
 
 
@@ -44,21 +44,7 @@ function EmployeeAssessment() {
                     <div className="col-12 circles">
                        <div className="col-6 circle-box">
                             <div className="circle" data-prog="95">
-                                <svg width={250} height="250">
-                                <circle
-                                    class="progress-ring__circle"
-                                    stroke="#00823B"
-                                    stroke-width="15"
-                                    // fill="transparent"
-                                    r="35"
-                                    cx="125"
-                                    cy="125">
-
-                                    </circle>
-                                </svg>
-                                <div className="circle-inner">
-                                    <h1>95%</h1>
-                                </div>
+                               <ProgressBar value={40}/>
                             </div>
                             <div className="text">
                                 <h6>Colleague Score</h6>
@@ -66,21 +52,8 @@ function EmployeeAssessment() {
                        </div>
                         <div className="col-6 circle-box">
                             <div className="circle" data-prog="75">
-                                <svg width={250} height="250">
-                                <circle
-                                    class="progress-ring__circle"
-                                    stroke="#00823B"
-                                    stroke-width="15"
-                                    // fill="transparent"
-                                    r="35"
-                                    cx="125"
-                                    cy="125">
-
-                                    </circle>
-                                </svg>
-                                <div className="circle-inner">
-                                    <h1>75%</h1>
-                                </div>
+                                <ProgressBar value={40}/>
+                               
                             </div>
                             <div className="text">
                                 <h6>Score</h6>
