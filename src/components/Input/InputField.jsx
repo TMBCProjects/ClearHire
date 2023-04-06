@@ -19,7 +19,11 @@ export default function InputField(props) {
 
   return (
       <div className="form-group">
+        {props.label ?
           <label className="control-label">{props.label}</label>
+          :
+          ""
+        }
           <div className="input">
               <input type={props.type === "password" && showPassword? "password" : "text" } 
               className="form-control" 

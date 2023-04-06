@@ -1,0 +1,100 @@
+.profile {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    padding: 7vh;
+    gap: 3vh;
+}
+
+.profileHeader img {
+    width: 15vh;
+    border-radius: 10vh;
+}
+
+.profilePic {
+    background-color: white;
+    border-radius: 10vh;
+    border: 1px solid;
+}
+
+.profileHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+}
+
+.name {
+    font-size: larger;
+}
+
+
+.profileBody {
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+}
+
+.profileBody button {
+    padding: 1vh;
+    color: var(--primary-color);
+    background: white;
+    width: 60vh;
+    border: 1px solid;
+    border-radius: 0.375rem;
+    font-weight: 600;
+}
+
+.profileBody button img {
+    width: 2vh;
+}
+
+.profileBody input {
+    border: none !important;
+    padding: 1.5vh;
+}
+
+.skills {
+    margin-top: 5vh;
+    font-size: larger;
+}
+
+.skillList {
+    display: flex;
+    align-items: center;
+    gap: 2vh;
+    margin-top: 2vh;
+}
+
+.skillList .form-group {
+    width: 25vh;
+}
+
+.skillList input {
+    width: 25vh;
+
+}
+
+.sliderpercent {
+    background-color: #E2F0E8;
+    width: 5vh;
+    height: 5vh;
+    border-radius: 5vh;
+    padding: 1vh;
+    color: #00823B;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.profileFooter {
+    margin-top: 5vh;
+}
+
+.profileFooter button {
+    width: 25%;
+    border: none;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}

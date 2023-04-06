@@ -1,27 +1,31 @@
-.empnavbar{
+.empnavbar {
     display: flex;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    /* box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; */
+    border-bottom: 1px solid #cfcfcf;
     padding-block: 2vh;
     justify-content: space-around;
     background: white;
+    position: sticky;
+    top: 0;
+    z-index: 11;
 }
 
-.logo.navLink{
+.logo.navLink {
     width: 3vh;
 }
 
-.navlink{
+.navlink {
     text-decoration: none;
     color: black;
 }
 
-.active{
+.active {
     font-weight: 600;
     text-decoration: none;
     color: black;
     border-bottom: 5px solid #00823B;
     border-radius: 3px;
-    height: 192%;
+    height: 100%;
 }
 
 .navbarBody {
@@ -35,7 +39,7 @@
     font-weight: 600;
 }
 
-.navbarFoot button{
+.navbarFoot button {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -47,9 +51,13 @@
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 
-.navitem{
+.navitem {
     position: relative;
     top: 40%;
+}
+
+.navitem svg{
+    color: #00823B;
 }
 
 .navbarDropdown{
@@ -59,9 +67,10 @@
     position: absolute;
     background: white;
     border-radius: 0.4rem;
+    z-index: 9;
 }
 
-.navbarDropdown li a{
+.navbarDropdown li a {
     text-decoration: none;
     color: black;
 }

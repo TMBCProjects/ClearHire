@@ -1,0 +1,29 @@
+.assess-card{
+    width: 26rem !important;
+   padding: 1vh;
+
+}
+.assess-card .managerlogo{
+    margin-bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+}
+.assess-card .managerlogo img{
+    width: 25%;
+}
+.assess-card .headDesc{
+    display: flex;
+    flex-direction: column;
+}
+.assess-card .headDesc span:nth-child(1){
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+.assess-card .allow{
+    width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+

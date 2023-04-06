@@ -7,6 +7,7 @@ function CREATE_EMPLOYEE() {
   let [file,setFile] = useState('')
 
   return (
+    <div className="createemp">
     <div className="row back">
       <div className="col-12 back-item">
         <i class="fa-solid fa-circle-chevron-left"></i>
@@ -70,7 +71,7 @@ function CREATE_EMPLOYEE() {
                         // alert(e.target.files[0].name)
                         setFile(e.target.files[0].name)
                       }}/>
-                      <label for="file" class="custom-file-upload">{file!='' ? file : 'Upload Offer Letter'}</label>
+                      <label for="file" class="custom-file-upload">{file!=='' ? file : 'Upload Offer Letter'}</label>
                       <span id="filename"></span>
                       <img src={add} alt="" />  
                        
@@ -92,6 +93,7 @@ function CREATE_EMPLOYEE() {
             </div>
           </div>
         </div>
+    </div>
     </div>
   )
 }

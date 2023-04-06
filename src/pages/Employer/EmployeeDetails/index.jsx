@@ -43,7 +43,7 @@ const index = () => {
             </div>
           </div>
           <div className="col-4 d-flex justify-content-center align-items-center empDetailsProgress">
-            <div class="circle-wrap ">
+            <div class="circle-wrap">
               <div class="circle">
                 <div class="mask full">
                   <div class="fill"></div>
