@@ -19,7 +19,7 @@
 }
 
 #banner .banner-heading {
-    font-size: 55px;
+    font-size: 3.5rem;
     font-weight: 600;
 }
 
@@ -31,9 +31,10 @@
 }
 
 @media(max-width:767px) {
-    .banner-heading {
-        font-size: 35px;
+    #banner .banner-heading {
+        font-size: 2.5rem;
         text-align: center;
+        margin-top: 1rem;
     }
 
     .banner-text {
