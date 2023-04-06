@@ -23,17 +23,12 @@ const Banner = () => {
             id="banner-btn"
           >
             <div className="col-md-3 col-5">
-            <a
-                  href="/#login"
-                  className="btn"
-                  id="login-btn"
-                  type="submit"
-                >
-                  Login
-                </a>
+              <a href="/#login" className="btn" id="login-btn" type="submit">
+                Login
+              </a>
             </div>
-            <div className="col-md-3">
-              <Link to={'/signup-options'} className="btn" id="signup-btn">
+            <div className="col-md-3 col-5">
+              <Link to={"/signup-options"} className="btn" id="signup-btn">
                 Signup
               </Link>
             </div>

@@ -127,10 +127,8 @@ circle, svg{
 
 .circle-box{
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
-
-
 
 .skill-assessment{
     padding: 2%;
@@ -213,9 +211,7 @@ circle, svg{
     display: flex;
     justify-content: center;
 }
-.note-1{
-    padding-top: 25px;
-}
+
 .note-2{
     padding-bottom: 55px;
 }
@@ -229,8 +225,13 @@ circle, svg{
 .note-text{
     border: 1px solid #B2B2B2;
     margin-left: 15px;
+    cursor: pointer;
     margin-top: 15px;
     border-radius: 5px;
+}
+
+.note-text:hover{
+    border: 4px solid #00823B;
 }
 
 .or h3{

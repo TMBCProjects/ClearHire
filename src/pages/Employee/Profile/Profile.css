@@ -76,6 +76,9 @@
 
 }
 
+.skill-item{
+    display: flex;
+}
 .sliderpercent {
     background-color: #E2F0E8;
     width: 5vh;

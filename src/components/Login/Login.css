@@ -12,11 +12,11 @@
 }
 
 .login-form {
-    border-radius: 0    ;
+    border-radius: 0;
     background-color: white !important;
     width: 625px;
     padding: 20px;
-    
+
 }
 
 .login-form input {
@@ -50,5 +50,9 @@
 @media(max-width:767px) {
     .login-form {
         width: 100%;
+    }
+
+    .text-light {
+        text-align: center;
     }
 }

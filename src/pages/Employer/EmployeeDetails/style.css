@@ -136,7 +136,7 @@
 }
 .skillsContainer .arrowLeft {
     position: absolute;
-    left: 10%;
+    left: 5%;
     background: #FFFFFF;
     box-shadow: 0px 0px 11px #00000024;
     width: 40px;
@@ -150,7 +150,7 @@
 
 .skillsContainer .arrowRight {
     position: absolute;
-    right: 10%;
+    right: 5%;
     background: #FFFFFF;
     box-shadow: 0px 0px 11px #00000024;
     width: 40px;
@@ -248,8 +248,12 @@
     100% {
         transform: rotate(135deg);
     }
+.skillsCircle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
 }
-
 
 
 .progressBars p {
