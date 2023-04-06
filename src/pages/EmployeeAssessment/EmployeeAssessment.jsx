@@ -227,7 +227,6 @@ function EmployeeAssessment() {
                            <textarea id="assessment" name="assessment" rows="3" cols="100" placeholder='enter your text assessment...'/>
                         </div>
                     </div>
-                    
                 </div>               
             </div>
             <div className="submit">
