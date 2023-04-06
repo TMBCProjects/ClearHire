@@ -233,9 +233,7 @@ function EmployeeAssessment() {
                 <img src={check_1} alt="" />
                 <button>Submit Assessment</button>
             </div>
-              
-               
-                   
+
         </div>    
     )
 }
