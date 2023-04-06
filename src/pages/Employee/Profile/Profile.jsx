@@ -59,10 +59,7 @@ export default function Profile() {
 
                 <div className='skills'>
                     <span style={{ fontWeight: "bold", display: "flex", gap: "2vh", alignItems: "center" }}>Your Skills
-                        <span style={{ border: "1px solid green", borderRadius: "5vh", padding: "1vh", width: "5vh", cursor: "pointer" }}>
-                            <img src={Add} alt="add"></img></span>
-                    </span>
-
+                       </span>
                     <div className='skillList'>
                         <InputField
                             type={"text"}
@@ -103,10 +100,13 @@ export default function Profile() {
                                 handleStyle={{ backgroundColor: "#00823B" }}
                             />
                         </Col>
-
                         <span className='sliderpercent'>{inputValue}</span>
+                        <span style={{ border: "1px solid green", borderRadius: "6vh",marginLeft: "2vh", padding: "1vh 1.5vh", width: "7vh", cursor: "pointer" }}>
+                            <img src={Add} alt="add"></img>
+                        </span>
+                        
                     </div>
-
+                    
                     <div className='profileFooter'>
                         <button><img src={Check} alt="submit-logo" ></img>&nbsp;Done</button>
                     </div>
