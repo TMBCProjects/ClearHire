@@ -19,5 +19,6 @@ export default class Employee {
   // portfolioLink = "";
   // resume = "";
   // salary = "";
-  // skillsAndPercentage = [];
+  // skills = [];
+  // skillPercentage = [];
 }
