@@ -7,10 +7,17 @@ export default class Employee {
   profileImage = "";
   dateOfBirth = "";
   role = "";
+  // currentEmployerId = "";
+  // employerIdList = "";
+  // designation = "";
+  // offerLetter = "";
+  // dateOfJoining = "";
+  // employeeAadhaarCardNumber = "";
   // companyName = "";
   // typeOfEmployment = "";
   // dateOfBirth = "";
   // portfolioLink = "";
   // resume = "";
+  // salary = "";
   // skillsAndPercentage = [];
 }
