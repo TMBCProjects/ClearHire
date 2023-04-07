@@ -24,7 +24,6 @@ function EmployeeAssessment() {
 
             <div className="back-cont">
                 <img src={arrow} alt="" />
-                
                 <h4>Employee Assessment</h4>
             </div>
             <div className="row employe-details">
@@ -222,23 +221,19 @@ function EmployeeAssessment() {
                             </div>
                         </div>
                         <div className="or">
-                            <h6></h6>
                            <h3>or</h3>
                         </div>   
                         <div className="assessment-text">
                            <textarea id="assessment" name="assessment" rows="3" cols="100" placeholder='enter your text assessment...'/>
                         </div>
                     </div>
-                    
                 </div>               
             </div>
             <div className="submit">
                 <img src={check_1} alt="" />
                 <button>Submit Assessment</button>
             </div>
-              
-               
-                   
+
         </div>    
     )
 }
