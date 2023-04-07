@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+
+import React, { useEffect, useState } from 'react'
 import "./Assessment.css";
 import pic from "../../images/download.jpg";
 import check_1 from "../../images/Check-1.svg";
 import quote from "../../images/quote-left.svg";
 import arrow from "../../images/arrow-dropup.svg";
+import { rateEmployee } from '../../DataBase/Employer/employer';
 
 function EmployeeAssessment() {
   let [rangeSkill_1, setRangeSkill_1] = useState(0);
@@ -293,5 +295,6 @@ function EmployeeAssessment() {
       </div>
     </div>
   );
+
 }
 export default EmployeeAssessment;
