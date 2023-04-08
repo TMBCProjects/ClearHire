@@ -8,8 +8,10 @@ import { Slider, Col } from 'antd';
 
 const initialValues = {
     portfolioLink: "",
+    resume: "",
     employeeAadhaarCardNumber: "",
     skill: [],
+    skillPercentage: [],
 }
 export default function Profile() {
     const [values, setValues] = useState(initialValues)
@@ -64,7 +66,7 @@ export default function Profile() {
                     <input
                         type="file"
                         id="file"
-                        name="offerLetter"
+                        name="resume"
                         accept=".txt, .pdf"
                         onChange={(e) => {
                             handleFileChange(e);
