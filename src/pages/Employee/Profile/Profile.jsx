@@ -24,6 +24,27 @@ export default function Profile() {
             [name]: value,
         });
     };
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        const name = e.target.name;
+        setFile(file.name);
+        setValues({
+            ...values,
+            [name]: file,
+        });
+    };
+
+    const handleSubmit = () => {
+        let userDatas = JSON.parse(sessionStorage.getItem("userData"));
+        values.companyName = userDatas.data.companyName;
+        values.employerEmail = userDatas.data.employerEmail;
+        values.employerId = userDatas.id;
+        // onboardEmployee(values).then(() => {
+        //     window.location.href = "/offerletter-sent";
+        // });
+    };
+
+    let [file, setFile] = useState("");
     return (
         <div className='profile'>
             <div className='profileHeader'>
@@ -39,8 +60,21 @@ export default function Profile() {
             </div>
 
             <div className='profileBody'>
-                <button><img src={Add} alt="add"></img>&nbsp;Add Resume</button>
-
+                <div className="f-3">
+                    <input
+                        type="file"
+                        id="file"
+                        name="offerLetter"
+                        accept=".txt, .pdf"
+                        onChange={(e) => {
+                            handleFileChange(e);
+                        }}
+                    />
+                    <label for="file" className="custom-file-upload">
+                        <img src={Add} alt="add"></img>{file !== "" ? file : "Add Resume"}
+                    </label>
+                    <span id="filename"></span>
+                </div>
                 <InputField
                     type={"text"}
                     name={"portfolioLink"}

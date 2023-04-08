@@ -36,8 +36,9 @@
     gap: 2vh;
 }
 
-.profileBody button {
+.profileBody label {
     padding: 1vh;
+    cursor: pointer;
     color: var(--primary-color);
     background: white;
     width: 60vh;
@@ -46,7 +47,7 @@
     font-weight: 600;
 }
 
-.profileBody button img {
+.profileBody label img {
     width: 2vh;
 }
 
