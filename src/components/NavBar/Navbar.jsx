@@ -47,13 +47,6 @@ export default function EmployerNavbar() {
             </div>
           </NavLink>
 
-          <NavLink activeclassname="active" to={"/verification-request"} className="navlink">
-            <div className='navitem'>
-              <img src={verification} alt="search-logo" className="logo navLink" />&nbsp;
-              Verification / Request
-            </div>
-          </NavLink>
-
           <NavLink activeclassname="active" to={"/EmployeeAssessment"} className="navlink">
             <div className='navitem'>
               <FileDoneOutlined />&nbsp;
@@ -76,6 +69,13 @@ export default function EmployerNavbar() {
             <div className='navitem'>
               <img src={job} alt="search-logo" className="logo navLink" />&nbsp;
               Offer Letter
+            </div>
+          </NavLink>
+
+          <NavLink activeclassname="active" to={"/verification-request"} className="navlink">
+            <div className='navitem'>
+              <img src={verification} alt="search-logo" className="logo navLink" />&nbsp;
+              Verification / Request
             </div>
           </NavLink>
 
