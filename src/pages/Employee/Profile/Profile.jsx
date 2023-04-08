@@ -7,9 +7,9 @@ import InputField from '../../../components/Input/InputField';
 import { Slider, Col } from 'antd';
 
 const initialValues = {
-    link: "",
-    aadharno: "",
-    skill: ""
+    portfolioLink: "",
+    employeeAadhaarCardNumber: "",
+    skill: [],
 }
 export default function Profile() {
     const [values, setValues] = useState(initialValues)
@@ -43,16 +43,16 @@ export default function Profile() {
 
                 <InputField
                     type={"text"}
-                    name={"link"}
-                    value={values.link}
+                    name={"portfolioLink"}
+                    value={values.portfolioLink}
                     onChange={handleInputChange}
                     placeholder={"Add Portfolio link..."}
                 />
 
                 <InputField
                     type={"number"}
-                    name={"aadharno"}
-                    value={values.aadharno}
+                    name={"employeeAadhaarCardNumber"}
+                    value={values.employeeAadhaarCardNumber}
                     onChange={handleInputChange}
                     placeholder={"Add Your Aadhar Number"}
                 />

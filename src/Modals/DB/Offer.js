@@ -1,6 +1,7 @@
 export default class Offer {
   isActive = false;
   companyName = "";
+  companyLogo = "";
   employerEmail = "";
   employerId = "";
   employeeEmail = "";

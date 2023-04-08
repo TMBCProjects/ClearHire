@@ -14,6 +14,7 @@ export default class Employee {
   // dateOfJoining = "";
   // employeeAadhaarCardNumber = "";
   // companyName = "";
+  // companyLogo = "";
   // typeOfEmployment = "";
   // dateOfBirth = "";
   // portfolioLink = "";

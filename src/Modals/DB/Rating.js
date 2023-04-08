@@ -1,6 +1,7 @@
 export default class Rating {
   isActive = false;
   companyName = "";
+  companyLogo = "";
   ratedById = "";
   ratedByEmail = "";
   employeeName = "";
