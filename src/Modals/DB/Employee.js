@@ -16,9 +16,9 @@ export default class Employee {
   // typeOfEmployment = "";
   // offerLetter = "";
   // dateOfJoining = "";
-  // employeeAadhaarCardNumber = "";
-  // dateOfBirth = "";
-  // portfolioLink = "";
-  // resume = "";
-  // skills = [];
+  employeeAadhaarCardNumber = "";
+  dateOfBirth = "";
+  portfolioLink = "";
+  resume = "";
+  skills = [];
 }
