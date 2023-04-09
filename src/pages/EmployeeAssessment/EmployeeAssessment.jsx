@@ -22,7 +22,8 @@ const initialState = {
 function EmployeeAssessment({
   employeeId,
   employeeName,
-  employeeEmail }) {
+  employeeEmail,
+  profileImage }) {
   const [values, setValues] = useState(initialState);
   let [rangeSkill_1, setRangeSkill_1] = useState(0);
   let [rangeSkill_2, setRangeSkill_2] = useState(0);
@@ -49,6 +50,7 @@ function EmployeeAssessment({
     values.employeeId = employeeId || "employeeId"
     values.employeeName = employeeName || "employeeName"
     values.employeeEmail = employeeEmail || "employeeEmail"
+    values.profileImage = profileImage || pic
     rateEmployee(values).then(() => {
       window.location.href = "/";
     });
@@ -63,7 +65,7 @@ function EmployeeAssessment({
       <div className="row employe-details">
         <div className="col-xl-8 col-lg-7 col-md-6 col-12 employe-prof">
           <div className="prof-img">
-            <img src={pic} alt="" />
+            <img src={profileImage} alt="" />
           </div>
           <div className="prof-text">
             <h3>Govarthan, 24</h3>
