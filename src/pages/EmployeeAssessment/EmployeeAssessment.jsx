@@ -29,7 +29,7 @@ function EmployeeAssessment({
   employeeId,
   employeeName,
   employeeEmail }) {
-  const [values, setValues] = useState({});
+  const [values, setValues] = useState(initialState);
   let [rangeSkill_1, setRangeSkill_1] = useState(0);
   let [rangeSkill_2, setRangeSkill_2] = useState(0);
   let [rangeSkill_3, setRangeSkill_3] = useState(0);
