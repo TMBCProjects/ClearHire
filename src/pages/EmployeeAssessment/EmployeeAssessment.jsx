@@ -52,14 +52,13 @@ function EmployeeAssessment({
     values.companyName = userDatas.companyName
     values.ratedById = userDatas.employerId
     values.ratedByEmail = userDatas.employerEmail
-    values.employeeId = employeeId
-    values.employeeName = employeeName
-    values.employeeEmail = employeeEmail
+    values.employeeId = employeeId || "employeeId"
+    values.employeeName = employeeName || "employeeName"
+    values.employeeEmail = employeeEmail || "employeeEmail"
     console.log(values);
-    rateEmployee(values).then(() => {
-      window.location.href = "/";
-      sessionStorage.removeItem("resume")
-    });
+    // rateEmployee(values).then(() => {
+    //   window.location.href = "/";
+    // });
   };
 
   return (
