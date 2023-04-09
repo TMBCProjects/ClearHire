@@ -9,19 +9,9 @@ import UploadFile from "../../../components/UploadFile";
 import { MinusOutlined } from "@ant-design/icons";
 
 let userDatas = JSON.parse(sessionStorage.getItem("userData"));
-const initialValues = {
-    portfolioLink: userDatas.data.portfolioLink || "",
-    resume: userDatas.data.resume || "",
-    employeeAadhaarCardNumber: userDatas.data.employeeAadhaarCardNumber || "",
-    skills: userDatas.data.skills || [],
-};
 export default function Profile() {
-    const [values, setValues] = useState(initialValues);
+    const [values, setValues] = useState({});
     const [skills, setSkills] = useState([
-        {
-            skillName: "",
-            value: 0,
-        },
         {
             skillName: "",
             value: 0,
@@ -48,6 +38,17 @@ export default function Profile() {
         setSkills(newState);
     };
 
+    const handleSkillValueChange = (e, index) => {
+        const value = e;
+        const newState = skills.map((obj, id) => {
+            if (id === index) {
+                return { ...obj, value: value };
+            }
+            return obj;
+        });
+        setSkills(newState);
+    };
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setValues({
@@ -65,10 +66,14 @@ export default function Profile() {
 
     const handleSubmit = () => {
         let resume = sessionStorage.getItem("resume");
-        values.resume = resume;
+        if (resume) {
+            values.resume = resume;
+        }
+        values.skills = skills;
         console.log(values);
         // profileUpdate(values).then(() => {
         //     window.location.href = "/offerletter-sent";
+        sessionStorage.removeItem("resume")
         // });
     };
 
@@ -164,6 +169,9 @@ export default function Profile() {
                                     <Slider
                                         min={1}
                                         max={100}
+                                        onChange={(e) => {
+                                            handleSkillValueChange(e, index);
+                                        }}
                                         trackStyle={{ backgroundColor: "#00823B" }}
                                         handleStyle={{ backgroundColor: "#00823B" }}
                                     />
