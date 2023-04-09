@@ -63,7 +63,7 @@ export default function Profile() {
         values.skill = skills;
         values.resume = resume;
         console.log(values)
-        // onboardEmployee(values).then(() => {
+        // profileUpdate(values).then(() => {
         //     window.location.href = "/offerletter-sent";
         // });
     };
