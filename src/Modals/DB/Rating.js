@@ -1,6 +1,6 @@
 export default class Rating {
   isActive = false;
-  ratedByName = "";
+  companyName = "";
   ratedById = "";
   ratedByEmail = "";
   employeeName = "";
@@ -16,6 +16,4 @@ export default class Rating {
   skill = "";
   teamPlayer = "";
   note = "";
-  // companyId = "";
-  // companyName = "";
 }

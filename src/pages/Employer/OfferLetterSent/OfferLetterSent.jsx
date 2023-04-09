@@ -1,9 +1,9 @@
 import React from "react";
-import "./main.css";
+import "./OfferLetterSent.css";
 import check from "../../../assets/images/Check.svg";
 //import { useNavigate } from "react-router-dom";
 
-const Index = () => {
+function OfferLetterSent() {
   //const navigate = useNavigate();
   return (
     <div className="signup-options-container">
@@ -43,4 +43,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default OfferLetterSent;

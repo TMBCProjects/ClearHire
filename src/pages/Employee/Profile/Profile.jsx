@@ -5,6 +5,7 @@ import Add from "../../../assets/images/add.svg";
 import Check from "../../../assets/images/Check.svg";
 import InputField from '../../../components/Input/InputField';
 import { Slider, Col } from 'antd';
+import UploadFile from '../../../components/UploadFile';
 
 const initialValues = {
     link: "",
@@ -13,16 +14,37 @@ const initialValues = {
 }
 export default function Profile() {
     const [values, setValues] = useState(initialValues)
+    const [skills,setSkills]=useState([
+        {
+            skillName:"",
+            value:0
+        },
+        {
+            skillName:"",
+            value:0 
+        }
+    ])
     const [inputValue, setInputValue] = useState(1);
     const onChange = (newValue) => {
         setInputValue(newValue);
     };
-    const handleInputChange = (e) => {
+    const handleInputChange = (e,index) => {
         const { name, value } = e.target;
-        setValues({
-            ...values,
-            [name]: value,
-        });
+        // setValues({
+        //     ...values,
+        //     [name]: value,
+        // });
+        const newState = skills.map((obj,id) => {
+            // 👇️ if id equals 2, update country property
+            if (id === index) {
+              return {...obj, skillName: value};
+            }
+      
+            // 👇️ otherwise return the object as is
+            return obj;
+          });
+      
+          setSkills(newState);
     };
     return (
         <div className='profile'>
@@ -39,8 +61,7 @@ export default function Profile() {
             </div>
 
             <div className='profileBody'>
-                <button><img src={Add} alt="add"></img>&nbsp;Add Resume</button>
-
+            <UploadFile/>
                 <InputField
                     type={"text"}
                     name={"link"}
@@ -59,54 +80,51 @@ export default function Profile() {
 
                 <div className='skills'>
                     <span style={{ fontWeight: "bold", display: "flex", gap: "2vh", alignItems: "center" }}>Your Skills
-                        <span style={{ border: "1px solid green", borderRadius: "5vh", padding: "1vh", width: "5vh", cursor: "pointer" }}>
-                            <img src={Add} alt="add"></img></span>
-                    </span>
+                       </span>
+                       {
+                        skills?.map((skill,index)=>{
+                            return(
+                             <div className='skillList'>
+                                <InputField
+                                    type={"text"}
+                                    name={`skill ${index+1}`}//name should iterated according to .map
+                                    onChange={(e)=>{
+                                        handleInputChange(e,index)
+                                    }}
+                                    placeholder={`Skill ${index+1}`}
+                                />
+                                <Col span={10}>
+                                    <Slider
+                                        min={1}
+                                        max={100}
+                                        // onChange={onChange}
+                                        // value={typeof inputValue === 'number' ? inputValue : 0}
+                                        trackStyle={{ backgroundColor: "#00823B" }}
+                                        handleStyle={{ backgroundColor: "#00823B" }}
+                                    />
+                                </Col>
+        
+                                <span className='sliderpercent'>{inputValue}</span>
+                                {
+                                    index===skills.length-1 && 
+                                <span onClick={()=>{
+                                    setSkills([...skills,{
+                                        skillName:"",
+                                        value:0
+                                    }])
+                                }} style={{ border: "1px solid green", borderRadius: "6vh",marginLeft: "2vh", padding: "1vh 1.5vh", width: "7vh", cursor: "pointer" }}>
+                                    <img src={Add} alt="add"></img>
+                                </span>
+                                }
+                            </div>
+                            )
+                        })
+                       }
+                       
+                   
 
-                    <div className='skillList'>
-                        <InputField
-                            type={"text"}
-                            name={"skill"}//name should iterated according to .map
-                            value={values.skill}
-                            onChange={handleInputChange}
-                            placeholder={"Skill 1"}
-                        />
-                        <Col span={10}>
-                            <Slider
-                                min={1}
-                                max={100}
-                                // onChange={onChange}
-                                // value={typeof inputValue === 'number' ? inputValue : 0}
-                                trackStyle={{ backgroundColor: "#00823B" }}
-                                handleStyle={{ backgroundColor: "#00823B" }}
-                            />
-                        </Col>
-
-                        <span className='sliderpercent'>{inputValue}</span>
-                    </div>
-
-                    <div className='skillList'>
-                        <InputField
-                            type={"text"}
-                            name={"skill"}//name should iterated according to .map
-                            value={values.skill}
-                            onChange={handleInputChange}
-                            placeholder={"Skill 2"}
-                        />
-                        <Col span={10}>
-                            <Slider
-                                min={1}
-                                max={100}
-                                // onChange={onChange}
-                                // value={typeof inputValue === 'number' ? inputValue : 0}
-                                trackStyle={{ backgroundColor: "#00823B" }}
-                                handleStyle={{ backgroundColor: "#00823B" }}
-                            />
-                        </Col>
-
-                        <span className='sliderpercent'>{inputValue}</span>
-                    </div>
-
+                
+                    
                     <div className='profileFooter'>
                         <button><img src={Check} alt="submit-logo" ></img>&nbsp;Done</button>
                     </div>
