@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "../Profile/Profile.css";
-import pic from "../../../assets/images/pic.png";
 import Add from "../../../assets/images/add.svg";
 import Check from "../../../assets/images/Check.svg";
 import InputField from "../../../components/Input/InputField";
