@@ -1,17 +1,25 @@
 import React, { useState } from 'react'
 import { FileOutlined, PlusOutlined } from "@ant-design/icons";
 import "../UploadPic/UploadPic.css";
-export default function UploadPic() {
+import { deleteFile, uploadFile } from "../../utils/FirebaseUtils";
+import { Fields } from "../../utils/Fields";
+export default function UploadPic({ name, url }) {
   const [fileLoading, setFileLoading] = useState(false);
+  const [fileData, setFileData] = useState("");
   const handleFileUpload = async (event) => {
-    console.log(event.target);
-    sessionStorage.setItem("resume", { file: event.target.files[0] });
-    let resume = JSON.parse(sessionStorage.getItem("resume"));
-    console.log(resume);
+    const fileUrl = await uploadFile(
+      Fields.resumes,
+      name,
+      event.target.files[0]
+    );
+    setFileData(fileUrl);
+    sessionStorage.setItem("resume", fileUrl);
     setFileLoading(true);
   };
   const removeImg = async (e) => {
     e.preventDefault();
+    setFileData(url === "" ? fileData : url);
+    setFileData(await deleteFile(Fields.resumes, fileData));
     sessionStorage.removeItem("resume");
     setFileLoading(false);
   };

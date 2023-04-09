@@ -48,7 +48,7 @@ export default function Profile() {
         setSkills(newState);
     };
 
-    const handleInputChange = (e, index) => {
+    const handleInputChange = (e) => {
         const { name, value } = e.target;
         setValues({
             ...values,
@@ -64,10 +64,9 @@ export default function Profile() {
     };
 
     const handleSubmit = () => {
-        let resume = JSON.parse(sessionStorage.getItem("resume"));
-        values.skill = skills;
-        // values.resume = resume;
-        console.log(resume);
+        let resume = sessionStorage.getItem("resume");
+        values.resume = resume;
+        console.log(values);
         // profileUpdate(values).then(() => {
         //     window.location.href = "/offerletter-sent";
         // });
@@ -96,7 +95,7 @@ export default function Profile() {
             </div>
 
             <div className="profileBody">
-                <UploadFile />
+                <UploadFile name={userDatas.data.employeeName} url={userDatas.data.resume} />
                 <InputField
                     type={"text"}
                     name={"portfolioLink"}
