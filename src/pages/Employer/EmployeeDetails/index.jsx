@@ -117,64 +117,80 @@ const index = () => {
             <div className="row">
               <div className="col-md-3 mb-3">
 
+
                 <div class="circle-wrap">
                 <ProgressBar value={75}/>
+
 
                 </div>
                 <p>Communitcation</p>
               </div>
               <div className="col-md-3 mb-3">
 
+
                 <div class="circle-wrap">
                 <ProgressBar value={75}/>
+
 
                 </div>
                 <p>Attitude</p>
               </div>
               <div className="col-md-3 mb-3">
 
+
                 <div class="circle-wrap">
                 <ProgressBar value={75}/>
+
 
                 </div>
                 <p>Ability To Learn</p>
               </div>
               <div className="col-md-3 mb-3">
 
+
                 <div class="circle-wrap">
                 <ProgressBar value={75}/>
+
 
                 </div>
                 <p>Punctuality</p>
               </div>
               <div className="col-md-3 mb-3">
 
+
                 <div class="circle-wrap">
                   <ProgressBar value={75}/>
+
 
                 </div>
                 <p>Commitment</p>
               </div>
               <div className="col-md-3 mb-3">
 
+
                 <div class="circle-wrap">
                 <ProgressBar value={75}/>
+
 
                 </div>
                 <p>Trustworthiness</p>
               </div>
               <div className="col-md-3 mb-3">
 
+
                 <div class="circle-wrap">
                 <ProgressBar value={75}/>
+
 
                 </div>
                 <p>Skill</p>
               </div>
               <div className="col-md-3 mb-3">
 
+
                 <div class="circle-wrap">
                 <ProgressBar value={75}/>
+
 
 
                 </div>
@@ -185,8 +201,10 @@ const index = () => {
           <div className="col-md-4 align-items-center d-flex flex-column">
             <p className="mb-0">Total</p>
 
+
             <div class="circle-wrap">
             <ProgressBar value={75}/>
+
 
             </div>
           </div>

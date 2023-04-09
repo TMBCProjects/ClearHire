@@ -8,7 +8,6 @@ import arrow from "../../images/arrow-dropup.svg";
 import ProgressBar from '../../components/ProgressBar'
 import { rateEmployee } from '../../DataBase/Employer/employer';
 
-
 function EmployeeAssessment() {
   let [rangeSkill_1, setRangeSkill_1] = useState(0);
   let [rangeSkill_2, setRangeSkill_2] = useState(0);
@@ -40,6 +39,7 @@ function EmployeeAssessment() {
           <div className="col-12 circles">
             <div className="col-6 circle-box">
               <div className="circle" data-prog="95">
+
                 <ProgressBar value={40} />
               </div>
               <div className="text">
@@ -49,6 +49,7 @@ function EmployeeAssessment() {
             <div className="col-6 circle-box">
               <div className="circle" data-prog="75">
                 <ProgressBar value={40} />
+
 
               </div>
               <div className="text">
