@@ -6,13 +6,13 @@ import Check from "../../../assets/images/Check.svg";
 import InputField from '../../../components/Input/InputField';
 import { Slider, Col } from 'antd';
 import UploadFile from '../../../components/UploadFile';
-
+let userDatas = JSON.parse(sessionStorage.getItem("userData"));
 const initialValues = {
-    portfolioLink: "",
-    resume: "",
-    employeeAadhaarCardNumber: "",
-    skill: [],
-    skillPercentage: [],
+    portfolioLink: userDatas.data.portfolioLink || "",
+    resume: userDatas.data.resume || "",
+    employeeAadhaarCardNumber: userDatas.data.employeeAadhaarCardNumber || "",
+    skill: userDatas.data.skill || [],
+    skillPercentage: userDatas.data.skillPercentage || [],
 }
 export default function Profile() {
     const [values, setValues] = useState(initialValues)
@@ -26,79 +26,63 @@ export default function Profile() {
             value:0 
         }
     ])
+    const calculateAge = (dob) => {
+        const today = new Date();
+        const birthDate = new Date(dob);
+        let years = today.getFullYear() - birthDate.getFullYear();
+        const months = today.getMonth() - birthDate.getMonth();
+        if (months < 0 || (months === 0 && today.getDate() < birthDate.getDate())) {
+            years--;
+        }
+        return (years);
+    };
     const [inputValue, setInputValue] = useState(1);
     const onChange = (newValue) => {
         setInputValue(newValue);
     };
-    const handleInputChange = (e,index) => {
+    const handleInputChange = (e, index) => {
         const { name, value } = e.target;
         // setValues({
         //     ...values,
         //     [name]: value,
         // });
-        const newState = skills.map((obj,id) => {
-            // 👇️ if id equals 2, update country property
+        const newState = skills.map((obj, id) => {
             if (id === index) {
-              return {...obj, skillName: value};
+                return { ...obj, skillName: value };
             }
-      
-            // 👇️ otherwise return the object as is
             return obj;
-          });
-      
-          setSkills(newState);
-    };
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        const name = e.target.name;
-        setFile(file.name);
-        setValues({
-            ...values,
-            [name]: file,
         });
+
+        setSkills(newState);
     };
 
     const handleSubmit = () => {
-        let userDatas = JSON.parse(sessionStorage.getItem("userData"));
-        values.companyName = userDatas.data.companyName;
-        values.employerEmail = userDatas.data.employerEmail;
-        values.employerId = userDatas.id;
+        // let userDatas = JSON.parse(sessionStorage.getItem("userData"));
+        let resume = JSON.parse(sessionStorage.getItem("resume"));
+        // values.companyName = userDatas.data.companyName;
+        values.skill = skills;
+        values.resume = resume;
+        console.log(values)
         // onboardEmployee(values).then(() => {
         //     window.location.href = "/offerletter-sent";
         // });
     };
 
-    let [file, setFile] = useState("");
     return (
         <div className='profile'>
             <div className='profileHeader'>
                 <div className='profilePic'>
-                    <img src={pic} alt="manager-logo" style={{ cursor: "pointer" }}></img>
+                    <img src={userDatas.data.profileImage} alt="manager-logo" style={{ cursor: "pointer" }}></img>
                 </div>
 
                 <div className='name'>
-                    <span style={{ fontWeight: "bold" }}>Govarthini, 24</span><br />
-                    <span>Chennai, India</span>
+                    <span style={{ fontWeight: "bold" }}>{userDatas.data.employeeName}, {calculateAge(userDatas.data.dateOfBirth)}</span><br />
+                    <span>{userDatas.data.employeeState}, {userDatas.data.employeeCountry}</span>
                 </div>
 
             </div>
 
             <div className='profileBody'>
-                {/* <div className="f-3">
-                    <input
-                        type="file"
-                        id="file"
-                        name="resume"
-                        accept=".txt, .pdf"
-                        onChange={(e) => {
-                            handleFileChange(e);
-                        }}
-                    />
-                    <label for="file" className="custom-file-upload">
-                        <img src={Add} alt="add"></img>{file !== "" ? file : "Add Resume"}
-                    </label>
-                    <span id="filename"></span>
-                </div> */}
             <UploadFile/>
                 <InputField
                     type={"text"}
@@ -158,13 +142,9 @@ export default function Profile() {
                             )
                         })
                        }
-                       
-                   
 
-                
-                    
                     <div className='profileFooter'>
-                        <button><img src={Check} alt="submit-logo" ></img>&nbsp;Done</button>
+                        <button><img src={Check} onClick={handleSubmit} alt="submit-logo" ></img>&nbsp;Done</button>
                     </div>
                 </div>
             </div>

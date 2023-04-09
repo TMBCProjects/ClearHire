@@ -1,20 +1,7 @@
-// import { arrayUnion, query, where } from "firebase/firestore";
-// import Attendance from "../../Modals/DB/Attendance";
-// import Communication from "../../Modals/DB/Communication";
-// import Notification from "../../Modals/DB/Notification";
-// import { Collections } from "../../utils/Collections";
-// import { Fields } from "../../utils/Fields";
-// import { Notifications } from "../../utils/Notifications";
-// import {
-//   addDocument,
-//   getDocument,
-//   getDocuments,
-//   setCollection,
-//   setDocument,
-//   setSubCollection,
-//   updateDocument,
-//   uploadPhoto,
-// } from "../../utils/FirebaseUtils";
+import { arrayUnion, query, where } from "firebase/firestore";
+import { Collections } from "../../utils/Collections";
+import { Fields } from "../../utils/Fields";
+import { addDocument, updateDocument } from "../../utils/FirebaseUtils";
 
 // export default async function defaultFn() {}
 
@@ -258,6 +245,23 @@
 //     return [];
 //   }
 // }
+
+export async function profileUpdate(profileData) {
+  const resumeFileUrl = await uploadFile(
+    Fields.resumes,
+    profileData.name,
+    profileData.resume
+  );
+  await updateDocument(
+    Collections.employees,
+    {
+      //   skills: arrayUnion(profileData.skills),
+      resume: resumeFileUrl,
+    },
+    teammateId
+  );
+  return await addDocument(Collections.offers, offer);
+}
 
 // export async function readRequestsTeammate(teammateEmail) {
 //   try {

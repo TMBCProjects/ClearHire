@@ -1,21 +1,17 @@
 import React, { useState } from 'react'
 import { FileOutlined, PlusOutlined } from "@ant-design/icons";
-import "../UploadPic/UploadPic.css"
-import { deletePhoto, uploadPhoto } from "../../utils/FirebaseUtils";
+import "../UploadPic/UploadPic.css";
+
 export default function UploadPic() {
-  const [photoLoading, setPhotoLoading] = useState(false);
-  const [profileImage, setProfileImage] = useState("");
+  const [fileLoading, setFileLoading] = useState(false);
   const handleFileUpload = async (event) => {
-    const imageUrl = await uploadPhoto(event.target.files[0]);
-    setProfileImage(imageUrl);
-    sessionStorage.setItem("profileImage", imageUrl);
-    setPhotoLoading(true);
+    sessionStorage.setItem("resume", event.target.files[0]);
+    setFileLoading(true);
   };
   const removeImg = async (e) => {
     e.preventDefault();
-    setProfileImage(await deletePhoto(profileImage));
-    sessionStorage.removeItem("profileImage");
-    setPhotoLoading(false);
+    sessionStorage.removeItem("resume");
+    setFileLoading(false);
   };
   return (
     <div className="input profilepic">
@@ -26,16 +22,16 @@ export default function UploadPic() {
             width: "100%",
             background: `#FFFFFF`,
             border: "1px solid #00823B",
-            cursor:"pointer",
+            cursor: "pointer",
             textAlign: "center",
             borderRadius: "0.375rem",
             padding: ".4vh",
-            color:"#00823B",
-            fontWeight:"bold",
-            fontSize:"1rem"
+            color: "#00823B",
+            fontWeight: "bold",
+            fontSize: "1rem",
           }}
           className="photoLabel">
-          {photoLoading ? (
+          {fileLoading ? (
             <div onClick={removeImg}>
               <FileOutlined
                 style={{
@@ -51,7 +47,7 @@ export default function UploadPic() {
                 style={{
                   fontSize: "x-large",
                   backdropFilter: "blur(4px)",
-                  color:"#00823B"
+                  color: "#00823B",
                 }}
               />
               &nbsp;Add Resume
