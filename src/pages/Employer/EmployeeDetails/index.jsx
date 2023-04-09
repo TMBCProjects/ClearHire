@@ -5,7 +5,7 @@ import ViewFile from "../../../assets/images/view-doc.svg";
 import UrlLink from "../../../assets/images/link.svg";
 import Employee1 from "../../../assets/images/person-1.png";
 import CompanyLogo from "../../../assets/images/company-logo.png";
-
+import ProgressBar from '../../../components/ProgressBar'
 import "./style.css";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 
@@ -42,40 +42,14 @@ const index = () => {
               <p>Chennai, India</p>
             </div>
           </div>
-          <div className="col-xl-4 col-lg-5 col-md-6 col-12 employe-score">
-            <div className="col-12 circles">
-              <div className="circle mx-5" data-prog="95">
-                <svg width={250} height="250">
-                  <circle
-                    class="progress-ring__circle"
-                    stroke="#00823B"
-                    stroke-width="15"
-                    // fill="transparent"
-                    r="35"
-                    cx="125"
-                    cy="125"
-                  ></circle>
-                </svg>
-                <div className="circle-inner">
-                  <h1>95%</h1>
-                </div>
-              </div>
-              <div className="circle" data-prog="75">
-                <svg width={250} height="250">
-                  <circle
-                    class="progress-ring__circle"
-                    stroke="#00823B"
-                    stroke-width="15"
-                    // fill="transparent"
-                    r="35"
-                    cx="125"
-                    cy="125"
-                  ></circle>
-                </svg>
-                <div className="circle-inner">
-                  <h1>75%</h1>
-                </div>
-              </div>
+
+          <div className="col-4 d-flex justify-content-center align-items-center empDetailsProgress">
+            <div class="circle-wrap">
+              <ProgressBar value={75}/>
+            </div>
+            <div class="circle-wrap">
+            <ProgressBar value={50}/>
+
             </div>
           </div>
         </div>
@@ -92,33 +66,23 @@ const index = () => {
           </div>
           <div className="skills">
             <p className="title">Photoshop</p>
-            <div className="progressbar">
-              <p className="progress-percent">90%</p>
-            </div>
+            <ProgressBar value={75}/>
           </div>
           <div className="skills">
             <p className="title">Illustrator</p>
-            <div className="progressbar">
-              <p className="progress-percent">80%</p>
-            </div>
+            <ProgressBar value={75}/>
           </div>
           <div className="skills">
             <p className="title">Premiere Pro</p>
-            <div className="progressbar">
-              <p className="progress-percent">70%</p>
-            </div>
+            <ProgressBar value={75}/>
           </div>
           <div className="skills">
             <p className="title">After Effects</p>
-            <div className="progressbar">
-              <p className="progress-percent">60%</p>
-            </div>
+            <ProgressBar value={75}/>
           </div>
           <div className="skills">
             <p className="title">Photoshop</p>
-            <div className="progressbar">
-              <p className="progress-percent">90%</p>
-            </div>
+            <ProgressBar value={75}/>
           </div>
           <div className="arrowRight">
             <RightOutlined
@@ -152,154 +116,83 @@ const index = () => {
           <div className="col-md-8">
             <div className="row">
               <div className="col-md-3 mb-3">
-                <div className="circle skillsCircle" data-prog="75">
-                  <svg width={250} height="250">
-                    <circle
-                      class="progress-ring__circle"
-                      stroke="#00823B"
-                      stroke-width="15"
-                      // fill="transparent"
-                      r="35"
-                      cx="125"
-                      cy="125"
-                    ></circle>
-                  </svg>
-                  <div className="circle-inner">
-                    <h1>75%</h1>
-                  </div>
+
+
+                <div class="circle-wrap">
+                <ProgressBar value={75}/>
+
+
                 </div>
                 <p>Communitcation</p>
               </div>
               <div className="col-md-3 mb-3">
-                <div className="circle skillsCircle" data-prog="75">
-                  <svg width={250} height="250">
-                    <circle
-                      class="progress-ring__circle"
-                      stroke="#00823B"
-                      stroke-width="15"
-                      // fill="transparent"
-                      r="35"
-                      cx="125"
-                      cy="125"
-                    ></circle>
-                  </svg>
-                  <div className="circle-inner">
-                    <h1>75%</h1>
-                  </div>
+
+
+                <div class="circle-wrap">
+                <ProgressBar value={75}/>
+
+
                 </div>
                 <p>Attitude</p>
               </div>
               <div className="col-md-3 mb-3">
-                <div className="circle skillsCircle" data-prog="75">
-                  <svg width={250} height="250">
-                    <circle
-                      class="progress-ring__circle"
-                      stroke="#00823B"
-                      stroke-width="15"
-                      // fill="transparent"
-                      r="35"
-                      cx="125"
-                      cy="125"
-                    ></circle>
-                  </svg>
-                  <div className="circle-inner">
-                    <h1>75%</h1>
-                  </div>
+
+
+                <div class="circle-wrap">
+                <ProgressBar value={75}/>
+
+
                 </div>
                 <p>Ability To Learn</p>
               </div>
               <div className="col-md-3 mb-3">
-                <div className="circle skillsCircle" data-prog="75">
-                  <svg width={250} height="250">
-                    <circle
-                      class="progress-ring__circle"
-                      stroke="#00823B"
-                      stroke-width="15"
-                      // fill="transparent"
-                      r="35"
-                      cx="125"
-                      cy="125"
-                    ></circle>
-                  </svg>
-                  <div className="circle-inner">
-                    <h1>75%</h1>
-                  </div>
+
+
+                <div class="circle-wrap">
+                <ProgressBar value={75}/>
+
+
                 </div>
                 <p>Punctuality</p>
               </div>
               <div className="col-md-3 mb-3">
-                <div className="circle skillsCircle" data-prog="75">
-                  <svg width={250} height="250">
-                    <circle
-                      class="progress-ring__circle"
-                      stroke="#00823B"
-                      stroke-width="15"
-                      // fill="transparent"
-                      r="35"
-                      cx="125"
-                      cy="125"
-                    ></circle>
-                  </svg>
-                  <div className="circle-inner">
-                    <h1>75%</h1>
-                  </div>
+
+
+                <div class="circle-wrap">
+                  <ProgressBar value={75}/>
+
+
                 </div>
                 <p>Commitment</p>
               </div>
               <div className="col-md-3 mb-3">
-                <div className="circle skillsCircle" data-prog="75">
-                  <svg width={250} height="250">
-                    <circle
-                      class="progress-ring__circle"
-                      stroke="#00823B"
-                      stroke-width="15"
-                      // fill="transparent"
-                      r="35"
-                      cx="125"
-                      cy="125"
-                    ></circle>
-                  </svg>
-                  <div className="circle-inner">
-                    <h1>75%</h1>
-                  </div>
+
+
+                <div class="circle-wrap">
+                <ProgressBar value={75}/>
+
+
                 </div>
                 <p>Trustworthiness</p>
               </div>
               <div className="col-md-3 mb-3">
-                <div className="circle skillsCircle" data-prog="75">
-                  <svg width={250} height="250">
-                    <circle
-                      class="progress-ring__circle"
-                      stroke="#00823B"
-                      stroke-width="15"
-                      // fill="transparent"
-                      r="35"
-                      cx="125"
-                      cy="125"
-                    ></circle>
-                  </svg>
-                  <div className="circle-inner">
-                    <h1>75%</h1>
-                  </div>
+
+
+                <div class="circle-wrap">
+                <ProgressBar value={75}/>
+
+
                 </div>
                 <p>Skill</p>
               </div>
               <div className="col-md-3 mb-3">
-                <div className="circle skillsCircle" data-prog="75">
-                  <svg width={250} height="250">
-                    <circle
-                      class="progress-ring__circle"
-                      stroke="#00823B"
-                      stroke-width="15"
-                      // fill="transparent"
-                      r="35"
-                      cx="125"
-                      cy="125"
-                    ></circle>
-                  </svg>
-                  <div className="circle-inner">
-                    <h1>75%</h1>
-                  </div>
+
+
+                <div class="circle-wrap">
+                <ProgressBar value={75}/>
+
+
+
                 </div>
                 <p>Team Player</p>
               </div>
@@ -307,21 +200,12 @@ const index = () => {
           </div>
           <div className="col-md-4 align-items-center d-flex flex-column">
             <p className="mb-0">Total</p>
-            <div className="circle " data-prog="75">
-              <svg width={250} height="250">
-                <circle
-                  class="progress-ring__circle"
-                  stroke="#00823B"
-                  stroke-width="15"
-                  // fill="transparent"
-                  r="35"
-                  cx="125"
-                  cy="125"
-                ></circle>
-              </svg>
-              <div className="circle-inner">
-                <h1>75%</h1>
-              </div>
+
+
+            <div class="circle-wrap">
+            <ProgressBar value={75}/>
+
+
             </div>
           </div>
         </div>

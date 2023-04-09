@@ -123,12 +123,17 @@
 
 .skillsContainer {
     margin: 30px auto;
-    padding: 40px 0;
+    padding: 20px 0;
     border-radius: 24px;
     background: #EFF6F2;
     position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-
+.skillsContainer .skills{
+    margin: 2rem;
+}
 .skillsContainer .arrowLeft {
     position: absolute;
     left: 5%;
@@ -168,9 +173,9 @@
 .empDetailsProgress .circle-wrap {
     width: 150px;
     height: 150px;
-    background: #C1C1C1;
+    /* background: #C1C1C1; */
     border-radius: 50%;
-    border: 1px solid #C1C1C1;
+    /* border: 1px solid #C1C1C1; */
     margin-right: 20px;
 }
 
@@ -181,6 +186,70 @@
 
 
 /* circular progress bar  */
+
+.circle-wrap {
+    display: flex;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    /* border: 1px solid #C1C1C1; */
+}
+
+.circle-wrap .circle .mask,
+.circle-wrap .circle .fill {
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    border-radius: 50%;
+}
+
+.circle-wrap .circle .mask {
+    clip: rect(0px, 150px, 150px, 75px);
+}
+
+.circle-wrap .inside-circle {
+    width: 122px;
+    height: 122px;
+    border: 1px solid #C1C1C1;
+    border-radius: 50%;
+    background: #ffffff;
+    line-height: 120px;
+    text-align: center;
+    margin-top: 14px;
+    margin-left: 14px;
+    color: #00823B;
+    position: absolute;
+    z-index: 100;
+    font-weight: 700;
+    font-size: 2em;
+}
+
+/* color animation */
+
+/* 3rd progress bar */
+.mask .fill {
+    clip: rect(0px, 75px, 150px, 0px);
+    background-color: #00823B;
+}
+
+.mask.full,
+.circle .fill {
+    animation: fill ease-in-out 3s;
+    transform: rotate(135deg);
+}
+
+
+@keyframes fill {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(135deg);
+    }
+}
 .skillsCircle {
     display: flex;
     justify-content: center;
