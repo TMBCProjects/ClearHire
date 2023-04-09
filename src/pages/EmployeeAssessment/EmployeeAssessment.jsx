@@ -8,12 +8,6 @@ import arrow from "../../images/arrow-dropup.svg";
 import ProgressBar from '../../components/ProgressBar'
 import { rateEmployee } from '../../DataBase/Employer/employer';
 const initialState = {
-  companyName: "",
-  ratedById: "",
-  ratedByEmail: "",
-  employeeId: "",
-  employeeName: "",
-  employeeEmail: "",
   dateOfReview: new Date(),
   communication: 0,
   attitude: 0,
@@ -49,16 +43,15 @@ function EmployeeAssessment({
 
   const handleSubmit = () => {
     let userDatas = JSON.parse(sessionStorage.getItem("userData"));
-    values.companyName = userDatas.companyName
-    values.ratedById = userDatas.employerId
-    values.ratedByEmail = userDatas.employerEmail
+    values.companyName = userDatas.data.companyName
+    values.ratedById = userDatas.id
+    values.ratedByEmail = userDatas.data.employerEmail
     values.employeeId = employeeId || "employeeId"
     values.employeeName = employeeName || "employeeName"
     values.employeeEmail = employeeEmail || "employeeEmail"
-    console.log(values);
-    // rateEmployee(values).then(() => {
-    //   window.location.href = "/";
-    // });
+    rateEmployee(values).then(() => {
+      window.location.href = "/";
+    });
   };
 
   return (
@@ -120,6 +113,7 @@ function EmployeeAssessment({
                 name="communication"
                 defaultValue={rangeSkill_1}
                 onChange={(e) => {
+                  handleInputChange(e)
                   setRangeSkill_1(e.target.value);
                 }}
               />
@@ -289,35 +283,35 @@ function EmployeeAssessment({
         <div className="row note">
           <div className="row note-0">
             <div className="note-head">
-              <h3>note</h3>
+              <h3>Note</h3>
             </div>
             <div className="quote-img">
               <img src={quote} alt="" />
             </div>
             <div className="col-xl-8 col-md-8 col-sm-8  note-1">
               <div className="col-xl-3 col-md-4 col-sm-5 note-text"
-                onChange={(e) => {
+                onClick={() => {
                   setValues({
                     ...values,
-                    "note": "Great Employee",
+                    note: "Great Employee",
                   });
                 }}>
                 <h4 >Great employee</h4>
               </div>
               <div className="col-xl-3 col-md-4 col-sm-5  note-text"
-                onChange={(e) => {
+                onClick={() => {
                   setValues({
                     ...values,
-                    "note": "Very Good Employee",
+                    note: "Very Good Employee",
                   });
                 }}>
                 <h4>Very Good employee</h4>
               </div>
               <div className="col-xl-3 col-md-4 col-sm-5  note-text"
-                onChange={(e) => {
+                onClick={() => {
                   setValues({
                     ...values,
-                    "note": "Good Employee",
+                    note: "Good Employee",
                   });
                 }}>
                 <h4>Good employee</h4>
@@ -325,19 +319,19 @@ function EmployeeAssessment({
             </div>
             <div className="col-xl-8 col-md-8 col-sm-8 note-2">
               <div className="col-xl-3 col-md-4 col-sm-5  note-text"
-                onChange={(e) => {
+                onClick={() => {
                   setValues({
                     ...values,
-                    "note": "Poor Employee",
+                    note: "Poor Employee",
                   });
                 }}>
                 <h4>Poor employee</h4>
               </div>
               <div className="col-xl-3 col-md-4 col-sm-5  note-text"
-                onChange={(e) => {
+                onClick={() => {
                   setValues({
                     ...values,
-                    "note": "Worst Employee",
+                    note: "Worst Employee",
                   });
                 }}>
                 <h4>Worst employee</h4>
@@ -349,6 +343,7 @@ function EmployeeAssessment({
             <div className="assessment-text">
               <textarea
                 id="assessment"
+                value={values.note}
                 name="note"
                 rows="3"
                 onChange={(e) => { handleInputChange(e) }}

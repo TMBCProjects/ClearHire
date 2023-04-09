@@ -59,7 +59,7 @@ function App() {
                     path="/employer-approval"
                     element={<Approval />}></Route>
                   <Route
-                    path="/assessment"
+                    path="/EmployeeAssessment"
                     element={<EmployeeAssessment />}></Route>
                   <Route
                     path="/employee-details"
@@ -93,6 +93,9 @@ function App() {
                     <Route
                       path="/verification-request"
                       element={<VerficationRequest />}></Route>
+                    <Route
+                      path="/EmployeeAssessment"
+                      element={<EmployeeAssessment />}></Route>
                     {/* <Route path="/employer-approval" element={<Approval />}></Route>
                   <Route path="/verification-request" element={<VerficationRequest />}></Route>
                   <Route path="/assessment" element={<Assessment />}></Route>
