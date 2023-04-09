@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { FileOutlined, PlusOutlined } from "@ant-design/icons";
 import "../UploadPic/UploadPic.css";
-
 export default function UploadPic() {
   const [fileLoading, setFileLoading] = useState(false);
   const handleFileUpload = async (event) => {
-    sessionStorage.setItem("resume", event.target.files[0]);
+    console.log(event.target);
+    sessionStorage.setItem("resume", { file: event.target.files[0] });
+    let resume = JSON.parse(sessionStorage.getItem("resume"));
+    console.log(resume);
     setFileLoading(true);
   };
   const removeImg = async (e) => {
