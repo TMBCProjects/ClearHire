@@ -17,7 +17,6 @@ export default class Employee {
   // offerLetter = "";
   // dateOfJoining = "";
   employeeAadhaarCardNumber = "";
-  dateOfBirth = "";
   portfolioLink = "";
   resume = "";
   skills = [];
