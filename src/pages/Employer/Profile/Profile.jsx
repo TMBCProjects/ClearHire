@@ -34,8 +34,50 @@ const Profile = () => {
 
       <div className="profile-progress">
         <div className="progressBar">
-          <div className="progressleft">Colleague Score</div>
-          <div className="progressRight">Score</div>
+          <div className="col-12 circles">
+            <div className="col-6 circle-box">
+              <div className="circle" data-prog="95">
+                <svg width={250} height="250">
+                  <circle
+                    class="progress-ring__circle"
+                    stroke="#00823B"
+                    stroke-width="15"
+                    // fill="transparent"
+                    r="35"
+                    cx="125"
+                    cy="125"
+                  ></circle>
+                </svg>
+                <div className="circle-inner">
+                  <h1>95%</h1>
+                </div>
+              </div>
+              <div className="text">
+                <h6>Colleague Score</h6>
+              </div>
+            </div>
+            <div className="col-6 circle-box">
+              <div className="circle" data-prog="75">
+                <svg width={250} height="250">
+                  <circle
+                    class="progress-ring__circle"
+                    stroke="#00823B"
+                    stroke-width="15"
+                    // fill="transparent"
+                    r="35"
+                    cx="125"
+                    cy="125"
+                  ></circle>
+                </svg>
+                <div className="circle-inner">
+                  <h1>75%</h1>
+                </div>
+              </div>
+              <div className="text">
+                <h6>Score</h6>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div className="profileScore">
