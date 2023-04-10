@@ -1,7 +1,12 @@
 import Rating from "../../Modals/DB/Rating";
 import Offer from "../../Modals/DB/Offer";
 import { Collections } from "../../utils/Collections";
-import { addDocument, uploadOfferLetter } from "../../utils/FirebaseUtils";
+import {
+  addDocument,
+  uploadFile,
+  uploadOfferLetter,
+} from "../../utils/FirebaseUtils";
+import { Fields } from "../../utils/Fields";
 
 export default async function defaultFn() {}
 
@@ -324,7 +329,8 @@ export default async function defaultFn() {}
 // }
 
 export async function onboardEmployee(offerData) {
-  const offerLetterFileUrl = await uploadOfferLetter(
+  const offerLetterFileUrl = await uploadFile(
+    Fields.offerLetters,
     offerData.name,
     offerData.offerLetter
   );
@@ -344,6 +350,7 @@ export async function onboardEmployee(offerData) {
   };
   return await addDocument(Collections.offers, offer);
 }
+
 export async function rateEmployee(ratingData) {
   let rating = new Rating();
   rating = {

@@ -10,15 +10,14 @@ export default class Employee {
   // currentEmployerId = "";
   // employerIdList = "";
   // designation = "";
+  // salary = "";
+  // companyName = "";
+  // companyLogo = "";
+  // typeOfEmployment = "";
   // offerLetter = "";
   // dateOfJoining = "";
-  // employeeAadhaarCardNumber = "";
-  // companyName = "";
-  // typeOfEmployment = "";
-  // dateOfBirth = "";
-  // portfolioLink = "";
-  // resume = "";
-  // salary = "";
-  // skills = [];
-  // skillPercentage = [];
+  employeeAadhaarCardNumber = "";
+  portfolioLink = "";
+  resume = "";
+  skills = [];
 }
