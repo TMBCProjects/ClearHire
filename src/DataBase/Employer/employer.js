@@ -339,7 +339,6 @@ export async function onboardEmployee(offerData) {
     isActive: true,
     employeeName: offerData.name,
     employeeEmail: offerData.email,
-    employeeAadhaarNumber: offerData.aadhaarNumber,
     dateOfJoining: offerData.dateOfJoining,
     employerEmail: offerData.employerEmail,
     employerId: offerData.employerId,
