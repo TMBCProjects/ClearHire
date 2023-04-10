@@ -342,6 +342,7 @@ export async function onboardEmployee(offerData) {
     dateOfJoining: offerData.dateOfJoining,
     employerEmail: offerData.employerEmail,
     employerId: offerData.employerId,
+    typeOfEmployment: offerData.typeOfEmployment,
     companyName: offerData.companyName,
     designation: offerData.designation,
     salary: offerData.salary,

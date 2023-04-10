@@ -9,6 +9,7 @@ const initialValues = {
   email: "",
   designation: "",
   dateOfJoining: "",
+  typeOfEmployment: "",
   salary: "",
   offerLetter: "",
 };
@@ -83,6 +84,16 @@ function OnboardingForm() {
                     <option value="Graphics Designer">Graphics Designer</option>
                     <option value="Developer">Developer</option>
                     <option value="Video Editor">Video Editor</option>
+                  </select>
+                </div>
+                <div className="form-item ">
+                  <select name="typeOfEmployment" id="" onChange={handleInputChange}>
+                    <option value="">Type Of Employment*</option>
+                    <option value="Permanent Full-Time">Permanent Full-Time</option>
+                    <option value="Part-Time">Part-Time</option>
+                    <option value="Casual/Vacation">Casual/Vacation</option>
+                    <option value="Contract">Contract</option>
+                    <option value="Internship/Trainee">Internship/Trainee</option>
                   </select>
                 </div>
                 <div className="form-item">

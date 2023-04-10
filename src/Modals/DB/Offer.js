@@ -6,7 +6,7 @@ export default class Offer {
   employerId = "";
   employeeEmail = "";
   dateOfJoining = "";
-  // typeOfEmployment = "";
+  typeOfEmployment = "";
   designation = "";
   salary = "";
   offerLetter = "";
