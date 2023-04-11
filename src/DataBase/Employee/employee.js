@@ -2,6 +2,7 @@ import { query, where } from "firebase/firestore";
 import { Collections } from "../../utils/Collections";
 import { Fields } from "../../utils/Fields";
 import {
+  addDocument,
   getDocuments,
   setCollection,
   updateDocument,
@@ -326,7 +327,47 @@ export async function profileUpdate(profileData, employeeId) {
 //   }
 // }
 
+// export async function profileUpdate(profileData) {
+//   const resumeFileUrl = await uploadFile(
+//     Fields.resumes,
+//     profileData.name,
+//     profileData.resume
+//   );
+//   await updateDocument(
+//     Collections.employees,
+//     {
+//       //   skills: arrayUnion(profileData.skills),
+//       resume: resumeFileUrl,
+//     },
+//     teammateId
+//   );
+//   return await addDocument(Collections.offers, offer);
+// }
+
 // fetch the employees details
+export async function readEmployeeDetails() {
+  try {
+    const querySnapshot = await getDocuments(
+      query(setCollection(Collections.employees))
+    );
+    querySnapshot.forEach(async (doc) => {
+      const employee = {
+        isActive: doc.data().isActive,
+        employeeName: doc.data().employeeName,
+        employeeEmail: doc.data().employeeEmail,
+        employeeCountry: doc.data().employeeCountry,
+        employeeState: doc.data().employeeState,
+        profileImage: doc.data().profileImage,
+        dateOfBirth: doc.data().dateOfBirth,
+        role: doc.data().role,
+      };
+      return employee;
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 // export async function readRequestsTeammate(teammateEmail) {
 //   try {
 //     const requests = [];
