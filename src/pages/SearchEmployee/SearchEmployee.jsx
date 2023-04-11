@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./styles.css";
 import search from "../../assets/images/search.svg";
 import location from "../../assets/images/location.svg";
@@ -7,6 +7,8 @@ import salary from "../../assets/images/salary.svg";
 import cross from "../../assets/images/cross.svg";
 import { Select, Checkbox, Slider } from "antd";
 import AssesmentCard from "../../components/Cards/AssesmentCard";
+import { readEmployees } from "../../DataBase/Employer/employer";
+import { readColleagues } from "../../DataBase/Employee/employee";
 const handleChange = (value) => {
   console.log(`selected ${value}`);
 };
@@ -38,7 +40,16 @@ const options = [
   },
 ];
 export default function SearchEmployee() {
+  const [employeeList, setEmployeeList] = useState([])
   const user = sessionStorage.getItem("LoggedIn")
+  const userDatas = JSON.parse(sessionStorage.getItem("userData"))
+  useEffect(() => {
+    const fetchEmployerDetails = async () => {
+      const data = user === "Employee" ? await readColleagues(userDatas.data.currentEmployerId) : await readEmployees(userDatas.id);
+      setEmployeeList(data);
+    };
+    fetchEmployerDetails();
+  });
   return (
     <div className="employer-home">
       <div className="search-inputs">
@@ -273,12 +284,9 @@ export default function SearchEmployee() {
             <div className="result-count">56 results</div>
           </div>
           <div className="row2">
-          <AssesmentCard value={30}/>
-          <AssesmentCard value={40}/>
-          <AssesmentCard value={50}/>
-          <AssesmentCard value={60}/>
-          <AssesmentCard value={70}/>
-          <AssesmentCard value={80}/>
+            {employeeList.map((info) => {
+              return <AssesmentCard value={30} name={info.employeeName} state={info.employeeState} country={info.employeeCountry} designation={info.designation} />
+            })}
           
           </div>
         </div>

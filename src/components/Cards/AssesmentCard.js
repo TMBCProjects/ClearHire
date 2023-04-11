@@ -1,27 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 //import image from "../../assets/images/Image.png"
 import pic from "../../assets/images/pic.png";
 import ProgressBar from "../ProgressBar";
 import "./styles.css";
-import { readEmployerDetails } from "../../DataBase/Employer/employer";
-const Assesment_Card = ({ value }) => {
-  const [employer, seEmployer] = useState([]);
-  useEffect(() => {
-    const fetchEmployerDetails = async () => {
-      const data = await readEmployerDetails();
-      console.log(data);
-    };
-    fetchEmployerDetails();
-  });
+const Assesment_Card = ({ value, name, state, country, designation }) => {
   return (
     <div className="vreqcard assess-card">
       <div className="managerlogo">
-        <img src={pic} alt="manager-logo"></img>
+        <img
+          src={pic}
+          alt="manager-logo"></img>
         <ProgressBar value={value} />
       </div>
       <div className="headDesc">
-        <span>Govarthini</span>
-        <span>Chennai, India</span>
+        <span>{name}</span>
+        <span>
+          {state}, {country}
+        </span>
         <span
           style={{
             background: "#D7F2BC 0% 0% no-repeat padding-box",
@@ -32,9 +27,8 @@ const Assesment_Card = ({ value }) => {
             textAlign: "center",
             color: "#66BC11",
             fontWeight: "bold",
-          }}
-        >
-          Project Manager
+          }}>
+          {designation}
         </span>
       </div>
 
