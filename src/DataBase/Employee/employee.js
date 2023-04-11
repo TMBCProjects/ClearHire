@@ -37,38 +37,42 @@ export default async function defaultFn() {}
 //   }
 // }
 
-export async function readColleagues(employerId) {
+export async function readColleagues(employeeId, employerId) {
   try {
     let employees = [];
     const querySnapshot = await getDocuments(
       query(setCollection(Collections.employees)),
-      where(Fields.currentEmployerId, "==", employerId)
+      where(Fields.currentEmployerId, "==", employerId),
+      where(Fields.isActive, "==", true)
     );
     querySnapshot.forEach(async (doc) => {
-      let employee = {
-        isActive: doc.data().isActive,
-        employeeName: doc.data().employeeName,
-        employeeEmail: doc.data().employeeEmail,
-        employeeCountry: doc.data().employeeCountry,
-        employeeState: doc.data().employeeState,
-        profileImage: doc.data().profileImage,
-        dateOfBirth: doc.data().dateOfBirth,
-        role: doc.data().role,
-        currentEmployerId: doc.data().currentEmployerId,
-        employerIdList: doc.data().employerIdList,
-        designation: doc.data().designation,
-        salary: doc.data().salary,
-        companyName: doc.data().companyName,
-        companyLogo: doc.data().companyLogo,
-        typeOfEmployment: doc.data().typeOfEmployment,
-        offerLetter: doc.data().offerLetter,
-        dateOfJoining: doc.data().dateOfJoining,
-        employeeAadhaarCardNumber: doc.data().employeeAadhaarCardNumber,
-        portfolioLink: doc.data().portfolioLink,
-        resume: doc.data().resume,
-        skills: doc.data().skills,
-      };
-      employees.push(employee);
+      if (doc.id === employeeId) {
+        let employee = {
+          id: doc.id,
+          isActive: doc.data().isActive,
+          employeeName: doc.data().employeeName,
+          employeeEmail: doc.data().employeeEmail,
+          employeeCountry: doc.data().employeeCountry,
+          employeeState: doc.data().employeeState,
+          profileImage: doc.data().profileImage,
+          dateOfBirth: doc.data().dateOfBirth,
+          role: doc.data().role,
+          currentEmployerId: doc.data().currentEmployerId,
+          employerIdList: doc.data().employerIdList,
+          designation: doc.data().designation,
+          salary: doc.data().salary,
+          companyName: doc.data().companyName,
+          companyLogo: doc.data().companyLogo,
+          typeOfEmployment: doc.data().typeOfEmployment,
+          offerLetter: doc.data().offerLetter,
+          dateOfJoining: doc.data().dateOfJoining,
+          employeeAadhaarCardNumber: doc.data().employeeAadhaarCardNumber,
+          portfolioLink: doc.data().portfolioLink,
+          resume: doc.data().resume,
+          skills: doc.data().skills,
+        };
+        employees.push(employee);
+      }
     });
     return employees;
   } catch (error) {

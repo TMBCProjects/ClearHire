@@ -336,10 +336,12 @@ export async function readEmployees(employerId) {
     let employees = [];
     const querySnapshot = await getDocuments(
       query(setCollection(Collections.employees)),
-      where(Fields.currentEmployerId, "==", employerId)
+      where(Fields.currentEmployerId, "==", employerId),
+      where(Fields.isActive, "==", true)
     );
     querySnapshot.forEach(async (doc) => {
       let employee = {
+        id: doc.id,
         isActive: doc.data().isActive,
         employeeName: doc.data().employeeName,
         employeeEmail: doc.data().employeeEmail,
