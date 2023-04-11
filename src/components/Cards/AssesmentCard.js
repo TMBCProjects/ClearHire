@@ -7,6 +7,7 @@ import { readEmployerDetails } from "../../DataBase/Employer/employer";
 const Assesment_Card = ({ value }) => {
   const [employer, seEmployer] = useState([]);
   useEffect(() => {
+    // function to fetch the employers data
     const fetchEmployerDetails = async () => {
       const data = await readEmployerDetails();
       console.log(data);
