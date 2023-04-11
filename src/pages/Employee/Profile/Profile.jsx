@@ -155,14 +155,6 @@ export default function Profile() {
                     <p>The Madras Branding Company</p>
                 </div>
                 <div>
-                    <p>Name</p>
-                    <p>Sivasundar N</p>
-                </div>
-                <div>
-                    <p>Aadhar Id</p>
-                    <p>5486 6598 6598</p>
-                </div>
-                <div>
                     <p>Job Role</p>
                     <p>Graphics Designer</p>
                 </div>
