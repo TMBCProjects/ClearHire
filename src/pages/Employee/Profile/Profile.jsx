@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../Profile/Profile.css";
+import "./Profile.css";
 import Add from "../../../assets/images/add.svg";
 import Check from "../../../assets/images/Check.svg";
 import InputField from "../../../components/Input/InputField";
@@ -95,6 +95,84 @@ export default function Profile() {
                     <span>
                         {userDatas.data.employeeState}, {userDatas.data.employeeCountry}
                     </span>
+                </div>
+            </div>
+
+            <div className="profile-progress">
+                <div className="progressBar">
+                    <div className="col-12 circles">
+                        <div className="col-6 circle-box">
+                            <div className="circle" data-prog="95">
+                                <svg width={250} height="250">
+                                    <circle
+                                        class="progress-ring__circle"
+                                        stroke="#00823B"
+                                        stroke-width="15"
+                                        // fill="transparent"
+                                        r="35"
+                                        cx="125"
+                                        cy="125"
+                                    ></circle>
+                                </svg>
+                                <div className="circle-inner">
+                                    <h1>95%</h1>
+                                </div>
+                            </div>
+                            <div className="text">
+                                <h6>Colleague Score</h6>
+                            </div>
+                        </div>
+                        <div className="col-6 circle-box">
+                            <div className="circle" data-prog="75">
+                                <svg width={250} height="250">
+                                    <circle
+                                        class="progress-ring__circle"
+                                        stroke="#00823B"
+                                        stroke-width="15"
+                                        // fill="transparent"
+                                        r="35"
+                                        cx="125"
+                                        cy="125"
+                                    ></circle>
+                                </svg>
+                                <div className="circle-inner">
+                                    <h1>75%</h1>
+                                </div>
+                            </div>
+                            <div className="text">
+                                <h6>Score</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="profileScore">
+                <h1 className="text-center text-color-green fw-bold font-size-30">
+                    Current Company
+                </h1>
+                <div>
+                    <p>Company</p>
+                    <p>The Madras Branding Company</p>
+                </div>
+                <div>
+                    <p>Name</p>
+                    <p>Sivasundar N</p>
+                </div>
+                <div>
+                    <p>Aadhar Id</p>
+                    <p>5486 6598 6598</p>
+                </div>
+                <div>
+                    <p>Job Role</p>
+                    <p>Graphics Designer</p>
+                </div>
+                <div>
+                    <p>Date of joining</p>
+                    <p>01-01-2023</p>
+                </div>
+                <div>
+                    <p>Salary</p>
+                    <p>500,000 PA</p>
                 </div>
             </div>
 

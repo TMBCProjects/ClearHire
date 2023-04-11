@@ -7,9 +7,9 @@ import { onboardEmployee } from "../../../DataBase/Employer/employer";
 const initialValues = {
   name: "",
   email: "",
-  aadhaarNumber: "",
   designation: "",
   dateOfJoining: "",
+  typeOfEmployment: "",
   salary: "",
   offerLetter: "",
 };
@@ -78,21 +78,22 @@ function OnboardingForm() {
                     Not on clearhire - an email will be sent to them instead
                   </p>
                 </div>
-                <div className="form-item">
-                  <input
-                    type="number"
-                    className="form-control-1"
-                    placeholder="Aadhaar Number"
-                    name="aadhaarNumber"
-                    onChange={handleInputChange}
-                  />
-                </div>
                 <div className="form-item ">
                   <select name="designation" id="" onChange={handleInputChange}>
                     <option value="">Designation*</option>
                     <option value="Graphics Designer">Graphics Designer</option>
                     <option value="Developer">Developer</option>
                     <option value="Video Editor">Video Editor</option>
+                  </select>
+                </div>
+                <div className="form-item ">
+                  <select name="typeOfEmployment" id="" onChange={handleInputChange}>
+                    <option value="">Type Of Employment*</option>
+                    <option value="Permanent Full-Time">Permanent Full-Time</option>
+                    <option value="Part-Time">Part-Time</option>
+                    <option value="Casual/Vacation">Casual/Vacation</option>
+                    <option value="Contract">Contract</option>
+                    <option value="Internship/Trainee">Internship/Trainee</option>
                   </select>
                 </div>
                 <div className="form-item">

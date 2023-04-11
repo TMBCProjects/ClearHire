@@ -29,6 +29,7 @@ import {
   ref,
   uploadBytes,
 } from "firebase/storage";
+import { Fields } from "./Fields";
 // import sendEmail from "./Email";
 global.Buffer = Buffer;
 
@@ -168,7 +169,7 @@ export async function uploadPhoto(file) {
 export async function deletePhoto(url) {
   const storage = ref(
     storageRef,
-    `profileImages/${url.split("%2F")[1].split("?")[0]}`
+    `${Fields.profileImages}/${url.split("%2F")[1].split("?")[0]}`
   );
   deleteObject(storage)
     .then(() => {
