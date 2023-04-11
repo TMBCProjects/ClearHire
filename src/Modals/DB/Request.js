@@ -7,4 +7,5 @@ export default class Request {
   employeeEmail = "";
   employeeId = "";
   employeeAadhaarCardNumber = "";
+  status = ""
 }
