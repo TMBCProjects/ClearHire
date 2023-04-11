@@ -1,7 +1,12 @@
 import { arrayUnion, query, where } from "firebase/firestore";
 import { Collections } from "../../utils/Collections";
 import { Fields } from "../../utils/Fields";
-import { addDocument, updateDocument } from "../../utils/FirebaseUtils";
+import {
+  addDocument,
+  getDocuments,
+  setCollection,
+  updateDocument,
+} from "../../utils/FirebaseUtils";
 
 // export default async function defaultFn() {}
 
@@ -246,50 +251,45 @@ import { addDocument, updateDocument } from "../../utils/FirebaseUtils";
 //   }
 // }
 
+// export async function profileUpdate(profileData) {
+//   const resumeFileUrl = await uploadFile(
+//     Fields.resumes,
+//     profileData.name,
+//     profileData.resume
+//   );
+//   await updateDocument(
+//     Collections.employees,
+//     {
+//       //   skills: arrayUnion(profileData.skills),
+//       resume: resumeFileUrl,
+//     },
+//     teammateId
+//   );
+//   return await addDocument(Collections.offers, offer);
+// }
+
 // fetch the employees details
-export async function readEmployerDetails() {
+export async function readEmployeeDetails() {
   try {
     const querySnapshot = await getDocuments(
-      query(setCollection(Collections.employers))
+      query(setCollection(Collections.employees))
     );
     querySnapshot.forEach(async (doc) => {
-      const employer = {
+      const employee = {
         isActive: doc.data().isActive,
         employeeName: doc.data().employeeName,
         employeeEmail: doc.data().employeeEmail,
-        country: doc.data().country,
-        state: doc.data().state,
+        employeeCountry: doc.data().employeeCountry,
+        employeeState: doc.data().employeeState,
         profileImage: doc.data().profileImage,
         dateOfBirth: doc.data().dateOfBirth,
         role: doc.data().role,
-        employeeAadhaarCardNumber: doc.data().employeeAadhaarCardNumber,
-        portfolioLink: doc.data().portfolioLink,
-        resume: doc.data().resume,
-        skills: doc.data().skills,
       };
-      console.log(employer);
-      return employer;
+      return employee;
     });
   } catch (error) {
     console.log(error);
   }
-}
-
-export async function profileUpdate(profileData) {
-  const resumeFileUrl = await uploadFile(
-    Fields.resumes,
-    profileData.name,
-    profileData.resume
-  );
-  await updateDocument(
-    Collections.employees,
-    {
-      //   skills: arrayUnion(profileData.skills),
-      resume: resumeFileUrl,
-    },
-    teammateId
-  );
-  return await addDocument(Collections.offers, offer);
 }
 
 // export async function readRequestsTeammate(teammateEmail) {

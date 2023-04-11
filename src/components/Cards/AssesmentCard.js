@@ -1,19 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 //import image from "../../assets/images/Image.png"
 import pic from "../../assets/images/pic.png";
 import ProgressBar from "../ProgressBar";
 import "./styles.css";
-import { readEmployerDetails } from "../../DataBase/Employer/employer";
-const Assesment_Card = ({ value }) => {
-  const [employer, seEmployer] = useState([]);
-  useEffect(() => {
-    // function to fetch the employers data
-    const fetchEmployerDetails = async () => {
-      const data = await readEmployerDetails();
-      console.log(data);
-    };
-    fetchEmployerDetails();
-  });
+const Assesment_Card = ({ value, data }) => {
   return (
     <div className="vreqcard assess-card">
       <div className="managerlogo">
