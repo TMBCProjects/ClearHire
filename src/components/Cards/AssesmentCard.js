@@ -3,16 +3,20 @@ import React from "react";
 import pic from "../../assets/images/pic.png";
 import ProgressBar from "../ProgressBar";
 import "./styles.css";
-const Assesment_Card = ({ value, data }) => {
+const Assesment_Card = ({ value, name, state, country, designation }) => {
   return (
     <div className="vreqcard assess-card">
       <div className="managerlogo">
-        <img src={pic} alt="manager-logo"></img>
+        <img
+          src={pic}
+          alt="manager-logo"></img>
         <ProgressBar value={value} />
       </div>
       <div className="headDesc">
-        <span>Govarthini</span>
-        <span>Chennai, India</span>
+        <span>{name}</span>
+        <span>
+          {state}, {country}
+        </span>
         <span
           style={{
             background: "#D7F2BC 0% 0% no-repeat padding-box",
@@ -23,9 +27,8 @@ const Assesment_Card = ({ value, data }) => {
             textAlign: "center",
             color: "#66BC11",
             fontWeight: "bold",
-          }}
-        >
-          Project Manager
+          }}>
+          {designation}
         </span>
       </div>
 

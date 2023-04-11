@@ -1,4 +1,4 @@
-import { arrayUnion, query, where } from "firebase/firestore";
+import { query, where } from "firebase/firestore";
 import { Collections } from "../../utils/Collections";
 import { Fields } from "../../utils/Fields";
 import {
@@ -8,7 +8,83 @@ import {
   updateDocument,
 } from "../../utils/FirebaseUtils";
 
-// export default async function defaultFn() {}
+export default async function defaultFn() {}
+
+// export async function readEmployerDetails() {
+//   try {
+//     const querySnapshot = await getDocuments(
+//       query(setCollection(Collections.employers))
+//     );
+//     querySnapshot.forEach(async (doc) => {
+//       const employer = {
+//         isActive: doc.data().isActive,
+//         employeeName: doc.data().employeeName,
+//         employeeEmail: doc.data().employeeEmail,
+//         country: doc.data().country,
+//         state: doc.data().state,
+//         profileImage: doc.data().profileImage,
+//         dateOfBirth: doc.data().dateOfBirth,
+//         role: doc.data().role,
+//         employeeAadhaarCardNumber: doc.data().employeeAadhaarCardNumber,
+//         portfolioLink: doc.data().portfolioLink,
+//         resume: doc.data().resume,
+//         skills: doc.data().skills,
+//       };
+//       return employer;
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+
+export async function readColleagues(employeeId, employerId) {
+  try {
+    let employees = [];
+    const querySnapshot = await getDocuments(
+      query(
+        setCollection(Collections.employees),
+        where(Fields.currentEmployerId, "==", employerId),
+        where(Fields.isActive, "==", true)
+      )
+    );
+    querySnapshot.forEach(async (doc) => {
+      if (doc.id === employeeId) {
+        let employee = {
+          id: doc.id,
+          isActive: doc.data().isActive,
+          employeeName: doc.data().employeeName,
+          employeeEmail: doc.data().employeeEmail,
+          employeeCountry: doc.data().employeeCountry,
+          employeeState: doc.data().employeeState,
+          profileImage: doc.data().profileImage,
+          dateOfBirth: doc.data().dateOfBirth,
+          role: doc.data().role,
+          currentEmployerId: doc.data().currentEmployerId,
+          employerIdList: doc.data().employerIdList,
+          designation: doc.data().designation,
+          salary: doc.data().salary,
+          companyName: doc.data().companyName,
+          companyLogo: doc.data().companyLogo,
+          typeOfEmployment: doc.data().typeOfEmployment,
+          offerLetter: doc.data().offerLetter,
+          dateOfJoining: doc.data().dateOfJoining,
+          employeeAadhaarCardNumber: doc.data().employeeAadhaarCardNumber,
+          portfolioLink: doc.data().portfolioLink,
+          resume: doc.data().resume,
+          skills: doc.data().skills,
+        };
+        employees.push(employee);
+      }
+    });
+    return employees;
+  } catch (error) {
+    console.log(error);
+  }
+}
+export async function profileUpdate(profileData, employeeId) {
+  console.log(profileData);
+  await updateDocument(Collections.employees, profileData, employeeId);
+}
 
 // //READS
 // export async function readTasksByTeammate(teammateId) {

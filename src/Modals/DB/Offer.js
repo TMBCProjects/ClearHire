@@ -5,9 +5,8 @@ export default class Offer {
   employerEmail = "";
   employerId = "";
   employeeEmail = "";
-  employeeAadhaarCardNumber = "";
   dateOfJoining = "";
-  // typeOfEmployment = "";
+  typeOfEmployment = "";
   designation = "";
   salary = "";
   offerLetter = "";
