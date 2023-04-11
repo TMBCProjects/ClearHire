@@ -44,6 +44,8 @@ const options = [
 export default function SearchEmployee() {
   const user = sessionStorage.getItem("LoggedIn");
   const [employee, setEmployee] = useState([]);
+  const [employeeList, setEmployeeList] = useState([])
+
 
   // function to fetch the employers data
   const handleEmployeeDetails = async () => {
@@ -54,14 +56,11 @@ export default function SearchEmployee() {
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    handleEmployeeDetails();
-  const [employeeList, setEmployeeList] = useState([])
-  const user = sessionStorage.getItem("LoggedIn")
-  const userDatas = JSON.parse(sessionStorage.getItem("userData"))
   useEffect(() => {
     const fetchEmployerDetails = async () => {
+      handleEmployeeDetails();
+      const user = sessionStorage.getItem("LoggedIn")
+      const userDatas = JSON.parse(sessionStorage.getItem("userData"))
       const data = user === "Employee" ? await readColleagues(userDatas.data.currentEmployerId) : await readEmployees(userDatas.id);
       setEmployeeList(data);
     };
@@ -310,4 +309,6 @@ export default function SearchEmployee() {
       </div>
     </div>
   );
+  
 }
+
