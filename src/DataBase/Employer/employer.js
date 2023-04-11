@@ -335,9 +335,11 @@ export async function readEmployees(employerId) {
   try {
     let employees = [];
     const querySnapshot = await getDocuments(
-      query(setCollection(Collections.employees)),
-      where(Fields.currentEmployerId, "==", employerId),
-      where(Fields.isActive, "==", true)
+      query(
+        setCollection(Collections.employees),
+        where(Fields.currentEmployerId, "==", employerId),
+        where(Fields.isActive, "==", true)
+      )
     );
     querySnapshot.forEach(async (doc) => {
       let employee = {
