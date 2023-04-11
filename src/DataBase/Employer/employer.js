@@ -5,10 +5,8 @@ import {
   addDocument,
   getDocuments,
   uploadFile,
-  uploadOfferLetter,
 } from "../../utils/FirebaseUtils";
 import { Fields } from "../../utils/Fields";
-import { setDocument } from "../../utils/FirebaseUtils";
 import { setCollection } from "../../utils/FirebaseUtils";
 import { query, where } from "firebase/firestore";
 
@@ -345,8 +343,8 @@ export async function readEmployees(employerId) {
         isActive: doc.data().isActive,
         employeeName: doc.data().employeeName,
         employeeEmail: doc.data().employeeEmail,
-        country: doc.data().country,
-        state: doc.data().state,
+        employeeCountry: doc.data().employeeCountry,
+        employeeState: doc.data().employeeState,
         profileImage: doc.data().profileImage,
         dateOfBirth: doc.data().dateOfBirth,
         role: doc.data().role,
