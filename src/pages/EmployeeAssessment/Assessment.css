@@ -1,69 +1,81 @@
-*{
+* {
     margin: 0%;
     padding: 0%;
     box-sizing: border-box;
     text-decoration: none;
 }
 
-.assesment{
+.assesment {
     background-color: #F5F7F9;
     padding: 2% 3%;
     height: 100%;
 }
-.back-cont{
+
+.back-cont {
     display: flex;
     column-gap: 10px;
 }
-.back-cont img{
+
+.back-cont img {
     transform: rotate(90deg);
 }
-.back-cont h4{
+
+.back-cont h4 {
     font-size: 17px;
     font-weight: 600;
 }
-.employe-details{
+
+.employe-details {
     padding: 4% 7%;
 }
-.employe-prof{
+
+.employe-prof {
     display: flex;
 }
 
-.prof-img img{
+.prof-img img {
     width: 100px;
     height: 100px;
     border-radius: 50%;
     border: 1px solid #000000;
 }
-.prof-text{
+
+.prof-text {
     padding-left: 20px;
 }
-.prof-text h3{
+
+.prof-text h3 {
     font-size: 23px;
     font-weight: bold;
     color: black;
 }
-.prof-text h6{
+
+.prof-text h6 {
     font-size: 16px;
     font-weight: 600;
 }
-  
 
 
-.circles{
+
+.circles {
     display: flex;
     text-align: center;
     flex-wrap: wrap;
 }
-.circle-box{
+
+.circle-box {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
 }
-circle, svg{
+
+circle,
+svg {
     background: none !important;
 }
-.circle{
+
+.circle {
     background: #F5F7F9;
     /* border: 1px #555 solid; */
     border-radius: 50%;
@@ -73,7 +85,8 @@ circle, svg{
     color: #fff;
     /* box-shadow: 0 0 1.5em rgba(0,0,0,0.6); */
 }
-.circle-inner{
+
+.circle-inner {
     background: #F5F7F9;
     border-radius: inherit;
     position: absolute;
@@ -88,7 +101,7 @@ circle, svg{
     align-items: center;
 }
 
-.circle-inner::before{
+.circle-inner::before {
     content: " ";
     background: #F5F7F9;
     /* box-shadow: 0 0 0.5em 0.5em rgba(0,0,0,0.7); */
@@ -99,69 +112,75 @@ circle, svg{
     transform: translate(-50%, -50%);
     width: 3em;
     height: 3em;
-    z-index: -1 ;
-    
+    z-index: -1;
+
 }
 
-.circle h1{
+.circle h1 {
     font-size: 25px;
     color: #000000;
 }
 
-.circle svg{
+.circle svg {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-.progress-ring__circle{
-    stroke-dasharray: 40 3 ;
-    
+.progress-ring__circle {
+    stroke-dasharray: 40 3;
+
 
 }
-.text{
-    margin-top: 1rem;
+
+.text {
+    margin-top: 0;
 }
-.text h6{
+
+.text h6 {
     font-size: 16px;
     font-weight: 600;
     margin-left: 10px;
     margin-top: 25px;
 }
 
-.circle-box{
+.circle-box {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
 }
 
-.skill-assessment{
+.skill-assessment {
     padding: 2%;
-    margin: 0% 7% !important; 
+    margin: 0% 7% !important;
     background: #FFFFFF;
     border-radius: 12px;
 }
-.slider-1{
+
+.slider-1 {
     display: flex;
     margin-top: 10px;
     justify-content: center;
 }
 
-.heading h3{
-   font-size: 16px;
-   font-weight: bold;
+.heading h3 {
+    font-size: 16px;
+    font-weight: bold;
 }
-.slied{
+
+.slied {
     margin-top: -1%;
 }
-.range-1{
+
+.range-1 {
     width: 100%;
     height: 2px;
     outline: none;
     border-radius: 15px;
     accent-color: #00823B;
 }
-.range-1::-webkit-slider-thumb{
+
+.range-1::-webkit-slider-thumb {
     appearance: none;
     width: 6px;
     height: 6px;
@@ -169,7 +188,7 @@ circle, svg{
     cursor: pointer;
 }
 
-.value-1 h5{
+.value-1 h5 {
     font-size: 14px;
     font-weight: 700;
     color: #00823B;
@@ -179,23 +198,25 @@ circle, svg{
     margin-top: -15%;
     width: 50px;
     margin-left: 7px;
-    text-align: center; 
+    text-align: center;
 }
 
 /* note style */
 
-.note{
+.note {
     padding: 6% 3% 1.5% 3% !important;
     margin: 0% !important;
 
 }
-.note-0{
-    margin: 0%!important;
+
+.note-0 {
+    margin: 0% !important;
     border: 1px solid #C1C1C1;
-    justify-content: center;   
+    justify-content: center;
     border-radius: 15px;
 }
-.note-head h3{
+
+.note-head h3 {
     font-size: 18px;
     font-weight: bold;
     margin: auto;
@@ -207,27 +228,31 @@ circle, svg{
     border-radius: 40px;
     margin-top: -1.5%;
 }
-.quote-img img{
+
+.quote-img img {
     margin-top: 10px;
     width: 25px;
     height: 25px;
 }
-.note-1, .note-2{
+
+.note-1,
+.note-2 {
     display: flex;
     justify-content: center;
 }
 
-.note-2{
+.note-2 {
     padding-bottom: 55px;
 }
-.note-text h4{
+
+.note-text h4 {
     font-size: 15px;
     font-weight: bold;
     text-align: center;
     padding-top: 8px;
 }
 
-.note-text{
+.note-text {
     border: 1px solid #B2B2B2;
     margin-left: 15px;
     cursor: pointer;
@@ -235,11 +260,11 @@ circle, svg{
     border-radius: 5px;
 }
 
-.note-text:hover{
+.note-text:hover {
     border: 4px solid #00823B;
 }
 
-.or h3{
+.or h3 {
     font-size: 20px;
     font-weight: bold;
     margin: auto;
@@ -249,48 +274,53 @@ circle, svg{
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    padding-top:6px;
+    padding-top: 6px;
     margin-top: -3%;
     border: 1px solid #B2B2B2;
 }
-.or  h6{
-    content:" ";
+
+.or h6 {
+    content: " ";
     border-top: 1px solid #B2B2B2;
 }
 
-.assessment-text textarea{
+.assessment-text textarea {
     border: none;
     resize: none;
     margin-top: 40px;
 }
-.assessment-text{
+
+.assessment-text {
     height: 130px;
     overflow: hidden;
     margin-bottom: 30px;
     padding-left: 5% !important;
 }
-textarea:focus{
+
+textarea:focus {
     border: none !important;
     outline: 0;
 }
 
-.submit{
+.submit {
     display: flex;
     justify-content: flex-end;
     color: #00823B;
     margin-top: 30px !important;
     margin-right: 7%;
 }
-.submit button{
+
+.submit button {
     font-size: 14px;
     background-color: white;
     padding: 12px 40px 12px 60px;
     border: none;
     color: #00823B;
     border-radius: 5px;
-    
+
 }
-.submit img{
+
+.submit img {
     position: relative;
     margin-top: 10px;
     width: 20px;
@@ -300,10 +330,11 @@ textarea:focus{
 }
 
 @media (max-width:576px) {
-    .employe-score{
+    .employe-score {
         padding: 5% 0%;
 
     }
+
     .skill-assessment {
         padding: 2% 0%;
         margin: 0% 0% !important;
@@ -312,16 +343,21 @@ textarea:focus{
     .note-head h3 {
         margin-top: -5.5%;
     }
-    .note-1, .note-2 {
+
+    .note-1,
+    .note-2 {
         display: block;
     }
+
     .or h3 {
         margin-top: -11%;
     }
+
     .submit img {
         margin-top: 15px;
         left: 15%;
     }
+
     .submit {
         margin: 20px 0px !important;
     }
