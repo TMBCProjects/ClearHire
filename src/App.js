@@ -95,6 +95,9 @@ function App() {
                       path="/employeeOfferLetter"
                       element={<EmployeeOfferLetter />}></Route>
                     <Route
+                      path="/OfferLetter"
+                      element={<EmployeeOfferLetter />}></Route>
+                    <Route
                       path="/colleagues"
                       element={<SearchEmployee />}></Route>
                     <Route
