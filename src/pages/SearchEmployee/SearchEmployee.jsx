@@ -48,7 +48,7 @@ export default function SearchEmployee() {
     const fetchEmployerDetails = async () => {
       const user = sessionStorage.getItem("LoggedIn")
       const userDatas = JSON.parse(sessionStorage.getItem("userData"))
-      const data = user === "Employer" ? await readEmployees(userDatas.id) : userDatas.data.currentEmployerId ? await readColleagues(userDatas.data.currentEmployerId) : [{}];
+      const data = user === "Employer" ? await readEmployees(userDatas.id) : userDatas.data.currentEmployerId ? await readColleagues(userDatas.data.currentEmployerId) : [];
       setEmployeeList(data);
     };
     fetchEmployerDetails();
