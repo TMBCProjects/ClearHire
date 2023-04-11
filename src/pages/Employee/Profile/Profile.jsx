@@ -6,6 +6,7 @@ import InputField from "../../../components/Input/InputField";
 import { Slider, Col } from "antd";
 import UploadFile from "../../../components/UploadFile";
 import { MinusOutlined } from "@ant-design/icons";
+import { profileUpdate } from "../../../DataBase/Employee/employee";
 
 let userDatas = JSON.parse(sessionStorage.getItem("userData"));
 export default function Profile() {
@@ -69,11 +70,10 @@ export default function Profile() {
             values.resume = resume;
         }
         values.skills = skills;
-        console.log(values);
-        // profileUpdate(values).then(() => {
-        //     window.location.href = "/offerletter-sent";
-        sessionStorage.removeItem("resume")
-        // });
+        profileUpdate(values, userDatas.id).then(() => {
+            sessionStorage.removeItem("resume");
+            window.location.href = "/";
+        });
     };
 
     return (
@@ -97,55 +97,56 @@ export default function Profile() {
                     </span>
                 </div>
             </div>
-
-            <div className="profile-progress">
-                <div className="progressBar">
-                    <div className="col-12 circles">
-                        <div className="col-6 circle-box">
-                            <div className="circle" data-prog="95">
-                                <svg width={250} height="250">
-                                    <circle
-                                        class="progress-ring__circle"
-                                        stroke="#00823B"
-                                        stroke-width="15"
-                                        // fill="transparent"
-                                        r="35"
-                                        cx="125"
-                                        cy="125"
-                                    ></circle>
-                                </svg>
-                                <div className="circle-inner">
-                                    <h1>95%</h1>
+            {userDatas.data.currentEmployerId &&
+                <div className="profile-progress">
+                    <div className="progressBar">
+                        <div className="col-12 circles">
+                            <div className="col-6 circle-box">
+                                <div className="circle" data-prog="95">
+                                    <svg width={250} height="250">
+                                        <circle
+                                            class="progress-ring__circle"
+                                            stroke="#00823B"
+                                            stroke-width="15"
+                                            // fill="transparent"
+                                            r="35"
+                                            cx="125"
+                                            cy="125"
+                                        ></circle>
+                                    </svg>
+                                    <div className="circle-inner">
+                                        <h1>95%</h1>
+                                    </div>
+                                </div>
+                                <div className="text">
+                                    <h6>Colleague Score</h6>
                                 </div>
                             </div>
-                            <div className="text">
-                                <h6>Colleague Score</h6>
-                            </div>
-                        </div>
-                        <div className="col-6 circle-box">
-                            <div className="circle" data-prog="75">
-                                <svg width={250} height="250">
-                                    <circle
-                                        class="progress-ring__circle"
-                                        stroke="#00823B"
-                                        stroke-width="15"
-                                        // fill="transparent"
-                                        r="35"
-                                        cx="125"
-                                        cy="125"
-                                    ></circle>
-                                </svg>
-                                <div className="circle-inner">
-                                    <h1>75%</h1>
+                            <div className="col-6 circle-box">
+                                <div className="circle" data-prog="75">
+                                    <svg width={250} height="250">
+                                        <circle
+                                            class="progress-ring__circle"
+                                            stroke="#00823B"
+                                            stroke-width="15"
+                                            // fill="transparent"
+                                            r="35"
+                                            cx="125"
+                                            cy="125"
+                                        ></circle>
+                                    </svg>
+                                    <div className="circle-inner">
+                                        <h1>75%</h1>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="text">
-                                <h6>Score</h6>
+                                <div className="text">
+                                    <h6>Score</h6>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </div>}
+            {userDatas.data.currentEmployerId &&
             <div className="profileScore">
                 <h1 className="text-center text-color-green fw-bold font-size-30">
                     Current Company
@@ -167,6 +168,7 @@ export default function Profile() {
                     <p>500,000 PA</p>
                 </div>
             </div>
+            }
 
             <div className="profileBody">
                 <UploadFile name={userDatas.data.employeeName} url={userDatas.data.resume} />

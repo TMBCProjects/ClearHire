@@ -82,19 +82,8 @@ export async function readColleagues(employeeId, employerId) {
   }
 }
 export async function profileUpdate(profileData, employeeId) {
-  const resumeFileUrl = await uploadFile(
-    Fields.resumes,
-    profileData.name,
-    profileData.resume
-  );
-  await updateDocument(
-    Collections.employees,
-    {
-      //   skills: arrayUnion(profileData.skills),
-      resume: resumeFileUrl,
-    },
-    employeeId
-  );
+  console.log(profileData);
+  await updateDocument(Collections.employees, profileData, employeeId);
 }
 
 // //READS
