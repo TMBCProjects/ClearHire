@@ -44,7 +44,6 @@ export default function SearchEmployee() {
   const user = sessionStorage.getItem("LoggedIn");
   const [employeeList, setEmployeeList] = useState([]);
 
-  // function to fetch the employers data
   useEffect(() => {
     const fetchEmployerDetails = async () => {
       const user = sessionStorage.getItem("LoggedIn")

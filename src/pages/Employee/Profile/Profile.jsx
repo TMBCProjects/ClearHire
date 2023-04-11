@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Profile.css";
 import Add from "../../../assets/images/add.svg";
 import Check from "../../../assets/images/Check.svg";
@@ -19,6 +19,11 @@ export default function Profile() {
       value: 0,
     },
   ]);
+  useEffect(() => {
+    if (userDatas.data.skills) {
+      setSkills(userDatas.data.skills);
+    }
+  }, [userDatas])
   const calculateAge = (dob) => {
     const today = new Date();
     const birthDate = new Date(dob);
@@ -66,14 +71,11 @@ export default function Profile() {
     setSkills(newState);
   };
 
-  const updateUserData = (change) => {
-    const newData = {
-      ...userDatas,
-      data: {
-        ...userDatas.data,
-        change,
-      },
-    };
+  const updateUserData = (data) => {
+    const newData = Object.assign({}, userDatas);
+    if (data) {
+      Object.assign(newData.data, data);
+    }
     sessionStorage.setItem("userData", JSON.stringify(newData));
     setUserDatas(JSON.parse(sessionStorage.getItem("userData")));
   };
@@ -87,7 +89,6 @@ export default function Profile() {
     profileUpdate(values, userDatas.id).then(() => {
       updateUserData(values);
       sessionStorage.removeItem("resume");
-      window.location.href = "/";
     });
   };
 
@@ -196,9 +197,9 @@ export default function Profile() {
           type={"text"}
           name={"portfolioLink"}
           value={
-            userDatas?.data
-              ? userDatas?.data?.portfolioLink
-              : values.portfolioLink
+            values.portfolioLink
+              ? values.portfolioLink : userDatas?.data?.portfolioLink
+
           }
           onChange={handleInputChange}
           placeholder={"Add Portfolio link..."}
@@ -208,9 +209,8 @@ export default function Profile() {
           type={"number"}
           name={"employeeAadhaarCardNumber"}
           value={
-            userDatas?.data
-              ? userDatas?.data?.employeeAadhaarCardNumber
-              : values.employeeAadhaarCardNumber
+            values.employeeAadhaarCardNumber
+              ? values.employeeAadhaarCardNumber : userDatas?.data?.employeeAadhaarCardNumber
           }
           onChange={handleInputChange}
           placeholder={"Add Your Aadhar Number"}
@@ -228,23 +228,6 @@ export default function Profile() {
             Your Skills
           </span>
 
-          {userDatas?.data?.skills &&
-            userDatas?.data?.skills.map((skill) => (
-              <div className="skillList">
-                <InputField type={"text"} value={skill.skillName} />
-                <Col span={10}>
-                  <Slider
-                    min={1}
-                    max={100}
-                    defaultValue={skill.value}
-                    trackStyle={{ backgroundColor: "#00823B" }}
-                    handleStyle={{ backgroundColor: "#00823B" }}
-                  />
-                </Col>
-
-                <span className="sliderpercent">{skill.value}</span>
-              </div>
-            ))}
           {!skills.length && (
             <div>
               Add atleast 1 skill{" "}
@@ -280,12 +263,14 @@ export default function Profile() {
                   onChange={(e) => {
                     handleSkillChange(e, index);
                   }}
-                  placeholder={`Skill ${index + 1}`}
+                  value={skill.skillName}
+                  placeholder={`Skill Name`}
                 />
                 <Col span={10}>
                   <Slider
                     min={1}
                     max={100}
+                    value={skill.value}
                     onChange={(e) => {
                       handleSkillValueChange(e, index);
                     }}
