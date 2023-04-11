@@ -49,7 +49,6 @@ const Login = () => {
           window.location.reload();
         }, 1000);
         navigate("/");
-        
       } else if (user.photoURL === "Employee") {
         sessionStorage.setItem("LoggedIn", "Employee");
         const myObj = await readEmployee(user.uid);
@@ -70,7 +69,7 @@ const Login = () => {
       {contextHolder}
       <div className="container">
         <div className="row d-flex justify-content-center align-items-center">
-          <div className="col-md-5">
+          <div className="col-lg-5 col-12">
             <h1 className="heading  text-white fw-bold">
               Eprehenderit in{" "}
               <span className="text-color-green">voluptate velit</span> esse
@@ -82,7 +81,7 @@ const Login = () => {
               voluptatem sequ.
             </p>
           </div>
-          <div className="col-md-6">
+          <div className="col-lg-6 col-12">
             <div className="login-form">
               <p className="login-heading">Login to your account</p>
 

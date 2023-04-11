@@ -1,22 +1,24 @@
-#profile {
-    margin: 5rem;
+.profile {
+    margin: 4rem;
 }
 
-#profile .profileImage {
+.profile .profilePic {
     display: flex;
     justify-content: center;
     width: 8rem;
     margin: auto;
     height: 8rem;
+    margin-top: -2rem;
+    margin-bottom: 2rem;
 }
 
-#profile .profileImage img {
+.profile .profilePic img {
     width: 100%;
     height: 100%;
     border-radius: 50%;
 }
 
-#profile .name {
+.profile .name {
     text-align: center;
     margin-top: 0.7rem;
 }
@@ -34,19 +36,6 @@
     box-shadow: 0px 0px 33px #00000012;
     border-radius: 95px;
     opacity: 1;
-}
-
-.websiteLink,
-.adharNumber {
-    width: 100%;
-    padding: 0.5rem;
-    border-radius: 12px;
-    background: #FFFFFF 0% 0% no-repeat padding-box;
-    box-shadow: 0px 0px 33px #00000012;
-    text-align: start;
-    padding-left: 2rem;
-    font-weight: bold;
-    font-size: 18px;
 }
 
 .profile-progress {
@@ -96,7 +85,9 @@
     color: #4F4F4F;
     margin-bottom: 1rem;
 }
-
+.profileScore div:nth-of-type(4) {
+    margin-bottom: 5rem;
+}
 .font-size-30 {
     font-size: 30px;
     margin-top: 15vh;

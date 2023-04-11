@@ -1,7 +1,14 @@
 import Rating from "../../Modals/DB/Rating";
 import Offer from "../../Modals/DB/Offer";
 import { Collections } from "../../utils/Collections";
-import { addDocument, uploadOfferLetter } from "../../utils/FirebaseUtils";
+import {
+  addDocument,
+  getDocuments,
+  uploadFile,
+} from "../../utils/FirebaseUtils";
+import { Fields } from "../../utils/Fields";
+import { setCollection } from "../../utils/FirebaseUtils";
+import { query, where } from "firebase/firestore";
 
 export default async function defaultFn() {}
 
@@ -323,8 +330,54 @@ export default async function defaultFn() {}
 //   return new Date(year, month, day, hours, minutes, seconds);
 // }
 
+// fetch the employer details
+export async function readEmployees(employerId) {
+  try {
+    let employees = [];
+    const querySnapshot = await getDocuments(
+      query(
+        setCollection(Collections.employees),
+        where(Fields.currentEmployerId, "==", employerId),
+        where(Fields.isActive, "==", true)
+      )
+    );
+    querySnapshot.forEach(async (doc) => {
+      let employee = {
+        id: doc.id,
+        isActive: doc.data().isActive,
+        employeeName: doc.data().employeeName,
+        employeeEmail: doc.data().employeeEmail,
+        employeeCountry: doc.data().employeeCountry,
+        employeeState: doc.data().employeeState,
+        profileImage: doc.data().profileImage,
+        dateOfBirth: doc.data().dateOfBirth,
+        role: doc.data().role,
+        currentEmployerId: doc.data().currentEmployerId,
+        employerIdList: doc.data().employerIdList,
+        designation: doc.data().designation,
+        salary: doc.data().salary,
+        companyName: doc.data().companyName,
+        companyLogo: doc.data().companyLogo,
+        typeOfEmployment: doc.data().typeOfEmployment,
+        offerLetter: doc.data().offerLetter,
+        dateOfJoining: doc.data().dateOfJoining,
+        employeeAadhaarCardNumber: doc.data().employeeAadhaarCardNumber,
+        portfolioLink: doc.data().portfolioLink,
+        resume: doc.data().resume,
+        skills: doc.data().skills,
+      };
+      employees.push(employee);
+    });
+    return employees;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// function to onboard new employee
 export async function onboardEmployee(offerData) {
-  const offerLetterFileUrl = await uploadOfferLetter(
+  const offerLetterFileUrl = await uploadFile(
+    Fields.offerLetters,
     offerData.name,
     offerData.offerLetter
   );
@@ -333,10 +386,10 @@ export async function onboardEmployee(offerData) {
     isActive: true,
     employeeName: offerData.name,
     employeeEmail: offerData.email,
-    employeeAadhaarNumber: offerData.aadhaarNumber,
     dateOfJoining: offerData.dateOfJoining,
     employerEmail: offerData.employerEmail,
     employerId: offerData.employerId,
+    typeOfEmployment: offerData.typeOfEmployment,
     companyName: offerData.companyName,
     designation: offerData.designation,
     salary: offerData.salary,
@@ -344,6 +397,7 @@ export async function onboardEmployee(offerData) {
   };
   return await addDocument(Collections.offers, offer);
 }
+
 export async function rateEmployee(ratingData) {
   let rating = new Rating();
   rating = {

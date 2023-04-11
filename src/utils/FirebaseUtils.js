@@ -29,6 +29,7 @@ import {
   ref,
   uploadBytes,
 } from "firebase/storage";
+import { Fields } from "./Fields";
 // import sendEmail from "./Email";
 global.Buffer = Buffer;
 
@@ -168,7 +169,7 @@ export async function uploadPhoto(file) {
 export async function deletePhoto(url) {
   const storage = ref(
     storageRef,
-    `profileImages/${url.split("%2F")[1].split("?")[0]}`
+    `${Fields.profileImages}/${url.split("%2F")[1].split("?")[0]}`
   );
   deleteObject(storage)
     .then(() => {
@@ -178,10 +179,10 @@ export async function deletePhoto(url) {
       console.log(url);
     });
 }
-export async function uploadOfferLetter(name, file) {
+export async function uploadFile(foldername, name, file) {
   try {
     const fileName = file.name;
-    const storage = ref(storageRef, `offerLetter/${name}_${fileName}`);
+    const storage = ref(storageRef, `${foldername}/${name}_${fileName}`);
     await uploadBytes(storage, file);
     const downloadURL = await getDownloadURL(storage);
     return downloadURL;
@@ -191,10 +192,10 @@ export async function uploadOfferLetter(name, file) {
   }
 }
 
-export async function deleteOfferLetter(url) {
+export async function deleteFile(foldername, url) {
   const storage = ref(
     storageRef,
-    `offerLetter/${url.split("%2F")[1].split("?")[0]}`
+    `${foldername}/${url.split("%2F")[1].split("?")[0]}`
   );
   deleteObject(storage)
     .then(() => {

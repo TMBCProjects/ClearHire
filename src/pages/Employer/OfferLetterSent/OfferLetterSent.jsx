@@ -29,15 +29,14 @@ function OfferLetterSent() {
             <br /> your employee's list
           </p>
         </div>
-        {/* <div className="buttons">
+        <div className="buttons">
                     <button
                         onClick={() => {
-                            window.location.href = "/";
-                        }}>
-                        <HomeOutlined style={{ fontSize: "1.4rem", marginRight: "1rem" }} />
-                        BACK TO HOME
+              window.location.href = "/employer-approval";
+            }}>
+            BACK TO ONBOARD PAGE
                     </button>
-                </div> */}
+        </div>
       </div>
     </div>
   );
