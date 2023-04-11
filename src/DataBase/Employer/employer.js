@@ -3,10 +3,14 @@ import Offer from "../../Modals/DB/Offer";
 import { Collections } from "../../utils/Collections";
 import {
   addDocument,
+  getDocuments,
   uploadFile,
   uploadOfferLetter,
 } from "../../utils/FirebaseUtils";
 import { Fields } from "../../utils/Fields";
+import { setDocument } from "../../utils/FirebaseUtils";
+import { setCollection } from "../../utils/FirebaseUtils";
+import { query } from "firebase/firestore";
 
 export default async function defaultFn() {}
 
@@ -328,6 +332,34 @@ export default async function defaultFn() {}
 //   return new Date(year, month, day, hours, minutes, seconds);
 // }
 
+// fetch the employer details
+export async function readEmployerDetails() {
+  try {
+    const querySnapshot = await getDocuments(
+      query(setCollection(Collections.employers))
+    );
+    querySnapshot.forEach(async (doc) => {
+      const employer = {
+        isActive: doc.data().isActive,
+        employerName: doc.data().employerName,
+        employerEmail: doc.data().employerEmail,
+        companyName: doc.data().companyName,
+        companyWebsite: doc.data().companyWebsite,
+        companyCountry: doc.data().companyCountry,
+        companyState: doc.data().companyState,
+        companyLogo: doc.data().companyLogo,
+        companyEstablishmentYear: doc.data().companyEstablishmentYear,
+        role: doc.role,
+      };
+      console.log(employer);
+      return employer;
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// function to onboard new employee
 export async function onboardEmployee(offerData) {
   const offerLetterFileUrl = await uploadFile(
     Fields.offerLetters,
