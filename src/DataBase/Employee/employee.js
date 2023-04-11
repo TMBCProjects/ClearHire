@@ -246,6 +246,35 @@ import { addDocument, updateDocument } from "../../utils/FirebaseUtils";
 //   }
 // }
 
+// fetch the employees details
+export async function readEmployerDetails() {
+  try {
+    const querySnapshot = await getDocuments(
+      query(setCollection(Collections.employers))
+    );
+    querySnapshot.forEach(async (doc) => {
+      const employer = {
+        isActive: doc.data().isActive,
+        employeeName: doc.data().employeeName,
+        employeeEmail: doc.data().employeeEmail,
+        country: doc.data().country,
+        state: doc.data().state,
+        profileImage: doc.data().profileImage,
+        dateOfBirth: doc.data().dateOfBirth,
+        role: doc.data().role,
+        employeeAadhaarCardNumber: doc.data().employeeAadhaarCardNumber,
+        portfolioLink: doc.data().portfolioLink,
+        resume: doc.data().resume,
+        skills: doc.data().skills,
+      };
+      console.log(employer);
+      return employer;
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function profileUpdate(profileData) {
   const resumeFileUrl = await uploadFile(
     Fields.resumes,
