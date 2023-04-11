@@ -61,7 +61,7 @@ export async function readOffers(employeeEmail) {
         setCollection(Collections.offers),
         where(Fields.employeeEmail, "==", employeeEmail),
         where(Fields.isActive, "==", true),
-        where(Fields.isAccepted, "==", true)
+        where(Fields.isAccepted, "==", false)
       )
     );
     querySnapshot.forEach(async (doc) => {
