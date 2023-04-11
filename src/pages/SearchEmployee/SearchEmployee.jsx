@@ -47,7 +47,6 @@ export default function SearchEmployee() {
     const fetchEmployerDetails = async () => {
       const data = user === "Employee" ? await readColleagues(userDatas.data.currentEmployerId) : await readEmployees(userDatas.id);
       setEmployeeList(data);
-      console.log(data);
     };
     fetchEmployerDetails();
   });
