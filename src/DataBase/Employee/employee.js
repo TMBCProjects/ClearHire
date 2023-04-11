@@ -2,40 +2,12 @@ import { query, where } from "firebase/firestore";
 import { Collections } from "../../utils/Collections";
 import { Fields } from "../../utils/Fields";
 import {
-  addDocument,
   getDocuments,
   setCollection,
   updateDocument,
 } from "../../utils/FirebaseUtils";
 
 export default async function defaultFn() {}
-
-// export async function readEmployerDetails() {
-//   try {
-//     const querySnapshot = await getDocuments(
-//       query(setCollection(Collections.employers))
-//     );
-//     querySnapshot.forEach(async (doc) => {
-//       const employer = {
-//         isActive: doc.data().isActive,
-//         employeeName: doc.data().employeeName,
-//         employeeEmail: doc.data().employeeEmail,
-//         country: doc.data().country,
-//         state: doc.data().state,
-//         profileImage: doc.data().profileImage,
-//         dateOfBirth: doc.data().dateOfBirth,
-//         role: doc.data().role,
-//         employeeAadhaarCardNumber: doc.data().employeeAadhaarCardNumber,
-//         portfolioLink: doc.data().portfolioLink,
-//         resume: doc.data().resume,
-//         skills: doc.data().skills,
-//       };
-//       return employer;
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
 
 export async function readColleagues(employeeId, employerId) {
   try {
@@ -343,31 +315,6 @@ export async function profileUpdate(profileData, employeeId) {
 //   );
 //   return await addDocument(Collections.offers, offer);
 // }
-
-// fetch the employees details
-export async function readEmployeeDetails() {
-  try {
-    const querySnapshot = await getDocuments(
-      query(setCollection(Collections.employees))
-    );
-    querySnapshot.forEach(async (doc) => {
-      const employee = {
-        isActive: doc.data().isActive,
-        employeeName: doc.data().employeeName,
-        employeeEmail: doc.data().employeeEmail,
-        employeeCountry: doc.data().employeeCountry,
-        employeeState: doc.data().employeeState,
-        profileImage: doc.data().profileImage,
-        dateOfBirth: doc.data().dateOfBirth,
-        role: doc.data().role,
-      };
-      return employee;
-    });
-  } catch (error) {
-    console.log(error);
-  }
-}
-
 // export async function readRequestsTeammate(teammateEmail) {
 //   try {
 //     const requests = [];
