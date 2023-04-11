@@ -3,20 +3,14 @@ import React, { useEffect, useState } from "react";
 import pic from "../../assets/images/pic.png";
 import ProgressBar from "../ProgressBar";
 import "./styles.css";
-import { readEmployerDetails } from "../../DataBase/Employer/employer";
 const Assesment_Card = ({ value }) => {
   const [employer, seEmployer] = useState([]);
-  useEffect(() => {
-    const fetchEmployerDetails = async () => {
-      const data = await readEmployerDetails();
-      console.log(data);
-    };
-    fetchEmployerDetails();
-  });
   return (
     <div className="vreqcard assess-card">
       <div className="managerlogo">
-        <img src={pic} alt="manager-logo"></img>
+        <img
+          src={pic}
+          alt="manager-logo"></img>
         <ProgressBar value={value} />
       </div>
       <div className="headDesc">
@@ -32,8 +26,7 @@ const Assesment_Card = ({ value }) => {
             textAlign: "center",
             color: "#66BC11",
             fontWeight: "bold",
-          }}
-        >
+          }}>
           Project Manager
         </span>
       </div>

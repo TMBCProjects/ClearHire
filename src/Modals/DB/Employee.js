@@ -7,7 +7,7 @@ export default class Employee {
   profileImage = "";
   dateOfBirth = "";
   role = "";
-  // currentEmployerId = "";
+  currentEmployerId = "";
   // employerIdList = "";
   // designation = "";
   // salary = "";

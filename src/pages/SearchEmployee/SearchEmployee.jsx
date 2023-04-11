@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./styles.css";
 import search from "../../assets/images/search.svg";
 import location from "../../assets/images/location.svg";
@@ -7,6 +7,7 @@ import salary from "../../assets/images/salary.svg";
 import cross from "../../assets/images/cross.svg";
 import { Select, Checkbox, Slider } from "antd";
 import AssesmentCard from "../../components/Cards/AssesmentCard";
+import { readEmployees } from "../../DataBase/Employer/employer";
 const handleChange = (value) => {
   console.log(`selected ${value}`);
 };
@@ -39,6 +40,14 @@ const options = [
 ];
 export default function SearchEmployee() {
   const user = sessionStorage.getItem("LoggedIn")
+  const userDatas = JSON.parse(sessionStorage.getItem("userData"))
+  useEffect(() => {
+    const fetchEmployerDetails = async () => {
+      const data = await readEmployees(userDatas.id);
+      console.log(data);
+    };
+    fetchEmployerDetails();
+  });
   return (
     <div className="employer-home">
       <div className="search-inputs">

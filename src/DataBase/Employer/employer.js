@@ -10,7 +10,7 @@ import {
 import { Fields } from "../../utils/Fields";
 import { setDocument } from "../../utils/FirebaseUtils";
 import { setCollection } from "../../utils/FirebaseUtils";
-import { query } from "firebase/firestore";
+import { query, where } from "firebase/firestore";
 
 export default async function defaultFn() {}
 
@@ -333,27 +333,40 @@ export default async function defaultFn() {}
 // }
 
 // fetch the employer details
-export async function readEmployerDetails() {
+export async function readEmployees(employerId) {
   try {
+    let employees = [];
     const querySnapshot = await getDocuments(
-      query(setCollection(Collections.employers))
+      query(setCollection(Collections.employees)),
+      where(Fields.currentEmployerId, "==", employerId)
     );
     querySnapshot.forEach(async (doc) => {
-      const employer = {
+      let employee = {
         isActive: doc.data().isActive,
-        employerName: doc.data().employerName,
-        employerEmail: doc.data().employerEmail,
+        employeeName: doc.data().employeeName,
+        employeeEmail: doc.data().employeeEmail,
+        country: doc.data().country,
+        state: doc.data().state,
+        profileImage: doc.data().profileImage,
+        dateOfBirth: doc.data().dateOfBirth,
+        role: doc.data().role,
+        currentEmployerId: doc.data().currentEmployerId,
+        employerIdList: doc.data().employerIdList,
+        designation: doc.data().designation,
+        salary: doc.data().salary,
         companyName: doc.data().companyName,
-        companyWebsite: doc.data().companyWebsite,
-        companyCountry: doc.data().companyCountry,
-        companyState: doc.data().companyState,
         companyLogo: doc.data().companyLogo,
-        companyEstablishmentYear: doc.data().companyEstablishmentYear,
-        role: doc.role,
+        typeOfEmployment: doc.data().typeOfEmployment,
+        offerLetter: doc.data().offerLetter,
+        dateOfJoining: doc.data().dateOfJoining,
+        employeeAadhaarCardNumber: doc.data().employeeAadhaarCardNumber,
+        portfolioLink: doc.data().portfolioLink,
+        resume: doc.data().resume,
+        skills: doc.data().skills,
       };
-      console.log(employer);
-      return employer;
+      employees.push(employee);
     });
+    return employees;
   } catch (error) {
     console.log(error);
   }
