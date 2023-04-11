@@ -8,8 +8,8 @@ import UploadFile from "../../../components/UploadFile";
 import { MinusOutlined } from "@ant-design/icons";
 import { profileUpdate } from "../../../DataBase/Employee/employee";
 
-let userDatas = JSON.parse(sessionStorage.getItem("userData"));
 export default function Profile() {
+    const [userDatas, setUserDatas] = useState(JSON.parse(sessionStorage.getItem("userData")));
     const [values, setValues] = useState({});
     const [skills, setSkills] = useState([
         {
@@ -64,6 +64,16 @@ export default function Profile() {
         setSkills(newState);
     };
 
+    const updateUserData = (change) => {
+        const newData = {
+            ...userDatas, data: {
+                ...userDatas.data, change
+            }
+        };
+        sessionStorage.setItem("userData", JSON.stringify(newData));
+        setUserDatas(JSON.parse(sessionStorage.getItem("userData")))
+    };
+
     const handleSubmit = () => {
         let resume = sessionStorage.getItem("resume");
         if (resume) {
@@ -71,6 +81,7 @@ export default function Profile() {
         }
         values.skills = skills;
         profileUpdate(values, userDatas.id).then(() => {
+            updateUserData(values);
             sessionStorage.removeItem("resume");
             window.location.href = "/";
         });

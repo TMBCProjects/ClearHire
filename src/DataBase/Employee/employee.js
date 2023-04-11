@@ -5,7 +5,6 @@ import {
   getDocuments,
   setCollection,
   updateDocument,
-  uploadFile,
 } from "../../utils/FirebaseUtils";
 
 export default async function defaultFn() {}
