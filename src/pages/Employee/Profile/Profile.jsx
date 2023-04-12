@@ -235,7 +235,8 @@ export default function Profile() {
                 <Col span={10}>
                   <Slider
                     min={1}
-                    max={skill.value}
+                    max={100}
+                    defaultValue={skill.value}
                     trackStyle={{ backgroundColor: "#00823B" }}
                     handleStyle={{ backgroundColor: "#00823B" }}
                   />
