@@ -10,7 +10,6 @@ const index = ({ value }) => {
                 backgroundTransparent
                 duration={3000}
                 fontRatio={4}
-                height="100%"
                 ringBgColour="#E3E3E3"
                 ringFgColour="#00823B"
                 ringIntermediateColour="#59648D"
@@ -20,8 +19,7 @@ const index = ({ value }) => {
                 startStep={0}
                 step={value / 10}
                 steps={10}
-                text={function text(steps, proportion) { return "".concat(Math.floor(100 * proportion), "%") }}
-                width="100%"
+                text={function text( proportion) { return "".concat(Math.floor(value), "%") }}
             />
         </div >
 
