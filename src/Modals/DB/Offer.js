@@ -1,11 +1,12 @@
 export default class Offer {
   isActive = false;
-  employeeName = "";
+  companyName = "";
+  companyLogo = "";
+  employerEmail = "";
+  employerId = "";
   employeeEmail = "";
-  country = "";
-  state = "";
-  profileImage = "";
   dateOfJoining = "";
+  typeOfEmployment = "";
   designation = "";
   salary = "";
   offerLetter = "";

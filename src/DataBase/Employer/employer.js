@@ -1,27 +1,16 @@
-// import { query, where } from "firebase/firestore";
-// import Client from "../../Modals/DB/Client";
-// import Communication from "../../Modals/DB/Communication";
-// import Request from "../../Modals/DB/Request";
-// import NewTask from "../../Modals/DB/NewTask";
-// import Type from "../../Modals/DB/Type";
-// import Notification from "../../Modals/DB/Notification";
-// import { Collections } from "../../utils/Collections";
-// import { Fields } from "../../utils/Fields";
-// import {
-//   addDocument,
-//   addSubDocument,
-//   getDocument,
-//   getDocuments,
-//   setCollection,
-//   setDocument,
-//   setSubCollection,
-//   updateDocument,
-//   uploadPhoto,
-// } from "../../utils/FirebaseUtils";
-// import { Notifications } from "../../utils/Notifications";
-// import { message } from "antd";
+import Rating from "../../Modals/DB/Rating";
+import Offer from "../../Modals/DB/Offer";
+import { Collections } from "../../utils/Collections";
+import {
+  addDocument,
+  getDocuments,
+  uploadFile,
+} from "../../utils/FirebaseUtils";
+import { Fields } from "../../utils/Fields";
+import { setCollection } from "../../utils/FirebaseUtils";
+import { query, where } from "firebase/firestore";
 
-// export default async function defaultFn() {}
+export default async function defaultFn() {}
 
 // //READS
 // export async function readTasksByManager(managerId) {
@@ -341,50 +330,97 @@
 //   return new Date(year, month, day, hours, minutes, seconds);
 // }
 
-// export async function addNewTask(taskList) {
-//   let deadline = new Date(convertStringToDate(taskList.deadline, "0:0:0"));
-//   // if (taskList.estimatedTime) {
-//   //   deadline = new Date(
-//   //     convertStringToDate(taskList.deadline, taskList.estimatedTime)
-//   //   );
-//   // }
+// fetch the employer details
+export async function readEmployees(employerId) {
+  try {
+    let employees = [];
+    const querySnapshot = await getDocuments(
+      query(
+        setCollection(Collections.employees),
+        where(Fields.currentEmployerId, "==", employerId),
+        where(Fields.isActive, "==", true)
+      )
+    );
+    querySnapshot.forEach(async (doc) => {
+      let employee = {
+        id: doc.id,
+        isActive: doc.data().isActive,
+        employeeName: doc.data().employeeName,
+        employeeEmail: doc.data().employeeEmail,
+        employeeCountry: doc.data().employeeCountry,
+        employeeState: doc.data().employeeState,
+        profileImage: doc.data().profileImage,
+        dateOfBirth: doc.data().dateOfBirth,
+        role: doc.data().role,
+        currentEmployerId: doc.data().currentEmployerId,
+        employerIdList: doc.data().employerIdList,
+        designation: doc.data().designation,
+        salary: doc.data().salary,
+        companyName: doc.data().companyName,
+        companyLogo: doc.data().companyLogo,
+        typeOfEmployment: doc.data().typeOfEmployment,
+        offerLetter: doc.data().offerLetter,
+        dateOfJoining: doc.data().dateOfJoining,
+        employeeAadhaarCardNumber: doc.data().employeeAadhaarCardNumber,
+        portfolioLink: doc.data().portfolioLink,
+        resume: doc.data().resume,
+        skills: doc.data().skills,
+      };
+      employees.push(employee);
+    });
+    return employees;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
-//   let task = new NewTask();
-//   task = {
-//     assigned: taskList.assigned,
-//     companyName: taskList.companyName,
-//     companyId: taskList.companyId,
-//     clientId: taskList.clientId,
-//     clientName: taskList.clientName,
-//     clientEmail: taskList.clientEmail,
-//     corrections: taskList.corrections,
-//     createdAt: taskList.createdAt,
-//     createdBy: taskList.createdBy,
-//     profileImage: taskList.profileImage,
-//     createdByEmail: taskList.createdByEmail,
-//     deadline: deadline,
-//     isLive: true,
-//     highPriority: taskList.highPriority,
-//     managerId: taskList.managerId,
-//     taskId: taskList.taskId,
-//     teammateId: taskList.teammateId,
-//     totalHours: 0,
-//     teammateName: taskList.teammateName,
-//     title: taskList.title,
-//     type: taskList.type,
-//     status: taskList.status,
-//   };
-//   addNotification({
-//     createdAt: taskList.createdAt,
-//     createdBy: taskList.createdBy,
-//     createdByEmail: taskList.createdByEmail,
-//     managerId: taskList.managerId,
-//     teammateId: taskList.teammateId,
-//     title: taskList.title,
-//     type: Notifications.NEW_TASK,
-//   });
-//   return await addDocument(Collections.tasks, task);
-// }
+// function to onboard new employee
+export async function onboardEmployee(offerData) {
+  const offerLetterFileUrl = await uploadFile(
+    Fields.offerLetters,
+    offerData.name,
+    offerData.offerLetter
+  );
+  let offer = new Offer();
+  offer = {
+    isActive: true,
+    employeeName: offerData.name,
+    employeeEmail: offerData.email,
+    dateOfJoining: offerData.dateOfJoining,
+    employerEmail: offerData.employerEmail,
+    employerId: offerData.employerId,
+    typeOfEmployment: offerData.typeOfEmployment,
+    companyName: offerData.companyName,
+    designation: offerData.designation,
+    salary: offerData.salary,
+    offerLetter: offerLetterFileUrl,
+  };
+  return await addDocument(Collections.offers, offer);
+}
+
+export async function rateEmployee(ratingData) {
+  let rating = new Rating();
+  rating = {
+    isActive: true,
+    companyName: ratingData.companyName,
+    ratedById: ratingData.ratedById,
+    ratedByEmail: ratingData.ratedByEmail,
+    employeeId: ratingData.employeeId,
+    employeeName: ratingData.employeeName,
+    employeeEmail: ratingData.employeeEmail,
+    dateOfReview: ratingData.dateOfReview,
+    communication: ratingData.communication,
+    attitude: ratingData.attitude,
+    abilityToLearn: ratingData.abilityToLearn,
+    punctuality: ratingData.punctuality,
+    commitment: ratingData.commitment,
+    trustworthiness: ratingData.trustworthiness,
+    skill: ratingData.skill,
+    teamPlayer: ratingData.teamPlayer,
+    note: ratingData.note,
+  };
+  return await addDocument(Collections.ratings, rating);
+}
 // export async function switchTask(id, oldTeammate, newTeammate, data) {
 //   addNotification({
 //     createdAt: newTeammate.createdAt,

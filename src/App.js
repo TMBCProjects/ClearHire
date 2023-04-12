@@ -12,13 +12,13 @@ import SearchEmployee from "./pages/SearchEmployee/SearchEmployee";
 import Navbar from "./components/NavBar/Navbar";
 import VerficationRequest from "./pages/Employer/VerficationRequest/VerficationRequest";
 import OnboardingForm from "./pages/Employer/OnboardingForm/OnboardingForm";
-import OfferLetterSent from "./pages/Employer/OfferLetterSent";
-import Assessment from "./pages/Employer/Assessment/Assessment";
+import OfferLetterSent from "./pages/Employer/OfferLetterSent/OfferLetterSent";
 import Employee from "./pages/Employer/EmployeeDetails/index";
-import CREATE_EMPLOYEE from "./pages/Onboard/CREATE_EMPLOYEE";
 import Profile from "./pages/Employee/Profile/Profile";
-import UserProfile from "./pages/Employer/Profile/Profile";
 import EmployeeOfferLetter from "./pages/Employee/EmployeeOfferLetter/EmployeeOfferLetter";
+import EmployeeAssessment from "./pages/EmployeeAssessment/EmployeeAssessment";
+import EmployerProfile from "./pages/Employer/Profile/Profile";
+
 function App() {
   return (
     <div>
@@ -43,9 +43,6 @@ function App() {
                 path="/signup-done"
                 element={<SignupDone />}></Route>
               <Route
-                path="/create-employee"
-                element={<CREATE_EMPLOYEE />}></Route>
-              <Route
                 path="/Profile"
                 element={<Profile />}></Route>
             </Routes>
@@ -60,17 +57,23 @@ function App() {
                     path="/"
                     element={<SearchEmployee />}></Route>
                   <Route
+                    path="/profile"
+                    element={<EmployerProfile />}></Route>
+                  <Route
                     path="/employer-approval"
                     element={<Approval />}></Route>
                   <Route
-                    path="/verification-request"
-                    element={<VerficationRequest />}></Route>
-                  <Route
-                    path="/assessment"
-                    element={<Assessment />}></Route>
+                    path="/EmployeeAssessment"
+                    element={<EmployeeAssessment />}></Route>
                   <Route
                     path="/employee-details"
                     element={<Employee />}></Route>
+                  <Route
+                    path="/onboarding-form"
+                    element={<OnboardingForm />}></Route>
+                  <Route
+                    path="/offerletter-sent"
+                    element={<OfferLetterSent />}></Route>
                 </Routes>
               </div>
             ) : (
@@ -89,12 +92,21 @@ function App() {
                       path="/employeeOfferLetter"
                       element={<EmployeeOfferLetter />}></Route>
                     <Route
+                      path="/OfferLetter"
+                      element={<EmployeeOfferLetter />}></Route>
+                    <Route
                       path="/colleagues"
                       element={<SearchEmployee />}></Route>
+                    <Route
+                      path="/EmployeeAssessment"
+                      element={<EmployeeAssessment />}></Route>
                     {/* <Route path="/employer-approval" element={<Approval />}></Route>
                   <Route path="/verification-request" element={<VerficationRequest />}></Route>
                   <Route path="/assessment" element={<Assessment />}></Route>
                   <Route path="/employee-details" element={<Employee />}></Route> */}
+                    <Route
+                      path="/verification-request"
+                      element={<VerficationRequest />}></Route>
                   </Routes>
                 </div>
               ) : (
