@@ -734,3 +734,27 @@ export async function readEmployeeDetails() {
 //     throw new Error("Error updating teammate details");
 //   }
 // }
+
+export async function getRequests(teammateId) {
+   try {
+    const querySnapshot = await getDocuments(
+      query(setCollection(Collections.requests, teammateId))
+    );
+    querySnapshot.forEach(async (doc) => {
+      const requests = {
+        isActive: doc.data().isActive,
+        companyName: doc.data().companyName,
+        companyLogo: doc.data().companyLogo,
+        employerEmail: doc.data().employerEmail,
+        employerId: doc.data().employerId,
+        employeeEmail: doc.data().employeeEmail,
+        employeeId: doc.data().employeeId,
+        employeeAadhaarCardNumber: doc.data().employeeAadhaarCardNumber,
+        status: doc.data().status
+      };
+      return requests;
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
