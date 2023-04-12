@@ -11,42 +11,40 @@ import { readEmployeeDetails } from "../../DataBase/Employee/employee";
 
 import { readEmployees } from "../../DataBase/Employer/employer";
 import { readColleagues } from "../../DataBase/Employee/employee";
-
+const handleChange = (value) => {
+  console.log(`selected ${value}`);
+};
+const onChange = (e) => {
+  console.log(`checked = ${e.target.checked}`);
+};
+const formatter = (value) => `${value}LPA`;
+const formatter2 = (value) => `${value} %`;
+const marks = {
+  0: "1LPA",
+  49: "50LPA",
+};
+const marks2 = {
+  0: "0%",
+  100: "100%",
+};
+const options = [
+  {
+    value: "jack",
+    label: "Jack",
+  },
+  {
+    value: "lucy",
+    label: "Lucy",
+  },
+  {
+    value: "tom",
+    label: "Tom",
+  },
+];
 export default function SearchEmployee() {
   const user = sessionStorage.getItem("LoggedIn");
   const [employee, setEmployee] = useState([]);
   const [employeeList, setEmployeeList] = useState([]);
-
-  const handleChange = (value) => {
-    console.log(`selected ${value}`);
-  };
-  const onChange = (e) => {
-    console.log(`checked = ${e.target.checked}`);
-  };
-  const formatter = (value) => `${value}LPA`;
-  const formatter2 = (value) => `${value} %`;
-  const marks = {
-    0: "1LPA",
-    49: "50LPA",
-  };
-  const marks2 = {
-    0: "0%",
-    100: "100%",
-  };
-  const options = [
-    {
-      value: "jack",
-      label: "Jack",
-    },
-    {
-      value: "lucy",
-      label: "Lucy",
-    },
-    {
-      value: "tom",
-      label: "Tom",
-    },
-  ];
 
   // function to fetch the employers data
   const handleEmployeeDetails = async () => {
