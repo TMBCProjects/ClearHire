@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
-import Sample from "../../assets/pdf/sample.pdf";
+// import Sample from "../../assets/pdf/sample.pdf";
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 import { LeftCircleOutlined, RightCircleOutlined } from "@ant-design/icons";
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-const PdfViewer = () => {
+const PdfViewer = ({ offerLetterUrl }) => {
   const [numPages, setNumPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -32,7 +32,7 @@ const PdfViewer = () => {
         }}
       >
         <div>
-          <Document file={Sample} onLoadSuccess={onDocumentLoadSuccess}>
+          <Document file={offerLetterUrl} onLoadSuccess={onDocumentLoadSuccess}>
             <Page pageNumber={currentPage} />
           </Document>
         </div>

@@ -2,7 +2,7 @@ import React from "react";
 import "./EmployeeOfferLetter.css";
 import PdfViewer from "../../../components/PdfViewer/PdfViewer";
 
-const EmployeeOfferLetter = () => {
+const EmployeeOfferLetter = ({ item }) => {
   return (
     <div className="container" id="offerletter">
       <div className="row align-items-center d-flex">
@@ -14,23 +14,23 @@ const EmployeeOfferLetter = () => {
           <p className="offerletter-text mt-5">
             <span className="text-color-green">Company</span>
           </p>
-          <p className="offerletter-text">Nemo enim.</p>
+          <p className="offerletter-text">{item.companyName}</p>
           <p className="offerletter-text mt-5">
-            <span className="text-color-green">Name</span>
+            <span className="text-color-green">Type of Employment</span>
           </p>
-          <p className="offerletter-text">Nemo enim.</p>
+          <p className="offerletter-text">{item.typeOfEmployment}</p>
           <p className="offerletter-text mt-5">
             <span className="text-color-green">Job Role</span>
           </p>
-          <p className="offerletter-text">Nemo enim.</p>
+          <p className="offerletter-text">{item.designation}</p>
           <p className="offerletter-text mt-5">
             <span className="text-color-green">Date Of Joining</span>
           </p>
-          <p className="offerletter-text">Nemo enim.</p>
+          <p className="offerletter-text">{item.dateOfJoining}</p>
           <p className="offerletter-text mt-5">
             <span className="text-color-green">Salary</span>
           </p>
-          <p className="offerletter-text">Nemo enim.</p>
+          <p className="offerletter-text">{item.salary}</p>
           <br />
           <div
             className="row justify-content-start align-items-start mt-3"
@@ -43,7 +43,7 @@ const EmployeeOfferLetter = () => {
         </div>
         <div className="col-md-8">
           <div className="offerletter-pdf">
-            <PdfViewer />
+            <PdfViewer offerLetterUrl={item.offerLetter} />
           </div>
         </div>
       </div>

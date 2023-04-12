@@ -7,7 +7,6 @@ import salary from "../../assets/images/salary.svg";
 import cross from "../../assets/images/cross.svg";
 import { Select, Checkbox, Slider } from "antd";
 import AssesmentCard from "../../components/Cards/AssesmentCard";
-import { readEmployeeDetails } from "../../DataBase/Employee/employee";
 
 import { readEmployees } from "../../DataBase/Employer/employer";
 import { readColleagues } from "../../DataBase/Employee/employee";
@@ -43,25 +42,14 @@ const options = [
 ];
 export default function SearchEmployee() {
   const user = sessionStorage.getItem("LoggedIn");
-  const [employee, setEmployee] = useState([]);
-  const [employeeList, setEmployeeList] = useState([])
-
+  const [employeeList, setEmployeeList] = useState([]);
 
   // function to fetch the employers data
-  const handleEmployeeDetails = async () => {
-    try {
-      const data = await readEmployeeDetails();
-      setEmployee(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   useEffect(() => {
     const fetchEmployerDetails = async () => {
-      handleEmployeeDetails();
       const user = sessionStorage.getItem("LoggedIn")
       const userDatas = JSON.parse(sessionStorage.getItem("userData"))
-      const data = user === "Employee" ? await readColleagues(userDatas.data.currentEmployerId) : await readEmployees(userDatas.id);
+      const data = user === "Employer" ? await readEmployees(userDatas.id) : userDatas.data.currentEmployerId ? await readColleagues(userDatas.data.currentEmployerId) : [{}];
       setEmployeeList(data);
     };
     fetchEmployerDetails();
@@ -301,14 +289,19 @@ export default function SearchEmployee() {
           </div>
           <div className="row2">
             {employeeList.map((info) => {
-              return <AssesmentCard value={30} name={info.employeeName} state={info.employeeState} country={info.employeeCountry} designation={info.designation} />
+              return (
+                <AssesmentCard
+                  value={30}
+                  name={info.employeeName}
+                  state={info.employeeState}
+                  country={info.employeeCountry}
+                  designation={info.designation}
+                />
+              );
             })}
-          
           </div>
         </div>
       </div>
     </div>
   );
-  
 }
-

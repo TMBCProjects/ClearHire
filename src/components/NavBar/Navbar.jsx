@@ -86,7 +86,7 @@ export default function EmployerNavbar() {
 
           <NavLink
             activeclassname="active"
-            to={"/employeeOfferLetter"}
+              to={"/offerLetters"}
             className="navlink"
           >
             <div className="navitem">

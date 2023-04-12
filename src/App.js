@@ -18,6 +18,7 @@ import Profile from "./pages/Employee/Profile/Profile";
 import EmployeeOfferLetter from "./pages/Employee/EmployeeOfferLetter/EmployeeOfferLetter";
 import EmployeeAssessment from "./pages/EmployeeAssessment/EmployeeAssessment";
 import EmployerProfile from "./pages/Employer/Profile/Profile";
+import Offers from "./pages/Employee/OfferList/Offers";
 
 function App() {
   return (
@@ -92,8 +93,8 @@ function App() {
                       path="/employeeOfferLetter"
                       element={<EmployeeOfferLetter />}></Route>
                     <Route
-                      path="/OfferLetter"
-                      element={<EmployeeOfferLetter />}></Route>
+                      path="/offerLetters"
+                      element={<Offers />}></Route>
                     <Route
                       path="/colleagues"
                       element={<SearchEmployee />}></Route>
