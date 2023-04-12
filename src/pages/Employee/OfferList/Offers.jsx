@@ -25,24 +25,28 @@ const Offers = () => {
       <div className="row mt-3">
         <div className="col-md-3 gy-3">
           {offerList.map((info) => {
-            return (<div className="card" key={info.id}>
-            <div className="card-body">
-                <h3 className="card-title fw-bold">{info.companyName}</h3>
-                <p className="card-text designation w-50 mt-2">{info.designation}</p>
-                <p className="mb-1">{info.typeOfEmployment}</p>
-                <p className="mb-1">{info.dateOfJoining}</p>
-                <p className="mb-1">{info.salary}</p>
-                <Link to={{
-                  pathname: '/employeeOfferLetter',
-                  state: info
-                }}>
-                <button className="w-100 mt-3 btn btn-request">
-                  View Offer
-                </button>
-              </Link>
-            </div>
-          </div>
-            )
+            return (
+              <div className="card" key={info.id}>
+                <div className="card-body">
+                  <h3 className="card-title fw-bold">{info.companyName}</h3>
+                  <p className="card-text designation w-50 mt-2">
+                    {info.designation}
+                  </p>
+                  <p className="mb-1">{info.typeOfEmployment}</p>
+                  <p className="mb-1">{info.dateOfJoining}</p>
+                  <p className="mb-1">{info.salary}</p>
+                  <Link
+                    className="w-100 mt-3 btn btn-request"
+                    to={{
+                      pathname: "/employeeOfferLetter",
+                    }}
+                    state={{ from: info }}
+                  >
+                    View Offer
+                  </Link>
+                </div>
+              </div>
+            );
           })}
         </div>
       </div>
