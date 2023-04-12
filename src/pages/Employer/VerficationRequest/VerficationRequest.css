@@ -5,10 +5,9 @@
 .vreqbody {
     padding: 5vh;
     display: grid;
-    grid-template-rows: repeat(2,40vh);
+    grid-template-rows: repeat(2,30vh);
     grid-auto-flow: column;
     justify-items: start;
-    gap: 6vh;
 }
 
 .vreqHeader{
@@ -35,7 +34,8 @@
     background: white;
     width: 50vh;
     gap: 4vh;
-    flex-direction: column
+    flex-direction: column;
+    height: 23vh;
 }
 
 .managerlogo img{
