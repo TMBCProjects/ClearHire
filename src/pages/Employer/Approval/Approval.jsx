@@ -3,8 +3,89 @@ import { Link } from "react-router-dom";
 import Add from "../../../assets/images/add.svg";
 import View from "../../../assets/images/view-doc.svg";
 import "./approval.css";
+import { useState } from "react";
+import { useEffect } from "react";
+import { readAccessRequests, readOfferReplies } from "../../../DataBase/Employer/employer";
+import { onSnapshot, query, where } from "firebase/firestore";
+import { Fields } from "../../../utils/Fields";
+import { getDocuments, setCollection } from "../../../utils/FirebaseUtils";
+import { Collections } from "../../../utils/Collections";
 
 const Approval = () => {
+  const [requests, setRequests] = useState([]);
+  const [offerReplies, setOfferReplies] = useState([]);
+
+  useEffect(() => {
+    const fetchOfferDetails = async () => {
+      const userDatas = JSON.parse(sessionStorage.getItem("userData"))
+      const data = await readOfferReplies(userDatas.id);
+      setOfferReplies(data);
+    };
+    fetchOfferDetails();
+  }, []);
+  // useEffect(() => {
+  //   const userDatas = JSON.parse(sessionStorage.getItem("userData"));
+  //   const fetchRequests = async () => {
+  //     try {
+  //       const querySnapshot = await getDocuments(
+  //         query(
+  //           setCollection(Collections.requests),
+  //           where(Fields.employerId, "==", userDatas.id),
+  //           where(Fields.isActive, "==", true)
+  //         )
+  //       );
+
+  //       if (!querySnapshot) {
+  //         console.error("Error fetching access requests: querySnapshot is undefined");
+  //         return;
+  //       }
+
+  //       const requestsData = [];
+  //       querySnapshot.forEach((doc) => {
+  //         if (doc.exists) {
+  //           const request = {
+  //             id: doc.id,
+  //             isApproved: doc.data().isApproved,
+  //             companyName: doc.data().companyName,
+  //             companyLogo: doc.data().companyLogo,
+  //             employerEmail: doc.data().employerEmail,
+  //             employerId: doc.data().employerId,
+  //             employeeEmail: doc.data().employeeEmail,
+  //             employeeId: doc.data().employeeId,
+  //             offerId: doc.data().offerId,
+  //           };
+  //           requestsData.push(request);
+  //         } else {
+  //           console.error("Document does not exist");
+  //         }
+  //       });
+  //       setRequests(requestsData);
+  //     } catch (error) {
+  //       console.error("Error fetching access requests: ", error);
+  //     }
+  //   };
+
+
+  //   const unsubscribe = onSnapshot(
+  //     query(
+  //       setCollection(Collections.requests),
+  //       where(Fields.employerId, "==", userDatas.id),
+  //       where(Fields.isActive, "==", true)
+  //     ),
+  //     { includeMetadataChanges: true },
+  //     () => {
+  //       fetchRequests();
+  //     }
+  //   );
+
+  //   return () => {
+  //     unsubscribe();
+  //   };
+  // }, []);
+
+
+
+
   return (
     <div id="employer-approval">
       <div className="row d-flex justify-content-between align-items-center">
@@ -65,18 +146,19 @@ const Approval = () => {
           </div>
         </div>
       </div>
-      <div className="row mt-3">
+      <div className="row mt-3">{offerReplies.map((info) => {
+        return (
         <div className="col-md-3 gy-3">
           <div className="card">
             <div className="card-body">
-              <h3 className="card-title fw-bold">Govarthini</h3>
+                <h3 className="card-title fw-bold">{info.employeeName}</h3>
               <p className="card-text designation w-50 mt-2">
-                Graphic Designer
+                  {info.designation}
               </p>
-              <p className="mb-1">Chennai, India</p>
-              <p className="mb-1">Govarthini1994@gmail.com</p>
-              <p className="mb-1">01-01-2023</p>
-              <p className="mb-1">500,000</p>
+                <p className="mb-1">{info.employeeState}, {info.employeeCountry}</p>
+                <p className="mb-1">{info.employeeEmail}</p>
+                <p className="mb-1">{info.dateOfJoining}</p>
+                <p className="mb-1">{info.salary}</p>
               <div className="row  mt-2">
                 <div className="col">
                   <p className="text-color-green fs-13 fw-bold">
@@ -92,8 +174,9 @@ const Approval = () => {
               </button>
             </div>
           </div>
-        </div>
-        <div className="col-md-3 gy-3">
+          </div>)
+      })}
+        {/* <div className="col-md-3 gy-3">
           <div className="card">
             <div className="card-body">
               <h3 className="card-title fw-bold">Ramesh Balasubramaniyam..</h3>
@@ -200,7 +283,7 @@ const Approval = () => {
               </button>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

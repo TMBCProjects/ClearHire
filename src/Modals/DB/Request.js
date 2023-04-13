@@ -6,6 +6,5 @@ export default class Request {
   employerId = "";
   employeeEmail = "";
   employeeId = "";
-  employeeAadhaarCardNumber = "";
-  status = ""
+  offerId = "";
 }
