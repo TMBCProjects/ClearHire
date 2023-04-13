@@ -59,6 +59,10 @@ export default function SearchEmployee() {
       } catch (error) {
         console.log(error);
       }
+      //const user = sessionStorage.getItem("LoggedIn")
+      //const userDatas = JSON.parse(sessionStorage.getItem("userData"))
+      //const data = user === "Employer" ? await readEmployees(userDatas.id) : userDatas.data.currentEmployerId ? await readColleagues(userDatas.id, userDatas.data.currentEmployerId) : [];
+      //setEmployeeList(data);
     };
     fetchEmployerDetails();
   });

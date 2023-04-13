@@ -3,7 +3,10 @@ export default class Offer {
   isAccepted = false;
   companyName = "";
   companyLogo = "";
+  employeeName = "";
   employerEmail = "";
+  employeeState = "";
+  employeeCountry = "";
   employerId = "";
   employeeEmail = "";
   dateOfJoining = "";

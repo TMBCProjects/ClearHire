@@ -374,6 +374,58 @@ export async function readEmployees(employerId) {
   }
 }
 
+export async function readOfferReplies(employerId) {
+  try {
+    let offers = [];
+    const querySnapshot = await getDocuments(
+      query(
+        setCollection(Collections.offers),
+        where(Fields.employerId, "==", employerId),
+        where(Fields.isActive, "==", false),
+        where(Fields.isAccepted, "==", true)
+      )
+    );
+    querySnapshot.forEach(async (doc) => {
+      let offer = {
+        id: doc.id,
+        isActive: doc.data().isActive,
+        isAccepted: doc.data().isAccepted,
+        companyName: doc.data().companyName,
+        companyLogo: doc.data().companyLogo,
+        employerEmail: doc.data().employerEmail,
+        employerId: doc.data().employerId,
+        employeeEmail: doc.data().employeeEmail,
+        employeeName: doc.data().employeeName,
+        employeeState: doc.data().employeeState,
+        employeeCountry: doc.data().employeeCountry,
+        dateOfJoining: doc.data().dateOfJoining,
+        typeOfEmployment: doc.data().typeOfEmployment,
+        designation: doc.data().designation,
+        salary: doc.data().salary,
+        offerLetter: doc.data().offerLetter,
+      };
+      offers.push(offer);
+    });
+    return offers;
+  } catch (error) {
+    console.log(error);
+  }
+}
+export async function readAccessRequests(employerId) {
+  try {
+    const querySnapshot = await getDocuments(
+      query(
+        setCollection(Collections.requests),
+        where(Fields.employerId, "==", employerId),
+        where(Fields.isActive, "==", true)
+      )
+    );
+    return querySnapshot;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 // function to onboard new employee
 export async function onboardEmployee(offerData) {
   const offerLetterFileUrl = await uploadFile(
@@ -389,6 +441,7 @@ export async function onboardEmployee(offerData) {
     dateOfJoining: offerData.dateOfJoining,
     employerEmail: offerData.employerEmail,
     employerId: offerData.employerId,
+    companyLogo: offerData.companyLogo,
     typeOfEmployment: offerData.typeOfEmployment,
     companyName: offerData.companyName,
     designation: offerData.designation,
@@ -398,6 +451,23 @@ export async function onboardEmployee(offerData) {
   return await addDocument(Collections.offers, offer);
 }
 
+export async function requestEmployee(offerData) {
+  let offer = new Request();
+  offer = {
+    isActive: true,
+    isApproved: false,
+    employeeName: offerData.name,
+    employeeEmail: offerData.email,
+    employerEmail: offerData.employerEmail,
+    employerId: offerData.employerId,
+    companyLogo: offerData.companyLogo,
+    companyName: offerData.companyName,
+    designation: offerData.designation,
+    salary: offerData.salary,
+    offerId: offerData.id,
+  };
+  return await addDocument(Collections.offers, offer);
+}
 export async function rateEmployee(ratingData) {
   let rating = new Rating();
   rating = {

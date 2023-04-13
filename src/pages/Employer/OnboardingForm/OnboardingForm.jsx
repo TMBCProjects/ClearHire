@@ -37,6 +37,7 @@ function OnboardingForm() {
   const handleSubmit = () => {
     let userDatas = JSON.parse(sessionStorage.getItem("userData"));
     values.companyName = userDatas.data.companyName;
+    values.companyLogo = userDatas.data.companyLogo;
     values.employerEmail = userDatas.data.employerEmail;
     values.employerId = userDatas.id;
     onboardEmployee(values).then(() => {
