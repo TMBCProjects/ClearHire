@@ -12,7 +12,7 @@ const PdfViewer = ({ offerLetterUrl }) => {
   const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {
     console.log(offerLetterUrl)
-  }, [])
+  }, [offerLetterUrl])
   const onNextPage = () => {
     setCurrentPage(currentPage + 1);
   };
