@@ -7,7 +7,6 @@ const EmployeeOfferLetter = () => {
   const location = useLocation();
   const { from } = location.state;
   const item = from;
-  console.log(item);
   return (
     <div className="container" id="offerletter">
       <div className="row align-items-center d-flex">

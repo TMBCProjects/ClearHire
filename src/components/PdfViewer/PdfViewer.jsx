@@ -4,12 +4,15 @@ import { Document, Page, pdfjs } from "react-pdf";
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 import { LeftCircleOutlined, RightCircleOutlined } from "@ant-design/icons";
+import { useEffect } from "react";
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const PdfViewer = ({ offerLetterUrl }) => {
   const [numPages, setNumPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-
+  useEffect(() => {
+    console.log(offerLetterUrl)
+  }, [])
   const onNextPage = () => {
     setCurrentPage(currentPage + 1);
   };
