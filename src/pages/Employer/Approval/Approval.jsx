@@ -5,7 +5,8 @@ import View from "../../../assets/images/view-doc.svg";
 import "./approval.css";
 import { useState } from "react";
 import { useEffect } from "react";
-import { readAccessRequests, readOfferReplies } from "../../../DataBase/Employer/employer";
+import { v4 as uuid } from 'uuid';
+import { readAccessRequests, readOfferReplies, sendRequestToViewAssesment } from "../../../DataBase/Employer/employer";
 import { onSnapshot, query, where } from "firebase/firestore";
 import { Fields } from "../../../utils/Fields";
 import { getDocuments, setCollection } from "../../../utils/FirebaseUtils";
@@ -23,67 +24,81 @@ const Approval = () => {
     };
     fetchOfferDetails();
   }, []);
-  // useEffect(() => {
-  //   const userDatas = JSON.parse(sessionStorage.getItem("userData"));
-  //   const fetchRequests = async () => {
-  //     try {
-  //       const querySnapshot = await getDocuments(
-  //         query(
-  //           setCollection(Collections.requests),
-  //           where(Fields.employerId, "==", userDatas.id),
-  //           where(Fields.isActive, "==", true)
-  //         )
-  //       );
+  useEffect(() => {
+    const userDatas = JSON.parse(sessionStorage.getItem("userData"));
+    const fetchRequests = async () => {
+      try {
+        const querySnapshot = await getDocuments(
+          query(
+            setCollection(Collections.requests),
+            where(Fields.employerId, "==", userDatas.id),
+          )
+        );
 
-  //       if (!querySnapshot) {
-  //         console.error("Error fetching access requests: querySnapshot is undefined");
-  //         return;
-  //       }
+        if (!querySnapshot) {
+          console.error("Error fetching access requests: querySnapshot is undefined");
+          return;
+        }
 
-  //       const requestsData = [];
-  //       querySnapshot.forEach((doc) => {
-  //         if (doc.exists) {
-  //           const request = {
-  //             id: doc.id,
-  //             isApproved: doc.data().isApproved,
-  //             companyName: doc.data().companyName,
-  //             companyLogo: doc.data().companyLogo,
-  //             employerEmail: doc.data().employerEmail,
-  //             employerId: doc.data().employerId,
-  //             employeeEmail: doc.data().employeeEmail,
-  //             employeeId: doc.data().employeeId,
-  //             offerId: doc.data().offerId,
-  //           };
-  //           requestsData.push(request);
-  //         } else {
-  //           console.error("Document does not exist");
-  //         }
-  //       });
-  //       setRequests(requestsData);
-  //     } catch (error) {
-  //       console.error("Error fetching access requests: ", error);
-  //     }
-  //   };
-
-
-  //   const unsubscribe = onSnapshot(
-  //     query(
-  //       setCollection(Collections.requests),
-  //       where(Fields.employerId, "==", userDatas.id),
-  //       where(Fields.isActive, "==", true)
-  //     ),
-  //     { includeMetadataChanges: true },
-  //     () => {
-  //       fetchRequests();
-  //     }
-  //   );
-
-  //   return () => {
-  //     unsubscribe();
-  //   };
-  // }, []);
+        const requestsData = [];
+        querySnapshot.forEach((doc) => {
+          if (doc.exists) {
+            const request = {
+              id: doc.id,
+              isApproved: doc.data().isApproved,
+              companyName: doc.data().companyName,
+              companyLogo: doc.data().companyLogo,
+              employerEmail: doc.data().employerEmail,
+              employerId: doc.data().employerId,
+              employeeEmail: doc.data().employeeEmail,
+              employeeId: doc.data().employeeId,
+              requestId: doc.data().requestId,
+            };
+            requestsData.push(request);
+          } else {
+            console.error("Document does not exist");
+          }
+        });
+        setRequests(requestsData);
+      } catch (error) {
+        console.error("Error fetching access requests: ", error);
+      }
+    };
 
 
+    const unsubscribe = onSnapshot(
+      query(
+        setCollection(Collections.requests),
+        where(Fields.employerId, "==", userDatas.id),
+      ),
+      { includeMetadataChanges: true },
+      () => {
+        fetchRequests();
+      }
+    );
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+
+  console.log(requests);
+  const sentRequest = async (data) => {
+    let userDetails = JSON.parse(sessionStorage.getItem("userData")).data
+    let newRequest = {
+      isApproved: false,
+      companyName: userDetails.companyName,
+      companyLogo: userDetails.companyLogo,
+      employerEmail: userDetails.employerEmail,
+      employerId: data.employerId,
+      employeeEmail: data.employeeEmail,
+      employeeId: data.id,
+      requestId: `req-${uuid(6)}`,
+    }
+    // console.log(newRequest);
+    await sendRequestToViewAssesment(newRequest)
+  }
 
 
   return (
@@ -146,36 +161,55 @@ const Approval = () => {
           </div>
         </div>
       </div>
-      <div className="row mt-3">{offerReplies.map((info) => {
-        return (
-        <div className="col-md-3 gy-3">
-          <div className="card">
-            <div className="card-body">
-                <h3 className="card-title fw-bold">{info.employeeName}</h3>
-              <p className="card-text designation w-50 mt-2">
-                  {info.designation}
-              </p>
-                <p className="mb-1">{info.employeeState}, {info.employeeCountry}</p>
-                <p className="mb-1">{info.employeeEmail}</p>
-                <p className="mb-1">{info.dateOfJoining}</p>
-                <p className="mb-1">{info.salary}</p>
-              <div className="row  mt-2">
-                <div className="col">
-                  <p className="text-color-green fs-13 fw-bold">
-                    <img className="mr-5" src={View} alt="" /> View offer Letter
-                  </p>
+      <div className="row mt-3">
+        {
+          offerReplies?.map((info) => {
+            return (
+              <div className="col-md-3 gy-3">
+                <div className="card">
+                  <div className="card-body">
+                    <h3 className="card-title fw-bold">{info.employeeName}</h3>
+                    <p className="card-text designation w-50 mt-2">
+                      {info.designation}
+                    </p>
+                    <p className="mb-1">{info.employeeState}, {info.employeeCountry}</p>
+                    <p className="mb-1">{info.employeeEmail}</p>
+                    <p className="mb-1">{info.dateOfJoining}</p>
+                    <p className="mb-1">{info.salary}</p>
+                    <div className="row  mt-2">
+                      <div className="col">
+                        <p className="text-color-green fs-13 fw-bold">
+                          <img className="mr-5" src={View} alt="" /> View offer Letter
+                        </p>
+                      </div>
+                      <div className="col">
+                        <button className="delete-btn">Delete</button>
+                      </div>
+                    </div>
+                    {
+                      requests.find((req) => req.employeeId === info.id)?.isActive
+                        ?
+                        <button className="w-100 mt-3 btn btn-assessment">
+                          View assessment
+                        </button>
+                        :
+                        <button className="w-100 mt-3 btn btn-request-sent">
+                          Request sent
+                        </button>
+                    }
+                    {
+                      !requests.find((req) => req.employeeId === info.id) && 
+                      <button className="w-100 mt-3 btn btn-request" onClick={() => {
+                        sentRequest(info)
+                      }}>
+                        Request to view assessment
+                      </button>
+                    }
+                  
+                  </div>
                 </div>
-                <div className="col">
-                  <button className="delete-btn">Delete</button>
-                </div>
-              </div>
-              <button className="w-100 mt-3 btn btn-request">
-                Request to view assessment
-              </button>
-            </div>
-          </div>
-          </div>)
-      })}
+              </div>)
+          })}
         {/* <div className="col-md-3 gy-3">
           <div className="card">
             <div className="card-body">

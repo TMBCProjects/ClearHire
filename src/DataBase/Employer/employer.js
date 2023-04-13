@@ -491,6 +491,15 @@ export async function rateEmployee(ratingData) {
   };
   return await addDocument(Collections.ratings, rating);
 }
+
+export async function sendRequestToViewAssesment(offerData) {
+
+  return await addDocument(Collections.requests, offerData);
+}
+
+
+
+
 // export async function switchTask(id, oldTeammate, newTeammate, data) {
 //   addNotification({
 //     createdAt: newTeammate.createdAt,
