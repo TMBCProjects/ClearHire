@@ -94,7 +94,14 @@ export async function profileUpdate(profileData, employeeId) {
 export async function offerAccept(profileData, employeeId, offerId) {
   await updateDocument(
     Collections.offers,
-    { isAccepted: true, isActive: false },
+    {
+      isAccepted: true,
+      isActive: false,
+      employeeId: employeeId,
+      employeeName: profileData.employeeName,
+      employeeState: profileData.employeeState,
+      employeeCountry: profileData.employeeCountry,
+    },
     offerId
   );
   await updateDocument(Collections.employees, profileData, employeeId);

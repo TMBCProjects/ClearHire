@@ -380,6 +380,7 @@ export async function readOfferReplies(employerId) {
     const querySnapshot = await getDocuments(
       query(
         setCollection(Collections.offers),
+        where(Fields.employerId, "==", employerId),
         where(Fields.isActive, "==", false),
         where(Fields.isAccepted, "==", true)
       )
@@ -394,6 +395,9 @@ export async function readOfferReplies(employerId) {
         employerEmail: doc.data().employerEmail,
         employerId: doc.data().employerId,
         employeeEmail: doc.data().employeeEmail,
+        employeeName: doc.data().employeeName,
+        employeeState: doc.data().employeeState,
+        employeeCountry: doc.data().employeeCountry,
         dateOfJoining: doc.data().dateOfJoining,
         typeOfEmployment: doc.data().typeOfEmployment,
         designation: doc.data().designation,
@@ -412,9 +416,8 @@ export async function readAccessRequests(employerId) {
     const querySnapshot = await getDocuments(
       query(
         setCollection(Collections.requests),
-        where(Fields.currentEmployerId, "==", employerId),
-        where(Fields.isActive, "==", false),
-        where(Fields.isAccepted, "==", true)
+        where(Fields.employerId, "==", employerId),
+        where(Fields.isActive, "==", true)
       )
     );
     return querySnapshot;
@@ -448,6 +451,23 @@ export async function onboardEmployee(offerData) {
   return await addDocument(Collections.offers, offer);
 }
 
+export async function requestEmployee(offerData) {
+  let offer = new Request();
+  offer = {
+    isActive: true,
+    isApproved: false,
+    employeeName: offerData.name,
+    employeeEmail: offerData.email,
+    employerEmail: offerData.employerEmail,
+    employerId: offerData.employerId,
+    companyLogo: offerData.companyLogo,
+    companyName: offerData.companyName,
+    designation: offerData.designation,
+    salary: offerData.salary,
+    offerId: offerData.id,
+  };
+  return await addDocument(Collections.offers, offer);
+}
 export async function rateEmployee(ratingData) {
   let rating = new Rating();
   rating = {
