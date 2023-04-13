@@ -171,19 +171,19 @@ export default function Profile() {
           </h1>
           <div>
             <p>Company</p>
-            <p>The Madras Branding Company</p>
+            <p>{userDatas.data.companyName}</p>
           </div>
           <div>
             <p>Job Role</p>
-            <p>Graphics Designer</p>
+            <p>{userDatas.data.designation}</p>
           </div>
           <div>
             <p>Date of joining</p>
-            <p>01-01-2023</p>
+            <p>{userDatas.data.dateOfJoining}</p>
           </div>
           <div>
             <p>Salary</p>
-            <p>500,000 PA</p>
+            <p>{userDatas.data.salary} PA</p>
           </div>
         </div>
       )}
