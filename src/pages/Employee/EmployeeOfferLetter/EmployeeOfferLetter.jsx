@@ -1,8 +1,12 @@
 import React from "react";
 import "./EmployeeOfferLetter.css";
 import PdfViewer from "../../../components/PdfViewer/PdfViewer";
+import { useLocation } from "react-router-dom";
 
-const EmployeeOfferLetter = ({ item }) => {
+const EmployeeOfferLetter = () => {
+  const location = useLocation();
+  const { from } = location.state;
+  const item = from;
   return (
     <div className="container" id="offerletter">
       <div className="row align-items-center d-flex">

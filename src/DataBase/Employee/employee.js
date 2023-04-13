@@ -53,8 +53,41 @@ export async function readColleagues(employeeId, employerId) {
     console.log(error);
   }
 }
+export async function readOffers(employeeEmail) {
+  try {
+    let offers = [];
+    const querySnapshot = await getDocuments(
+      query(
+        setCollection(Collections.offers),
+        where(Fields.employeeEmail, "==", employeeEmail),
+        where(Fields.isActive, "==", true),
+        where(Fields.isAccepted, "==", false)
+      )
+    );
+    querySnapshot.forEach(async (doc) => {
+      let offer = {
+        id: doc.id,
+        isActive: doc.data().isActive,
+        isAccepted: doc.data().isAccepted,
+        companyName: doc.data().companyName,
+        companyLogo: doc.data().companyLogo,
+        employerEmail: doc.data().employerEmail,
+        employerId: doc.data().employerId,
+        employeeEmail: doc.data().employeeEmail,
+        dateOfJoining: doc.data().dateOfJoining,
+        typeOfEmployment: doc.data().typeOfEmployment,
+        designation: doc.data().designation,
+        salary: doc.data().salary,
+        offerLetter: doc.data().offerLetter,
+      };
+      offers.push(offer);
+    });
+    return offers;
+  } catch (error) {
+    console.log(error);
+  }
+}
 export async function profileUpdate(profileData, employeeId) {
-  console.log(profileData);
   await updateDocument(Collections.employees, profileData, employeeId);
 }
 
