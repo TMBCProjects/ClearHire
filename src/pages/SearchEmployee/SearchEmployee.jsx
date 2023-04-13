@@ -287,7 +287,7 @@ export default function SearchEmployee() {
             <div className="result-count">56 results</div>
           </div>
           <div className="row2">
-            {employeeList.map((info) => {
+            {employeeList?.map((info) => {
               return (
                 <AssesmentCard
                   value={30}
