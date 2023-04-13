@@ -3,8 +3,56 @@ import { Link } from "react-router-dom";
 import Add from "../../../assets/images/add.svg";
 import View from "../../../assets/images/view-doc.svg";
 import "./approval.css";
+import { useState } from "react";
+import { useEffect } from "react";
+import { readAccessRequests, readOfferReplies } from "../../../DataBase/Employer/employer";
+import { onSnapshot } from "firebase/firestore";
 
 const Approval = () => {
+  const [requests, setRequests] = useState();
+  const [offerReplies, setOfferReplies] = useState();
+
+  useEffect(() => {
+    const fetchOfferDetails = async () => {
+      const userDatas = JSON.parse(sessionStorage.getItem("userData"))
+      const data = await readOfferReplies(userDatas.id);
+      setOfferReplies(data);
+    };
+    fetchOfferDetails();
+  }, []);
+
+  useEffect(() => {
+    const fetchRequests = async () => {
+      try {
+        const querySnapshot = await readAccessRequests();
+        const requestsData = [];
+        querySnapshot.forEach((doc) => {
+          if (doc.exists) {
+            const request = {
+              id: doc.id,
+              assigned: doc.data().assigned,
+            };
+            requestsData.push(request);
+          } else {
+            console.error("Document does not exist");
+          }
+        });
+        setRequests(requestsData);
+      } catch (error) {
+        console.error("Error fetching access requests: ", error);
+      }
+    };
+
+    const unsubscribe = onSnapshot(readAccessRequests(), { includeMetadataChanges: true }, async () => {
+      await fetchRequests();
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+
   return (
     <div id="employer-approval">
       <div className="row d-flex justify-content-between align-items-center">

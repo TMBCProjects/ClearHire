@@ -379,8 +379,7 @@ export async function readOfferReplies(employerId) {
     let offers = [];
     const querySnapshot = await getDocuments(
       query(
-        setCollection(Collections.employees),
-        where(Fields.currentEmployerId, "==", employerId),
+        setCollection(Collections.offers),
         where(Fields.isActive, "==", false),
         where(Fields.isAccepted, "==", true)
       )
@@ -404,6 +403,21 @@ export async function readOfferReplies(employerId) {
       offers.push(offer);
     });
     return offers;
+  } catch (error) {
+    console.log(error);
+  }
+}
+export async function readAccessRequests(employerId) {
+  try {
+    const querySnapshot = await getDocuments(
+      query(
+        setCollection(Collections.requests),
+        where(Fields.currentEmployerId, "==", employerId),
+        where(Fields.isActive, "==", false),
+        where(Fields.isAccepted, "==", true)
+      )
+    );
+    return querySnapshot;
   } catch (error) {
     console.log(error);
   }

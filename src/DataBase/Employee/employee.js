@@ -20,7 +20,7 @@ export async function readColleagues(employeeId, employerId) {
       )
     );
     querySnapshot.forEach(async (doc) => {
-      if (doc.id === employeeId) {
+      if (doc.id !== employeeId) {
         let employee = {
           id: doc.id,
           isActive: doc.data().isActive,
