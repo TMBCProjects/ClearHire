@@ -87,10 +87,41 @@ export async function readOffers(employeeEmail) {
     console.log(error);
   }
 }
+
 export async function profileUpdate(profileData, employeeId) {
   await updateDocument(Collections.employees, profileData, employeeId);
 }
-
+export async function offerAccept(profileData, employeeId, offerId) {
+  await updateDocument(
+    Collections.offers,
+    { isAccepted: true, isActive: false },
+    offerId
+  );
+  await updateDocument(Collections.employees, profileData, employeeId);
+}
+// export async function rateEmployee(ratingData) {
+//   let rating = new Rating();
+//   rating = {
+//     isActive: true,
+//     companyName: ratingData.companyName,
+//     ratedById: ratingData.ratedById,
+//     ratedByEmail: ratingData.ratedByEmail,
+//     employeeId: ratingData.employeeId,
+//     employeeName: ratingData.employeeName,
+//     employeeEmail: ratingData.employeeEmail,
+//     dateOfReview: ratingData.dateOfReview,
+//     communication: ratingData.communication,
+//     attitude: ratingData.attitude,
+//     abilityToLearn: ratingData.abilityToLearn,
+//     punctuality: ratingData.punctuality,
+//     commitment: ratingData.commitment,
+//     trustworthiness: ratingData.trustworthiness,
+//     skill: ratingData.skill,
+//     teamPlayer: ratingData.teamPlayer,
+//     note: ratingData.note,
+//   };
+//   return await addDocument(Collections.ratings, rating);
+// }
 // //READS
 // export async function readTasksByTeammate(teammateId) {
 //   try {
