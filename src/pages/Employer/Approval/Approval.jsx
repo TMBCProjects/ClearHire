@@ -5,8 +5,7 @@ import View from "../../../assets/images/view-doc.svg";
 import "./approval.css";
 import { useState } from "react";
 import { useEffect } from "react";
-import { v4 as uuid } from 'uuid';
-import { readAccessRequests, readOfferReplies, sendRequestToViewAssesment } from "../../../DataBase/Employer/employer";
+import { readOfferReplies, sendRequestToViewAssesment } from "../../../DataBase/Employer/employer";
 import { onSnapshot, query, where } from "firebase/firestore";
 import { Fields } from "../../../utils/Fields";
 import { getDocuments, setCollection } from "../../../utils/FirebaseUtils";
@@ -32,6 +31,7 @@ const Approval = () => {
           query(
             setCollection(Collections.requests),
             where(Fields.employerId, "==", userDatas.id),
+            where(Fields.isActive, "==", true),
           )
         );
 
@@ -45,6 +45,7 @@ const Approval = () => {
           if (doc.exists) {
             const request = {
               id: doc.id,
+              isActive: doc.data().isActive,
               isApproved: doc.data().isApproved,
               companyName: doc.data().companyName,
               companyLogo: doc.data().companyLogo,
@@ -52,7 +53,7 @@ const Approval = () => {
               employerId: doc.data().employerId,
               employeeEmail: doc.data().employeeEmail,
               employeeId: doc.data().employeeId,
-              requestId: doc.data().requestId,
+              offerId: doc.data().offerId,
             };
             requestsData.push(request);
           } else {
@@ -82,22 +83,9 @@ const Approval = () => {
     };
   }, []);
 
-
-  console.log(requests);
   const sentRequest = async (data) => {
     let userDetails = JSON.parse(sessionStorage.getItem("userData")).data
-    let newRequest = {
-      isApproved: false,
-      companyName: userDetails.companyName,
-      companyLogo: userDetails.companyLogo,
-      employerEmail: userDetails.employerEmail,
-      employerId: data.employerId,
-      employeeEmail: data.employeeEmail,
-      employeeId: data.id,
-      requestId: `req-${uuid(6)}`,
-    }
-    // console.log(newRequest);
-    await sendRequestToViewAssesment(newRequest)
+    await sendRequestToViewAssesment(userDetails, data)
   }
 
 
@@ -187,7 +175,7 @@ const Approval = () => {
                       </div>
                     </div>
                     {
-                      requests.find((req) => req.employeeId === info.id)?.isActive
+                      requests.find((req) => req.offerId === info.id)?.isApproved
                         ?
                         <button className="w-100 mt-3 btn btn-assessment">
                           View assessment
@@ -198,7 +186,7 @@ const Approval = () => {
                         </button>
                     }
                     {
-                      !requests.find((req) => req.employeeId === info.id) && 
+                      !requests.find((req) => req.offerId === info.id) && 
                       <button className="w-100 mt-3 btn btn-request" onClick={() => {
                         sentRequest(info)
                       }}>

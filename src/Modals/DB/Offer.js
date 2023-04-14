@@ -8,6 +8,7 @@ export default class Offer {
   employeeState = "";
   employeeCountry = "";
   employerId = "";
+  employeeId = "";
   employeeEmail = "";
   dateOfJoining = "";
   typeOfEmployment = "";
