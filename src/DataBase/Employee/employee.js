@@ -60,26 +60,25 @@ export async function getRequests(employeeId) {
     const querySnapshot = await getDocuments(
       query(
         setCollection(Collections.requests),
+        where(Fields.employeeId, "==", employeeId),
         where(Fields.isActive, "==", true),
         where(Fields.isApproved, "==", false)
       )
     );
     querySnapshot.forEach((doc) => {
-      if (doc.data().employeeId === employeeId) {
-        const request = {
-          id: doc.id,
-          isActive: doc.data().isActive,
-          isApproved: doc.data().isApproved,
-          companyName: doc.data().companyName,
-          companyLogo: doc.data().companyLogo,
-          employerEmail: doc.data().employerEmail,
-          employerId: doc.data().employerId,
-          employeeEmail: doc.data().employeeEmail,
-          employeeId: doc.data().employeeId,
-          offerId: doc.data().offerId,
-        };
-        requests.push(request);
-      }
+      const request = {
+        id: doc.id,
+        isActive: doc.data().isActive,
+        isApproved: doc.data().isApproved,
+        companyName: doc.data().companyName,
+        companyLogo: doc.data().companyLogo,
+        employerEmail: doc.data().employerEmail,
+        employerId: doc.data().employerId,
+        employeeEmail: doc.data().employeeEmail,
+        employeeId: doc.data().employeeId,
+        offerId: doc.data().offerId,
+      };
+      requests.push(request);
     });
     return requests;
   } catch (error) {
