@@ -123,7 +123,7 @@ export async function rejectRequest(requestId) {
   await updateDocument(Collections.requests, { isActive: false }, requestId);
 }
 export async function acceptRequest(requestId) {
-  await updateDocument(Collections.requests, { isAccepted: true }, requestId);
+  await updateDocument(Collections.requests, { isApproved: true }, requestId);
 }
 
 export async function profileUpdate(profileData, employeeId) {

@@ -3,7 +3,7 @@ import "./VerficationRequest.css";
 import image from "../../../assets/images/Image.png";
 import check from "../../../assets/images/checkfull.svg";
 import close from "../../../assets/images/closebtn.svg";
-import { getRequests } from "../../../DataBase/Employee/employee";
+import { acceptRequest, getRequests, rejectRequest } from "../../../DataBase/Employee/employee";
 
 export default function VerficationRequest() {
   const userDatas = JSON.parse(sessionStorage.getItem("userData"));
@@ -17,6 +17,12 @@ export default function VerficationRequest() {
     fetchRequests();
   }, [userDatas]);
 
+  const allowAccess = (data) => {
+    acceptRequest(data);
+  };
+  const denyAccess = (data) => {
+    rejectRequest(data);
+  };
   return (
     <div className="vreq">
       <div className="vreqHeader">
@@ -43,10 +49,10 @@ export default function VerficationRequest() {
             </div>
 
             <div className="cardFooter">
-              <button className="allow">
+              <button className="allow" onClick={() => allowAccess(request.id)}>
                 Allow Access&nbsp;<img src={check} alt="check"></img>
               </button>
-              <button className="deny">
+              <button className="deny" onClick={() => denyAccess(request.id)}>
                 Deny&nbsp;<img src={close} alt="close"></img>
               </button>
             </div>
