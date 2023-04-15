@@ -65,7 +65,7 @@ function EmployeeAssessment({
   };
 
   return (
-    <div className="assesment">
+    <div className="assesment container">
       <div className="back-cont" onClick={handleBack}>
         <img src={arrow} alt="" />
         <h4>Employee Assessment</h4>
