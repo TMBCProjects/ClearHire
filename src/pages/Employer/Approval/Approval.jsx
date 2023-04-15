@@ -11,6 +11,7 @@ import {
   readOfferReplies,
   sendRequestToViewAssesment,
 } from "../../../DataBase/Employer/employer";
+
 import { onSnapshot, query, where } from "firebase/firestore";
 import { Fields } from "../../../utils/Fields";
 import { getDocuments, setCollection } from "../../../utils/FirebaseUtils";
@@ -35,7 +36,9 @@ const Approval = () => {
         const querySnapshot = await getDocuments(
           query(
             setCollection(Collections.requests),
-            where(Fields.employerId, "==", userDatas.id)
+
+            where(Fields.employerId, "==", userDatas.id),
+            where(Fields.isActive, "==", true),
           )
         );
 
@@ -51,6 +54,7 @@ const Approval = () => {
           if (doc.exists) {
             const request = {
               id: doc.id,
+              isActive: doc.data().isActive,
               isApproved: doc.data().isApproved,
               companyName: doc.data().companyName,
               companyLogo: doc.data().companyLogo,
@@ -58,7 +62,7 @@ const Approval = () => {
               employerId: doc.data().employerId,
               employeeEmail: doc.data().employeeEmail,
               employeeId: doc.data().employeeId,
-              requestId: doc.data().requestId,
+              offerId: doc.data().offerId,
             };
             requestsData.push(request);
           } else {
@@ -103,6 +107,7 @@ const Approval = () => {
     // console.log(newRequest);
     await sendRequestToViewAssesment(newRequest);
   };
+
 
   return (
     <div id="employer-approval" className="container">
@@ -191,6 +196,26 @@ const Approval = () => {
                     <div className="col">
                       <button className="delete-btn">Delete</button>
                     </div>
+                    {
+                      requests.find((req) => req.offerId === info.id)?.isApproved
+                        ?
+                        <button className="w-100 mt-3 btn btn-assessment">
+                          View assessment
+                        </button>
+                        :
+                        <button className="w-100 mt-3 btn btn-request-sent">
+                          Request sent
+                        </button>
+                    }
+                    {
+                      !requests.find((req) => req.offerId === info.id) && 
+                      <button className="w-100 mt-3 btn btn-request" onClick={() => {
+                        sentRequest(info)
+                      }}>
+                        Request to view assessment
+                      </button>
+                    }
+                  
                   </div>
                   {requests.find((req) => req.employeeId === info.id)
                     ?.isActive ? (

@@ -9,6 +9,7 @@ import {
 import { Fields } from "../../utils/Fields";
 import { setCollection } from "../../utils/FirebaseUtils";
 import { query, where } from "firebase/firestore";
+import Request from "../../Modals/DB/Request";
 
 export default async function defaultFn() {}
 
@@ -394,6 +395,7 @@ export async function readOfferReplies(employerId) {
         companyLogo: doc.data().companyLogo,
         employerEmail: doc.data().employerEmail,
         employerId: doc.data().employerId,
+        employeeId: doc.data().employeeId,
         employeeEmail: doc.data().employeeEmail,
         employeeName: doc.data().employeeName,
         employeeState: doc.data().employeeState,
@@ -407,20 +409,6 @@ export async function readOfferReplies(employerId) {
       offers.push(offer);
     });
     return offers;
-  } catch (error) {
-    console.log(error);
-  }
-}
-export async function readAccessRequests(employerId) {
-  try {
-    const querySnapshot = await getDocuments(
-      query(
-        setCollection(Collections.requests),
-        where(Fields.employerId, "==", employerId),
-        where(Fields.isActive, "==", true)
-      )
-    );
-    return querySnapshot;
   } catch (error) {
     console.log(error);
   }
@@ -492,9 +480,21 @@ export async function rateEmployee(ratingData) {
   return await addDocument(Collections.ratings, rating);
 }
 
-export async function sendRequestToViewAssesment(offerData) {
-
-  return await addDocument(Collections.requests, offerData);
+export async function sendRequestToViewAssesment(userDetails, data) {
+  let newRequest = new Request();
+  newRequest = {
+    isApproved: false,
+    isActive: true,
+    companyName: userDetails.companyName,
+    companyLogo: userDetails.companyLogo,
+    employerEmail: userDetails.employerEmail,
+    employerId: data.employerId,
+    employeeEmail: data.employeeEmail,
+    employeeId: data.employeeId,
+    offerId: data.id,
+  };
+  console.log(data);
+  return await addDocument(Collections.requests, newRequest);
 }
 
 

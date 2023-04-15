@@ -53,6 +53,38 @@ export async function readColleagues(employeeId, employerId) {
     console.log(error);
   }
 }
+
+export async function getRequests(employeeId) {
+  try {
+    let requests = [];
+    const querySnapshot = await getDocuments(
+      query(
+        setCollection(Collections.requests),
+        where(Fields.employeeId, "==", employeeId),
+        where(Fields.isActive, "==", true),
+        where(Fields.isApproved, "==", false)
+      )
+    );
+    querySnapshot.forEach((doc) => {
+      const request = {
+        id: doc.id,
+        isActive: doc.data().isActive,
+        isApproved: doc.data().isApproved,
+        companyName: doc.data().companyName,
+        companyLogo: doc.data().companyLogo,
+        employerEmail: doc.data().employerEmail,
+        employerId: doc.data().employerId,
+        employeeEmail: doc.data().employeeEmail,
+        employeeId: doc.data().employeeId,
+        offerId: doc.data().offerId,
+      };
+      requests.push(request);
+    });
+    return requests;
+  } catch (error) {
+    console.log(error);
+  }
+}
 export async function readOffers(employeeEmail) {
   try {
     let offers = [];
@@ -86,6 +118,12 @@ export async function readOffers(employeeEmail) {
   } catch (error) {
     console.log(error);
   }
+}
+export async function rejectRequest(requestId) {
+  await updateDocument(Collections.requests, { isActive: false }, requestId);
+}
+export async function acceptRequest(requestId) {
+  await updateDocument(Collections.requests, { isApproved: true }, requestId);
 }
 
 export async function profileUpdate(profileData, employeeId) {
@@ -752,27 +790,3 @@ export async function offerAccept(profileData, employeeId, offerId) {
 //     throw new Error("Error updating teammate details");
 //   }
 // }
-
-export async function getRequests(teammateId) {
-   try {
-    const querySnapshot = await getDocuments(
-      query(setCollection(Collections.requests, teammateId))
-    );
-    querySnapshot.forEach(async (doc) => {
-      const requests = {
-        isActive: doc.data().isActive,
-        companyName: doc.data().companyName,
-        companyLogo: doc.data().companyLogo,
-        employerEmail: doc.data().employerEmail,
-        employerId: doc.data().employerId,
-        employeeEmail: doc.data().employeeEmail,
-        employeeId: doc.data().employeeId,
-        employeeAadhaarCardNumber: doc.data().employeeAadhaarCardNumber,
-        status: doc.data().status
-      };
-      return requests;
-    });
-  } catch (error) {
-    console.log(error);
-  }
-}
