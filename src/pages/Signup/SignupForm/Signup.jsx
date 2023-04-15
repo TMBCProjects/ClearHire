@@ -121,7 +121,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="container">
+    <div className="signup-container">
       <div className="signupHeader">
         {user === "Employer" ? (
           <span style={{ fontWeight: "bold" }}>Employer Signup</span>

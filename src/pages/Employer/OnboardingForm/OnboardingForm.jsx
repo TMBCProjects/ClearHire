@@ -3,6 +3,7 @@ import "./OnboardingForm.css";
 import add from "../../../images/add.svg";
 import { GoChevronLeft } from "react-icons/go";
 import { onboardEmployee } from "../../../DataBase/Employer/employer";
+import { useNavigate } from "react-router-dom";
 
 const initialValues = {
   name: "",
@@ -15,6 +16,8 @@ const initialValues = {
 };
 function OnboardingForm() {
   const [values, setValues] = useState(initialValues);
+
+  const navigate = useNavigate("");
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -47,9 +50,13 @@ function OnboardingForm() {
 
   let [file, setFile] = useState("");
 
+  const handleBack = () => {
+    navigate("/");
+  };
+
   return (
     <div className="createemp container">
-      <div className="back mt-2">
+      <div className="back mt-2" onClick={handleBack}>
         <GoChevronLeft style={{ color: "#9EC2AD" }} size={25} />
       </div>
       <div className="container-fluid" id="On-board">
@@ -88,13 +95,21 @@ function OnboardingForm() {
                   </select>
                 </div>
                 <div className="form-item ">
-                  <select name="typeOfEmployment" id="" onChange={handleInputChange}>
+                  <select
+                    name="typeOfEmployment"
+                    id=""
+                    onChange={handleInputChange}
+                  >
                     <option value="">Type Of Employment*</option>
-                    <option value="Permanent Full-Time">Permanent Full-Time</option>
+                    <option value="Permanent Full-Time">
+                      Permanent Full-Time
+                    </option>
                     <option value="Part-Time">Part-Time</option>
                     <option value="Casual/Vacation">Casual/Vacation</option>
                     <option value="Contract">Contract</option>
-                    <option value="Internship/Trainee">Internship/Trainee</option>
+                    <option value="Internship/Trainee">
+                      Internship/Trainee
+                    </option>
                   </select>
                 </div>
                 <div className="form-item">
