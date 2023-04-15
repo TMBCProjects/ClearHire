@@ -1,4 +1,4 @@
-import { query, where } from "firebase/firestore";
+import { arrayUnion, query, where } from "firebase/firestore";
 import { Collections } from "../../utils/Collections";
 import { Fields } from "../../utils/Fields";
 import {
@@ -143,6 +143,11 @@ export async function offerAccept(profileData, employeeId, offerId) {
     offerId
   );
   await updateDocument(Collections.employees, profileData, employeeId);
+  await updateDocument(
+    Collections.employees,
+    { employerIdList: arrayUnion(profileData.currentEmployerId) },
+    employeeId
+  );
 }
 // export async function rateEmployee(ratingData) {
 //   let rating = new Rating();

@@ -308,6 +308,7 @@ export default function SearchEmployee() {
               return (
                 <AssesmentCard
                   value={30}
+                  info={info}
                   name={info.employeeName}
                   state={info.employeeState}
                   country={info.employeeCountry}
