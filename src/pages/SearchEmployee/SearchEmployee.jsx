@@ -297,7 +297,11 @@ export default function SearchEmployee() {
             ) : (
               ""
             )}
-            <div className="result-count">56 results</div>
+            <div className="result-count">
+              {employeeList.length > 1
+                ? `${employeeList.length} records`
+                : `${employeeList.length} record`}
+            </div>
           </div>
           <div className="row2">
             {employeeList?.map((info) => {

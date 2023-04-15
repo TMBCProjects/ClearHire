@@ -1,12 +1,13 @@
-
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import "./Assessment.css";
 import pic from "../../images/download.jpg";
 import check_1 from "../../images/Check-1.svg";
 import quote from "../../images/quote-left.svg";
 import arrow from "../../images/arrow-dropup.svg";
-import ProgressBar from '../../components/ProgressBar'
-import { rateEmployee } from '../../DataBase/Employer/employer';
+import ProgressBar from "../../components/ProgressBar";
+import { rateEmployee } from "../../DataBase/Employer/employer";
+import { useNavigate } from "react-router-dom";
+
 const initialState = {
   dateOfReview: new Date(),
   communication: 0,
@@ -18,12 +19,14 @@ const initialState = {
   skill: 0,
   teamPlayer: 0,
   note: "",
-}
+};
 function EmployeeAssessment({
   employeeId,
   employeeName,
   employeeEmail,
-  profileImage }) {
+  profileImage,
+}) {
+  const navigate = useNavigate();
   const [values, setValues] = useState(initialState);
   let [rangeSkill_1, setRangeSkill_1] = useState(0);
   let [rangeSkill_2, setRangeSkill_2] = useState(0);
@@ -44,21 +47,26 @@ function EmployeeAssessment({
 
   const handleSubmit = () => {
     let userDatas = JSON.parse(sessionStorage.getItem("userData"));
-    values.companyName = userDatas.data.companyName
-    values.ratedById = userDatas.id
-    values.ratedByEmail = userDatas.data.employerEmail
-    values.employeeId = employeeId || "employeeId"
-    values.employeeName = employeeName || "employeeName"
-    values.employeeEmail = employeeEmail || "employeeEmail"
-    values.profileImage = profileImage || pic
+    values.companyName = userDatas.data.companyName;
+    values.ratedById = userDatas.id;
+    values.ratedByEmail = userDatas.data.employerEmail;
+    values.employeeId = employeeId || "employeeId";
+    values.employeeName = employeeName || "employeeName";
+    values.employeeEmail = employeeEmail || "employeeEmail";
+    values.profileImage = profileImage || pic;
     rateEmployee(values).then(() => {
       window.location.href = "/";
     });
   };
 
+  // handle back click
+  const handleBack = () => {
+    navigate("/");
+  };
+
   return (
-    <div className="assesment">
-      <div className="back-cont">
+    <div className="assesment container">
+      <div className="back-cont" onClick={handleBack}>
         <img src={arrow} alt="" />
         <h4>Employee Assessment</h4>
       </div>
@@ -77,7 +85,6 @@ function EmployeeAssessment({
           <div className="col-12 circles">
             <div className="col-6 circle-box">
               <div className="circle" data-prog="95">
-
                 <ProgressBar value={40} />
               </div>
               <div className="text">
@@ -87,17 +94,12 @@ function EmployeeAssessment({
             <div className="col-6 circle-box">
               <div className="circle" data-prog="75">
                 <ProgressBar value={40} />
-
-
               </div>
               <div className="text">
                 <h6>Score</h6>
               </div>
             </div>
-
           </div>
-
-
         </div>
       </div>
       <div className="row skill-assessment">
@@ -115,7 +117,7 @@ function EmployeeAssessment({
                 name="communication"
                 defaultValue={rangeSkill_1}
                 onChange={(e) => {
-                  handleInputChange(e)
+                  handleInputChange(e);
                   setRangeSkill_1(e.target.value);
                 }}
               />
@@ -137,7 +139,7 @@ function EmployeeAssessment({
                 name="attitude"
                 defaultValue={rangeSkill_2}
                 onChange={(e) => {
-                  handleInputChange(e)
+                  handleInputChange(e);
                   setRangeSkill_2(e.target.value);
                 }}
               />
@@ -159,7 +161,7 @@ function EmployeeAssessment({
                 name="abilityToLearn"
                 defaultValue={rangeSkill_3}
                 onChange={(e) => {
-                  handleInputChange(e)
+                  handleInputChange(e);
                   setRangeSkill_3(e.target.value);
                 }}
               />
@@ -181,7 +183,7 @@ function EmployeeAssessment({
                 name="punctuality"
                 defaultValue={rangeSkill_4}
                 onChange={(e) => {
-                  handleInputChange(e)
+                  handleInputChange(e);
                   setRangeSkill_4(e.target.value);
                 }}
               />
@@ -206,7 +208,7 @@ function EmployeeAssessment({
                 name="commitment"
                 defaultValue={rangeSkill_5}
                 onChange={(e) => {
-                  handleInputChange(e)
+                  handleInputChange(e);
                   setRangeSkill_5(e.target.value);
                 }}
               />
@@ -228,7 +230,7 @@ function EmployeeAssessment({
                 name="trustworthiness"
                 defaultValue={rangeSkill_6}
                 onChange={(e) => {
-                  handleInputChange(e)
+                  handleInputChange(e);
                   setRangeSkill_6(e.target.value);
                 }}
               />
@@ -250,7 +252,7 @@ function EmployeeAssessment({
                 name="skill"
                 defaultValue={rangeSkill_7}
                 onChange={(e) => {
-                  handleInputChange(e)
+                  handleInputChange(e);
                   setRangeSkill_7(e.target.value);
                 }}
               />
@@ -272,7 +274,7 @@ function EmployeeAssessment({
                 name="teamPlayer"
                 defaultValue={rangeSkill_8}
                 onChange={(e) => {
-                  handleInputChange(e)
+                  handleInputChange(e);
                   setRangeSkill_8(e.target.value);
                 }}
               />
@@ -291,51 +293,61 @@ function EmployeeAssessment({
               <img src={quote} alt="" />
             </div>
             <div className="col-xl-8 col-md-8 col-sm-8  note-1">
-              <div className="col-xl-3 col-md-4 col-sm-5 note-text"
+              <div
+                className="col-xl-3 col-md-4 col-sm-5 note-text"
                 onClick={() => {
                   setValues({
                     ...values,
                     note: "Great Employee",
                   });
-                }}>
-                <h4 >Great employee</h4>
+                }}
+              >
+                <h4>Great employee</h4>
               </div>
-              <div className="col-xl-3 col-md-4 col-sm-5  note-text"
+              <div
+                className="col-xl-3 col-md-4 col-sm-5  note-text"
                 onClick={() => {
                   setValues({
                     ...values,
                     note: "Very Good Employee",
                   });
-                }}>
+                }}
+              >
                 <h4>Very Good employee</h4>
               </div>
-              <div className="col-xl-3 col-md-4 col-sm-5  note-text"
+              <div
+                className="col-xl-3 col-md-4 col-sm-5  note-text"
                 onClick={() => {
                   setValues({
                     ...values,
                     note: "Good Employee",
                   });
-                }}>
+                }}
+              >
                 <h4>Good employee</h4>
               </div>
             </div>
             <div className="col-xl-8 col-md-8 col-sm-8 note-2">
-              <div className="col-xl-3 col-md-4 col-sm-5  note-text"
+              <div
+                className="col-xl-3 col-md-4 col-sm-5  note-text"
                 onClick={() => {
                   setValues({
                     ...values,
                     note: "Poor Employee",
                   });
-                }}>
+                }}
+              >
                 <h4>Poor employee</h4>
               </div>
-              <div className="col-xl-3 col-md-4 col-sm-5  note-text"
+              <div
+                className="col-xl-3 col-md-4 col-sm-5  note-text"
                 onClick={() => {
                   setValues({
                     ...values,
                     note: "Worst Employee",
                   });
-                }}>
+                }}
+              >
                 <h4>Worst employee</h4>
               </div>
             </div>
@@ -348,7 +360,9 @@ function EmployeeAssessment({
                 value={values.note}
                 name="note"
                 rows="3"
-                onChange={(e) => { handleInputChange(e) }}
+                onChange={(e) => {
+                  handleInputChange(e);
+                }}
                 cols="100"
                 placeholder="enter your text assessment..."
               />
@@ -362,6 +376,5 @@ function EmployeeAssessment({
       </div>
     </div>
   );
-
 }
 export default EmployeeAssessment;
