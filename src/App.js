@@ -10,7 +10,7 @@ import SignupDone from "./pages/Signup/SignupDone";
 import Approval from "./pages/Employer/Approval/Approval";
 import SearchEmployee from "./pages/SearchEmployee/SearchEmployee";
 import Navbar from "./components/NavBar/Navbar";
-import VerficationRequest from "./pages/Employer/VerficationRequest/VerficationRequest";
+import VerficationRequest from "./pages/Employee/VerficationRequest/VerficationRequest";
 import OnboardingForm from "./pages/Employer/OnboardingForm/OnboardingForm";
 import OfferLetterSent from "./pages/Employer/OfferLetterSent/OfferLetterSent";
 import Employee from "./pages/Employer/EmployeeDetails/index";
