@@ -53,7 +53,7 @@ export default function SearchEmployee() {
           user === "Employer"
             ? await readEmployees(userDatas.id)
             : userDatas.data.currentEmployerId
-            ? await readColleagues(userDatas.data.currentEmployerId)
+            ? await readColleagues(userDatas.id, userDatas.data.currentEmployerId)
             : [{}];
         setEmployeeList(data);
       } catch (error) {
