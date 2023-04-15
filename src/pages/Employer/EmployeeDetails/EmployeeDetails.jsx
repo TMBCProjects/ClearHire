@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MdArrowBackIos, MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { FaQuoteLeft } from "react-icons/fa";
 import ViewFile from "../../../assets/images/view-doc.svg";
@@ -6,10 +6,27 @@ import UrlLink from "../../../assets/images/link.svg";
 import Employee1 from "../../../assets/images/person-1.png";
 import CompanyLogo from "../../../assets/images/company-logo.png";
 import ProgressBar from "../../../components/ProgressBar";
-import "./style.css";
+import "./EmployeeDetails.css";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import { useLocation } from "react-router-dom";
 
-const index = () => {
+const EmployeeDetails = () => {
+  const location = useLocation();
+  const { from } = location.state;
+  const employeeId = from;
+  const [employeeRatings, setEmployeeRatings] = useState([]);
+  const [employeeDetail, setEmployeeDetail] = useState([]);
+
+  useEffect(() => {
+    const fetchOfferDetails = async () => {
+      const userDatas = JSON.parse(sessionStorage.getItem("userData"));
+      // const data = await readEmployee(employeeId);
+      // const data2 = await readEmployeeRatings(employeeId);
+      // setEmployeeDetail(data);
+      // setEmployeeRatings(data2)
+    };
+    fetchOfferDetails();
+  }, []);
   return (
     <>
       <div className="container">
@@ -231,4 +248,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default EmployeeDetails;

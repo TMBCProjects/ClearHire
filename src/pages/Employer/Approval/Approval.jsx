@@ -198,9 +198,16 @@ const Approval = () => {
                     {
                       requests.find((req) => req.offerId === info.id)?.isApproved
                         ?
+                        <Link
+                          className="w-100 mt-3 btn"
+                          to={{
+                            pathname: "/employee-details",
+                          }}
+                          state={{ from: info.employeeId }}>
                         <button className="w-100 mt-3 btn btn-assessment">
                           View assessment
-                        </button>
+                          </button>
+                        </Link>
                         :
                         <button className="w-100 mt-3 btn btn-request-sent">
                           Request sent
@@ -216,26 +223,6 @@ const Approval = () => {
                     }
                   
                   </div>
-                  {requests.find((req) => req.employeeId === info.id)
-                    ?.isActive ? (
-                    <button className="w-100 mt-3 btn btn-assessment">
-                      View assessment
-                    </button>
-                  ) : (
-                    <button className="w-100 mt-3 btn btn-request-sent">
-                      Request sent
-                    </button>
-                  )}
-                  {!requests.find((req) => req.employeeId === info.id) && (
-                    <button
-                      className="w-100 mt-3 btn btn-request"
-                      onClick={() => {
-                        sentRequest(info);
-                      }}
-                    >
-                      Request to view assessment
-                    </button>
-                  )}
                 </div>
               </div>
             </div>
