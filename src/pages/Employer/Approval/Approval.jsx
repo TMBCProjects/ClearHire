@@ -7,7 +7,6 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { v4 as uuid } from "uuid";
 import {
-  readAccessRequests,
   readOfferReplies,
   sendRequestToViewAssesment,
 } from "../../../DataBase/Employer/employer";

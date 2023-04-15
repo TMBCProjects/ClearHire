@@ -6,7 +6,7 @@ import quote from "../../images/quote-left.svg";
 import arrow from "../../images/arrow-dropup.svg";
 import ProgressBar from "../../components/ProgressBar";
 import { rateEmployee } from "../../DataBase/Employer/employer";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const initialState = {
   dateOfReview: new Date(),
@@ -20,13 +20,11 @@ const initialState = {
   teamPlayer: 0,
   note: "",
 };
-function EmployeeAssessment({
-  employeeId,
-  employeeName,
-  employeeEmail,
-  profileImage,
-}) {
+function EmployeeAssessment() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { from } = location.state;
+  const info = from;
   const [values, setValues] = useState(initialState);
   let [rangeSkill_1, setRangeSkill_1] = useState(0);
   let [rangeSkill_2, setRangeSkill_2] = useState(0);
@@ -44,16 +42,15 @@ function EmployeeAssessment({
       [name]: value,
     });
   };
-
   const handleSubmit = () => {
     let userDatas = JSON.parse(sessionStorage.getItem("userData"));
     values.companyName = userDatas.data.companyName;
     values.ratedById = userDatas.id;
     values.ratedByEmail = userDatas.data.employerEmail;
-    values.employeeId = employeeId || "employeeId";
-    values.employeeName = employeeName || "employeeName";
-    values.employeeEmail = employeeEmail || "employeeEmail";
-    values.profileImage = profileImage || pic;
+    values.employeeId = info.id || "employeeId";
+    values.employeeName = info.employeeName || "employeeName";
+    values.employeeEmail = info.employeeEmail || "employeeEmail";
+    values.profileImage = info.profileImage || pic;
     rateEmployee(values).then(() => {
       window.location.href = "/";
     });
@@ -73,12 +70,12 @@ function EmployeeAssessment({
       <div className="row employe-details">
         <div className="col-xl-8 col-lg-7 col-md-6 col-12 employe-prof">
           <div className="prof-img">
-            <img src={profileImage} alt="" />
+            <img src={info.profileImage} alt="" />
           </div>
           <div className="prof-text">
-            <h3>Govarthan, 24</h3>
-            <h6>Project Manager at The example company</h6>
-            <h6>Chennai, India</h6>
+            <h3>{info.employeeName}, {info.dateOfBirth}</h3>
+            <h6>{info.designation} at {info.companyName}</h6>
+            <h6>{info.employeeState}, {info.employeeCountry}</h6>
           </div>
         </div>
         <div className="col-xl-4 col-lg-5 col-md-6 col-12 employe-score">
