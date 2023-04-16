@@ -10,9 +10,6 @@ import AssesmentCard from "../../components/Cards/AssesmentCard";
 
 import { readEmployees } from "../../DataBase/Employer/employer";
 import { readColleagues } from "../../DataBase/Employee/employee";
-const handleChange = (value) => {
-  console.log(`selected ${value}`);
-};
 const onChange = (e) => {
   console.log(`checked = ${e.target.checked}`);
 };
@@ -43,6 +40,7 @@ const options = [
 export default function SearchEmployee() {
   const user = sessionStorage.getItem("LoggedIn");
   const [employeeList, setEmployeeList] = useState([]);
+  const [filters, setFilters] = useState();
 
   useEffect(() => {
     const fetchEmployerDetails = async () => {
@@ -61,7 +59,38 @@ export default function SearchEmployee() {
       }
     };
     fetchEmployerDetails();
+    setFilters({
+      typeOfEmployment: '',
+      salary: '',
+      state: '',
+      country: '',
+      designation: ''
+    })
   });
+  const handleTypeOfEmploymentChange = (event) => {
+    filters.typeOfEmployment = event.target.value
+  }
+
+
+  const handleSalaryChange = (event) => {
+    filters.salary = event.target.value
+  }
+
+  const handleStateChange = (event) => {
+    filters.state = event.target.value
+  }
+
+  const handleDesignationChange = (event) => {
+    filters.designation = event.target.value
+  }
+
+  const handleCountryChange = (event) => {
+    filters.country = event.target.value
+  }
+
+  const handleChange = (value) => {
+    console.log(`selected ${value}`);
+  };
   return (
     <div className="employer-home">
       <div className="search-inputs">
@@ -69,6 +98,7 @@ export default function SearchEmployee() {
           <img src={search} alt="Search" />
           <input
             type="text"
+            onChange={(e) => handleDesignationChange(e)}
             className="box-input"
             placeholder="Job title, company and keyword"
           />
@@ -76,14 +106,22 @@ export default function SearchEmployee() {
         {user === "Employer" ? (
           <div className="input-box2 input-box">
             <img src={location} alt="Search" />
-            <input type="text" className="box-input" placeholder="Location" />
+            <input type="text" onChange={(e) => handleStateChange(e)} className="box-input" placeholder="State" />
+          </div>
+        ) : (
+          ""
+        )}
+        {user === "Employer" ? (
+          <div className="input-box2 input-box">
+            <img src={location} alt="Search" />
+            <input type="text" onChange={(e) => handleCountryChange(e)} className="box-input" placeholder="Country" />
           </div>
         ) : (
           ""
         )}
         <div className="input-box3 input-box">
           <img src={job} alt="Search" />
-          <input type="text" className="box-input" placeholder="Job Type" />
+          <input type="text" onChange={(e) => handleTypeOfEmploymentChange(e)} className="box-input" placeholder="Job Type" />
         </div>
         {user === "Employer" ? (
           <div className="input-box4 input-box">
@@ -119,30 +157,30 @@ export default function SearchEmployee() {
                 style={{
                   width: "100%",
                 }}
-                onChange={handleChange}
+                onChange={(e) => handleCountryChange(e)} 
                 options={options}
               />
             </div>
             <div className="dropdown-select">
-              <p>Categories</p>
+              <p>State</p>
               <Select
                 mode="tags"
                 style={{
                   width: "100%",
                 }}
-                onChange={handleChange}
+                onChange={(e) => handleStateChange(e)} 
                 tokenSeparators={[","]}
                 options={options}
               />
             </div>
             <div className="dropdown-select">
-              <p>Location</p>
+              <p>Country</p>
               <Select
                 mode="tags"
                 style={{
                   width: "100%",
                 }}
-                onChange={handleChange}
+                onChange={(e) => handleCountryChange(e)} 
                 tokenSeparators={[","]}
                 options={options}
               />
@@ -230,6 +268,7 @@ export default function SearchEmployee() {
                   marks={marks}
                   min={1}
                   max={50}
+                  onChange={(e) => handleSalaryChange(e)} 
                   trackStyle={{
                     backgroundColor: "#00823B",
                     height: ".3rem",
@@ -300,7 +339,15 @@ export default function SearchEmployee() {
             </div>
           </div>
           <div className="row2">
-            {employeeList?.map((info) => {
+            {employeeList?.filter((item) => {
+              return (
+                (filters.typeOfEmployment === '' || item.typeOfEmployment === filters.typeOfEmployment) &&
+                (filters.designation === '' || item.designation === filters.designation) &&
+                (filters.salary === '' || (item.salary >= filters.salary.split('-')[0] && item.salary <= filters.salary.split('-')[1])) &&
+                (filters.state === '' || item.employeeState.toLowerCase().includes(filters.state.toLowerCase())) &&
+                (filters.country === '' || item.employeeCountry.toLowerCase().includes(filters.country.toLowerCase()))
+              )
+            }).map((info) => {
               return (
                 <AssesmentCard
                   value={30}
