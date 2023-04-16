@@ -62,11 +62,10 @@ export default function SearchEmployee() {
     setFilters({
       typeOfEmployment: '',
       salary: '',
-      state: '',
-      country: '',
+      location: '',
       designation: ''
     })
-  });
+  }, [filters]);
   const handleTypeOfEmploymentChange = (event) => {
     filters.typeOfEmployment = event.target.value
   }
@@ -76,16 +75,12 @@ export default function SearchEmployee() {
     filters.salary = event.target.value
   }
 
-  const handleStateChange = (event) => {
-    filters.state = event.target.value
-  }
-
   const handleDesignationChange = (event) => {
     filters.designation = event.target.value
   }
 
-  const handleCountryChange = (event) => {
-    filters.country = event.target.value
+  const handleLocationChange = (event) => {
+    filters.location = event.target.value
   }
 
   const handleChange = (value) => {
@@ -106,15 +101,7 @@ export default function SearchEmployee() {
         {user === "Employer" ? (
           <div className="input-box2 input-box">
             <img src={location} alt="Search" />
-            <input type="text" onChange={(e) => handleStateChange(e)} className="box-input" placeholder="State" />
-          </div>
-        ) : (
-          ""
-        )}
-        {user === "Employer" ? (
-          <div className="input-box2 input-box">
-            <img src={location} alt="Search" />
-            <input type="text" onChange={(e) => handleCountryChange(e)} className="box-input" placeholder="Country" />
+            <input type="text" onChange={(e) => handleLocationChange(e)} className="box-input" placeholder="Location" />
           </div>
         ) : (
           ""
@@ -157,30 +144,18 @@ export default function SearchEmployee() {
                 style={{
                   width: "100%",
                 }}
-                onChange={(e) => handleCountryChange(e)} 
+                onChange={(e) => handleDesignationChange(e)} 
                 options={options}
               />
             </div>
             <div className="dropdown-select">
-              <p>State</p>
+              <p>Location</p>
               <Select
                 mode="tags"
                 style={{
                   width: "100%",
                 }}
-                onChange={(e) => handleStateChange(e)} 
-                tokenSeparators={[","]}
-                options={options}
-              />
-            </div>
-            <div className="dropdown-select">
-              <p>Country</p>
-              <Select
-                mode="tags"
-                style={{
-                  width: "100%",
-                }}
-                onChange={(e) => handleCountryChange(e)} 
+                onChange={(e) => handleLocationChange(e)} 
                 tokenSeparators={[","]}
                 options={options}
               />
@@ -339,13 +314,12 @@ export default function SearchEmployee() {
             </div>
           </div>
           <div className="row2">
-            {employeeList?.filter((item) => {
+            {employeeList.filter((item) => {
               return (
                 (filters.typeOfEmployment === '' || item.typeOfEmployment === filters.typeOfEmployment) &&
                 (filters.designation === '' || item.designation === filters.designation) &&
                 (filters.salary === '' || (item.salary >= filters.salary.split('-')[0] && item.salary <= filters.salary.split('-')[1])) &&
-                (filters.state === '' || item.employeeState.toLowerCase().includes(filters.state.toLowerCase())) &&
-                (filters.country === '' || item.employeeCountry.toLowerCase().includes(filters.country.toLowerCase()))
+                (filters.location === '' || item.employeeState.toLowerCase().includes(filters.location.toLowerCase()))
               )
             }).map((info) => {
               return (
