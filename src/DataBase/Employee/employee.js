@@ -93,9 +93,9 @@ export async function readOffers(employeeEmail) {
         setCollection(Collections.offers),
         where(Fields.employeeEmail, "==", employeeEmail),
         where(Fields.isActive, "==", true),
-        where(Fields.isAccepted, "==", false)
       )
     );
+    console.log(querySnapshot, "gg")
     querySnapshot.forEach(async (doc) => {
       let offer = {
         id: doc.id,
