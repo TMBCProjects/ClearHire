@@ -1,0 +1,7 @@
+[
+  {
+    "origin": ["https://clear-hire.vercel.app/","http://localhost:3000/"],
+    "method": ["GET"],
+    "maxAgeSeconds": 3600
+  }
+]
