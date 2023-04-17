@@ -41,20 +41,20 @@ const options = [
   },
 ];
 export default function SearchEmployee() {
-  const user = sessionStorage.getItem("LoggedIn");
   const [employeeList, setEmployeeList] = useState([]);
+  const user = sessionStorage.getItem("LoggedIn");
+  const userDatas = JSON.parse(sessionStorage.getItem("userData"));
 
   useEffect(() => {
     const fetchEmployerDetails = async () => {
       try {
-        const user = sessionStorage.getItem("LoggedIn");
-        const userDatas = JSON.parse(sessionStorage.getItem("userData"));
         const data =
           user === "Employer"
             ? await readEmployees(userDatas.id)
             : userDatas.data.currentEmployerId
             ? await readColleagues(userDatas.data.currentEmployerId)
             : [{}];
+        console.log(data);
         setEmployeeList(data);
       } catch (error) {
         console.log(error);
@@ -65,7 +65,15 @@ export default function SearchEmployee() {
       //setEmployeeList(data);
     };
     fetchEmployerDetails();
-  });
+  }, []);
+
+  // search filters
+  const handleSearchFilter = async () => {
+    try {
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="employer-home">
       <div className="search-inputs">
@@ -102,7 +110,7 @@ export default function SearchEmployee() {
           ""
         )}
 
-        <button>Search</button>
+        <button onClick={handleSearchFilter}>Search</button>
       </div>
       <div className="search-results">
         <div className="search-settings">
