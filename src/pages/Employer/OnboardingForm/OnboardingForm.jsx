@@ -51,7 +51,7 @@ function OnboardingForm() {
   let [file, setFile] = useState("");
 
   const handleBack = () => {
-    navigate("/");
+    navigate("/employer-approval");
   };
 
   return (
@@ -64,7 +64,7 @@ function OnboardingForm() {
           <div className="col-12">
             <div className="onboard-form-1">
               <p className="onboard-heading">On-Board New Employee</p>
-              <div className="mx-auto">
+              <div className="mx-auto d-flex flex-column justify-content-center align-items-center">
                 <div className="form-item">
                   <input
                     type="text"

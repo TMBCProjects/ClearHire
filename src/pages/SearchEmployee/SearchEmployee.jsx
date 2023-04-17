@@ -23,69 +23,54 @@ const marks2 = {
   0: "0%",
   100: "100%",
 };
-const options = [
-  {
-    value: "jack",
-    label: "Jack",
-  },
-  {
-    value: "lucy",
-    label: "Lucy",
-  },
-  {
-    value: "tom",
-    label: "Tom",
-  },
-];
+
 export default function SearchEmployee() {
   const user = sessionStorage.getItem("LoggedIn");
+  const userDatas = JSON.parse(sessionStorage.getItem("userData"));
   const [employeeList, setEmployeeList] = useState([]);
-  const [filters, setFilters] = useState();
+  const [filters, setFilters] = useState("");
 
+  // fetch employer details
+  const fetchEmployerDetails = async () => {
+    try {
+      const data =
+        user === "Employer"
+          ? await readEmployees(userDatas.id)
+          : userDatas.data.currentEmployerId
+          ? await readColleagues(userDatas.id, userDatas.data.currentEmployerId)
+          : [{}];
+      setEmployeeList(data);
+      setFilters({
+        typeOfEmployment: "",
+        salary: "",
+        location: "",
+        designation: "",
+      });
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
-    const fetchEmployerDetails = async () => {
-      try {
-        const user = sessionStorage.getItem("LoggedIn");
-        const userDatas = JSON.parse(sessionStorage.getItem("userData"));
-        const data =
-          user === "Employer"
-            ? await readEmployees(userDatas.id)
-            : userDatas.data.currentEmployerId
-              ? await readColleagues(userDatas.id, userDatas.data.currentEmployerId)
-            : [{}];
-        setEmployeeList(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     fetchEmployerDetails();
-    setFilters({
-      typeOfEmployment: '',
-      salary: '',
-      location: '',
-      designation: ''
-    })
-  }, [filters]);
-  const handleTypeOfEmploymentChange = (event) => {
-    filters.typeOfEmployment = event.target.value
-  }
+  }, []);
 
+  const handleTypeOfEmploymentChange = (event) => {
+    filters.typeOfEmployment = event.target.value;
+  };
 
   const handleSalaryChange = (event) => {
-    filters.salary = event.target.value
-  }
+    filters.salary = event.target.value;
+  };
 
   const handleDesignationChange = (event) => {
-    filters.designation = event.target.value
-  }
+    filters.designation = event.target.value;
+  };
 
   const handleLocationChange = (event) => {
-    filters.location = event.target.value
-  }
-
-  const handleChange = (value) => {
-    console.log(`selected ${value}`);
+    filters.location = event.target.value;
   };
+
   return (
     <div className="employer-home">
       <div className="search-inputs">
@@ -101,14 +86,24 @@ export default function SearchEmployee() {
         {user === "Employer" ? (
           <div className="input-box2 input-box">
             <img src={location} alt="Search" />
-            <input type="text" onChange={(e) => handleLocationChange(e)} className="box-input" placeholder="Location" />
+            <input
+              type="text"
+              onChange={(e) => handleLocationChange(e)}
+              className="box-input"
+              placeholder="Location"
+            />
           </div>
         ) : (
           ""
         )}
         <div className="input-box3 input-box">
           <img src={job} alt="Search" />
-          <input type="text" onChange={(e) => handleTypeOfEmploymentChange(e)} className="box-input" placeholder="Job Type" />
+          <input
+            type="text"
+            onChange={(e) => handleTypeOfEmploymentChange(e)}
+            className="box-input"
+            placeholder="Job Type"
+          />
         </div>
         {user === "Employer" ? (
           <div className="input-box4 input-box">
@@ -122,7 +117,6 @@ export default function SearchEmployee() {
         ) : (
           ""
         )}
-
         <button>Search</button>
       </div>
       <div className="search-results">
@@ -144,8 +138,12 @@ export default function SearchEmployee() {
                 style={{
                   width: "100%",
                 }}
-                onChange={(e) => handleDesignationChange(e)} 
-                options={options}
+                onChange={(e) => handleDesignationChange(e)}
+                options={[
+                  { value: "Graphics Designer", label: "Graphics Designer" },
+                  { value: "Developer", label: "Developer" },
+                  { value: "Video Editor", label: "Video Editor" },
+                ]}
               />
             </div>
             <div className="dropdown-select">
@@ -155,9 +153,17 @@ export default function SearchEmployee() {
                 style={{
                   width: "100%",
                 }}
-                onChange={(e) => handleLocationChange(e)} 
+                onChange={(e) => handleLocationChange(e)}
                 tokenSeparators={[","]}
-                options={options}
+                options={[
+                  {
+                    value: "Inda",
+                    label: "India",
+                  },
+                  { value: "USA", label: "USA" },
+                  { value: "Canada", label: "Canada" },
+                  { value: "Australia", label: "Australia" },
+                ]}
               />
             </div>
           </div>
@@ -243,7 +249,7 @@ export default function SearchEmployee() {
                   marks={marks}
                   min={1}
                   max={50}
-                  onChange={(e) => handleSalaryChange(e)} 
+                  onChange={(e) => handleSalaryChange(e)}
                   trackStyle={{
                     backgroundColor: "#00823B",
                     height: ".3rem",
@@ -314,25 +320,34 @@ export default function SearchEmployee() {
             </div>
           </div>
           <div className="row2">
-            {employeeList.filter((item) => {
-              return (
-                (filters.typeOfEmployment === '' || item.typeOfEmployment === filters.typeOfEmployment) &&
-                (filters.designation === '' || item.designation === filters.designation) &&
-                (filters.salary === '' || (item.salary >= filters.salary.split('-')[0] && item.salary <= filters.salary.split('-')[1])) &&
-                (filters.location === '' || item.employeeState.toLowerCase().includes(filters.location.toLowerCase()))
-              )
-            }).map((info) => {
-              return (
-                <AssesmentCard
-                  value={30}
-                  info={info}
-                  name={info.employeeName}
-                  state={info.employeeState}
-                  country={info.employeeCountry}
-                  designation={info.designation}
-                />
-              );
-            })}
+            {employeeList
+              .filter((item) => {
+                return (
+                  (filters.typeOfEmployment === "" ||
+                    item.typeOfEmployment === filters.typeOfEmployment) &&
+                  (filters.designation === "" ||
+                    item.designation === filters.designation) &&
+                  (filters.salary === "" ||
+                    (item.salary >= filters.salary.split("-")[0] &&
+                      item.salary <= filters.salary.split("-")[1])) &&
+                  (filters.location === "" ||
+                    item.employeeState
+                      .toLowerCase()
+                      .includes(filters.location.toLowerCase()))
+                );
+              })
+              .map((info) => {
+                return (
+                  <AssesmentCard
+                    value={30}
+                    info={info}
+                    name={info.employeeName}
+                    state={info.employeeState}
+                    country={info.employeeCountry}
+                    designation={info.designation}
+                  />
+                );
+              })}
           </div>
         </div>
       </div>
