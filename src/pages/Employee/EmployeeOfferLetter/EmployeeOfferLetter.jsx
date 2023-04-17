@@ -27,7 +27,7 @@ const EmployeeOfferLetter = () => {
       offerLetter: item.offerLetter,
       dateOfJoining: item.dateOfJoining,
     })
-  }, [item])
+  }, [item, userDatas])
 
   const updateUserData = (data) => {
     const newData = Object.assign({}, userDatas);

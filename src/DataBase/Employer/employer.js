@@ -5,7 +5,6 @@ import {
   addDocument,
   getDocument,
   getDocuments,
-  setDocument,
   uploadFile,
 } from "../../utils/FirebaseUtils";
 import { Fields } from "../../utils/Fields";

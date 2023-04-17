@@ -11,8 +11,10 @@
   background-color: white;
   height: 10vh !important;
   display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
-  top: 5.7rem !important;
+  top: 4.4rem !important;
   z-index: 1;
 }
 
@@ -48,7 +50,7 @@
 .search-inputs button {
   position: absolute;
   right: 3rem;
-  top: 1rem;
+  top: 0.5rem;
   width: 10rem;
   padding: 1rem;
   border: 0;
@@ -58,7 +60,7 @@
 }
 
 .search-results {
-  margin-top: 6rem;
+  margin-top: 4rem;
   display: flex;
 }
 
@@ -105,6 +107,8 @@
 
 .ranges {
   margin-top: 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .clear-filter {
