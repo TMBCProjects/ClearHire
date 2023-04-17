@@ -130,6 +130,7 @@ export async function profileUpdate(profileData, employeeId) {
   await updateDocument(Collections.employees, profileData, employeeId);
 }
 export async function offerAccept(profileData, employeeId, offerId) {
+  console.log(profileData);
   await updateDocument(
     Collections.offers,
     {

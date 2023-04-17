@@ -16,6 +16,7 @@ const EmployeeOfferLetter = () => {
   useEffect(() => {
     setValues({
       currentEmployerId: item.employerId,
+      employeeName: userDatas.data.employeeName,
       designation: item.designation,
       salary: item.salary,
       companyName: item.companyName,
