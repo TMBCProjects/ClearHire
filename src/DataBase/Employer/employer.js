@@ -401,6 +401,7 @@ export async function onboardEmployee(offerData) {
   let offer = new Offer();
   offer = {
     isActive: true,
+    isAccepted: false,
     employeeName: offerData.name,
     employeeEmail: offerData.email,
     dateOfJoining: offerData.dateOfJoining,

@@ -56,6 +56,16 @@ function EmployeeAssessment() {
     });
   };
 
+  const calculateAge = (dob) => {
+    const today = new Date();
+    const birthDate = new Date(dob);
+    let years = today.getFullYear() - birthDate.getFullYear();
+    const months = today.getMonth() - birthDate.getMonth();
+    if (months < 0 || (months === 0 && today.getDate() < birthDate.getDate())) {
+      years--;
+    }
+    return years;
+  };
   // handle back click
   const handleBack = () => {
     navigate("/");
@@ -73,7 +83,7 @@ function EmployeeAssessment() {
             <img src={info.profileImage} alt="" />
           </div>
           <div className="prof-text">
-            <h3>{info.employeeName}, {info.dateOfBirth}</h3>
+            <h3>{info.employeeName}, {calculateAge(info.dateOfBirth)}</h3>
             <h6>{info.designation} at {info.companyName}</h6>
             <h6>{info.employeeState}, {info.employeeCountry}</h6>
           </div>

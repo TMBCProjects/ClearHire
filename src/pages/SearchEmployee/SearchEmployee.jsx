@@ -52,7 +52,7 @@ export default function SearchEmployee() {
             ? await readEmployees(userDatas.id)
             : userDatas.data.currentEmployerId
               ? await readColleagues(userDatas.id, userDatas.data.currentEmployerId)
-            : [{}];
+              : [];
         setEmployeeList(data);
       } catch (error) {
         console.log(error);
