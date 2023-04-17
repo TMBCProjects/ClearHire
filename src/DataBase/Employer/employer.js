@@ -3,7 +3,9 @@ import Offer from "../../Modals/DB/Offer";
 import { Collections } from "../../utils/Collections";
 import {
   addDocument,
+  getDocument,
   getDocuments,
+  setDocument,
   uploadFile,
 } from "../../utils/FirebaseUtils";
 import { Fields } from "../../utils/Fields";
@@ -174,107 +176,6 @@ export default async function defaultFn() {}
 //   }
 // }
 
-// export async function readTaskById(id) {
-//   const docRef = setDocument(Collections.tasks, id);
-//   try {
-//     const doc = await getDocument(docRef);
-//     let task = {};
-//     if (doc.exists()) {
-//       const promise = readCommunications(doc).then((communications) => {
-//         task = {
-//           id: doc.id,
-//           assigned: doc.data().assigned,
-//           companyName: doc.data().companyName,
-//           companyId: doc.data().companyId,
-//           clientId: doc.data().clientId,
-//           clientEmail: doc.data().clientEmail,
-//           clientName: doc.data().clientName,
-//           profileImage: doc.data().profileImage,
-//           corrections: doc.data().corrections,
-//           createdAt: doc.data().createdAt,
-//           createdBy: doc.data().createdBy,
-//           pauseTimeStamp:doc.data()?.pauseTimeStamp,
-//           startTimeStamp:doc.data()?.startTimeStamp,
-//           completedOn:doc.data()?.completedOn,
-//           createdByEmail: doc.data().createdByEmail,
-//           deadline: doc.data().deadline,
-//           isLive: doc.data().isLive,
-//           managerId: doc.data().managerId,
-//           status: doc.data().status,
-//           taskId: doc.data().taskId,
-//           teammateId: doc.data().teammateId,
-//           teammateName: doc.data().teammateName,
-//           title: doc.data().title,
-//           totalHours: doc.data().totalHours,
-//           highPriority: doc.data().highPriority,
-//           type: doc.data().type,
-//           communications: communications,
-//         };
-//       });
-//       await Promise.resolve(promise);
-//       return task;
-//     } else {
-//       return {};
-//     }
-//   } catch (error) {
-//     message.error("Error while fetching data", error);
-//     return {};
-//   }
-// }
-
-// export async function readCommunications(doc) {
-//   try {
-//     const communications = [];
-//     const querySnapshot = await getDocuments(
-//       query(
-//         setSubCollection(Collections.tasks, doc.id, Collections.communications),
-//         where(Fields.isVisible, "==", true)
-//       )
-//     );
-//     querySnapshot.forEach(async (doc) => {
-//       let communication = new Communication();
-//       communication = {
-//         id: doc.id,
-//         corrections: doc.data().corrections,
-//         correctionNo: doc.data().correctionNo,
-//         createdAt: doc.data().createdAt,
-//         createdBy: doc.data().createdBy,
-//         createdByEmail: doc.data().createdByEmail,
-//         isVisible: doc.data().isVisible,
-//         managerId: doc.data().managerId,
-//         teammateId: doc.data().teammateId,
-//         query: doc.data().query,
-//         queryId: doc.data().queryId,
-//         description: doc.data().description,
-//         type: doc.data().type,
-//       };
-//       switch (doc.data().type) {
-//         case "DESCRIPTION_ADDED":
-//           communication.description = doc.data().description;
-//           break;
-//         case "QUERY_ADDED":
-//           communication.query = doc.data().query;
-//           communication.queryNo = doc.data().queryNo;
-//           break;
-//         case "QUERY_REPLIED":
-//           communication.query = doc.data().query;
-//           communication.queryId = doc.data().queryId;
-//           communication.queryReplied = doc.data().queryReplied;
-//           break;
-//         case "CORRECTION_ADDED":
-//           communication.description = doc.data().description;
-//           break;
-//         default:
-//           break;
-//       }
-//       communications.push(communication);
-//     });
-//     return communications;
-//   } catch (err) {
-//     return [];
-//   }
-// }
-
 // export async function readTeammatesByMangerId(id) {
 //   let teamates = [];
 //   const teammatesRef = setCollection(Collections.teammates);
@@ -332,6 +233,45 @@ export default async function defaultFn() {}
 // }
 
 // fetch the employer details
+
+export async function readEmployee(id) {
+  try {
+    const doc = await getDocument(Collections.employees, id);
+    let employee = {};
+    if (doc.exists()) {
+      employee = {
+        id: doc.id,
+        isActive: doc.data().isActive,
+        employeeName: doc.data().employeeName,
+        employeeEmail: doc.data().employeeEmail,
+        employeeCountry: doc.data().employeeCountry,
+        employeeState: doc.data().employeeState,
+        profileImage: doc.data().profileImage,
+        dateOfBirth: doc.data().dateOfBirth,
+        role: doc.data().role,
+        currentEmployerId: doc.data().currentEmployerId,
+        employerIdList: doc.data().employerIdList,
+        designation: doc.data().designation,
+        salary: doc.data().salary,
+        companyName: doc.data().companyName,
+        companyLogo: doc.data().companyLogo,
+        typeOfEmployment: doc.data().typeOfEmployment,
+        offerLetter: doc.data().offerLetter,
+        dateOfJoining: doc.data().dateOfJoining,
+        employeeAadhaarCardNumber: doc.data().employeeAadhaarCardNumber,
+        portfolioLink: doc.data().portfolioLink,
+        resume: doc.data().resume,
+        skills: doc.data().skills,
+      };
+      return employee;
+    } else {
+      return {};
+    }
+  } catch (error) {
+    console.error("Error while fetching data", error);
+    return {};
+  }
+}
 export async function readEmployees(employerId) {
   try {
     let employees = [];
@@ -374,7 +314,44 @@ export async function readEmployees(employerId) {
     console.log(error);
   }
 }
-
+export async function readEmployeeRatings(employeeId) {
+  try {
+    let ratings = [];
+    const querySnapshot = await getDocuments(
+      query(
+        setCollection(Collections.ratings),
+        where(Fields.employeeId, "==", employeeId),
+        where(Fields.isActive, "==", true)
+      )
+    );
+    querySnapshot.forEach(async (doc) => {
+      let rating = {
+        id: doc.id,
+        isActive: doc.data().isActive,
+        companyName: doc.data().companyName,
+        ratedById: doc.data().ratedById,
+        ratedByEmail: doc.data().ratedByEmail,
+        employeeId: doc.data().employeeId,
+        employeeName: doc.data().employeeName,
+        employeeEmail: doc.data().employeeEmail,
+        dateOfReview: doc.data().dateOfReview,
+        communication: doc.data().communication,
+        attitude: doc.data().attitude,
+        abilityToLearn: doc.data().abilityToLearn,
+        punctuality: doc.data().punctuality,
+        commitment: doc.data().commitment,
+        trustworthiness: doc.data().trustworthiness,
+        skill: doc.data().skill,
+        teamPlayer: doc.data().teamPlayer,
+        note: doc.data().note,
+      };
+      ratings.push(rating);
+    });
+    return ratings;
+  } catch (error) {
+    console.log(error);
+  }
+}
 export async function readOfferReplies(employerId) {
   try {
     let offers = [];
