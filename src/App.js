@@ -10,10 +10,10 @@ import SignupDone from "./pages/Signup/SignupDone";
 import Approval from "./pages/Employer/Approval/Approval";
 import SearchEmployee from "./pages/SearchEmployee/SearchEmployee";
 import Navbar from "./components/NavBar/Navbar";
-import VerficationRequest from "./pages/Employer/VerficationRequest/VerficationRequest";
+import VerficationRequest from "./pages/Employee/VerficationRequest/VerficationRequest";
 import OnboardingForm from "./pages/Employer/OnboardingForm/OnboardingForm";
 import OfferLetterSent from "./pages/Employer/OfferLetterSent/OfferLetterSent";
-import Employee from "./pages/Employer/EmployeeDetails/index";
+import EmployeeDetails from "./pages/Employer/EmployeeDetails/EmployeeDetails";
 import Profile from "./pages/Employee/Profile/Profile";
 import EmployeeOfferLetter from "./pages/Employee/EmployeeOfferLetter/EmployeeOfferLetter";
 import EmployeeAssessment from "./pages/EmployeeAssessment/EmployeeAssessment";
@@ -68,7 +68,7 @@ function App() {
                     element={<EmployeeAssessment />}></Route>
                   <Route
                     path="/employee-details"
-                    element={<Employee />}></Route>
+                    element={<EmployeeDetails />}></Route>
                   <Route
                     path="/onboarding-form"
                     element={<OnboardingForm />}></Route>
@@ -101,7 +101,7 @@ function App() {
                     <Route
                       path="/EmployeeAssessment"
                       element={<EmployeeAssessment />}></Route>
-                      {/*<Route path="/employer-approval" element={<Approval />}></Route>
+                    {/*<Route path="/employer-approval" element={<Approval />}></Route>
                    <Route path="/verification-request" element={<VerficationRequest />}></Route>
                   <Route path="/assessment" element={<Assessment />}></Route>
                   <Route path="/employee-details" element={<Employee />}></Route> */}
