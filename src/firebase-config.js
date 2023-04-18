@@ -17,4 +17,4 @@ export const fire = firebase.initializeApp(firebaseConfig);
 export const auth = getAuth(fire);
 export const firestoreDB = getFirestore(fire);
 export const storageRef = getStorage(fire);
-// export const provider = new GoogleAuthProvider();
+// gcloud storage buckets update gs://clearhire-d91d9.appspot.com --cors-file=D:\Projects\ClearHire-1\cors.json

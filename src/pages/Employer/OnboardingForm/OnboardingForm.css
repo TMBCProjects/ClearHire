@@ -11,6 +11,7 @@
 .back {
     width: 100%;
     background: #F5F7F9;
+    cursor: pointer;
 }
 
 .back-item {

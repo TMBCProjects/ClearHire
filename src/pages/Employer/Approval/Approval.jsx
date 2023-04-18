@@ -5,8 +5,12 @@ import View from "../../../assets/images/view-doc.svg";
 import "./approval.css";
 import { useState } from "react";
 import { useEffect } from "react";
-import { v4 as uuid } from 'uuid';
-import { readAccessRequests, readOfferReplies, sendRequestToViewAssesment } from "../../../DataBase/Employer/employer";
+import { v4 as uuid } from "uuid";
+import {
+  readOfferReplies,
+  sendRequestToViewAssesment,
+} from "../../../DataBase/Employer/employer";
+
 import { onSnapshot, query, where } from "firebase/firestore";
 import { Fields } from "../../../utils/Fields";
 import { getDocuments, setCollection } from "../../../utils/FirebaseUtils";
@@ -18,7 +22,7 @@ const Approval = () => {
 
   useEffect(() => {
     const fetchOfferDetails = async () => {
-      const userDatas = JSON.parse(sessionStorage.getItem("userData"))
+      const userDatas = JSON.parse(sessionStorage.getItem("userData"));
       const data = await readOfferReplies(userDatas.id);
       setOfferReplies(data);
     };
@@ -31,12 +35,16 @@ const Approval = () => {
         const querySnapshot = await getDocuments(
           query(
             setCollection(Collections.requests),
+
             where(Fields.employerId, "==", userDatas.id),
+            where(Fields.isActive, "==", true),
           )
         );
 
         if (!querySnapshot) {
-          console.error("Error fetching access requests: querySnapshot is undefined");
+          console.error(
+            "Error fetching access requests: querySnapshot is undefined"
+          );
           return;
         }
 
@@ -45,6 +53,7 @@ const Approval = () => {
           if (doc.exists) {
             const request = {
               id: doc.id,
+              isActive: doc.data().isActive,
               isApproved: doc.data().isApproved,
               companyName: doc.data().companyName,
               companyLogo: doc.data().companyLogo,
@@ -52,7 +61,7 @@ const Approval = () => {
               employerId: doc.data().employerId,
               employeeEmail: doc.data().employeeEmail,
               employeeId: doc.data().employeeId,
-              requestId: doc.data().requestId,
+              offerId: doc.data().offerId,
             };
             requestsData.push(request);
           } else {
@@ -65,11 +74,10 @@ const Approval = () => {
       }
     };
 
-
     const unsubscribe = onSnapshot(
       query(
         setCollection(Collections.requests),
-        where(Fields.employerId, "==", userDatas.id),
+        where(Fields.employerId, "==", userDatas.id)
       ),
       { includeMetadataChanges: true },
       () => {
@@ -82,10 +90,9 @@ const Approval = () => {
     };
   }, []);
 
-
   console.log(requests);
   const sentRequest = async (data) => {
-    let userDetails = JSON.parse(sessionStorage.getItem("userData")).data
+    let userDetails = JSON.parse(sessionStorage.getItem("userData")).data;
     let newRequest = {
       isApproved: false,
       companyName: userDetails.companyName,
@@ -95,14 +102,14 @@ const Approval = () => {
       employeeEmail: data.employeeEmail,
       employeeId: data.id,
       requestId: `req-${uuid(6)}`,
-    }
+    };
     // console.log(newRequest);
-    await sendRequestToViewAssesment(newRequest)
-  }
+    await sendRequestToViewAssesment(newRequest);
+  };
 
 
   return (
-    <div id="employer-approval">
+    <div id="employer-approval" className="container">
       <div className="row d-flex justify-content-between align-items-center">
         <div className="col-md-6">
           <h3 className="fw-bold fs-30">Sent Approvals (Pending)</h3>
@@ -156,49 +163,60 @@ const Approval = () => {
           </div>
           <div className="form-check form-check-inline">
             <Link to={"/onboarding-form"} className="btn add-recruit">
-              <img src={Add} className="mr-5 add-icon" alt="addIcons" /> New Recruit
+              <img src={Add} className="mr-5 add-icon" alt="addIcons" /> New
+              Recruit
             </Link>
           </div>
         </div>
       </div>
       <div className="row mt-3">
-        {
-          offerReplies?.map((info) => {
-            return (
-              <div className="col-md-3 gy-3">
-                <div className="card">
-                  <div className="card-body">
-                    <h3 className="card-title fw-bold">{info.employeeName}</h3>
-                    <p className="card-text designation w-50 mt-2">
-                      {info.designation}
-                    </p>
-                    <p className="mb-1">{info.employeeState}, {info.employeeCountry}</p>
-                    <p className="mb-1">{info.employeeEmail}</p>
-                    <p className="mb-1">{info.dateOfJoining}</p>
-                    <p className="mb-1">{info.salary}</p>
-                    <div className="row  mt-2">
-                      <div className="col">
-                        <p className="text-color-green fs-13 fw-bold">
-                          <img className="mr-5" src={View} alt="" /> View offer Letter
-                        </p>
-                      </div>
-                      <div className="col">
-                        <button className="delete-btn">Delete</button>
-                      </div>
+        {offerReplies?.map((info) => {
+          return (
+            <div className="col-md-3 gy-3">
+              <div className="card">
+                <div className="card-body">
+                  <h3 className="card-title fw-bold">{info.employeeName}</h3>
+                  <p className="card-text designation w-50 mt-2">
+                    {info.designation}
+                  </p>
+                  <p className="mb-1">
+                    {info.employeeState}, {info.employeeCountry}
+                  </p>
+                  <p className="mb-1">{info.employeeEmail}</p>
+                  <p className="mb-1">{info.dateOfJoining}</p>
+                  <p className="mb-1">{info.salary}</p>
+                  <div className="row  mt-2">
+                    <div className="col">
+                      <p className="text-color-green fs-13 fw-bold">
+                        <img className="mr-5" src={View} alt="" /> View offer
+                        Letter
+                      </p>
+                    </div>
+                    <div className="col">
+                      <button className="delete-btn">Delete</button>
                     </div>
                     {
+
                       requests.find((req) => req.employeeId === info.id)?.isApproved
+
                         ?
+                        <Link
+                          className="w-100 mt-3 btn"
+                          to={{
+                            pathname: "/employee-details",
+                          }}
+                          state={{ from: info.employeeId }}>
                         <button className="w-100 mt-3 btn btn-assessment">
                           View assessment
-                        </button>
+                          </button>
+                        </Link>
                         :
                         <button className="w-100 mt-3 btn btn-request-sent">
                           Request sent
                         </button>
                     }
                     {
-                      !requests.find((req) => req.employeeId === info.id) && 
+                      !requests.find((req) => req.offerId === info.id) && 
                       <button className="w-100 mt-3 btn btn-request" onClick={() => {
                         sentRequest(info)
                       }}>
@@ -208,8 +226,10 @@ const Approval = () => {
                   
                   </div>
                 </div>
-              </div>)
-          })}
+              </div>
+            </div>
+          );
+        })}
         {/* <div className="col-md-3 gy-3">
           <div className="card">
             <div className="card-body">

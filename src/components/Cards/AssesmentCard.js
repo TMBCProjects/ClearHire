@@ -3,7 +3,8 @@ import React from "react";
 import pic from "../../assets/images/pic.png";
 import ProgressBar from "../ProgressBar";
 import "./styles.css";
-const Assesment_Card = ({ value, name, state, country, designation }) => {
+import { Link } from "react-router-dom";
+const Assesment_Card = ({ info, value, name, state, country, designation }) => {
   return (
     <div className="vreqcard assess-card">
       <div className="managerlogo">
@@ -31,9 +32,16 @@ const Assesment_Card = ({ value, name, state, country, designation }) => {
           {designation}
         </span>
       </div>
-
+      Assess Employee
       <div className="cardFooter">
-        <button className="allow">Assess Employee</button>
+        <Link
+          className="w-100 mt-3 btn"
+          to={{
+            pathname: "/EmployeeAssessment",
+          }}
+          state={{ from: info }}>
+          <button className="allow">Assess Employee</button>
+        </Link>
       </div>
     </div>
   );

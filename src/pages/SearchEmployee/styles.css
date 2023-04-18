@@ -5,15 +5,19 @@
   height: auto;
   padding-bottom: 3vh
 }
+
 .search-inputs {
   width: inherit;
   background-color: white;
   height: 10vh !important;
   display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
-  top: 5.7rem !important;
+  top: 4.4rem !important;
   z-index: 1;
 }
+
 .search-inputs .input-box {
   height: 100%;
   width: 25%;
@@ -22,9 +26,11 @@
   align-items: center;
   padding: 0 3rem;
 }
+
 .search-inputs .input-box img {
   width: 6%;
 }
+
 .search-inputs .input-box .box-input {
   height: 100%;
   border: 0 !important;
@@ -35,14 +41,16 @@
   width: 100%;
   border-right: 1px solid #dadada !important;
 }
+
 .search-inputs .input-box .no-border {
   border-right: none !important;
   width: 50% !important;
 }
+
 .search-inputs button {
   position: absolute;
   right: 3rem;
-  top: 1rem;
+  top: 0.5rem;
   width: 10rem;
   padding: 1rem;
   border: 0;
@@ -50,47 +58,60 @@
   color: white;
   border-radius: 10px;
 }
+
 .search-results {
-  margin-top: 6rem;
+  margin-top: 4rem;
   display: flex;
 }
+
 .search-settings {
   flex: .2;
-  padding:2rem;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
 }
+
 .ant-select-selection-search {
   width: inherit !important;
 }
+
 .ant-select-selection-search input {
   border: 0 !important;
   outline: none !important;
   box-shadow: none;
 }
+
 .search-settings .dropdowns {
   display: flex;
   flex-direction: column;
 }
+
 .result-employees {
   flex: .75;
 }
-.dropdown-select p{
-font-size: 1.2rem;
+
+.dropdown-select p {
+  font-size: 1.2rem;
 }
-.checkboxes{
+
+.checkboxes {
   margin-top: 2rem;
   display: flex;
   flex-direction: column;
 }
-.checkboxes .checkboxes-div{
+
+.checkboxes .checkboxes-div {
   display: flex;
   flex-direction: column;
 }
-.ranges{
+
+.ranges {
   margin-top: 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
-.clear-filter{
+
+.clear-filter {
   width: 50%;
   margin-top: 2rem;
   text-decoration: none;
@@ -98,26 +119,31 @@ font-size: 1.2rem;
   display: flex;
   cursor: pointer;
   align-items: center;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
-.clear-filter img{
+
+.clear-filter img {
   margin-right: .7rem;
 }
-.clear-filter:hover{
+
+.clear-filter:hover {
   color: #000 !important;
 }
-.result-employees .row1{
+
+.result-employees .row1 {
   display: flex;
   width: 100%;
   justify-content: space-between;
   padding: 2rem 0;
 }
-.result-employees .row2{
+
+.result-employees .row2 {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
 }
-.ranges-div{
+
+.ranges-div {
   display: flex;
   flex-direction: column;
   gap: 2vh;

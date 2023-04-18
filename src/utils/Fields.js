@@ -7,6 +7,7 @@ const Fields = {
   currentEmployerId: "currentEmployerId",
   employeeEmail: "employeeEmail",
   employerId: "employerId",
+  employeeId: "employeeId",
   resumes: "resumes",
   isLive: "isLive",
 };

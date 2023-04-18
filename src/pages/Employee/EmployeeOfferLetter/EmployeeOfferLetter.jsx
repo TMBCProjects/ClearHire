@@ -12,6 +12,7 @@ const EmployeeOfferLetter = () => {
   const location = useLocation();
   const { from } = location.state;
   const item = from;
+
   useEffect(() => {
     setValues({
       currentEmployerId: item.employerId,
@@ -37,6 +38,7 @@ const EmployeeOfferLetter = () => {
     updateUserData(values)
     offerAccept(values, userDatas.id, item.id);
   };
+
   return (
     <div
       className="container"

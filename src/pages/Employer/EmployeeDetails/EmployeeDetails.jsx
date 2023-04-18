@@ -1,15 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MdArrowBackIos, MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { FaQuoteLeft } from "react-icons/fa";
 import ViewFile from "../../../assets/images/view-doc.svg";
 import UrlLink from "../../../assets/images/link.svg";
 import Employee1 from "../../../assets/images/person-1.png";
 import CompanyLogo from "../../../assets/images/company-logo.png";
-import ProgressBar from '../../../components/ProgressBar'
-import "./style.css";
+import ProgressBar from "../../../components/ProgressBar";
+import "./EmployeeDetails.css";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import { useLocation } from "react-router-dom";
 
-const index = () => {
+const EmployeeDetails = () => {
+  const location = useLocation();
+  const { from } = location.state;
+  const employeeId = from;
+  const [employeeRatings, setEmployeeRatings] = useState([]);
+  const [employeeDetail, setEmployeeDetail] = useState([]);
+
+  useEffect(() => {
+    const fetchOfferDetails = async () => {
+      const userDatas = JSON.parse(sessionStorage.getItem("userData"));
+      // const data = await readEmployee(employeeId);
+      // const data2 = await readEmployeeRatings(employeeId);
+      // setEmployeeDetail(data);
+      // setEmployeeRatings(data2)
+    };
+    fetchOfferDetails();
+  }, []);
   return (
     <>
       <div className="container">
@@ -45,11 +62,10 @@ const index = () => {
 
           <div className="col-4 d-flex justify-content-center align-items-center empDetailsProgress">
             <div class="circle-wrap">
-              <ProgressBar value={75}/>
+              <ProgressBar value={75} />
             </div>
             <div class="circle-wrap">
-            <ProgressBar value={50}/>
-
+              <ProgressBar value={50} />
             </div>
           </div>
         </div>
@@ -66,23 +82,23 @@ const index = () => {
           </div>
           <div className="skills">
             <p className="title">Photoshop</p>
-            <ProgressBar value={75}/>
+            <ProgressBar value={75} />
           </div>
           <div className="skills">
             <p className="title">Illustrator</p>
-            <ProgressBar value={75}/>
+            <ProgressBar value={75} />
           </div>
           <div className="skills">
             <p className="title">Premiere Pro</p>
-            <ProgressBar value={75}/>
+            <ProgressBar value={75} />
           </div>
           <div className="skills">
             <p className="title">After Effects</p>
-            <ProgressBar value={75}/>
+            <ProgressBar value={75} />
           </div>
           <div className="skills">
             <p className="title">Photoshop</p>
-            <ProgressBar value={75}/>
+            <ProgressBar value={75} />
           </div>
           <div className="arrowRight">
             <RightOutlined
@@ -116,83 +132,50 @@ const index = () => {
           <div className="col-md-8">
             <div className="row">
               <div className="col-md-3 mb-3">
-
-
                 <div class="circle-wrap">
-                <ProgressBar value={75}/>
-
-
+                  <ProgressBar value={75} />
                 </div>
                 <p>Communitcation</p>
               </div>
               <div className="col-md-3 mb-3">
-
-
                 <div class="circle-wrap">
-                <ProgressBar value={75}/>
-
-
+                  <ProgressBar value={75} />
                 </div>
                 <p>Attitude</p>
               </div>
               <div className="col-md-3 mb-3">
-
-
                 <div class="circle-wrap">
-                <ProgressBar value={75}/>
-
-
+                  <ProgressBar value={75} />
                 </div>
                 <p>Ability To Learn</p>
               </div>
               <div className="col-md-3 mb-3">
-
-
                 <div class="circle-wrap">
-                <ProgressBar value={75}/>
-
-
+                  <ProgressBar value={75} />
                 </div>
                 <p>Punctuality</p>
               </div>
               <div className="col-md-3 mb-3">
-
-
                 <div class="circle-wrap">
-                  <ProgressBar value={75}/>
-
-
+                  <ProgressBar value={75} />
                 </div>
                 <p>Commitment</p>
               </div>
               <div className="col-md-3 mb-3">
-
-
                 <div class="circle-wrap">
-                <ProgressBar value={75}/>
-
-
+                  <ProgressBar value={75} />
                 </div>
                 <p>Trustworthiness</p>
               </div>
               <div className="col-md-3 mb-3">
-
-
                 <div class="circle-wrap">
-                <ProgressBar value={75}/>
-
-
+                  <ProgressBar value={75} />
                 </div>
                 <p>Skill</p>
               </div>
               <div className="col-md-3 mb-3">
-
-
                 <div class="circle-wrap">
-                <ProgressBar value={75}/>
-
-
-
+                  <ProgressBar value={75} />
                 </div>
                 <p>Team Player</p>
               </div>
@@ -201,11 +184,8 @@ const index = () => {
           <div className="col-md-4 align-items-center d-flex flex-column">
             <p className="mb-0">Total</p>
 
-
             <div class="circle-wrap">
-            <ProgressBar value={75}/>
-
-
+              <ProgressBar value={75} />
             </div>
           </div>
         </div>
@@ -268,4 +248,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default EmployeeDetails;

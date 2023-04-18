@@ -12,7 +12,7 @@
     cursor: pointer;
 }
 
-.container {
+.signup-container {
     display: grid;
     justify-content: center;
     justify-items: center;
