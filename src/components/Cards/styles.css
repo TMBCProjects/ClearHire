@@ -1,6 +1,7 @@
 .assess-card{
     width: 26rem !important;
-   padding: 1vh;
+   padding: 1.4vh;
+   background: white;
 
 }
 .assess-card .managerlogo{

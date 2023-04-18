@@ -4,16 +4,31 @@ import pic from "../../assets/images/pic.png";
 import ProgressBar from "../ProgressBar";
 import "./styles.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const Assesment_Card = ({ info, value, name, state, country, designation }) => {
+  const navigate=useNavigate();
+
   return (
-    <div className="vreqcard assess-card">
-      <div className="managerlogo">
+    <div className="assess-card">
+      <div className="managerlogo" onClick={()=>{
+        navigate('/employee-details',{
+          state:{
+            from:info
+          }
+        })
+      }}>
         <img
           src={pic}
           alt="manager-logo"></img>
         <ProgressBar value={value} />
       </div>
-      <div className="headDesc">
+      <div className="headDesc" onClick={()=>{
+        navigate('/employee-details',{
+          state:{
+            from:info
+          }
+        })
+      }}>
         <span>{name}</span>
         <span>
           {state}, {country}
@@ -32,7 +47,6 @@ const Assesment_Card = ({ info, value, name, state, country, designation }) => {
           {designation}
         </span>
       </div>
-      Assess Employee
       <div className="cardFooter">
         <Link
           className="w-100 mt-3 btn"
