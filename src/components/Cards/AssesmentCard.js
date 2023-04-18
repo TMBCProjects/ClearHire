@@ -8,27 +8,38 @@ import { useNavigate } from "react-router-dom";
 const Assesment_Card = ({ info, value, name, state, country, designation }) => {
   const navigate=useNavigate();
 
+  function hasOneMonthPassed(date) {
+    const specificDate = new Date(date);
+    const oneMonthInMs = 30 * 24 * 60 * 60 * 1000;
+    const currentDate = new Date();
+    const diffInMs = currentDate - specificDate;
+    return diffInMs <= oneMonthInMs;
+  }
   return (
     <div className="assess-card">
-      <div className="managerlogo" onClick={()=>{
-        navigate('/employee-details',{
-          state:{
-            from:info
-          }
-        })
-      }}>
+      <div
+        className="managerlogo"
+        onClick={() => {
+          navigate("/employee-details", {
+            state: {
+              from: info,
+            },
+          });
+        }}>
         <img
           src={pic}
           alt="manager-logo"></img>
         <ProgressBar value={value} />
       </div>
-      <div className="headDesc" onClick={()=>{
-        navigate('/employee-details',{
-          state:{
-            from:info
-          }
-        })
-      }}>
+      <div
+        className="headDesc"
+        onClick={() => {
+          navigate("/employee-details", {
+            state: {
+              from: info,
+            },
+          });
+        }}>
         <span>{name}</span>
         <span>
           {state}, {country}
@@ -53,8 +64,13 @@ const Assesment_Card = ({ info, value, name, state, country, designation }) => {
           to={{
             pathname: "/EmployeeAssessment",
           }}
+          disabled={hasOneMonthPassed(info.ratedAtDate)}
           state={{ from: info }}>
-          <button className="allow">Assess Employee</button>
+          <button
+            className="allow"
+            disabled={hasOneMonthPassed(info.ratedAtDate)}>
+            Assess Employee
+          </button>
         </Link>
       </div>
     </div>

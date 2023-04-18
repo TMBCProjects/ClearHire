@@ -19,5 +19,6 @@ export default class Employee {
   employeeAadhaarCardNumber = "";
   portfolioLink = "";
   resume = "";
+  ratedAtDate = "";
   skills = [];
 }
