@@ -3,16 +3,11 @@ import { MdArrowBackIos, MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { FaQuoteLeft } from "react-icons/fa";
 import ViewFile from "../../../assets/images/view-doc.svg";
 import UrlLink from "../../../assets/images/link.svg";
-import Employee1 from "../../../assets/images/person-1.png";
 import CompanyLogo from "../../../assets/images/company-logo.png";
 import ProgressBar from "../../../components/ProgressBar";
 import "./EmployeeDetails.css";
 
-import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Pagination } from 'antd';
-import { useRef } from "react";
-import { readEmployee } from "../../../DataBase/Login/login";
 import { readEmployeeRatings } from "../../../DataBase/Employee/employee";
 
 
@@ -79,13 +74,12 @@ const EmployeeDetails = () => {
 
   useEffect(() => {
     const fetchOfferDetails = async () => {
-      const userDatas = JSON.parse(sessionStorage.getItem("userData"));
       const data2 = await readEmployeeRatings(employee.id);
       calculateRatings(data2)
       setEmployeeRatings(data2)
     };
     fetchOfferDetails();
-  }, []);
+  }, [employee.id]);
 
  function text(percentage){
   if(percentage <10){
@@ -121,11 +115,11 @@ const EmployeeDetails = () => {
           <div className="col-6 d-flex justify-content-end">
             <button className="btn">
               <img src={ViewFile} alt="" className="viewIcon" />
-              <a className="text-color-green fw-bold" href={employee.resume} target="_blank" style={{
+              <a className="text-color-green fw-bold" href={employee.resume} target="_blank" rel="noreferrer" style={{
                 textDecoration: "none"
               }}>View Resume</a>
             </button>
-            <a className="btn portfolio-btn" href={`https://${employee.portfolioLink}`} target="_blan">
+            <a className="btn portfolio-btn" href={`https://${employee.portfolioLink}`} target="_blank" rel="noreferrer">
               <img src={UrlLink} alt="" className="linkIcon" />
               <span className=" fw-bold">Portfolio</span>
             </a>
