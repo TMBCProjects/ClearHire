@@ -36,7 +36,14 @@ const EmployeeDetails = () => {
     let avgSkill = 0;
     let avgTeamPlayer = 0;
     let total=0;
-
+    let colleagueScore=0;
+    let score=0;
+    let ratingsOfEmployee=ratings.filter((rate)=>{
+     return rate?.ratedByRole==='Employee'
+    });
+    let ratingsOfEmployer=ratings.filter((rate)=>{
+      return rate?.ratedByRole==='Employer'
+    })
     for (let index = 0; index < ratings.length; index++) {
       const element = ratings[index];
       avgCommunication += +element.communication;
@@ -58,7 +65,22 @@ const EmployeeDetails = () => {
     avgTeamPlayer /= ratings.length;
     total=avgCommunication+avgAttitude+avgAbilityToLearn+avgPunctuality+avgCommitment+avgTrustWorthiness+avgSkill+avgTeamPlayer;
     total=total/8;
-    console.log("HI",avgCommunication);
+    
+    
+    for (let index = 0; index < ratingsOfEmployer.length; index++) {
+      const element = ratingsOfEmployer[index];
+      let temp=+element.communication+ +element.attitude + +element.abilityToLearn + +element.punctuality+ +element.commitment + +element.trustworthiness + +element.skill + +element.teamPlayer;
+      temp/=8;
+      score+=temp;
+    }
+    for (let index = 0; index < ratingsOfEmployee.length; index++) {
+      const element = ratingsOfEmployee[index];
+      let temp=+element.communication+ +element.attitude + +element.abilityToLearn + +element.punctuality+ +element.commitment + +element.trustworthiness + +element.skill + +element.teamPlayer;
+      temp/=8;
+      colleagueScore+=temp;
+    }
+    score/=ratingsOfEmployer.length
+    colleagueScore/=ratingsOfEmployee.length
     setAvgRatings({
       avgCommunication:Math.ceil(avgCommunication),
       avgAttitude:Math.ceil(avgAttitude),
@@ -68,7 +90,9 @@ const EmployeeDetails = () => {
       avgTrustWorthiness:Math.ceil(avgTrustWorthiness),
       avgSkill:Math.ceil(avgSkill),
       avgTeamPlayer:Math.ceil(avgTeamPlayer),
-      total:Math.ceil(total)
+      total:Math.ceil(total),
+      score:Math.ceil(score),
+      colleagueScore:Math.ceil(colleagueScore)
     })
 
   }
@@ -145,11 +169,11 @@ const EmployeeDetails = () => {
 
           <div className="col-4 d-flex justify-content-center align-items-center empDetailsProgress">
             <div class="circle-wrap">
-              <ProgressBar value={75} color={"#D50000"}/>
+              <ProgressBar value={avgRatings?.colleagueScore || 0} color={"#D50000"}/>
               <p>Colleague Score</p>
             </div>
             <div class="circle-wrap">
-              <ProgressBar value={50} />
+              <ProgressBar value={avgRatings?.score || 0} />
               <p>
               Score
               </p>
