@@ -149,6 +149,43 @@ export async function offerAccept(profileData, employeeId, offerId) {
     employeeId
   );
 }
+export async function readEmployeeRatings(employeeId) {
+  try {
+    let ratings = [];
+    const querySnapshot = await getDocuments(
+      query(
+        setCollection(Collections.ratings),
+        where(Fields.employeeId, "==", employeeId),
+      )
+    );
+    // console.log(querySnapshot, "gg")
+    querySnapshot.forEach(async (doc) => {
+      let rating = {
+        id: doc.id,
+        abilityToLearn: doc.data().abilityToLearn,
+        attitude: doc.data().attitude,
+        commitment: doc.data().commitment,
+        communication: doc.data().communication,
+        companyName: doc.data().companyName,
+        dateOfReview: doc.data().dateOfReview,
+        note: doc.data().note,
+        punctuality: doc.data().punctuality,
+        ratedByEmail: doc.data().ratedByEmail,
+        ratedById: doc.data().ratedById,
+        skill: doc.data().skill,
+        teamPlayer: doc.data().teamPlayer,
+        trustworthiness: doc.data().trustworthiness,
+      };
+      ratings.push(rating);
+    });
+    return ratings;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+
 // export async function rateEmployee(ratingData) {
 //   let rating = new Rating();
 //   rating = {

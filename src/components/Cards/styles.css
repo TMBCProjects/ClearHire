@@ -1,6 +1,7 @@
 .assess-card{
     width: 26rem !important;
-   padding: 1vh;
+   padding: 1.4vh;
+   background: white;
 
 }
 .assess-card .managerlogo{
@@ -8,6 +9,7 @@
     display: flex;
     justify-content: space-between;
     align-items:center;
+    cursor: pointer;
 }
 .assess-card .managerlogo img{
     width: 25%;
@@ -15,6 +17,7 @@
 .assess-card .headDesc{
     display: flex;
     flex-direction: column;
+    cursor: pointer;
 }
 .assess-card .headDesc span:nth-child(1){
     font-size: 1.3rem;
