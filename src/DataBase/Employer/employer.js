@@ -5,6 +5,7 @@ import {
   addDocument,
   getDocument,
   getDocuments,
+  updateDocument,
   uploadFile,
 } from "../../utils/FirebaseUtils";
 import { Fields } from "../../utils/Fields";
@@ -242,6 +243,7 @@ export async function readEmployee(id) {
         id: doc.id,
         isActive: doc.data().isActive,
         employeeName: doc.data().employeeName,
+        ratedAtDate: doc.data().ratedAtDate,
         employeeEmail: doc.data().employeeEmail,
         employeeCountry: doc.data().employeeCountry,
         employeeState: doc.data().employeeState,
@@ -285,6 +287,7 @@ export async function readEmployees(employerId) {
       let employee = {
         id: doc.id,
         isActive: doc.data().isActive,
+        ratedAtDate: doc.data().ratedAtDate,
         employeeName: doc.data().employeeName,
         employeeEmail: doc.data().employeeEmail,
         employeeCountry: doc.data().employeeCountry,
@@ -330,10 +333,12 @@ export async function readEmployeeRatings(employeeId) {
         companyName: doc.data().companyName,
         ratedById: doc.data().ratedById,
         ratedByEmail: doc.data().ratedByEmail,
+        ratedByRole: doc.data().ratedByRole,
+        ratedAt: doc.data().ratedAt,
+        ratedAtDate: doc.data().ratedAtDate,
         employeeId: doc.data().employeeId,
         employeeName: doc.data().employeeName,
         employeeEmail: doc.data().employeeEmail,
-        dateOfReview: doc.data().dateOfReview,
         communication: doc.data().communication,
         attitude: doc.data().attitude,
         abilityToLearn: doc.data().abilityToLearn,
@@ -439,6 +444,9 @@ export async function rateEmployee(ratingData) {
     isActive: true,
     companyName: ratingData.companyName,
     ratedById: ratingData.ratedById,
+    ratedByRole: ratingData.ratedByRole,
+    ratedAt: new Date(),
+    ratedAtDate: new Date().toDateString(),
     ratedByEmail: ratingData.ratedByEmail,
     employeeId: ratingData.employeeId,
     employeeName: ratingData.employeeName,
@@ -454,6 +462,11 @@ export async function rateEmployee(ratingData) {
     teamPlayer: ratingData.teamPlayer,
     note: ratingData.note,
   };
+  await updateDocument(
+    Collections.employees,
+    { ratedAtDate: new Date().toDateString() },
+    ratingData.employeeId
+  );
   return await addDocument(Collections.ratings, rating);
 }
 

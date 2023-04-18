@@ -44,8 +44,10 @@ function EmployeeAssessment() {
   };
   const handleSubmit = () => {
     let userDatas = JSON.parse(sessionStorage.getItem("userData"));
+    let role = sessionStorage.getItem("LoggedIn");
     values.companyName = userDatas.data.companyName;
     values.ratedById = userDatas.id;
+    values.ratedByRole = role;
     values.ratedByEmail = userDatas.data.employerEmail;
     values.employeeId = info.id || "employeeId";
     values.employeeName = info.employeeName || "employeeName";
