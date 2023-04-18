@@ -464,7 +464,7 @@ export async function rateEmployee(ratingData) {
   };
   await updateDocument(
     Collections.employees,
-    { ratedAtDate: new Date().toDateString() },
+    { ratedAtDate: new Date().toLocaleDateString() },
     ratingData.employeeId
   );
   return await addDocument(Collections.ratings, rating);
