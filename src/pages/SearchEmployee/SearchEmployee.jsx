@@ -26,32 +26,32 @@ const marks2 = {
 
 export default function SearchEmployee() {
   const user = sessionStorage.getItem("LoggedIn");
-  const userDatas = JSON.parse(sessionStorage.getItem("userData"));
   const [employeeList, setEmployeeList] = useState([]);
   const [filters, setFilters] = useState("");
 
   // fetch employer details
-  const fetchEmployerDetails = async () => {
-    try {
-      const data =
-        user === "Employer"
-          ? await readEmployees(userDatas.id)
-          : userDatas.data.currentEmployerId
-          ? await readColleagues(userDatas.id, userDatas.data.currentEmployerId)
-          : [{}];
-      setEmployeeList(data);
+  useEffect(() => {
       setFilters({
         typeOfEmployment: "",
         salary: "",
         location: "",
         designation: "",
       });
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
+    const fetchEmployerDetails = async () => {
+      try {
+        const user = sessionStorage.getItem("LoggedIn");
+        const userDatas = JSON.parse(sessionStorage.getItem("userData"));
+        const data =
+          user === "Employer"
+            ? await readEmployees(userDatas.id)
+            : userDatas.data.currentEmployerId
+              ? await readColleagues(userDatas.id, userDatas.data.currentEmployerId)
+              : [];
+        setEmployeeList(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     fetchEmployerDetails();
   }, []);
 

@@ -16,6 +16,9 @@ const EmployeeOfferLetter = () => {
   useEffect(() => {
     setValues({
       currentEmployerId: item.employerId,
+      employeeName: userDatas.data.employeeName,
+      employeeState: userDatas.data.employeeState,
+      employeeCountry: userDatas.data.employeeCountry,
       designation: item.designation,
       salary: item.salary,
       companyName: item.companyName,
@@ -24,7 +27,7 @@ const EmployeeOfferLetter = () => {
       offerLetter: item.offerLetter,
       dateOfJoining: item.dateOfJoining,
     })
-  }, [item])
+  }, [item, userDatas])
 
   const updateUserData = (data) => {
     const newData = Object.assign({}, userDatas);
