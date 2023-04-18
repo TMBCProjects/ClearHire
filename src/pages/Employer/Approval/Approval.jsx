@@ -187,7 +187,7 @@ const Approval = () => {
                       </div>
                     </div>
                     {
-                      requests.find((req) => req.employeeId === info.id)?.isActive
+                      requests.find((req) => req.employeeId === info.id)?.isApproved
                         ?
                         <button className="w-100 mt-3 btn btn-assessment">
                           View assessment
