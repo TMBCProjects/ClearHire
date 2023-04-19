@@ -11,13 +11,13 @@ import AssesmentCard from "../../components/Cards/AssesmentCard";
 import { readEmployees } from "../../DataBase/Employer/employer";
 import { readColleagues } from "../../DataBase/Employee/employee";
 const onChange = (e) => {
-  console.log(`checked = ${e.target.checked}`);
+  // alert(`checked = ${e.target.checked}`);
 };
 const formatter = (value) => `${value}LPA`;
 const formatter2 = (value) => `${value} %`;
 const marks = {
   0: "1LPA",
-  49: "50LPA",
+  50: "50LPA",
 };
 const marks2 = {
   0: "0%",
@@ -56,21 +56,26 @@ export default function SearchEmployee() {
   }, []);
 
   const handleTypeOfEmploymentChange = (event) => {
-    filters.typeOfEmployment = event.target.value;
+    // filters.typeOfEmployment = event.target.value;
+    setFilters({...filters,typeOfEmployment:event.target.value})
+    
   };
 
   const handleSalaryChange = (event) => {
-    filters.salary = event.target.value;
+    // filters.salary = event.target.value;
+    setFilters({...filters,salary:event.target.value})
   };
 
   const handleDesignationChange = (event) => {
-    filters.designation = event.target.value;
+    // filters.designation = event.target.value;
+    setFilters({...filters,designation:event.target.value})
   };
 
   const handleLocationChange = (event) => {
-    filters.location = event.target.value;
+    // filters.location = event.target.value;
+    setFilters({...filters,location:event.target.value})
   };
-
+console.log(employeeList);
   return (
     <div className="employer-home">
       <div className="search-inputs">
@@ -112,6 +117,7 @@ export default function SearchEmployee() {
               type="text"
               className="box-input no-border"
               placeholder="Salary"
+              onChange={handleSalaryChange}
             />
           </div>
         ) : (
@@ -134,11 +140,13 @@ export default function SearchEmployee() {
             <div className="dropdown-select">
               <p>Job Title</p>
               <Select
-                mode="tags"
+               
                 style={{
                   width: "100%",
                 }}
-                onChange={(e) => handleDesignationChange(e)}
+                onChange={(e) => {
+                  setFilters({...filters,designation:e})
+                }}
                 options={[
                   { value: "Graphics Designer", label: "Graphics Designer" },
                   { value: "Developer", label: "Developer" },
@@ -149,11 +157,11 @@ export default function SearchEmployee() {
             <div className="dropdown-select">
               <p>Location</p>
               <Select
-                mode="tags"
+                
                 style={{
                   width: "100%",
                 }}
-                onChange={(e) => handleLocationChange(e)}
+                onChange={(e) => setFilters({...filters,location:e})}
                 tokenSeparators={[","]}
                 options={[
                   {
@@ -249,7 +257,7 @@ export default function SearchEmployee() {
                   marks={marks}
                   min={1}
                   max={50}
-                  onChange={(e) => handleSalaryChange(e)}
+                  onChange={(e) => setFilters({...filters,salary:+e*1000})}
                   trackStyle={{
                     backgroundColor: "#00823B",
                     height: ".3rem",
@@ -273,7 +281,12 @@ export default function SearchEmployee() {
           ) : (
             ""
           )}
-          <a className="clear-filter" href="/">
+          <a className="clear-filter" onClick={()=>setFilters({
+            typeOfEmployment:"",
+            salary:"",
+            location:"",
+            designation:""
+          })}>
             {" "}
             <img src={cross} alt="cross" /> Clear all filters
           </a>
@@ -328,8 +341,8 @@ export default function SearchEmployee() {
                   (filters.designation === "" ||
                     item.designation === filters.designation) &&
                   (filters.salary === "" ||
-                    (item.salary >= filters.salary.split("-")[0] &&
-                      item.salary <= filters.salary.split("-")[1])) &&
+                    (+item.salary <= +filters.salary) 
+                    ) &&
                   (filters.location === "" ||
                     item.employeeState
                       .toLowerCase()

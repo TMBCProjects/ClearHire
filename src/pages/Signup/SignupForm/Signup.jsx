@@ -6,7 +6,7 @@ import InputField from "../../../components/Input/InputField";
 import UploadPic from "../../../components/UploadPic/UploadPic";
 import { registerLogin } from "../../../DataBase/SignUp/signUp";
 import "../SignupForm/Signup.css";
-
+import Loader from '../../../components/Loader'
 const initialValues = {
   email: "",
   password: "",
@@ -20,6 +20,7 @@ const initialValues = {
 export default function Signup() {
   const [values, setValues] = useState(initialValues);
   const [countries, setCountries] = useState([""]);
+  const [loading, setLoading] = useState(false)
   const [states, setStates] = useState([""]);
   let year = Array.from(
     { length: 123 },
@@ -48,12 +49,14 @@ export default function Signup() {
   };
 
   const handleSubmit = () => {
+    setLoading(true)
     values.profileImage = sessionStorage.getItem("profileImage");
     values.role = sessionStorage.getItem("user");
     registerLogin(values).then(() => {
       sessionStorage.removeItem("profileImage");
       window.location.href = "/signup-done";
     });
+    setLoading(false)
   };
 
   const handleCountryChange = (e) => {
@@ -85,9 +88,8 @@ export default function Signup() {
     const selectedYear = e.target.value;
     values.dateOfBirth =
       values.dateOfBirth === undefined ? "" : values.dateOfBirth;
-    const newDateOfBirth = `${values.dateOfBirth.split("/")[0]}/${
-      values.dateOfBirth.split("/")[1]
-    }/${selectedYear}`;
+    const newDateOfBirth = `${values.dateOfBirth.split("/")[0]}/${values.dateOfBirth.split("/")[1]
+      }/${selectedYear}`;
     setValues({
       ...values,
       dateOfBirth: newDateOfBirth,
@@ -98,9 +100,8 @@ export default function Signup() {
     const selectedMonth = e.target.value;
     values.dateOfBirth =
       values.dateOfBirth === undefined ? "" : values.dateOfBirth;
-    const newDateOfBirth = `${selectedMonth}/${
-      values.dateOfBirth.split("/")[1]
-    }/${values.dateOfBirth.split("/")[2]}`;
+    const newDateOfBirth = `${selectedMonth}/${values.dateOfBirth.split("/")[1]
+      }/${values.dateOfBirth.split("/")[2]}`;
     setValues({
       ...values,
       dateOfBirth: newDateOfBirth,
@@ -111,9 +112,8 @@ export default function Signup() {
     const selectedDate = e.target.value;
     values.dateOfBirth =
       values.dateOfBirth === undefined ? "" : values.dateOfBirth;
-    const newDateOfBirth = `${
-      values.dateOfBirth.split("/")[0]
-    }/${selectedDate}/${values.dateOfBirth.split("/")[2]}`;
+    const newDateOfBirth = `${values.dateOfBirth.split("/")[0]
+      }/${selectedDate}/${values.dateOfBirth.split("/")[2]}`;
     setValues({
       ...values,
       dateOfBirth: newDateOfBirth,
@@ -121,136 +121,145 @@ export default function Signup() {
   };
 
   return (
-    <div className="signup-container">
-      <div className="signupHeader">
-        {user === "Employer" ? (
-          <span style={{ fontWeight: "bold" }}>Employer Signup</span>
-        ) : (
-          <span style={{ fontWeight: "bold" }}>Employee Signup</span>
-        )}
-      </div>
-      <form className="form-horizontal">
-        <InputField
-          label={"Email"}
-          type={"email"}
-          name={"email"}
-          value={values.email}
-          onChange={handleInputChange}
-          placeholder={
-            "Input your company mail id, use an official email address."
-          }
-        />
+    <>
+    {
+      loading && 
+      <Loader text={"Signing up..." }textColor={"#000"}/>  
+    }
 
-        <InputField
-          label={"Password"}
-          type={"password"}
-          name={"password"}
-          value={values.password}
-          onChange={handleInputChange}
-          placeholder={"Input your password in here."}
-        />
-        {user === "Employer" ? (
-          <>
+
+      <div className="signup-container">
+        <div className="signupHeader">
+          {user === "Employer" ? (
+            <span style={{ fontWeight: "bold" }}>Employer Signup</span>
+          ) : (
+            <span style={{ fontWeight: "bold" }}>Employee Signup</span>
+          )}
+        </div>
+        <form className="form-horizontal">
+          <InputField
+            label={"Email"}
+            type={"email"}
+            name={"email"}
+            value={values.email}
+            onChange={handleInputChange}
+            placeholder={
+              "Input your company mail id, use an official email address."
+            }
+          />
+
+          <InputField
+            label={"Password"}
+            type={"password"}
+            name={"password"}
+            value={values.password}
+            onChange={handleInputChange}
+            placeholder={"Input your password in here."}
+          />
+          {user === "Employer" ? (
+            <>
+              <InputField
+                label={"Company Name"}
+                type={"text"}
+                name={"name"}
+                value={values.name}
+                onChange={handleInputChange}
+                placeholder={"Input your company name."}
+              />
+
+              <InputField
+                label={"Company Website"}
+                type={"url"}
+                name={"companyWebsite"}
+                value={values.companyWebsite}
+                onChange={handleInputChange}
+                placeholder={"Input your official company website link."}
+              />
+            </>
+          ) : (
             <InputField
-              label={"Company Name"}
+              label={"Your Name"}
               type={"text"}
               name={"name"}
               value={values.name}
               onChange={handleInputChange}
-              placeholder={"Input your company name."}
+              placeholder={"Input your full name."}
+            />
+          )}
+
+          {user === "Employer" ? (
+            <label className="control-label">Company Location</label>
+          ) : (
+            <label className="control-label">Your Location</label>
+          )}
+          <div className="dropdowns">
+            <Dropdown
+              values={countries}
+              type={"country"}
+              name={"country"}
+              id={"Country"}
+              onChange={handleCountryChange}
             />
 
-            <InputField
-              label={"Company Website"}
-              type={"url"}
-              name={"companyWebsite"}
-              value={values.companyWebsite}
-              onChange={handleInputChange}
-              placeholder={"Input your official company website link."}
+            <Dropdown
+              values={states}
+              type={"country"}
+              name={"state"}
+              id={"State"}
+              onChange={handleStateChange}
             />
-          </>
-        ) : (
-          <InputField
-            label={"Your Name"}
-            type={"text"}
-            name={"name"}
-            value={values.name}
-            onChange={handleInputChange}
-            placeholder={"Input your full name."}
-          />
-        )}
+          </div>
+          {user === "Employer" ? (
+            <label className="control-label">Company Logo</label>
+          ) : (
+            <label className="control-label">Profile Image</label>
+          )}
+          <UploadPic />
 
-        {user === "Employer" ? (
-          <label className="control-label">Company Location</label>
-        ) : (
-          <label className="control-label">Your Location</label>
-        )}
-        <div className="dropdowns">
-          <Dropdown
-            values={countries}
-            type={"country"}
-            name={"country"}
-            id={"Country"}
-            onChange={handleCountryChange}
-          />
+          {user === "Employer" ? (
+            <>
+              <label className="control-label">Company Establishment Date</label>
+              <div className="dropdowns">
+                <Dropdown
+                  values={year}
+                  type={"number"}
+                  name={"Year"}
+                  id={"Year"}
+                  onChange={handleYearChange}
+                />
+              </div>
+            </>
+          ) : (
+            <>
+              <label className="control-label">Date of Birth</label>
+              <div className="dropdowns">
+                <Dropdown
+                  values={date}
+                  type={"number"}
+                  name={"Date"}
+                  onChange={handleDateChange}
+                />
+                <Dropdown
+                  values={month}
+                  type={"number"}
+                  name={"Month"}
+                  onChange={handleMonthChange}
+                />
+                <Dropdown
+                  values={year}
+                  type={"number"}
+                  name={"Year"}
+                  onChange={handleDOBYearChange}
+                />
+              </div>
+            </>
+          )}
+          <Button className="signupBtn" onClick={handleSubmit}>
+            Signup
+          </Button>
+        </form>
+      </div>
+    </>
 
-          <Dropdown
-            values={states}
-            type={"country"}
-            name={"state"}
-            id={"State"}
-            onChange={handleStateChange}
-          />
-        </div>
-        {user === "Employer" ? (
-          <label className="control-label">Company Logo</label>
-        ) : (
-          <label className="control-label">Profile Image</label>
-        )}
-        <UploadPic />
-
-        {user === "Employer" ? (
-          <>
-            <label className="control-label">Company Establishment Date</label>
-            <div className="dropdowns">
-              <Dropdown
-                values={year}
-                type={"number"}
-                name={"Year"}
-                id={"Year"}
-                onChange={handleYearChange}
-              />
-            </div>
-          </>
-        ) : (
-          <>
-            <label className="control-label">Date of Birth</label>
-            <div className="dropdowns">
-              <Dropdown
-                values={date}
-                type={"number"}
-                name={"Date"}
-                onChange={handleDateChange}
-              />
-              <Dropdown
-                values={month}
-                type={"number"}
-                name={"Month"}
-                onChange={handleMonthChange}
-              />
-              <Dropdown
-                values={year}
-                type={"number"}
-                name={"Year"}
-                onChange={handleDOBYearChange}
-              />
-            </div>
-          </>
-        )}
-        <Button className="signupBtn" onClick={handleSubmit}>
-          Signup
-        </Button>
-      </form>
-    </div>
   );
 }
