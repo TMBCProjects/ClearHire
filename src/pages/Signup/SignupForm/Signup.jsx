@@ -49,21 +49,20 @@ export default function Signup() {
   };
 
   const handleSubmit = () => {
-    setLoading(true)
     values.profileImage = sessionStorage.getItem("profileImage");
     values.role = sessionStorage.getItem("user");
-    try{
+   
+      setLoading(true)
 
       registerLogin(values).then(() => {
         sessionStorage.removeItem("profileImage");
         window.location.href = "/signup-done";
+      }).catch((err)=>{
+        setLoading(false)
+        alert(err);
       });
-    }
-    catch(err){
-      setLoading(false)
-      alert(err);
-
-    }
+    
+    
     
   };
 
