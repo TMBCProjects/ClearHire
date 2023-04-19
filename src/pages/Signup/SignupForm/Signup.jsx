@@ -52,11 +52,19 @@ export default function Signup() {
     setLoading(true)
     values.profileImage = sessionStorage.getItem("profileImage");
     values.role = sessionStorage.getItem("user");
-    registerLogin(values).then(() => {
-      sessionStorage.removeItem("profileImage");
-      window.location.href = "/signup-done";
-    });
-    setLoading(false)
+    try{
+
+      registerLogin(values).then(() => {
+        sessionStorage.removeItem("profileImage");
+        window.location.href = "/signup-done";
+      });
+    }
+    catch(err){
+      setLoading(false)
+      alert(err);
+
+    }
+    
   };
 
   const handleCountryChange = (e) => {
