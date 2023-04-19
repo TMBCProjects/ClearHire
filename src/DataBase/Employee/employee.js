@@ -96,7 +96,6 @@ export async function readOffers(employeeEmail) {
         where(Fields.isActive, "==", true)
       )
     );
-    console.log(querySnapshot, "gg");
     querySnapshot.forEach(async (doc) => {
       let offer = {
         id: doc.id,

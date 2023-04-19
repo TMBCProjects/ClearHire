@@ -25,6 +25,7 @@ const marks2 = {
 };
 
 export default function SearchEmployee() {
+  const userDatas = JSON.parse(sessionStorage.getItem("userData"));
   const user = sessionStorage.getItem("LoggedIn");
   const [employeeList, setEmployeeList] = useState([]);
   const [filters, setFilters] = useState("");
@@ -40,7 +41,6 @@ export default function SearchEmployee() {
     const fetchEmployerDetails = async () => {
       try {
         const user = sessionStorage.getItem("LoggedIn");
-        const userDatas = JSON.parse(sessionStorage.getItem("userData"));
         const data =
           user === "Employer"
             ? await readEmployees(userDatas.id)
@@ -53,7 +53,7 @@ export default function SearchEmployee() {
       }
     };
     fetchEmployerDetails();
-  }, []);
+  }, [userDatas]);
 
   const handleTypeOfEmploymentChange = (event) => {
     // filters.typeOfEmployment = event.target.value;
@@ -75,7 +75,6 @@ export default function SearchEmployee() {
     // filters.location = event.target.value;
     setFilters({...filters,location:event.target.value})
   };
-console.log(employeeList);
   return (
     <div className="employer-home">
       <div className="search-inputs">
@@ -281,7 +280,7 @@ console.log(employeeList);
           ) : (
             ""
           )}
-          <a className="clear-filter" onClick={()=>setFilters({
+          <a href="#" className="clear-filter" onClick={() => setFilters({
             typeOfEmployment:"",
             salary:"",
             location:"",
@@ -354,6 +353,7 @@ console.log(employeeList);
                   <AssesmentCard
                     value={30}
                     info={info}
+                    employerId={userDatas.id}
                     name={info.employeeName}
                     state={info.employeeState}
                     country={info.employeeCountry}
