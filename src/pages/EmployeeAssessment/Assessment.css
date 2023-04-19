@@ -254,7 +254,7 @@ svg {
 }
 
 .note-text {
-    border: 1px solid #B2B2B2;
+    border: 2px solid #B2B2B2;
     margin-left: 15px;
     cursor: pointer;
     margin-top: 15px;
@@ -262,7 +262,7 @@ svg {
 }
 
 .note-text:hover {
-    border: 4px solid #00823B;
+    border: 2px solid #00823B;
 }
 
 .or h3 {

@@ -28,7 +28,8 @@ export default function SearchEmployee() {
   const user = sessionStorage.getItem("LoggedIn");
   const userDatas = JSON.parse(sessionStorage.getItem("userData"));
   const [employeeList, setEmployeeList] = useState([]);
-  const [filters, setFilters] = useState("");
+  const [filters, setFilters] = useState([]);
+  const [query, setQuery] = useState("");
 
   // fetch employer details
   const fetchEmployerDetails = async () => {
@@ -57,18 +58,58 @@ export default function SearchEmployee() {
 
   const handleTypeOfEmploymentChange = (event) => {
     filters.typeOfEmployment = event.target.value;
+    if (filters.typeOfEmployment.length > 0) {
+      const filteredData = employeeList.filter((item) =>
+        item.typeOfEmployment.toLowerCase().includes(filters.typeOfEmployment)
+      );
+      console.log("Employment", filteredData);
+      setEmployeeList(filteredData);
+    } else {
+      setEmployeeList(filters);
+    }
+    setQuery(filters.typeOfEmployment);
   };
 
   const handleSalaryChange = (event) => {
     filters.salary = event.target.value;
+    if (filters.salary.length > 0) {
+      const filteredData = employeeList.filter((item) =>
+        item.typeOfEmployment.toLowerCase().includes(filters.salary)
+      );
+      console.log("salary", filteredData);
+      setEmployeeList(filteredData);
+    } else {
+      setEmployeeList(filters);
+    }
+    setQuery(filters.salary);
   };
 
   const handleDesignationChange = (event) => {
     filters.designation = event.target.value;
+    if (filters.designation.length > 0) {
+      const filteredData = employeeList.filter((item) =>
+        item.typeOfEmployment.toLowerCase().includes(filters.designation)
+      );
+      console.log("designation", filteredData);
+      setEmployeeList(filteredData);
+    } else {
+      setEmployeeList(filters);
+    }
+    setQuery(filters.designation);
   };
 
   const handleLocationChange = (event) => {
     filters.location = event.target.value;
+    if (filters.location.length > 0) {
+      const filteredData = employeeList.filter((item) =>
+        item.typeOfEmployment.toLowerCase().includes(filters.location)
+      );
+      console.log("location", filteredData);
+      setEmployeeList(filteredData);
+    } else {
+      setEmployeeList(filters);
+    }
+    setQuery(filters.location);
   };
 
   return (
@@ -112,6 +153,7 @@ export default function SearchEmployee() {
               type="text"
               className="box-input no-border"
               placeholder="Salary"
+              onChange={(e) => handleSalaryChange(e)}
             />
           </div>
         ) : (
