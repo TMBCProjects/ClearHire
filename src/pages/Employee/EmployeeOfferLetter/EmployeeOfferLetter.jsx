@@ -1,7 +1,7 @@
 import React from "react";
 import "./EmployeeOfferLetter.css";
 import PdfViewer from "../../../components/PdfViewer/PdfViewer";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { offerAccept } from "../../../DataBase/Employee/employee";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -12,6 +12,7 @@ const EmployeeOfferLetter = () => {
   const location = useLocation();
   const { from } = location.state;
   const item = from;
+  const navigate = useNavigate();
 
   useEffect(() => {
     setValues({
@@ -26,8 +27,8 @@ const EmployeeOfferLetter = () => {
       typeOfEmployment: item.typeOfEmployment,
       offerLetter: item.offerLetter,
       dateOfJoining: item.dateOfJoining,
-    })
-  }, [item, userDatas])
+    });
+  }, [item, userDatas]);
 
   const updateUserData = (data) => {
     const newData = Object.assign({}, userDatas);
@@ -38,14 +39,13 @@ const EmployeeOfferLetter = () => {
   };
 
   const acceptOffer = () => {
-    updateUserData(values)
+    updateUserData(values);
     offerAccept(values, userDatas.id, item.id);
+    navigate("/offerLetters");
   };
 
   return (
-    <div
-      className="container"
-      id="offerletter">
+    <div className="container" id="offerletter">
       <div className="row align-items-center d-flex">
         <div className="col-md-4">
           <h1 className="offerletter-heading">
@@ -75,12 +75,14 @@ const EmployeeOfferLetter = () => {
           <br />
           <div
             className="row justify-content-start align-items-start mt-3"
-            id="offerletter-btn">
+            id="offerletter-btn"
+          >
             <button
               onClick={acceptOffer}
               className="btn"
               id="login-btn"
-              type="submit">
+              type="submit"
+            >
               Verify & Accept
             </button>
           </div>

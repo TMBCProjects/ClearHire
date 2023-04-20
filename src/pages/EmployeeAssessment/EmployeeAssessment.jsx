@@ -85,9 +85,15 @@ function EmployeeAssessment() {
             <img src={info.profileImage} alt="" />
           </div>
           <div className="prof-text">
-            <h3>{info.employeeName}, {calculateAge(info.dateOfBirth)}</h3>
-            <h6>{info.designation} at {info.companyName}</h6>
-            <h6>{info.employeeState}, {info.employeeCountry}</h6>
+            <h3>
+              {info.employeeName}, {info.dateOfBirth}
+            </h3>
+            <h6>
+              {info.designation} at {info.companyName}
+            </h6>
+            <h6>
+              {info.employeeState}, {info.employeeCountry}
+            </h6>
           </div>
         </div>
         <div className="col-xl-4 col-lg-5 col-md-6 col-12 employe-score">
@@ -104,7 +110,7 @@ function EmployeeAssessment() {
               <div className="circle" data-prog="75">
                 <ProgressBar value={40} />
               </div>
-              <div className="text">
+              <div className="text ms-3">
                 <h6>Score</h6>
               </div>
             </div>
