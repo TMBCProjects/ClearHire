@@ -7,6 +7,7 @@ import UploadPic from "../../../components/UploadPic/UploadPic";
 import { registerLogin } from "../../../DataBase/SignUp/signUp";
 import "../SignupForm/Signup.css";
 import Loader from '../../../components/Loader'
+import Tags from "../../../components/Tags/Tags";
 const initialValues = {
   email: "",
   password: "",
@@ -199,23 +200,7 @@ export default function Signup() {
           ) : (
             <label className="control-label">Your Location</label>
           )}
-          <div className="dropdowns">
-            <Dropdown
-              values={countries}
-              type={"country"}
-              name={"country"}
-              id={"Country"}
-              onChange={handleCountryChange}
-            />
-
-            <Dropdown
-              values={states}
-              type={"country"}
-              name={"state"}
-              id={"State"}
-              onChange={handleStateChange}
-            />
-          </div>
+         <Tags />
           {user === "Employer" ? (
             <label className="control-label">Company Logo</label>
           ) : (
