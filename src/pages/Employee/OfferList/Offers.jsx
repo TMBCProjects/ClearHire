@@ -23,9 +23,9 @@ const Offers = () => {
         </div>
       </div>
       <div className="row mt-3">
-        <div className="col-md-3 gy-3">
-          {offerList.map((info) => {
-            return (
+        {offerList.map((info) => {
+          return (
+            <div className="col-md-3 gy-3">
               <div className="card" key={info.id}>
                 <div className="card-body">
                   <h3 className="card-title fw-bold">{info.companyName}</h3>
@@ -46,9 +46,9 @@ const Offers = () => {
                   </Link>
                 </div>
               </div>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

@@ -11,13 +11,13 @@ import AssesmentCard from "../../components/Cards/AssesmentCard";
 import { readEmployees } from "../../DataBase/Employer/employer";
 import { readColleagues } from "../../DataBase/Employee/employee";
 const onChange = (e) => {
-  console.log(`checked = ${e.target.checked}`);
+  // alert(`checked = ${e.target.checked}`);
 };
 const formatter = (value) => `${value}LPA`;
 const formatter2 = (value) => `${value} %`;
 const marks = {
   0: "1LPA",
-  49: "50LPA",
+  50: "50LPA",
 };
 const marks2 = {
   0: "0%",
@@ -26,33 +26,36 @@ const marks2 = {
 
 export default function SearchEmployee() {
   const user = sessionStorage.getItem("LoggedIn");
-  const userDatas = JSON.parse(sessionStorage.getItem("userData"));
   const [employeeList, setEmployeeList] = useState([]);
   const [filters, setFilters] = useState([]);
   const [query, setQuery] = useState("");
 
   // fetch employer details
-  const fetchEmployerDetails = async () => {
-    try {
-      const data =
-        user === "Employer"
-          ? await readEmployees(userDatas.id)
-          : userDatas.data.currentEmployerId
-          ? await readColleagues(userDatas.id, userDatas.data.currentEmployerId)
-          : [{}];
-      setEmployeeList(data);
-      setFilters({
-        typeOfEmployment: "",
-        salary: "",
-        location: "",
-        designation: "",
-      });
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   useEffect(() => {
+    setFilters({
+      typeOfEmployment: "",
+      salary: "",
+      location: "",
+      designation: "",
+    });
+    const fetchEmployerDetails = async () => {
+      try {
+        const user = sessionStorage.getItem("LoggedIn");
+        const userDatas = JSON.parse(sessionStorage.getItem("userData"));
+        const data =
+          user === "Employer"
+            ? await readEmployees(userDatas.id)
+            : userDatas.data.currentEmployerId
+            ? await readColleagues(
+                userDatas.id,
+                userDatas.data.currentEmployerId
+              )
+            : [];
+        setEmployeeList(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     fetchEmployerDetails();
   }, []);
 
@@ -111,7 +114,7 @@ export default function SearchEmployee() {
     }
     setQuery(filters.location);
   };
-
+  console.log(employeeList);
   return (
     <div className="employer-home">
       <div className="search-inputs">
@@ -176,11 +179,12 @@ export default function SearchEmployee() {
             <div className="dropdown-select">
               <p>Job Title</p>
               <Select
-                mode="tags"
                 style={{
                   width: "100%",
                 }}
-                onChange={(e) => handleDesignationChange(e)}
+                onChange={(e) => {
+                  setFilters({ ...filters, designation: e });
+                }}
                 options={[
                   { value: "Graphics Designer", label: "Graphics Designer" },
                   { value: "Developer", label: "Developer" },
@@ -191,11 +195,10 @@ export default function SearchEmployee() {
             <div className="dropdown-select">
               <p>Location</p>
               <Select
-                mode="tags"
                 style={{
                   width: "100%",
                 }}
-                onChange={(e) => handleLocationChange(e)}
+                onChange={(e) => setFilters({ ...filters, location: e })}
                 tokenSeparators={[","]}
                 options={[
                   {
@@ -291,7 +294,9 @@ export default function SearchEmployee() {
                   marks={marks}
                   min={1}
                   max={50}
-                  onChange={(e) => handleSalaryChange(e)}
+                  onChange={(e) =>
+                    setFilters({ ...filters, salary: +e * 1000 })
+                  }
                   trackStyle={{
                     backgroundColor: "#00823B",
                     height: ".3rem",
@@ -315,7 +320,17 @@ export default function SearchEmployee() {
           ) : (
             ""
           )}
-          <a className="clear-filter" href="/">
+          <a
+            className="clear-filter"
+            onClick={() =>
+              setFilters({
+                typeOfEmployment: "",
+                salary: "",
+                location: "",
+                designation: "",
+              })
+            }
+          >
             {" "}
             <img src={cross} alt="cross" /> Clear all filters
           </a>
@@ -369,9 +384,7 @@ export default function SearchEmployee() {
                     item.typeOfEmployment === filters.typeOfEmployment) &&
                   (filters.designation === "" ||
                     item.designation === filters.designation) &&
-                  (filters.salary === "" ||
-                    (item.salary >= filters.salary.split("-")[0] &&
-                      item.salary <= filters.salary.split("-")[1])) &&
+                  (filters.salary === "" || +item.salary <= +filters.salary) &&
                   (filters.location === "" ||
                     item.employeeState
                       .toLowerCase()

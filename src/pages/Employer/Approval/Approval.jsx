@@ -196,7 +196,9 @@ const Approval = () => {
                       <button className="delete-btn">Delete</button>
                     </div>
                     {
-                      requests.find((req) => req.offerId === info.id)?.isApproved
+
+                      requests.find((req) => req.employeeId === info.id)?.isApproved
+
                         ?
                         <Link
                           className="w-100 mt-3 btn"

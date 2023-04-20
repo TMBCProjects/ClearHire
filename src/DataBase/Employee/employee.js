@@ -25,6 +25,7 @@ export async function readColleagues(employeeId, employerId) {
           id: doc.id,
           isActive: doc.data().isActive,
           employeeName: doc.data().employeeName,
+          ratedAtDate: doc.data().ratedAtDate,
           employeeEmail: doc.data().employeeEmail,
           employeeCountry: doc.data().employeeCountry,
           employeeState: doc.data().employeeState,
@@ -92,10 +93,10 @@ export async function readOffers(employeeEmail) {
       query(
         setCollection(Collections.offers),
         where(Fields.employeeEmail, "==", employeeEmail),
-        where(Fields.isActive, "==", true),
+        where(Fields.isActive, "==", true)
       )
     );
-    console.log(querySnapshot, "gg")
+    console.log(querySnapshot, "gg");
     querySnapshot.forEach(async (doc) => {
       let offer = {
         id: doc.id,
@@ -149,6 +150,48 @@ export async function offerAccept(profileData, employeeId, offerId) {
     employeeId
   );
 }
+export async function readEmployeeRatings(employeeId) {
+  try {
+    let ratings = [];
+    const querySnapshot = await getDocuments(
+      query(
+        setCollection(Collections.ratings),
+        where(Fields.employeeId, "==", employeeId)
+      )
+    );
+    querySnapshot.forEach(async (doc) => {
+      let rating = {
+        id: doc.id,
+        isActive: doc.data().isActive,
+        companyName: doc.data().companyName,
+        ratedById: doc.data().ratedById,
+        ratedByEmail: doc.data().ratedByEmail,
+        ratedByRole: doc.data().ratedByRole,
+        ratedAt: doc.data().ratedAt,
+        ratedAtDate: doc.data().ratedAtDate,
+        employeeId: doc.data().employeeId,
+        employeeName: doc.data().employeeName,
+        employeeEmail: doc.data().employeeEmail,
+        communication: doc.data().communication,
+        attitude: doc.data().attitude,
+        abilityToLearn: doc.data().abilityToLearn,
+        punctuality: doc.data().punctuality,
+        commitment: doc.data().commitment,
+        trustworthiness: doc.data().trustworthiness,
+        skill: doc.data().skill,
+        teamPlayer: doc.data().teamPlayer,
+        note: doc.data().note,
+      };
+      ratings.push(rating);
+    });
+    return ratings;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+
 // export async function rateEmployee(ratingData) {
 //   let rating = new Rating();
 //   rating = {

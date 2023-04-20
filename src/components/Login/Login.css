@@ -39,6 +39,9 @@
     margin: 0;
     padding: 10px;
     font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .login-btn:hover {

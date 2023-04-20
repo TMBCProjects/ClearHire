@@ -3,36 +3,135 @@ import { MdArrowBackIos, MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { FaQuoteLeft } from "react-icons/fa";
 import ViewFile from "../../../assets/images/view-doc.svg";
 import UrlLink from "../../../assets/images/link.svg";
-import Employee1 from "../../../assets/images/person-1.png";
 import CompanyLogo from "../../../assets/images/company-logo.png";
 import ProgressBar from "../../../components/ProgressBar";
 import "./EmployeeDetails.css";
-import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-import { useLocation } from "react-router-dom";
+
+import { useLocation, useNavigate } from "react-router-dom";
+import { readEmployeeRatings } from "../../../DataBase/Employee/employee";
+
 
 const EmployeeDetails = () => {
   const location = useLocation();
+  const navigate = useNavigate()
   const { from } = location.state;
-  const employeeId = from;
+  const employee = from;
   const [employeeRatings, setEmployeeRatings] = useState([]);
-  const [employeeDetail, setEmployeeDetail] = useState([]);
+  const [avgRatings, setAvgRatings] = useState({})
+  // console.log("info", from);
+
+
+  const calculateRatings = (ratings) => {
+    let avgCommunication = 0;
+    let avgAttitude = 0;
+    let avgAbilityToLearn = 0;
+    let avgPunctuality = 0;
+    let avgCommitment = 0;
+    let avgTrustWorthiness = 0;
+    let avgSkill = 0;
+    let avgTeamPlayer = 0;
+    let total=0;
+    let colleagueScore=0;
+    let score=0;
+    let ratingsOfEmployee=ratings.filter((rate)=>{
+     return rate?.ratedByRole==='Employee'
+    });
+    let ratingsOfEmployer=ratings.filter((rate)=>{
+      return rate?.ratedByRole==='Employer'
+    })
+    for (let index = 0; index < ratings.length; index++) {
+      const element = ratings[index];
+      avgCommunication += +element.communication;
+      avgAttitude += +element.attitude;
+      avgAbilityToLearn += +element.abilityToLearn;
+      avgPunctuality += +element.punctuality;
+      avgCommitment += +element.commitment;
+      avgTrustWorthiness += +element.trustworthiness;
+      avgSkill += +element.skill;
+      avgTeamPlayer += +element.teamPlayer;
+    }
+    avgCommunication /= ratings.length;
+    avgAttitude /= ratings.length;
+    avgAbilityToLearn /= ratings.length;
+    avgPunctuality /= ratings.length;
+    avgCommitment /= ratings.length;
+    avgTrustWorthiness /= ratings.length;
+    avgSkill /= ratings.length;
+    avgTeamPlayer /= ratings.length;
+    total=avgCommunication+avgAttitude+avgAbilityToLearn+avgPunctuality+avgCommitment+avgTrustWorthiness+avgSkill+avgTeamPlayer;
+    total=total/8;
+    
+    
+    for (let index = 0; index < ratingsOfEmployer.length; index++) {
+      const element = ratingsOfEmployer[index];
+      let temp=+element.communication+ +element.attitude + +element.abilityToLearn + +element.punctuality+ +element.commitment + +element.trustworthiness + +element.skill + +element.teamPlayer;
+      temp/=8;
+      score+=temp;
+    }
+    for (let index = 0; index < ratingsOfEmployee.length; index++) {
+      const element = ratingsOfEmployee[index];
+      let temp=+element.communication+ +element.attitude + +element.abilityToLearn + +element.punctuality+ +element.commitment + +element.trustworthiness + +element.skill + +element.teamPlayer;
+      temp/=8;
+      colleagueScore+=temp;
+    }
+    score/=ratingsOfEmployer.length
+    colleagueScore/=ratingsOfEmployee.length
+    setAvgRatings({
+      avgCommunication:Math.ceil(avgCommunication),
+      avgAttitude:Math.ceil(avgAttitude),
+      avgAbilityToLearn:Math.ceil(avgAbilityToLearn),
+      avgPunctuality:Math.ceil(avgPunctuality),
+      avgCommitment:Math.ceil(avgCommitment),
+      avgTrustWorthiness:Math.ceil(avgTrustWorthiness),
+      avgSkill:Math.ceil(avgSkill),
+      avgTeamPlayer:Math.ceil(avgTeamPlayer),
+      total:Math.ceil(total),
+      score:Math.ceil(score),
+      colleagueScore:Math.ceil(colleagueScore)
+    })
+
+  }
+
+
+
+
 
   useEffect(() => {
     const fetchOfferDetails = async () => {
-      const userDatas = JSON.parse(sessionStorage.getItem("userData"));
-      // const data = await readEmployee(employeeId);
-      // const data2 = await readEmployeeRatings(employeeId);
-      // setEmployeeDetail(data);
-      // setEmployeeRatings(data2)
+      const data2 = await readEmployeeRatings(employee.id);
+      calculateRatings(data2)
+      setEmployeeRatings(data2)
     };
     fetchOfferDetails();
-  }, []);
+  }, [employee.id]);
+
+ function text(percentage){
+  if(percentage <10){
+    return "Worst";
+  }
+  else if(percentage >=10 && percentage<30){
+    return "Poor"
+  }
+  else if(percentage >= 30 && percentage<55){
+    return "Good"
+  }
+  else if(percentage>=55 && percentage <80){
+    return "Very Good"
+  }else{
+    return "Great"
+  }
+ }
+
+  console.log(employeeRatings);
+  console.log(avgRatings);
   return (
     <>
-      <div className="container">
+      <div className="main-container">
         <div className="row d-flex justify-content-between align-items-center my-3">
           <div className="col-6 d-flex justify-content-start align-items-center">
-            <div className="back me-3">
+            <div className="back me-3" onClick={() => {
+              navigate("/")
+            }}>
               <MdArrowBackIos size={22} className="backIcon" />
             </div>
             <span className="employeeDetailsText">Employee Details</span>
@@ -40,74 +139,85 @@ const EmployeeDetails = () => {
           <div className="col-6 d-flex justify-content-end">
             <button className="btn">
               <img src={ViewFile} alt="" className="viewIcon" />
-              <span className="text-color-green fw-bold">View Resume</span>
+              <a className="text-color-green fw-bold" href={employee.resume} target="_blank" rel="noreferrer" style={{
+                textDecoration: "none"
+              }}>View Resume</a>
             </button>
-            <button className="btn portfolio-btn">
+            <a className="btn portfolio-btn" href={`https://${employee.portfolioLink}`} target="_blank" rel="noreferrer">
               <img src={UrlLink} alt="" className="linkIcon" />
               <span className=" fw-bold">Portfolio</span>
-            </button>
+            </a>
           </div>
         </div>
         <div className="row mt-5 d-flex justify-content-center align-items-center mb-5">
           <div className="col-8 d-flex align-items-start">
             <div className="employeeImg">
-              <img src={Employee1} alt="" className="empImg" />
+              <img src={employee?.profileImage} alt="" className="empImg" />
             </div>
             <div className="employeeDetails">
-              <h3>Govarthini, 24</h3>
-              <p>Project Manager at The example company</p>
-              <p>Chennai, India</p>
+              <h3>{employee?.employeeName}</h3>
+              <p>{employee?.designation + " at The " + employee?.companyName}</p>
+              <p>{employee?.employeeState + ", " + employee?.employeeCountry}</p>
             </div>
           </div>
 
           <div className="col-4 d-flex justify-content-center align-items-center empDetailsProgress">
             <div class="circle-wrap">
-              <ProgressBar value={75} />
+              <ProgressBar value={avgRatings?.colleagueScore || 0} color={"#D50000"}/>
+              <p>Colleague Score</p>
             </div>
             <div class="circle-wrap">
-              <ProgressBar value={50} />
+              <ProgressBar value={avgRatings?.score || 0} />
+              <p>
+              Score
+              </p>
             </div>
           </div>
         </div>
 
         {/* skills section  starts */}
         <div className="d-flex justify-content-center align-items-center skillsContainer">
-          <div className="arrowLeft">
-            <LeftOutlined
-              style={{
-                fontSize: "22px",
-                color: "#8E8E8E",
-              }}
-            />
+          {
+            /*
+            <div className="arrowLeft" >
+              <LeftOutlined
+                style={{
+                  fontSize: "22px",
+                  color: "#8E8E8E",
+                }}
+              />
+              </div>
+            */
+
+          }
+          <div className="inside-skills">
+            {
+
+              employee?.skills?.map((skill) => {
+                return (
+                  <div className="skills">
+                    <p className="title">{skill.skillName}</p>
+                    <ProgressBar value={skill.value} />
+                  </div>
+                )
+              })
+            }
           </div>
-          <div className="skills">
-            <p className="title">Photoshop</p>
-            <ProgressBar value={75} />
-          </div>
-          <div className="skills">
-            <p className="title">Illustrator</p>
-            <ProgressBar value={75} />
-          </div>
-          <div className="skills">
-            <p className="title">Premiere Pro</p>
-            <ProgressBar value={75} />
-          </div>
-          <div className="skills">
-            <p className="title">After Effects</p>
-            <ProgressBar value={75} />
-          </div>
-          <div className="skills">
-            <p className="title">Photoshop</p>
-            <ProgressBar value={75} />
-          </div>
-          <div className="arrowRight">
-            <RightOutlined
-              style={{
-                fontSize: "22px",
-                color: "#8E8E8E",
-              }}
-            />
-          </div>
+
+
+          {
+            /*
+            <div className="arrowRight">
+              <RightOutlined
+                style={{
+                  fontSize: "22px",
+                  color: "#8E8E8E",
+                }}
+              />
+            </div>
+            */
+          }
+
         </div>
         {/* skills section ends */}
 
@@ -117,12 +227,12 @@ const EmployeeDetails = () => {
           </div>
           <div className="col">
             <div className="companyLogo">
-              <img src={CompanyLogo} alt="" className="logo" />
+              <img src={employee?.companyLogo} alt="logo" className="logo" />
             </div>
           </div>
           <div className="col-md-10">
             <h1 className="fw-bold font-size-39">
-              The Madras Branding Company
+              {employee?.companyName}
             </h1>
             <div className="fw-bold font-size-25">2022</div>
           </div>
@@ -133,49 +243,79 @@ const EmployeeDetails = () => {
             <div className="row">
               <div className="col-md-3 mb-3">
                 <div class="circle-wrap">
-                  <ProgressBar value={75} />
+                {
+                  avgRatings.avgCommunication && 
+                  <ProgressBar value={avgRatings.avgCommunication || 0} />
+                }
+                  
                 </div>
                 <p>Communitcation</p>
               </div>
               <div className="col-md-3 mb-3">
                 <div class="circle-wrap">
-                  <ProgressBar value={75} />
+                {
+                  avgRatings.avgAttitude &&
+                  <ProgressBar value={avgRatings.avgAttitude || 0} />
+                }
                 </div>
                 <p>Attitude</p>
               </div>
               <div className="col-md-3 mb-3">
                 <div class="circle-wrap">
-                  <ProgressBar value={75} />
+                {
+                  avgRatings.avgAbilityToLearn && 
+                  <ProgressBar value={avgRatings.avgAbilityToLearn || 0} />
+                }
                 </div>
                 <p>Ability To Learn</p>
               </div>
               <div className="col-md-3 mb-3">
                 <div class="circle-wrap">
-                  <ProgressBar value={75} />
+                {
+                  avgRatings.avgPunctuality &&
+                  <ProgressBar value={avgRatings.avgPunctuality || 0} />
+
+                }
                 </div>
                 <p>Punctuality</p>
               </div>
               <div className="col-md-3 mb-3">
                 <div class="circle-wrap">
-                  <ProgressBar value={75} />
+                {
+                  avgRatings.avgCommitment &&
+                  <ProgressBar value={avgRatings.avgCommitment || 0} />
+
+                }
                 </div>
                 <p>Commitment</p>
               </div>
               <div className="col-md-3 mb-3">
                 <div class="circle-wrap">
-                  <ProgressBar value={75} />
+                {
+                  avgRatings.avgTrustWorthiness &&
+                  <ProgressBar value={avgRatings.avgTrustWorthiness || 0} />
+
+                }
                 </div>
                 <p>Trustworthiness</p>
               </div>
               <div className="col-md-3 mb-3">
                 <div class="circle-wrap">
-                  <ProgressBar value={75} />
+                {
+                  avgRatings.avgSkill &&
+                  <ProgressBar value={avgRatings.avgSkill || 0} />
+
+                }
                 </div>
                 <p>Skill</p>
               </div>
               <div className="col-md-3 mb-3">
                 <div class="circle-wrap">
-                  <ProgressBar value={75} />
+                {
+                  avgRatings.avgTeamPlayer &&
+                  <ProgressBar value={avgRatings.avgTeamPlayer || 0} />
+
+                }
                 </div>
                 <p>Team Player</p>
               </div>
@@ -185,7 +325,11 @@ const EmployeeDetails = () => {
             <p className="mb-0">Total</p>
 
             <div class="circle-wrap">
-              <ProgressBar value={75} />
+            {
+              avgRatings.total &&
+              <ProgressBar value={avgRatings.total || 0} />
+
+            }
             </div>
           </div>
         </div>
@@ -194,7 +338,7 @@ const EmployeeDetails = () => {
             <p>
               <FaQuoteLeft size={30} className="quoteLeft" />
               This employee is marked as a{" "}
-              <span className="text-color-green">good employee </span> by{" "}
+              <span className="text-color-green">{text(avgRatings?.total)} employee </span> by{" "}
               <strong>The Madras Branding Company</strong>
             </p>
           </div>

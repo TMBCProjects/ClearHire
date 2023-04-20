@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import { FileOutlined, PlusOutlined } from "@ant-design/icons";
 import "../UploadPic/UploadPic.css";
 import { deleteFile, uploadFile } from "../../utils/FirebaseUtils";
@@ -40,7 +40,8 @@ export default function UploadPic({ name, url }) {
             fontWeight: "bold",
             fontSize: "1rem",
           }}
-          className="photoLabel">
+          className="photoLabel"
+        >
           {fileLoading ? (
             <div onClick={removeImg}>
               <FileOutlined
@@ -49,7 +50,7 @@ export default function UploadPic({ name, url }) {
                   backdropFilter: "blur(4px)",
                 }}
               />
-              &nbsp;View Resume
+              &nbsp;Resume Added
             </div>
           ) : (
             <>
