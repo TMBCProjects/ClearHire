@@ -37,7 +37,7 @@ const Approval = () => {
             setCollection(Collections.requests),
 
             where(Fields.employerId, "==", userDatas.id),
-            where(Fields.isActive, "==", true),
+            where(Fields.isActive, "==", true)
           )
         );
 
@@ -106,7 +106,6 @@ const Approval = () => {
     await sendRequestToViewAssesment(newRequest);
   };
 
-
   return (
     <div id="employer-approval" className="container">
       <div className="row d-flex justify-content-between align-items-center">
@@ -130,21 +129,7 @@ const Approval = () => {
               All
             </label>
           </div>
-          <div className="form-check form-check-inline mx-3">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="inlineRadioOptions"
-              id="inlineRadio2"
-              defaultValue="option2"
-            />
-            <label
-              className="form-check-label filter-approval"
-              htmlFor="inlineRadio2"
-            >
-              Fresher
-            </label>
-          </div>
+
           <div className="form-check form-check-inline mx-3">
             <input
               className="form-check-input"
@@ -194,35 +179,34 @@ const Approval = () => {
                     <div className="col">
                       <button className="delete-btn">Delete</button>
                     </div>
-                    {
-
-                      requests.find((req) => req.employeeId === info.id)?.isApproved
-
-                        ?
-                        <Link
-                          className="w-100 mt-3 btn"
-                          to={{
-                            pathname: "/employee-details",
-                          }}
-                          state={{ from: info.employeeId }}>
+                    {requests.find((req) => req.employeeId === info.id)
+                      ?.isApproved ? (
+                      <Link
+                        className="w-100 mt-3 btn"
+                        to={{
+                          pathname: "/employee-details",
+                        }}
+                        state={{ from: info.employeeId }}
+                      >
                         <button className="w-100 mt-3 btn btn-assessment">
                           View assessment
-                          </button>
-                        </Link>
-                        :
-                        <button className="w-100 mt-3 btn btn-request-sent">
-                          Request sent
                         </button>
-                    }
-                    {
-                      !requests.find((req) => req.offerId === info.id) && 
-                      <button className="w-100 mt-3 btn btn-request" onClick={() => {
-                        sentRequest(info)
-                      }}>
+                      </Link>
+                    ) : (
+                      <button className="w-100 mt-3 btn btn-request-sent">
+                        Request sent
+                      </button>
+                    )}
+                    {!requests.find((req) => req.offerId === info.id) && (
+                      <button
+                        className="w-100 mt-3 btn btn-request"
+                        onClick={() => {
+                          sentRequest(info);
+                        }}
+                      >
                         Request to view assessment
                       </button>
-                    }
-                  
+                    )}
                   </div>
                 </div>
               </div>

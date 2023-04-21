@@ -7,6 +7,7 @@ import UploadPic from "../../../components/UploadPic/UploadPic";
 import { registerLogin } from "../../../DataBase/SignUp/signUp";
 import "../SignupForm/Signup.css";
 import Loader from '../../../components/Loader'
+import Tags from "../../../components/Tags/Tags";
 const initialValues = {
   email: "",
   password: "",
@@ -49,14 +50,21 @@ export default function Signup() {
   };
 
   const handleSubmit = () => {
-    setLoading(true)
     values.profileImage = sessionStorage.getItem("profileImage");
     values.role = sessionStorage.getItem("user");
-    registerLogin(values).then(() => {
-      sessionStorage.removeItem("profileImage");
-      window.location.href = "/signup-done";
-    });
-    setLoading(false)
+   
+      setLoading(true)
+
+      registerLogin(values).then(() => {
+        sessionStorage.removeItem("profileImage");
+        window.location.href = "/signup-done";
+      }).catch((err)=>{
+        setLoading(false)
+        alert(err);
+      });
+    
+    
+    
   };
 
   const handleCountryChange = (e) => {
@@ -192,23 +200,7 @@ export default function Signup() {
           ) : (
             <label className="control-label">Your Location</label>
           )}
-          <div className="dropdowns">
-            <Dropdown
-              values={countries}
-              type={"country"}
-              name={"country"}
-              id={"Country"}
-              onChange={handleCountryChange}
-            />
-
-            <Dropdown
-              values={states}
-              type={"country"}
-              name={"state"}
-              id={"State"}
-              onChange={handleStateChange}
-            />
-          </div>
+         <Tags />
           {user === "Employer" ? (
             <label className="control-label">Company Logo</label>
           ) : (

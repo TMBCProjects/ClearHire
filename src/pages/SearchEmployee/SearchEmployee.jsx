@@ -28,16 +28,17 @@ export default function SearchEmployee() {
   const userDatas = JSON.parse(sessionStorage.getItem("userData"));
   const user = sessionStorage.getItem("LoggedIn");
   const [employeeList, setEmployeeList] = useState([]);
-  const [filters, setFilters] = useState("");
+  const [filters, setFilters] = useState([]);
+  const [query, setQuery] = useState("");
 
   // fetch employer details
   useEffect(() => {
-      setFilters({
-        typeOfEmployment: "",
-        salary: "",
-        location: "",
-        designation: "",
-      });
+    setFilters({
+      typeOfEmployment: "",
+      salary: "",
+      location: "",
+      designation: "",
+    });
     const fetchEmployerDetails = async () => {
       try {
         const user = sessionStorage.getItem("LoggedIn");
@@ -45,8 +46,11 @@ export default function SearchEmployee() {
           user === "Employer"
             ? await readEmployees(userDatas.id)
             : userDatas.data.currentEmployerId
-              ? await readColleagues(userDatas.id, userDatas.data.currentEmployerId)
-              : [];
+            ? await readColleagues(
+                userDatas.id,
+                userDatas.data.currentEmployerId
+              )
+            : [];
         setEmployeeList(data);
       } catch (error) {
         console.log(error);
@@ -56,24 +60,59 @@ export default function SearchEmployee() {
   }, [userDatas]);
 
   const handleTypeOfEmploymentChange = (event) => {
-    // filters.typeOfEmployment = event.target.value;
-    setFilters({...filters,typeOfEmployment:event.target.value})
-    
+    filters.typeOfEmployment = event.target.value;
+    if (filters.typeOfEmployment.length > 0) {
+      const filteredData = employeeList.filter((item) =>
+        item.typeOfEmployment.toLowerCase().includes(filters.typeOfEmployment)
+      );
+      console.log("Employment", filteredData);
+      setEmployeeList(filteredData);
+    } else {
+      setEmployeeList(filters);
+    }
+    setQuery(filters.typeOfEmployment);
   };
 
   const handleSalaryChange = (event) => {
-    // filters.salary = event.target.value;
-    setFilters({...filters,salary:event.target.value})
+    filters.salary = event.target.value;
+    if (filters.salary.length > 0) {
+      const filteredData = employeeList.filter((item) =>
+        item.typeOfEmployment.toLowerCase().includes(filters.salary)
+      );
+      console.log("salary", filteredData);
+      setEmployeeList(filteredData);
+    } else {
+      setEmployeeList(filters);
+    }
+    setQuery(filters.salary);
   };
 
   const handleDesignationChange = (event) => {
-    // filters.designation = event.target.value;
-    setFilters({...filters,designation:event.target.value})
+    filters.designation = event.target.value;
+    if (filters.designation.length > 0) {
+      const filteredData = employeeList.filter((item) =>
+        item.typeOfEmployment.toLowerCase().includes(filters.designation)
+      );
+      console.log("designation", filteredData);
+      setEmployeeList(filteredData);
+    } else {
+      setEmployeeList(filters);
+    }
+    setQuery(filters.designation);
   };
 
   const handleLocationChange = (event) => {
-    // filters.location = event.target.value;
-    setFilters({...filters,location:event.target.value})
+    filters.location = event.target.value;
+    if (filters.location.length > 0) {
+      const filteredData = employeeList.filter((item) =>
+        item.typeOfEmployment.toLowerCase().includes(filters.location)
+      );
+      console.log("location", filteredData);
+      setEmployeeList(filteredData);
+    } else {
+      setEmployeeList(filters);
+    }
+    setQuery(filters.location);
   };
   return (
     <div className="employer-home">
@@ -116,7 +155,7 @@ export default function SearchEmployee() {
               type="text"
               className="box-input no-border"
               placeholder="Salary"
-              onChange={handleSalaryChange}
+              onChange={(e) => handleSalaryChange(e)}
             />
           </div>
         ) : (
@@ -139,12 +178,11 @@ export default function SearchEmployee() {
             <div className="dropdown-select">
               <p>Job Title</p>
               <Select
-               
                 style={{
                   width: "100%",
                 }}
                 onChange={(e) => {
-                  setFilters({...filters,designation:e})
+                  setFilters({ ...filters, designation: e });
                 }}
                 options={[
                   { value: "Graphics Designer", label: "Graphics Designer" },
@@ -156,11 +194,10 @@ export default function SearchEmployee() {
             <div className="dropdown-select">
               <p>Location</p>
               <Select
-                
                 style={{
                   width: "100%",
                 }}
-                onChange={(e) => setFilters({...filters,location:e})}
+                onChange={(e) => setFilters({ ...filters, location: e })}
                 tokenSeparators={[","]}
                 options={[
                   {
@@ -256,7 +293,9 @@ export default function SearchEmployee() {
                   marks={marks}
                   min={1}
                   max={50}
-                  onChange={(e) => setFilters({...filters,salary:+e*1000})}
+                  onChange={(e) =>
+                    setFilters({ ...filters, salary: +e * 1000 })
+                  }
                   trackStyle={{
                     backgroundColor: "#00823B",
                     height: ".3rem",
@@ -339,9 +378,7 @@ export default function SearchEmployee() {
                     item.typeOfEmployment === filters.typeOfEmployment) &&
                   (filters.designation === "" ||
                     item.designation === filters.designation) &&
-                  (filters.salary === "" ||
-                    (+item.salary <= +filters.salary) 
-                    ) &&
+                  (filters.salary === "" || +item.salary <= +filters.salary) &&
                   (filters.location === "" ||
                     item.employeeState
                       .toLowerCase()
