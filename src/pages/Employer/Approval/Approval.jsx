@@ -90,7 +90,6 @@ const Approval = () => {
     };
   }, []);
 
-  console.log(requests);
   const sentRequest = async (data) => {
     let userDetails = JSON.parse(sessionStorage.getItem("userData")).data;
     let newRequest = {

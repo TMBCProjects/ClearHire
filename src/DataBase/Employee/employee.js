@@ -2,10 +2,12 @@ import { arrayUnion, query, where } from "firebase/firestore";
 import { Collections } from "../../utils/Collections";
 import { Fields } from "../../utils/Fields";
 import {
+  addDocument,
   getDocuments,
   setCollection,
   updateDocument,
 } from "../../utils/FirebaseUtils";
+import Rating from "../../Modals/DB/Rating";
 
 export default async function defaultFn() {}
 
@@ -25,7 +27,7 @@ export async function readColleagues(employeeId, employerId) {
           id: doc.id,
           isActive: doc.data().isActive,
           employeeName: doc.data().employeeName,
-          ratedAtDate: doc.data().ratedAtDate,
+          ratings: doc.data().ratings,
           employeeEmail: doc.data().employeeEmail,
           employeeCountry: doc.data().employeeCountry,
           employeeState: doc.data().employeeState,
@@ -96,7 +98,6 @@ export async function readOffers(employeeEmail) {
         where(Fields.isActive, "==", true)
       )
     );
-    console.log(querySnapshot, "gg");
     querySnapshot.forEach(async (doc) => {
       let offer = {
         id: doc.id,
@@ -190,31 +191,42 @@ export async function readEmployeeRatings(employeeId) {
   }
 }
 
-
-
-// export async function rateEmployee(ratingData) {
-//   let rating = new Rating();
-//   rating = {
-//     isActive: true,
-//     companyName: ratingData.companyName,
-//     ratedById: ratingData.ratedById,
-//     ratedByEmail: ratingData.ratedByEmail,
-//     employeeId: ratingData.employeeId,
-//     employeeName: ratingData.employeeName,
-//     employeeEmail: ratingData.employeeEmail,
-//     dateOfReview: ratingData.dateOfReview,
-//     communication: ratingData.communication,
-//     attitude: ratingData.attitude,
-//     abilityToLearn: ratingData.abilityToLearn,
-//     punctuality: ratingData.punctuality,
-//     commitment: ratingData.commitment,
-//     trustworthiness: ratingData.trustworthiness,
-//     skill: ratingData.skill,
-//     teamPlayer: ratingData.teamPlayer,
-//     note: ratingData.note,
-//   };
-//   return await addDocument(Collections.ratings, rating);
-// }
+export async function rateCollegue(ratingData) {
+  let rating = new Rating();
+  rating = {
+    isActive: true,
+    companyName: ratingData.companyName,
+    ratedById: ratingData.ratedById,
+    ratedByRole: ratingData.ratedByRole,
+    ratedAt: new Date(),
+    ratedAtDate: new Date().toDateString(),
+    ratedByEmail: ratingData.ratedByEmail,
+    employeeId: ratingData.employeeId,
+    employeeName: ratingData.employeeName,
+    employeeEmail: ratingData.employeeEmail,
+    dateOfReview: ratingData.dateOfReview,
+    communication: ratingData.communication,
+    attitude: ratingData.attitude,
+    abilityToLearn: ratingData.abilityToLearn,
+    punctuality: ratingData.punctuality,
+    commitment: ratingData.commitment,
+    trustworthiness: ratingData.trustworthiness,
+    skill: ratingData.skill,
+    teamPlayer: ratingData.teamPlayer,
+    note: ratingData.note,
+  };
+  await updateDocument(
+    Collections.employees,
+    {
+      ratings: arrayUnion({
+        ratedById: ratingData.ratedById,
+        ratedAtDate: new Date().toLocaleDateString(),
+      }),
+    },
+    ratingData.employeeId
+  );
+  return await addDocument(Collections.ratings, rating);
+}
 // //READS
 // export async function readTasksByTeammate(teammateId) {
 //   try {

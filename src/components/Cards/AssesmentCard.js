@@ -5,15 +5,37 @@ import ProgressBar from "../ProgressBar";
 import "./styles.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-const Assesment_Card = ({ info, value, name, state, country, designation }) => {
-  const navigate=useNavigate();
+const Assesment_Card = ({
+  info,
+  value,
+  name,
+  state,
+  country,
+  designation,
+  employerId,
+}) => {
+  const navigate = useNavigate();
 
   function hasOneMonthPassed(date) {
+    if (date === "null") {
+      return false;
+    }
     const specificDate = new Date(date);
     const oneMonthInMs = 30 * 24 * 60 * 60 * 1000;
     const currentDate = new Date();
     const diffInMs = currentDate - specificDate;
     return diffInMs <= oneMonthInMs;
+  }
+  function findRatedAtDate(ratingsArray, desiredId) {
+    if (ratingsArray !== undefined) {
+      for (let i = 0; i < ratingsArray.length; i++) {
+        if (ratingsArray[i].ratedById === desiredId) {
+          return ratingsArray[i].ratedAtDate;
+        } else {
+        }
+      }
+    }
+    return "null";
   }
   return (
     <div className="assess-card">
@@ -58,19 +80,22 @@ const Assesment_Card = ({ info, value, name, state, country, designation }) => {
           {designation}
         </span>
       </div>
-      <div className="cardFooter">
+      <div
+        className="cardFooter"
+        style={
+          hasOneMonthPassed(findRatedAtDate(info.ratings, employerId))
+            ? {
+                pointerEvents: "none",
+              }
+            : {}
+        }>
         <Link
           className="w-100 mt-3 btn"
           to={{
             pathname: "/EmployeeAssessment",
           }}
-          disabled={hasOneMonthPassed(info.ratedAtDate)}
           state={{ from: info }}>
-          <button
-            className="allow"
-            disabled={hasOneMonthPassed(info.ratedAtDate)}>
-            Assess Employee
-          </button>
+          <button className="allow">Assess Employee</button>
         </Link>
       </div>
     </div>

@@ -135,8 +135,6 @@ const EmployeeDetails = () => {
     }
   }
 
-  console.log(employeeRatings);
-  console.log(avgRatings);
   return (
     <>
       <div className="main-container">

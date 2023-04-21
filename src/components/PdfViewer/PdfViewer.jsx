@@ -12,12 +12,8 @@ import { useEffect } from "react";
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const PdfViewer = ({ offerLetterUrl }) => {
-  console.log(offerLetterUrl);
   const [numPages, setNumPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  useEffect(() => {
-    console.log(offerLetterUrl)
-  }, [offerLetterUrl])
   const onNextPage = () => {
     setCurrentPage(currentPage + 1);
   };

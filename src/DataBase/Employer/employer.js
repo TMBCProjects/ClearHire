@@ -10,7 +10,7 @@ import {
 } from "../../utils/FirebaseUtils";
 import { Fields } from "../../utils/Fields";
 import { setCollection } from "../../utils/FirebaseUtils";
-import { query, where } from "firebase/firestore";
+import { arrayUnion, query, where } from "firebase/firestore";
 import Request from "../../Modals/DB/Request";
 
 export default async function defaultFn() {}
@@ -243,7 +243,7 @@ export async function readEmployee(id) {
         id: doc.id,
         isActive: doc.data().isActive,
         employeeName: doc.data().employeeName,
-        ratedAtDate: doc.data().ratedAtDate,
+        ratings: doc.data().ratings,
         employeeEmail: doc.data().employeeEmail,
         employeeCountry: doc.data().employeeCountry,
         employeeState: doc.data().employeeState,
@@ -287,7 +287,7 @@ export async function readEmployees(employerId) {
       let employee = {
         id: doc.id,
         isActive: doc.data().isActive,
-        ratedAtDate: doc.data().ratedAtDate,
+        ratings: doc.data().ratings,
         employeeName: doc.data().employeeName,
         employeeEmail: doc.data().employeeEmail,
         employeeCountry: doc.data().employeeCountry,
@@ -399,14 +399,13 @@ export async function readOfferReplies(employerId) {
 export async function onboardEmployee(offerData) {
   const offerLetterFileUrl = await uploadFile(
     Fields.offerLetters,
-    offerData.name,
+    offerData.email,
     offerData.offerLetter
   );
   let offer = new Offer();
   offer = {
     isActive: true,
     isAccepted: false,
-    employeeName: offerData.name,
     employeeEmail: offerData.email,
     dateOfJoining: offerData.dateOfJoining,
     employerEmail: offerData.employerEmail,
@@ -464,7 +463,12 @@ export async function rateEmployee(ratingData) {
   };
   await updateDocument(
     Collections.employees,
-    { ratedAtDate: new Date().toLocaleDateString() },
+    {
+      ratings: arrayUnion({
+        ratedById: ratingData.ratedById,
+        ratedAtDate: new Date().toLocaleDateString(),
+      }),
+    },
     ratingData.employeeId
   );
   return await addDocument(Collections.ratings, rating);
@@ -483,7 +487,6 @@ export async function sendRequestToViewAssesment(userDetails, data) {
     employeeId: data.employeeId,
     offerId: data.id,
   };
-  console.log(data);
   return await addDocument(Collections.requests, newRequest);
 }
 

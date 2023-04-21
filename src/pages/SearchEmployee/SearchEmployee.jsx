@@ -25,6 +25,7 @@ const marks2 = {
 };
 
 export default function SearchEmployee() {
+  const userDatas = JSON.parse(sessionStorage.getItem("userData"));
   const user = sessionStorage.getItem("LoggedIn");
   const [employeeList, setEmployeeList] = useState([]);
   const [filters, setFilters] = useState([]);
@@ -41,7 +42,6 @@ export default function SearchEmployee() {
     const fetchEmployerDetails = async () => {
       try {
         const user = sessionStorage.getItem("LoggedIn");
-        const userDatas = JSON.parse(sessionStorage.getItem("userData"));
         const data =
           user === "Employer"
             ? await readEmployees(userDatas.id)
@@ -57,7 +57,7 @@ export default function SearchEmployee() {
       }
     };
     fetchEmployerDetails();
-  }, []);
+  }, [userDatas]);
 
   const handleTypeOfEmploymentChange = (event) => {
     filters.typeOfEmployment = event.target.value;
@@ -114,7 +114,6 @@ export default function SearchEmployee() {
     }
     setQuery(filters.location);
   };
-  console.log(employeeList);
   return (
     <div className="employer-home">
       <div className="search-inputs">
@@ -320,17 +319,12 @@ export default function SearchEmployee() {
           ) : (
             ""
           )}
-          <a
-            className="clear-filter"
-            onClick={() =>
-              setFilters({
-                typeOfEmployment: "",
-                salary: "",
-                location: "",
-                designation: "",
-              })
-            }
-          >
+          <a href="#" className="clear-filter" onClick={() => setFilters({
+            typeOfEmployment:"",
+            salary:"",
+            location:"",
+            designation:""
+          })}>
             {" "}
             <img src={cross} alt="cross" /> Clear all filters
           </a>
@@ -396,6 +390,7 @@ export default function SearchEmployee() {
                   <AssesmentCard
                     value={30}
                     info={info}
+                    employerId={userDatas.id}
                     name={info.employeeName}
                     state={info.employeeState}
                     country={info.employeeCountry}

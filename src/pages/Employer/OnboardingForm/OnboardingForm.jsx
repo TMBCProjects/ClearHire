@@ -4,9 +4,9 @@ import add from "../../../images/add.svg";
 import { GoChevronLeft } from "react-icons/go";
 import { onboardEmployee } from "../../../DataBase/Employer/employer";
 import { useNavigate } from "react-router-dom";
+import { checkIfAvailable } from "../../../utils/FirebaseUtils";
 
 const initialValues = {
-  name: "",
   email: "",
   designation: "",
   dateOfJoining: "",
@@ -65,15 +65,6 @@ function OnboardingForm() {
             <div className="onboard-form-1">
               <p className="onboard-heading">On-Board New Employee</p>
               <div className="mx-auto d-flex flex-column justify-content-center align-items-center">
-                <div className="form-item">
-                  <input
-                    type="text"
-                    className="form-control-1"
-                    placeholder="Name"
-                    name="name"
-                    onChange={handleInputChange}
-                  />
-                </div>
                 <div className="form-item email">
                   <input
                     type="email"
@@ -82,10 +73,10 @@ function OnboardingForm() {
                     name="email"
                     onChange={handleInputChange}
                   />
-                  <p>
-                    Not on clearhire - an email will be sent to them instead
-                  </p>
                 </div>
+                <p style={checkIfAvailable(values.email) ? { display: "none" } : { color: "red" }}>
+                  Not on clearhire - an email will be sent to them instead
+                </p>
                 <div className="form-item ">
                   <select name="designation" id="" onChange={handleInputChange}>
                     <option value="">Designation*</option>

@@ -7,6 +7,7 @@ import arrow from "../../images/arrow-dropup.svg";
 import ProgressBar from "../../components/ProgressBar";
 import { rateEmployee } from "../../DataBase/Employer/employer";
 import { useLocation, useNavigate } from "react-router-dom";
+import { rateCollegue } from "../../DataBase/Employee/employee";
 
 const initialState = {
   dateOfReview: new Date(),
@@ -48,13 +49,16 @@ function EmployeeAssessment() {
     values.companyName = userDatas.data.companyName;
     values.ratedById = userDatas.id;
     values.ratedByRole = role;
-    values.ratedByEmail = userDatas.data.employerEmail;
+    values.ratedByEmail = userDatas.data.employerEmail || userDatas.data.employeeEmail;
     values.employeeId = info.id || "employeeId";
     values.employeeName = info.employeeName || "employeeName";
     values.employeeEmail = info.employeeEmail || "employeeEmail";
     values.profileImage = info.profileImage || pic;
-    rateEmployee(values).then(() => {
-      window.location.href = "/";
+    role === "Employer" ? rateEmployee(values).then(() => {
+      window.location.href = "/colleagues";
+    }) :
+      rateCollegue(values).then(() => {
+        window.location.href = "/colleagues";
     });
   };
 
@@ -70,7 +74,7 @@ function EmployeeAssessment() {
   };
   // handle back click
   const handleBack = () => {
-    navigate("/");
+    navigate("/colleagues");
   };
 
   return (
