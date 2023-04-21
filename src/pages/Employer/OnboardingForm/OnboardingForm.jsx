@@ -4,6 +4,7 @@ import add from "../../../images/add.svg";
 import { GoChevronLeft } from "react-icons/go";
 import { onboardEmployee } from "../../../DataBase/Employer/employer";
 import { useNavigate } from "react-router-dom";
+import { checkIfAvailable } from "../../../utils/FirebaseUtils";
 
 const initialValues = {
   name: "",
@@ -82,10 +83,10 @@ function OnboardingForm() {
                     name="email"
                     onChange={handleInputChange}
                   />
-                  <p>
-                    Not on clearhire - an email will be sent to them instead
-                  </p>
                 </div>
+                <p style={checkIfAvailable(values.email) ? { display: "none" } : { color: "red" }}>
+                  Not on clearhire - an email will be sent to them instead
+                </p>
                 <div className="form-item ">
                   <select name="designation" id="" onChange={handleInputChange}>
                     <option value="">Designation*</option>
