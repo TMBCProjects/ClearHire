@@ -178,11 +178,13 @@ export default function Signup() {
           )}
 
           {user === "Employer" ? (
+            <>
             <label className="control-label">Company Location</label>
+              <Tags />
+            </>
           ) : (
-            <label className="control-label">Your Location</label>
+              <></>
           )}
-         <Tags />
           {user === "Employer" ? (
             <label className="control-label">Company Logo</label>
           ) : (

@@ -2,8 +2,7 @@ export default class Employee {
   isActive = false;
   employeeName = "";
   employeeEmail = "";
-  employeeCountry = "";
-  employeeState = "";
+  companyLocations = "";
   profileImage = "";
   dateOfBirth = "";
   role = "";
