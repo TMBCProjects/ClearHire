@@ -399,14 +399,13 @@ export async function readOfferReplies(employerId) {
 export async function onboardEmployee(offerData) {
   const offerLetterFileUrl = await uploadFile(
     Fields.offerLetters,
-    offerData.name,
+    offerData.email,
     offerData.offerLetter
   );
   let offer = new Offer();
   offer = {
     isActive: true,
     isAccepted: false,
-    employeeName: offerData.name,
     employeeEmail: offerData.email,
     dateOfJoining: offerData.dateOfJoining,
     employerEmail: offerData.employerEmail,

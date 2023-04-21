@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { checkIfAvailable } from "../../../utils/FirebaseUtils";
 
 const initialValues = {
-  name: "",
   email: "",
   designation: "",
   dateOfJoining: "",
@@ -66,15 +65,6 @@ function OnboardingForm() {
             <div className="onboard-form-1">
               <p className="onboard-heading">On-Board New Employee</p>
               <div className="mx-auto d-flex flex-column justify-content-center align-items-center">
-                <div className="form-item">
-                  <input
-                    type="text"
-                    className="form-control-1"
-                    placeholder="Name"
-                    name="name"
-                    onChange={handleInputChange}
-                  />
-                </div>
                 <div className="form-item email">
                   <input
                     type="email"
