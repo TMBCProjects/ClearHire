@@ -38,8 +38,7 @@ export async function addNewEmployee(docId, user) {
   employee = {
     employeeName: user.name,
     role: user.role,
-    employeeCountry: user.country,
-    employeeState: user.state,
+    employeeCountry: user.locations,
     profileImage: user.profileImage,
     isActive: true,
     employeeEmail: user.email,
