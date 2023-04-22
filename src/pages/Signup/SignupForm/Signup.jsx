@@ -67,24 +67,6 @@ export default function Signup() {
     
   };
 
-  const handleCountryChange = (e) => {
-    selectedCountry = e.target.value;
-    const data = { country: e.target.value };
-    axios
-      .post("https://countriesnow.space/api/v0.1/countries/states", data)
-      .then((res) => setStates(res.data.data.states));
-    setValues({
-      ...values,
-      country: selectedCountry,
-    });
-  };
-  const handleStateChange = (e) => {
-    selectedState = e.target.value;
-    setValues({
-      ...values,
-      state: selectedState,
-    });
-  };
   const handleYearChange = (e) => {
     selectedYear = e.target.value;
     setValues({
@@ -196,11 +178,13 @@ export default function Signup() {
           )}
 
           {user === "Employer" ? (
+            <>
             <label className="control-label">Company Location</label>
+              <Tags />
+            </>
           ) : (
-            <label className="control-label">Your Location</label>
+              <></>
           )}
-         <Tags />
           {user === "Employer" ? (
             <label className="control-label">Company Logo</label>
           ) : (
