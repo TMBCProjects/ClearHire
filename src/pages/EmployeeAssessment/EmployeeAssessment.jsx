@@ -96,7 +96,7 @@ function EmployeeAssessment() {
           </div>
           <div className="prof-text">
             <h3>
-              {info.employeeName}, {info.dateOfBirth}
+              {info.employeeName}, {calculateAge(info.dateOfBirth)}
             </h3>
             <h6>
               {info.designation} at {info.companyName}

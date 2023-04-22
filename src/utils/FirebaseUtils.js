@@ -157,19 +157,11 @@ export async function changePasswordWithCurrentPassword(
 
 export async function checkIfAvailable(email) {
   try {
-    fetchSignInMethodsForEmail(auth, email)
-      .then((signInMethods) => {
-        if (signInMethods.length > 0) {
-          return true;
-        } else {
-          return false;
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    const signInMethods = await fetchSignInMethodsForEmail(auth, email);
+    return signInMethods.length === 0;
   } catch (error) {
     console.error(error);
+    return false;
   }
 }
 export async function uploadPhoto(file) {
