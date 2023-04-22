@@ -13,8 +13,16 @@
 
 .back-cont {
     display: flex;
-    column-gap: 10px;
     cursor: pointer;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.back-div{
+    width: 26vh;
+    display: flex;
+    flex-direction: row;
+    gap: 2vh;
 }
 
 .back-cont img {
@@ -62,6 +70,7 @@
     display: flex;
     text-align: center;
     flex-wrap: wrap;
+    width: 47vh;
 }
 
 .circle-box {

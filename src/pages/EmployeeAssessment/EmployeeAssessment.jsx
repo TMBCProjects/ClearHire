@@ -8,6 +8,7 @@ import ProgressBar from "../../components/ProgressBar";
 import { rateEmployee } from "../../DataBase/Employer/employer";
 import { useLocation, useNavigate } from "react-router-dom";
 import { rateCollegue } from "../../DataBase/Employee/employee";
+import { Segmented } from 'antd';
 
 const initialState = {
   dateOfReview: new Date(),
@@ -74,14 +75,19 @@ function EmployeeAssessment() {
   };
   // handle back click
   const handleBack = () => {
-    navigate("/colleagues");
+    navigate("/");
   };
 
   return (
     <div className="assesment container">
       <div className="back-cont" onClick={handleBack}>
-        <img src={arrow} alt="" />
-        <h4>Employee Assessment</h4>
+        <div className="back-div">
+          <img src={arrow} alt="" />
+          <h4>Employee Assessment</h4>
+        </div>
+        <div className="tabs" style={{width: "40vh"}}>
+          <Segmented block options={["Softskill", "Assessment Form"]} />
+        </div>
       </div>
       <div className="row employe-details">
         <div className="col-xl-8 col-lg-7 col-md-6 col-12 employe-prof">
