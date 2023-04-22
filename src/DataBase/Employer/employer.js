@@ -407,6 +407,8 @@ export async function onboardEmployee(offerData) {
     isActive: true,
     isAccepted: false,
     employeeEmail: offerData.email,
+    emailAvailable: offerData.emailAvailable,
+    companyLocation: offerData.companyLocation,
     dateOfJoining: offerData.dateOfJoining,
     employerEmail: offerData.employerEmail,
     employerId: offerData.employerId,

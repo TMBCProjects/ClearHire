@@ -12,6 +12,7 @@ const initialValues = {
   designation: "",
   dateOfJoining: "",
   typeOfEmployment: "",
+  companyLocation: "",
   salary: "",
   offerLetter: "",
 };
@@ -31,8 +32,10 @@ function OnboardingForm() {
   };
 
   useEffect(() => {
-    setEmailAvailable(checkIfAvailable(values.email))
-  }, [values.email])
+    checkIfAvailable(values.email)
+      .then((result) => setEmailAvailable(result))
+      .catch((error) => console.error(error))
+  }, [values.email]);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -49,6 +52,7 @@ function OnboardingForm() {
     values.companyLogo = userDatas.data.companyLogo;
     values.employerEmail = userDatas.data.employerEmail;
     values.employerId = userDatas.id;
+    values.emailAvailable = emailAvailable;
     onboardEmployee(values).then(() => {
       window.location.href = "/offerletter-sent";
     });
