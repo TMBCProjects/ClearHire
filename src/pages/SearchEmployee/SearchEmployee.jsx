@@ -319,7 +319,7 @@ export default function SearchEmployee() {
           ) : (
             ""
           )}
-          <a href="#" className="clear-filter" onClick={() => setFilters({
+          <p href="#" className="clear-filter" onClick={() => setFilters({
             typeOfEmployment:"",
             salary:"",
             location:"",
@@ -327,7 +327,7 @@ export default function SearchEmployee() {
           })}>
             {" "}
             <img src={cross} alt="cross" /> Clear all filters
-          </a>
+          </p>
         </div>
         <div className="result-employees">
           <div className="row1">
@@ -380,7 +380,7 @@ export default function SearchEmployee() {
                     item.designation === filters.designation) &&
                   (filters.salary === "" || +item.salary <= +filters.salary) &&
                   (filters.location === "" ||
-                    item.employeeState
+                    item.companyLocation
                       .toLowerCase()
                       .includes(filters.location.toLowerCase()))
                 );
@@ -392,8 +392,7 @@ export default function SearchEmployee() {
                     info={info}
                     employerId={userDatas.id}
                     name={info.employeeName}
-                    state={info.employeeState}
-                    country={info.employeeCountry}
+                    companyLocation={info.companyLocation}
                     designation={info.designation}
                   />
                 );

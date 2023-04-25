@@ -18,12 +18,11 @@ const EmployeeOfferLetter = () => {
     setValues({
       currentEmployerId: item.employerId,
       employeeName: userDatas.data.employeeName,
-      employeeState: userDatas.data.employeeState,
-      employeeCountry: userDatas.data.employeeCountry,
       designation: item.designation,
       salary: item.salary,
       companyName: item.companyName,
       companyLogo: item.companyLogo,
+      companyLocation: item.companyLocation,
       typeOfEmployment: item.typeOfEmployment,
       offerLetter: item.offerLetter,
       dateOfJoining: item.dateOfJoining,

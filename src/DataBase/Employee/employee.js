@@ -29,8 +29,7 @@ export async function readColleagues(employeeId, employerId) {
           employeeName: doc.data().employeeName,
           ratings: doc.data().ratings,
           employeeEmail: doc.data().employeeEmail,
-          employeeCountry: doc.data().employeeCountry,
-          employeeState: doc.data().employeeState,
+          companyLocation: doc.data().companyLocation,
           profileImage: doc.data().profileImage,
           dateOfBirth: doc.data().dateOfBirth,
           role: doc.data().role,
@@ -143,8 +142,6 @@ export async function offerAccept(profileData, employeeId, offerId) {
       isActive: false,
       employeeId: employeeId,
       employeeName: profileData.employeeName,
-      employeeState: profileData.employeeState,
-      employeeCountry: profileData.employeeCountry,
     },
     offerId
   );
@@ -231,6 +228,7 @@ export async function rateCollegue(ratingData) {
   );
   return await addDocument(Collections.ratings, rating);
 }
+
 // //READS
 // export async function readTasksByTeammate(teammateId) {
 //   try {

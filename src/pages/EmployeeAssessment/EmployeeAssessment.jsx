@@ -116,7 +116,7 @@ function EmployeeAssessment() {
               {info.designation} at {info.companyName}
             </h6>
             <h6>
-              {info.employeeState}, {info.employeeCountry}
+              {info.companyLocation}
             </h6>
           </div>
         </div>
