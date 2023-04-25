@@ -68,6 +68,7 @@ export default function Signup() {
       companyEstablishmentYear: selectedYear,
     });
   };
+
   const handleDOBYearChange = (e) => {
     const selectedYear = e.target.value;
     values.dateOfBirth =
