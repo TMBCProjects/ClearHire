@@ -47,9 +47,9 @@ export default function Signup() {
 
   const handleSubmit = () => {
     values.profileImage = sessionStorage.getItem("profileImage");
-    values.role = sessionStorage.getItem("user");
-    if (sessionStorage.getItem("user") === "Employer") {
-      values.companyLocations = sessionStorage.getItem("user");
+    values.role = user;
+    if (user === "Employer") {
+      values.companyLocations = sessionStorage.getItem("locations");
     }
     setLoading(true);
     registerLogin(values).then(() => {
