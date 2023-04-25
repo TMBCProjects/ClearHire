@@ -231,6 +231,7 @@ const EmployeeDetails = () => {
               />
               </div>
             */}
+
           <div className="inside-skills">
             {employee?.skills?.map((skill) => {
               return (

@@ -74,7 +74,13 @@ function OnboardingForm() {
                     onChange={handleInputChange}
                   />
                 </div>
-                <p style={checkIfAvailable(values.email) ? { display: "none" } : { color: "red" }}>
+                <p
+                  style={
+                    checkIfAvailable(values.email)
+                      ? { display: "none" }
+                      : { color: "red" }
+                  }
+                >
                   Not on clearhire - an email will be sent to them instead
                 </p>
                 <div className="form-item ">

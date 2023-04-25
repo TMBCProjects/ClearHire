@@ -160,7 +160,7 @@ const Approval = () => {
               <div className="card">
                 <div className="card-body">
                   <h3 className="card-title fw-bold">{info.employeeName}</h3>
-                  <p className="card-text designation w-50 mt-2">
+                  <p className="card-text designation w-75 mt-2">
                     {info.designation}
                   </p>
                   <p className="mb-1">
