@@ -57,13 +57,13 @@ export async function readColleagues(employeeId, employerId) {
   }
 }
 
-export async function getRequests(employeeId) {
+export async function getRequests(employeeEmail) {
   try {
     let requests = [];
     const querySnapshot = await getDocuments(
       query(
         setCollection(Collections.requests),
-        where(Fields.employeeId, "==", employeeId),
+        where(Fields.employeeEmail, "==", employeeEmail),
         where(Fields.isActive, "==", true),
         where(Fields.isApproved, "==", false)
       )

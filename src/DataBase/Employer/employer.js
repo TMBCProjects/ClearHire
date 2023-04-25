@@ -245,8 +245,6 @@ export async function readEmployee(id) {
         employeeName: doc.data().employeeName,
         ratings: doc.data().ratings,
         employeeEmail: doc.data().employeeEmail,
-        employeeCountry: doc.data().employeeCountry,
-        employeeState: doc.data().employeeState,
         profileImage: doc.data().profileImage,
         dateOfBirth: doc.data().dateOfBirth,
         role: doc.data().role,
@@ -256,6 +254,7 @@ export async function readEmployee(id) {
         salary: doc.data().salary,
         companyName: doc.data().companyName,
         companyLogo: doc.data().companyLogo,
+        companyLocation: doc.data().companyLocation,
         typeOfEmployment: doc.data().typeOfEmployment,
         offerLetter: doc.data().offerLetter,
         dateOfJoining: doc.data().dateOfJoining,
@@ -290,8 +289,6 @@ export async function readEmployees(employerId) {
         ratings: doc.data().ratings,
         employeeName: doc.data().employeeName,
         employeeEmail: doc.data().employeeEmail,
-        employeeCountry: doc.data().employeeCountry,
-        employeeState: doc.data().employeeState,
         profileImage: doc.data().profileImage,
         dateOfBirth: doc.data().dateOfBirth,
         role: doc.data().role,
@@ -301,6 +298,7 @@ export async function readEmployees(employerId) {
         salary: doc.data().salary,
         companyName: doc.data().companyName,
         companyLogo: doc.data().companyLogo,
+        companyLocation: doc.data().companyLocation,
         typeOfEmployment: doc.data().typeOfEmployment,
         offerLetter: doc.data().offerLetter,
         dateOfJoining: doc.data().dateOfJoining,
@@ -363,8 +361,8 @@ export async function readOfferReplies(employerId) {
       query(
         setCollection(Collections.offers),
         where(Fields.employerId, "==", employerId),
-        where(Fields.isActive, "==", false),
-        where(Fields.isAccepted, "==", true)
+        where(Fields.isActive, "==", true),
+        where(Fields.isAccepted, "==", false)
       )
     );
     querySnapshot.forEach(async (doc) => {
@@ -379,8 +377,7 @@ export async function readOfferReplies(employerId) {
         employeeId: doc.data().employeeId,
         employeeEmail: doc.data().employeeEmail,
         employeeName: doc.data().employeeName,
-        employeeState: doc.data().employeeState,
-        employeeCountry: doc.data().employeeCountry,
+        companyLocation: doc.data().companyLocation,
         dateOfJoining: doc.data().dateOfJoining,
         typeOfEmployment: doc.data().typeOfEmployment,
         designation: doc.data().designation,
@@ -476,18 +473,18 @@ export async function rateEmployee(ratingData) {
   return await addDocument(Collections.ratings, rating);
 }
 
-export async function sendRequestToViewAssesment(userDetails, data) {
+export async function sendRequestToViewAssesment(data) {
   let newRequest = new Request();
   newRequest = {
     isApproved: false,
     isActive: true,
-    companyName: userDetails.companyName,
-    companyLogo: userDetails.companyLogo,
-    employerEmail: userDetails.employerEmail,
-    employerId: data.employerId,
+    companyName: data.companyName,
+    companyLogo: data.companyLogo,
+    employerEmail: data.employerEmail,
+    employeeName: data.employeeName,
     employeeEmail: data.employeeEmail,
-    employeeId: data.employeeId,
-    offerId: data.id,
+    employerId: data.employerId,
+    emailAvailable: data.emailAvailable,
   };
   return await addDocument(Collections.requests, newRequest);
 }

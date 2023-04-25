@@ -18,7 +18,9 @@ import Profile from "./pages/Employee/Profile/Profile";
 import EmployeeOfferLetter from "./pages/Employee/EmployeeOfferLetter/EmployeeOfferLetter";
 import EmployeeAssessment from "./pages/EmployeeAssessment/EmployeeAssessment";
 import EmployerProfile from "./pages/Employer/Profile/Profile";
-import Offers from "./pages/Employee/OfferList/Offers";
+import OfferList from "./pages/Employee/OfferList/Offers";
+import Requests from "./pages/Employer/Requests/Requests";
+import RequestApproval from "./pages/Employer/RequestApproval/RequestApproval";
 
 function App() {
   return (
@@ -64,6 +66,12 @@ function App() {
                     path="/employer-approval"
                     element={<Approval />}></Route>
                   <Route
+                    path="/requests"
+                    element={<Requests />}></Route>
+                  <Route
+                    path="/approvalRequest-form"
+                    element={<RequestApproval />}></Route>
+                  <Route
                     path="/EmployeeAssessment"
                     element={<EmployeeAssessment />}></Route>
                   <Route
@@ -94,7 +102,7 @@ function App() {
                       element={<EmployeeOfferLetter />}></Route>
                     <Route
                       path="/offerLetters"
-                      element={<Offers />}></Route>
+                      element={<OfferList />}></Route>
                     <Route
                       path="/colleagues"
                       element={<SearchEmployee />}></Route>
@@ -104,7 +112,9 @@ function App() {
                     {/*<Route path="/employer-approval" element={<Approval />}></Route>
                    <Route path="/verification-request" element={<VerficationRequest />}></Route>
                   <Route path="/assessment" element={<Assessment />}></Route>*/}
-                  <Route path="/employee-details" element={<EmployeeDetails />}></Route> 
+                    <Route
+                      path="/employee-details"
+                      element={<EmployeeDetails />}></Route>
                     <Route
                       path="/verification-request"
                       element={<VerficationRequest />}></Route>

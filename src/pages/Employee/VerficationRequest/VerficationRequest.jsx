@@ -11,7 +11,7 @@ export default function VerficationRequest() {
 
   useEffect(() => {
     const fetchRequests = async () => {
-      const data = await getRequests(userDatas.id);
+      const data = await getRequests(userDatas.data.employeeEmail);
       setRequestData(data);
     };
     fetchRequests();
