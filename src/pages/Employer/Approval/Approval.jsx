@@ -11,7 +11,7 @@ import { getDocuments, setCollection } from "../../../utils/FirebaseUtils";
 import { onSnapshot, query, where } from "firebase/firestore";
 import { Collections } from "../../../utils/Collections";
 import { Fields } from "../../../utils/Fields";
-import { Button, Modal } from "antd";
+import { Modal } from "antd";
 
 const Approval = () => {
   const [offerReplies, setOfferReplies] = useState([]);
