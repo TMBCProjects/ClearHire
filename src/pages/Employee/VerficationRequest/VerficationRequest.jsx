@@ -18,7 +18,7 @@ export default function VerficationRequest() {
   }, [userDatas]);
 
   const allowAccess = (data) => {
-    acceptRequest(data);
+    acceptRequest(userDatas.id, data);
   };
   const denyAccess = (data) => {
     rejectRequest(data);

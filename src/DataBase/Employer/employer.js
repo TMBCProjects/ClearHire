@@ -354,6 +354,7 @@ export async function readEmployeeRatings(employeeId) {
     console.log(error);
   }
 }
+
 // export async function readOfferReplies(employerId) {
 //   try {
 //     let offers = [];

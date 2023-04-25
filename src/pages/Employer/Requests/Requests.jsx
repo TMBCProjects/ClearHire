@@ -13,6 +13,7 @@ const Requests = () => {
   const [requests, setRequests] = useState([]);
   const [notOnClearHire, setNotOnClearHire] = useState(false);
 
+
   useEffect(() => {
     const userDatas = JSON.parse(sessionStorage.getItem("userData"));
     const fetchRequests = async () => {
@@ -136,7 +137,7 @@ const Requests = () => {
                       <Link
                         className="w-100 mt-3 btn"
                         to={{
-                          pathname: "/employee-details",
+                          pathname: "/ViewAssessment",
                         }}
                         state={{ from: info.employeeId }}
                       >

@@ -21,6 +21,7 @@ import EmployerProfile from "./pages/Employer/Profile/Profile";
 import OfferList from "./pages/Employee/OfferList/Offers";
 import Requests from "./pages/Employer/Requests/Requests";
 import RequestApproval from "./pages/Employer/RequestApproval/RequestApproval";
+import ViewAssessment from "./pages/Employer/EmployeeDetails/ViewAssessment";
 
 function App() {
   return (
@@ -71,6 +72,10 @@ function App() {
                   <Route
                     path="/approvalRequest-form"
                     element={<RequestApproval />}></Route>
+                  <Route
+                    path="/ViewAssessment"
+                    element={<ViewAssessment />}></Route>
+
                   <Route
                     path="/EmployeeAssessment"
                     element={<EmployeeAssessment />}></Route>
