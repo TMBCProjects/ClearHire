@@ -9,6 +9,7 @@ import "./EmployeeDetails.css";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import { readEmployeeRatings } from "../../../DataBase/Employee/employee";
+import { Carousel } from "react-responsive-carousel";
 
 const EmployeeDetails = () => {
   const location = useLocation();
