@@ -4,12 +4,14 @@ import { FaQuoteLeft } from "react-icons/fa";
 import ViewFile from "../../../assets/images/view-doc.svg";
 import UrlLink from "../../../assets/images/link.svg";
 import CompanyLogo from "../../../assets/images/company-logo.png";
+import RightArrow from "../../../assets/images/right-arrow.png";
+import LeftArrow from "../../../assets/images/left-arrow.png";
 import ProgressBar from "../../../components/ProgressBar";
 import "./EmployeeDetails.css";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import { readEmployeeRatings } from "../../../DataBase/Employee/employee";
-import { Carousel } from "react-responsive-carousel";
+import Slider from "react-slick";
 
 const EmployeeDetails = () => {
   const location = useLocation();
@@ -19,6 +21,51 @@ const EmployeeDetails = () => {
   const [employeeRatings, setEmployeeRatings] = useState([]);
   const [avgRatings, setAvgRatings] = useState({});
   // console.log("info", from);
+
+  const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
+    <img src={LeftArrow} alt="prevArrow" {...props} />
+  );
+
+  const SlickArrowRight = ({ currentSlide, slideCount, ...props }) => (
+    <img src={RightArrow} alt="nextArrow" {...props} />
+  );
+
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+    prevArrow: <SlickArrowLeft />,
+    nextArrow: <SlickArrowRight />,
+  };
 
   const calculateRatings = (ratings) => {
     let avgCommunication = 0;
@@ -222,24 +269,15 @@ const EmployeeDetails = () => {
 
         {/* skills section  starts */}
         <div className="d-flex justify-content-center align-items-center skillsContainer">
-          {/*
-            <div className="arrowLeft" >
-              <LeftOutlined
-                style={{
-                  fontSize: "22px",
-                  color: "#8E8E8E",
-                }}
-              />
-              </div>
-            */}
-
           <div className="inside-skills">
             {employee?.skills?.map((skill) => {
               return (
-                <div className="skills">
-                  <p className="title">{skill.skillName}</p>
-                  <ProgressBar value={skill.value} />
-                </div>
+                <Slider {...settings}>
+                  <div className="skills" key={skill}>
+                    <p className="title">{skill.skillName}</p>
+                    <ProgressBar value={skill.value} />
+                  </div>
+                </Slider>
               );
             })}
           </div>
