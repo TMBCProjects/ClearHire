@@ -354,44 +354,53 @@ export async function readEmployeeRatings(employeeId) {
     console.log(error);
   }
 }
-export async function readOfferReplies(employerId) {
-  try {
-    let offers = [];
-    const querySnapshot = await getDocuments(
-      query(
-        setCollection(Collections.offers),
-        where(Fields.employerId, "==", employerId),
-        where(Fields.isActive, "==", true),
-        where(Fields.isAccepted, "==", false)
-      )
-    );
-    querySnapshot.forEach(async (doc) => {
-      let offer = {
-        id: doc.id,
-        isActive: doc.data().isActive,
-        isAccepted: doc.data().isAccepted,
-        companyName: doc.data().companyName,
-        companyLogo: doc.data().companyLogo,
-        employerEmail: doc.data().employerEmail,
-        employerId: doc.data().employerId,
-        employeeId: doc.data().employeeId,
-        employeeEmail: doc.data().employeeEmail,
-        employeeName: doc.data().employeeName,
-        companyLocation: doc.data().companyLocation,
-        dateOfJoining: doc.data().dateOfJoining,
-        typeOfEmployment: doc.data().typeOfEmployment,
-        designation: doc.data().designation,
-        salary: doc.data().salary,
-        offerLetter: doc.data().offerLetter,
-      };
-      offers.push(offer);
-    });
-    return offers;
-  } catch (error) {
-    console.log(error);
-  }
+// export async function readOfferReplies(employerId) {
+//   try {
+//     let offers = [];
+//     const querySnapshot = await getDocuments(
+//       query(
+//         setCollection(Collections.offers),
+//         where(Fields.employerId, "==", employerId),
+//         where(Fields.isActive, "==", true),
+//         where(Fields.isAccepted, "==", false)
+//       )
+//     );
+//     querySnapshot.forEach(async (doc) => {
+//       let offer = {
+//         id: doc.id,
+//         isActive: doc.data().isActive,
+//         isAccepted: doc.data().isAccepted,
+//         companyName: doc.data().companyName,
+//         companyLogo: doc.data().companyLogo,
+//         employerEmail: doc.data().employerEmail,
+//         employerId: doc.data().employerId,
+//         employeeId: doc.data().employeeId,
+//         employeeEmail: doc.data().employeeEmail,
+//         employeeName: doc.data().employeeName,
+//         companyLocation: doc.data().companyLocation,
+//         dateOfJoining: doc.data().dateOfJoining,
+//         typeOfEmployment: doc.data().typeOfEmployment,
+//         designation: doc.data().designation,
+//         salary: doc.data().salary,
+//         offerLetter: doc.data().offerLetter,
+//       };
+//       offers.push(offer);
+//     });
+//     return offers;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+export async function deleteOffer(offerId) {
+  await updateDocument(
+    Collections.offers,
+    {
+      isActive: false,
+    },
+    offerId
+  );
 }
-
+;
 // function to onboard new employee
 export async function onboardEmployee(offerData) {
   const offerLetterFileUrl = await uploadFile(

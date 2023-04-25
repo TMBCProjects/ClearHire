@@ -1,7 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Add from "../../../assets/images/add.svg";
-import View from "../../../assets/images/view-doc.svg";
 import "./requests.css";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -119,7 +117,7 @@ const Requests = () => {
           </div>
           <div className="form-check form-check-inline">
             <Link to={"/approvalRequest-form"} className="btn add-recruit">
-              <SendOutlined size={16} />Send
+              <SendOutlined style={{ fontSize: '15px' }} /> Send
               Request
             </Link>
           </div>

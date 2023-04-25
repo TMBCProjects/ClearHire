@@ -52,7 +52,7 @@ function OnboardingForm() {
     values.companyLogo = userDatas.data.companyLogo;
     values.employerEmail = userDatas.data.employerEmail;
     values.employerId = userDatas.id;
-    values.emailAvailable = emailAvailable;
+    values.emailAvailable = !emailAvailable;
     onboardEmployee(values).then(() => {
       window.location.href = "/offerletter-sent";
     });

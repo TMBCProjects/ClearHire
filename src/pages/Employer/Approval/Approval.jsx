@@ -1,25 +1,89 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Add from "../../../assets/images/add.svg";
-import View from "../../../assets/images/view-doc.svg";
 import "./approval.css";
 import { useState } from "react";
 import { useEffect } from "react";
 import {
-  readOfferReplies,
+  deleteOffer,
 } from "../../../DataBase/Employer/employer";
+import { FileTextOutlined, PlusOutlined } from "@ant-design/icons";
+import { getDocuments, setCollection } from "../../../utils/FirebaseUtils";
+import { onSnapshot, query, where } from "firebase/firestore";
+import { Collections } from "../../../utils/Collections";
+import { Fields } from "../../../utils/Fields";
 
 const Approval = () => {
   const [offerReplies, setOfferReplies] = useState([]);
+  const [notOnClearHire, setNotOnClearHire] = useState(false);
 
   useEffect(() => {
-    const fetchOfferDetails = async () => {
-      const userDatas = JSON.parse(sessionStorage.getItem("userData"));
-      const data = await readOfferReplies(userDatas.id);
-      setOfferReplies(data);
+    const userDatas = JSON.parse(sessionStorage.getItem("userData"));
+    const fetchRequests = async () => {
+      try {
+        const querySnapshot = await getDocuments(
+          query(
+            setCollection(Collections.offers),
+            where(Fields.employerId, "==", userDatas.id),
+            where(Fields.isActive, "==", true),
+            where(Fields.isAccepted, "==", false)
+          )
+        );
+
+        if (!querySnapshot) {
+          console.error(
+            "Error fetching access requests: querySnapshot is undefined"
+          );
+          return;
+        }
+
+        const offers = [];
+        querySnapshot.forEach(async (doc) => {
+          let offer = {
+            id: doc.id,
+            isActive: doc.data().isActive,
+            isAccepted: doc.data().isAccepted,
+            emailAvailable: doc.data().emailAvailable,
+            companyName: doc.data().companyName,
+            companyLogo: doc.data().companyLogo,
+            employerEmail: doc.data().employerEmail,
+            employerId: doc.data().employerId,
+            employeeId: doc.data().employeeId,
+            employeeEmail: doc.data().employeeEmail,
+            employeeName: doc.data().employeeName,
+            companyLocation: doc.data().companyLocation,
+            dateOfJoining: doc.data().dateOfJoining,
+            typeOfEmployment: doc.data().typeOfEmployment,
+            designation: doc.data().designation,
+            salary: doc.data().salary,
+            offerLetter: doc.data().offerLetter,
+          };
+          offers.push(offer);
+        });
+        setOfferReplies(offers);
+      } catch (error) {
+        console.error("Error fetching access requests: ", error);
+      }
     };
-    fetchOfferDetails();
+
+    const unsubscribe = onSnapshot(
+      query(
+        setCollection(Collections.offers),
+        where(Fields.employerId, "==", userDatas.id)
+      ),
+      { includeMetadataChanges: true },
+      () => {
+        fetchRequests();
+      }
+    );
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
+
+  const handleDelete = (offerId) => {
+    deleteOffer(offerId);
+  };
 
   return (
     <div id="employer-approval" className="container">
@@ -34,8 +98,8 @@ const Approval = () => {
               type="radio"
               name="inlineRadioOptions"
               id="inlineRadio1"
-              defaultValue="option1"
-              checked
+              onClick={() => setNotOnClearHire(false)}
+              checked={!notOnClearHire}
             />
             <label
               className="form-check-label filter-approval"
@@ -50,26 +114,28 @@ const Approval = () => {
               className="form-check-input"
               type="radio"
               name="inlineRadioOptions"
-              id="inlineRadio3"
-              defaultValue="option3"
+              onClick={() => setNotOnClearHire(true)}
+              id="inlineRadio2"
+              checked={notOnClearHire}
             />
             <label
               className="form-check-label filter-approval"
-              htmlFor="inlineRadio3"
+              htmlFor="inlineRadio2"
             >
               Not on clearhire
             </label>
           </div>
+
           <div className="form-check form-check-inline">
-            <Link to={"/onboarding-form"} className="btn add-recruit">
-              <img src={Add} className="mr-5 add-icon" alt="addIcons" /> New
+            <Link to={"/approvalRequest-form"} className="btn add-recruit">
+              <PlusOutlined style={{ fontSize: '20px', fontWeight: "bolder" }} /> Add
               Recruit
             </Link>
           </div>
         </div>
       </div>
       <div className="row mt-3">
-        {offerReplies?.map((info) => {
+        {offerReplies?.filter((info) => { return (notOnClearHire ? info.emailAvailable === false : info.emailAvailable === true) }).map((info) => {
           return (
             <div className="col-md-3 gy-3">
               <div className="card">
@@ -87,12 +153,12 @@ const Approval = () => {
                   <div className="row  mt-2">
                     <div className="col">
                       <p className="text-color-green fs-13 fw-bold">
-                        <img className="mr-5" src={View} alt="" /> View offer
+                        <FileTextOutlined style={{ fontSize: '20px' }} /> View offer
                         Letter
                       </p>
                     </div>
                     <div className="col">
-                      <button className="delete-btn">Delete</button>
+                      <button onClick={() => { handleDelete(info.id) }} className="delete-btn">Delete</button>
                     </div>
                   </div>
                 </div>
