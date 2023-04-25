@@ -49,6 +49,13 @@ export default function EmployerNavbar() {
             </div>
           </NavLink>
 
+          <NavLink activeclassname="active" to={"/requests"} className="navlink">
+            <div className="navitem">
+              <img src={search} alt="search-logo" className="logo navLink" />
+              &nbsp; Requests
+            </div>
+          </NavLink>
+
           {/* <NavLink
             activeclassname="active"
             to={"/EmployeeAssessment"}
