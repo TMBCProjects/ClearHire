@@ -5,6 +5,7 @@ import {
   addDocument,
   getDocument,
   getDocuments,
+  setDocument,
   updateDocument,
   uploadFile,
 } from "../../utils/FirebaseUtils";
@@ -236,8 +237,9 @@ export default async function defaultFn() {}
 
 export async function readEmployee(id) {
   try {
-    const doc = await getDocument(Collections.employees, id);
     let employee = {};
+    const q = setDocument(Collections.employees, id);
+    const doc = await getDocument(q);
     if (doc.exists()) {
       employee = {
         id: doc.id,
@@ -263,10 +265,8 @@ export async function readEmployee(id) {
         resume: doc.data().resume,
         skills: doc.data().skills,
       };
-      return employee;
-    } else {
-      return {};
     }
+    return employee;
   } catch (error) {
     console.error("Error while fetching data", error);
     return {};

@@ -27,6 +27,16 @@ const ViewAssessment = () => {
         };
         fetchOfferDetails();
     }, [employeeId]);
+
+    useEffect(() => {
+        const fetchOfferDetails = async () => {
+            const data2 = await readEmployeeRatings(employeeId);
+            calculateRatings(data2);
+            setEmployeeRatings(data2);
+        };
+        fetchOfferDetails();
+    }, [employeeId]);
+
     const calculateRatings = (ratings) => {
         let avgCommunication = 0;
         let avgAttitude = 0;
@@ -120,15 +130,6 @@ const ViewAssessment = () => {
         });
     };
 
-    useEffect(() => {
-        const fetchOfferDetails = async () => {
-            const data2 = await readEmployeeRatings(employee.id);
-            calculateRatings(data2);
-            setEmployeeRatings(data2);
-        };
-        fetchOfferDetails();
-    }, [employee]);
-
     function text(percentage) {
         if (percentage < 10) {
             return "Worst";
@@ -151,7 +152,7 @@ const ViewAssessment = () => {
                         <div
                             className="back me-3"
                             onClick={() => {
-                                navigate("/");
+                                navigate("/requests");
                             }}
                         >
                             <MdArrowBackIos size={22} className="backIcon" />

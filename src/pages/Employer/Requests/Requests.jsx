@@ -45,6 +45,7 @@ const Requests = () => {
               employeeName: doc.data().employeeName,
               employerEmail: doc.data().employerEmail,
               employerId: doc.data().employerId,
+              employeeId: doc.data().employeeId,
               employeeEmail: doc.data().employeeEmail,
               emailAvailable: doc.data().emailAvailable,
             };
