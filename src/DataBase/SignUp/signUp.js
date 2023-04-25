@@ -38,7 +38,6 @@ export async function addNewEmployee(docId, user) {
   employee = {
     employeeName: user.name,
     role: user.role,
-    employeeCountry: user.locations,
     profileImage: user.profileImage,
     isActive: true,
     employeeEmail: user.email,
@@ -53,8 +52,7 @@ export async function addNewEmployer(docId, user) {
     companyWebsite: user.companyWebsite,
     companyName: user.name,
     companyLogo: user.profileImage,
-    companyCountry: user.country,
-    companyState: user.state,
+    companyLocations: user.companyLocations,
     isActive: true,
     employerEmail: user.email,
     companyEstablishmentYear: user.companyEstablishmentYear,

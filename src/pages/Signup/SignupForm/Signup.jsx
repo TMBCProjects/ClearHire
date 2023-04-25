@@ -1,6 +1,5 @@
 import { Button } from "antd";
-import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Dropdown from "../../../components/Dropdrowns/Dropdown";
 import InputField from "../../../components/Input/InputField";
 import UploadPic from "../../../components/UploadPic/UploadPic";
@@ -20,26 +19,23 @@ const initialValues = {
 
 export default function Signup() {
   const [values, setValues] = useState(initialValues);
-  const [countries, setCountries] = useState([""]);
+  //  const [countries, setCountries] = useState([""]);
   const [loading, setLoading] = useState(false)
-  const [states, setStates] = useState([""]);
   let year = Array.from(
     { length: 123 },
     (_, i) => new Date().getFullYear() - i
   );
   let date = Array.from({ length: 31 }, (_, i) => i + 1);
   let month = Array.from({ length: 12 }, (_, i) => i + 1);
-  var selectedCountry = "";
-  var selectedState = "";
   var selectedYear = "";
   var user = sessionStorage.getItem("user");
-  useEffect(() => {
-    fetch("https://restcountries.com/v2/all?fields=name")
-      .then((res) => res.json())
-      .then((data) => {
-        setCountries(data);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch("https://restcountries.com/v2/all?fields=name")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setCountries(data);
+  //     });
+  // }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -52,19 +48,17 @@ export default function Signup() {
   const handleSubmit = () => {
     values.profileImage = sessionStorage.getItem("profileImage");
     values.role = sessionStorage.getItem("user");
-   
-      setLoading(true)
-
-      registerLogin(values).then(() => {
-        sessionStorage.removeItem("profileImage");
-        window.location.href = "/signup-done";
-      }).catch((err)=>{
-        setLoading(false)
-        alert(err);
-      });
-    
-    
-    
+    if (sessionStorage.getItem("user") === "Employer") {
+      values.companyLocations = sessionStorage.getItem("user");
+    }
+    setLoading(true);
+    registerLogin(values).then(() => {
+      sessionStorage.removeItem("profileImage");
+      window.location.href = "/signup-done";
+    }).catch((err) => {
+      setLoading(false)
+      alert(err);
+    });
   };
 
   const handleYearChange = (e) => {

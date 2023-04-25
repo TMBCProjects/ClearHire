@@ -16,7 +16,7 @@ const ViewAssessment = () => {
     const navigate = useNavigate();
     const { from } = location.state;
     const employeeId = from;
-    const [employeeRatings, setEmployeeRatings] = useState([]);
+    // const [employeeRatings, setEmployeeRatings] = useState([]);
     const [employee, setEmployee] = useState({});
     const [avgRatings, setAvgRatings] = useState({});
     // console.log("info", from);
@@ -32,7 +32,7 @@ const ViewAssessment = () => {
         const fetchOfferDetails = async () => {
             const data2 = await readEmployeeRatings(employeeId);
             calculateRatings(data2);
-            setEmployeeRatings(data2);
+            // setEmployeeRatings(data2);
         };
         fetchOfferDetails();
     }, [employeeId]);
