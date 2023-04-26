@@ -107,6 +107,7 @@ export async function readOffers(employeeEmail) {
         employerEmail: doc.data().employerEmail,
         employerId: doc.data().employerId,
         employeeEmail: doc.data().employeeEmail,
+        companyLocation: doc.data().companyLocation,
         dateOfJoining: doc.data().dateOfJoining,
         typeOfEmployment: doc.data().typeOfEmployment,
         designation: doc.data().designation,

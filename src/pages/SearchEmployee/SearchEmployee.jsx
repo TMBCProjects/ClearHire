@@ -103,7 +103,7 @@ export default function SearchEmployee() {
 
   const handleLocationChange = (event) => {
     filters.location = event.target.value;
-    if (filters.location.length > 0) {
+    if (filters.location) {
       const filteredData = employeeList.filter((item) =>
         item.typeOfEmployment.toLowerCase().includes(filters.location)
       );
@@ -375,9 +375,7 @@ export default function SearchEmployee() {
                     item.designation === filters.designation) &&
                   (filters.salary === "" || +item.salary <= +filters.salary) &&
                   (filters.location === "" ||
-                    item.companyLocation
-                      .toLowerCase()
-                      .includes(filters.location.toLowerCase()))
+                    item.companyLocation === filters.location)
                 );
               })
               .map((info) => {

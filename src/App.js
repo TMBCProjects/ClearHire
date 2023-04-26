@@ -17,6 +17,8 @@ import EmployeeDetails from "./pages/Employer/EmployeeDetails/EmployeeDetails";
 import Profile from "./pages/Employee/Profile/Profile";
 import EmployeeOfferLetter from "./pages/Employee/EmployeeOfferLetter/EmployeeOfferLetter";
 import EmployeeAssessment from "./pages/EmployeeAssessment/EmployeeAssessment";
+import EmployeeAssessmentForm from "./pages/EmployeeAssessment/EmployeeAssesmentForm";
+
 import EmployerProfile from "./pages/Employer/Profile/Profile";
 import OfferList from "./pages/Employee/OfferList/Offers";
 import Requests from "./pages/Employer/Requests/Requests";
@@ -36,10 +38,16 @@ function App() {
               <Route path="/signup-options" element={<SignupOptions />}></Route>
               <Route
                 path="/user-options"
-                element={<SignupChooseUser />}
-              ></Route>
-              <Route path="/signup-done" element={<SignupDone />}></Route>
-              <Route path="/Profile" element={<Profile />}></Route>
+                element={<SignupChooseUser />}></Route>
+              <Route
+                path="/signup-done"
+                element={<SignupDone />}></Route>
+              <Route
+                path="/Assessment-form"
+                element={<EmployeeAssessmentForm />}></Route>
+              <Route
+                path="/Profile"
+                element={<Profile />}></Route>
             </Routes>
           </>
         ) : (
