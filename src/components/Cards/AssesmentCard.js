@@ -9,11 +9,11 @@ const Assesment_Card = ({
   info,
   value,
   name,
-  state,
-  country,
+  companyLocation,
   designation,
   employerId,
 }) => {
+  const user = sessionStorage.getItem("LoggedIn");
   const navigate = useNavigate();
 
   function hasOneMonthPassed(date) {
@@ -42,11 +42,12 @@ const Assesment_Card = ({
       <div
         className="managerlogo"
         onClick={() => {
-          navigate("/employee-details", {
-            state: {
-              from: info,
-            },
-          });
+          user === "Employer" &&
+            navigate("/employee-details", {
+              state: {
+                from: info,
+              },
+            });
         }}>
         <img
           src={pic}
@@ -56,16 +57,15 @@ const Assesment_Card = ({
       <div
         className="headDesc"
         onClick={() => {
-          navigate("/employee-details", {
-            state: {
-              from: info,
-            },
-          });
+          user === "Employer" &&
+            navigate("/employee-details", {
+              state: {
+                from: info,
+              },
+            });
         }}>
         <span>{name}</span>
-        <span>
-          {state}, {country}
-        </span>
+        <span>{companyLocation}</span>
         <span
           style={{
             background: "#D7F2BC 0% 0% no-repeat padding-box",

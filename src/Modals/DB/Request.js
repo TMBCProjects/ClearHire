@@ -5,7 +5,7 @@ export default class Request {
   companyLogo = "";
   employerEmail = "";
   employerId = "";
+  employeeName = "";
   employeeEmail = "";
-  employeeId = "";
-  offerId = "";
+  emailAvailable = "";
 }

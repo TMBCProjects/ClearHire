@@ -5,17 +5,21 @@ import { GoChevronLeft } from "react-icons/go";
 import { onboardEmployee } from "../../../DataBase/Employer/employer";
 import { useNavigate } from "react-router-dom";
 import { checkIfAvailable } from "../../../utils/FirebaseUtils";
+import { useEffect } from "react";
 
 const initialValues = {
   email: "",
   designation: "",
   dateOfJoining: "",
   typeOfEmployment: "",
+  companyLocation: "",
   salary: "",
   offerLetter: "",
 };
 function OnboardingForm() {
+  let userDatas = JSON.parse(sessionStorage.getItem("userData"));
   const [values, setValues] = useState(initialValues);
+  const [emailAvailable, setEmailAvailable] = useState(false);
 
   const navigate = useNavigate("");
 
@@ -26,6 +30,12 @@ function OnboardingForm() {
       [name]: value,
     });
   };
+
+  useEffect(() => {
+    checkIfAvailable(values.email)
+      .then((result) => setEmailAvailable(result))
+      .catch((error) => console.error(error))
+  }, [values.email]);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -38,11 +48,11 @@ function OnboardingForm() {
   };
 
   const handleSubmit = () => {
-    let userDatas = JSON.parse(sessionStorage.getItem("userData"));
     values.companyName = userDatas.data.companyName;
     values.companyLogo = userDatas.data.companyLogo;
     values.employerEmail = userDatas.data.employerEmail;
     values.employerId = userDatas.id;
+    values.emailAvailable = !emailAvailable;
     onboardEmployee(values).then(() => {
       window.location.href = "/offerletter-sent";
     });
@@ -74,9 +84,20 @@ function OnboardingForm() {
                     onChange={handleInputChange}
                   />
                 </div>
-                <p style={checkIfAvailable(values.email) ? { display: "none" } : { color: "red" }}>
+                <p style={emailAvailable ? { color: "red" } : { opacity: "0", pointerEvents: "none" }}>
                   Not on clearhire - an email will be sent to them instead
                 </p>
+
+                <div className="form-item ">
+                  <select
+                    name="companyLocation"
+                    id=""
+                    onChange={handleInputChange}
+                  >
+                    <option value="">Location*</option>
+                    {userDatas.data.companyLocations.map(info => { return (<option value={info}>{info}</option>) })}
+                  </select>
+                </div>
                 <div className="form-item ">
                   <select name="designation" id="" onChange={handleInputChange}>
                     <option value="">Designation*</option>

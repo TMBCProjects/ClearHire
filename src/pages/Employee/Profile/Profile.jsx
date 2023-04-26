@@ -110,7 +110,7 @@ export default function Profile() {
           </span>
           <br />
           <span>
-            {userDatas.data.employeeState}, {userDatas.data.employeeCountry}
+            {userDatas.data.companyLocation}
           </span>
         </div>
       </div>

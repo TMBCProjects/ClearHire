@@ -5,8 +5,8 @@ export default class Offer {
   companyLogo = "";
   employeeName = "";
   employerEmail = "";
-  employeeState = "";
-  employeeCountry = "";
+  emailAvailable = "";
+  companyLocation = "";
   employerId = "";
   employeeId = "";
   employeeEmail = "";
