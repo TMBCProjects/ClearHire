@@ -6,26 +6,9 @@ import quote from "../../images/quote-left.svg";
 import arrow from "../../images/arrow-dropup.svg";
 import ProgressBar from "../../components/ProgressBar";
 import { rateEmployee } from "../../DataBase/Employer/employer";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import { rateCollegue } from "../../DataBase/Employee/employee";
-import { Tabs } from 'antd';
 
-const onChange = (key) => {
-  console.log(key);
-};
-const items = [
-  {
-    key: '1',
-    label: `Tab 1`,
-    children: `Content of Tab Pane 1`,
-  },
-  {
-    key: '2',
-    label: `Tab 2`,
-    children: `Content of Tab Pane 2`,
-  },
-
-];
 
 const initialState = {
   dateOfReview: new Date(),
@@ -94,6 +77,10 @@ function EmployeeAssessment() {
     navigate("/");
   };
 
+  // const handleSoftSkill = () => {
+  //   navigate("/EmployeeAssessment");
+  // };
+
   return (
     <div className="assesment container">
       <div className="back-cont">
@@ -101,7 +88,16 @@ function EmployeeAssessment() {
           <img src={arrow} alt="" />
           <h4>Employee Assessment</h4>
         </div>
-        <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
+
+        <div className="col f-btn">
+          <Link to={"/EmployeeAssessment"}>
+            <button className="btn-1">Softskill</button>
+          </Link>
+          <Link to={"/Assessment-form"}>
+            <button className="btn-2">Assessment Form</button>
+          </Link>
+          
+         </div>
       </div>
       <div className="row employe-details">
         <div className="col-xl-8 col-lg-7 col-md-6 col-12 employe-prof">
