@@ -234,9 +234,7 @@ const EmployeeDetails = () => {
               <p>
                 {employee?.designation + " at The " + employee?.companyName}
               </p>
-              <p>
-                {employee?.companyLocation}
-              </p>
+              <p>{employee?.companyLocation}</p>
             </div>
           </div>
 
@@ -272,12 +270,12 @@ const EmployeeDetails = () => {
           <div className="inside-skills">
             {employee?.skills?.map((skill) => {
               return (
-                <Slider {...settings}>
-                  <div className="skills" key={skill}>
-                    <p className="title">{skill.skillName}</p>
-                    <ProgressBar value={skill.value} />
-                  </div>
-                </Slider>
+                // <Slider {...settings}>
+                <div className="skills" key={skill}>
+                  <p className="title">{skill.skillName}</p>
+                  <ProgressBar value={skill.value} />
+                </div>
+                // </Slider>
               );
             })}
           </div>

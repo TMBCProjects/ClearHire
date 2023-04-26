@@ -96,7 +96,7 @@ function App() {
                       path="/employeeOfferLetter"
                       element={<EmployeeOfferLetter />}
                     ></Route>
-                    <Route path="/offerLetters" element={<Offers />}></Route>
+                    {/* <Route path="/offerLetters" element={<Offers />}></Route> */}
                     <Route
                       path="/colleagues"
                       element={<SearchEmployee />}
