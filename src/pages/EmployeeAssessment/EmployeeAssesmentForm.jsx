@@ -1,27 +1,23 @@
 import React from 'react'
 import "./Assessmentform.css";
 import { Link } from 'react-router-dom';
+import arrow from "../../images/arrow-dropup.svg";
+import { useNavigate } from "react-router-dom";
 
 
 export default function EmployeeAssesmentForm() {
+  const navigate = useNavigate();
+  const handleBack = () => {
+    navigate("/");
+  };
   return (
   <div className="assessment">
 
     <div className="head">
-      <div className="row">
-         <div className="col">
-          <h5>Employee Assesment Form</h5>
-         </div>
-         <div className="col f-btn">
-          <Link to={"/EmployeeAssessment"}>
-            <button className="btn-1">Softskill</button>
-          </Link>
-          <Link to={"/Assessment-form"}>
-            <button className="btn-2">Assessment Form</button>
-          </Link>
-          
-         </div>
-      </div>
+    <div className="back-div" onClick={handleBack}>
+            <img src={arrow} alt="" />
+            <h4>Employee Assessment</h4>
+          </div>
     </div>
     <div className="assess-form">
       <div className="form">
