@@ -375,9 +375,7 @@ export default function SearchEmployee() {
                     item.designation === filters.designation) &&
                   (filters.salary === "" || +item.salary <= +filters.salary) &&
                   (filters.location === "" ||
-                    item.companyLocation
-                      .toLowerCase()
-                      .includes(filters.location.toLowerCase()))
+                    item.companyLocation === filters.location)
                 );
               })
               .map((info) => {
