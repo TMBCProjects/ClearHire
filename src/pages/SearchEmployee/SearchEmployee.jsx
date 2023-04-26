@@ -103,7 +103,7 @@ export default function SearchEmployee() {
 
   const handleLocationChange = (event) => {
     filters.location = event.target.value;
-    if (filters.location.length > 0) {
+    if (filters.location) {
       const filteredData = employeeList.filter((item) =>
         item.typeOfEmployment.toLowerCase().includes(filters.location)
       );
