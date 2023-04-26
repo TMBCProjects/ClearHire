@@ -8,7 +8,24 @@ import ProgressBar from "../../components/ProgressBar";
 import { rateEmployee } from "../../DataBase/Employer/employer";
 import { useLocation, useNavigate } from "react-router-dom";
 import { rateCollegue } from "../../DataBase/Employee/employee";
-import { Segmented } from 'antd';
+import { Tabs } from 'antd';
+
+const onChange = (key) => {
+  console.log(key);
+};
+const items = [
+  {
+    key: '1',
+    label: `Tab 1`,
+    children: `Content of Tab Pane 1`,
+  },
+  {
+    key: '2',
+    label: `Tab 2`,
+    children: `Content of Tab Pane 2`,
+  },
+
+];
 
 const initialState = {
   dateOfReview: new Date(),
@@ -60,7 +77,7 @@ function EmployeeAssessment() {
     }) :
       rateCollegue(values).then(() => {
         window.location.href = "/colleagues";
-    });
+      });
   };
 
   const calculateAge = (dob) => {
@@ -73,21 +90,18 @@ function EmployeeAssessment() {
     }
     return years;
   };
-  // handle back click
   const handleBack = () => {
     navigate("/");
   };
 
   return (
     <div className="assesment container">
-      <div className="back-cont" onClick={handleBack}>
-        <div className="back-div">
+      <div className="back-cont">
+        <div className="back-div" onClick={handleBack}>
           <img src={arrow} alt="" />
           <h4>Employee Assessment</h4>
         </div>
-        <div className="tabs" style={{width: "40vh"}}>
-          <Segmented block options={["Softskill", "Assessment Form"]} />
-        </div>
+        <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
       </div>
       <div className="row employe-details">
         <div className="col-xl-8 col-lg-7 col-md-6 col-12 employe-prof">
