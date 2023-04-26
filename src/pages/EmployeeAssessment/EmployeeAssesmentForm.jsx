@@ -1,6 +1,6 @@
 import React from 'react'
 import "./Assessmentform.css";
-import add from "../../images/add.svg";
+import { Link } from 'react-router-dom';
 
 
 export default function EmployeeAssesmentForm() {
@@ -13,8 +13,13 @@ export default function EmployeeAssesmentForm() {
           <h5>Employee Assesment Form</h5>
          </div>
          <div className="col f-btn">
-          <button className="btn-1">Softskill</button>
-          <button className="btn-2">Assessment Form</button>
+          <Link to={"/EmployeeAssessment"}>
+            <button className="btn-1">Softskill</button>
+          </Link>
+          <Link to={"/Assessment-form"}>
+            <button className="btn-2">Assessment Form</button>
+          </Link>
+          
          </div>
       </div>
     </div>
