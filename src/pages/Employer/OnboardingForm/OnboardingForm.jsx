@@ -34,7 +34,7 @@ function OnboardingForm() {
   useEffect(() => {
     checkIfAvailable(values.email)
       .then((result) => setEmailAvailable(result))
-      .catch((error) => console.error(error))
+      .catch((error) => console.error(error));
   }, [values.email]);
 
   const handleFileChange = (e) => {
@@ -84,7 +84,13 @@ function OnboardingForm() {
                     onChange={handleInputChange}
                   />
                 </div>
-                <p style={emailAvailable ? { color: "red" } : { opacity: "0", pointerEvents: "none" }}>
+                <p
+                  style={
+                    checkIfAvailable(values.email)
+                      ? { display: "none" }
+                      : { color: "red" }
+                  }
+                >
                   Not on clearhire - an email will be sent to them instead
                 </p>
 
@@ -95,7 +101,9 @@ function OnboardingForm() {
                     onChange={handleInputChange}
                   >
                     <option value="">Location*</option>
-                    {userDatas.data.companyLocations.map(info => { return (<option value={info}>{info}</option>) })}
+                    {userDatas.data.companyLocations.map((info) => {
+                      return <option value={info}>{info}</option>;
+                    })}
                   </select>
                 </div>
                 <div className="form-item ">

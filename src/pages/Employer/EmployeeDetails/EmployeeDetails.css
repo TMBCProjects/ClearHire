@@ -7,10 +7,12 @@
     display: flex;
     justify-content: center;
 }
-.main-container{
+
+.main-container {
     background: white;
     padding: 1vh 20vh;
 }
+
 .backIcon {
     color: #9EC2AD;
     margin-left: 8px;
@@ -135,37 +137,41 @@
     align-items: center;
 
 }
-.skillsContainer .skills{
+
+.skillsContainer .skills {
     margin: 0rem 6rem;
-    
+
 }
-.inside-skills{
+
+.inside-skills {
     margin: 2rem 3rem;
-    display: flex;
+    display: flex !important;
     overflow-x: scroll;
-    max-width: 80%; 
+    max-width: 80%;
     padding-bottom: 1rem;
-   
+
 }
+
 /* width */
 .inside-skills::-webkit-scrollbar {
     width: 10px;
-  }
-  
-  /* Track */
-  .inside-skills::-webkit-scrollbar-track {
+}
+
+/* Track */
+.inside-skills::-webkit-scrollbar-track {
     background: #EFF6F2;
-  }
-  
-  /* Handle */
-  .inside-skills::-webkit-scrollbar-thumb {
+}
+
+/* Handle */
+.inside-skills::-webkit-scrollbar-thumb {
     background: #ffffff;
-  }
-  
-  /* Handle on hover */
-  .inside-skills::-webkit-scrollbar-thumb:hover {
+}
+
+/* Handle on hover */
+.inside-skills::-webkit-scrollbar-thumb:hover {
     background: #01976f;
-  }
+}
+
 .skillsContainer .arrowLeft {
     position: absolute;
     left: 5%;
@@ -226,7 +232,8 @@
     align-items: center;
     /* border: 1px solid #C1C1C1; */
 }
-.circle-wrap p{
+
+.circle-wrap p {
     font-weight: bold;
 }
 
@@ -283,6 +290,7 @@
         transform: rotate(135deg);
     }
 }
+
 .skillsCircle {
     display: flex;
     justify-content: center;
