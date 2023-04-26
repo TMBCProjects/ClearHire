@@ -235,7 +235,7 @@ const EmployeeDetails = () => {
                 {employee?.designation + " at The " + employee?.companyName}
               </p>
               <p>
-                {employee?.employeeState + ", " + employee?.employeeCountry}
+                {employee?.companyLocation}
               </p>
             </div>
           </div>

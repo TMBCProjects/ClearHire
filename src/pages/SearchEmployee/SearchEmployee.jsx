@@ -48,7 +48,7 @@ export default function SearchEmployee() {
             : userDatas.data.currentEmployerId
             ? await readColleagues(
                 userDatas.id,
-                userDatas.data.currentEmployerId
+              userDatas.data.currentEmployerId
               )
             : [];
         setEmployeeList(data);
@@ -191,7 +191,7 @@ export default function SearchEmployee() {
                 ]}
               />
             </div>
-            <div className="dropdown-select">
+            {user === "Employer" && <div className="dropdown-select">
               <p>Location</p>
               <Select
                 style={{
@@ -199,17 +199,12 @@ export default function SearchEmployee() {
                 }}
                 onChange={(e) => setFilters({ ...filters, location: e })}
                 tokenSeparators={[","]}
-                options={[
-                  {
-                    value: "Inda",
-                    label: "India",
-                  },
-                  { value: "USA", label: "USA" },
-                  { value: "Canada", label: "Canada" },
-                  { value: "Australia", label: "Australia" },
-                ]}
+                options={userDatas.data.companyLocations.map((location) => ({
+                  value: location,
+                  label: location,
+                }))}
               />
-            </div>
+            </div>}
           </div>
           <div className="checkboxes">
             <p
@@ -319,7 +314,7 @@ export default function SearchEmployee() {
           ) : (
             ""
           )}
-          <a href="#" className="clear-filter" onClick={() => setFilters({
+          <p href="#" className="clear-filter" onClick={() => setFilters({
             typeOfEmployment:"",
             salary:"",
             location:"",
@@ -327,7 +322,7 @@ export default function SearchEmployee() {
           })}>
             {" "}
             <img src={cross} alt="cross" /> Clear all filters
-          </a>
+          </p>
         </div>
         <div className="result-employees">
           <div className="row1">
@@ -380,7 +375,7 @@ export default function SearchEmployee() {
                     item.designation === filters.designation) &&
                   (filters.salary === "" || +item.salary <= +filters.salary) &&
                   (filters.location === "" ||
-                    item.employeeState
+                    item.companyLocation
                       .toLowerCase()
                       .includes(filters.location.toLowerCase()))
                 );
@@ -392,8 +387,7 @@ export default function SearchEmployee() {
                     info={info}
                     employerId={userDatas.id}
                     name={info.employeeName}
-                    state={info.employeeState}
-                    country={info.employeeCountry}
+                    companyLocation={info.companyLocation}
                     designation={info.designation}
                   />
                 );

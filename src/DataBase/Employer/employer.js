@@ -5,6 +5,7 @@ import {
   addDocument,
   getDocument,
   getDocuments,
+  setDocument,
   updateDocument,
   uploadFile,
 } from "../../utils/FirebaseUtils";
@@ -236,8 +237,9 @@ export default async function defaultFn() {}
 
 export async function readEmployee(id) {
   try {
-    const doc = await getDocument(Collections.employees, id);
     let employee = {};
+    const q = setDocument(Collections.employees, id);
+    const doc = await getDocument(q);
     if (doc.exists()) {
       employee = {
         id: doc.id,
@@ -245,8 +247,6 @@ export async function readEmployee(id) {
         employeeName: doc.data().employeeName,
         ratings: doc.data().ratings,
         employeeEmail: doc.data().employeeEmail,
-        employeeCountry: doc.data().employeeCountry,
-        employeeState: doc.data().employeeState,
         profileImage: doc.data().profileImage,
         dateOfBirth: doc.data().dateOfBirth,
         role: doc.data().role,
@@ -256,6 +256,7 @@ export async function readEmployee(id) {
         salary: doc.data().salary,
         companyName: doc.data().companyName,
         companyLogo: doc.data().companyLogo,
+        companyLocation: doc.data().companyLocation,
         typeOfEmployment: doc.data().typeOfEmployment,
         offerLetter: doc.data().offerLetter,
         dateOfJoining: doc.data().dateOfJoining,
@@ -264,10 +265,8 @@ export async function readEmployee(id) {
         resume: doc.data().resume,
         skills: doc.data().skills,
       };
-      return employee;
-    } else {
-      return {};
     }
+    return employee;
   } catch (error) {
     console.error("Error while fetching data", error);
     return {};
@@ -290,8 +289,6 @@ export async function readEmployees(employerId) {
         ratings: doc.data().ratings,
         employeeName: doc.data().employeeName,
         employeeEmail: doc.data().employeeEmail,
-        employeeCountry: doc.data().employeeCountry,
-        employeeState: doc.data().employeeState,
         profileImage: doc.data().profileImage,
         dateOfBirth: doc.data().dateOfBirth,
         role: doc.data().role,
@@ -301,6 +298,7 @@ export async function readEmployees(employerId) {
         salary: doc.data().salary,
         companyName: doc.data().companyName,
         companyLogo: doc.data().companyLogo,
+        companyLocation: doc.data().companyLocation,
         typeOfEmployment: doc.data().typeOfEmployment,
         offerLetter: doc.data().offerLetter,
         dateOfJoining: doc.data().dateOfJoining,
@@ -356,45 +354,54 @@ export async function readEmployeeRatings(employeeId) {
     console.log(error);
   }
 }
-export async function readOfferReplies(employerId) {
-  try {
-    let offers = [];
-    const querySnapshot = await getDocuments(
-      query(
-        setCollection(Collections.offers),
-        where(Fields.employerId, "==", employerId),
-        where(Fields.isActive, "==", false),
-        where(Fields.isAccepted, "==", true)
-      )
-    );
-    querySnapshot.forEach(async (doc) => {
-      let offer = {
-        id: doc.id,
-        isActive: doc.data().isActive,
-        isAccepted: doc.data().isAccepted,
-        companyName: doc.data().companyName,
-        companyLogo: doc.data().companyLogo,
-        employerEmail: doc.data().employerEmail,
-        employerId: doc.data().employerId,
-        employeeId: doc.data().employeeId,
-        employeeEmail: doc.data().employeeEmail,
-        employeeName: doc.data().employeeName,
-        employeeState: doc.data().employeeState,
-        employeeCountry: doc.data().employeeCountry,
-        dateOfJoining: doc.data().dateOfJoining,
-        typeOfEmployment: doc.data().typeOfEmployment,
-        designation: doc.data().designation,
-        salary: doc.data().salary,
-        offerLetter: doc.data().offerLetter,
-      };
-      offers.push(offer);
-    });
-    return offers;
-  } catch (error) {
-    console.log(error);
-  }
-}
 
+// export async function readOfferReplies(employerId) {
+//   try {
+//     let offers = [];
+//     const querySnapshot = await getDocuments(
+//       query(
+//         setCollection(Collections.offers),
+//         where(Fields.employerId, "==", employerId),
+//         where(Fields.isActive, "==", true),
+//         where(Fields.isAccepted, "==", false)
+//       )
+//     );
+//     querySnapshot.forEach(async (doc) => {
+//       let offer = {
+//         id: doc.id,
+//         isActive: doc.data().isActive,
+//         isAccepted: doc.data().isAccepted,
+//         companyName: doc.data().companyName,
+//         companyLogo: doc.data().companyLogo,
+//         employerEmail: doc.data().employerEmail,
+//         employerId: doc.data().employerId,
+//         employeeId: doc.data().employeeId,
+//         employeeEmail: doc.data().employeeEmail,
+//         employeeName: doc.data().employeeName,
+//         companyLocation: doc.data().companyLocation,
+//         dateOfJoining: doc.data().dateOfJoining,
+//         typeOfEmployment: doc.data().typeOfEmployment,
+//         designation: doc.data().designation,
+//         salary: doc.data().salary,
+//         offerLetter: doc.data().offerLetter,
+//       };
+//       offers.push(offer);
+//     });
+//     return offers;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+export async function deleteOffer(offerId) {
+  await updateDocument(
+    Collections.offers,
+    {
+      isActive: false,
+    },
+    offerId
+  );
+}
+;
 // function to onboard new employee
 export async function onboardEmployee(offerData) {
   const offerLetterFileUrl = await uploadFile(
@@ -407,6 +414,8 @@ export async function onboardEmployee(offerData) {
     isActive: true,
     isAccepted: false,
     employeeEmail: offerData.email,
+    emailAvailable: offerData.emailAvailable,
+    companyLocation: offerData.companyLocation,
     dateOfJoining: offerData.dateOfJoining,
     employerEmail: offerData.employerEmail,
     employerId: offerData.employerId,
@@ -474,18 +483,18 @@ export async function rateEmployee(ratingData) {
   return await addDocument(Collections.ratings, rating);
 }
 
-export async function sendRequestToViewAssesment(userDetails, data) {
+export async function sendRequestToViewAssesment(data) {
   let newRequest = new Request();
   newRequest = {
     isApproved: false,
     isActive: true,
-    companyName: userDetails.companyName,
-    companyLogo: userDetails.companyLogo,
-    employerEmail: userDetails.employerEmail,
-    employerId: data.employerId,
+    companyName: data.companyName,
+    companyLogo: data.companyLogo,
+    employerEmail: data.employerEmail,
+    employeeName: data.employeeName,
     employeeEmail: data.employeeEmail,
-    employeeId: data.employeeId,
-    offerId: data.id,
+    employerId: data.employerId,
+    emailAvailable: data.emailAvailable,
   };
   return await addDocument(Collections.requests, newRequest);
 }

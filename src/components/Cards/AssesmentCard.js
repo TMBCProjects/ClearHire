@@ -9,8 +9,7 @@ const Assesment_Card = ({
   info,
   value,
   name,
-  state,
-  country,
+  companyLocation,
   designation,
   employerId,
 }) => {
@@ -63,9 +62,7 @@ const Assesment_Card = ({
           });
         }}>
         <span>{name}</span>
-        <span>
-          {state}, {country}
-        </span>
+        <span>{companyLocation}</span>
         <span
           style={{
             background: "#D7F2BC 0% 0% no-repeat padding-box",

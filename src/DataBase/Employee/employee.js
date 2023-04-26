@@ -29,8 +29,7 @@ export async function readColleagues(employeeId, employerId) {
           employeeName: doc.data().employeeName,
           ratings: doc.data().ratings,
           employeeEmail: doc.data().employeeEmail,
-          employeeCountry: doc.data().employeeCountry,
-          employeeState: doc.data().employeeState,
+          companyLocation: doc.data().companyLocation,
           profileImage: doc.data().profileImage,
           dateOfBirth: doc.data().dateOfBirth,
           role: doc.data().role,
@@ -57,13 +56,13 @@ export async function readColleagues(employeeId, employerId) {
   }
 }
 
-export async function getRequests(employeeId) {
+export async function getRequests(employeeEmail) {
   try {
     let requests = [];
     const querySnapshot = await getDocuments(
       query(
         setCollection(Collections.requests),
-        where(Fields.employeeId, "==", employeeId),
+        where(Fields.employeeEmail, "==", employeeEmail),
         where(Fields.isActive, "==", true),
         where(Fields.isApproved, "==", false)
       )
@@ -122,10 +121,18 @@ export async function readOffers(employeeEmail) {
   }
 }
 export async function rejectRequest(requestId) {
-  await updateDocument(Collections.requests, { isActive: false }, requestId);
+  await updateDocument(
+    Collections.requests,
+    { isActive: false, emailAvailable: true },
+    requestId
+  );
 }
-export async function acceptRequest(requestId) {
-  await updateDocument(Collections.requests, { isApproved: true }, requestId);
+export async function acceptRequest(employeeId, requestId) {
+  await updateDocument(
+    Collections.requests,
+    { isApproved: true, emailAvailable: true, employeeId: employeeId },
+    requestId
+  );
 }
 
 export async function profileUpdate(profileData, employeeId) {
@@ -139,8 +146,6 @@ export async function offerAccept(profileData, employeeId, offerId) {
       isActive: false,
       employeeId: employeeId,
       employeeName: profileData.employeeName,
-      employeeState: profileData.employeeState,
-      employeeCountry: profileData.employeeCountry,
     },
     offerId
   );
@@ -227,6 +232,7 @@ export async function rateCollegue(ratingData) {
   );
   return await addDocument(Collections.ratings, rating);
 }
+
 // //READS
 // export async function readTasksByTeammate(teammateId) {
 //   try {
