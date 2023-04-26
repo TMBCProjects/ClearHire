@@ -129,7 +129,7 @@ const Approval = () => {
           </div>
 
           <div className="form-check form-check-inline">
-            <Link to={"/approvalRequest-form"} className="btn add-recruit">
+            <Link to={"/onboarding-form"} className="btn add-recruit">
               <PlusOutlined style={{ fontSize: '20px', fontWeight: "bolder" }} /> Add
               Recruit
             </Link>

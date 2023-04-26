@@ -121,12 +121,16 @@ export async function readOffers(employeeEmail) {
   }
 }
 export async function rejectRequest(requestId) {
-  await updateDocument(Collections.requests, { isActive: false }, requestId);
+  await updateDocument(
+    Collections.requests,
+    { isActive: false, emailAvailable: true },
+    requestId
+  );
 }
 export async function acceptRequest(employeeId, requestId) {
   await updateDocument(
     Collections.requests,
-    { isApproved: true, employeeId: employeeId },
+    { isApproved: true, emailAvailable: true, employeeId: employeeId },
     requestId
   );
 }

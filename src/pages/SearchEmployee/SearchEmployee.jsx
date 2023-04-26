@@ -48,7 +48,7 @@ export default function SearchEmployee() {
             : userDatas.data.currentEmployerId
             ? await readColleagues(
                 userDatas.id,
-                userDatas.data.currentEmployerId
+              userDatas.data.currentEmployerId
               )
             : [];
         setEmployeeList(data);
@@ -191,7 +191,7 @@ export default function SearchEmployee() {
                 ]}
               />
             </div>
-            <div className="dropdown-select">
+            {user === "Employer" && <div className="dropdown-select">
               <p>Location</p>
               <Select
                 style={{
@@ -199,17 +199,12 @@ export default function SearchEmployee() {
                 }}
                 onChange={(e) => setFilters({ ...filters, location: e })}
                 tokenSeparators={[","]}
-                options={[
-                  {
-                    value: "Inda",
-                    label: "India",
-                  },
-                  { value: "USA", label: "USA" },
-                  { value: "Canada", label: "Canada" },
-                  { value: "Australia", label: "Australia" },
-                ]}
+                options={userDatas.data.companyLocations.map((location) => ({
+                  value: location,
+                  label: location,
+                }))}
               />
-            </div>
+            </div>}
           </div>
           <div className="checkboxes">
             <p
