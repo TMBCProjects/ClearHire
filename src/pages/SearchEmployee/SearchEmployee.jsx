@@ -48,7 +48,7 @@ export default function SearchEmployee() {
             : userDatas.data.currentEmployerId
             ? await readColleagues(
                 userDatas.id,
-              userDatas.data.currentEmployerId
+                userDatas.data.currentEmployerId
               )
             : [];
         setEmployeeList(data);
@@ -191,20 +191,22 @@ export default function SearchEmployee() {
                 ]}
               />
             </div>
-            {user === "Employer" && <div className="dropdown-select">
-              <p>Location</p>
-              <Select
-                style={{
-                  width: "100%",
-                }}
-                onChange={(e) => setFilters({ ...filters, location: e })}
-                tokenSeparators={[","]}
-                options={userDatas.data.companyLocations.map((location) => ({
-                  value: location,
-                  label: location,
-                }))}
-              />
-            </div>}
+            {user === "Employer" && (
+              <div className="dropdown-select">
+                <p>Location</p>
+                <Select
+                  style={{
+                    width: "100%",
+                  }}
+                  onChange={(e) => setFilters({ ...filters, location: e })}
+                  tokenSeparators={[","]}
+                  options={userDatas.data.companyLocations.map((location) => ({
+                    value: location,
+                    label: location,
+                  }))}
+                />
+              </div>
+            )}
           </div>
           <div className="checkboxes">
             <p
@@ -314,12 +316,18 @@ export default function SearchEmployee() {
           ) : (
             ""
           )}
-          <p href="#" className="clear-filter" onClick={() => setFilters({
-            typeOfEmployment:"",
-            salary:"",
-            location:"",
-            designation:""
-          })}>
+          <p
+            href="#"
+            className="clear-filter"
+            onClick={() =>
+              setFilters({
+                typeOfEmployment: "",
+                salary: "",
+                location: "",
+                designation: "",
+              })
+            }
+          >
             {" "}
             <img src={cross} alt="cross" /> Clear all filters
           </p>

@@ -13,7 +13,6 @@ const Requests = () => {
   const [requests, setRequests] = useState([]);
   const [notOnClearHire, setNotOnClearHire] = useState(false);
 
-
   useEffect(() => {
     const userDatas = JSON.parse(sessionStorage.getItem("userData"));
     const fetchRequests = async () => {
@@ -76,14 +75,13 @@ const Requests = () => {
     };
   }, []);
 
-
   return (
     <div id="employer-approval" className="container">
       <div className="row d-flex justify-content-between align-items-center">
-        <div className="col-md-6">
+        <div className="col-md-6 ">
           <h3 className="fw-bold fs-30">Sent Approvals (Pending)</h3>
         </div>
-        <div className="col-md-6 d-flex justify-content-end align-items-center">
+        <div className="col-md-6 d-flex justify-content-md-end justify-content-center align-items-center mobile-filters">
           <div className="form-check form-check-inline mx-3">
             <input
               className="form-check-input"
@@ -119,22 +117,26 @@ const Requests = () => {
           </div>
           <div className="form-check form-check-inline">
             <Link to={"/approvalRequest-form"} className="btn add-recruit">
-              <SendOutlined style={{ fontSize: '15px' }} /> Send
-              Request
+              <SendOutlined style={{ fontSize: "15px" }} /> Send Request
             </Link>
           </div>
         </div>
       </div>
       <div className="row mt-3">
-        {requests?.filter((info) => { return (notOnClearHire ? info.emailAvailable === false : info.emailAvailable === true) }).map((info) => {
-          return (
-            <div className="col-md-3 gy-3">
-              <div className="card">
-                <div className="card-body">
-                  <h3 className="card-title fw-bold">{info.employeeName}</h3>
-                  <p className="mb-1">{info.employeeEmail}</p>
-                  {info.isApproved === true
-                    ? (
+        {requests
+          ?.filter((info) => {
+            return notOnClearHire
+              ? info.emailAvailable === false
+              : info.emailAvailable === true;
+          })
+          .map((info) => {
+            return (
+              <div className="col-md-3 gy-3">
+                <div className="card">
+                  <div className="card-body">
+                    <h3 className="card-title fw-bold">{info.employeeName}</h3>
+                    <p className="mb-1">{info.employeeEmail}</p>
+                    {info.isApproved === true ? (
                       <Link
                         className="w-100 mt-3 btn"
                         to={{
@@ -151,11 +153,11 @@ const Requests = () => {
                         Request sent
                       </button>
                     )}
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
         {/* <div className="col-md-3 gy-3">
           <div className="card">
             <div className="card-body">
@@ -265,7 +267,7 @@ const Requests = () => {
           </div>
         </div> */}
       </div>
-    </div >
+    </div>
   );
 };
 
