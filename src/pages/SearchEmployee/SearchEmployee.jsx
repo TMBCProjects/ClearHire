@@ -24,21 +24,21 @@ const marks2 = {
   100: "100%",
 };
 
+const initialValues = {
+  typeOfEmployment: "",
+  salary: "",
+  location: "",
+  designation: "",
+};
 export default function SearchEmployee() {
   const userDatas = JSON.parse(sessionStorage.getItem("userData"));
   const user = sessionStorage.getItem("LoggedIn");
   const [employeeList, setEmployeeList] = useState([]);
-  const [filters, setFilters] = useState([]);
+  const [filters, setFilters] = useState(initialValues);
   const [query, setQuery] = useState("");
 
   // fetch employer details
   useEffect(() => {
-    setFilters({
-      typeOfEmployment: "",
-      salary: "",
-      location: "",
-      designation: "",
-    });
     const fetchEmployerDetails = async () => {
       try {
         const user = sessionStorage.getItem("LoggedIn");
@@ -103,7 +103,7 @@ export default function SearchEmployee() {
 
   const handleLocationChange = (event) => {
     filters.location = event.target.value;
-    if (filters.location.length > 0) {
+    if (filters.location) {
       const filteredData = employeeList.filter((item) =>
         item.typeOfEmployment.toLowerCase().includes(filters.location)
       );
@@ -185,6 +185,7 @@ export default function SearchEmployee() {
                   setFilters({ ...filters, designation: e });
                 }}
                 options={[
+                  { value: "", label: "" },
                   { value: "Graphics Designer", label: "Graphics Designer" },
                   { value: "Developer", label: "Developer" },
                   { value: "Video Editor", label: "Video Editor" },
@@ -377,15 +378,16 @@ export default function SearchEmployee() {
             {employeeList
               .filter((item) => {
                 return (
-                  (filters.typeOfEmployment === "" ||
-                    item.typeOfEmployment === filters.typeOfEmployment) &&
-                  (filters.designation === "" ||
-                    item.designation === filters.designation) &&
+                  (filters.typeOfEmployment.toLowerCase() === "" ||
+                    item.typeOfEmployment.toLowerCase() ===
+                      filters.typeOfEmployment.toLowerCase()) &&
+                  (filters.designation.toLowerCase() === "" ||
+                    item.designation.toLowerCase() ===
+                      filters.designation.toLowerCase()) &&
                   (filters.salary === "" || +item.salary <= +filters.salary) &&
-                  (filters.location === "" ||
-                    item.companyLocation
-                      .toLowerCase()
-                      .includes(filters.location.toLowerCase()))
+                  (filters.location.toLowerCase() === "" ||
+                    item.companyLocation.toLowerCase() ===
+                      filters.location.toLowerCase())
                 );
               })
               .map((info) => {
