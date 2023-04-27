@@ -268,18 +268,6 @@
 
 /* color animation */
 
-/* 3rd progress bar */
-.mask .fill {
-    clip: rect(0px, 75px, 150px, 0px);
-    background-color: #00823B;
-}
-
-.mask.full,
-.circle .fill {
-    animation: fill ease-in-out 3s;
-    transform: rotate(135deg);
-}
-
 
 @keyframes fill {
     0% {
@@ -330,4 +318,51 @@
     font-size: 40px;
     color: #232323;
     font-weight: bold;
+}
+
+/* media queries for mobile menu  */
+@media (max-width:767px) {
+    .companyLogo {
+        width: 70px;
+        height: 70px;
+    }
+
+    .font-size-39 {
+        font-size: 18px;
+        margin: 0.5px;
+    }
+
+    .font-size-25 {
+        font-size: 16px;
+    }
+
+    .employerResult {
+        padding: 1.5rem;
+        margin: 1rem auto;
+    }
+
+    .employerResult p {
+        font-size: 16px;
+    }
+
+    .employerResult .quoteLeft {
+        left: 3vh;
+        top: 3vh;
+    }
+
+    .employeeImg {
+        width: 7rem;
+    }
+
+    .employeeDetails h3 {
+        font-size: 25px;
+    }
+
+    .employeeDetails p {
+        font-size: 20px;
+    }
+
+    .progressBars p {
+        font-size: 18px;
+    }
 }
