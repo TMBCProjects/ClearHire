@@ -328,6 +328,7 @@ textarea:focus {
     border: none;
     color: #00823B;
     border-radius: 5px;
+    font-weight: 600;
 
 }
 
@@ -337,7 +338,9 @@ textarea:focus {
     width: 20px;
     height: 20px;
     left: 3.5%;
+    top: 4px;
     font-size: 18px;
+    transform: rotate(0deg);
 }
 
 @media (max-width:576px) {
