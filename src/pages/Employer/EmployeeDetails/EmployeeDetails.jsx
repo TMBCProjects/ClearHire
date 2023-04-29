@@ -225,7 +225,7 @@ const EmployeeDetails = () => {
           </div>
         </div>
         <div className="row mt-5 d-flex justify-content-center align-items-center mb-5">
-          <div className="col-8 d-flex align-items-start">
+          <div className="col-md-8 col-12 d-flex align-items-start">
             <div className="employeeImg">
               <img src={employee?.profileImage} alt="" className="empImg" />
             </div>
@@ -238,7 +238,7 @@ const EmployeeDetails = () => {
             </div>
           </div>
 
-          <div className="col-4 d-flex justify-content-center align-items-center empDetailsProgress">
+          <div className="col-md-4 col-10 d-flex justify-content-center align-items-center empDetailsProgress">
             <div class="circle-wrap">
               {avgRatings?.colleagueScore > 0 ? (
                 <>
@@ -297,12 +297,12 @@ const EmployeeDetails = () => {
           <div className="col-12">
             <h1>Current Company</h1>
           </div>
-          <div className="col">
+          <div className="col-3">
             <div className="companyLogo">
               <img src={employee?.companyLogo} alt="logo" className="logo" />
             </div>
           </div>
-          <div className="col-md-10">
+          <div className="col-8">
             <h1 className="fw-bold font-size-39">{employee?.companyName}</h1>
             <div className="fw-bold font-size-25">2022</div>
           </div>
@@ -408,35 +408,35 @@ const EmployeeDetails = () => {
             </div>
           </div>
           <div className="row d-flex align-items-center my-3">
-            <div className="col-md-2">
+            <div className="col-md-2 col-3">
               <div className="companyLogo">
                 <img src={CompanyLogo} alt="" className="logo" />
               </div>
             </div>
-            <div className="col-md-9">
+            <div className="col-md-9 col-7">
               <h1 className="fw-bold font-size-39">
                 The Madras Branding Company
               </h1>
               <div className="fw-bold font-size-25">2022</div>
             </div>
-            <div className="col-md-1">
+            <div className="col-md-1 col-1">
               <div className="back">
                 <MdOutlineKeyboardArrowDown size={35} className="downIcon" />
               </div>
             </div>
             <div className="divider my-3"></div>
-            <div className="col-md-2">
+            <div className="col-md-2 col-3">
               <div className="companyLogo">
                 <img src={CompanyLogo} alt="" className="logo" />
               </div>
             </div>
-            <div className="col-md-9">
+            <div className="col-md-9 col-7">
               <h1 className="fw-bold font-size-39">
                 The Madras Branding Company
               </h1>
               <div className="fw-bold font-size-25">2022</div>
             </div>
-            <div className="col-md-1">
+            <div className="col-md-1 col-1">
               <div className="back">
                 <MdOutlineKeyboardArrowDown size={35} className="downIcon" />
               </div>

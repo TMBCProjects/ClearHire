@@ -148,3 +148,21 @@
   flex-direction: column;
   gap: 2vh;
 }
+
+/* media queries for small devices  */
+
+@media (max-width:767px) {
+  .search-settings {
+    display: none;
+  }
+
+  .search-inputs {
+    display: none;
+  }
+
+  .result-employees .row1 {
+    display: none;
+  }
+
+
+}

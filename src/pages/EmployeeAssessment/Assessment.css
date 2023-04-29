@@ -20,7 +20,7 @@
     width: 100%;
 }
 
-.back-div{
+.back-div {
     width: 26vh;
     display: flex;
     flex-direction: row;
@@ -237,6 +237,7 @@ svg {
     color: #00823B;
     width: 130px;
     height: 30px;
+    line-height: 30px;
     border-radius: 40px;
     margin-top: -1.5%;
 }
@@ -329,6 +330,7 @@ textarea:focus {
     border: none;
     color: #00823B;
     border-radius: 5px;
+    font-weight: 600;
 
 }
 
@@ -338,7 +340,9 @@ textarea:focus {
     width: 20px;
     height: 20px;
     left: 3.5%;
+    top: 4px;
     font-size: 18px;
+    transform: rotate(0deg);
 }
 @media (max-width:992px) {
     .employe-details {

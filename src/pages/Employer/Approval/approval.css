@@ -15,6 +15,8 @@
     font-size: 30px;
 }
 
+
+
 .mr-5 {
     margin-right: 5px;
 }
@@ -107,6 +109,17 @@
 
 .fs-13 {
     font-size: 13px;
+}
+
+/* media queries for small screens  */
+@media(max-width:767px) {
+    .fs-30 {
+        font-size: 25px;
+    }
+
+    .filter-approval {
+        font-size: 16px;
+     }
 }
 
 @media (max-width: 576px){
