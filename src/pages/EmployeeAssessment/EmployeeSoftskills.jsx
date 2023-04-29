@@ -82,7 +82,7 @@ function EmployeeSoftskills() {
       };  
        
     return (
-        <div className="assesment container">
+      <div className="assesment container">
         <div className="back-cont">
           <div className="back-div" onClick={handleBack}>
             <img src={arrow} alt="" />
@@ -90,7 +90,7 @@ function EmployeeSoftskills() {
           </div>
         </div>
         <div className="row employe-details">
-          <div className="col-xl-8 col-lg-7 col-md-6 col-12 employe-prof">
+          <div className="col-xl-7 col-lg-6 col-md-6 col-12 employe-prof">
             <div className="prof-img">
               <img src={info.profileImage} alt="" />
             </div>
@@ -106,7 +106,7 @@ function EmployeeSoftskills() {
               </h6>
             </div>
           </div>
-          <div className="col-xl-4 col-lg-5 col-md-6 col-12 employe-score">
+          <div className="col-xl-5 col-lg-6 col-md-6 col-12 employe-score">
             <div className="col-12 circles">
               <div className="col-6 circle-box">
                 <div className="circle" data-prog="95">
@@ -221,10 +221,10 @@ function EmployeeSoftskills() {
   
           <div className="col-xl-6 col-lg-6 skill-box-2">
             <div className="col-12 slider-1">
-              <div className="col-xl-3 col-4 heading">
+              <div className="col-3 heading">
                 <h3>Commitment</h3>
               </div>
-              <div className="col-xl-6 col-5 slied">
+              <div className="col-6 slied">
                 <input
                   type="range"
                   className="range-1"
