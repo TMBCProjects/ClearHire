@@ -63,9 +63,7 @@ function App() {
                   ></Route>
                   <Route
                     path="/ViewAssessment"
-                    element={<ViewAssessment />}
-                  ></Route>
-
+                    element={<ViewAssessment />}></Route>
                   <Route
                     path="/Assessment-form"
                     element={<EmployeeAssessmentForm />}

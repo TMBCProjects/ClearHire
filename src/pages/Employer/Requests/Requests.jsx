@@ -97,7 +97,7 @@ const Requests = () => {
             >
               All
             </label>
-          </div>
+          </div>  
 
           <div className="form-check form-check-inline mx-3">
             <input
