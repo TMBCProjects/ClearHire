@@ -3,9 +3,15 @@ import { FileOutlined, PlusOutlined } from "@ant-design/icons";
 import "../UploadPic/UploadPic.css";
 import { deleteFile, uploadFile } from "../../utils/FirebaseUtils";
 import { Fields } from "../../utils/Fields";
+import { useEffect } from "react";
 export default function UploadPic({ name, url }) {
   const [fileLoading, setFileLoading] = useState(false);
   const [fileData, setFileData] = useState("");
+  useEffect(() => {
+    if (url !== "") {
+      setFileLoading(true);
+    }
+  }, [url]);
   const handleFileUpload = async (event) => {
     const fileUrl = await uploadFile(
       Fields.resumes,
@@ -18,8 +24,8 @@ export default function UploadPic({ name, url }) {
   };
   const removeImg = async (e) => {
     e.preventDefault();
-    setFileData(url === "" ? fileData : url);
-    setFileData(await deleteFile(Fields.resumes, fileData));
+    let fileData2 = url === "" ? fileData : url;
+    setFileData(await deleteFile(Fields.resumes, fileData2));
     sessionStorage.removeItem("resume");
     setFileLoading(false);
   };
@@ -40,8 +46,7 @@ export default function UploadPic({ name, url }) {
             fontWeight: "bold",
             fontSize: "1rem",
           }}
-          className="photoLabel"
-        >
+          className="photoLabel">
           {fileLoading ? (
             <div onClick={removeImg}>
               <FileOutlined

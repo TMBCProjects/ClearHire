@@ -5,6 +5,7 @@ const Fields = {
   offerLetters: "offerLetters",
   profileImages: "profileImages",
   currentEmployerId: "currentEmployerId",
+  companyLocation: "companyLocation",
   employeeEmail: "employeeEmail",
   employerId: "employerId",
   employeeId: "employeeId",

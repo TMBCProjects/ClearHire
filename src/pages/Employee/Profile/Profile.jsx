@@ -3,7 +3,7 @@ import "./Profile.css";
 import Add from "../../../assets/images/add.svg";
 import Check from "../../../assets/images/Check.svg";
 import InputField from "../../../components/Input/InputField";
-import { Slider, Col } from "antd";
+import { Slider, Col, message } from "antd";
 import UploadFile from "../../../components/UploadFile";
 import { MinusOutlined } from "@ant-design/icons";
 import { profileUpdate } from "../../../DataBase/Employee/employee";
@@ -23,7 +23,7 @@ export default function Profile() {
     if (userDatas.data.skills) {
       setSkills(userDatas.data.skills);
     }
-  }, [userDatas])
+  }, [userDatas]);
   const calculateAge = (dob) => {
     const today = new Date();
     const birthDate = new Date(dob);
@@ -69,6 +69,7 @@ export default function Profile() {
       return id !== index;
     });
     setSkills(newState);
+    message.success("One skill removed");
   };
 
   const updateUserData = (data) => {
@@ -90,6 +91,7 @@ export default function Profile() {
       updateUserData(values);
       sessionStorage.removeItem("resume");
     });
+    message.success("Profile updated successfully");
   };
 
   return (
@@ -110,7 +112,7 @@ export default function Profile() {
           </span>
           <br />
           <span>
-            {userDatas.data.employeeState}, {userDatas.data.employeeCountry}
+            {userDatas.data.companyLocation}
           </span>
         </div>
       </div>
@@ -198,8 +200,8 @@ export default function Profile() {
           name={"portfolioLink"}
           value={
             values.portfolioLink
-              ? values.portfolioLink : userDatas?.data?.portfolioLink
-
+              ? values.portfolioLink
+              : userDatas?.data?.portfolioLink
           }
           onChange={handleInputChange}
           placeholder={"Add Portfolio link..."}
@@ -210,7 +212,8 @@ export default function Profile() {
           name={"employeeAadhaarCardNumber"}
           value={
             values.employeeAadhaarCardNumber
-              ? values.employeeAadhaarCardNumber : userDatas?.data?.employeeAadhaarCardNumber
+              ? values.employeeAadhaarCardNumber
+              : userDatas?.data?.employeeAadhaarCardNumber
           }
           onChange={handleInputChange}
           placeholder={"Add Your Aadhar Number"}

@@ -24,21 +24,21 @@ const marks2 = {
   100: "100%",
 };
 
+const initialValues = {
+  typeOfEmployment: "",
+  salary: "",
+  location: "",
+  designation: "",
+};
 export default function SearchEmployee() {
   const userDatas = JSON.parse(sessionStorage.getItem("userData"));
   const user = sessionStorage.getItem("LoggedIn");
   const [employeeList, setEmployeeList] = useState([]);
-  const [filters, setFilters] = useState([]);
+  const [filters, setFilters] = useState(initialValues);
   const [query, setQuery] = useState("");
 
   // fetch employer details
   useEffect(() => {
-    setFilters({
-      typeOfEmployment: "",
-      salary: "",
-      location: "",
-      designation: "",
-    });
     const fetchEmployerDetails = async () => {
       try {
         const user = sessionStorage.getItem("LoggedIn");
@@ -48,7 +48,7 @@ export default function SearchEmployee() {
             : userDatas.data.currentEmployerId
             ? await readColleagues(
                 userDatas.id,
-                userDatas.data.currentEmployerId
+              userDatas.data.currentEmployerId
               )
             : [];
         setEmployeeList(data);
@@ -103,7 +103,7 @@ export default function SearchEmployee() {
 
   const handleLocationChange = (event) => {
     filters.location = event.target.value;
-    if (filters.location.length > 0) {
+    if (filters.location) {
       const filteredData = employeeList.filter((item) =>
         item.typeOfEmployment.toLowerCase().includes(filters.location)
       );
@@ -185,13 +185,14 @@ export default function SearchEmployee() {
                   setFilters({ ...filters, designation: e });
                 }}
                 options={[
+                  { value: "", label: "" },
                   { value: "Graphics Designer", label: "Graphics Designer" },
                   { value: "Developer", label: "Developer" },
                   { value: "Video Editor", label: "Video Editor" },
                 ]}
               />
             </div>
-            <div className="dropdown-select">
+            {user === "Employer" && <div className="dropdown-select">
               <p>Location</p>
               <Select
                 style={{
@@ -199,17 +200,13 @@ export default function SearchEmployee() {
                 }}
                 onChange={(e) => setFilters({ ...filters, location: e })}
                 tokenSeparators={[","]}
-                options={[
-                  {
-                    value: "Inda",
-                    label: "India",
-                  },
-                  { value: "USA", label: "USA" },
-                  { value: "Canada", label: "Canada" },
-                  { value: "Australia", label: "Australia" },
-                ]}
+                options={
+                  [{ value: "", label: "" }].concat(userDatas.data.companyLocations.map((location) => ({
+                  value: location,
+                  label: location,
+                  })))}
               />
-            </div>
+            </div>}
           </div>
           <div className="checkboxes">
             <p
@@ -319,15 +316,10 @@ export default function SearchEmployee() {
           ) : (
             ""
           )}
-          <a href="#" className="clear-filter" onClick={() => setFilters({
-            typeOfEmployment:"",
-            salary:"",
-            location:"",
-            designation:""
-          })}>
+          <p href="#" className="clear-filter" onClick={() => setFilters(initialValues)}>
             {" "}
             <img src={cross} alt="cross" /> Clear all filters
-          </a>
+          </p>
         </div>
         <div className="result-employees">
           <div className="row1">
@@ -374,15 +366,13 @@ export default function SearchEmployee() {
             {employeeList
               .filter((item) => {
                 return (
-                  (filters.typeOfEmployment === "" ||
-                    item.typeOfEmployment === filters.typeOfEmployment) &&
-                  (filters.designation === "" ||
-                    item.designation === filters.designation) &&
+                  (filters.typeOfEmployment.toLowerCase() === "" ||
+                    item.typeOfEmployment.toLowerCase() === filters.typeOfEmployment.toLowerCase()) &&
+                  (filters.designation.toLowerCase() === "" ||
+                    item.designation.toLowerCase() === filters.designation.toLowerCase()) &&
                   (filters.salary === "" || +item.salary <= +filters.salary) &&
-                  (filters.location === "" ||
-                    item.employeeState
-                      .toLowerCase()
-                      .includes(filters.location.toLowerCase()))
+                  (filters.location.toLowerCase() === "" ||
+                    item.companyLocation.toLowerCase() === filters.location.toLowerCase())
                 );
               })
               .map((info) => {
@@ -392,8 +382,7 @@ export default function SearchEmployee() {
                     info={info}
                     employerId={userDatas.id}
                     name={info.employeeName}
-                    state={info.employeeState}
-                    country={info.employeeCountry}
+                    companyLocation={info.companyLocation}
                     designation={info.designation}
                   />
                 );

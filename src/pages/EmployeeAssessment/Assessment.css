@@ -9,6 +9,8 @@
     background-color: #F5F7F9;
     padding: 2% 3%;
     height: 100%;
+    width: 100%;
+    margin: 0% 3% !important;
 }
 
 .back-cont {
@@ -25,9 +27,9 @@
     gap: 2vh;
 }
 
-.back-cont img {
+/* .back-cont img {
     transform: rotate(90deg);
-}
+} */
 
 .back-cont h4 {
     font-size: 17px;
@@ -151,7 +153,7 @@ svg {
 .text h6 {
     font-size: 16px;
     font-weight: 600;
-    margin-left: 10px;
+    margin-left: 25px;
     margin-top: 25px;
 }
 
@@ -338,7 +340,12 @@ textarea:focus {
     left: 3.5%;
     font-size: 18px;
 }
+@media (max-width:992px) {
+    .employe-details {
+        padding: 4% 0%;
+    }
 
+}
 @media (max-width:576px) {
     .employe-score {
         padding: 5% 0%;

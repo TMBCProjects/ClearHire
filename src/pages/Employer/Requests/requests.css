@@ -15,7 +15,7 @@
     font-size: 30px;
 }
 
-.mr-5 {
+.mr-5 {  
     margin-right: 5px;
 }
 
@@ -107,13 +107,4 @@
 
 .fs-13 {
     font-size: 13px;
-}
-
-@media (max-width: 576px){
-    .form-check-inline {
-        margin-right: 0rem;
-    }
-    .justify-content-end {
-        margin-top: 2%;
-    }
 }
