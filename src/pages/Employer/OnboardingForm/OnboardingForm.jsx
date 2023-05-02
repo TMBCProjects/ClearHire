@@ -117,7 +117,7 @@ function OnboardingForm() {
                 <div className="form-item ">
                   <select
                     name="typeOfEmployment"
-                    id=""
+                    id="typeOfEmployment"
                     onChange={handleInputChange}
                   >
                     <option value="">Type Of Employment*</option>

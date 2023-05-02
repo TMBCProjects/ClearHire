@@ -396,20 +396,20 @@ export default function SearchEmployee() {
           </div>
           <div className="row2">
             {employeeList
-              .filter((item) => {
-                return (
-                  (filters.typeOfEmployment.toLowerCase() === "" ||
-                    item.typeOfEmployment.toLowerCase() ===
-                      filters.typeOfEmployment.toLowerCase()) &&
-                  (filters.designation.toLowerCase() === "" ||
-                    item.designation.toLowerCase() ===
-                      filters.designation.toLowerCase()) &&
-                  (filters.salary === "" || +item.salary <= +filters.salary) &&
-                  (filters.location.toLowerCase() === "" ||
-                    item.companyLocation.toLowerCase() ===
-                      filters.location.toLowerCase())
-                );
-              })
+              // .filter((item) => {
+              //   return (
+              //     (filters.typeOfEmployment.toLowerCase() === "" ||
+              //       item.typeOfEmployment.toLowerCase() ===
+              //         filters.typeOfEmployment.toLowerCase()) &&
+              //     (filters.designation.toLowerCase() === "" ||
+              //       item.designation.toLowerCase() ===
+              //         filters.designation.toLowerCase()) &&
+              //     (filters.salary === "" || +item.salary <= +filters.salary) &&
+              //     (filters.location.toLowerCase() === "" ||
+              //       item.companyLocation.toLowerCase() ===
+              //         filters.location.toLowerCase())
+              //   );
+              // })
               .map((info) => {
                 return (
                   <AssesmentCard
