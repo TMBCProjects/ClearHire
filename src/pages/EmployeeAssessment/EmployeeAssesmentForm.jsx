@@ -1,25 +1,67 @@
 import React from 'react'
 import "./Assessmentform.css";
-import { Link } from 'react-router-dom';
 import arrow from "../../images/arrow-dropup.svg";
 import { useNavigate } from "react-router-dom";
-import { Select, Space } from 'antd';
+import { Button, Select } from 'antd';
 import add from "../../assets/images/add.svg"
 import { useState } from 'react';
+import check_1 from "../../images/Check-1.svg";
+import Dropdown from '../../components/Dropdrowns/Dropdown';
 
 export default function EmployeeAssesmentForm() {
+  const ansType = ["Short Answer", "MCQ", "Select"]
   const [qCount, setQCount] = useState(1)
+  const [questions, setQuestions] = useState({
+    title: "",
+    desc: ""
+  })
+
+  let values = [];
+  let type = [];
+  var questionDetails = []
+
   const navigate = useNavigate();
   const handleBack = () => {
     navigate("/");
   };
-  const handleChange = (value) => {
-    console.log(`selected ${value}`);
-  };
+  const handleTitleChange = (event) => {
+    setQuestions(title => ({ ...title, title: event.target.value }))
+  }
+  const handleDescChange = (event) => {
+    setQuestions(desc => ({ ...desc, desc: event.target.value }))
+  }
+  const handleQuesChange = (e, i) => {
+    for (let j = 0; j <= qCount - 1; j++) {
+
+      values[j] = document.getElementById(j).value;
+      type[j] = document.getElementById("type" + j).value;
+      questionDetails.push({ question_no: j + 1, question: values[j], type: type[j] })
+    }
+
+    setQuestions(questions => ({
+      ...questions,
+      questionDetails
+    }))
+
+  }
+
+  const handleChange = () => {
+
+  }
+
+  const submitQues = () => {
+    console.log(JSON.stringify(questions))
+  }
+
   const addques = () => {
     setQCount(qCount + 1)
-    console.log(qCount)
   }
+  const delques = () => {
+    if (qCount > 1) {
+      setQCount(qCount - 1)
+    }
+  }
+
   return (
     <div className="assessment">
 
@@ -33,41 +75,36 @@ export default function EmployeeAssesmentForm() {
         <div className="form">
           <form action="" className='assessform-1'>
             <div className="form-1">
-              <input type="text" placeholder='Untitled review form' className='f-1' />
-              <input type="text" placeholder='Description' className='f-2' />
+              <input type="text" onChange={handleTitleChange} placeholder='Untitled review form' className='f-1' />
+              <input type="text" onChange={handleDescChange} placeholder='Description' className='f-2' />
             </div>
-            {[...Array(qCount)].map((e,i) => (
-              <div>
+            {[...Array(qCount)].map((e, i) => (
+              <div key={i}>
                 <div className="form-2">
-                  <label htmlFor="">Q{i+1}</label>
-                  <input type="text" placeholder='Enter Question' className='f-3' />
+                  <label htmlFor="">Q{i + 1}</label>
+                  <input type="text" id={i} onChange={(e) => handleQuesChange(e, i)} placeholder='Enter Question' className='f-3' />
                 </div>
 
                 <div className="form-3">
                   <label htmlFor="">Answer type</label>
-                  <Select
-                    defaultValue="Choose Answer type"
-                    style={{
-                      width: "50vh",
-                      marginLeft: "5vh"
-                    }}
-                    onChange={handleChange}
-                    options={[
-                      {
-                        value: 'Short Answer',
-                        label: 'Short Answer',
-                      },
-                      {
-                        value: 'Multiple Choice Question',
-                        label: 'MCQ',
-                      },
-                      {
-                        value: 'Select',
-                        label: 'Select',
-                      },
-                    ]}
+                  <Dropdown
+                    values={ansType}
+                    type={"text"}
+                    name={"Choose Answer type"}
+                    id={"type" + i}
+                    onChange={handleQuesChange}
                   />
                 </div>
+
+                <div style={{ marginBottom: "4vh" }} id={"options" + i}>
+                  <div style={{ display: "flex", flexDirection: 'column' }}>
+                    <input type="text" onChange={handleChange} placeholder='Enter Options' className='chkbx' />
+                    <input type="text" onChange={handleChange} placeholder='Enter Options' className='chkbx' />
+                    <input type="text" onChange={handleChange} placeholder='Enter Options' className='chkbx' />
+                    <input type="text" onChange={handleChange} placeholder='Enter Options' className='chkbx' />
+                  </div>
+                </div>
+                <Button onClick={delques}>Delete Question</Button>
                 <hr />
               </div>
             ))}
@@ -78,8 +115,11 @@ export default function EmployeeAssesmentForm() {
               <img src={add} alt="addIcon" />
               &nbsp;
               Add question</button>
-
           </div>
+
+          <Button onClick={submitQues} >
+            <img className='checkimg' src={check_1} alt="" width={20} />&nbsp;
+            Submit</Button>
         </div>
 
       </div>
