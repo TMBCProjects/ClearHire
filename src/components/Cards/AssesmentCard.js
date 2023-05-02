@@ -5,17 +5,20 @@ import ProgressBar from "../ProgressBar";
 import "./styles.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-const Assesment_Card = ({
-  info,
-  value,
-  name,
-  companyLocation,
-  designation,
-  employerId,
-}) => {
+const Assesment_Card = ({ info, value, employerId }) => {
   const user = sessionStorage.getItem("LoggedIn");
   const navigate = useNavigate();
 
+  const calculateAge = (dob) => {
+    const today = new Date();
+    const birthDate = new Date(dob);
+    let years = today.getFullYear() - birthDate.getFullYear();
+    const months = today.getMonth() - birthDate.getMonth();
+    if (months < 0 || (months === 0 && today.getDate() < birthDate.getDate())) {
+      years--;
+    }
+    return years;
+  };
   function hasOneMonthPassed(date) {
     if (date === "null") {
       return false;
@@ -64,8 +67,11 @@ const Assesment_Card = ({
               },
             });
         }}>
-        <span>{name}</span>
-        <span>{companyLocation}</span>
+        <span>
+          {info.employeeName}, {calculateAge(info.dateOfBirth)}
+        </span>
+        <span>{info.companyLocation}</span>
+        <span>{info.salary}</span>
         <span
           style={{
             background: "#D7F2BC 0% 0% no-repeat padding-box",
@@ -77,7 +83,7 @@ const Assesment_Card = ({
             color: "#66BC11",
             fontWeight: "bold",
           }}>
-          {designation}
+          {info.designation}
         </span>
       </div>
       <div
