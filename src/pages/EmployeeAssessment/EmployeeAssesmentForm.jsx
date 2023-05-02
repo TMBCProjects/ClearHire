@@ -55,7 +55,7 @@ export default function EmployeeAssesmentForm() {
   }
 
   const submitQues = () => {
-    console.log(JSON.stringify(questions))
+    console.log(JSON.stringify(qType))
   }
 
   const addques = () => {
