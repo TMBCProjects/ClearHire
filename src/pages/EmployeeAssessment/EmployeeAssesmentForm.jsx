@@ -63,9 +63,12 @@ export default function EmployeeAssesmentForm() {
     const newObject = { question_no: qCount + 1, question: "", type: "" };
     setQType(qType.concat(newObject))
   }
-  const delques = () => {
+  const delques = (i) => {
     if (qCount > 1) {
       setQCount(qCount - 1)
+      const list = qType.slice(0, i).concat(
+        qType.slice(i + 1, qCount))
+      setQType(list)
     }
   }
 
@@ -89,7 +92,7 @@ export default function EmployeeAssesmentForm() {
               <div key={i}>
                 <div className="form-2">
                   <label htmlFor="">Q{i + 1}</label>
-                  <input type="text" id={i} onChange={(e) => handleQuesChange(e, i)} placeholder='Enter Question' className='f-3' />
+                  <input type="text" id={i} value={qType[i].question} onChange={(e) => handleQuesChange(e, i)} placeholder='Enter Question' className='f-3' />
                 </div>
 
                 <div className="form-3">
@@ -112,7 +115,7 @@ export default function EmployeeAssesmentForm() {
                   </div>
                 </div>
                   }
-                <Button onClick={delques}>Delete Question</Button>
+                <Button onClick={() => delques(i)}>Delete Question</Button>
                 <hr />
               </div>
             ))}
