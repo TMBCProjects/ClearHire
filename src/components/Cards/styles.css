@@ -1,32 +1,43 @@
-.assess-card{
+.assess-card {
     width: 26rem !important;
-   padding: 1.4vh;
-   background: white;
+    padding: 1.4vh;
+    background: white;
 
 }
-.assess-card .managerlogo{
+
+.assess-card .managerlogo {
     margin-bottom: 0;
     display: flex;
     justify-content: space-between;
-    align-items:center;
+    align-items: center;
     cursor: pointer;
 }
-.assess-card .managerlogo img{
+
+.assess-card .managerlogo img {
     width: 25%;
 }
-.assess-card .headDesc{
+
+.assess-card .headDesc {
     display: flex;
     flex-direction: column;
     cursor: pointer;
 }
-.assess-card .headDesc span:nth-child(1){
+
+.assess-card .headDesc span:nth-child(1) {
     font-size: 1.3rem;
     font-weight: bold;
 }
-.assess-card .allow{
+
+.assess-card .allow {
     width: 100%;
-   display: flex;
-   justify-content: center;
-   align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+@media(max-width:767px) {
+    .assess-card {
+        width: 24rem !important;
+        margin-left: 0.8rem;
+    }
+}
