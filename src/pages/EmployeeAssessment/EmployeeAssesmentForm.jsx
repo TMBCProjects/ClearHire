@@ -15,6 +15,7 @@ export default function EmployeeAssesmentForm() {
     title: "",
     desc: ""
   })
+  const [qType, setQType] = useState([])
 
   let values = [];
   let type = [];
@@ -32,12 +33,12 @@ export default function EmployeeAssesmentForm() {
   }
   const handleQuesChange = (e, i) => {
     for (let j = 0; j <= qCount - 1; j++) {
-
       values[j] = document.getElementById(j).value;
-      type[j] = document.getElementById("type" + j).value;
+      type[j] = document.getElementById("type"+j).value;
       questionDetails.push({ question_no: j + 1, question: values[j], type: type[j] })
     }
-
+    setQType(questionDetails)
+    console.log(questionDetails)
     setQuestions(questions => ({
       ...questions,
       questionDetails
@@ -55,6 +56,7 @@ export default function EmployeeAssesmentForm() {
 
   const addques = () => {
     setQCount(qCount + 1)
+    setQType(qType=>({...qType, question_no: qCount + 1, question: "", type: ""}))
   }
   const delques = () => {
     if (qCount > 1) {
@@ -91,11 +93,11 @@ export default function EmployeeAssesmentForm() {
                     values={ansType}
                     type={"text"}
                     name={"Choose Answer type"}
-                    id={"type" + i}
-                    onChange={handleQuesChange}
+                    id={"type"+i}
+                    onChange={(e)=>handleQuesChange(e,i)}
                   />
-                </div>
-
+                </div>{console.log(qType[i])}
+                  {qType[i] === "Select" && 
                 <div style={{ marginBottom: "4vh" }} id={"options" + i}>
                   <div style={{ display: "flex", flexDirection: 'column' }}>
                     <input type="text" onChange={handleChange} placeholder='Enter Options' className='chkbx' />
@@ -104,6 +106,7 @@ export default function EmployeeAssesmentForm() {
                     <input type="text" onChange={handleChange} placeholder='Enter Options' className='chkbx' />
                   </div>
                 </div>
+                  }
                 <Button onClick={delques}>Delete Question</Button>
                 <hr />
               </div>
