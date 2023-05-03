@@ -1,21 +1,26 @@
 import React from 'react'
 import "./Assessmentform.css";
 import arrow from "../../images/arrow-dropup.svg";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Select } from 'antd';
 import add from "../../assets/images/add.svg"
 import { useState } from 'react';
 import check_1 from "../../images/Check-1.svg";
 import Dropdown from '../../components/Dropdrowns/Dropdown';
+import { assessEmployee } from '../../DataBase/Employer/employer';
 
 export default function EmployeeAssesmentForm() {
+  const location = useLocation();
+  const { from } = location.state;
+  const info = from;
   const ansType = ["Short Answer", "MCQ", "Select"]
   const [qCount, setQCount] = useState(1)
   const [questions, setQuestions] = useState({
     title: "",
-    desc: ""
+    description: "",
+    questionsList: []
   })
-  const [qType, setQType] = useState([{ question_no: 1, question: "", type: "" }])
+  const [qType, setQType] = useState([{ question_no: 1, question: "", type: "", option: [] }])
   // var questionDetails = []
 
   const navigate = useNavigate();
@@ -26,41 +31,57 @@ export default function EmployeeAssesmentForm() {
     setQuestions(title => ({ ...title, title: event.target.value }))
   }
   const handleDescChange = (event) => {
-    setQuestions(desc => ({ ...desc, desc: event.target.value }))
+    setQuestions(description => ({ ...description, description: event.target.value }))
   }
-  // const handleQuesChange = (e, i) => {
-  //   for (let j = 0; j <= qCount - 1; j++) {
-  //     values[j] = document.getElementById(j).value;
-  //     type[j] = document.getElementById("type"+j).value;
-  //     questionDetails.push({ question_no: j + 1, question: values[j], type: type[j] })
-  //   }
-  //   setQType(questionDetails)
-  //   console.log(questionDetails)
-  //   setQuestions(questions => ({
-  //     ...questions,
-  //     questionDetails
-  //   }))
-
-  // }
-
   const handleQuesChange = (e, i) => {
-    qType[i].question = e.target.value;
-  }
+    setQType(prevQType => {
+      const updatedQType = [...prevQType];
+      updatedQType[i] = { ...updatedQType[i], question: e.target.value };
+      return updatedQType;
+    });
+  };
   const handleQuesTypeChange = (e, i) => {
-    qType[i].type = e.target.value;
+    setQType(prevQType => {
+      const updatedQType = [...prevQType];
+      updatedQType[i] = { ...updatedQType[i], type: e.target.value };
+      return updatedQType;
+    });
+  };
+
+  const handle1Change = (e, i) => {
+    qType[i].option[0] = e.target.value;
   }
-
-  const handleChange = () => {
-
+  const handle2Change = (e, i) => {
+    qType[i].option[1] = e.target.value;
   }
-
+  const handle3Change = (e, i) => {
+    qType[i].option[2] = e.target.value;
+  }
+  const handle4Change = (e, i) => {
+    qType[i].option[3] = e.target.value;
+  }
   const submitQues = () => {
-    console.log(JSON.stringify(qType))
+    questions.questionsList = qType
+    let userDatas = JSON.parse(sessionStorage.getItem("userData"));
+    let role = sessionStorage.getItem("LoggedIn");
+    questions.companyName = userDatas.data.companyName;
+    questions.ratedById = userDatas.id;
+    questions.ratedByRole = role;
+    questions.ratedByEmail = userDatas.data.employerEmail || userDatas.data.employeeEmail;
+    questions.employeeId = info.id || "employeeId";
+    questions.employeeName = info.employeeName || "employeeName";
+    questions.employeeEmail = info.employeeEmail || "employeeEmail";
+    assessEmployee(questions).then(() => { window.location.href = "/"; })
+    console.log(JSON.stringify(questions))
+  }
+  const checkSelect = (i) => {
+    const selectedType = qType[i].type;
+    return selectedType === "Select" || selectedType === "MCQ";
   }
 
   const addques = () => {
     setQCount(qCount + 1)
-    const newObject = { question_no: qCount + 1, question: "", type: "" };
+    const newObject = { question_no: qCount + 1, question: "", type: "", option: [] };
     setQType(qType.concat(newObject))
   }
   const delques = (i) => {
@@ -92,7 +113,7 @@ export default function EmployeeAssesmentForm() {
               <div key={i}>
                 <div className="form-2">
                   <label htmlFor="">Q{i + 1}</label>
-                  <input type="text" id={i} value={qType[i].question} onChange={(e) => handleQuesChange(e, i)} placeholder='Enter Question' className='ques' />
+                  <input type="text" id={i} defaultValue={qType[i].question} onChange={(e) => handleQuesChange(e, i)} placeholder='Enter Question' className='f-3' />
                 </div>
 
                 <div className="form-3">
@@ -105,13 +126,13 @@ export default function EmployeeAssesmentForm() {
                     onChange={(e) => handleQuesTypeChange(e, i)}
                   />
                 </div>
-                {(qType[i].type === "Select" || qType[i].type === "MCQ") && 
+                {checkSelect(i) && 
                 <div style={{ marginBottom: "4vh" }} id={"options" + i}>
                   <div style={{ display: "flex", flexDirection: 'column' }}>
-                    <input type="text" onChange={handleChange} placeholder='Enter Options' className='chkbx' />
-                    <input type="text" onChange={handleChange} placeholder='Enter Options' className='chkbx' />
-                    <input type="text" onChange={handleChange} placeholder='Enter Options' className='chkbx' />
-                    <input type="text" onChange={handleChange} placeholder='Enter Options' className='chkbx' />
+                      <input type="text" onChange={(e) => handle1Change(e, i)} placeholder='Enter Options' className='chkbx' />
+                      <input type="text" onChange={(e) => handle2Change(e, i)} placeholder='Enter Options' className='chkbx' />
+                      <input type="text" onChange={(e) => handle3Change(e, i)} placeholder='Enter Options' className='chkbx' />
+                      <input type="text" onChange={(e) => handle4Change(e, i)} placeholder='Enter Options' className='chkbx' />
                   </div>
                 </div>
                   }
