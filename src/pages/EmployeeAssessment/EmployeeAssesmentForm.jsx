@@ -1,19 +1,23 @@
 import React from 'react'
 import "./Assessmentform.css";
 import arrow from "../../images/arrow-dropup.svg";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Select } from 'antd';
 import add from "../../assets/images/add.svg"
 import { useState } from 'react';
 import check_1 from "../../images/Check-1.svg";
 import Dropdown from '../../components/Dropdrowns/Dropdown';
+import { assessEmployee } from '../../DataBase/Employer/employer';
 
 export default function EmployeeAssesmentForm() {
+  const location = useLocation();
+  const { from } = location.state;
+  const info = from;
   const ansType = ["Short Answer", "MCQ", "Select"]
   const [qCount, setQCount] = useState(1)
   const [questions, setQuestions] = useState({
     title: "",
-    desc: "",
+    description: "",
     questionsList: []
   })
   const [qType, setQType] = useState([{ question_no: 1, question: "", type: "", option: [] }])
@@ -27,23 +31,8 @@ export default function EmployeeAssesmentForm() {
     setQuestions(title => ({ ...title, title: event.target.value }))
   }
   const handleDescChange = (event) => {
-    setQuestions(desc => ({ ...desc, desc: event.target.value }))
+    setQuestions(description => ({ ...description, description: event.target.value }))
   }
-  // const handleQuesChange = (e, i) => {
-  //   for (let j = 0; j <= qCount - 1; j++) {
-  //     values[j] = document.getElementById(j).value;
-  //     type[j] = document.getElementById("type"+j).value;
-  //     questionDetails.push({ question_no: j + 1, question: values[j], type: type[j] })
-  //   }
-  //   setQType(questionDetails)
-  //   console.log(questionDetails)
-  //   setQuestions(questions => ({
-  //     ...questions,
-  //     questionDetails
-  //   }))
-
-  // }
-
   const handleQuesChange = (e, i) => {
     setQType(prevQType => {
       const updatedQType = [...prevQType];
@@ -73,6 +62,16 @@ export default function EmployeeAssesmentForm() {
   }
   const submitQues = () => {
     questions.questionsList = qType
+    let userDatas = JSON.parse(sessionStorage.getItem("userData"));
+    let role = sessionStorage.getItem("LoggedIn");
+    questions.companyName = userDatas.data.companyName;
+    questions.ratedById = userDatas.id;
+    questions.ratedByRole = role;
+    questions.ratedByEmail = userDatas.data.employerEmail || userDatas.data.employeeEmail;
+    questions.employeeId = info.id || "employeeId";
+    questions.employeeName = info.employeeName || "employeeName";
+    questions.employeeEmail = info.employeeEmail || "employeeEmail";
+    assessEmployee(questions).then(() => { window.location.href = "/"; })
     console.log(JSON.stringify(questions))
   }
   const checkSelect = (i) => {

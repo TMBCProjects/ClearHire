@@ -61,7 +61,7 @@ function EmployeeSoftskills() {
       values.employeeEmail = info.employeeEmail || "employeeEmail";
       values.profileImage = info.profileImage || pic;
       role === "Employer" ? rateEmployee(values).then(() => {
-        window.location.href = "/colleagues";
+        window.location.href = "/";
       }) :
         rateCollegue(values).then(() => {
           window.location.href = "/colleagues";
