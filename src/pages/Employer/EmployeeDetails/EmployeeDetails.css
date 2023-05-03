@@ -343,6 +343,7 @@
 
     .employerResult p {
         font-size: 16px;
+        margin-left: 2rem;
     }
 
     .employerResult .quoteLeft {
@@ -364,5 +365,11 @@
 
     .progressBars p {
         font-size: 18px;
+    }
+
+    .employeeDetailsText,
+    .view-resume-btn,
+    .portfolio-text {
+        font-size: 14px;
     }
 }
