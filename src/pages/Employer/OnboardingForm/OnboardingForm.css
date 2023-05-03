@@ -38,6 +38,15 @@
     text-align: center;
 }
 
+.f-3{
+    /* position: absolute; */
+    border: none !important;
+    box-shadow: none;
+    background-color:#F5F7F9;
+    margin-left: 15px;
+    border-radius: 7px;
+}
+
 .f-3 input {
     display: none;
 }
