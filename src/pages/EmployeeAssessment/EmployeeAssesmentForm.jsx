@@ -71,7 +71,7 @@ export default function EmployeeAssesmentForm() {
     qType[i].option[3] = e.target.value;
   }
   const submitQues = () => {
-    setQuestions(desc => ({ ...desc, questions: qType }))
+    setQuestions(desc => ({ ...desc, questionsList: qType }))
     console.log(JSON.stringify(questions))
   }
   const checkSelect = (i) => {
