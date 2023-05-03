@@ -32,9 +32,12 @@ function EmployeeAssessment() {
     <div className="assesment container">
       <div className="back-cont">
         <div className="col">
+        {sessionStorage.getItem("LoggedIn") === "Employer" ? 
 
           <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
-          
+          :
+          <EmployeeSoftskills />
+        }
          </div>
       </div>
     </div>
