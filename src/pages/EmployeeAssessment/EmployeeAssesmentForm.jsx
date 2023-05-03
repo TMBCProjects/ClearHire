@@ -13,7 +13,8 @@ export default function EmployeeAssesmentForm() {
   const [qCount, setQCount] = useState(1)
   const [questions, setQuestions] = useState({
     title: "",
-    desc: ""
+    desc: "",
+    questionsList: []
   })
   const [qType, setQType] = useState([{ question_no: 1, question: "", type: "", option: [] }])
   // var questionDetails = []
@@ -71,7 +72,7 @@ export default function EmployeeAssesmentForm() {
     qType[i].option[3] = e.target.value;
   }
   const submitQues = () => {
-    setQuestions(desc => ({ ...desc, questionsList: qType }))
+    questions.questionsList = qType
     console.log(JSON.stringify(questions))
   }
   const checkSelect = (i) => {
