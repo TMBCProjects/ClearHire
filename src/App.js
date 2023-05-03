@@ -18,13 +18,12 @@ import Profile from "./pages/Employee/Profile/Profile";
 import EmployeeOfferLetter from "./pages/Employee/EmployeeOfferLetter/EmployeeOfferLetter";
 import EmployeeAssessment from "./pages/EmployeeAssessment/EmployeeAssessment";
 import EmployeeAssessmentForm from "./pages/EmployeeAssessment/EmployeeAssesmentForm";
-
+import Assessment from "./pages/Employee/Assessment/Assessment";
 import EmployerProfile from "./pages/Employer/Profile/Profile";
 import OfferList from "./pages/Employee/OfferList/Offers";
 import Requests from "./pages/Employer/Requests/Requests";
 import RequestApproval from "./pages/Employer/RequestApproval/RequestApproval";
 import ViewAssessment from "./pages/Employer/EmployeeDetails/ViewAssessment";
-import Offers from "./pages/Employee/OfferList/Offers";
 
 function App() {
   return (
@@ -78,6 +77,7 @@ function App() {
                   <Route
                     path="/ViewAssessment"
                     element={<ViewAssessment />}></Route>
+
                   <Route
                     path="/Assessment-form"
                     element={<EmployeeAssessmentForm />}></Route>
@@ -110,9 +110,7 @@ function App() {
                     <Route
                       path="/employeeOfferLetter"
                       element={<EmployeeOfferLetter />}></Route>
-                    <Route
-                      path="/offerLetters"
-                      element={<Offers />}></Route>
+                    {/* <Route path="/offerLetters" element={<Offers />}></Route> */}
                     <Route
                       path="/colleagues"
                       element={<SearchEmployee />}></Route>
@@ -128,6 +126,9 @@ function App() {
                     <Route
                       path="/verification-request"
                       element={<VerficationRequest />}></Route>
+                    <Route
+                      path="/Assessment"
+                      element={<Assessment />}></Route>
                   </Routes>
                 </div>
               ) : (
