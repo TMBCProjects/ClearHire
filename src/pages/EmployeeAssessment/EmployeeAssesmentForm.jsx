@@ -15,11 +15,8 @@ export default function EmployeeAssesmentForm() {
     title: "",
     desc: ""
   })
-  const [qType, setQType] = useState([])
-
-  let values = [];
-  let type = [];
-  var questionDetails = []
+  const [qType, setQType] = useState([{ question_no: 1, question: "", type: "" }])
+  // var questionDetails = []
 
   const navigate = useNavigate();
   const handleBack = () => {
@@ -31,19 +28,26 @@ export default function EmployeeAssesmentForm() {
   const handleDescChange = (event) => {
     setQuestions(desc => ({ ...desc, desc: event.target.value }))
   }
-  const handleQuesChange = (e, i) => {
-    for (let j = 0; j <= qCount - 1; j++) {
-      values[j] = document.getElementById(j).value;
-      type[j] = document.getElementById("type"+j).value;
-      questionDetails.push({ question_no: j + 1, question: values[j], type: type[j] })
-    }
-    setQType(questionDetails)
-    console.log(questionDetails)
-    setQuestions(questions => ({
-      ...questions,
-      questionDetails
-    }))
+  // const handleQuesChange = (e, i) => {
+  //   for (let j = 0; j <= qCount - 1; j++) {
+  //     values[j] = document.getElementById(j).value;
+  //     type[j] = document.getElementById("type"+j).value;
+  //     questionDetails.push({ question_no: j + 1, question: values[j], type: type[j] })
+  //   }
+  //   setQType(questionDetails)
+  //   console.log(questionDetails)
+  //   setQuestions(questions => ({
+  //     ...questions,
+  //     questionDetails
+  //   }))
 
+  // }
+
+  const handleQuesChange = (e, i) => {
+    qType[i].question = e.target.value;
+  }
+  const handleQuesTypeChange = (e, i) => {
+    qType[i].type = e.target.value;
   }
 
   const handleChange = () => {
@@ -51,16 +55,20 @@ export default function EmployeeAssesmentForm() {
   }
 
   const submitQues = () => {
-    console.log(JSON.stringify(questions))
+    console.log(JSON.stringify(qType))
   }
 
   const addques = () => {
     setQCount(qCount + 1)
-    setQType(qType=>({...qType, question_no: qCount + 1, question: "", type: ""}))
+    const newObject = { question_no: qCount + 1, question: "", type: "" };
+    setQType(qType.concat(newObject))
   }
-  const delques = () => {
+  const delques = (i) => {
     if (qCount > 1) {
       setQCount(qCount - 1)
+      const list = qType.slice(0, i).concat(
+        qType.slice(i + 1, qCount))
+      setQType(list)
     }
   }
 
@@ -84,7 +92,7 @@ export default function EmployeeAssesmentForm() {
               <div key={i}>
                 <div className="form-2">
                   <label htmlFor="">Q{i + 1}</label>
-                  <input type="text" id={i} onChange={(e) => handleQuesChange(e, i)} placeholder='Enter Question' className='f-3' />
+                  <input type="text" id={i} value={qType[i].question} onChange={(e) => handleQuesChange(e, i)} placeholder='Enter Question' className='f-3' />
                 </div>
 
                 <div className="form-3">
@@ -94,10 +102,10 @@ export default function EmployeeAssesmentForm() {
                     type={"text"}
                     name={"Choose Answer type"}
                     id={"type"+i}
-                    onChange={(e)=>handleQuesChange(e,i)}
+                    onChange={(e) => handleQuesTypeChange(e, i)}
                   />
-                </div>{console.log(qType[i])}
-                  {qType[i] === "Select" && 
+                </div>
+                {(qType[i].type === "Select" || qType[i].type === "MCQ") && 
                 <div style={{ marginBottom: "4vh" }} id={"options" + i}>
                   <div style={{ display: "flex", flexDirection: 'column' }}>
                     <input type="text" onChange={handleChange} placeholder='Enter Options' className='chkbx' />
@@ -107,7 +115,7 @@ export default function EmployeeAssesmentForm() {
                   </div>
                 </div>
                   }
-                <Button onClick={delques}>Delete Question</Button>
+                <Button onClick={() => delques(i)}>Delete Question</Button>
                 <hr />
               </div>
             ))}

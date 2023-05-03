@@ -78,7 +78,7 @@ function RequestApproval() {
                                         onChange={handleInputChange}
                                     />
                                 </div>
-                                <p style={emailAvailable ? { color: "red" } : { opacity: "0", pointerEvents: "none" }}>
+                                <p style={emailAvailable ? { color: "red", pointerEvents: "none" } : { display: "none" }}>
                                     Not on clearhire - an email will be sent to them instead
                                 </p>
 

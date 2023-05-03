@@ -10,11 +10,8 @@ import AssesmentCard from "../../components/Cards/AssesmentCard";
 
 import { readEmployees } from "../../DataBase/Employer/employer";
 import { readColleagues } from "../../DataBase/Employee/employee";
-const onChange = (e) => {
-  // alert(`checked = ${e.target.checked}`);
-};
 const formatter = (value) => `${value}LPA`;
-const formatter2 = (value) => `${value} %`;
+// const formatter2 = (value) => `${value} %`;
 const marks = {
   0: "1LPA",
   50: "50LPA",
@@ -25,7 +22,13 @@ const marks2 = {
 };
 
 const initialValues = {
-  typeOfEmployment: "",
+  typeOfEmployment: {
+    "Permanent Full-Time": false,
+    "Part-Time": false,
+    "Contact": false,
+    "Casual/Vacation": false,
+    "Internship/Trainee": false,
+  },
   salary: "",
   location: "",
   designation: "",
@@ -114,6 +117,16 @@ export default function SearchEmployee() {
     }
     setQuery(filters.location);
   };
+
+
+  // const onTypeOfEmploymentChange = (value) => {
+  //   const updatedTypeOfEmployment = {
+  //     ...filters.typeOfEmployment,
+  //     [value.target.value]: value.target.checked,
+  //   };
+  //   setFilters({ ...filters, typeOfEmployment: updatedTypeOfEmployment });
+  // };
+
   return (
     <div className="employer-home">
       <div className="search-inputs">
@@ -225,7 +238,8 @@ export default function SearchEmployee() {
                   marginLeft: ".5rem",
                   fontSize: "1.1rem",
                 }}
-                onChange={onChange}
+                // onChange={onTypeOfEmploymentChange}
+                // checked={filters.typeOfEmployment["Permanent Full-Time"]}
               >
                 Permanent Full-Time
               </Checkbox>
@@ -234,7 +248,8 @@ export default function SearchEmployee() {
                   marginLeft: ".5rem",
                   fontSize: "1.1rem",
                 }}
-                onChange={onChange}
+                // checked={filters.typeOfEmployment["Part-Time"]}
+                // onChange={onTypeOfEmploymentChange}
               >
                 Part-Time
               </Checkbox>
@@ -243,7 +258,8 @@ export default function SearchEmployee() {
                   marginLeft: ".5rem",
                   fontSize: "1.1rem",
                 }}
-                onChange={onChange}
+                // onChange={onTypeOfEmploymentChange}
+                // checked={filters.typeOfEmployment["Casual/Vacation"]}
               >
                 Casual/Vacation
               </Checkbox>
@@ -252,16 +268,18 @@ export default function SearchEmployee() {
                   marginLeft: ".5rem",
                   fontSize: "1.1rem",
                 }}
-                onChange={onChange}
+                // onChange={onTypeOfEmploymentChange}
+                // checked={filters.typeOfEmployment["Contract"]}
               >
-                Contact
+                Contract
               </Checkbox>
               <Checkbox
                 style={{
                   marginLeft: ".5rem",
                   fontSize: "1.1rem",
                 }}
-                onChange={onChange}
+                // onChange={onTypeOfEmploymentChange}
+                // checked={filters.typeOfEmployment["Internship/Trainee"]}
               >
                 Internship/Trainee
               </Checkbox>
@@ -291,8 +309,10 @@ export default function SearchEmployee() {
                   marks={marks}
                   min={1}
                   max={50}
+                  // range
+                  // defaultValue={[20, 50]}
                   onChange={(e) =>
-                    setFilters({ ...filters, salary: +e * 1000 })
+                    setFilters({ ...filters, salary: +e * 100000 })
                   }
                   trackStyle={{
                     backgroundColor: "#00823B",
@@ -302,7 +322,7 @@ export default function SearchEmployee() {
                     backgroundColor: "red",
                   }}
                 />
-                <Slider
+                {/* <Slider
                   tooltip={{
                     formatter2,
                   }}
@@ -311,7 +331,7 @@ export default function SearchEmployee() {
                     backgroundColor: "#00823B",
                     height: ".3rem",
                   }}
-                />
+                /> */}
               </div>
             </div>
           ) : (
@@ -342,7 +362,7 @@ export default function SearchEmployee() {
                     marginLeft: ".5rem",
                     fontSize: "1.1rem",
                   }}
-                  onChange={onChange}
+                  // onChange={onChange}
                 >
                   Assessed
                 </Checkbox>
@@ -351,7 +371,7 @@ export default function SearchEmployee() {
                     marginLeft: ".5rem",
                     fontSize: "1.1rem",
                   }}
-                  onChange={onChange}
+                  // onChange={onChange}
                 >
                   Pending
                 </Checkbox>
@@ -360,7 +380,7 @@ export default function SearchEmployee() {
                     marginLeft: ".5rem",
                     fontSize: "1.1rem",
                   }}
-                  onChange={onChange}
+                  // onChange={onChange}
                 >
                   All
                 </Checkbox>
@@ -376,29 +396,26 @@ export default function SearchEmployee() {
           </div>
           <div className="row2">
             {employeeList
-              .filter((item) => {
-                return (
-                  (filters.typeOfEmployment.toLowerCase() === "" ||
-                    item.typeOfEmployment.toLowerCase() ===
-                      filters.typeOfEmployment.toLowerCase()) &&
-                  (filters.designation.toLowerCase() === "" ||
-                    item.designation.toLowerCase() ===
-                      filters.designation.toLowerCase()) &&
-                  (filters.salary === "" || +item.salary <= +filters.salary) &&
-                  (filters.location.toLowerCase() === "" ||
-                    item.companyLocation.toLowerCase() ===
-                      filters.location.toLowerCase())
-                );
-              })
+              // .filter((item) => {
+              //   return (
+              //     (filters.typeOfEmployment.toLowerCase() === "" ||
+              //       item.typeOfEmployment.toLowerCase() ===
+              //         filters.typeOfEmployment.toLowerCase()) &&
+              //     (filters.designation.toLowerCase() === "" ||
+              //       item.designation.toLowerCase() ===
+              //         filters.designation.toLowerCase()) &&
+              //     (filters.salary === "" || +item.salary <= +filters.salary) &&
+              //     (filters.location.toLowerCase() === "" ||
+              //       item.companyLocation.toLowerCase() ===
+              //         filters.location.toLowerCase())
+              //   );
+              // })
               .map((info) => {
                 return (
                   <AssesmentCard
                     value={30}
                     info={info}
                     employerId={userDatas.id}
-                    name={info.employeeName}
-                    companyLocation={info.companyLocation}
-                    designation={info.designation}
                   />
                 );
               })}
