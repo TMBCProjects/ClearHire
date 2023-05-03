@@ -92,7 +92,7 @@ export default function EmployeeAssesmentForm() {
               <div key={i}>
                 <div className="form-2">
                   <label htmlFor="">Q{i + 1}</label>
-                  <input type="text" id={i} value={qType[i].question} onChange={(e) => handleQuesChange(e, i)} placeholder='Enter Question' className='f-3' />
+                  <input type="text" id={i} value={qType[i].question} onChange={(e) => handleQuesChange(e, i)} placeholder='Enter Question' className='ques' />
                 </div>
 
                 <div className="form-3">

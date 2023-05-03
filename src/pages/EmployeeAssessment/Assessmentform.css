@@ -85,16 +85,14 @@
     padding: 10px 0px;
 }
 
-.f-3 {
-    position: absolute;
+.ques{
+    padding: 2vh;
     border: none !important;
-    width: 33%;
-    left: 36%;
     box-shadow: none;
     background-color: #F5F7F9;
     margin-left: 15px;
-    padding: 15px 10px;
     border-radius: 7px;
+    width: 95%
 }
 
 .f-4 {
@@ -163,12 +161,12 @@
 .add-btn {
     position: absolute;
     background-color: white;
-    padding: 5px 15px;
-    border-radius: 20px;
+    padding: 7px 20px;
+    border-radius: 20px; 
     font-size: 18px;
     font-weight: 600;
-    margin-top: -3%;
-    margin-left: -8%;
+    margin-top: -2.5%;
+    margin-left: -4%;
 }
 
 .add {
@@ -184,13 +182,12 @@
 .add-cho {
     position: absolute;
     background-color: white;
-    padding: 3px 15px;
-    border-radius: 20px;
+    padding: 6px 18px;
+    border-radius: 20px; 
     font-size: 16px;
     font-weight: 600;
     margin-top: -0.5%;
-    margin-left: -31%;
-}
+    margin-left: -21%;
 
 @media(max-width:1200px) {
     .add-cho {
@@ -303,3 +300,4 @@
 .add img {
     width: 2vh;
 }
+
