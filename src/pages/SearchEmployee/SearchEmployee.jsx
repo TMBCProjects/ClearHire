@@ -66,30 +66,12 @@ export default function SearchEmployee() {
 
   const handleSalaryChange = (event) => {
     filters.salary = event.target.value;
-    if (filters.salary.length > 0) {
-      const filteredData = employeeList.filter((item) =>
-        item.typeOfEmployment.toLowerCase().includes(filters.salary)
-      );
-      console.log("salary", filteredData);
-      setEmployeeList(filteredData);
-    } else {
-      setEmployeeList(filters);
-    }
-    setQuery(filters.salary);
+   
   };
 
   const handleDesignationChange = (event) => {
     filters.designation = event.target.value;
-    if (filters.designation.length > 0) {
-      const filteredData = employeeList.filter((item) =>
-        item.typeOfEmployment.toLowerCase().includes(filters.designation)
-      );
-      console.log("designation", filteredData);
-      setEmployeeList(filteredData);
-    } else {
-      setEmployeeList(filters);
-    }
-    setQuery(filters.designation);
+    
   };
 
   const handleLocationChange = (event) => {
@@ -119,10 +101,32 @@ export default function SearchEmployee() {
       setEmployeeList(filters);
     }
     setQuery(filters.typeOfEmployment);
+
+    if (filters.designation.length > 0) {
+      const filteredData = employeeList.filter((item) =>
+        item.typeOfEmployment.toLowerCase().includes(filters.designation)
+      );
+      console.log("designation", filteredData);
+      setEmployeeList(filteredData);
+    } else {
+      setEmployeeList(filters);
+    }
+    setQuery(filters.designation);
+
+    if (filters.salary.length > 0) {
+      const filteredData = employeeList.filter((item) =>
+        item.typeOfEmployment.toLowerCase().includes(filters.salary)
+      );
+      console.log("salary", filteredData);
+      setEmployeeList(filteredData);
+    } else {
+      setEmployeeList(filters);
+    }
+    setQuery(filters.salary);
   }
   return (
     <div className="employer-home">
-      <div className="search-inputs">
+      <div className="search-inputs" style={{position: "absolute"}}>
         <div className="input-box1 input-box">
           <img src={search} alt="Search" />
           <input
@@ -133,7 +137,7 @@ export default function SearchEmployee() {
           />
         </div>
         {user === "Employer" ? (
-          <div className="input-box2 input-box">
+          <div className="input-box2 input-box" >
             <img src={location} alt="Search" />
             <input
               type="text"
