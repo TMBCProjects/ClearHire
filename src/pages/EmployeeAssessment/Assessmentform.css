@@ -5,7 +5,6 @@
 }
 .assessment{
     background-color: #F5F7F9;
-    padding: 3% ;
 }
 .head{
     width: 100%;
@@ -27,9 +26,7 @@
     border: 1px solid #707070;
     font-weight: 600;
 }
-.col h5{
-    font-size: 25px;
-}
+
 .btn-2{
     padding: 8px 30px;
     background-color: #00823B;
@@ -72,16 +69,16 @@
     padding:10px 0px;
 }
 
-.f-3{
-    position: absolute;
+.ques{
+    padding: 2vh;
     border: none !important;
-    width: 51%;
     box-shadow: none;
     background-color:#F5F7F9;
     margin-left: 15px;
-    padding:15px 10px;
     border-radius: 7px;
+    width: 95%
 }
+
 .f-4{
     position: absolute;
     border: none !important;
@@ -141,12 +138,12 @@
  .add-btn{
     position: absolute;
     background-color: white;
-    padding: 5px 15px;
-    border-radius: 20px;
+    padding: 7px 20px;
+    border-radius: 20px; 
     font-size: 18px;
     font-weight: 600;
-    margin-top: -3%;
-    margin-left: -8%;
+    margin-top: -2.5%;
+    margin-left: -4%;
 }
 
 .add{
@@ -160,103 +157,26 @@
 .add-cho{
     position: absolute;
     background-color: white;
-    padding: 3px 15px;
-    border-radius: 20px;
+    padding: 6px 18px;
+    border-radius: 20px; 
     font-size: 16px;
     font-weight: 600;
     margin-top: -0.5%;
-    margin-left: -31%;
-}
+    margin-left: -21%;
 
-@media(max-width:1200px){
-    .add-cho{
-        margin-left: -41%;
-    }
-}
-@media(max-width:960px){
-    .add-cho{
-        margin-left: -31%;
-    }
-    .add-btn{
-        margin-top: -4%;
-    }
-    .f-3 {
-        width: 62%;
-    }
-    .f-4 {
-        width: 55%;
-    }
-    .f-5 {
-        width: 57%;
-    }
-}
-
-@media(max-width:768px){
-    .btn-2,.btn-1 {
-        padding: 0px 0px;
-        height: 40px;
-        width: 130px;
-        font-size: 14px;
-    }
-
-    .f-1 {
-        font-size: 20px;
-    }
-    .f-3 {
-        width: 72%;
-    }
-    .f-4 {
-        width: 63%;
-    }
-    .f-5 {
-        width: 65%;
-    }
-    .add-cho {
-        padding: 3px 15px;
-        font-size: 12px;
-        margin-left: -32%;
-    }
-    .add-btn {
-        padding: 3px 15px;
-        font-size: 12px;
-        margin-top: -4%;
-        margin-left: -8%;
-    }
-}
-
-@media(max-width:576px){
-    .btn-2,.btn-1 {
-        padding: 0px 0px;
-        height: 40px;
-        width: 130px;
-        font-size: 14px;
-    }
-
-    .f-1 {
-        font-size: 20px;
-    }
-    .f-3 {
-        width: 72%;
-    }
-    .f-4 {
-        width: 57%;
-    }
-    .f-5 {
-        width: 60%;
-    }
-    .add-cho {
-        padding: 3px 15px;
-        font-size: 12px;
-        margin-left: -28%;
-    }
-    .add-btn {
-        padding: 3px 15px;
-        font-size: 12px;
-        margin-top: -8%;
-        margin-left: -13%;
-    }
 }
 
 .add img{
     width: 2vh;
+}
+
+
+.checkimg{
+    transform: rotate(0deg) !important;
+}
+
+.chkbx{
+    border-radius: 1vh;
+    padding: 2vh;
+    margin: 2vh;
 }
