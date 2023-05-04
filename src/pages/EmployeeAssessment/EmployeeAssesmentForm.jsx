@@ -2,7 +2,7 @@ import React from 'react'
 import "./Assessmentform.css";
 import arrow from "../../images/arrow-dropup.svg";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button, Select } from 'antd';
+import { Button } from 'antd';
 import add from "../../assets/images/add.svg"
 import { useState } from 'react';
 import check_1 from "../../images/Check-1.svg";
@@ -72,7 +72,6 @@ export default function EmployeeAssesmentForm() {
     questions.employeeName = info.employeeName || "employeeName";
     questions.employeeEmail = info.employeeEmail || "employeeEmail";
     assessEmployee(questions).then(() => { window.location.href = "/"; })
-    console.log(JSON.stringify(questions))
   }
   const checkSelect = (i) => {
     const selectedType = qType[i].type;
