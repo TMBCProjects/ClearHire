@@ -6,10 +6,9 @@ import quote from "../../images/quote-left.svg";
 import arrow from "../../images/arrow-dropup.svg";
 import ProgressBar from "../../components/ProgressBar";
 import { rateEmployee } from "../../DataBase/Employer/employer";
-import { useLocation, useNavigate, Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { rateCollegue } from "../../DataBase/Employee/employee";
-import { Tabs } from 'antd';
-import EmployeeAssesmentForm from "./EmployeeAssesmentForm";
+import { Button } from 'antd';
 
 
 const initialState = {
@@ -417,13 +416,14 @@ function EmployeeSoftskills() {
           </div>
         </div>
         <div className="submit">
-          <img src={check_1} alt="" />
-          <button onClick={handleSubmit}
+          <Button onClick={handleSubmit}
             disabled={
               hasOneMonthPassed(
                 findRatedAtDate(info.ratings, info.currentEmployerId)
               )
-            }>Submit Assessment</button>
+            }>
+            <img className='checkimg' src={check_1} alt="" width={20} />
+            Submit Assessment</Button>
         </div>
       </div>
     )
