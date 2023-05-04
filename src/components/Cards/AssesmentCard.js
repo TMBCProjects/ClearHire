@@ -19,21 +19,34 @@ const Assesment_Card = ({ info, value, employerId }) => {
     }
     return years;
   };
-  function hasOneMonthPassed(date) {
-    if (date === "null") {
+  function hasOneMonthPassed(date, date2) {
+    if (date === "null" || date2 === "null") {
       return false;
     }
     const specificDate = new Date(date);
+    const specificDate2 = new Date(date2);
     const oneMonthInMs = 30 * 24 * 60 * 60 * 1000;
     const currentDate = new Date();
     const diffInMs = currentDate - specificDate;
-    return diffInMs <= oneMonthInMs;
+    const diffInMs2 = currentDate - specificDate2;
+    return diffInMs <= oneMonthInMs && diffInMs2 <= oneMonthInMs;
   }
   function findRatedAtDate(ratingsArray, desiredId) {
     if (ratingsArray !== undefined) {
       for (let i = 0; i < ratingsArray.length; i++) {
         if (ratingsArray[i].ratedById === desiredId) {
           return ratingsArray[i].ratedAtDate;
+        } else {
+        }
+      }
+    }
+    return "null";
+  }
+  function findAssessmentDate(ratingsArray, desiredId) {
+    if (ratingsArray !== undefined) {
+      for (let i = 0; i < ratingsArray.length; i++) {
+        if (ratingsArray[i].ratedById === desiredId) {
+          return ratingsArray[i].assessmentDate;
         } else {
         }
       }
@@ -89,7 +102,10 @@ const Assesment_Card = ({ info, value, employerId }) => {
       <div
         className="cardFooter"
         style={
-          hasOneMonthPassed(findRatedAtDate(info.ratings, employerId))
+          hasOneMonthPassed(
+            findRatedAtDate(info.ratings, employerId),
+            findAssessmentDate(info.ratings, employerId)
+          )
             ? {
                 pointerEvents: "none",
               }
