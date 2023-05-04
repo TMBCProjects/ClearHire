@@ -122,10 +122,6 @@ select:focus {
     margin-top: 5px;
 }
 
-.email {
-    margin-bottom: 8px;
-}
-
 .email p {
     color: red;
     bottom: 0%;
