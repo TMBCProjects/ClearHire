@@ -180,3 +180,19 @@
     padding: 2vh;
     margin: 2vh;
 }
+
+.question{
+    border: none !important;
+    width: 33%;
+    box-shadow: none;
+    background-color:#F5F7F9;
+    margin-left: 15px;
+    padding:15px 10px;
+    border-radius: 7px;
+}
+
+.radio{
+    width: 5%;
+    box-shadow: none;
+    background-color:#F5F7F9;
+}
