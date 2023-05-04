@@ -1,5 +1,5 @@
 import React from 'react'
-import "./Assessmentform.css";
+import "./AssessmentForm.css";
 import arrow from "../../../images/arrow-dropup.svg";
 import { useNavigate } from "react-router-dom";
 import { Button } from 'antd';

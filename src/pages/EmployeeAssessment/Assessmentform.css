@@ -179,6 +179,9 @@
     padding-bottom: 10px;
 }
 
+.add img {
+    width: 2vh;
+}
 .add-cho {
     position: absolute;
     background-color: white;
@@ -188,6 +191,7 @@
     font-weight: 600;
     margin-top: -0.5%;
     margin-left: -21%;
+}
 
 @media(max-width:1200px) {
     .add-cho {
@@ -297,7 +301,4 @@
     }
 }
 
-.add img {
-    width: 2vh;
-}
 
