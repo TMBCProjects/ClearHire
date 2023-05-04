@@ -85,7 +85,7 @@
     padding: 10px 0px;
 }
 
-.ques{
+.ques {
     padding: 2vh;
     border: none !important;
     box-shadow: none;
@@ -162,7 +162,7 @@
     position: absolute;
     background-color: white;
     padding: 7px 20px;
-    border-radius: 20px; 
+    border-radius: 20px;
     font-size: 18px;
     font-weight: 600;
     margin-top: -2.5%;
@@ -183,11 +183,12 @@
     position: absolute;
     background-color: white;
     padding: 6px 18px;
-    border-radius: 20px; 
+    border-radius: 20px;
     font-size: 16px;
     font-weight: 600;
     margin-top: -0.5%;
     margin-left: -21%;
+}
 
 @media(max-width:1200px) {
     .add-cho {
@@ -300,4 +301,3 @@
 .add img {
     width: 2vh;
 }
-

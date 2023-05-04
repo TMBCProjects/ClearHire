@@ -1,37 +1,34 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./AssessmentForm.css";
 import arrow from "../../../images/arrow-dropup.svg";
 import { useNavigate } from "react-router-dom";
 import { Button } from "antd";
 import { useState } from "react";
 import check_1 from "../../../images/Check-1.svg";
-import { readAssessment } from "../../../DataBase/Employer/employer";
 
 export default function EmployeeAssesmentForm() {
   const ansType = ["Short Answer", "MCQ", "Select"];
-  const [questions, setQuestions] = useState([]);
+  const [qCount, setQCount] = useState(1);
+  const [questions, setQuestions] = useState({
+    title: "",
+    desc: "",
+  });
   const [qType, setQType] = useState([]);
+
   let values = [];
   let type = [];
   var questionDetails = [];
+
   const navigate = useNavigate();
   const handleBack = () => {
     navigate("/");
   };
-
-  useEffect(() => {
-    const fetchAssessment = async () => {
-      try {
-        const userDatas = JSON.parse(sessionStorage.getItem("userData"));
-        const data = await readAssessment(userDatas.id);
-        setQuestions(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchAssessment();
-  }, []);
-
+  const handleTitleChange = (event) => {
+    setQuestions((title) => ({ ...title, title: event.target.value }));
+  };
+  const handleDescChange = (event) => {
+    setQuestions((desc) => ({ ...desc, desc: event.target.value }));
+  };
   const handleQuesChange = (e, i) => {
     for (let j = 0; j <= qCount - 1; j++) {
       values[j] = document.getElementById(j).value;
@@ -53,7 +50,7 @@ export default function EmployeeAssesmentForm() {
   const handleChange = () => {};
 
   const submitQues = () => {
-    console.log(questions);
+    console.log(JSON.stringify(questions));
   };
 
   return (
@@ -67,36 +64,65 @@ export default function EmployeeAssesmentForm() {
       <div className="assess-form">
         <div className="form">
           <form action="" className="assessform-1">
-            {questions.map((e, i) => (
-              <>
-                <div className="form-1">
-                  <h1>{e.title}</h1>
-                  <hr />
-                  <h2>{e.description} </h2>
+            <div className="form-1">
+              <input
+                type="text"
+                onChange={handleTitleChange}
+                placeholder="Untitled review form"
+                className="f-1"
+              />
+              <input
+                type="text"
+                onChange={handleDescChange}
+                placeholder="Description"
+                className="f-2"
+              />
+            </div>
+            {[...Array(qCount)].map((e, i) => (
+              <div key={i}>
+                <div className="form-2">
+                  <label htmlFor="">Q{i + 1}</label>
+                  <input
+                    type="text"
+                    id={i}
+                    onChange={(e) => handleQuesChange(e, i)}
+                    placeholder="Enter Question"
+                    className="f-3"
+                  />
                 </div>
-                <br />
-                <div key={i}>
-                  {e.questionsList.map((value, i) => {
-                    <div className="form-2" style={{ display: "flex" }}>
-                      <label htmlFor="">Q{i + 1}</label>
-                      {console.log(value, "sdaas")}
-                      <h3 className="question">{value[i]}</h3>
-                    </div>;
-                  })}
 
-                  {e.questionsList[i + 1].type === "MCQ" && (
-                    <div style={{ marginBottom: "4vh" }} id={"options" + i}>
-                      <div style={{ display: "flex", flexDirection: "row" }}>
-                        <input className="radio" type={"radio"}></input>
-                        <label for="html">
-                          {e.questionsList[i + 1].option[i + 1]}
-                        </label>
-                      </div>
+                {qType[i] === "Select" && (
+                  <div style={{ marginBottom: "4vh" }} id={"options" + i}>
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                      <input
+                        type="text"
+                        onChange={handleChange}
+                        placeholder="Enter Options"
+                        className="chkbx"
+                      />
+                      <input
+                        type="text"
+                        onChange={handleChange}
+                        placeholder="Enter Options"
+                        className="chkbx"
+                      />
+                      <input
+                        type="text"
+                        onChange={handleChange}
+                        placeholder="Enter Options"
+                        className="chkbx"
+                      />
+                      <input
+                        type="text"
+                        onChange={handleChange}
+                        placeholder="Enter Options"
+                        className="chkbx"
+                      />
                     </div>
-                  )}
-                  <hr />
-                </div>
-              </>
+                  </div>
+                )}
+                <hr />
+              </div>
             ))}
           </form>
 
