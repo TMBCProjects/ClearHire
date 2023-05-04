@@ -92,6 +92,27 @@ export default function EmployeeAssesmentForm() {
     }
   }
 
+  function hasOneMonthPassed(date) {
+    if (date === "null") {
+      return false;
+    }
+    const specificDate = new Date(date);
+    const oneMonthInMs = 30 * 24 * 60 * 60 * 1000;
+    const currentDate = new Date();
+    const diffInMs = currentDate - specificDate;
+    return diffInMs <= oneMonthInMs;
+  }
+  function findAssessmentDate(ratingsArray, desiredId) {
+    if (ratingsArray !== undefined) {
+      for (let i = 0; i < ratingsArray.length; i++) {
+        if (ratingsArray[i].ratedById === desiredId) {
+          return ratingsArray[i].assessmentDate;
+        } else {
+        }
+      }
+    }
+    return "null";
+  }
   return (
     <div className="assessment">
 
@@ -148,9 +169,15 @@ export default function EmployeeAssesmentForm() {
               Add question</button>
           </div>
 
-          <Button onClick={submitQues} >
+          <Button onClick={submitQues}
+            disabled={
+              hasOneMonthPassed(
+                findAssessmentDate(info.ratings, info.currentEmployerId)
+              )
+            }>
             <img className='checkimg' src={check_1} alt="" width={20} />&nbsp;
-            Submit</Button>
+            Submit
+          </Button>
         </div>
 
       </div>

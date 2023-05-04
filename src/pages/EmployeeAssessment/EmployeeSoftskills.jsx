@@ -80,7 +80,28 @@ function EmployeeSoftskills() {
       const handleBack = () => {
         navigate("/");
       };  
-       
+
+  function hasOneMonthPassed(date) {
+    if (date === "null") {
+      return false;
+    }
+    const specificDate = new Date(date);
+    const oneMonthInMs = 30 * 24 * 60 * 60 * 1000;
+    const currentDate = new Date();
+    const diffInMs = currentDate - specificDate;
+    return diffInMs <= oneMonthInMs;
+  }
+  function findRatedAtDate(ratingsArray, desiredId) {
+    if (ratingsArray !== undefined) {
+      for (let i = 0; i < ratingsArray.length; i++) {
+        if (ratingsArray[i].ratedById === desiredId) {
+          return ratingsArray[i].ratedAtDate;
+        } else {
+        }
+      }
+    }
+    return "null";
+  }
     return (
       <div className="assesment container">
         <div className="back-cont">
@@ -397,7 +418,12 @@ function EmployeeSoftskills() {
         </div>
         <div className="submit">
           <img src={check_1} alt="" />
-          <button onClick={handleSubmit}>Submit Assessment</button>
+          <button onClick={handleSubmit}
+            disabled={
+              hasOneMonthPassed(
+                findRatedAtDate(info.ratings, info.currentEmployerId)
+              )
+            }>Submit Assessment</button>
         </div>
       </div>
     )

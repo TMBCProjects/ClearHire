@@ -469,19 +469,44 @@ export async function rateEmployee(ratingData) {
     teamPlayer: ratingData.teamPlayer,
     note: ratingData.note,
   };
-  await updateDocument(
-    Collections.employees,
-    {
-      ratings: arrayUnion({
-        ratedById: ratingData.ratedById,
-        ratedAtDate: new Date().toLocaleDateString(),
-      }),
-    },
-    ratingData.employeeId
-  );
-  return await addDocument(Collections.ratings, rating);
-}
+  const employeeRef = setDocument(Collections.employees, ratingData.employeeId);
+  const employeeSnapshot = await getDocument(employeeRef);
 
+  if (employeeSnapshot.exists()) {
+    const employeeData = employeeSnapshot.data();
+    const ratings = employeeData.ratings || [];
+    const ratingIndex = ratings.findIndex(
+      (rating) => rating.ratedById === ratingData.ratedById
+    );
+
+    if (ratingIndex !== -1) {
+      ratings[ratingIndex].ratedAtDate = new Date().toLocaleDateString();
+      await updateDocument(
+        Collections.employees,
+        {
+          ratings: ratings,
+        },
+        ratingData.employeeId
+      );
+      await addDocument(Collections.ratings, rating);
+    } else {
+      await updateDocument(
+        Collections.employees,
+        {
+          ratings: arrayUnion({
+            ratedById: ratingData.ratedById,
+            ratedAtDate: new Date().toLocaleDateString(),
+          }),
+        },
+        ratingData.employeeId
+      );
+    }
+  } else {
+    throw new Error(
+      `Employee document with ID ${ratingData.employeeId} not found`
+    );
+  }
+}
 export async function assessEmployee(assessData) {
   let assessment = new Assessment();
   assessment = {
@@ -499,18 +524,46 @@ export async function assessEmployee(assessData) {
     description: assessData.description,
     questionsList: assessData.questionsList,
   };
-  await updateDocument(
-    Collections.employees,
-    {
-      ratings: arrayUnion({
-        ratedById: assessData.ratedById,
-        assessmentDate: new Date().toLocaleDateString(),
-      }),
-    },
-    assessData.employeeId
-  );
-  return await addDocument(Collections.assessments, assessment);
+  const employeeRef = setDocument(Collections.employees, assessData.employeeId);
+  const employeeSnapshot = await getDocument(employeeRef);
+
+  if (employeeSnapshot.exists()) {
+    const employeeData = employeeSnapshot.data();
+    const ratings = employeeData.ratings || [];
+    const ratingIndex = ratings.findIndex(
+      (rating) => rating.ratedById === assessData.ratedById
+    );
+
+    if (ratingIndex !== -1) {
+      ratings[ratingIndex].assessmentDate = new Date().toLocaleDateString();
+      await updateDocument(
+        Collections.employees,
+        {
+          ratings: ratings,
+        },
+        assessData.employeeId
+      );
+      await addDocument(Collections.assessments, assessment);
+    } else {
+      await updateDocument(
+        Collections.employees,
+        {
+          ratings: arrayUnion({
+            ratedById: assessData.ratedById,
+            assessmentDate: new Date().toLocaleDateString(),
+          }),
+        },
+        assessData.employeeId
+      );
+    }
+  } else {
+    throw new Error(
+      `Employee document with ID ${assessData.employeeId} not found`
+    );
+  }
 }
+
+
 export async function sendRequestToViewAssesment(data) {
   let newRequest = new Request();
   newRequest = {
