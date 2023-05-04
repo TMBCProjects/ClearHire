@@ -13,6 +13,7 @@ import { Fields } from "../../utils/Fields";
 import { setCollection } from "../../utils/FirebaseUtils";
 import { arrayUnion, query, where } from "firebase/firestore";
 import Request from "../../Modals/DB/Request";
+import Assessment from "../../Modals/DB/Assessment";
 
 export default async function defaultFn() {}
 
@@ -401,7 +402,6 @@ export async function deleteOffer(offerId) {
     offerId
   );
 }
-;
 // function to onboard new employee
 export async function onboardEmployee(offerData) {
   const offerLetterFileUrl = await uploadFile(
@@ -459,7 +459,6 @@ export async function rateEmployee(ratingData) {
     employeeId: ratingData.employeeId,
     employeeName: ratingData.employeeName,
     employeeEmail: ratingData.employeeEmail,
-    dateOfReview: ratingData.dateOfReview,
     communication: ratingData.communication,
     attitude: ratingData.attitude,
     abilityToLearn: ratingData.abilityToLearn,
@@ -483,6 +482,35 @@ export async function rateEmployee(ratingData) {
   return await addDocument(Collections.ratings, rating);
 }
 
+export async function assessEmployee(assessData) {
+  let assessment = new Assessment();
+  assessment = {
+    isActive: true,
+    companyName: assessData.companyName,
+    ratedById: assessData.ratedById,
+    ratedByRole: assessData.ratedByRole,
+    ratedAt: new Date(),
+    ratedAtDate: new Date().toDateString(),
+    ratedByEmail: assessData.ratedByEmail,
+    employeeId: assessData.employeeId,
+    employeeName: assessData.employeeName,
+    employeeEmail: assessData.employeeEmail,
+    title: assessData.title,
+    description: assessData.description,
+    questionsList: assessData.questionsList,
+  };
+  await updateDocument(
+    Collections.employees,
+    {
+      ratings: arrayUnion({
+        ratedById: assessData.ratedById,
+        assessmentDate: new Date().toLocaleDateString(),
+      }),
+    },
+    assessData.employeeId
+  );
+  return await addDocument(Collections.assessments, assessment);
+}
 export async function sendRequestToViewAssesment(data) {
   let newRequest = new Request();
   newRequest = {
