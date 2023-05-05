@@ -29,7 +29,10 @@ export default function VerficationRequest() {
         <span>Access Requests</span>
       </div>
 
-      <div className="vreqbody">
+       <div className="vreqbody" style={requestData.length === 0?{justifyContent: "center"}:""}>
+        {requestData.length === 0 && 
+          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="No Requests" />
+        }
         {requestData.map((request) => (
           <div className="vreqcard">
             <div className="vreqcardHead">
