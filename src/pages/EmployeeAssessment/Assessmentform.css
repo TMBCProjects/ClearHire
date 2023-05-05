@@ -179,6 +179,10 @@
     padding-bottom: 10px;
 }
 
+.add img {
+    width: 2vh;
+}
+
 .add-cho {
     position: absolute;
     background-color: white;

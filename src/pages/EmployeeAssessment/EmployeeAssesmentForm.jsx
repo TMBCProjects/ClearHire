@@ -2,7 +2,7 @@ import React from 'react'
 import "./Assessmentform.css";
 import arrow from "../../images/arrow-dropup.svg";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button, Select } from 'antd';
+import { Button } from 'antd';
 import add from "../../assets/images/add.svg"
 import { useState } from 'react';
 import check_1 from "../../images/Check-1.svg";
@@ -72,7 +72,6 @@ export default function EmployeeAssesmentForm() {
     questions.employeeName = info.employeeName || "employeeName";
     questions.employeeEmail = info.employeeEmail || "employeeEmail";
     assessEmployee(questions).then(() => { window.location.href = "/"; })
-    console.log(JSON.stringify(questions))
   }
   const checkSelect = (i) => {
     const selectedType = qType[i].type;
@@ -93,6 +92,27 @@ export default function EmployeeAssesmentForm() {
     }
   }
 
+  function hasOneMonthPassed(date) {
+    if (date === "null") {
+      return false;
+    }
+    const specificDate = new Date(date);
+    const oneMonthInMs = 30 * 24 * 60 * 60 * 1000;
+    const currentDate = new Date();
+    const diffInMs = currentDate - specificDate;
+    return diffInMs <= oneMonthInMs;
+  }
+  function findAssessmentDate(ratingsArray, desiredId) {
+    if (ratingsArray !== undefined) {
+      for (let i = 0; i < ratingsArray.length; i++) {
+        if (ratingsArray[i].ratedById === desiredId) {
+          return ratingsArray[i].assessmentDate;
+        } else {
+        }
+      }
+    }
+    return "null";
+  }
   return (
     <div className="assessment">
 
@@ -149,9 +169,15 @@ export default function EmployeeAssesmentForm() {
               Add question</button>
           </div>
 
-          <Button onClick={submitQues} >
+          <Button onClick={submitQues}
+            disabled={
+              hasOneMonthPassed(
+                findAssessmentDate(info.ratings, info.currentEmployerId)
+              )
+            }>
             <img className='checkimg' src={check_1} alt="" width={20} />&nbsp;
-            Submit</Button>
+            Submit
+          </Button>
         </div>
 
       </div>
