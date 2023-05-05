@@ -69,10 +69,14 @@ export default function EmployerNavbar() {
         </div>
       ) : (
         <div className="navbarBody">
-          <NavLink activeclassname="active" to={"/"} className="navlink">
+           <NavLink
+            activeclassname="active"
+            to={"/"}
+            className="navlink"
+          >
             <div className="navitem">
-              <img src={search} alt="search-logo" className="logo navLink" />
-              &nbsp; Your Profile
+              <img src={users} alt="search-logo" className="logo navLink" />
+              &nbsp; Colleagues
             </div>
           </NavLink>
 
@@ -99,17 +103,6 @@ export default function EmployerNavbar() {
             <div className="navitem">
               <img src={job} alt="search-logo" className="logo navLink" />
               &nbsp; Offer Letter
-            </div>
-          </NavLink>
-
-          <NavLink
-            activeclassname="active"
-            to={"/colleagues"}
-            className="navlink"
-          >
-            <div className="navitem">
-              <img src={users} alt="search-logo" className="logo navLink" />
-              &nbsp; Colleagues
             </div>
           </NavLink>
         </div>
