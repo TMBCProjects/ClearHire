@@ -373,7 +373,7 @@ export default function SearchEmployee() {
                 : ""}
             </div>
           </div>
-          <div className="row2" style={employeeList.length === 0?{justifyContent: "center"}:""}>
+          <div className="row2" style={employeeList.length === 0 ? { justifyContent: "center" } : {}}>
             {employeeList.length === 0 && 
               <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="No Records"/>
             }
