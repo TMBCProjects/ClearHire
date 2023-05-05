@@ -76,13 +76,6 @@ export default function EmployeeAssesmentForm() {
 
   return (
     <div className="assessment">
-
-      <div className="head">
-        <div className="back-div" onClick={handleBack}>
-          <img src={arrow} alt="" style={{ transform: "rotate(90deg)" }} />
-          <h4>Employee Assessment</h4>
-        </div>
-      </div>
       <div className="assess-form">
         <div className="form">
           <form action="" className='assessform-1'>
