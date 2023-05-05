@@ -105,14 +105,14 @@ function App() {
                   <Navbar />
                   <Routes>
                     <Route
-                      path="/"
+                      path="/profile"
                       element={<Profile />}></Route>
                     <Route
                       path="/employeeOfferLetter"
                       element={<EmployeeOfferLetter />}></Route>
                     {/* <Route path="/offerLetters" element={<Offers />}></Route> */}
                     <Route
-                      path="/colleagues"
+                      path="/"
                       element={<SearchEmployee />}></Route>
                     <Route
                       path="/EmployeeAssessment"
