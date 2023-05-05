@@ -6,10 +6,9 @@ import quote from "../../images/quote-left.svg";
 import arrow from "../../images/arrow-dropup.svg";
 import ProgressBar from "../../components/ProgressBar";
 import { rateEmployee } from "../../DataBase/Employer/employer";
-import { useLocation, useNavigate, Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { rateCollegue } from "../../DataBase/Employee/employee";
-import { Tabs } from 'antd';
-import EmployeeAssesmentForm from "./EmployeeAssesmentForm";
+import { Button } from 'antd';
 
 
 const initialState = {
@@ -80,7 +79,28 @@ function EmployeeSoftskills() {
       const handleBack = () => {
         navigate("/");
       };  
-       
+
+  function hasOneMonthPassed(date) {
+    if (date === "null") {
+      return false;
+    }
+    const specificDate = new Date(date);
+    const oneMonthInMs = 30 * 24 * 60 * 60 * 1000;
+    const currentDate = new Date();
+    const diffInMs = currentDate - specificDate;
+    return diffInMs <= oneMonthInMs;
+  }
+  function findRatedAtDate(ratingsArray, desiredId) {
+    if (ratingsArray !== undefined) {
+      for (let i = 0; i < ratingsArray.length; i++) {
+        if (ratingsArray[i].ratedById === desiredId) {
+          return ratingsArray[i].ratedAtDate;
+        } else {
+        }
+      }
+    }
+    return "null";
+  }
     return (
       <div className="assesment container">
         <div className="back-cont">
@@ -396,8 +416,14 @@ function EmployeeSoftskills() {
           </div>
         </div>
         <div className="submit">
-          <img src={check_1} alt="" />
-          <button onClick={handleSubmit}>Submit Assessment</button>
+          <Button onClick={handleSubmit}
+            disabled={
+              hasOneMonthPassed(
+                findRatedAtDate(info.ratings, info.currentEmployerId)
+              )
+            }>
+            <img className='checkimg' src={check_1} alt="" width={20} />
+            Submit Assessment</Button>
         </div>
       </div>
     )

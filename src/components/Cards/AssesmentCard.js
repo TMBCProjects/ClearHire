@@ -117,7 +117,23 @@ const Assesment_Card = ({ info, value, employerId }) => {
             pathname: "/EmployeeAssessment",
           }}
           state={{ from: info }}>
-          <button className="allow">Assess Employee</button>
+          <button
+            className="allow"
+            style={
+              hasOneMonthPassed(
+                findRatedAtDate(info.ratings, employerId),
+                findAssessmentDate(info.ratings, employerId)
+              )
+                ? { color: "#d2dee8", backgroundColor: "#eef8ff" }
+                : {}
+            }>
+            {hasOneMonthPassed(
+              findRatedAtDate(info.ratings, employerId),
+              findAssessmentDate(info.ratings, employerId)
+            )
+              ? "Assessment Done"
+              : "Assess Employee"}
+          </button>
         </Link>
       </div>
     </div>
