@@ -547,6 +547,7 @@ export async function assessEmployee(assessData) {
   let assessment = new Assessment();
   assessment = {
     isActive: true,
+    isAnswered: false,
     companyName: assessData.companyName,
     ratedById: assessData.ratedById,
     ratedByRole: assessData.ratedByRole,
