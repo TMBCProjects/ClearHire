@@ -5,7 +5,7 @@ import location from "../../assets/images/location.svg";
 import job from "../../assets/images/job.svg";
 import salary from "../../assets/images/salary.svg";
 import cross from "../../assets/images/cross.svg";
-import { Select, Checkbox, Slider } from "antd";
+import { Select, Checkbox, Empty } from "antd";
 import AssesmentCard from "../../components/Cards/AssesmentCard";
 
 import { readEmployees } from "../../DataBase/Employer/employer";
