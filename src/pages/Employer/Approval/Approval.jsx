@@ -3,15 +3,13 @@ import { Link } from "react-router-dom";
 import "./approval.css";
 import { useState } from "react";
 import { useEffect } from "react";
-import {
-  deleteOffer,
-} from "../../../DataBase/Employer/employer";
+import { deleteOffer } from "../../../DataBase/Employer/employer";
 import { FileTextOutlined, PlusOutlined } from "@ant-design/icons";
 import { getDocuments, setCollection } from "../../../utils/FirebaseUtils";
 import { onSnapshot, query, where } from "firebase/firestore";
 import { Collections } from "../../../utils/Collections";
 import { Fields } from "../../../utils/Fields";
-import { Modal } from "antd";
+import { Empty, Modal } from "antd";
 
 const Approval = () => {
   const [offerReplies, setOfferReplies] = useState([]);
@@ -130,56 +128,84 @@ const Approval = () => {
 
           <div className="form-check form-check-inline">
             <Link to={"/onboarding-form"} className="btn add-recruit">
-              <PlusOutlined style={{ fontSize: '20px', fontWeight: "bolder" }} /> Add
-              Recruit
+              <PlusOutlined
+                style={{ fontSize: "20px", fontWeight: "bolder" }}
+              />{" "}
+              Add Recruit
             </Link>
           </div>
         </div>
       </div>
       <div className="row mt-3">
-        {offerReplies?.filter((info) => { return (notOnClearHire ? info.emailAvailable === false : info.emailAvailable === true) }).map((info) => {
-          return (
-            <div className="col-md-3 gy-3">
-              <div className="card">
-                <div className="card-body">
-                  <h3 className="card-title fw-bold">{info.employeeName}</h3>
-                  <p className="card-text designation w-75 mt-2">
-                    {info.designation}
-                  </p>
-                  <p className="mb-1">
-                    {info.companyLocation}
-                  </p>
-                  <p className="mb-1">{info.employeeEmail}</p>
-                  <p className="mb-1">{info.dateOfJoining}</p>
-                  <p className="mb-1">{info.salary}</p>
-                  <div className="row  mt-2">
-                    <div className="col">
-                      <p className="text-color-green fs-13 fw-bold" style={{ cursor: "pointer" }} onClick={() => setModalOpen(true)}>
-                        <FileTextOutlined style={{ fontSize: '20px' }} /> View offer
-                        Letter
+        {offerReplies && offerReplies.length > 0 ? (
+          offerReplies
+            ?.filter((info) => {
+              return notOnClearHire
+                ? info.emailAvailable === false
+                : info.emailAvailable === true;
+            })
+            .map((info) => {
+              return (
+                <div className="col-md-3 gy-3">
+                  <div className="card">
+                    <div className="card-body">
+                      <h3 className="card-title fw-bold">
+                        {info.employeeName}
+                      </h3>
+                      <p className="card-text designation w-75 mt-2">
+                        {info.designation}
                       </p>
-                      <Modal
-                        title="OFFER LETTER"
-                        centered
-                        open={modalOpen}
-                        onOk={() => setModalOpen(false)}
-                        onCancel={() => setModalOpen(false)}
-                        width={1000}
-                      >
-                        <embed
-                          width={950}
-                          height={680} src={info.offerLetter} />
-                      </Modal>
-                    </div>
-                    <div className="col">
-                      <button onClick={() => { handleDelete(info.id) }} className="delete-btn">Delete</button>
+                      <p className="mb-1">{info.companyLocation}</p>
+                      <p className="mb-1">{info.employeeEmail}</p>
+                      <p className="mb-1">{info.dateOfJoining}</p>
+                      <p className="mb-1">{info.salary}</p>
+                      <div className="row  mt-2">
+                        <div className="col">
+                          <p
+                            className="text-color-green fs-13 fw-bold"
+                            style={{ cursor: "pointer" }}
+                            onClick={() => setModalOpen(true)}
+                          >
+                            <FileTextOutlined style={{ fontSize: "20px" }} />{" "}
+                            View offer Letter
+                          </p>
+                          <Modal
+                            title="OFFER LETTER"
+                            centered
+                            open={modalOpen}
+                            onOk={() => setModalOpen(false)}
+                            onCancel={() => setModalOpen(false)}
+                            width={1000}
+                          >
+                            <embed
+                              width={950}
+                              height={680}
+                              src={info.offerLetter}
+                            />
+                          </Modal>
+                        </div>
+                        <div className="col">
+                          <button
+                            onClick={() => {
+                              handleDelete(info.id);
+                            }}
+                            className="delete-btn"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          );
-        })}
+              );
+            })
+        ) : (
+          <Empty
+            image={Empty.PRESENTED_IMAGE_SIMPLE}
+            description="No Records"
+          />
+        )}
       </div>
     </div>
   );
