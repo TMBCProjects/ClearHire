@@ -3,6 +3,7 @@ import "./VerficationRequest.css";
 import image from "../../../assets/images/Image.png";
 import check from "../../../assets/images/checkfull.svg";
 import close from "../../../assets/images/closebtn.svg";
+import { Empty } from "antd";
 import { acceptRequest, getRequests, rejectRequest } from "../../../DataBase/Employee/employee";
 
 export default function VerficationRequest() {
