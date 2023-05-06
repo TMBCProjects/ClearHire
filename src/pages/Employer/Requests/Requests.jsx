@@ -140,12 +140,12 @@ const Requests = () => {
                       <Link
                         className="w-100 mt-3 btn"
                         to={{
-                          pathname: "/ViewAssessment",
+                          pathname: "/ViewEmployeeProfile",
                         }}
                         state={{ from: info.employeeId }}
                       >
                         <button className="w-100 mt-3 btn btn-assessment">
-                          View assessment
+                          View Employee Profile
                         </button>
                       </Link>
                     ) : (

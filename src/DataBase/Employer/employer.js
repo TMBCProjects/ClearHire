@@ -447,41 +447,7 @@ export async function requestEmployee(offerData) {
   return await addDocument(Collections.offers, offer);
 }
 
-export async function readAssessment(employeeId) {
-  try {
-    let assessmentQuestions = [];
-    const querySnapshot = await getDocuments(
-      query(
-        setCollection(Collections.assessments),
-        where(Fields.employeeId, "==", employeeId),
-        where(Fields.isActive, "==", true)
-      )
-    );
-    querySnapshot.forEach(async (doc) => {
-    let assessment = {
-        isActive: doc.data().isActive,
-        id: doc.id,
-        companyName: doc.data().companyName,
-        ratedById: doc.data().ratedById,
-        ratedByRole: doc.data().ratedByRole,
-        ratedAt: new Date(),
-        ratedAtDate: new Date().toDateString(),
-        ratedByEmail: doc.data().ratedByEmail,
-        employeeId: doc.data().employeeId,
-        employeeName: doc.data().employeeName,
-        employeeEmail: doc.data().employeeEmail,
-        title: doc.data().title,
-        description: doc.data().description,
-        questionsList: doc.data().questionsList,
-        isAnswered: doc.data().isAnswered
-      };
-      assessmentQuestions.push(assessment);
-    });
-    return assessmentQuestions;
-  } catch (error) {
-    console.log(error);
-  }
-}
+
 export async function rateEmployee(ratingData) {
   let rating = new Rating();
   rating = {
@@ -541,6 +507,44 @@ export async function rateEmployee(ratingData) {
     throw new Error(
       `Employee document with ID ${ratingData.employeeId} not found`
     );
+  }
+}
+export async function readAssessment(employeeId) {
+  try {
+    let assessmentQuestions = [];
+    const querySnapshot = await getDocuments(
+      query(
+        setCollection(Collections.assessments),
+        where(Fields.employeeId, "==", employeeId),
+        where(Fields.isActive, "==", true),
+        where(Fields.isAnswered, "==", true)
+      )
+    );
+    querySnapshot.forEach(async (doc) => {
+      let assessment = {
+        isActive: doc.data().isActive,
+        id: doc.id,
+        companyName: doc.data().companyName,
+        ratedById: doc.data().ratedById,
+        ratedByRole: doc.data().ratedByRole,
+        ratedAt: new Date(),
+        ratedAtDate: new Date().toDateString(),
+        ratedByEmail: doc.data().ratedByEmail,
+        employeeId: doc.data().employeeId,
+        employeeName: doc.data().employeeName,
+        employeeEmail: doc.data().employeeEmail,
+        title: doc.data().title,
+        description: doc.data().description,
+        questionsList: doc.data().questionsList,
+        answers: doc.data().answers,
+        isAnswered: doc.data().isAnswered,
+      };
+      assessmentQuestions.push(assessment);
+    });
+    return assessmentQuestions;
+  } catch (error) {
+    return [];
+    //console.log(error);
   }
 }
 export async function assessEmployee(assessData) {
