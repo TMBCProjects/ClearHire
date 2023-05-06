@@ -69,7 +69,7 @@ export default function EmployerNavbar() {
         </div>
       ) : (
         <div className="navbarBody">
-           <NavLink
+          <NavLink
             activeclassname="active"
             to={"/"}
             className="navlink"
@@ -97,7 +97,7 @@ export default function EmployerNavbar() {
 
           <NavLink
             activeclassname="active"
-              to={"/offerLetters"}
+            to={"/offerLetters"}
             className="navlink"
           >
             <div className="navitem">
@@ -111,37 +111,21 @@ export default function EmployerNavbar() {
         <button onClick={dropdown}></button>
         {open ? (
           <ul className="navbarDropdown">
-            {user === "Employer" ? (
-              <>
-                <li>
-                  <Link to={"/profile"}>View Profile</Link>
-                </li>{" "}
-                <hr />
-                <li>
-                  <a
-                    href="/"
-                    onClick={() => {
-                      logOut();
-                      window.location.reload();
-                    }}
-                  >
-                    Signout
-                  </a>
-                </li>
-              </>
-            ) : (
-              <li>
-                <a
-                  href="/"
-                  onClick={() => {
-                    logOut();
-                    window.location.reload();
-                  }}
-                >
-                  Signout
-                </a>
-              </li>
-            )}
+            <li>
+              <Link to={"/profile"}>View Profile</Link>
+            </li>{" "}
+            <hr />
+            <li>
+              <a
+                href="/"
+                onClick={() => {
+                  logOut();
+                  window.location.reload();
+                }}
+              >
+                Signout
+              </a>
+            </li>
           </ul>
         ) : (
           ""
