@@ -3,6 +3,7 @@ import "./VerficationRequest.css";
 import image from "../../../assets/images/Image.png";
 import check from "../../../assets/images/checkfull.svg";
 import close from "../../../assets/images/closebtn.svg";
+import { Empty } from "antd";
 import { acceptRequest, getRequests, rejectRequest } from "../../../DataBase/Employee/employee";
 
 export default function VerficationRequest() {
@@ -29,7 +30,10 @@ export default function VerficationRequest() {
         <span>Access Requests</span>
       </div>
 
-      <div className="vreqbody">
+       <div className="vreqbody" style={requestData.length === 0?{justifyContent: "center"}:""}>
+        {requestData.length === 0 && 
+          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="No Requests" />
+        }
         {requestData.map((request) => (
           <div className="vreqcard">
             <div className="vreqcardHead">

@@ -459,7 +459,8 @@ export async function readAssessment(employeeId) {
     );
     querySnapshot.forEach(async (doc) => {
     let assessment = {
-        isActive: true,
+        isActive: doc.data().isActive,
+        id: doc.id,
         companyName: doc.data().companyName,
         ratedById: doc.data().ratedById,
         ratedByRole: doc.data().ratedByRole,
@@ -472,10 +473,10 @@ export async function readAssessment(employeeId) {
         title: doc.data().title,
         description: doc.data().description,
         questionsList: doc.data().questionsList,
+        isAnswered: doc.data().isAnswered
       };
       assessmentQuestions.push(assessment);
     });
-    //console.log(assessmentQuestions)
     return assessmentQuestions;
   } catch (error) {
     console.log(error);

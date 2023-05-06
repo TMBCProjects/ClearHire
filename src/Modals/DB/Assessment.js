@@ -13,4 +13,5 @@ export default class Assessment {
   title = "";
   description = "";
   questionsList = [];
+  isAnswered = false;
 }
