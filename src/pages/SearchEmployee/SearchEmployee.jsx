@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./styles.css";
-import search from "../../assets/images/search.svg";
+import search1 from "../../assets/images/search.svg";
 import location from "../../assets/images/location.svg";
 import job from "../../assets/images/job.svg";
 import salary from "../../assets/images/salary.svg";
@@ -128,7 +128,7 @@ export default function SearchEmployee() {
     <div className="employer-home">
       <div className="search-inputs" style={{position: "absolute"}}>
         <div className="input-box1 input-box">
-          <img src={search} alt="Search" />
+          <img src={search1} alt="Search" />
           <input
             type="text"
             onChange={(e) => handleDesignationChange(e)}
@@ -370,7 +370,7 @@ export default function SearchEmployee() {
             <div className="result-count">
               {employeeList.length > 1
                 ? `${employeeList.length} records`
-                : `${employeeList.length} record`}
+                : ""}
             </div>
           </div>
           <div className="row2" style={employeeList.length === 0?{justifyContent: "center"}:""}>
