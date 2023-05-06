@@ -24,6 +24,17 @@ const marks2 = {
   100: "100%",
 };
 
+const myStyle = {
+  fontSize: "1.6rem",
+  fontWeight: "bolder",
+  letterSpacing: "-0.47x",
+};
+
+const checkBoxStyles = {
+  marginLeft: "0.5rem",
+  fontSize: "1.1rem",
+};
+
 const initialValues = {
   typeOfEmployment: "",
   salary: "",
@@ -46,11 +57,11 @@ export default function SearchEmployee() {
           user === "Employer"
             ? await readEmployees(userDatas.id)
             : userDatas.data.currentEmployerId
-              ? await readColleagues(
+            ? await readColleagues(
                 userDatas.id,
                 userDatas.data.currentEmployerId
               )
-              : [];
+            : [];
         setEmployeeList(data);
       } catch (error) {
         console.log(error);
@@ -61,22 +72,18 @@ export default function SearchEmployee() {
 
   const handleTypeOfEmploymentChange = (event) => {
     filters.typeOfEmployment = event.target.value;
-   
   };
 
   const handleSalaryChange = (event) => {
     filters.salary = event.target.value;
-   
   };
 
   const handleDesignationChange = (event) => {
     filters.designation = event.target.value;
-    
   };
 
   const handleLocationChange = (event) => {
     filters.location = event.target.value;
-    
   };
 
   const search = () => {
@@ -123,10 +130,10 @@ export default function SearchEmployee() {
       setEmployeeList(filters);
     }
     setQuery(filters.salary);
-  }
+  };
   return (
     <div className="employer-home">
-      <div className="search-inputs" style={{position: "absolute"}}>
+      <div className="search-inputs" style={{ position: "absolute" }}>
         <div className="input-box1 input-box">
           <img src={search1} alt="Search" />
           <input
@@ -137,7 +144,7 @@ export default function SearchEmployee() {
           />
         </div>
         {user === "Employer" ? (
-          <div className="input-box2 input-box" >
+          <div className="input-box2 input-box">
             <img src={location} alt="Search" />
             <input
               type="text"
@@ -175,13 +182,7 @@ export default function SearchEmployee() {
       </div>
       <div className="search-results">
         <div className="search-settings">
-          <p
-            style={{
-              fontSize: "1.6rem",
-              fontWeight: "bolder",
-              letterSpacing: "-.47x",
-            }}
-          >
+          <p style={myStyle}>
             {user === "Employer" ? "Employee" : "Colleague"} Search Settings
           </p>
           <div className="dropdowns">
@@ -203,33 +204,28 @@ export default function SearchEmployee() {
                 ]}
               />
             </div>
-            {user === "Employer" && <div className="dropdown-select">
-              <p>Location</p>
-              <Select
-                placeholder="Location"
-                style={{
-                  width: "100%",
-                }}
-                onChange={(e) => setFilters({ ...filters, location: e })}
-                tokenSeparators={[","]}
-                options={
-                  [{ value: "", label: "" }].concat(userDatas.data.companyLocations.map((location) => ({
-                    value: location,
-                    label: location,
-                  })))}
-              />
-            </div>}
+            {user === "Employer" && (
+              <div className="dropdown-select">
+                <p>Location</p>
+                <Select
+                  placeholder="Location"
+                  style={{
+                    width: "100%",
+                  }}
+                  onChange={(e) => setFilters({ ...filters, location: e })}
+                  tokenSeparators={[","]}
+                  options={[{ value: "", label: "" }].concat(
+                    userDatas.data.companyLocations.map((location) => ({
+                      value: location,
+                      label: location,
+                    }))
+                  )}
+                />
+              </div>
+            )}
           </div>
           <div className="checkboxes">
-            <p
-              style={{
-                fontSize: "1.6rem",
-                fontWeight: "bolder",
-                letterSpacing: "-.47x",
-              }}
-            >
-              Type of employement
-            </p>
+            <p style={myStyle}>Type of employement</p>
             <div className="checkboxes-div">
               {/* <Checkbox
                 style={{
@@ -297,15 +293,7 @@ export default function SearchEmployee() {
           </div>
           {user === "Employer" ? (
             <div className="ranges">
-              <p
-                style={{
-                  fontSize: "1.6rem",
-                  fontWeight: "bolder",
-                  letterSpacing: "-.47x",
-                }}
-              >
-                Salary
-              </p>
+              <p style={myStyle}>Salary</p>
               <Select
                 placeholder={"Salary range"}
                 style={{
@@ -327,7 +315,11 @@ export default function SearchEmployee() {
           ) : (
             ""
           )}
-          <p href="#" className="clear-filter" onClick={() => setFilters(initialValues)}>
+          <p
+            href="#"
+            className="clear-filter"
+            onClick={() => setFilters(initialValues)}
+          >
             {" "}
             <img src={cross} alt="cross" /> Clear all filters
           </p>
@@ -336,31 +328,13 @@ export default function SearchEmployee() {
           <div className="row1">
             {user === "Employer" ? (
               <div className="row1-checkboxes">
-                <Checkbox
-                  style={{
-                    marginLeft: ".5rem",
-                    fontSize: "1.1rem",
-                  }}
-                  onChange={onChange}
-                >
+                <Checkbox style={checkBoxStyles} onChange={onChange}>
                   Assessed
                 </Checkbox>
-                <Checkbox
-                  style={{
-                    marginLeft: ".5rem",
-                    fontSize: "1.1rem",
-                  }}
-                  onChange={onChange}
-                >
+                <Checkbox style={checkBoxStyles} onChange={onChange}>
                   Pending
                 </Checkbox>
-                <Checkbox
-                  style={{
-                    marginLeft: ".5rem",
-                    fontSize: "1.1rem",
-                  }}
-                  onChange={onChange}
-                >
+                <Checkbox style={checkBoxStyles} onChange={onChange}>
                   All
                 </Checkbox>
               </div>
@@ -368,25 +342,34 @@ export default function SearchEmployee() {
               ""
             )}
             <div className="result-count">
-              {employeeList.length > 1
-                ? `${employeeList.length} records`
-                : ""}
+              {employeeList.length > 1 ? `${employeeList.length} records` : ""}
             </div>
           </div>
-          <div className="row2" style={employeeList.length === 0 ? { justifyContent: "center" } : {}}>
-            {employeeList.length === 0 && 
-              <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="No Records"/>
-            }
+          <div
+            className="row2"
+            style={{
+              justifyContent: `${employeeList.length === 0}? 'center':''`,
+            }}
+          >
+            {employeeList.length === 0 && (
+              <Empty
+                image={Empty.PRESENTED_IMAGE_SIMPLE}
+                description="No Records"
+              />
+            )}
             {employeeList
               .filter((item) => {
                 return (
                   (filters.typeOfEmployment.toLowerCase() === "" ||
-                    item.typeOfEmployment.toLowerCase() === filters.typeOfEmployment.toLowerCase()) &&
+                    item.typeOfEmployment.toLowerCase() ===
+                      filters.typeOfEmployment.toLowerCase()) &&
                   (filters.designation.toLowerCase() === "" ||
-                    item.designation.toLowerCase() === filters.designation.toLowerCase()) &&
+                    item.designation.toLowerCase() ===
+                      filters.designation.toLowerCase()) &&
                   (filters.salary === "" || +item.salary <= +filters.salary) &&
                   (filters.location.toLowerCase() === "" ||
-                    item.companyLocation.toLowerCase() === filters.location.toLowerCase())
+                    item.companyLocation.toLowerCase() ===
+                      filters.location.toLowerCase())
                 );
               })
               .map((info) => {
