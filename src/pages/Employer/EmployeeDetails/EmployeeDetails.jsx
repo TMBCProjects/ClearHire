@@ -163,7 +163,6 @@ const EmployeeDetails = () => {
   useEffect(() => {
     const fetchOfferDetails = async () => {
       const data2 = await readEmployeeRatings(employee.id);
-      console.log("Ratings", data2);
       calculateRatings(data2);
       setEmployeeRatings(data2);
     };
