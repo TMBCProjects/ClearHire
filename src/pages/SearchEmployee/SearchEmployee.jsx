@@ -158,11 +158,18 @@ export default function SearchEmployee() {
         )}
         <div className="input-box3 input-box">
           <img src={job} alt="Search" />
-          <input
+          <Select
             type="text"
             onChange={(e) => handleTypeOfEmploymentChange(e)}
-            className="box-input"
+            className="box-select"
             placeholder="Job Type"
+            options={[
+              { value: 'PFT', label: 'Permanent Full-Time' },
+              { value: 'PT', label: 'Part-Time' },
+              { value: 'CV', label: 'Casual/Vacation' },
+              { value: 'Contact', label: 'Contact' },
+              { value: 'Intern', label: 'Internship/Trainee' },
+            ]}
           />
         </div>
         {user === "Employer" ? (
