@@ -604,6 +604,15 @@ export async function assessEmployee(assessData) {
   }
 }
 
+export async function rateAssessment(data, assessmentId) {
+  await updateDocument(
+    Collections.assessments,
+    {
+      ratings: data,
+    },
+    assessmentId
+  );
+}
 
 export async function sendRequestToViewAssesment(data) {
   let newRequest = new Request();

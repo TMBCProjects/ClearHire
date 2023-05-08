@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Empty, Rate } from 'antd';
 import { useState } from 'react';
 import check_1 from "../../../images/Check-1.svg";
-import { readAssessment } from '../../../DataBase/Employer/employer';
+import { rateAssessment, readAssessment } from '../../../DataBase/Employer/employer';
 
 const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
 export default function EmployeeAssesmentForm() {
@@ -44,11 +44,10 @@ export default function EmployeeAssesmentForm() {
     }
 
     const submitQues = async (i) => {
-        console.log(ratings)
-        // await rateAssessment(ratings, i)
-        //     .then(() => {
-        //         window.location.href = "/"
-        //     })
+        await rateAssessment(ratings, i)
+            .then(() => {
+                window.location.href = "/"
+            })
     }
 
 
@@ -98,7 +97,7 @@ export default function EmployeeAssesmentForm() {
                                     ))}
                                     <br />
                                 </div>
-                                <Button onClick={() => submitQues(e.id)} >
+                                <Button disabled={e.ratings !== undefined} onClick={() => submitQues(e.id)} >
                                     <img className='checkimg' src={check_1} alt="" width={20} />&nbsp;
                                     Submit</Button>
                             </>
