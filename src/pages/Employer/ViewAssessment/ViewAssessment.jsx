@@ -2,21 +2,20 @@ import React, { useEffect } from 'react'
 import "./ViewAssessment.css";
 import arrow from "../../../images/arrow-dropup.svg";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button, Empty } from 'antd';
+import { Button, Empty, Rate } from 'antd';
 import { useState } from 'react';
 import check_1 from "../../../images/Check-1.svg";
 import { readAssessment } from '../../../DataBase/Employer/employer';
-import { submitAssessment } from '../../../DataBase/Employee/employee';
 
+const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
 export default function EmployeeAssesmentForm() {
+    const [value, setValue] = useState(0);
     const location = useLocation();
     const { from } = location.state;
     const info = from;
     const [questions, setQuestions] = useState([])
-    const [answers, setAnswers] = useState([])
-    //const [checkedItems ,setCheckedItems] = useState([])
-    const checkedItems = []
-    const ques_no = []
+    const [ratings, setRatings] = useState([])
+
     const navigate = useNavigate();
     const handleBack = () => {
         navigate("/");
@@ -33,46 +32,23 @@ export default function EmployeeAssesmentForm() {
             }
         };
         fetchAssessment();
-        console.log(questions)
     }, [])
 
-    const handleChange = (event, question_no, i) => {
-        const { value, checked } = event.target;
-        setAnswers(prevAns => {
-            const updatedAns = [...prevAns];
-            let selectedValues = []
-            if (updatedAns[i] === undefined) {
-                selectedValues = []
-            }
-            else {
-                selectedValues = updatedAns[i].answer.slice();
-            }
-            if (checked) {
-                selectedValues.push(value);
-            } else {
-                const index = selectedValues.indexOf(value);
-                if (index !== -1) {
-                    selectedValues.splice(index, 1);
-                }
-            }
-            updatedAns[i] = { ...updatedAns[i], question_no: question_no, answer: selectedValues };
-            return updatedAns;
-        });
-    };
 
     const handleInputChange = (e, question_no, i) => {
-        setAnswers(prevAns => {
-            const updatedAns = [...prevAns];
-            updatedAns[i] = { ...updatedAns[i], question_no: question_no, answer: e.target.value };
+        setRatings(ratings => {
+            const updatedAns = [...ratings];
+            updatedAns[i] = { ...updatedAns[i], question_no: question_no, rating: e };
             return updatedAns;
         });
     }
 
     const submitQues = async (i) => {
-        await submitAssessment(answers, i)
-            .then(() => {
-                window.location.href = "/"
-            })
+        console.log(ratings)
+        // await rateAssessment(ratings, i)
+        //     .then(() => {
+        //         window.location.href = "/"
+        //     })
     }
 
 
@@ -114,7 +90,9 @@ export default function EmployeeAssesmentForm() {
                                                             </div>
                                                         </div>
                                                     }</p>
-                                            </div>
+                                                <p className='answer'>
+                                                    <Rate tooltips={desc} style={{ fontSize: "40px", color: "green" }} onChange={(event) => handleInputChange(event, value.question_no, i)} />
+                                                </p> </div>
 
                                         </div>
                                     ))}
