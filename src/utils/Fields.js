@@ -2,6 +2,7 @@ const Fields = {
   isActive: "isActive",
   isApproved: "isApproved",
   isAccepted: "isAccepted",
+  isAnswered: "isAnswered",
   offerLetters: "offerLetters",
   profileImages: "profileImages",
   currentEmployerId: "currentEmployerId",

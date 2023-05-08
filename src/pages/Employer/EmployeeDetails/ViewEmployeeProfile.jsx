@@ -11,7 +11,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { readEmployeeRatings } from "../../../DataBase/Employee/employee";
 import { readEmployee } from "../../../DataBase/Employer/employer";
 
-const ViewAssessment = () => {
+const ViewEmployeeProfile = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { from } = location.state;
@@ -417,4 +417,4 @@ const ViewAssessment = () => {
   );
 };
 
-export default ViewAssessment;
+export default ViewEmployeeProfile;
