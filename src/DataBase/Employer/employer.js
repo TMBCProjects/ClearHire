@@ -532,6 +532,7 @@ export async function readAssessment(employeeId) {
         ratedByEmail: doc.data().ratedByEmail,
         employeeId: doc.data().employeeId,
         employeeName: doc.data().employeeName,
+        ratings: doc.data().ratings,
         employeeEmail: doc.data().employeeEmail,
         title: doc.data().title,
         description: doc.data().description,

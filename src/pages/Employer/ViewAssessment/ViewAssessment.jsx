@@ -6,6 +6,7 @@ import { Button, Empty, Rate } from 'antd';
 import { useState } from 'react';
 import check_1 from "../../../images/Check-1.svg";
 import { rateAssessment, readAssessment } from '../../../DataBase/Employer/employer';
+import { MdArrowBackIos } from 'react-icons/md';
 
 const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
 export default function EmployeeAssesmentForm() {
@@ -53,6 +54,15 @@ export default function EmployeeAssesmentForm() {
 
     return (
         <div className="assessment">
+            <div className="col-6 d-flex justify-content-start align-items-center">
+                <div
+                    className="back me-3"
+                    onClick={() => {
+                        navigate("/");
+                    }}
+                >
+                    <MdArrowBackIos size={22} className="backIcon" />
+                </div></div>
             <div className="assess-form">
                 <div className="form">
                     <form action="" className='assessform-1'>
@@ -90,14 +100,15 @@ export default function EmployeeAssesmentForm() {
                                                         </div>
                                                     }</p>
                                                 <p className='answer'>
-                                                    <Rate tooltips={desc} style={{ fontSize: "40px", color: "green" }} value={e.ratings !== undefined ? e.ratings[i]?.rating : ratings[i]?.rating || 0} onChange={(event) => handleInputChange(event, value.question_no, i)} />
-                                                </p> </div>
+                                                    {e?.ratings === undefined ?
+                                                        <Rate tooltips={desc} style={{ fontSize: "40px", color: "green" }} value={ratings[i]?.rating || 0} onChange={(event) => handleInputChange(event, value.question_no, i)} />
+                                                        : <Rate style={{ fontSize: "40px", color: "blue" }} disabled value={e?.ratings[i]?.rating} />}</p> </div>
 
                                         </div>
                                     ))}
                                     <br />
                                 </div>
-                                <Button disabled={e.ratings !== undefined} onClick={() => submitQues(e.id)} >
+                                <Button disabled={e?.ratings !== undefined} onClick={() => submitQues(e.id)} >
                                     <img className='checkimg' src={check_1} alt="" width={20} />&nbsp;
                                     Submit</Button>
                             </>
