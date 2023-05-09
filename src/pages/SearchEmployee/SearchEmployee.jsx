@@ -158,11 +158,18 @@ export default function SearchEmployee() {
         )}
         <div className="input-box3 input-box">
           <img src={job} alt="Search" />
-          <input
+          <Select
             type="text"
             onChange={(e) => handleTypeOfEmploymentChange(e)}
-            className="box-input"
+            className="box-select"
             placeholder="Job Type"
+            options={[
+              { value: 'PFT', label: 'Permanent Full-Time' },
+              { value: 'PT', label: 'Part-Time' },
+              { value: 'CV', label: 'Casual/Vacation' },
+              { value: 'Contact', label: 'Contact' },
+              { value: 'Intern', label: 'Internship/Trainee' },
+            ]}
           />
         </div>
         {user === "Employer" ? (
@@ -181,149 +188,6 @@ export default function SearchEmployee() {
         <button onClick={search}>Search</button>
       </div>
       <div className="search-results">
-        <div className="search-settings">
-          <p style={myStyle}>
-            {user === "Employer" ? "Employee" : "Colleague"} Search Settings
-          </p>
-          <div className="dropdowns">
-            <div className="dropdown-select">
-              <p>Job Title</p>
-              <Select
-                placeholder={"Job Title"}
-                style={{
-                  width: "100%",
-                }}
-                onChange={(e) => {
-                  setFilters({ ...filters, designation: e });
-                }}
-                options={[
-                  { value: "", label: "" },
-                  { value: "Graphics Designer", label: "Graphics Designer" },
-                  { value: "Developer", label: "Developer" },
-                  { value: "Video Editor", label: "Video Editor" },
-                ]}
-              />
-            </div>
-            {user === "Employer" && (
-              <div className="dropdown-select">
-                <p>Location</p>
-                <Select
-                  placeholder="Location"
-                  style={{
-                    width: "100%",
-                  }}
-                  onChange={(e) => setFilters({ ...filters, location: e })}
-                  tokenSeparators={[","]}
-                  options={[{ value: "", label: "" }].concat(
-                    userDatas.data.companyLocations.map((location) => ({
-                      value: location,
-                      label: location,
-                    }))
-                  )}
-                />
-              </div>
-            )}
-          </div>
-          <div className="checkboxes">
-            <p style={myStyle}>Type of employement</p>
-            <div className="checkboxes-div">
-              {/* <Checkbox
-                style={{
-                  marginLeft: ".5rem",
-                  fontSize: "1.1rem",
-                }}
-                onChange={onChange}
-              >
-                Permanent Full-Time
-              </Checkbox>
-              <Checkbox
-                style={{
-                  marginLeft: ".5rem",
-                  fontSize: "1.1rem",
-                }}
-                onChange={onChange}
-              >
-                Part-Time
-              </Checkbox>
-              <Checkbox
-                style={{
-                  marginLeft: ".5rem",
-                  fontSize: "1.1rem",
-                }}
-                onChange={onChange}
-              >
-                Casual/Vacation
-              </Checkbox>
-              <Checkbox
-                style={{
-                  marginLeft: ".5rem",
-                  fontSize: "1.1rem",
-                }}
-                onChange={onChange}
-              >
-                Contact
-              </Checkbox>
-              <Checkbox
-                style={{
-                  marginLeft: ".5rem",
-                  fontSize: "1.1rem",
-                }}
-                onChange={onChange}
-              >
-                Internship/Trainee
-              </Checkbox> */}
-              <Select
-                placeholder={"Salary range"}
-                style={{
-                  width: "100%",
-                }}
-                onChange={(e) => {
-                  setFilters({ ...filters, designation: e });
-                }}
-                options={[
-                  { value: "", label: "" },
-                  { value: "PFT", label: "Permanent Full-Time" },
-                  { value: "PT", label: "Part-Time" },
-                  { value: "CV", label: "Casual/Vacation" },
-                  { value: "Contact", label: "Contact" },
-                  { value: "intern", label: "Internship/Trainee" },
-                ]}
-              />
-            </div>
-          </div>
-          {user === "Employer" ? (
-            <div className="ranges">
-              <p style={myStyle}>Salary</p>
-              <Select
-                placeholder={"Salary range"}
-                style={{
-                  width: "100%",
-                }}
-                onChange={(e) => {
-                  setFilters({ ...filters, designation: e });
-                }}
-                options={[
-                  { value: "", label: "" },
-                  { value: "lessThan10", label: "0 - 10LPA" },
-                  { value: "lessThan25", label: "10 - 25LPA" },
-                  { value: "lessThan40", label: "25 - 40LPA" },
-                  { value: "lessThan50", label: "40 - 50LPA" },
-                  { value: "moreThan50", label: "Above 50LPA" },
-                ]}
-              />
-            </div>
-          ) : (
-            ""
-          )}
-          <p
-            href="#"
-            className="clear-filter"
-            onClick={() => setFilters(initialValues)}
-          >
-            {" "}
-            <img src={cross} alt="cross" /> Clear all filters
-          </p>
-        </div>
         <div className="result-employees">
           <div className="row1">
             {user === "Employer" ? (
@@ -347,9 +211,7 @@ export default function SearchEmployee() {
           </div>
           <div
             className="row2"
-            style={{
-              justifyContent: `${employeeList.length === 0}? 'center':''`,
-            }}
+            style={employeeList.length === 0 ?  {justifyContent: 'center'}:{} }
           >
             {employeeList.length === 0 && (
               <Empty

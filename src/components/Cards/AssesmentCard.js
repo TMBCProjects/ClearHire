@@ -99,19 +99,18 @@ const Assesment_Card = ({ info, value, employerId }) => {
           {info.designation}
         </span>
       </div>
-      <div
-        className="cardFooter"
-        style={
-          hasOneMonthPassed(
-            findRatedAtDate(info.ratings, employerId),
-            findAssessmentDate(info.ratings, employerId)
-          )
-            ? {
-                pointerEvents: "none",
-              }
-            : {}
-        }>
+      <div className="cardFooter">
         <Link
+          style={
+            hasOneMonthPassed(
+              findRatedAtDate(info.ratings, employerId),
+              findAssessmentDate(info.ratings, employerId)
+            )
+              ? {
+                  pointerEvents: "none",
+                }
+              : {}
+          }
           className="w-100 mt-3 btn"
           to={{
             pathname: "/EmployeeAssessment",
@@ -135,6 +134,21 @@ const Assesment_Card = ({ info, value, employerId }) => {
               : "Assess Employee"}
           </button>
         </Link>
+        {hasOneMonthPassed(
+          findRatedAtDate(info.ratings, employerId),
+          findAssessmentDate(info.ratings, employerId)
+        ) ? (
+          <Link
+            className="w-100 mt-3 btn"
+            to={{
+              pathname: "/ViewAssessment",
+            }}
+            state={{ from: info }}>
+            <button className="allow">View Assesment</button>
+          </Link>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

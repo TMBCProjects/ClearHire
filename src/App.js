@@ -23,7 +23,8 @@ import EmployerProfile from "./pages/Employer/Profile/Profile";
 import OfferList from "./pages/Employee/OfferList/Offers";
 import Requests from "./pages/Employer/Requests/Requests";
 import RequestApproval from "./pages/Employer/RequestApproval/RequestApproval";
-import ViewAssessment from "./pages/Employer/EmployeeDetails/ViewAssessment";
+import ViewEmployeeProfile from "./pages/Employer/EmployeeDetails/ViewEmployeeProfile";
+import ViewAssessment from "./pages/Employer/ViewAssessment/ViewAssessment";
 
 function App() {
   return (
@@ -75,8 +76,8 @@ function App() {
                     path="/approvalRequest-form"
                     element={<RequestApproval />}></Route>
                   <Route
-                    path="/ViewAssessment"
-                    element={<ViewAssessment />}></Route>
+                    path="/ViewEmployeeProfile"
+                    element={<ViewEmployeeProfile />}></Route>
 
                   <Route
                     path="/Assessment-form"
@@ -84,6 +85,9 @@ function App() {
                   <Route
                     path="/EmployeeAssessment"
                     element={<EmployeeAssessment />}></Route>
+                  <Route
+                    path="/ViewAssessment"
+                    element={<ViewAssessment />}></Route>
                   <Route
                     path="/employee-details"
                     element={<EmployeeDetails />}></Route>
