@@ -103,8 +103,8 @@ const Assesment_Card = ({ info, value, employerId }) => {
         <Link
           style={
             hasOneMonthPassed(
-              findRatedAtDate(info.ratings, employerId),
-              findAssessmentDate(info.ratings, employerId)
+              findRatedAtDate(info.lastRatings, employerId),
+              findAssessmentDate(info.lastRatings, employerId)
             )
               ? {
                   pointerEvents: "none",
@@ -120,23 +120,23 @@ const Assesment_Card = ({ info, value, employerId }) => {
             className="allow"
             style={
               hasOneMonthPassed(
-                findRatedAtDate(info.ratings, employerId),
-                findAssessmentDate(info.ratings, employerId)
+                findRatedAtDate(info.lastRatings, employerId),
+                findAssessmentDate(info.lastRatings, employerId)
               )
                 ? { color: "#d2dee8", backgroundColor: "#eef8ff" }
                 : {}
             }>
             {hasOneMonthPassed(
-              findRatedAtDate(info.ratings, employerId),
-              findAssessmentDate(info.ratings, employerId)
+              findRatedAtDate(info.lastRatings, employerId),
+              findAssessmentDate(info.lastRatings, employerId)
             )
               ? "Assessment Done"
               : "Assess Employee"}
           </button>
         </Link>
         {hasOneMonthPassed(
-          findRatedAtDate(info.ratings, employerId),
-          findAssessmentDate(info.ratings, employerId)
+          findRatedAtDate(info.lastRatings, employerId),
+          findAssessmentDate(info.lastRatings, employerId)
         ) ? (
           <Link
             className="w-100 mt-3 btn"
