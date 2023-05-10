@@ -290,6 +290,7 @@ export async function readEmployees(employerId) {
           id: doc.id,
           isActive: doc.data().isActive,
           lastRatings: doc.data().lastRatings,
+          ratings: ratings,
           employeeName: doc.data().employeeName,
           employeeEmail: doc.data().employeeEmail,
           profileImage: doc.data().profileImage,
@@ -314,6 +315,7 @@ export async function readEmployees(employerId) {
       });
       promises.push(promise);
     });
+    await Promise.all(promises);
     return employees;
   } catch (error) {
     console.log(error);
