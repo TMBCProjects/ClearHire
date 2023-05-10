@@ -162,12 +162,14 @@ const EmployeeDetails = () => {
 
   useEffect(() => {
     const fetchOfferDetails = async () => {
-      const data2 = await readEmployeeRatings(employee.id);
+      console.log(employee)
+      const data2 = employee.ratings
+        // await readEmployeeRatings(employee.id);
       calculateRatings(data2);
       setEmployeeRatings(data2);
     };
     fetchOfferDetails();
-  }, [employee.id]);
+  }, [employee]);
 
   function text(percentage) {
     if (percentage < 10) {
