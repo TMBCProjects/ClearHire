@@ -285,7 +285,7 @@ export async function readEmployees(employerId) {
     );
     const promises = [];
     querySnapshot.forEach(async (doc) => {
-      const promise = readEmployeeRatings(doc).then((ratings) => {
+      const promise = readEmployeeRatings(doc.id).then((ratings) => {
         let employee = {
           id: doc.id,
           isActive: doc.data().isActive,
