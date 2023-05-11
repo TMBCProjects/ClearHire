@@ -10,8 +10,6 @@ import ProgressBar from "../../../components/ProgressBar";
 import "./EmployeeDetails.css";
 
 import { useLocation, useNavigate } from "react-router-dom";
-import { readEmployeeRatings } from "../../../DataBase/Employee/employee";
-import Slider from "react-slick";
 
 const EmployeeDetails = () => {
   const location = useLocation();
