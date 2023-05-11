@@ -27,7 +27,7 @@ export async function readColleagues(employeeId, employerId) {
           id: doc.id,
           isActive: doc.data().isActive,
           employeeName: doc.data().employeeName,
-          ratings: doc.data().ratings,
+          lastRatings: doc.data().lastRatings,
           employeeEmail: doc.data().employeeEmail,
           companyLocation: doc.data().companyLocation,
           profileImage: doc.data().profileImage,
@@ -209,7 +209,7 @@ export async function readAssessment(employeeId) {
       )
     );
     querySnapshot.forEach(async (doc) => {
-    let assessment = {
+      let assessment = {
         isActive: doc.data().isActive,
         id: doc.id,
         companyName: doc.data().companyName,
@@ -224,23 +224,23 @@ export async function readAssessment(employeeId) {
         title: doc.data().title,
         description: doc.data().description,
         questionsList: doc.data().questionsList,
-        isAnswered: doc.data().isAnswered
+        isAnswered: doc.data().isAnswered,
       };
       assessmentQuestions.push(assessment);
     });
     return assessmentQuestions;
   } catch (error) {
-    return []
+    return [];
     //console.log(error);
   }
 }
 
-export async function submitAssessment(answersList, questionId){
+export async function submitAssessment(answersList, questionId) {
   await updateDocument(
     Collections.assessments,
     {
-     answers: answersList,
-     isAnswered: true,
+      answers: answersList,
+      isAnswered: true,
     },
     questionId
   );
@@ -273,7 +273,7 @@ export async function rateCollegue(ratingData) {
   await updateDocument(
     Collections.employees,
     {
-      ratings: arrayUnion({
+      lastRatings: arrayUnion({
         ratedById: ratingData.ratedById,
         ratedAtDate: new Date().toLocaleDateString(),
       }),

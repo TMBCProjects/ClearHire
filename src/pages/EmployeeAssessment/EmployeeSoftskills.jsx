@@ -419,7 +419,7 @@ function EmployeeSoftskills() {
           <Button onClick={handleSubmit}
             disabled={
               hasOneMonthPassed(
-                findRatedAtDate(info.ratings, info.currentEmployerId)
+                findRatedAtDate(info.lastRatings, info.currentEmployerId)
               )
             }>
             <img className='checkimg' src={check_1} alt="" width={20} />

@@ -142,7 +142,7 @@ const Requests = () => {
                         to={{
                           pathname: "/ViewEmployeeProfile",
                         }}
-                        state={{ from: info.employeeId }}
+                        state={{ from: info }}
                       >
                         <button className="w-100 mt-3 btn btn-assessment">
                           View Employee Profile
