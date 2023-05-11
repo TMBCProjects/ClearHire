@@ -6,6 +6,7 @@ import "./styles.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 const Assesment_Card = ({ info, employerId }) => {
+  const [count, setCount] = useState(0);
   const [avgRatings, setAvgRatings] = useState({});
   const user = sessionStorage.getItem("LoggedIn");
   const navigate = useNavigate();
@@ -137,8 +138,12 @@ const Assesment_Card = ({ info, employerId }) => {
       const data2 = info.ratings;
       calculateRatings(getRatingsByEmployerId(data2, userDatas.id));
     };
-    fetchOfferDetails();
-  }, [info]);
+
+    if (count < 5) {
+      fetchOfferDetails();
+      setCount((prevCount) => prevCount + 1);
+    }
+  }, [info, count]);
 
   return (
     <div className="assess-card">
