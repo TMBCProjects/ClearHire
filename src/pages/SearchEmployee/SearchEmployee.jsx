@@ -70,10 +70,6 @@ export default function SearchEmployee() {
     fetchEmployerDetails();
   }, [userDatas]);
 
-  const handleTypeOfEmploymentChange = (event) => {
-    filters.typeOfEmployment = event.target.value;
-  };
-
   const handleSalaryChange = (event) => {
     filters.salary = event.target.value;
   };
@@ -86,7 +82,11 @@ export default function SearchEmployee() {
     filters.location = event.target.value;
   };
 
+  const handleSelectChange = (e) => {
+    filters.typeOfEmployment = e;
+  };
   const search = () => {
+    console.log(employeeList);
     if (filters.location) {
       const filteredData = employeeList.filter((item) =>
         item.typeOfEmployment.toLowerCase().includes(filters.location)
@@ -161,7 +161,7 @@ export default function SearchEmployee() {
           <img src={job} alt="Search" />
           <Select
             type="text"
-            onChange={(e) => handleTypeOfEmploymentChange(e)}
+            onChange={handleSelectChange}
             className="box-select"
             placeholder="Job Type"
             options={[
@@ -186,7 +186,7 @@ export default function SearchEmployee() {
         ) : (
           ""
         )}
-        <button onClick={search}>Search</button>
+        {/* <button onClick={search}>Search</button> */}
       </div>
       <div className="search-results">
         <div className="result-employees">
