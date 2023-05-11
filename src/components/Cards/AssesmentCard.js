@@ -6,9 +6,10 @@ import "./styles.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 const Assesment_Card = ({ info, employerId }) => {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(true);
   const [avgRatings, setAvgRatings] = useState({});
   const user = sessionStorage.getItem("LoggedIn");
+  const employee = info;
   const navigate = useNavigate();
 
   const calculateAge = (dob) => {
@@ -55,95 +56,95 @@ const Assesment_Card = ({ info, employerId }) => {
     }
     return "null";
   }
-  const calculateRatings = (ratings) => {
-    let avgCommunication = 0;
-    let avgAttitude = 0;
-    let avgAbilityToLearn = 0;
-    let avgPunctuality = 0;
-    let avgCommitment = 0;
-    let avgTrustWorthiness = 0;
-    let avgSkill = 0;
-    let avgTeamPlayer = 0;
-    let total = 0;
-    let colleagueScore = 0;
-    let score = 0;
-    let ratingsOfEmployer = ratings.filter((rate) => {
-      return rate?.ratedByRole === "Employer";
-    });
-    for (let index = 0; index < ratings.length; index++) {
-      const element = ratings[index];
-      avgCommunication += +element.communication;
-      avgAttitude += +element.attitude;
-      avgAbilityToLearn += +element.abilityToLearn;
-      avgPunctuality += +element.punctuality;
-      avgCommitment += +element.commitment;
-      avgTrustWorthiness += +element.trustworthiness;
-      avgSkill += +element.skill;
-      avgTeamPlayer += +element.teamPlayer;
-    }
-    avgCommunication /= ratings.length;
-    avgAttitude /= ratings.length;
-    avgAbilityToLearn /= ratings.length;
-    avgPunctuality /= ratings.length;
-    avgCommitment /= ratings.length;
-    avgTrustWorthiness /= ratings.length;
-    avgSkill /= ratings.length;
-    avgTeamPlayer /= ratings.length;
-    total =
-      avgCommunication +
-      avgAttitude +
-      avgAbilityToLearn +
-      avgPunctuality +
-      avgCommitment +
-      avgTrustWorthiness +
-      avgSkill +
-      avgTeamPlayer;
-    total = total / 8;
-
-    for (let index = 0; index < ratingsOfEmployer.length; index++) {
-      const element = ratingsOfEmployer[index];
-      let temp =
-        +element.communication +
-        +element.attitude +
-        +element.abilityToLearn +
-        +element.punctuality +
-        +element.commitment +
-        +element.trustworthiness +
-        +element.skill +
-        +element.teamPlayer;
-      temp /= 8;
-      score += temp;
-    }
-    score /= ratingsOfEmployer.length;
-    setAvgRatings({
-      avgCommunication: Math.ceil(avgCommunication),
-      avgAttitude: Math.ceil(avgAttitude),
-      avgAbilityToLearn: Math.ceil(avgAbilityToLearn),
-      avgPunctuality: Math.ceil(avgPunctuality),
-      avgCommitment: Math.ceil(avgCommitment),
-      avgTrustWorthiness: Math.ceil(avgTrustWorthiness),
-      avgSkill: Math.ceil(avgSkill),
-      avgTeamPlayer: Math.ceil(avgTeamPlayer),
-      total: Math.ceil(total),
-      score: Math.ceil(score),
-      colleagueScore: Math.ceil(colleagueScore),
-    });
-  };
-  function getRatingsByEmployerId(ratings, employerId) {
-    return ratings.filter((rating) => rating.ratedById === employerId);
-  }
   useEffect(() => {
+    const calculateRatings = (ratings) => {
+      let avgCommunication = 0;
+      let avgAttitude = 0;
+      let avgAbilityToLearn = 0;
+      let avgPunctuality = 0;
+      let avgCommitment = 0;
+      let avgTrustWorthiness = 0;
+      let avgSkill = 0;
+      let avgTeamPlayer = 0;
+      let total = 0;
+      let colleagueScore = 0;
+      let score = 0;
+      let ratingsOfEmployer = ratings.filter((rate) => {
+        return rate?.ratedByRole === "Employer";
+      });
+      for (let index = 0; index < ratings.length; index++) {
+        const element = ratings[index];
+        avgCommunication += +element.communication;
+        avgAttitude += +element.attitude;
+        avgAbilityToLearn += +element.abilityToLearn;
+        avgPunctuality += +element.punctuality;
+        avgCommitment += +element.commitment;
+        avgTrustWorthiness += +element.trustworthiness;
+        avgSkill += +element.skill;
+        avgTeamPlayer += +element.teamPlayer;
+      }
+      avgCommunication /= ratings.length;
+      avgAttitude /= ratings.length;
+      avgAbilityToLearn /= ratings.length;
+      avgPunctuality /= ratings.length;
+      avgCommitment /= ratings.length;
+      avgTrustWorthiness /= ratings.length;
+      avgSkill /= ratings.length;
+      avgTeamPlayer /= ratings.length;
+      total =
+        avgCommunication +
+        avgAttitude +
+        avgAbilityToLearn +
+        avgPunctuality +
+        avgCommitment +
+        avgTrustWorthiness +
+        avgSkill +
+        avgTeamPlayer;
+      total = total / 8;
+
+      for (let index = 0; index < ratingsOfEmployer.length; index++) {
+        const element = ratingsOfEmployer[index];
+        let temp =
+          +element.communication +
+          +element.attitude +
+          +element.abilityToLearn +
+          +element.punctuality +
+          +element.commitment +
+          +element.trustworthiness +
+          +element.skill +
+          +element.teamPlayer;
+        temp /= 8;
+        score += temp;
+      }
+      score /= ratingsOfEmployer.length;
+      setAvgRatings({
+        avgCommunication: Math.ceil(avgCommunication),
+        avgAttitude: Math.ceil(avgAttitude),
+        avgAbilityToLearn: Math.ceil(avgAbilityToLearn),
+        avgPunctuality: Math.ceil(avgPunctuality),
+        avgCommitment: Math.ceil(avgCommitment),
+        avgTrustWorthiness: Math.ceil(avgTrustWorthiness),
+        avgSkill: Math.ceil(avgSkill),
+        avgTeamPlayer: Math.ceil(avgTeamPlayer),
+        total: Math.ceil(total),
+        score: Math.ceil(score),
+        colleagueScore: Math.ceil(colleagueScore),
+      });
+    };
+    function getRatingsByEmployerId(ratings, employerId) {
+      return ratings.filter((rating) => rating.ratedById === employerId);
+    }
     const fetchOfferDetails = async () => {
       const userDatas = JSON.parse(sessionStorage.getItem("userData"));
-      const data2 = info.ratings;
+      const data2 = employee.ratings;
       calculateRatings(getRatingsByEmployerId(data2, userDatas.id));
     };
 
-    if (count < 5) {
+    if (employee && count) {
       fetchOfferDetails();
-      setCount((prevCount) => prevCount + 1);
+      setCount(false);
     }
-  }, [info, count]);
+  }, [employee, count]);
 
   return (
     <div className="assess-card">
