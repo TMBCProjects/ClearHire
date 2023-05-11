@@ -31,6 +31,11 @@
   width: 6%;
 }
 
+.input-box3 {
+  border: 0 !important;
+  border-right: 1px solid #dadada !important;
+}
+
 .search-inputs .input-box .box-input {
   height: 100%;
   border: 0 !important;
@@ -40,6 +45,15 @@
   margin-left: 1rem;
   width: 100%;
   border-right: 1px solid #dadada !important;
+}
+
+.search-inputs .input-box .box-select {
+  border: 0 !important;
+  outline: none;
+  background: transparent;
+  box-shadow: none;
+  margin-left: 1rem;
+  width: 100%;
 }
 
 .search-inputs .input-box .no-border {
