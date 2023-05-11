@@ -53,6 +53,7 @@ const Assesment_Card = ({ info, value, employerId }) => {
     }
     return "null";
   }
+
   return (
     <div className="assess-card">
       <div
