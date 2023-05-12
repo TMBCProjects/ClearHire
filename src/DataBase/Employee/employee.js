@@ -153,7 +153,13 @@ export async function offerAccept(profileData, employeeId, offerId) {
   await updateDocument(Collections.employees, profileData, employeeId);
   await updateDocument(
     Collections.employees,
-    { employerIdList: arrayUnion(profileData.currentEmployerId) },
+    {
+      employerIdList: arrayUnion({
+        employerId: profileData.currentEmployerId,
+        companyName: profileData.companyName,
+        companyLogo: profileData.companyLogo,
+      }),
+    },
     employeeId
   );
 }
