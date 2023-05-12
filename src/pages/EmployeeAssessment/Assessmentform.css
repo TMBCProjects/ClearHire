@@ -19,7 +19,7 @@
 
 .f-btn {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     column-gap: 10px;
 }
 
