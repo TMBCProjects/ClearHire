@@ -162,9 +162,7 @@ const EmployeeDetails = () => {
   }
   useEffect(() => {
     const fetchOfferDetails = async () => {
-      // console.log(employee)
       const data2 = employee.ratings
-        // await readEmployeeRatings(employee.id);
       calculateRatings(data2);
       setEmployeeRatings(data2);
       // console.log(getRatingsByEmployerId(data2, employee.currentEmployerId))
