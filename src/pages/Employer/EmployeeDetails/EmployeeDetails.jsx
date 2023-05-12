@@ -401,7 +401,7 @@ const EmployeeDetails = () => {
           </div>
         </div>
       </div>
-      {employee?.employerIdList?.filter((info) => { return (info.employerId === employee.currentEmployerId) }) === [] &&
+      {employee?.employerIdList?.filter((info) => { return (info.employerId !== employee.currentEmployerId) }).length === 0 ? <section className="companies-section"></section> :
       <section className="companies-section">
         <div className="container">
           <div className="row">
@@ -409,7 +409,7 @@ const EmployeeDetails = () => {
               <h1>Previous Companies</h1>
             </div>
           </div>
-            {employee?.employerIdList?.filter((info) => { return (info.employerId === employee.currentEmployerId) })
+            {employee?.employerIdList?.filter((info) => { return (info.employerId !== employee.currentEmployerId) })
               ?.map((info) => {
                 return (<div className="row d-flex align-items-center my-3">
                   <div className="col-md-2 col-3">
@@ -421,13 +421,14 @@ const EmployeeDetails = () => {
                     <h1 className="fw-bold font-size-39">
                       {info.companyName}
                     </h1>
-                    <div className="fw-bold font-size-25">{new Date(info.dateOfJoining).getFullYear}</div>
+                    <div className="fw-bold font-size-25">{new Date(info.dateOfJoining.seconds * 1000).getFullYear()}</div>
                   </div>
                   <div className="col-md-1 col-1">
                     <div className="back">
                       <MdOutlineKeyboardArrowDown size={35} className="downIcon" />
                     </div>
-                  </div><div className="divider my-3"></div>
+                  </div>
+                  <div className="divider my-3"></div>
                 </div>)
               })}
 
