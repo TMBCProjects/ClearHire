@@ -401,7 +401,7 @@ const EmployeeDetails = () => {
           </div>
         </div>
       </div>
-      {employee?.employerIdList?.filter((info) => { return (info.employerId !== employee.currentEmployerId) }) &&
+      {employee?.employerIdList?.filter((info) => { return (info.employerId === employee.currentEmployerId) }) === [] &&
       <section className="companies-section">
         <div className="container">
           <div className="row">
@@ -409,7 +409,7 @@ const EmployeeDetails = () => {
               <h1>Previous Companies</h1>
             </div>
           </div>
-            {employee?.employerIdList?.filter((info) => { return (info.employerId !== employee.currentEmployerId) })
+            {employee?.employerIdList?.filter((info) => { return (info.employerId === employee.currentEmployerId) })
               ?.map((info) => {
                 return (<div className="row d-flex align-items-center my-3">
                   <div className="col-md-2 col-3">
