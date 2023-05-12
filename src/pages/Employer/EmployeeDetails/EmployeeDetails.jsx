@@ -401,6 +401,7 @@ const EmployeeDetails = () => {
           </div>
         </div>
       </div>
+      {employee?.employerIdList?.filter((info) => { return (info.employerId !== employee.currentEmployerId) }) &&
       <section className="companies-section">
         <div className="container">
           <div className="row">
@@ -408,43 +409,30 @@ const EmployeeDetails = () => {
               <h1>Previous Companies</h1>
             </div>
           </div>
-          <div className="row d-flex align-items-center my-3">
-            <div className="col-md-2 col-3">
-              <div className="companyLogo">
-                <img src={CompanyLogo} alt="" className="logo" />
-              </div>
-            </div>
-            <div className="col-md-9 col-7">
-              <h1 className="fw-bold font-size-39">
-                The Madras Branding Company
-              </h1>
-              <div className="fw-bold font-size-25">2022</div>
-            </div>
-            <div className="col-md-1 col-1">
-              <div className="back">
-                <MdOutlineKeyboardArrowDown size={35} className="downIcon" />
-              </div>
-            </div>
-            <div className="divider my-3"></div>
-            <div className="col-md-2 col-3">
-              <div className="companyLogo">
-                <img src={CompanyLogo} alt="" className="logo" />
-              </div>
-            </div>
-            <div className="col-md-9 col-7">
-              <h1 className="fw-bold font-size-39">
-                The Madras Branding Company
-              </h1>
-              <div className="fw-bold font-size-25">2022</div>
-            </div>
-            <div className="col-md-1 col-1">
-              <div className="back">
-                <MdOutlineKeyboardArrowDown size={35} className="downIcon" />
-              </div>
-            </div>
+            {employee?.employerIdList?.filter((info) => { return (info.employerId !== employee.currentEmployerId) })
+              ?.map((info) => {
+                return (<div className="row d-flex align-items-center my-3">
+                  <div className="col-md-2 col-3">
+                    <div className="companyLogo">
+                      <img src={info.companyLogo} alt="" className="logo" />
+                    </div>
+                  </div>
+                  <div className="col-md-9 col-7">
+                    <h1 className="fw-bold font-size-39">
+                      {info.companyName}
+                    </h1>
+                    <div className="fw-bold font-size-25">{new Date(info.dateOfJoining).getFullYear}</div>
+                  </div>
+                  <div className="col-md-1 col-1">
+                    <div className="back">
+                      <MdOutlineKeyboardArrowDown size={35} className="downIcon" />
+                    </div>
+                  </div><div className="divider my-3"></div>
+                </div>)
+              })}
+
           </div>
-        </div>
-      </section>
+        </section>}
     </>
   );
 };
