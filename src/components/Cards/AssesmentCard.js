@@ -6,10 +6,8 @@ import "./styles.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 const Assesment_Card = ({ info, employerId }) => {
-  const [count, setCount] = useState(true);
   const [avgRatings, setAvgRatings] = useState({});
   const user = sessionStorage.getItem("LoggedIn");
-  const employee = info;
   const navigate = useNavigate();
 
   const calculateAge = (dob) => {
@@ -136,15 +134,11 @@ const Assesment_Card = ({ info, employerId }) => {
     }
     const fetchOfferDetails = async () => {
       const userDatas = JSON.parse(sessionStorage.getItem("userData"));
-      const data2 = employee.ratings;
+      const data2 = info.ratings;
       calculateRatings(getRatingsByEmployerId(data2, userDatas.id));
     };
-
-    if (employee && count) {
-      fetchOfferDetails();
-      setCount(false);
-    }
-  }, [employee, count]);
+    fetchOfferDetails();
+  }, [info.ratings]);
 
   return (
     <div className="assess-card">
