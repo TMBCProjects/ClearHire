@@ -4,7 +4,11 @@ import image from "../../../assets/images/Image.png";
 import check from "../../../assets/images/checkfull.svg";
 import close from "../../../assets/images/closebtn.svg";
 import { Empty } from "antd";
-import { acceptRequest, getRequests, rejectRequest } from "../../../DataBase/Employee/employee";
+import {
+  acceptRequest,
+  getRequests,
+  rejectRequest,
+} from "../../../DataBase/Employee/employee";
 
 export default function VerficationRequest() {
   const userDatas = JSON.parse(sessionStorage.getItem("userData"));
@@ -30,15 +34,26 @@ export default function VerficationRequest() {
         <span>Access Requests</span>
       </div>
 
-       <div className="vreqbody" style={requestData.length === 0?{justifyContent: "center"}:""}>
-        {requestData.length === 0 && 
-          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="No Requests" />
-        }
+      <div
+        className="vreqbody"
+        style={{
+          justifyContent: `${requestData.length === 0 ? "center" : ""}`,
+        }}
+      >
+        {requestData.length === 0 && (
+          <Empty
+            image={Empty.PRESENTED_IMAGE_SIMPLE}
+            description="No Requests"
+          />
+        )}
         {requestData.map((request) => (
           <div className="vreqcard">
             <div className="vreqcardHead">
               <div className="companylogo">
-                <img src={request.companyLogo || image} alt="company-logo"></img>
+                <img
+                  src={request.companyLogo || image}
+                  alt="company-logo"
+                ></img>
               </div>
               <div className="headDesc">
                 <span style={{ fontWeight: "bold" }}>
@@ -62,7 +77,6 @@ export default function VerficationRequest() {
             </div>
           </div>
         ))}
-
       </div>
     </div>
   );
