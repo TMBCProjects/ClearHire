@@ -10,8 +10,6 @@ import ProgressBar from "../../../components/ProgressBar";
 import "./EmployeeDetails.css";
 
 import { useLocation, useNavigate } from "react-router-dom";
-import { readEmployeeRatings } from "../../../DataBase/Employee/employee";
-import Slider from "react-slick";
 
 const EmployeeDetails = () => {
   const location = useLocation();
@@ -160,15 +158,18 @@ const EmployeeDetails = () => {
       colleagueScore: Math.ceil(colleagueScore),
     });
   };
-
+  function getRatingsByEmployerId(ratings, employerId) {
+    return ratings.filter((rating) => rating.ratedById === employerId);
+  }
   useEffect(() => {
     const fetchOfferDetails = async () => {
-      const data2 = await readEmployeeRatings(employee.id);
+      const data2 = employee.ratings
       calculateRatings(data2);
       setEmployeeRatings(data2);
+      // console.log(getRatingsByEmployerId(data2, employee.currentEmployerId))
     };
     fetchOfferDetails();
-  }, [employee.id]);
+  }, [employee]);
 
   function text(percentage) {
     if (percentage < 10) {

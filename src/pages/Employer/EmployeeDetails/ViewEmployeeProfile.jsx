@@ -15,27 +15,26 @@ const ViewEmployeeProfile = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { from } = location.state;
-  const employeeId = from;
+  const employeeDetails = from;
   // const [employeeRatings, setEmployeeRatings] = useState([]);
   const [employee, setEmployee] = useState({});
   const [avgRatings, setAvgRatings] = useState({});
   // console.log("info", from);
   useEffect(() => {
     const fetchOfferDetails = async () => {
-      const data2 = await readEmployee(employeeId);
+      const data2 = await readEmployee(employeeDetails.id);
       setEmployee(data2);
     };
     fetchOfferDetails();
-  }, [employeeId]);
+  }, [employeeDetails]);
 
   useEffect(() => {
     const fetchOfferDetails = async () => {
-      const data2 = await readEmployeeRatings(employeeId);
+      const data2 = employeeDetails.ratings;
       calculateRatings(data2);
-      // setEmployeeRatings(data2);
     };
     fetchOfferDetails();
-  }, [employeeId]);
+  }, [employee]);
 
   const calculateRatings = (ratings) => {
     let avgCommunication = 0;

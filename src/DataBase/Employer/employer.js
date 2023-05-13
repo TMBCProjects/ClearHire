@@ -242,30 +242,34 @@ export async function readEmployee(id) {
     const q = setDocument(Collections.employees, id);
     const doc = await getDocument(q);
     if (doc.exists()) {
-      employee = {
-        id: doc.id,
-        isActive: doc.data().isActive,
-        employeeName: doc.data().employeeName,
-        ratings: doc.data().ratings,
-        employeeEmail: doc.data().employeeEmail,
-        profileImage: doc.data().profileImage,
-        dateOfBirth: doc.data().dateOfBirth,
-        role: doc.data().role,
-        currentEmployerId: doc.data().currentEmployerId,
-        employerIdList: doc.data().employerIdList,
-        designation: doc.data().designation,
-        salary: doc.data().salary,
-        companyName: doc.data().companyName,
-        companyLogo: doc.data().companyLogo,
-        companyLocation: doc.data().companyLocation,
-        typeOfEmployment: doc.data().typeOfEmployment,
-        offerLetter: doc.data().offerLetter,
-        dateOfJoining: doc.data().dateOfJoining,
-        employeeAadhaarCardNumber: doc.data().employeeAadhaarCardNumber,
-        portfolioLink: doc.data().portfolioLink,
-        resume: doc.data().resume,
-        skills: doc.data().skills,
-      };
+      const promise = readEmployeeRatings(doc.id).then((ratings) => {
+        employee = {
+          id: doc.id,
+          isActive: doc.data().isActive,
+          employeeName: doc.data().employeeName,
+          lastRatings: doc.data().lastRatings,
+          ratings: ratings,
+          employeeEmail: doc.data().employeeEmail,
+          profileImage: doc.data().profileImage,
+          dateOfBirth: doc.data().dateOfBirth,
+          role: doc.data().role,
+          currentEmployerId: doc.data().currentEmployerId,
+          employerIdList: doc.data().employerIdList,
+          designation: doc.data().designation,
+          salary: doc.data().salary,
+          companyName: doc.data().companyName,
+          companyLogo: doc.data().companyLogo,
+          companyLocation: doc.data().companyLocation,
+          typeOfEmployment: doc.data().typeOfEmployment,
+          offerLetter: doc.data().offerLetter,
+          dateOfJoining: doc.data().dateOfJoining,
+          employeeAadhaarCardNumber: doc.data().employeeAadhaarCardNumber,
+          portfolioLink: doc.data().portfolioLink,
+          resume: doc.data().resume,
+          skills: doc.data().skills,
+        };
+      });
+      await promise;
     }
     return employee;
   } catch (error) {
@@ -283,33 +287,39 @@ export async function readEmployees(employerId) {
         where(Fields.isActive, "==", true)
       )
     );
+    const promises = [];
     querySnapshot.forEach(async (doc) => {
-      let employee = {
-        id: doc.id,
-        isActive: doc.data().isActive,
-        ratings: doc.data().ratings,
-        employeeName: doc.data().employeeName,
-        employeeEmail: doc.data().employeeEmail,
-        profileImage: doc.data().profileImage,
-        dateOfBirth: doc.data().dateOfBirth,
-        role: doc.data().role,
-        currentEmployerId: doc.data().currentEmployerId,
-        employerIdList: doc.data().employerIdList,
-        designation: doc.data().designation,
-        salary: doc.data().salary,
-        companyName: doc.data().companyName,
-        companyLogo: doc.data().companyLogo,
-        companyLocation: doc.data().companyLocation,
-        typeOfEmployment: doc.data().typeOfEmployment,
-        offerLetter: doc.data().offerLetter,
-        dateOfJoining: doc.data().dateOfJoining,
-        employeeAadhaarCardNumber: doc.data().employeeAadhaarCardNumber,
-        portfolioLink: doc.data().portfolioLink,
-        resume: doc.data().resume,
-        skills: doc.data().skills,
-      };
-      employees.push(employee);
+      const promise = readEmployeeRatings(doc.id).then((ratings) => {
+        let employee = {
+          id: doc.id,
+          isActive: doc.data().isActive,
+          lastRatings: doc.data().lastRatings,
+          ratings: ratings,
+          employeeName: doc.data().employeeName,
+          employeeEmail: doc.data().employeeEmail,
+          profileImage: doc.data().profileImage,
+          dateOfBirth: doc.data().dateOfBirth,
+          role: doc.data().role,
+          currentEmployerId: doc.data().currentEmployerId,
+          employerIdList: doc.data().employerIdList,
+          designation: doc.data().designation,
+          salary: doc.data().salary,
+          companyName: doc.data().companyName,
+          companyLogo: doc.data().companyLogo,
+          companyLocation: doc.data().companyLocation,
+          typeOfEmployment: doc.data().typeOfEmployment,
+          offerLetter: doc.data().offerLetter,
+          dateOfJoining: doc.data().dateOfJoining,
+          employeeAadhaarCardNumber: doc.data().employeeAadhaarCardNumber,
+          portfolioLink: doc.data().portfolioLink,
+          resume: doc.data().resume,
+          skills: doc.data().skills,
+        };
+        employees.push(employee);
+      });
+      promises.push(promise);
     });
+    await Promise.all(promises);
     return employees;
   } catch (error) {
     console.log(error);
@@ -447,7 +457,6 @@ export async function requestEmployee(offerData) {
   return await addDocument(Collections.offers, offer);
 }
 
-
 export async function rateEmployee(ratingData) {
   let rating = new Rating();
   rating = {
@@ -476,7 +485,7 @@ export async function rateEmployee(ratingData) {
 
   if (employeeSnapshot.exists()) {
     const employeeData = employeeSnapshot.data();
-    const ratings = employeeData.ratings || [];
+    const ratings = employeeData.lastRatings || [];
     const ratingIndex = ratings.findIndex(
       (rating) => rating.ratedById === ratingData.ratedById
     );
@@ -486,7 +495,7 @@ export async function rateEmployee(ratingData) {
       await updateDocument(
         Collections.employees,
         {
-          ratings: ratings,
+          lastRatings: ratings,
         },
         ratingData.employeeId
       );
@@ -495,7 +504,7 @@ export async function rateEmployee(ratingData) {
       await updateDocument(
         Collections.employees,
         {
-          ratings: arrayUnion({
+          lastRatings: arrayUnion({
             ratedById: ratingData.ratedById,
             ratedAtDate: new Date().toLocaleDateString(),
           }),
@@ -571,7 +580,7 @@ export async function assessEmployee(assessData) {
 
   if (employeeSnapshot.exists()) {
     const employeeData = employeeSnapshot.data();
-    const ratings = employeeData.ratings || [];
+    const ratings = employeeData.lastRatings || [];
     const ratingIndex = ratings.findIndex(
       (rating) => rating.ratedById === assessData.ratedById
     );
@@ -581,7 +590,7 @@ export async function assessEmployee(assessData) {
       await updateDocument(
         Collections.employees,
         {
-          ratings: ratings,
+          lastRatings: ratings,
         },
         assessData.employeeId
       );
@@ -590,7 +599,7 @@ export async function assessEmployee(assessData) {
       await updateDocument(
         Collections.employees,
         {
-          ratings: arrayUnion({
+          lastRatings: arrayUnion({
             ratedById: assessData.ratedById,
             assessmentDate: new Date().toLocaleDateString(),
           }),
