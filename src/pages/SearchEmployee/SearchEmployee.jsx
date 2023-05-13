@@ -47,28 +47,29 @@ export default function SearchEmployee() {
   const [employeeList, setEmployeeList] = useState([]);
   const [filters, setFilters] = useState(initialValues);
   const [query, setQuery] = useState("");
-
-  // fetch employer details
   useEffect(() => {
     const fetchEmployerDetails = async () => {
       try {
         const user = sessionStorage.getItem("LoggedIn");
+        const userDatas1 = JSON.parse(sessionStorage.getItem("userData"));
         const data =
           user === "Employer"
-            ? await readEmployees(userDatas.id)
-            : userDatas.data.currentEmployerId
-            ? await readColleagues(
-                userDatas.id,
-                userDatas.data.currentEmployerId
+            ? await readEmployees(userDatas1.id)
+            : userDatas1.data.currentEmployerId
+              ? await readColleagues(
+                userDatas1.id,
+                userDatas1.data.currentEmployerId
               )
-            : [];
+              : [];
+        console.log(data);
         setEmployeeList(data);
       } catch (error) {
         console.log(error);
       }
     };
     fetchEmployerDetails();
-  }, [userDatas]);
+  }, [setEmployeeList]);
+
 
   const handleSalaryChange = (event) => {
     filters.salary = event.target.value;
@@ -86,12 +87,10 @@ export default function SearchEmployee() {
     filters.typeOfEmployment = e;
   };
   const search = () => {
-    console.log(employeeList);
     if (filters.location) {
       const filteredData = employeeList.filter((item) =>
         item.typeOfEmployment.toLowerCase().includes(filters.location)
       );
-      console.log("location", filteredData);
       setEmployeeList(filteredData);
     } else {
       setEmployeeList(filters);
@@ -102,7 +101,6 @@ export default function SearchEmployee() {
       const filteredData = employeeList.filter((item) =>
         item.typeOfEmployment.toLowerCase().includes(filters.typeOfEmployment)
       );
-      console.log("Employment", filteredData);
       setEmployeeList(filteredData);
     } else {
       setEmployeeList(filters);
@@ -113,7 +111,6 @@ export default function SearchEmployee() {
       const filteredData = employeeList.filter((item) =>
         item.typeOfEmployment.toLowerCase().includes(filters.designation)
       );
-      console.log("designation", filteredData);
       setEmployeeList(filteredData);
     } else {
       setEmployeeList(filters);
@@ -124,7 +121,6 @@ export default function SearchEmployee() {
       const filteredData = employeeList.filter((item) =>
         item.typeOfEmployment.toLowerCase().includes(filters.salary)
       );
-      console.log("salary", filteredData);
       setEmployeeList(filteredData);
     } else {
       setEmployeeList(filters);
@@ -161,7 +157,7 @@ export default function SearchEmployee() {
           <img src={job} alt="Search" />
           <Select
             type="text"
-            onChange={handleSelectChange}
+            onChange={(e) => { handleSelectChange(e) }}
             className="box-select"
             placeholder="Job Type"
             options={[
