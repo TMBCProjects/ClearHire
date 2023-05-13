@@ -1,23 +1,27 @@
-.footer{
-    position:relative;
+.footer {
+    position: relative;
     z-index: -1;
 }
 
-@media(max-width:567px) {
-    
-    .foot-item{
-        display:grid;
-        grid-template-columns: repeat(4,auto);  
+@media(max-width:767px) {
 
-        
+    .foot-item {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+
+
     }
-    #footer{
+
+    #footer {
         height: 100%;
         width: 100%;
-        margin:0%;
+        margin: 0%;
         padding: 0%;
     }
 
-
-
+    .copyrightText {
+        text-align: center;
+        font-weight: bold;
+        padding-bottom: 1rem;
+    }
 }

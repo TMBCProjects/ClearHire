@@ -9,6 +9,16 @@
     width: 12rem;
 }
 
+.navbar-toggler {
+    border: none !important;
+}
+
+.navbar-toggler:focus {
+    border: none !important;
+    outline: none I !important;
+    box-shadow: none !important;
+}
+
 @media(max-width:767px) {
     .logo {
         width: 9rem;
@@ -50,6 +60,17 @@
 }
 
 @media(max-width:767px) {
+    .nav-link {
+        color: black !important;
+        font-weight: bold !important;
+    }
+
+    #login-btn,
+    #signup-btn {
+        font-weight: 700 !important;
+        letter-spacing: 1.2px !important;
+    }
+
     .mobile-menu {
         width: 100%;
         justify-content: center;

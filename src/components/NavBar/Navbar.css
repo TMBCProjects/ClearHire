@@ -76,6 +76,16 @@
 }
 
 @media(max-width:767px) {
+    .empnavbar {
+        align-items: center;
+        padding: 1vh;
+        justify-content: space-between;
+    }
+
+    .navbarDropdown {
+        right: 0rem;
+    }
+
     .navbarBody {
         display: none;
     }

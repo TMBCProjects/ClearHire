@@ -19,7 +19,6 @@ const EmployeeDetails = () => {
   const [employeeRatings, setEmployeeRatings] = useState([]);
   const [avgRatings, setAvgRatings] = useState({});
   const [prevSkills, setPrevSkills] = useState("none");
-  // console.log("info", from);
 
   const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
     <img src={LeftArrow} alt="prevArrow" {...props} />
@@ -163,7 +162,7 @@ const EmployeeDetails = () => {
   }
   useEffect(() => {
     const fetchOfferDetails = async () => {
-      const data2 = employee.ratings
+      const data2 = employee.ratings;
       calculateRatings(data2);
       setEmployeeRatings(data2);
       // console.log(getRatingsByEmployerId(data2, employee.currentEmployerId))

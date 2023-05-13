@@ -68,7 +68,7 @@ export default function SearchEmployee() {
       }
     };
     fetchEmployerDetails();
-  }, [userDatas]);
+  }, []);
 
   const handleSalaryChange = (event) => {
     filters.salary = event.target.value;
