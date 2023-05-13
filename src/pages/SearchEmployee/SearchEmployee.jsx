@@ -13,22 +13,22 @@ import { readColleagues } from "../../DataBase/Employee/employee";
 const onChange = (e) => {
   // alert(`checked = ${e.target.checked}`);
 };
-const formatter = (value) => `${value}LPA`;
-const formatter2 = (value) => `${value} %`;
-const marks = {
-  0: "1LPA",
-  50: "50LPA",
-};
-const marks2 = {
-  0: "0%",
-  100: "100%",
-};
+// const formatter = (value) => `${value}LPA`;
+// const formatter2 = (value) => `${value} %`;
+// const marks = {
+//   0: "1LPA",
+//   50: "50LPA",
+// };
+// const marks2 = {
+//   0: "0%",
+//   100: "100%",
+// };
 
-const myStyle = {
-  fontSize: "1.6rem",
-  fontWeight: "bolder",
-  letterSpacing: "-0.47x",
-};
+// const myStyle = {
+//   fontSize: "1.6rem",
+//   fontWeight: "bolder",
+//   letterSpacing: "-0.47x",
+// };
 
 const checkBoxStyles = {
   marginLeft: "0.5rem",
@@ -70,10 +70,6 @@ export default function SearchEmployee() {
     fetchEmployerDetails();
   }, [userDatas]);
 
-  const handleTypeOfEmploymentChange = (event) => {
-    filters.typeOfEmployment = event.target.value;
-  };
-
   const handleSalaryChange = (event) => {
     filters.salary = event.target.value;
   };
@@ -86,7 +82,11 @@ export default function SearchEmployee() {
     filters.location = event.target.value;
   };
 
+  const handleSelectChange = (e) => {
+    filters.typeOfEmployment = e;
+  };
   const search = () => {
+    console.log(employeeList);
     if (filters.location) {
       const filteredData = employeeList.filter((item) =>
         item.typeOfEmployment.toLowerCase().includes(filters.location)
@@ -131,6 +131,7 @@ export default function SearchEmployee() {
     }
     setQuery(filters.salary);
   };
+
   return (
     <div className="employer-home">
       <div className="search-inputs" style={{ position: "absolute" }}>
@@ -160,20 +161,20 @@ export default function SearchEmployee() {
           <img src={job} alt="Search" />
           <Select
             type="text"
-            onChange={(e) => handleTypeOfEmploymentChange(e)}
+            onChange={handleSelectChange}
             className="box-select"
             placeholder="Job Type"
             options={[
-              { value: 'PFT', label: 'Permanent Full-Time' },
-              { value: 'PT', label: 'Part-Time' },
-              { value: 'CV', label: 'Casual/Vacation' },
-              { value: 'Contact', label: 'Contact' },
-              { value: 'Intern', label: 'Internship/Trainee' },
+              { value: "Permanent Full-Time", label: "Permanent Full-Time" },
+              { value: "Part-Time", label: "Part-Time" },
+              { value: "Casual/Vacation", label: "Casual/Vacation" },
+              { value: "Contract", label: "Contract" },
+              { value: "Internship/Trainee", label: "Internship/Trainee" },
             ]}
           />
         </div>
         {user === "Employer" ? (
-          <div className="input-box4 input-box">
+          <div className="input-box4 input-box ">
             <img src={salary} alt="Search" />
             <input
               type="text"
@@ -185,7 +186,7 @@ export default function SearchEmployee() {
         ) : (
           ""
         )}
-        <button onClick={search}>Search</button>
+        {/* <button onClick={search}>Search</button> */}
       </div>
       <div className="search-results">
         <div className="result-employees">
@@ -211,7 +212,9 @@ export default function SearchEmployee() {
           </div>
           <div
             className="row2"
-            style={employeeList.length === 0 ?  {justifyContent: 'center'}:{} }
+            style={
+              employeeList.length === 0 ? { justifyContent: "center" } : {}
+            }
           >
             {employeeList.length === 0 && (
               <Empty
@@ -222,16 +225,17 @@ export default function SearchEmployee() {
             {employeeList
               .filter((item) => {
                 return (
-                  (filters.typeOfEmployment.toLowerCase() === "" ||
-                    item.typeOfEmployment.toLowerCase() ===
-                      filters.typeOfEmployment.toLowerCase()) &&
-                  (filters.designation.toLowerCase() === "" ||
-                    item.designation.toLowerCase() ===
-                      filters.designation.toLowerCase()) &&
-                  (filters.salary === "" || +item.salary <= +filters.salary) &&
-                  (filters.location.toLowerCase() === "" ||
-                    item.companyLocation.toLowerCase() ===
-                      filters.location.toLowerCase())
+                  (filters?.typeOfEmployment.toLowerCase() === "" ||
+                    item?.typeOfEmployment.toLowerCase() ===
+                      filters?.typeOfEmployment.toLowerCase()) &&
+                  (filters?.designation.toLowerCase() === "" ||
+                    item?.designation.toLowerCase() ===
+                      filters?.designation.toLowerCase()) &&
+                  (filters?.salary === "" ||
+                    +item?.salary <= +filters?.salary) &&
+                  (filters?.location.toLowerCase() === "" ||
+                    item?.companyLocation.toLowerCase() ===
+                      filters?.location.toLowerCase())
                 );
               })
               .map((info) => {

@@ -1,7 +1,8 @@
 .assess-card {
-    width: 26rem !important;
-    padding: 1.4vh;
+    width: 25rem !important;
+    padding: 2vh;
     background: white;
+    margin-left: 0.5rem;
 
 }
 

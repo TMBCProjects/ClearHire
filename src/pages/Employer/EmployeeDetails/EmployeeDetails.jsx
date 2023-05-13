@@ -18,6 +18,7 @@ const EmployeeDetails = () => {
   const employee = from;
   const [employeeRatings, setEmployeeRatings] = useState([]);
   const [avgRatings, setAvgRatings] = useState({});
+  const [prevSkills, setPrevSkills] = useState("none");
   // console.log("info", from);
 
   const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
@@ -183,6 +184,10 @@ const EmployeeDetails = () => {
       return "Great";
     }
   }
+
+  const handlePrevCompanySkills = () => {
+    setPrevSkills(prevSkills === "none" ? "block" : "none");
+  };
 
   return (
     <>
@@ -408,7 +413,11 @@ const EmployeeDetails = () => {
               <h1>Previous Companies</h1>
             </div>
           </div>
-          <div className="row d-flex align-items-center my-3">
+          <div
+            className="row d-flex align-items-center my-3"
+            onClick={handlePrevCompanySkills}
+            style={{ cursor: "pointer", transition: "all 3s ease-in" }}
+          >
             <div className="col-md-2 col-3">
               <div className="companyLogo">
                 <img src={CompanyLogo} alt="" className="logo" />
@@ -423,10 +432,112 @@ const EmployeeDetails = () => {
             <div className="col-md-1 col-1">
               <div className="back">
                 <MdOutlineKeyboardArrowDown size={35} className="downIcon" />
+              </div>
+            </div>
+            <div
+              className="prevSkillsContainer"
+              style={{ display: prevSkills }}
+            >
+              <div className="row d-flex justify-content-center align-items-center progressBars">
+                <div className="col-md-8">
+                  <div className="row">
+                    <div className="col-md-3 mb-3">
+                      <div class="circle-wrap">
+                        {avgRatings.avgCommunication && (
+                          <ProgressBar
+                            value={avgRatings.avgCommunication || 0}
+                          />
+                        )}
+                      </div>
+                      <p>Communitcation</p>
+                    </div>
+                    <div className="col-md-3 mb-3">
+                      <div class="circle-wrap">
+                        {avgRatings.avgAttitude && (
+                          <ProgressBar value={avgRatings.avgAttitude || 0} />
+                        )}
+                      </div>
+                      <p>Attitude</p>
+                    </div>
+                    <div className="col-md-3 mb-3">
+                      <div class="circle-wrap">
+                        {avgRatings.avgAbilityToLearn && (
+                          <ProgressBar
+                            value={avgRatings.avgAbilityToLearn || 0}
+                          />
+                        )}
+                      </div>
+                      <p>Ability To Learn</p>
+                    </div>
+                    <div className="col-md-3 mb-3">
+                      <div class="circle-wrap">
+                        {avgRatings.avgPunctuality && (
+                          <ProgressBar value={avgRatings.avgPunctuality || 0} />
+                        )}
+                      </div>
+                      <p>Punctuality</p>
+                    </div>
+                    <div className="col-md-3 mb-3">
+                      <div class="circle-wrap">
+                        {avgRatings.avgCommitment && (
+                          <ProgressBar value={avgRatings.avgCommitment || 0} />
+                        )}
+                      </div>
+                      <p>Commitment</p>
+                    </div>
+                    <div className="col-md-3 mb-3">
+                      <div class="circle-wrap">
+                        {avgRatings.avgTrustWorthiness && (
+                          <ProgressBar
+                            value={avgRatings.avgTrustWorthiness || 0}
+                          />
+                        )}
+                      </div>
+                      <p>Trustworthiness</p>
+                    </div>
+                    <div className="col-md-3 mb-3">
+                      <div class="circle-wrap">
+                        {avgRatings.avgSkill && (
+                          <ProgressBar value={avgRatings.avgSkill || 0} />
+                        )}
+                      </div>
+                      <p>Skill</p>
+                    </div>
+                    <div className="col-md-3 mb-3">
+                      <div class="circle-wrap">
+                        {avgRatings.avgTeamPlayer && (
+                          <ProgressBar value={avgRatings.avgTeamPlayer || 0} />
+                        )}
+                      </div>
+                      <p>Team Player</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-4 align-items-center d-flex flex-column">
+                  <p className="mb-0">Total</p>
+
+                  <div class="circle-wrap">
+                    {avgRatings.total && (
+                      <ProgressBar value={avgRatings.total || 0} />
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div className="row employerResult">
+                <div>
+                  <p>
+                    <FaQuoteLeft size={30} className="quoteLeft" />
+                    This employee is marked as a{" "}
+                    <span className="text-color-green">
+                      {text(avgRatings?.total)} employee{" "}
+                    </span>{" "}
+                    by <strong>The Madras Branding Company</strong>
+                  </p>
+                </div>
               </div>
             </div>
             <div className="divider my-3"></div>
-            <div className="col-md-2 col-3">
+            {/* <div className="col-md-2 col-3">
               <div className="companyLogo">
                 <img src={CompanyLogo} alt="" className="logo" />
               </div>
@@ -441,7 +552,7 @@ const EmployeeDetails = () => {
               <div className="back">
                 <MdOutlineKeyboardArrowDown size={35} className="downIcon" />
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
