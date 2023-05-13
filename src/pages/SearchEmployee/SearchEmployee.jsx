@@ -237,7 +237,6 @@ export default function SearchEmployee() {
               .map((info) => {
                 return (
                   <AssesmentCard
-                    value={30}
                     info={info}
                     employerId={userDatas.id}
                     name={info.employeeName}
