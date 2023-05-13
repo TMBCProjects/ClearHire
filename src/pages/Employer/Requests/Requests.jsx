@@ -8,6 +8,7 @@ import { Fields } from "../../../utils/Fields";
 import { getDocuments, setCollection } from "../../../utils/FirebaseUtils";
 import { Collections } from "../../../utils/Collections";
 import { SendOutlined } from "@ant-design/icons";
+import { Empty } from "antd";
 
 const Requests = () => {
   const [requests, setRequests] = useState([]);
@@ -97,7 +98,7 @@ const Requests = () => {
             >
               All
             </label>
-          </div>  
+          </div>
 
           <div className="form-check form-check-inline mx-3">
             <input
@@ -123,41 +124,50 @@ const Requests = () => {
         </div>
       </div>
       <div className="row mt-3">
-        {requests
-          ?.filter((info) => {
-            return notOnClearHire
-              ? info.emailAvailable === false
-              : info.emailAvailable === true;
-          })
-          .map((info) => {
-            return (
-              <div className="col-md-3 gy-3">
-                <div className="card">
-                  <div className="card-body">
-                    <h3 className="card-title fw-bold">{info.employeeName}</h3>
-                    <p className="mb-1">{info.employeeEmail}</p>
-                    {info.isApproved === true ? (
-                      <Link
-                        className="w-100 mt-3 btn"
-                        to={{
-                          pathname: "/ViewEmployeeProfile",
-                        }}
-                        state={{ from: info }}
-                      >
-                        <button className="w-100 mt-3 btn btn-assessment">
-                          View Employee Profile
+        {requests.length > 0 ? (
+          requests
+            ?.filter((info) => {
+              return notOnClearHire
+                ? info.emailAvailable === false
+                : info.emailAvailable === true;
+            })
+            .map((info) => {
+              return (
+                <div className="col-md-3 gy-3">
+                  <div className="card">
+                    <div className="card-body">
+                      <h3 className="card-title fw-bold">
+                        {info.employeeName}
+                      </h3>
+                      <p className="mb-1">{info.employeeEmail}</p>
+                      {info.isApproved === true ? (
+                        <Link
+                          className="w-100 mt-3 btn"
+                          to={{
+                            pathname: "/ViewAssessment",
+                          }}
+                          state={{ from: info.employeeId }}
+                        >
+                          <button className="w-100 mt-3 btn btn-assessment">
+                            View assessment
+                          </button>
+                        </Link>
+                      ) : (
+                        <button className="w-100 mt-3 btn btn-request-sent">
+                          Request sent
                         </button>
-                      </Link>
-                    ) : (
-                      <button className="w-100 mt-3 btn btn-request-sent">
-                        Request sent
-                      </button>
-                    )}
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })
+        ) : (
+          <Empty
+            image={Empty.PRESENTED_IMAGE_SIMPLE}
+            description="No Records"
+          />
+        )}
         {/* <div className="col-md-3 gy-3">
           <div className="card">
             <div className="card-body">

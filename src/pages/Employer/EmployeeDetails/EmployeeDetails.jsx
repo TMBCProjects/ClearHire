@@ -18,6 +18,7 @@ const EmployeeDetails = () => {
   const employee = from;
   const [employeeRatings, setEmployeeRatings] = useState([]);
   const [avgRatings, setAvgRatings] = useState({});
+  const [prevSkills, setPrevSkills] = useState("none");
   // console.log("info", from);
 
   const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
@@ -183,6 +184,10 @@ const EmployeeDetails = () => {
       return "Great";
     }
   }
+
+  const handlePrevCompanySkills = () => {
+    setPrevSkills(prevSkills === "none" ? "block" : "none");
+  };
 
   return (
     <>
