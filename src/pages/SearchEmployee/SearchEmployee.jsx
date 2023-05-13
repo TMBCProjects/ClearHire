@@ -52,23 +52,22 @@ export default function SearchEmployee() {
       try {
         const user = sessionStorage.getItem("LoggedIn");
         const userDatas1 = JSON.parse(sessionStorage.getItem("userData"));
-        const data =
-          user === "Employer"
-            ? await readEmployees(userDatas1.id)
-            : userDatas1.data.currentEmployerId
-              ? await readColleagues(
-                userDatas1.id,
-                userDatas1.data.currentEmployerId
-              )
-              : [];
-        console.log(data);
-        setEmployeeList(data);
+        // const data =
+        //   user === "Employer"
+        //     ? await readEmployees(userDatas1.id)
+        //     : userDatas1.data.currentEmployerId
+        //       ? await readColleagues(
+        //         userDatas1.id,
+        //         userDatas1.data.currentEmployerId
+        //       )
+        //       : [];
+        // setEmployeeList(data);
       } catch (error) {
         console.log(error);
       }
     };
     fetchEmployerDetails();
-  }, [setEmployeeList]);
+  }, []);
 
 
   const handleSalaryChange = (event) => {
@@ -86,47 +85,48 @@ export default function SearchEmployee() {
   const handleSelectChange = (e) => {
     filters.typeOfEmployment = e;
   };
-  const search = () => {
-    if (filters.location) {
-      const filteredData = employeeList.filter((item) =>
-        item.typeOfEmployment.toLowerCase().includes(filters.location)
-      );
-      setEmployeeList(filteredData);
-    } else {
-      setEmployeeList(filters);
-    }
-    setQuery(filters.location);
 
-    if (filters.typeOfEmployment.length > 0) {
-      const filteredData = employeeList.filter((item) =>
-        item.typeOfEmployment.toLowerCase().includes(filters.typeOfEmployment)
-      );
-      setEmployeeList(filteredData);
-    } else {
-      setEmployeeList(filters);
-    }
-    setQuery(filters.typeOfEmployment);
+  // const search = () => {
+  //   if (filters.location) {
+  //     const filteredData = employeeList.filter((item) =>
+  //       item.typeOfEmployment.toLowerCase().includes(filters.location)
+  //     );
+  //     setEmployeeList(filteredData);
+  //   } else {
+  //     setEmployeeList(filters);
+  //   }
+  //   setQuery(filters.location);
 
-    if (filters.designation.length > 0) {
-      const filteredData = employeeList.filter((item) =>
-        item.typeOfEmployment.toLowerCase().includes(filters.designation)
-      );
-      setEmployeeList(filteredData);
-    } else {
-      setEmployeeList(filters);
-    }
-    setQuery(filters.designation);
+  //   if (filters.typeOfEmployment.length > 0) {
+  //     const filteredData = employeeList.filter((item) =>
+  //       item.typeOfEmployment.toLowerCase().includes(filters.typeOfEmployment)
+  //     );
+  //     setEmployeeList(filteredData);
+  //   } else {
+  //     setEmployeeList(filters);
+  //   }
+  //   setQuery(filters.typeOfEmployment);
 
-    if (filters.salary.length > 0) {
-      const filteredData = employeeList.filter((item) =>
-        item.typeOfEmployment.toLowerCase().includes(filters.salary)
-      );
-      setEmployeeList(filteredData);
-    } else {
-      setEmployeeList(filters);
-    }
-    setQuery(filters.salary);
-  };
+  //   if (filters.designation.length > 0) {
+  //     const filteredData = employeeList.filter((item) =>
+  //       item.typeOfEmployment.toLowerCase().includes(filters.designation)
+  //     );
+  //     setEmployeeList(filteredData);
+  //   } else {
+  //     setEmployeeList(filters);
+  //   }
+  //   setQuery(filters.designation);
+
+  //   if (filters.salary.length > 0) {
+  //     const filteredData = employeeList.filter((item) =>
+  //       item.typeOfEmployment.toLowerCase().includes(filters.salary)
+  //     );
+  //     setEmployeeList(filteredData);
+  //   } else {
+  //     setEmployeeList(filters);
+  //   }
+  //   setQuery(filters.salary);
+  // };
 
   return (
     <div className="employer-home">
@@ -189,13 +189,13 @@ export default function SearchEmployee() {
           <div className="row1">
             {user === "Employer" ? (
               <div className="row1-checkboxes">
-                <Checkbox style={checkBoxStyles} onChange={onChange}>
+                <Checkbox style={checkBoxStyles} onChange={(e) => onChange(e)}>
                   Assessed
                 </Checkbox>
-                <Checkbox style={checkBoxStyles} onChange={onChange}>
+                <Checkbox style={checkBoxStyles} onChange={(e) => onChange(e)}>
                   Pending
                 </Checkbox>
-                <Checkbox style={checkBoxStyles} onChange={onChange}>
+                <Checkbox style={checkBoxStyles} onChange={(e) => onChange(e)}>
                   All
                 </Checkbox>
               </div>
