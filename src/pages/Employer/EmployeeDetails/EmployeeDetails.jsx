@@ -406,6 +406,7 @@ const EmployeeDetails = () => {
           </div>
         </div>
       </div>
+      {employee?.employerIdList?.filter((info) => { return (info.employerId !== employee.currentEmployerId) }).length === 0 ? <section className="companies-section"></section> :
       <section className="companies-section">
         <div className="container">
           <div className="row">
@@ -413,149 +414,31 @@ const EmployeeDetails = () => {
               <h1>Previous Companies</h1>
             </div>
           </div>
-          <div
-            className="row d-flex align-items-center my-3"
-            onClick={handlePrevCompanySkills}
-            style={{ cursor: "pointer", transition: "all 3s ease-in" }}
-          >
-            <div className="col-md-2 col-3">
-              <div className="companyLogo">
-                <img src={CompanyLogo} alt="" className="logo" />
-              </div>
-            </div>
-            <div className="col-md-9 col-7">
-              <h1 className="fw-bold font-size-39">
-                The Madras Branding Company
-              </h1>
-              <div className="fw-bold font-size-25">2022</div>
-            </div>
-            <div className="col-md-1 col-1">
-              <div className="back">
-                <MdOutlineKeyboardArrowDown size={35} className="downIcon" />
-              </div>
-            </div>
-            <div
-              className="prevSkillsContainer"
-              style={{ display: prevSkills }}
-            >
-              <div className="row d-flex justify-content-center align-items-center progressBars">
-                <div className="col-md-8">
-                  <div className="row">
-                    <div className="col-md-3 mb-3">
-                      <div class="circle-wrap">
-                        {avgRatings.avgCommunication && (
-                          <ProgressBar
-                            value={avgRatings.avgCommunication || 0}
-                          />
-                        )}
-                      </div>
-                      <p>Communitcation</p>
-                    </div>
-                    <div className="col-md-3 mb-3">
-                      <div class="circle-wrap">
-                        {avgRatings.avgAttitude && (
-                          <ProgressBar value={avgRatings.avgAttitude || 0} />
-                        )}
-                      </div>
-                      <p>Attitude</p>
-                    </div>
-                    <div className="col-md-3 mb-3">
-                      <div class="circle-wrap">
-                        {avgRatings.avgAbilityToLearn && (
-                          <ProgressBar
-                            value={avgRatings.avgAbilityToLearn || 0}
-                          />
-                        )}
-                      </div>
-                      <p>Ability To Learn</p>
-                    </div>
-                    <div className="col-md-3 mb-3">
-                      <div class="circle-wrap">
-                        {avgRatings.avgPunctuality && (
-                          <ProgressBar value={avgRatings.avgPunctuality || 0} />
-                        )}
-                      </div>
-                      <p>Punctuality</p>
-                    </div>
-                    <div className="col-md-3 mb-3">
-                      <div class="circle-wrap">
-                        {avgRatings.avgCommitment && (
-                          <ProgressBar value={avgRatings.avgCommitment || 0} />
-                        )}
-                      </div>
-                      <p>Commitment</p>
-                    </div>
-                    <div className="col-md-3 mb-3">
-                      <div class="circle-wrap">
-                        {avgRatings.avgTrustWorthiness && (
-                          <ProgressBar
-                            value={avgRatings.avgTrustWorthiness || 0}
-                          />
-                        )}
-                      </div>
-                      <p>Trustworthiness</p>
-                    </div>
-                    <div className="col-md-3 mb-3">
-                      <div class="circle-wrap">
-                        {avgRatings.avgSkill && (
-                          <ProgressBar value={avgRatings.avgSkill || 0} />
-                        )}
-                      </div>
-                      <p>Skill</p>
-                    </div>
-                    <div className="col-md-3 mb-3">
-                      <div class="circle-wrap">
-                        {avgRatings.avgTeamPlayer && (
-                          <ProgressBar value={avgRatings.avgTeamPlayer || 0} />
-                        )}
-                      </div>
-                      <p>Team Player</p>
+            {employee?.employerIdList?.filter((info) => { return (info.employerId !== employee.currentEmployerId) })
+              ?.map((info) => {
+                return (<div className="row d-flex align-items-center my-3">
+                  <div className="col-md-2 col-3">
+                    <div className="companyLogo">
+                      <img src={info.companyLogo} alt="" className="logo" />
                     </div>
                   </div>
-                </div>
-                <div className="col-md-4 align-items-center d-flex flex-column">
-                  <p className="mb-0">Total</p>
+                  <div className="col-md-9 col-7">
+                    <h1 className="fw-bold font-size-39">
+                      {info.companyName}
+                    </h1>
+                    <div className="fw-bold font-size-25">{new Date(info.dateOfJoining.seconds * 1000).getFullYear()}</div>
+                  </div>
+                  <div className="col-md-1 col-1">
+                    <div className="back">
+                      <MdOutlineKeyboardArrowDown size={35} className="downIcon" />
+                    </div>
+                  </div>
+                  <div className="divider my-3"></div>
+                </div>)
+              })}
 
-                  <div class="circle-wrap">
-                    {avgRatings.total && (
-                      <ProgressBar value={avgRatings.total || 0} />
-                    )}
-                  </div>
-                </div>
-              </div>
-              <div className="row employerResult">
-                <div>
-                  <p>
-                    <FaQuoteLeft size={30} className="quoteLeft" />
-                    This employee is marked as a{" "}
-                    <span className="text-color-green">
-                      {text(avgRatings?.total)} employee{" "}
-                    </span>{" "}
-                    by <strong>The Madras Branding Company</strong>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="divider my-3"></div>
-            {/* <div className="col-md-2 col-3">
-              <div className="companyLogo">
-                <img src={CompanyLogo} alt="" className="logo" />
-              </div>
-            </div>
-            <div className="col-md-9 col-7">
-              <h1 className="fw-bold font-size-39">
-                The Madras Branding Company
-              </h1>
-              <div className="fw-bold font-size-25">2022</div>
-            </div>
-            <div className="col-md-1 col-1">
-              <div className="back">
-                <MdOutlineKeyboardArrowDown size={35} className="downIcon" />
-              </div>
-            </div> */}
           </div>
-        </div>
-      </section>
+        </section>}
     </>
   );
 };

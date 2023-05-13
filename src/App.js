@@ -25,6 +25,7 @@ import Requests from "./pages/Employer/Requests/Requests";
 import RequestApproval from "./pages/Employer/RequestApproval/RequestApproval";
 import ViewEmployeeProfile from "./pages/Employer/EmployeeDetails/ViewEmployeeProfile";
 import ViewAssessment from "./pages/Employer/ViewAssessment/ViewAssessment";
+import Offers from "./pages/Employee/OfferList/Offers";
 
 function App() {
   return (
@@ -114,7 +115,9 @@ function App() {
                     <Route
                       path="/employeeOfferLetter"
                       element={<EmployeeOfferLetter />}></Route>
-                    {/* <Route path="/offerLetters" element={<Offers />}></Route> */}
+                    <Route
+                      path="/offerLetters"
+                      element={<Offers />}></Route>
                     <Route
                       path="/"
                       element={<SearchEmployee />}></Route>

@@ -158,6 +158,7 @@ export async function offerAccept(profileData, employeeId, offerId) {
         employerId: profileData.currentEmployerId,
         companyName: profileData.companyName,
         companyLogo: profileData.companyLogo,
+        dateOfJoining: profileData.dateOfJoining,
       }),
     },
     employeeId

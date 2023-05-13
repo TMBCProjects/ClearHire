@@ -107,7 +107,7 @@ function OnboardingForm() {
                     <option value="Video Editor">Video Editor</option>
                   </select>
                 </div>
-                <div className="form-item ">
+                <div className="form-items">
                   <select
                     name="typeOfEmployment"
                     id="typeOfEmployment"
