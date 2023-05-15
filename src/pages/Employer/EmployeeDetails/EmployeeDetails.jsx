@@ -298,22 +298,26 @@ const EmployeeDetails = () => {
             */}
         </div>
         {/* skills section ends */}
-
-        <div className="row d-flex align-items-center">
-          <div className="col-12">
-            <h1>Current Company</h1>
-          </div>
-          <div className="col-3">
-            <div className="companyLogo">
-              <img src={employee?.companyLogo} alt="logo" className="logo" />
-            </div>
-          </div>
-          <div className="col-8">
-            <h1 className="fw-bold font-size-39">{employee?.companyName}</h1>
-            <div className="fw-bold font-size-25">2022</div>
-          </div>
-        </div>
-        <div className="divider"></div>
+        {employee?.employerIdList?.filter((info) => { return (info.employerId === employee.currentEmployerId) })
+          ?.map((info) => {
+            return (<div className="row d-flex align-items-center my-3">
+              <div className="col-12">
+                <h1>Current Company</h1>
+              </div>
+              <div className="col-3">
+                <div className="companyLogo">
+                  <img src={info.companyLogo} alt="" className="logo" />
+                </div>
+              </div>
+              <div className="col-md-9 col-7">
+                <h1 className="fw-bold font-size-39">
+                  {info.companyName}
+                </h1>
+                <div className="fw-bold font-size-25">{new Date(info.dateOfJoining.seconds * 1000).getFullYear()}</div>
+              </div>
+              <div className="divider my-3"></div>
+            </div>)
+          })}
         <div className="row d-flex justify-content-center align-items-center progressBars">
           <div className="col-md-8">
             <div className="row">

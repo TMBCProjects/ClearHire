@@ -52,16 +52,16 @@ export default function SearchEmployee() {
       try {
         const user = sessionStorage.getItem("LoggedIn");
         const userDatas1 = JSON.parse(sessionStorage.getItem("userData"));
-        // const data =
-        //   user === "Employer"
-        //     ? await readEmployees(userDatas1.id)
-        //     : userDatas1.data.currentEmployerId
-        //       ? await readColleagues(
-        //         userDatas1.id,
-        //         userDatas1.data.currentEmployerId
-        //       )
-        //       : [];
-        // setEmployeeList(data);
+        const data =
+          user === "Employer"
+            ? await readEmployees(userDatas1.id)
+            : userDatas1.data.currentEmployerId
+              ? await readColleagues(
+                userDatas1.id,
+                userDatas1.data.currentEmployerId
+              )
+              : [];
+        setEmployeeList(data);
       } catch (error) {
         console.log(error);
       }
