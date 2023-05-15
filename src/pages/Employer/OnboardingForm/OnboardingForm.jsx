@@ -143,7 +143,7 @@ function OnboardingForm() {
                     onChange={handleInputChange}
                   />
                 </div>
-                <div className="form-item f-3">
+                <div className="form-item">
                   <input
                     type="file"
                     id="file"
