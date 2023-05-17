@@ -158,6 +158,124 @@ const EmployeeDetails = () => {
       colleagueScore: Math.ceil(colleagueScore),
     });
   };
+
+  const calculateTotalRatings = (ratings) => {
+    let avgCommunication = 0;
+    let avgAttitude = 0;
+    let avgAbilityToLearn = 0;
+    let avgPunctuality = 0;
+    let avgCommitment = 0;
+    let avgTrustWorthiness = 0;
+    let avgSkill = 0;
+    let avgTeamPlayer = 0;
+    let total = 0;
+    for (let index = 0; index < ratings.length; index++) {
+      const element = ratings[index];
+      avgCommunication += +element.communication;
+      avgAttitude += +element.attitude;
+      avgAbilityToLearn += +element.abilityToLearn;
+      avgPunctuality += +element.punctuality;
+      avgCommitment += +element.commitment;
+      avgTrustWorthiness += +element.trustworthiness;
+      avgSkill += +element.skill;
+      avgTeamPlayer += +element.teamPlayer;
+    }
+    avgCommunication /= ratings.length;
+    avgAttitude /= ratings.length;
+    avgAbilityToLearn /= ratings.length;
+    avgPunctuality /= ratings.length;
+    avgCommitment /= ratings.length;
+    avgTrustWorthiness /= ratings.length;
+    avgSkill /= ratings.length;
+    avgTeamPlayer /= ratings.length;
+    total =
+      avgCommunication +
+      avgAttitude +
+      avgAbilityToLearn +
+      avgPunctuality +
+      avgCommitment +
+      avgTrustWorthiness +
+      avgSkill +
+      avgTeamPlayer;
+    total = total / 8;
+    return Math.ceil(total)
+  };
+
+  const calculateCommunicationRatings = (ratings) => {
+    let avgCommunication = 0;
+    for (let index = 0; index < ratings.length; index++) {
+      const element = ratings[index];
+      avgCommunication += +element.communication;
+    }
+    avgCommunication /= ratings.length;
+    return avgCommunication
+  };
+
+  const calculateAttitudeRatings = (ratings) => {
+    let avgAttitude = 0;
+    for (let index = 0; index < ratings.length; index++) {
+      const element = ratings[index];
+      avgAttitude += +element.attitude;
+    }
+    avgAttitude /= ratings.length;
+    return avgAttitude
+  };
+
+  const calculateAbilityToLearnRatings = (ratings) => {
+    let avgAbilityToLearn = 0;
+    for (let index = 0; index < ratings.length; index++) {
+      const element = ratings[index];
+      avgAbilityToLearn += +element.abilityToLearn;
+    }
+    avgAbilityToLearn /= ratings.length;
+    return avgAbilityToLearn
+  };
+
+  const calculatePunctualityRatings = (ratings) => {
+    let avgPunctuality = 0;
+    for (let index = 0; index < ratings.length; index++) {
+      const element = ratings[index];
+      avgPunctuality += +element.punctuality;
+    }
+    avgPunctuality /= ratings.length;
+    return avgPunctuality
+  };
+  const calculateCommitmentRatings = (ratings) => {
+    let avgCommitment = 0;
+    for (let index = 0; index < ratings.length; index++) {
+      const element = ratings[index];
+      avgCommitment += +element.commitment;
+    }
+    avgCommitment /= ratings.length;
+    return avgCommitment
+  };
+  const calculateTrustWorthinessRatings = (ratings) => {
+    let avgTrustWorthiness = 0;
+    for (let index = 0; index < ratings.length; index++) {
+      const element = ratings[index];
+      avgTrustWorthiness += +element.trustworthiness;
+    }
+    avgTrustWorthiness /= ratings.length;
+    return avgTrustWorthiness
+  };
+  const calculateSkillRatings = (ratings) => {
+    let avgTrustWorthiness = 0;
+    for (let index = 0; index < ratings.length; index++) {
+      const element = ratings[index];
+      avgSkill += +element.skill;
+    }
+    avgSkill /= ratings.length;
+    return avgSkill
+  };
+  const calculateTeamPlayerRatings = (ratings) => {
+    let avgTeamPlayer = 0;
+    for (let index = 0; index < ratings.length; index++) {
+      const element = ratings[index];
+      avgTeamPlayer += +element.teamPlayer;
+    }
+    avgTeamPlayer /= ratings.length;
+    return avgTeamPlayer
+  };
   function getRatingsByEmployerId(ratings, employerId) {
     return ratings.filter((rating) => rating.ratedById === employerId);
   }
@@ -420,7 +538,11 @@ const EmployeeDetails = () => {
           </div>
             {employee?.employerIdList?.filter((info) => { return (info.employerId !== employee.currentEmployerId) })
               ?.map((info) => {
-                return (<div className="row d-flex align-items-center my-3">
+                return (<div
+                  className="row d-flex align-items-center my-3"
+                  onClick={() => { handlePrevCompanySkills() }}
+                  style={{ cursor: "pointer", transition: "all 3s ease-in" }}
+                >
                   <div className="col-md-2 col-3">
                     <div className="companyLogo">
                       <img src={info.companyLogo} alt="" className="logo" />
@@ -435,6 +557,108 @@ const EmployeeDetails = () => {
                   <div className="col-md-1 col-1">
                     <div className="back">
                       <MdOutlineKeyboardArrowDown size={35} className="downIcon" />
+                    </div>
+                  </div>
+                  <div
+                    className="prevSkillsContainer"
+                    style={{ display: prevSkills }}
+                  >
+                    <div className="row d-flex justify-content-center align-items-center progressBars">
+                      <div className="col-md-8">
+                        <div className="row">
+                          <div className="col-md-3 mb-3">
+                            <div class="circle-wrap">
+                              {avgRatings.avgCommunication && (
+                                <ProgressBar
+                                  value={avgRatings.avgCommunication || 0}
+                                />
+                              )}
+                            </div>
+                            <p>Communitcation</p>
+                          </div>
+                          <div className="col-md-3 mb-3">
+                            <div class="circle-wrap">
+                              {avgRatings.avgAttitude && (
+                                <ProgressBar value={avgRatings.avgAttitude || 0} />
+                              )}
+                            </div>
+                            <p>Attitude</p>
+                          </div>
+                          <div className="col-md-3 mb-3">
+                            <div class="circle-wrap">
+                              {avgRatings.avgAbilityToLearn && (
+                                <ProgressBar
+                                  value={avgRatings.avgAbilityToLearn || 0}
+                                />
+                              )}
+                            </div>
+                            <p>Ability To Learn</p>
+                          </div>
+                          <div className="col-md-3 mb-3">
+                            <div class="circle-wrap">
+                              {avgRatings.avgPunctuality && (
+                                <ProgressBar value={avgRatings.avgPunctuality || 0} />
+                              )}
+                            </div>
+                            <p>Punctuality</p>
+                          </div>
+                          <div className="col-md-3 mb-3">
+                            <div class="circle-wrap">
+                              {avgRatings.avgCommitment && (
+                                <ProgressBar value={avgRatings.avgCommitment || 0} />
+                              )}
+                            </div>
+                            <p>Commitment</p>
+                          </div>
+                          <div className="col-md-3 mb-3">
+                            <div class="circle-wrap">
+                              {avgRatings.avgTrustWorthiness && (
+                                <ProgressBar
+                                  value={avgRatings.avgTrustWorthiness || 0}
+                                />
+                              )}
+                            </div>
+                            <p>Trustworthiness</p>
+                          </div>
+                          <div className="col-md-3 mb-3">
+                            <div class="circle-wrap">
+                              {avgRatings.avgSkill && (
+                                <ProgressBar value={avgRatings.avgSkill || 0} />
+                              )}
+                            </div>
+                            <p>Skill</p>
+                          </div>
+                          <div className="col-md-3 mb-3">
+                            <div class="circle-wrap">
+                              {avgRatings.avgTeamPlayer && (
+                                <ProgressBar value={avgRatings.avgTeamPlayer || 0} />
+                              )}
+                            </div>
+                            <p>Team Player</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-md-4 align-items-center d-flex flex-column">
+                        <p className="mb-0">Total</p>
+
+                        <div class="circle-wrap">
+                          {avgRatings.total && (
+                            <ProgressBar value={avgRatings.total || 0} />
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="row employerResult">
+                      <div>
+                        <p>
+                          <FaQuoteLeft size={30} className="quoteLeft" />
+                          This employee is marked as a{" "}
+                          <span className="text-color-green">
+                            {text(avgRatings?.total)} employee{" "}
+                          </span>{" "}
+                          by <strong>The Madras Branding Company</strong>
+                        </p>
+                      </div>
                     </div>
                   </div>
                   <div className="divider my-3"></div>

@@ -48,14 +48,11 @@ export default function SearchEmployee() {
   const [filters, setFilters] = useState(initialValues);
   const [query, setQuery] = useState("");
   useEffect(() => {
-    const fetchEmployerDetails = async () => {
+    const fetchCollegueDetails = async () => {
       try {
         const user = sessionStorage.getItem("LoggedIn");
         const userDatas1 = JSON.parse(sessionStorage.getItem("userData"));
-        const data =
-          user === "Employer"
-            ? await readEmployees(userDatas1.id)
-            : userDatas1.data.currentEmployerId
+        const data = userDatas1.data.currentEmployerId
               ? await readColleagues(
                 userDatas1.id,
                 userDatas1.data.currentEmployerId
@@ -66,7 +63,20 @@ export default function SearchEmployee() {
         console.log(error);
       }
     };
-    fetchEmployerDetails();
+    const fetchEmployeeDetails = async () => {
+      try {
+        const userDatas1 = JSON.parse(sessionStorage.getItem("userData"));
+        const data = await readEmployees(userDatas1.id);
+        console.log(data)
+        // setEmployeeList(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const user = sessionStorage.getItem("LoggedIn");
+    user === "Employer"
+      ? fetchEmployeeDetails()
+      : fetchCollegueDetails();
   }, []);
 
 
@@ -217,7 +227,8 @@ export default function SearchEmployee() {
                 image={Empty.PRESENTED_IMAGE_SIMPLE}
                 description="No Records"
               />
-            )}
+            )}{
+              console.log(employeeList)}
             {employeeList
               .filter((item) => {
                 return (
