@@ -249,7 +249,7 @@ const EmployeeDetails = () => {
     avgCommitment /= ratings.length;
     return avgCommitment
   };
-  const calculateTrustWorthinessRatings = (ratings) => {
+  const calculateTrustworthinessRatings = (ratings) => {
     let avgTrustWorthiness = 0;
     for (let index = 0; index < ratings.length; index++) {
       const element = ratings[index];
@@ -284,6 +284,7 @@ const EmployeeDetails = () => {
       const data2 = employee.ratings
       calculateRatings(data2);
       setEmployeeRatings(data2);
+      // calculateTeamPlayerRatings(getRatingsByEmployerId(employee.ratings, employee.currentEmployerId))
       // console.log(getRatingsByEmployerId(data2, employee.currentEmployerId))
     };
     fetchOfferDetails();
@@ -441,64 +442,64 @@ const EmployeeDetails = () => {
             <div className="row">
               <div className="col-md-3 mb-3">
                 <div class="circle-wrap">
-                  {avgRatings.avgCommunication && (
-                    <ProgressBar value={avgRatings.avgCommunication || 0} />
+                  {calculateCommunicationRatings(getRatingsByEmployerId(employee.ratings, employee.currentEmployerId)) && (
+                    <ProgressBar value={calculateCommunicationRatings(getRatingsByEmployerId(employee.ratings, employee.currentEmployerId)) || 0} />
                   )}
                 </div>
-                <p>Communitcation</p>
+                <p>Communication</p>
               </div>
               <div className="col-md-3 mb-3">
                 <div class="circle-wrap">
-                  {avgRatings.avgAttitude && (
-                    <ProgressBar value={avgRatings.avgAttitude || 0} />
+                  {calculateAttitudeRatings(getRatingsByEmployerId(employee.ratings, employee.currentEmployerId)) && (
+                    <ProgressBar value={calculateAttitudeRatings(getRatingsByEmployerId(employee.ratings, employee.currentEmployerId)) || 0} />
                   )}
                 </div>
                 <p>Attitude</p>
               </div>
               <div className="col-md-3 mb-3">
                 <div class="circle-wrap">
-                  {avgRatings.avgAbilityToLearn && (
-                    <ProgressBar value={avgRatings.avgAbilityToLearn || 0} />
+                  {calculateAbilityToLearnRatings(getRatingsByEmployerId(employee.ratings, employee.currentEmployerId)) && (
+                    <ProgressBar value={calculateAbilityToLearnRatings(getRatingsByEmployerId(employee.ratings, employee.currentEmployerId)) || 0} />
                   )}
                 </div>
                 <p>Ability To Learn</p>
               </div>
               <div className="col-md-3 mb-3">
                 <div class="circle-wrap">
-                  {avgRatings.avgPunctuality && (
-                    <ProgressBar value={avgRatings.avgPunctuality || 0} />
+                  {calculatePunctualityRatings(getRatingsByEmployerId(employee.ratings, employee.currentEmployerId)) && (
+                    <ProgressBar value={calculatePunctualityRatings(getRatingsByEmployerId(employee.ratings, employee.currentEmployerId)) || 0} />
                   )}
                 </div>
                 <p>Punctuality</p>
               </div>
               <div className="col-md-3 mb-3">
                 <div class="circle-wrap">
-                  {avgRatings.avgCommitment && (
-                    <ProgressBar value={avgRatings.avgCommitment || 0} />
+                  {calculateCommitmentRatings(getRatingsByEmployerId(employee.ratings, employee.currentEmployerId)) && (
+                    <ProgressBar value={calculateCommitmentRatings(getRatingsByEmployerId(employee.ratings, employee.currentEmployerId)) || 0} />
                   )}
                 </div>
                 <p>Commitment</p>
               </div>
               <div className="col-md-3 mb-3">
                 <div class="circle-wrap">
-                  {avgRatings.avgTrustWorthiness && (
-                    <ProgressBar value={avgRatings.avgTrustWorthiness || 0} />
+                  {calculateTrustworthinessRatings(getRatingsByEmployerId(employee.ratings, employee.currentEmployerId)) && (
+                    <ProgressBar value={calculateTrustworthinessRatings(getRatingsByEmployerId(employee.ratings, employee.currentEmployerId)) || 0} />
                   )}
                 </div>
                 <p>Trustworthiness</p>
               </div>
               <div className="col-md-3 mb-3">
                 <div class="circle-wrap">
-                  {avgRatings.avgSkill && (
-                    <ProgressBar value={avgRatings.avgSkill || 0} />
+                  {calculateSkillRatings(getRatingsByEmployerId(employee.ratings, employee.currentEmployerId)) && (
+                    <ProgressBar value={calculateSkillRatings(getRatingsByEmployerId(employee.ratings, employee.currentEmployerId)) || 0} />
                   )}
                 </div>
                 <p>Skill</p>
               </div>
               <div className="col-md-3 mb-3">
                 <div class="circle-wrap">
-                  {avgRatings.avgTeamPlayer && (
-                    <ProgressBar value={avgRatings.avgTeamPlayer || 0} />
+                  {calculateTeamPlayerRatings(getRatingsByEmployerId(employee.ratings, employee.currentEmployerId)) && (
+                    <ProgressBar value={calculateTeamPlayerRatings(getRatingsByEmployerId(employee.ratings, employee.currentEmployerId)) || 0} />
                   )}
                 </div>
                 <p>Team Player</p>
@@ -509,8 +510,8 @@ const EmployeeDetails = () => {
             <p className="mb-0">Total</p>
 
             <div class="circle-wrap">
-              {avgRatings.total && (
-                <ProgressBar value={avgRatings.total || 0} />
+              {calculateTotalRatings(getRatingsByEmployerId(employee.ratings, employee.currentEmployerId)) && (
+                <ProgressBar value={calculateTotalRatings(getRatingsByEmployerId(employee.ratings, employee.currentEmployerId)) || 0} />
               )}
             </div>
           </div>
@@ -521,7 +522,7 @@ const EmployeeDetails = () => {
               <FaQuoteLeft size={30} className="quoteLeft" />
               This employee is marked as a{" "}
               <span className="text-color-green">
-                {text(avgRatings?.total)} employee{" "}
+                {text(calculateTotalRatings(getRatingsByEmployerId(employee.ratings, employee.currentEmployerId)))} employee{" "}
               </span>{" "}
               by <strong>The Madras Branding Company</strong>
             </p>
