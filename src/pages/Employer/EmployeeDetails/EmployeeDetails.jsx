@@ -752,19 +752,39 @@ const EmployeeDetails = () => {
                           <div className="row">
                             <div className="col-md-3 mb-3">
                               <div class="circle-wrap">
-                                {avgRatings.avgCommunication && (
+                                {calculateCommunicationRatings(
+                                  getRatingsByEmployerId(
+                                    employee.ratings,
+                                    info.employerId
+                                  )
+                                ) && (
                                   <ProgressBar
-                                    value={avgRatings.avgCommunication || 0}
+                                    value={calculateCommunicationRatings(
+                                      getRatingsByEmployerId(
+                                        employee.ratings,
+                                        info.employerId
+                                      )
+                                    ) || 0}
                                   />
                                 )}
                               </div>
-                              <p>Communitcation</p>
+                              <p>Communication</p>
                             </div>
                             <div className="col-md-3 mb-3">
                               <div class="circle-wrap">
-                                {avgRatings.avgAttitude && (
+                                {calculateAttitudeRatings(
+                                  getRatingsByEmployerId(
+                                    employee.ratings,
+                                    info.employerId
+                                  )
+                                ) && (
                                   <ProgressBar
-                                    value={avgRatings.avgAttitude || 0}
+                                    value={calculateAttitudeRatings(
+                                      getRatingsByEmployerId(
+                                        employee.ratings,
+                                        info.employerId
+                                      )
+                                    ) || 0}
                                   />
                                 )}
                               </div>
@@ -772,9 +792,19 @@ const EmployeeDetails = () => {
                             </div>
                             <div className="col-md-3 mb-3">
                               <div class="circle-wrap">
-                                {avgRatings.avgAbilityToLearn && (
+                                {calculateAbilityToLearnRatings(
+                                  getRatingsByEmployerId(
+                                    employee.ratings,
+                                    info.employerId
+                                  )
+                                ) && (
                                   <ProgressBar
-                                    value={avgRatings.avgAbilityToLearn || 0}
+                                    value={calculateAbilityToLearnRatings(
+                                      getRatingsByEmployerId(
+                                        employee.ratings,
+                                        info.employerId
+                                      )
+                                    ) || 0}
                                   />
                                 )}
                               </div>
@@ -782,9 +812,19 @@ const EmployeeDetails = () => {
                             </div>
                             <div className="col-md-3 mb-3">
                               <div class="circle-wrap">
-                                {avgRatings.avgPunctuality && (
+                                {calculatePunctualityRatings(
+                                  getRatingsByEmployerId(
+                                    employee.ratings,
+                                    info.employerId
+                                  )
+                                ) && (
                                   <ProgressBar
-                                    value={avgRatings.avgPunctuality || 0}
+                                    value={calculatePunctualityRatings(
+                                      getRatingsByEmployerId(
+                                        employee.ratings,
+                                        info.employerId
+                                      )
+                                    ) || 0}
                                   />
                                 )}
                               </div>
@@ -792,9 +832,19 @@ const EmployeeDetails = () => {
                             </div>
                             <div className="col-md-3 mb-3">
                               <div class="circle-wrap">
-                                {avgRatings.avgCommitment && (
+                                {calculateCommitmentRatings(
+                                  getRatingsByEmployerId(
+                                    employee.ratings,
+                                    info.employerId
+                                  )
+                                ) && (
                                   <ProgressBar
-                                    value={avgRatings.avgCommitment || 0}
+                                    value={calculateCommitmentRatings(
+                                      getRatingsByEmployerId(
+                                        employee.ratings,
+                                        info.employerId
+                                      )
+                                    ) || 0}
                                   />
                                 )}
                               </div>
@@ -802,9 +852,19 @@ const EmployeeDetails = () => {
                             </div>
                             <div className="col-md-3 mb-3">
                               <div class="circle-wrap">
-                                {avgRatings.avgTrustWorthiness && (
+                                {calculateTrustworthinessRatings(
+                                  getRatingsByEmployerId(
+                                    employee.ratings,
+                                    info.employerId
+                                  )
+                                ) && (
                                   <ProgressBar
-                                    value={avgRatings.avgTrustWorthiness || 0}
+                                    value={calculateTrustworthinessRatings(
+                                      getRatingsByEmployerId(
+                                        employee.ratings,
+                                        info.employerId
+                                      )
+                                    ) || 0}
                                   />
                                 )}
                               </div>
@@ -812,9 +872,19 @@ const EmployeeDetails = () => {
                             </div>
                             <div className="col-md-3 mb-3">
                               <div class="circle-wrap">
-                                {avgRatings.avgSkill && (
+                                {calculateSkillRatings(
+                                  getRatingsByEmployerId(
+                                    employee.ratings,
+                                    info.employerId
+                                  )
+                                ) && (
                                   <ProgressBar
-                                    value={avgRatings.avgSkill || 0}
+                                    value={calculateSkillRatings(
+                                      getRatingsByEmployerId(
+                                        employee.ratings,
+                                        info.employerId
+                                      )
+                                    ) || 0}
                                   />
                                 )}
                               </div>
@@ -822,9 +892,19 @@ const EmployeeDetails = () => {
                             </div>
                             <div className="col-md-3 mb-3">
                               <div class="circle-wrap">
-                                {avgRatings.avgTeamPlayer && (
+                                {calculateTeamPlayerRatings(
+                                  getRatingsByEmployerId(
+                                    employee.ratings,
+                                    info.employerId
+                                  )
+                                ) && (
                                   <ProgressBar
-                                    value={avgRatings.avgTeamPlayer || 0}
+                                    value={calculateTeamPlayerRatings(
+                                      getRatingsByEmployerId(
+                                        employee.ratings,
+                                        info.employerId
+                                      )
+                                    ) || 0}
                                   />
                                 )}
                               </div>
@@ -836,8 +916,18 @@ const EmployeeDetails = () => {
                           <p className="mb-0">Total</p>
 
                           <div class="circle-wrap">
-                            {avgRatings.total && (
-                              <ProgressBar value={avgRatings.total || 0} />
+                            {calculateTotalRatings(
+                              getRatingsByEmployerId(
+                                employee.ratings,
+                                info.employerId
+                              )
+                            ) && (
+                                <ProgressBar value={calculateTotalRatings(
+                                  getRatingsByEmployerId(
+                                    employee.ratings,
+                                    info.employerId
+                                  )
+                                ) || 0} />
                             )}
                           </div>
                         </div>
@@ -851,9 +941,14 @@ const EmployeeDetails = () => {
                             />
                             This employee is marked as a{" "}
                             <span className="text-color-green">
-                              {text(avgRatings?.total)} employee{" "}
+                              {text(calculateTotalRatings(
+                                getRatingsByEmployerId(
+                                  employee.ratings,
+                                  info.employerId
+                                )
+                              ))} employee{" "}
                             </span>{" "}
-                            by <strong>The Madras Branding Company</strong>
+                            by <strong>{info.companyName}</strong>
                           </p>
                         </div>
                       </div>
