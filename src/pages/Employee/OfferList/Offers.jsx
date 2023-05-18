@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Offers.css";
 import { readOffers } from "../../../DataBase/Employee/employee";
 import { Link } from "react-router-dom";
+import { Empty } from "antd";
 
 const Offers = () => {
   const [offerList, setOfferList] = useState([]);
@@ -23,6 +24,12 @@ const Offers = () => {
         </div>
       </div>
       <div className="row mt-3">
+        {offerList.length === 0 && (
+          <Empty
+            image={Empty.PRESENTED_IMAGE_SIMPLE}
+            description="No Offers"
+          />
+        )}
         {offerList.map((info) => {
           return (
             <div className="col-md-3 gy-3">
