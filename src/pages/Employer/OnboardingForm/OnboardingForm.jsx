@@ -144,21 +144,22 @@ function OnboardingForm() {
                   />
                 </div>
                 <div className="form-item">
+                  <label htmlFor="file" className="file-input-label">
+                    {file !== "" ? file : "Upload Offer Letter"}
+                    <img src={add} alt="" />
+                  </label>
                   <input
                     type="file"
                     id="file"
+                    className="file-input"
                     name="offerLetter"
                     accept=".txt, .pdf"
                     onChange={(e) => {
                       handleFileChange(e);
                     }}
                   />
-                  <label for="file" className="custom-file-upload">
-                    {file !== "" ? file : "Upload Offer Letter"}
-                  </label>
-                  <span id="filename"></span>
-                  <img src={add} alt="" />
                 </div>
+
                 <div className="form-item">
                   <button
                     type="submit"
