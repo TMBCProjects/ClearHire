@@ -98,45 +98,6 @@ export default function SearchEmployee() {
 
   const search = () => {
     console.log(filters)
-  //   if (filters.location) {
-  //     const filteredData = employeeList.filter((item) =>
-  //       item.typeOfEmployment.toLowerCase().includes(filters.location)
-  //     );
-  //     setEmployeeList(filteredData);
-  //   } else {
-  //     setEmployeeList(filters);
-  //   }
-  //   setQuery(filters.location);
-
-  //   if (filters.typeOfEmployment.length > 0) {
-  //     const filteredData = employeeList.filter((item) =>
-  //       item.typeOfEmployment.toLowerCase().includes(filters.typeOfEmployment)
-  //     );
-  //     setEmployeeList(filteredData);
-  //   } else {
-  //     setEmployeeList(filters);
-  //   }
-  //   setQuery(filters.typeOfEmployment);
-
-  //   if (filters.designation.length > 0) {
-  //     const filteredData = employeeList.filter((item) =>
-  //       item.typeOfEmployment.toLowerCase().includes(filters.designation)
-  //     );
-  //     setEmployeeList(filteredData);
-  //   } else {
-  //     setEmployeeList(filters);
-  //   }
-  //   setQuery(filters.designation);
-
-  //   if (filters.salary.length > 0) {
-  //     const filteredData = employeeList.filter((item) =>
-  //       item.typeOfEmployment.toLowerCase().includes(filters.salary)
-  //     );
-  //     setEmployeeList(filteredData);
-  //   } else {
-  //     setEmployeeList(filters);
-  //   }
-  //   setQuery(filters.salary);
   };
 
   return (
