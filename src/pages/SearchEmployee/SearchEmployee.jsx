@@ -46,7 +46,6 @@ export default function SearchEmployee() {
   const user = sessionStorage.getItem("LoggedIn");
   const [employeeList, setEmployeeList] = useState([]);
   const [filters, setFilters] = useState(initialValues);
-  const [query, setQuery] = useState("");
   useEffect(() => {
     const fetchCollegueDetails = async () => {
       try {
