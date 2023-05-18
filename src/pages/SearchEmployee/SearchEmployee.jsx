@@ -4,7 +4,6 @@ import search1 from "../../assets/images/search.svg";
 import location from "../../assets/images/location.svg";
 import job from "../../assets/images/job.svg";
 import salary from "../../assets/images/salary.svg";
-import cross from "../../assets/images/cross.svg";
 import { Select, Checkbox, Empty } from "antd";
 import AssesmentCard from "../../components/Cards/AssesmentCard";
 
@@ -13,22 +12,6 @@ import { readColleagues } from "../../DataBase/Employee/employee";
 const onChange = (e) => {
   // alert(`checked = ${e.target.checked}`);
 };
-// const formatter = (value) => `${value}LPA`;
-// const formatter2 = (value) => `${value} %`;
-// const marks = {
-//   0: "1LPA",
-//   50: "50LPA",
-// };
-// const marks2 = {
-//   0: "0%",
-//   100: "100%",
-// };
-
-// const myStyle = {
-//   fontSize: "1.6rem",
-//   fontWeight: "bolder",
-//   letterSpacing: "-0.47x",
-// };
 
 const checkBoxStyles = {
   marginLeft: "0.5rem",
@@ -49,7 +32,6 @@ export default function SearchEmployee() {
   useEffect(() => {
     const fetchCollegueDetails = async () => {
       try {
-        const user = sessionStorage.getItem("LoggedIn");
         const userDatas1 = JSON.parse(sessionStorage.getItem("userData"));
         const data = userDatas1.data.currentEmployerId
               ? await readColleagues(
@@ -66,7 +48,6 @@ export default function SearchEmployee() {
       try {
         const userDatas1 = JSON.parse(sessionStorage.getItem("userData"));
         const data = await readEmployees(userDatas1.id);
-        // console.log(data)
         setEmployeeList(data);
       } catch (error) {
         console.log(error);
@@ -84,10 +65,6 @@ export default function SearchEmployee() {
       [field]: event.target ? event.target.value : event,
     }));
   };
-  // const search = () => {
-  //   console.log(filters)
-  // };
-
   return (
     <div className="employer-home">
       <div className="search-inputs" style={{ position: "absolute" }}>
@@ -148,7 +125,7 @@ export default function SearchEmployee() {
         ) : (
           ""
         )}
-        {/* <button onClick={search}>Search</button> */}
+
       </div>
       <div className="search-results">
         <div className="result-employees">

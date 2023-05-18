@@ -3,7 +3,6 @@ import { MdArrowBackIos, MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { FaQuoteLeft } from "react-icons/fa";
 import ViewFile from "../../../assets/images/view-doc.svg";
 import UrlLink from "../../../assets/images/link.svg";
-import CompanyLogo from "../../../assets/images/company-logo.png";
 import RightArrow from "../../../assets/images/right-arrow.png";
 import LeftArrow from "../../../assets/images/left-arrow.png";
 import ProgressBar from "../../../components/ProgressBar";
