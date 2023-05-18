@@ -158,7 +158,27 @@ input[type=file]::file-selector-button {
     background-color: rgb(255, 255, 255);
     width: 375px;
 }
+.form-control-container {
+  position: relative;
+  display: flex;
+}
 
+.form-control-2 {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #999999;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.form-control-unit {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: #999999;
+}
 .file-input-label {
   display: flex;
   align-items: center;

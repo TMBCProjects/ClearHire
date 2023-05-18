@@ -135,13 +135,17 @@ function OnboardingForm() {
                   />
                 </div>
                 <div className="form-item">
-                  <input
-                    type="number"
-                    className="form-control-1"
-                    placeholder="Salary*"
-                    name="salary"
-                    onChange={handleInputChange}
-                  />
+                  <div className="form-control-container">
+                    <input
+                      type="number"
+                      className="form-control-2"
+                      placeholder="Salary*"
+                      name="salary"
+                      onChange={handleInputChange}
+                    />
+                    <span className="form-control-unit">LPA</span>
+
+                  </div>
                 </div>
                 <div className="form-item">
                   <label htmlFor="file" className="file-input-label">
