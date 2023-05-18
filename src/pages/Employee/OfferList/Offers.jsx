@@ -4,7 +4,7 @@ import { readOffers } from "../../../DataBase/Employee/employee";
 import { Link } from "react-router-dom";
 import { Empty } from "antd";
 
-const Offers = () => {
+export default function Offers() {
   const [offerList, setOfferList] = useState([]);
 
   useEffect(() => {
@@ -61,4 +61,3 @@ const Offers = () => {
   );
 };
 
-export default Offers;
