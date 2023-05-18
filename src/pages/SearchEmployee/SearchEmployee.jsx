@@ -84,9 +84,9 @@ export default function SearchEmployee() {
       [field]: event.target ? event.target.value : event,
     }));
   };
-  const search = () => {
-    console.log(filters)
-  };
+  // const search = () => {
+  //   console.log(filters)
+  // };
 
   return (
     <div className="employer-home">
@@ -148,7 +148,7 @@ export default function SearchEmployee() {
         ) : (
           ""
         )}
-        <button onClick={search}>Search</button>
+        {/* <button onClick={search}>Search</button> */}
       </div>
       <div className="search-results">
         <div className="result-employees">
