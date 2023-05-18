@@ -4,19 +4,19 @@ import search1 from "../../assets/images/search.svg";
 import location from "../../assets/images/location.svg";
 import job from "../../assets/images/job.svg";
 import salary from "../../assets/images/salary.svg";
-import { Select, Checkbox, Empty } from "antd";
+import { Select, Empty } from "antd";
 import AssesmentCard from "../../components/Cards/AssesmentCard";
 
 import { readEmployees } from "../../DataBase/Employer/employer";
 import { readColleagues } from "../../DataBase/Employee/employee";
-const onChange = (e) => {
-  // alert(`checked = ${e.target.checked}`);
-};
+// const onChange = (e) => {
+//   alert(`checked = ${e.target.checked}`);
+// };
 
-const checkBoxStyles = {
-  marginLeft: "0.5rem",
-  fontSize: "1.1rem",
-};
+// const checkBoxStyles = {
+//   marginLeft: "0.5rem",
+//   fontSize: "1.1rem",
+// };
 
 const initialValues = {
   typeOfEmployment: "",

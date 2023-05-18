@@ -105,7 +105,7 @@ const Approval = () => {
               className="form-check-label filter-approval"
               htmlFor="inlineRadio1"
             >
-              All
+              On ClearHire
             </label>
           </div>
 
@@ -122,7 +122,7 @@ const Approval = () => {
               className="form-check-label filter-approval"
               htmlFor="inlineRadio2"
             >
-              Not on clearhire
+              Not on ClearHire
             </label>
           </div>
 

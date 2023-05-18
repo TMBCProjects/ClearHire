@@ -96,7 +96,7 @@ const Requests = () => {
               className="form-check-label filter-approval"
               htmlFor="inlineRadio1"
             >
-              All
+              On ClearHire
             </label>
           </div>
 
@@ -113,7 +113,7 @@ const Requests = () => {
               className="form-check-label filter-approval"
               htmlFor="inlineRadio2"
             >
-              Not on clearhire
+              Not on ClearHire
             </label>
           </div>
           <div className="form-check form-check-inline">
@@ -168,114 +168,6 @@ const Requests = () => {
             description="No Records"
           />
         )}
-        {/* <div className="col-md-3 gy-3">
-          <div className="card">
-            <div className="card-body">
-              <h3 className="card-title fw-bold">Ramesh Balasubramaniyam..</h3>
-              <p className="card-text designation w-50 mt-2">
-                Graphic Designer
-              </p>
-              <p className="mb-1">Chennai, India</p>
-              <p className="mb-1">Govarthini1994@gmail.com</p>
-              <p className="mb-1">01-01-2023</p>
-              <p className="mb-1">500,000</p>
-              <div className="row  mt-2">
-                <div className="col">
-                  <p className="text-color-green fs-13 fw-bold">
-                    <img className="mr-5" src={View} alt="" /> View offer Letter
-                  </p>
-                </div>
-                <div className="col">
-                  <button className="delete-btn">Delete</button>
-                </div>
-              </div>
-              <button className="w-100 mt-3 btn btn-assessment">
-                View assessment
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-3 gy-3">
-          <div className="card">
-            <div className="card-body">
-              <h3 className="card-title fw-bold">Ramesh Balasubramaniyam..</h3>
-              <p className="card-text designation w-50 mt-2">
-                Graphic Designer
-              </p>
-              <p className="mb-1">Chennai, India</p>
-              <p className="mb-1">Govarthini1994@gmail.com</p>
-              <p className="mb-1">01-01-2023</p>
-              <p className="mb-1">500,000</p>
-              <div className="row  mt-2">
-                <div className="col">
-                  <p className="text-color-green fs-13 fw-bold">
-                    <img className="mr-5" src={View} alt="" /> View offer Letter
-                  </p>
-                </div>
-                <div className="col">
-                  <button className="delete-btn">Delete</button>
-                </div>
-              </div>
-              <button className="w-100 mt-3 btn btn-request-sent">
-                Request sent
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-md-3 gy-3">
-          <div className="card">
-            <div className="card-body">
-              <h3 className="card-title fw-bold">Ramesh Balasubramaniyam..</h3>
-              <p className="card-text designation w-50 mt-2">
-                Graphic Designer
-              </p>
-              <p className="mb-1">Chennai, India</p>
-              <p className="mb-1">Govarthini1994@gmail.com</p>
-              <p className="mb-1">01-01-2023</p>
-              <p className="mb-1">500,000</p>
-              <div className="row  mt-2">
-                <div className="col">
-                  <p className="text-color-green fs-13 fw-bold">
-                    <img className="mr-5" src={View} alt="" /> View offer Letter
-                  </p>
-                </div>
-                <div className="col">
-                  <button className="delete-btn">Delete</button>
-                </div>
-              </div>
-              <button className="w-100 mt-3 btn btn-fresher">Fresher</button>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-md-3 gy-3">
-          <div className="card">
-            <div className="card-body">
-              <h3 className="card-title fw-bold">Ramesh Balasubramaniyam..</h3>
-              <p className="card-text designation w-50 mt-2">
-                Graphic Designer
-              </p>
-              <p className="mb-1">Chennai, India</p>
-              <p className="mb-1">Govarthini1994@gmail.com</p>
-              <p className="mb-1">01-01-2023</p>
-              <p className="mb-1">500,000</p>
-              <div className="row  mt-2">
-                <div className="col">
-                  <p className="text-color-green fs-13 fw-bold">
-                    <img className="mr-5" src={View} alt="" /> View offer Letter
-                  </p>
-                </div>
-                <div className="col">
-                  <button className="delete-btn">Delete</button>
-                </div>
-              </div>
-              <button className="w-100 mt-3 btn btn-clearhire">
-                Not on clearhire
-              </button>
-            </div>
-          </div>
-        </div> */}
       </div>
     </div>
   );
