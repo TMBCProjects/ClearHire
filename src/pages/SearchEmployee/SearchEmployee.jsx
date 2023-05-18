@@ -78,23 +78,12 @@ export default function SearchEmployee() {
       : fetchCollegueDetails();
   }, []);
 
-
-  const handleSalaryChange = (event) => {
-    filters.salary = event.target.value;
+  const handleInputChange = (event, field) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [field]: event.target ? event.target.value : event,
+    }));
   };
-
-  const handleDesignationChange = (event) => {
-    filters.designation = event.target.value;
-  };
-
-  const handleLocationChange = (event) => {
-    filters.location = event;
-  };
-
-  const handleSelectChange = (e) => {
-    filters.typeOfEmployment = e;
-  };
-
   const search = () => {
     console.log(filters)
   };
@@ -106,7 +95,8 @@ export default function SearchEmployee() {
           <img src={search1} alt="Search" />
           <input
             type="text"
-            onChange={(e) => handleDesignationChange(e)}
+            name="designation"
+            onChange={(e) => handleInputChange(e, e.target.name)}
             className="box-input"
             placeholder="Job title, company and keyword"
           />
@@ -115,7 +105,7 @@ export default function SearchEmployee() {
           <div className="input-box2 input-box">
             <img src={location} alt="Search" />
             <Select
-              onChange={(e) => { handleLocationChange(e) }}
+              onChange={(e) => { handleInputChange(e, 'location') }}
               className="box-select"
               placeholder="Location"
               options={[{ value: "", label: "" }].concat(userDatas.data.companyLocations.map((option) => ({
@@ -131,7 +121,7 @@ export default function SearchEmployee() {
           <img src={job} alt="Search" />
           <Select
             type="text"
-            onChange={(e) => { handleSelectChange(e) }}
+            onChange={(e) => { handleInputChange(e, 'typeOfEmployment') }}
             className="box-select"
             placeholder="Job Type"
             options={[
@@ -150,8 +140,9 @@ export default function SearchEmployee() {
             <input
               type="text"
               className="box-input no-border"
+              name="salary"
               placeholder="Salary"
-              onChange={(e) => handleSalaryChange(e)}
+              onChange={(e) => handleInputChange(e, e.target.name)}
             />
           </div>
         ) : (
