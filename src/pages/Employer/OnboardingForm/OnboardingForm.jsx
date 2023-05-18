@@ -124,7 +124,7 @@ function OnboardingForm() {
                       Internship/Trainee
                     </option>
                   </select>
-                </div>
+                </div><br />
                 <div className="form-item">
                   <input
                     type="date"
