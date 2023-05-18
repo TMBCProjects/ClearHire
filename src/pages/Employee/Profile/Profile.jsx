@@ -90,15 +90,6 @@ export default function Profile() {
   };
 
   const calculateRatings = (ratings) => {
-    let avgCommunication = 0;
-    let avgAttitude = 0;
-    let avgAbilityToLearn = 0;
-    let avgPunctuality = 0;
-    let avgCommitment = 0;
-    let avgTrustWorthiness = 0;
-    let avgSkill = 0;
-    let avgTeamPlayer = 0;
-    let total = 0;
     let colleagueScore = 0;
     let score = 0;
     let ratingsOfEmployee = ratings.filter((rate) => {
@@ -107,35 +98,6 @@ export default function Profile() {
     let ratingsOfEmployer = ratings.filter((rate) => {
       return rate?.ratedByRole === "Employer";
     });
-    for (let index = 0; index < ratings.length; index++) {
-      const element = ratings[index];
-      avgCommunication += +element.communication;
-      avgAttitude += +element.attitude;
-      avgAbilityToLearn += +element.abilityToLearn;
-      avgPunctuality += +element.punctuality;
-      avgCommitment += +element.commitment;
-      avgTrustWorthiness += +element.trustworthiness;
-      avgSkill += +element.skill;
-      avgTeamPlayer += +element.teamPlayer;
-    }
-    avgCommunication /= ratings.length;
-    avgAttitude /= ratings.length;
-    avgAbilityToLearn /= ratings.length;
-    avgPunctuality /= ratings.length;
-    avgCommitment /= ratings.length;
-    avgTrustWorthiness /= ratings.length;
-    avgSkill /= ratings.length;
-    avgTeamPlayer /= ratings.length;
-    total =
-      avgCommunication +
-      avgAttitude +
-      avgAbilityToLearn +
-      avgPunctuality +
-      avgCommitment +
-      avgTrustWorthiness +
-      avgSkill +
-      avgTeamPlayer;
-    total = total / 8;
 
     for (let index = 0; index < ratingsOfEmployer.length; index++) {
       const element = ratingsOfEmployer[index];

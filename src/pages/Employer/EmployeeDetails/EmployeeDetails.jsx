@@ -3,8 +3,8 @@ import { MdArrowBackIos, MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { FaQuoteLeft } from "react-icons/fa";
 import ViewFile from "../../../assets/images/view-doc.svg";
 import UrlLink from "../../../assets/images/link.svg";
-import RightArrow from "../../../assets/images/right-arrow.png";
-import LeftArrow from "../../../assets/images/left-arrow.png";
+// import RightArrow from "../../../assets/images/right-arrow.png";
+// import LeftArrow from "../../../assets/images/left-arrow.png";
 import ProgressBar from "../../../components/ProgressBar";
 import "./EmployeeDetails.css";
 
@@ -15,74 +15,72 @@ const EmployeeDetails = () => {
   const navigate = useNavigate();
   const { from } = location.state;
   const employee = from;
-  const [employeeRatings, setEmployeeRatings] = useState([]);
   const [avgRatings, setAvgRatings] = useState({});
   const [prevSkills, setPrevSkills] = useState("none");
   // console.log("info", from);
 
-  const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
-    <img
-      src={LeftArrow}
-      alt="prevArrow"
-      {...props}
-    />
-  );
+  // const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
+  //   <img
+  //     src={LeftArrow}
+  //     alt="prevArrow"
+  //     {...props}
+  //   />
+  // );
 
-  const SlickArrowRight = ({ currentSlide, slideCount, ...props }) => (
-    <img
-      src={RightArrow}
-      alt="nextArrow"
-      {...props}
-    />
-  );
+  // const SlickArrowRight = ({ currentSlide, slideCount, ...props }) => (
+  //   <img
+  //     src={RightArrow}
+  //     alt="nextArrow"
+  //     {...props}
+  //   />
+  // );
 
-  const settings = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    initialSlide: 0,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-    prevArrow: <SlickArrowLeft />,
-    nextArrow: <SlickArrowRight />,
-  };
+  // const settings = {
+  //   dots: false,
+  //   infinite: false,
+  //   speed: 500,
+  //   slidesToShow: 4,
+  //   slidesToScroll: 1,
+  //   initialSlide: 0,
+  //   responsive: [
+  //     {
+  //       breakpoint: 1024,
+  //       settings: {
+  //         slidesToShow: 3,
+  //         slidesToScroll: 3,
+  //         infinite: true,
+  //         dots: true,
+  //       },
+  //     },
+  //     {
+  //       breakpoint: 600,
+  //       settings: {
+  //         slidesToShow: 2,
+  //         slidesToScroll: 2,
+  //         initialSlide: 2,
+  //       },
+  //     },
+  //     {
+  //       breakpoint: 480,
+  //       settings: {
+  //         slidesToShow: 1,
+  //         slidesToScroll: 1,
+  //       },
+  //     },
+  //   ],
+  //   prevArrow: <SlickArrowLeft />,
+  //   nextArrow: <SlickArrowRight />,
+  // };
+
+  useEffect(() => {
+    const fetchOfferDetails = async () => {
+      const data2 = employee.ratings;
+      calculateRatings(data2);
+    };
+    fetchOfferDetails();
+  }, [employee]);
 
   const calculateRatings = (ratings) => {
-    let avgCommunication = 0;
-    let avgAttitude = 0;
-    let avgAbilityToLearn = 0;
-    let avgPunctuality = 0;
-    let avgCommitment = 0;
-    let avgTrustWorthiness = 0;
-    let avgSkill = 0;
-    let avgTeamPlayer = 0;
-    let total = 0;
     let colleagueScore = 0;
     let score = 0;
     let ratingsOfEmployee = ratings.filter((rate) => {
@@ -91,36 +89,6 @@ const EmployeeDetails = () => {
     let ratingsOfEmployer = ratings.filter((rate) => {
       return rate?.ratedByRole === "Employer";
     });
-    for (let index = 0; index < ratings.length; index++) {
-      const element = ratings[index];
-      avgCommunication += +element.communication;
-      avgAttitude += +element.attitude;
-      avgAbilityToLearn += +element.abilityToLearn;
-      avgPunctuality += +element.punctuality;
-      avgCommitment += +element.commitment;
-      avgTrustWorthiness += +element.trustworthiness;
-      avgSkill += +element.skill;
-      avgTeamPlayer += +element.teamPlayer;
-    }
-    avgCommunication /= ratings.length;
-    avgAttitude /= ratings.length;
-    avgAbilityToLearn /= ratings.length;
-    avgPunctuality /= ratings.length;
-    avgCommitment /= ratings.length;
-    avgTrustWorthiness /= ratings.length;
-    avgSkill /= ratings.length;
-    avgTeamPlayer /= ratings.length;
-    total =
-      avgCommunication +
-      avgAttitude +
-      avgAbilityToLearn +
-      avgPunctuality +
-      avgCommitment +
-      avgTrustWorthiness +
-      avgSkill +
-      avgTeamPlayer;
-    total = total / 8;
-
     for (let index = 0; index < ratingsOfEmployer.length; index++) {
       const element = ratingsOfEmployer[index];
       let temp =
@@ -151,7 +119,6 @@ const EmployeeDetails = () => {
     }
     score /= ratingsOfEmployer.length;
     colleagueScore /= ratingsOfEmployee.length;
-    // colleagueScore = 80;
     setAvgRatings({
       score: Math.ceil(score),
       colleagueScore: Math.ceil(colleagueScore),
@@ -278,17 +245,6 @@ const EmployeeDetails = () => {
   function getRatingsByEmployerId(ratings, employerId) {
     return ratings.filter((rating) => rating.ratedById === employerId);
   }
-  useEffect(() => {
-    const fetchOfferDetails = async () => {
-      const data2 = employee.ratings;
-      calculateRatings(data2);
-      setEmployeeRatings(data2);
-      // calculateTeamPlayerRatings(getRatingsByEmployerId(employee.ratings, employee.currentEmployerId))
-      // console.log(getRatingsByEmployerId(data2, employee.currentEmployerId))
-    };
-    fetchOfferDetails();
-  }, [employee]);
-
   function text(percentage) {
     if (percentage < 10) {
       return "Worst";
