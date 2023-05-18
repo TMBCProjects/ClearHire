@@ -170,6 +170,11 @@ input[type=file]::file-selector-button {
   border-radius: 4px;
   font-size: 14px;
 }
+.form-control-2::-webkit-inner-spin-button,
+.form-control-2::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
 .form-control-unit {
   position: absolute;
