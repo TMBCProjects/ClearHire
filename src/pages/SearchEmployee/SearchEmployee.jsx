@@ -75,7 +75,7 @@ export default function SearchEmployee() {
             name="designation"
             onChange={(e) => handleInputChange(e, e.target.name)}
             className="box-input"
-            placeholder="Job title, company and keyword"
+            placeholder="Job Title / Designation"
           />
         </div>
         {user === "Employer" ? (
@@ -100,7 +100,7 @@ export default function SearchEmployee() {
             type="text"
             onChange={(e) => { handleInputChange(e, 'typeOfEmployment') }}
             className="box-select"
-            placeholder="Job Type"
+            placeholder="Type Of Employment"
             options={[
               { value: "", label: "" },
               { value: "Permanent Full-Time", label: "Permanent Full-Time" },
