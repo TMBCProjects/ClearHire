@@ -67,8 +67,8 @@ export default function SearchEmployee() {
       try {
         const userDatas1 = JSON.parse(sessionStorage.getItem("userData"));
         const data = await readEmployees(userDatas1.id);
-        console.log(data)
-        // setEmployeeList(data);
+        // console.log(data)
+        setEmployeeList(data);
       } catch (error) {
         console.log(error);
       }
