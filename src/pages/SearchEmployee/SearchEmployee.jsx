@@ -189,7 +189,7 @@ export default function SearchEmployee() {
                 const { typeOfEmployment, designation, salary, location } = filters;
                 return (
                   (typeOfEmployment === "" || item.typeOfEmployment.toLowerCase() === typeOfEmployment.toLowerCase()) &&
-                  (designation === "" || item.designation.toLowerCase() === designation.toLowerCase()) &&
+                  (designation === "" || item.designation.toLowerCase().includes(designation)) &&
                   (salary === "" || +item?.salary <= +salary) &&
                   (location === "" || item.companyLocation.toLowerCase() === location.toLowerCase())
                 );
