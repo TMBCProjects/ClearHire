@@ -130,7 +130,7 @@ export default function SearchEmployee() {
       <div className="search-results">
         <div className="result-employees">
           <div className="row1">
-            {user === "Employer" ? (
+            {/* {user === "Employer" ? (
               <div className="row1-checkboxes">
                 <Checkbox style={checkBoxStyles} onChange={(e) => onChange(e)}>
                   Assessed
@@ -144,7 +144,7 @@ export default function SearchEmployee() {
               </div>
             ) : (
               ""
-            )}
+            )} */}
             <div className="result-count">
               {employeeList.length > 1 ? `${employeeList.length} records` : ""}
             </div>
