@@ -6,9 +6,11 @@ import InputField from "../../../components/Input/InputField";
 import { Slider, Col, message } from "antd";
 import UploadFile from "../../../components/UploadFile";
 import { MinusOutlined } from "@ant-design/icons";
-import { profileUpdate } from "../../../DataBase/Employee/employee";
+import { profileUpdate, readEmployeeRatings } from "../../../DataBase/Employee/employee";
+import ProgressBar from "../../../components/ProgressBar";
 
 export default function Profile() {
+  const [avgRatings, setAvgRatings] = useState({});
   const [userDatas, setUserDatas] = useState(
     JSON.parse(sessionStorage.getItem("userData"))
   );
@@ -20,10 +22,16 @@ export default function Profile() {
     },
   ]);
   useEffect(() => {
-    if (userDatas.data.skills) {
-      setSkills(userDatas.data.skills);
-    }
+    const fetchOfferDetails = async () => {
+      if (userDatas.data.skills) {
+        setSkills(userDatas.data.skills);
+      }
+      const data2 = await readEmployeeRatings(userDatas.id);
+      calculateRatings(data2);
+    };
+    fetchOfferDetails();
   }, [userDatas]);
+
   const calculateAge = (dob) => {
     const today = new Date();
     const birthDate = new Date(dob);
@@ -81,6 +89,52 @@ export default function Profile() {
     setUserDatas(JSON.parse(sessionStorage.getItem("userData")));
   };
 
+  const calculateRatings = (ratings) => {
+    let colleagueScore = 0;
+    let score = 0;
+    let ratingsOfEmployee = ratings.filter((rate) => {
+      return rate?.ratedByRole === "Employee";
+    });
+    let ratingsOfEmployer = ratings.filter((rate) => {
+      return rate?.ratedByRole === "Employer";
+    });
+
+    for (let index = 0; index < ratingsOfEmployer.length; index++) {
+      const element = ratingsOfEmployer[index];
+      let temp =
+        +element.communication +
+        +element.attitude +
+        +element.abilityToLearn +
+        +element.punctuality +
+        +element.commitment +
+        +element.trustworthiness +
+        +element.skill +
+        +element.teamPlayer;
+      temp /= 8;
+      score += temp;
+    }
+    for (let index = 0; index < ratingsOfEmployee.length; index++) {
+      const element = ratingsOfEmployee[index];
+      let temp =
+        +element.communication +
+        +element.attitude +
+        +element.abilityToLearn +
+        +element.punctuality +
+        +element.commitment +
+        +element.trustworthiness +
+        +element.skill +
+        +element.teamPlayer;
+      temp /= 8;
+      colleagueScore += temp;
+    }
+    score /= ratingsOfEmployer.length;
+    colleagueScore /= ratingsOfEmployee.length;
+    // colleagueScore = 80;
+    setAvgRatings({
+      score: Math.ceil(score),
+      colleagueScore: Math.ceil(colleagueScore),
+    });
+  };
   const handleSubmit = () => {
     let resume = sessionStorage.getItem("resume");
     if (resume) {
@@ -121,42 +175,26 @@ export default function Profile() {
           <div className="progressBar">
             <div className="col-12 circles">
               <div className="col-6 circle-box">
-                <div className="circle" data-prog="95">
-                  <svg width={250} height="250">
-                    <circle
-                      class="progress-ring__circle"
-                      stroke="#00823B"
-                      stroke-width="15"
-                      // fill="transparent"
-                      r="35"
-                      cx="125"
-                      cy="125"
-                    ></circle>
-                  </svg>
-                  <div className="circle-inner">
-                    <h1>95%</h1>
-                  </div>
+                <div className="circle">
+                  <ProgressBar
+                    value={
+                      avgRatings?.colleagueScore
+                      || 0
+                    }
+                  />
                 </div>
                 <div className="text">
                   <h6>Colleague Score</h6>
                 </div>
               </div>
               <div className="col-6 circle-box">
-                <div className="circle" data-prog="75">
-                  <svg width={250} height="250">
-                    <circle
-                      class="progress-ring__circle"
-                      stroke="#00823B"
-                      stroke-width="15"
-                      // fill="transparent"
-                      r="35"
-                      cx="125"
-                      cy="125"
-                    ></circle>
-                  </svg>
-                  <div className="circle-inner">
-                    <h1>75%</h1>
-                  </div>
+                <div className="circle">
+                  <ProgressBar
+                    value={
+                      avgRatings?.score
+                      || 0
+                    }
+                  />
                 </div>
                 <div className="text">
                   <h6>Score</h6>

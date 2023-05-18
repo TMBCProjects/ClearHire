@@ -4,36 +4,19 @@ import search1 from "../../assets/images/search.svg";
 import location from "../../assets/images/location.svg";
 import job from "../../assets/images/job.svg";
 import salary from "../../assets/images/salary.svg";
-import cross from "../../assets/images/cross.svg";
-import { Select, Checkbox, Empty } from "antd";
+import { Select, Empty } from "antd";
 import AssesmentCard from "../../components/Cards/AssesmentCard";
 
 import { readEmployees } from "../../DataBase/Employer/employer";
 import { readColleagues } from "../../DataBase/Employee/employee";
-const onChange = (e) => {
-  // alert(`checked = ${e.target.checked}`);
-};
-// const formatter = (value) => `${value}LPA`;
-// const formatter2 = (value) => `${value} %`;
-// const marks = {
-//   0: "1LPA",
-//   50: "50LPA",
-// };
-// const marks2 = {
-//   0: "0%",
-//   100: "100%",
+// const onChange = (e) => {
+//   alert(`checked = ${e.target.checked}`);
 // };
 
-// const myStyle = {
-//   fontSize: "1.6rem",
-//   fontWeight: "bolder",
-//   letterSpacing: "-0.47x",
+// const checkBoxStyles = {
+//   marginLeft: "0.5rem",
+//   fontSize: "1.1rem",
 // };
-
-const checkBoxStyles = {
-  marginLeft: "0.5rem",
-  fontSize: "1.1rem",
-};
 
 const initialValues = {
   typeOfEmployment: "",
@@ -46,11 +29,9 @@ export default function SearchEmployee() {
   const user = sessionStorage.getItem("LoggedIn");
   const [employeeList, setEmployeeList] = useState([]);
   const [filters, setFilters] = useState(initialValues);
-  const [query, setQuery] = useState("");
   useEffect(() => {
     const fetchCollegueDetails = async () => {
       try {
-        const user = sessionStorage.getItem("LoggedIn");
         const userDatas1 = JSON.parse(sessionStorage.getItem("userData"));
         const data = userDatas1.data.currentEmployerId
               ? await readColleagues(
@@ -67,8 +48,7 @@ export default function SearchEmployee() {
       try {
         const userDatas1 = JSON.parse(sessionStorage.getItem("userData"));
         const data = await readEmployees(userDatas1.id);
-        console.log(data)
-        // setEmployeeList(data);
+        setEmployeeList(data);
       } catch (error) {
         console.log(error);
       }
@@ -79,65 +59,12 @@ export default function SearchEmployee() {
       : fetchCollegueDetails();
   }, []);
 
-
-  const handleSalaryChange = (event) => {
-    filters.salary = event.target.value;
+  const handleInputChange = (event, field) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [field]: event.target ? event.target.value : event,
+    }));
   };
-
-  const handleDesignationChange = (event) => {
-    filters.designation = event.target.value;
-  };
-
-  const handleLocationChange = (event) => {
-    filters.location = event.target.value;
-  };
-
-  const handleSelectChange = (e) => {
-    filters.typeOfEmployment = e;
-  };
-
-  // const search = () => {
-  //   if (filters.location) {
-  //     const filteredData = employeeList.filter((item) =>
-  //       item.typeOfEmployment.toLowerCase().includes(filters.location)
-  //     );
-  //     setEmployeeList(filteredData);
-  //   } else {
-  //     setEmployeeList(filters);
-  //   }
-  //   setQuery(filters.location);
-
-  //   if (filters.typeOfEmployment.length > 0) {
-  //     const filteredData = employeeList.filter((item) =>
-  //       item.typeOfEmployment.toLowerCase().includes(filters.typeOfEmployment)
-  //     );
-  //     setEmployeeList(filteredData);
-  //   } else {
-  //     setEmployeeList(filters);
-  //   }
-  //   setQuery(filters.typeOfEmployment);
-
-  //   if (filters.designation.length > 0) {
-  //     const filteredData = employeeList.filter((item) =>
-  //       item.typeOfEmployment.toLowerCase().includes(filters.designation)
-  //     );
-  //     setEmployeeList(filteredData);
-  //   } else {
-  //     setEmployeeList(filters);
-  //   }
-  //   setQuery(filters.designation);
-
-  //   if (filters.salary.length > 0) {
-  //     const filteredData = employeeList.filter((item) =>
-  //       item.typeOfEmployment.toLowerCase().includes(filters.salary)
-  //     );
-  //     setEmployeeList(filteredData);
-  //   } else {
-  //     setEmployeeList(filters);
-  //   }
-  //   setQuery(filters.salary);
-  // };
-
   return (
     <div className="employer-home">
       <div className="search-inputs" style={{ position: "absolute" }}>
@@ -145,19 +72,23 @@ export default function SearchEmployee() {
           <img src={search1} alt="Search" />
           <input
             type="text"
-            onChange={(e) => handleDesignationChange(e)}
+            name="designation"
+            onChange={(e) => handleInputChange(e, e.target.name)}
             className="box-input"
-            placeholder="Job title, company and keyword"
+            placeholder="Job Title / Designation"
           />
         </div>
         {user === "Employer" ? (
           <div className="input-box2 input-box">
             <img src={location} alt="Search" />
-            <input
-              type="text"
-              onChange={(e) => handleLocationChange(e)}
-              className="box-input"
+            <Select
+              onChange={(e) => { handleInputChange(e, 'location') }}
+              className="box-select"
               placeholder="Location"
+              options={[{ value: "", label: "" }].concat(userDatas.data.companyLocations.map((option) => ({
+                value: option,
+                label: option,
+              })))}
             />
           </div>
         ) : (
@@ -167,10 +98,11 @@ export default function SearchEmployee() {
           <img src={job} alt="Search" />
           <Select
             type="text"
-            onChange={(e) => { handleSelectChange(e) }}
+            onChange={(e) => { handleInputChange(e, 'typeOfEmployment') }}
             className="box-select"
-            placeholder="Job Type"
+            placeholder="Type Of Employment"
             options={[
+              { value: "", label: "" },
               { value: "Permanent Full-Time", label: "Permanent Full-Time" },
               { value: "Part-Time", label: "Part-Time" },
               { value: "Casual/Vacation", label: "Casual/Vacation" },
@@ -185,19 +117,20 @@ export default function SearchEmployee() {
             <input
               type="text"
               className="box-input no-border"
+              name="salary"
               placeholder="Salary"
-              onChange={(e) => handleSalaryChange(e)}
+              onChange={(e) => handleInputChange(e, e.target.name)}
             />
           </div>
         ) : (
           ""
         )}
-        {/* <button onClick={search}>Search</button> */}
+
       </div>
       <div className="search-results">
         <div className="result-employees">
           <div className="row1">
-            {user === "Employer" ? (
+            {/* {user === "Employer" ? (
               <div className="row1-checkboxes">
                 <Checkbox style={checkBoxStyles} onChange={(e) => onChange(e)}>
                   Assessed
@@ -211,7 +144,7 @@ export default function SearchEmployee() {
               </div>
             ) : (
               ""
-            )}
+            )} */}
             <div className="result-count">
               {employeeList.length > 1 ? `${employeeList.length} records` : ""}
             </div>
@@ -227,22 +160,15 @@ export default function SearchEmployee() {
                 image={Empty.PRESENTED_IMAGE_SIMPLE}
                 description="No Records"
               />
-            )}{
-              console.log(employeeList)}
+            )}
             {employeeList
-              .filter((item) => {
+              .filter(item => {
+                const { typeOfEmployment, designation, salary, location } = filters;
                 return (
-                  (filters?.typeOfEmployment.toLowerCase() === "" ||
-                    item?.typeOfEmployment.toLowerCase() ===
-                      filters?.typeOfEmployment.toLowerCase()) &&
-                  (filters?.designation.toLowerCase() === "" ||
-                    item?.designation.toLowerCase() ===
-                      filters?.designation.toLowerCase()) &&
-                  (filters?.salary === "" ||
-                    +item?.salary <= +filters?.salary) &&
-                  (filters?.location.toLowerCase() === "" ||
-                    item?.companyLocation.toLowerCase() ===
-                      filters?.location.toLowerCase())
+                  (typeOfEmployment === "" || item.typeOfEmployment.toLowerCase() === typeOfEmployment.toLowerCase()) &&
+                  (designation === "" || item.designation.toLowerCase().includes(designation)) &&
+                  (salary === "" || +item?.salary <= +salary) &&
+                  (location === "" || item.companyLocation.toLowerCase() === location.toLowerCase())
                 );
               })
               .map((info) => {

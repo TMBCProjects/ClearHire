@@ -3,9 +3,8 @@ import { MdArrowBackIos, MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { FaQuoteLeft } from "react-icons/fa";
 import ViewFile from "../../../assets/images/view-doc.svg";
 import UrlLink from "../../../assets/images/link.svg";
-import CompanyLogo from "../../../assets/images/company-logo.png";
-import RightArrow from "../../../assets/images/right-arrow.png";
-import LeftArrow from "../../../assets/images/left-arrow.png";
+// import RightArrow from "../../../assets/images/right-arrow.png";
+// import LeftArrow from "../../../assets/images/left-arrow.png";
 import ProgressBar from "../../../components/ProgressBar";
 import "./EmployeeDetails.css";
 
@@ -16,66 +15,72 @@ const EmployeeDetails = () => {
   const navigate = useNavigate();
   const { from } = location.state;
   const employee = from;
-  const [employeeRatings, setEmployeeRatings] = useState([]);
   const [avgRatings, setAvgRatings] = useState({});
   const [prevSkills, setPrevSkills] = useState("none");
   // console.log("info", from);
 
-  const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
-    <img src={LeftArrow} alt="prevArrow" {...props} />
-  );
+  // const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
+  //   <img
+  //     src={LeftArrow}
+  //     alt="prevArrow"
+  //     {...props}
+  //   />
+  // );
 
-  const SlickArrowRight = ({ currentSlide, slideCount, ...props }) => (
-    <img src={RightArrow} alt="nextArrow" {...props} />
-  );
+  // const SlickArrowRight = ({ currentSlide, slideCount, ...props }) => (
+  //   <img
+  //     src={RightArrow}
+  //     alt="nextArrow"
+  //     {...props}
+  //   />
+  // );
 
-  const settings = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    initialSlide: 0,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-    prevArrow: <SlickArrowLeft />,
-    nextArrow: <SlickArrowRight />,
-  };
+  // const settings = {
+  //   dots: false,
+  //   infinite: false,
+  //   speed: 500,
+  //   slidesToShow: 4,
+  //   slidesToScroll: 1,
+  //   initialSlide: 0,
+  //   responsive: [
+  //     {
+  //       breakpoint: 1024,
+  //       settings: {
+  //         slidesToShow: 3,
+  //         slidesToScroll: 3,
+  //         infinite: true,
+  //         dots: true,
+  //       },
+  //     },
+  //     {
+  //       breakpoint: 600,
+  //       settings: {
+  //         slidesToShow: 2,
+  //         slidesToScroll: 2,
+  //         initialSlide: 2,
+  //       },
+  //     },
+  //     {
+  //       breakpoint: 480,
+  //       settings: {
+  //         slidesToShow: 1,
+  //         slidesToScroll: 1,
+  //       },
+  //     },
+  //   ],
+  //   prevArrow: <SlickArrowLeft />,
+  //   nextArrow: <SlickArrowRight />,
+  // };
+
+  useEffect(() => {
+    const fetchOfferDetails = async () => {
+      const data2 = employee.ratings;
+      calculateRatings(data2);
+    };
+    fetchOfferDetails();
+  }, [employee]);
 
   const calculateRatings = (ratings) => {
-    let avgCommunication = 0;
-    let avgAttitude = 0;
-    let avgAbilityToLearn = 0;
-    let avgPunctuality = 0;
-    let avgCommitment = 0;
-    let avgTrustWorthiness = 0;
-    let avgSkill = 0;
-    let avgTeamPlayer = 0;
-    let total = 0;
     let colleagueScore = 0;
     let score = 0;
     let ratingsOfEmployee = ratings.filter((rate) => {
@@ -84,36 +89,6 @@ const EmployeeDetails = () => {
     let ratingsOfEmployer = ratings.filter((rate) => {
       return rate?.ratedByRole === "Employer";
     });
-    for (let index = 0; index < ratings.length; index++) {
-      const element = ratings[index];
-      avgCommunication += +element.communication;
-      avgAttitude += +element.attitude;
-      avgAbilityToLearn += +element.abilityToLearn;
-      avgPunctuality += +element.punctuality;
-      avgCommitment += +element.commitment;
-      avgTrustWorthiness += +element.trustworthiness;
-      avgSkill += +element.skill;
-      avgTeamPlayer += +element.teamPlayer;
-    }
-    avgCommunication /= ratings.length;
-    avgAttitude /= ratings.length;
-    avgAbilityToLearn /= ratings.length;
-    avgPunctuality /= ratings.length;
-    avgCommitment /= ratings.length;
-    avgTrustWorthiness /= ratings.length;
-    avgSkill /= ratings.length;
-    avgTeamPlayer /= ratings.length;
-    total =
-      avgCommunication +
-      avgAttitude +
-      avgAbilityToLearn +
-      avgPunctuality +
-      avgCommitment +
-      avgTrustWorthiness +
-      avgSkill +
-      avgTeamPlayer;
-    total = total / 8;
-
     for (let index = 0; index < ratingsOfEmployer.length; index++) {
       const element = ratingsOfEmployer[index];
       let temp =
@@ -145,15 +120,6 @@ const EmployeeDetails = () => {
     score /= ratingsOfEmployer.length;
     colleagueScore /= ratingsOfEmployee.length;
     setAvgRatings({
-      avgCommunication: Math.ceil(avgCommunication),
-      avgAttitude: Math.ceil(avgAttitude),
-      avgAbilityToLearn: Math.ceil(avgAbilityToLearn),
-      avgPunctuality: Math.ceil(avgPunctuality),
-      avgCommitment: Math.ceil(avgCommitment),
-      avgTrustWorthiness: Math.ceil(avgTrustWorthiness),
-      avgSkill: Math.ceil(avgSkill),
-      avgTeamPlayer: Math.ceil(avgTeamPlayer),
-      total: Math.ceil(total),
       score: Math.ceil(score),
       colleagueScore: Math.ceil(colleagueScore),
     });
@@ -198,7 +164,7 @@ const EmployeeDetails = () => {
       avgSkill +
       avgTeamPlayer;
     total = total / 8;
-    return Math.ceil(total)
+    return Math.ceil(total);
   };
 
   const calculateCommunicationRatings = (ratings) => {
@@ -208,7 +174,7 @@ const EmployeeDetails = () => {
       avgCommunication += +element.communication;
     }
     avgCommunication /= ratings.length;
-    return avgCommunication
+    return avgCommunication;
   };
 
   const calculateAttitudeRatings = (ratings) => {
@@ -218,7 +184,7 @@ const EmployeeDetails = () => {
       avgAttitude += +element.attitude;
     }
     avgAttitude /= ratings.length;
-    return avgAttitude
+    return avgAttitude;
   };
 
   const calculateAbilityToLearnRatings = (ratings) => {
@@ -228,7 +194,7 @@ const EmployeeDetails = () => {
       avgAbilityToLearn += +element.abilityToLearn;
     }
     avgAbilityToLearn /= ratings.length;
-    return avgAbilityToLearn
+    return avgAbilityToLearn;
   };
 
   const calculatePunctualityRatings = (ratings) => {
@@ -238,7 +204,7 @@ const EmployeeDetails = () => {
       avgPunctuality += +element.punctuality;
     }
     avgPunctuality /= ratings.length;
-    return avgPunctuality
+    return avgPunctuality;
   };
   const calculateCommitmentRatings = (ratings) => {
     let avgCommitment = 0;
@@ -247,25 +213,25 @@ const EmployeeDetails = () => {
       avgCommitment += +element.commitment;
     }
     avgCommitment /= ratings.length;
-    return avgCommitment
+    return avgCommitment;
   };
-  const calculateTrustWorthinessRatings = (ratings) => {
+  const calculateTrustworthinessRatings = (ratings) => {
     let avgTrustWorthiness = 0;
     for (let index = 0; index < ratings.length; index++) {
       const element = ratings[index];
       avgTrustWorthiness += +element.trustworthiness;
     }
     avgTrustWorthiness /= ratings.length;
-    return avgTrustWorthiness
+    return avgTrustWorthiness;
   };
   const calculateSkillRatings = (ratings) => {
-    let avgTrustWorthiness = 0;
+    let avgSkill = 0;
     for (let index = 0; index < ratings.length; index++) {
       const element = ratings[index];
       avgSkill += +element.skill;
     }
     avgSkill /= ratings.length;
-    return avgSkill
+    return avgSkill;
   };
   const calculateTeamPlayerRatings = (ratings) => {
     let avgTeamPlayer = 0;
@@ -274,21 +240,11 @@ const EmployeeDetails = () => {
       avgTeamPlayer += +element.teamPlayer;
     }
     avgTeamPlayer /= ratings.length;
-    return avgTeamPlayer
+    return avgTeamPlayer;
   };
   function getRatingsByEmployerId(ratings, employerId) {
     return ratings.filter((rating) => rating.ratedById === employerId);
   }
-  useEffect(() => {
-    const fetchOfferDetails = async () => {
-      const data2 = employee.ratings
-      calculateRatings(data2);
-      setEmployeeRatings(data2);
-      // console.log(getRatingsByEmployerId(data2, employee.currentEmployerId))
-    };
-    fetchOfferDetails();
-  }, [employee]);
-
   function text(percentage) {
     if (percentage < 10) {
       return "Worst";
@@ -316,15 +272,21 @@ const EmployeeDetails = () => {
               className="back me-3"
               onClick={() => {
                 navigate("/");
-              }}
-            >
-              <MdArrowBackIos size={22} className="backIcon" />
+              }}>
+              <MdArrowBackIos
+                size={22}
+                className="backIcon"
+              />
             </div>
             <span className="employeeDetailsText">Employee Details</span>
           </div>
           <div className="col-6 d-flex justify-content-end">
             <button className="btn">
-              <img src={ViewFile} alt="" className="viewIcon" />
+              <img
+                src={ViewFile}
+                alt=""
+                className="viewIcon"
+              />
               <a
                 className="text-color-green fw-bold"
                 href={employee.resume}
@@ -332,8 +294,7 @@ const EmployeeDetails = () => {
                 rel="noreferrer"
                 style={{
                   textDecoration: "none",
-                }}
-              >
+                }}>
                 View Resume
               </a>
             </button>
@@ -341,9 +302,12 @@ const EmployeeDetails = () => {
               className="btn portfolio-btn"
               href={`https://${employee.portfolioLink}`}
               target="_blank"
-              rel="noreferrer"
-            >
-              <img src={UrlLink} alt="" className="linkIcon" />
+              rel="noreferrer">
+              <img
+                src={UrlLink}
+                alt=""
+                className="linkIcon"
+              />
               <span className=" fw-bold">Portfolio</span>
             </a>
           </div>
@@ -351,7 +315,11 @@ const EmployeeDetails = () => {
         <div className="row mt-5 d-flex justify-content-center align-items-center mb-5">
           <div className="col-md-8 col-12 d-flex align-items-start">
             <div className="employeeImg">
-              <img src={employee?.profileImage} alt="" className="empImg" />
+              <img
+                src={employee?.profileImage}
+                alt=""
+                className="empImg"
+              />
             </div>
             <div className="employeeDetails">
               <h3>{employee?.employeeName}</h3>
@@ -395,7 +363,9 @@ const EmployeeDetails = () => {
             {employee?.skills?.map((skill) => {
               return (
                 // <Slider {...settings}>
-                <div className="skills" key={skill}>
+                <div
+                  className="skills"
+                  key={skill}>
                   <p className="title">{skill.skillName}</p>
                   <ProgressBar value={skill.value} />
                 </div>
@@ -416,257 +386,535 @@ const EmployeeDetails = () => {
             */}
         </div>
         {/* skills section ends */}
-        {employee?.employerIdList?.filter((info) => { return (info.employerId === employee.currentEmployerId) })
+        {employee?.employerIdList
+          ?.filter((info) => {
+            return info.employerId === employee.currentEmployerId;
+          })
           ?.map((info) => {
-            return (<div className="row d-flex align-items-center my-3">
-              <div className="col-12">
-                <h1>Current Company</h1>
-              </div>
-              <div className="col-3">
-                <div className="companyLogo">
-                  <img src={info.companyLogo} alt="" className="logo" />
-                </div>
-              </div>
-              <div className="col-md-9 col-7">
-                <h1 className="fw-bold font-size-39">
-                  {info.companyName}
-                </h1>
-                <div className="fw-bold font-size-25">{new Date(info.dateOfJoining.seconds * 1000).getFullYear()}</div>
-              </div>
-              <div className="divider my-3"></div>
-            </div>)
-          })}
-        <div className="row d-flex justify-content-center align-items-center progressBars">
-          <div className="col-md-8">
-            <div className="row">
-              <div className="col-md-3 mb-3">
-                <div class="circle-wrap">
-                  {avgRatings.avgCommunication && (
-                    <ProgressBar value={avgRatings.avgCommunication || 0} />
-                  )}
-                </div>
-                <p>Communitcation</p>
-              </div>
-              <div className="col-md-3 mb-3">
-                <div class="circle-wrap">
-                  {avgRatings.avgAttitude && (
-                    <ProgressBar value={avgRatings.avgAttitude || 0} />
-                  )}
-                </div>
-                <p>Attitude</p>
-              </div>
-              <div className="col-md-3 mb-3">
-                <div class="circle-wrap">
-                  {avgRatings.avgAbilityToLearn && (
-                    <ProgressBar value={avgRatings.avgAbilityToLearn || 0} />
-                  )}
-                </div>
-                <p>Ability To Learn</p>
-              </div>
-              <div className="col-md-3 mb-3">
-                <div class="circle-wrap">
-                  {avgRatings.avgPunctuality && (
-                    <ProgressBar value={avgRatings.avgPunctuality || 0} />
-                  )}
-                </div>
-                <p>Punctuality</p>
-              </div>
-              <div className="col-md-3 mb-3">
-                <div class="circle-wrap">
-                  {avgRatings.avgCommitment && (
-                    <ProgressBar value={avgRatings.avgCommitment || 0} />
-                  )}
-                </div>
-                <p>Commitment</p>
-              </div>
-              <div className="col-md-3 mb-3">
-                <div class="circle-wrap">
-                  {avgRatings.avgTrustWorthiness && (
-                    <ProgressBar value={avgRatings.avgTrustWorthiness || 0} />
-                  )}
-                </div>
-                <p>Trustworthiness</p>
-              </div>
-              <div className="col-md-3 mb-3">
-                <div class="circle-wrap">
-                  {avgRatings.avgSkill && (
-                    <ProgressBar value={avgRatings.avgSkill || 0} />
-                  )}
-                </div>
-                <p>Skill</p>
-              </div>
-              <div className="col-md-3 mb-3">
-                <div class="circle-wrap">
-                  {avgRatings.avgTeamPlayer && (
-                    <ProgressBar value={avgRatings.avgTeamPlayer || 0} />
-                  )}
-                </div>
-                <p>Team Player</p>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4 align-items-center d-flex flex-column">
-            <p className="mb-0">Total</p>
-
-            <div class="circle-wrap">
-              {avgRatings.total && (
-                <ProgressBar value={avgRatings.total || 0} />
-              )}
-            </div>
-          </div>
-        </div>
-        <div className="row employerResult">
-          <div>
-            <p>
-              <FaQuoteLeft size={30} className="quoteLeft" />
-              This employee is marked as a{" "}
-              <span className="text-color-green">
-                {text(avgRatings?.total)} employee{" "}
-              </span>{" "}
-              by <strong>The Madras Branding Company</strong>
-            </p>
-          </div>
-        </div>
-      </div>
-      {employee?.employerIdList?.filter((info) => { return (info.employerId !== employee.currentEmployerId) }).length === 0 ? <section className="companies-section"></section> :
-      <section className="companies-section">
-        <div className="container">
-          <div className="row">
-            <div className="col">
-              <h1>Previous Companies</h1>
-            </div>
-          </div>
-            {employee?.employerIdList?.filter((info) => { return (info.employerId !== employee.currentEmployerId) })
-              ?.map((info) => {
-                return (<div
-                  className="row d-flex align-items-center my-3"
-                  onClick={() => { handlePrevCompanySkills() }}
-                  style={{ cursor: "pointer", transition: "all 3s ease-in" }}
-                >
-                  <div className="col-md-2 col-3">
+            return (
+              <div>
+                <div className="row d-flex align-items-center my-3">
+                  <div className="col-12">
+                    <h1>Current Company</h1>
+                  </div>
+                  <div className="col-3">
                     <div className="companyLogo">
-                      <img src={info.companyLogo} alt="" className="logo" />
+                      <img
+                        src={info.companyLogo}
+                        alt=""
+                        className="logo"
+                      />
                     </div>
                   </div>
                   <div className="col-md-9 col-7">
-                    <h1 className="fw-bold font-size-39">
-                      {info.companyName}
-                    </h1>
-                    <div className="fw-bold font-size-25">{new Date(info.dateOfJoining.seconds * 1000).getFullYear()}</div>
-                  </div>
-                  <div className="col-md-1 col-1">
-                    <div className="back">
-                      <MdOutlineKeyboardArrowDown size={35} className="downIcon" />
-                    </div>
-                  </div>
-                  <div
-                    className="prevSkillsContainer"
-                    style={{ display: prevSkills }}
-                  >
-                    <div className="row d-flex justify-content-center align-items-center progressBars">
-                      <div className="col-md-8">
-                        <div className="row">
-                          <div className="col-md-3 mb-3">
-                            <div class="circle-wrap">
-                              {avgRatings.avgCommunication && (
-                                <ProgressBar
-                                  value={avgRatings.avgCommunication || 0}
-                                />
-                              )}
-                            </div>
-                            <p>Communitcation</p>
-                          </div>
-                          <div className="col-md-3 mb-3">
-                            <div class="circle-wrap">
-                              {avgRatings.avgAttitude && (
-                                <ProgressBar value={avgRatings.avgAttitude || 0} />
-                              )}
-                            </div>
-                            <p>Attitude</p>
-                          </div>
-                          <div className="col-md-3 mb-3">
-                            <div class="circle-wrap">
-                              {avgRatings.avgAbilityToLearn && (
-                                <ProgressBar
-                                  value={avgRatings.avgAbilityToLearn || 0}
-                                />
-                              )}
-                            </div>
-                            <p>Ability To Learn</p>
-                          </div>
-                          <div className="col-md-3 mb-3">
-                            <div class="circle-wrap">
-                              {avgRatings.avgPunctuality && (
-                                <ProgressBar value={avgRatings.avgPunctuality || 0} />
-                              )}
-                            </div>
-                            <p>Punctuality</p>
-                          </div>
-                          <div className="col-md-3 mb-3">
-                            <div class="circle-wrap">
-                              {avgRatings.avgCommitment && (
-                                <ProgressBar value={avgRatings.avgCommitment || 0} />
-                              )}
-                            </div>
-                            <p>Commitment</p>
-                          </div>
-                          <div className="col-md-3 mb-3">
-                            <div class="circle-wrap">
-                              {avgRatings.avgTrustWorthiness && (
-                                <ProgressBar
-                                  value={avgRatings.avgTrustWorthiness || 0}
-                                />
-                              )}
-                            </div>
-                            <p>Trustworthiness</p>
-                          </div>
-                          <div className="col-md-3 mb-3">
-                            <div class="circle-wrap">
-                              {avgRatings.avgSkill && (
-                                <ProgressBar value={avgRatings.avgSkill || 0} />
-                              )}
-                            </div>
-                            <p>Skill</p>
-                          </div>
-                          <div className="col-md-3 mb-3">
-                            <div class="circle-wrap">
-                              {avgRatings.avgTeamPlayer && (
-                                <ProgressBar value={avgRatings.avgTeamPlayer || 0} />
-                              )}
-                            </div>
-                            <p>Team Player</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-md-4 align-items-center d-flex flex-column">
-                        <p className="mb-0">Total</p>
-
-                        <div class="circle-wrap">
-                          {avgRatings.total && (
-                            <ProgressBar value={avgRatings.total || 0} />
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="row employerResult">
-                      <div>
-                        <p>
-                          <FaQuoteLeft size={30} className="quoteLeft" />
-                          This employee is marked as a{" "}
-                          <span className="text-color-green">
-                            {text(avgRatings?.total)} employee{" "}
-                          </span>{" "}
-                          by <strong>The Madras Branding Company</strong>
-                        </p>
-                      </div>
+                    <h1 className="fw-bold font-size-39">{info.companyName}</h1>
+                    <div className="fw-bold font-size-25">
+                      {new Date(
+                        info.dateOfJoining.seconds * 1000
+                      ).getFullYear()}
                     </div>
                   </div>
                   <div className="divider my-3"></div>
-                </div>)
-              })}
+                </div>
+                <div className="row d-flex justify-content-center align-items-center progressBars">
+                  <div className="col-md-8">
+                    <div className="row">
+                      <div className="col-md-3 mb-3">
+                        <div class="circle-wrap">
+                          {calculateCommunicationRatings(
+                            getRatingsByEmployerId(
+                              employee.ratings,
+                              employee.currentEmployerId
+                            )
+                          ) && (
+                              <ProgressBar
+                                value={
+                                  calculateCommunicationRatings(
+                                    getRatingsByEmployerId(
+                                      employee.ratings,
+                                      employee.currentEmployerId
+                                    )
+                                  ) || 0
+                                }
+                              />
+                            )}
+                        </div>
+                        <p>Communication</p>
+                      </div>
+                      <div className="col-md-3 mb-3">
+                        <div class="circle-wrap">
+                          {calculateAttitudeRatings(
+                            getRatingsByEmployerId(
+                              employee.ratings,
+                              employee.currentEmployerId
+                            )
+                          ) && (
+                              <ProgressBar
+                                value={
+                                  calculateAttitudeRatings(
+                                    getRatingsByEmployerId(
+                                      employee.ratings,
+                                      employee.currentEmployerId
+                                    )
+                                  ) || 0
+                                }
+                              />
+                            )}
+                        </div>
+                        <p>Attitude</p>
+                      </div>
+                      <div className="col-md-3 mb-3">
+                        <div class="circle-wrap">
+                          {calculateAbilityToLearnRatings(
+                            getRatingsByEmployerId(
+                              employee.ratings,
+                              employee.currentEmployerId
+                            )
+                          ) && (
+                              <ProgressBar
+                                value={
+                                  calculateAbilityToLearnRatings(
+                                    getRatingsByEmployerId(
+                                      employee.ratings,
+                                      employee.currentEmployerId
+                                    )
+                                  ) || 0
+                                }
+                              />
+                            )}
+                        </div>
+                        <p>Ability To Learn</p>
+                      </div>
+                      <div className="col-md-3 mb-3">
+                        <div class="circle-wrap">
+                          {calculatePunctualityRatings(
+                            getRatingsByEmployerId(
+                              employee.ratings,
+                              employee.currentEmployerId
+                            )
+                          ) && (
+                              <ProgressBar
+                                value={
+                                  calculatePunctualityRatings(
+                                    getRatingsByEmployerId(
+                                      employee.ratings,
+                                      employee.currentEmployerId
+                                    )
+                                  ) || 0
+                                }
+                              />
+                            )}
+                        </div>
+                        <p>Punctuality</p>
+                      </div>
+                      <div className="col-md-3 mb-3">
+                        <div class="circle-wrap">
+                          {calculateCommitmentRatings(
+                            getRatingsByEmployerId(
+                              employee.ratings,
+                              employee.currentEmployerId
+                            )
+                          ) && (
+                              <ProgressBar
+                                value={
+                                  calculateCommitmentRatings(
+                                    getRatingsByEmployerId(
+                                      employee.ratings,
+                                      employee.currentEmployerId
+                                    )
+                                  ) || 0
+                                }
+                              />
+                            )}
+                        </div>
+                        <p>Commitment</p>
+                      </div>
+                      <div className="col-md-3 mb-3">
+                        <div class="circle-wrap">
+                          {calculateTrustworthinessRatings(
+                            getRatingsByEmployerId(
+                              employee.ratings,
+                              employee.currentEmployerId
+                            )
+                          ) && (
+                              <ProgressBar
+                                value={
+                                  calculateTrustworthinessRatings(
+                                    getRatingsByEmployerId(
+                                      employee.ratings,
+                                      employee.currentEmployerId
+                                    )
+                                  ) || 0
+                                }
+                              />
+                            )}
+                        </div>
+                        <p>Trustworthiness</p>
+                      </div>
+                      <div className="col-md-3 mb-3">
+                        <div class="circle-wrap">
+                          {calculateSkillRatings(
+                            getRatingsByEmployerId(
+                              employee.ratings,
+                              employee.currentEmployerId
+                            )
+                          ) && (
+                              <ProgressBar
+                                value={
+                                  calculateSkillRatings(
+                                    getRatingsByEmployerId(
+                                      employee.ratings,
+                                      employee.currentEmployerId
+                                    )
+                                  ) || 0
+                                }
+                              />
+                            )}
+                        </div>
+                        <p>Skill</p>
+                      </div>
+                      <div className="col-md-3 mb-3">
+                        <div class="circle-wrap">
+                          {calculateTeamPlayerRatings(
+                            getRatingsByEmployerId(
+                              employee.ratings,
+                              employee.currentEmployerId
+                            )
+                          ) && (
+                              <ProgressBar
+                                value={
+                                  calculateTeamPlayerRatings(
+                                    getRatingsByEmployerId(
+                                      employee.ratings,
+                                      employee.currentEmployerId
+                                    )
+                                  ) || 0
+                                }
+                              />
+                            )}
+                        </div>
+                        <p>Team Player</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-md-4 align-items-center d-flex flex-column">
+                    <p className="mb-0">Total</p>
 
+                    <div class="circle-wrap">
+                      {calculateTotalRatings(
+                        getRatingsByEmployerId(
+                          employee.ratings,
+                          employee.currentEmployerId
+                        )
+                      ) && (
+                          <ProgressBar
+                            value={
+                              calculateTotalRatings(
+                                getRatingsByEmployerId(
+                                  employee.ratings,
+                                  employee.currentEmployerId
+                                )
+                              ) || 0
+                            }
+                          />
+                        )}
+                    </div>
+                  </div>
+                </div>
+                <div className="row employerResult">
+                  <div>
+                    <p>
+                      <FaQuoteLeft
+                        size={30}
+                        className="quoteLeft"
+                      />
+                      This employee is marked as a{" "}
+                      <span className="text-color-green">
+                        {text(
+                          calculateTotalRatings(
+                            getRatingsByEmployerId(
+                              employee.ratings,
+                              employee.currentEmployerId
+                            )
+                          )
+                        )}{" "}
+                        employee{" "}
+                      </span>{" "}
+                      by <strong>{info.companyName}</strong>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+      </div>
+      {employee?.employerIdList?.filter((info) => {
+        return info.employerId !== employee.currentEmployerId;
+      }).length === 0 ? (
+        <section className="companies-section"></section>
+      ) : (
+        <section className="companies-section">
+          <div className="container">
+            <div className="row">
+              <div className="col">
+                <h1>Previous Companies</h1>
+              </div>
+            </div>
+              {employee?.employerIdList
+                ?.filter((info) => {
+                  return info.employerId !== employee.currentEmployerId;
+                })
+              ?.map((info) => {
+                return (
+                  <div
+                    className="row d-flex align-items-center my-3"
+                    onClick={() => {
+                      handlePrevCompanySkills();
+                    }}
+                    style={{ cursor: "pointer", transition: "all 3s ease-in" }}>
+                    <div className="col-md-2 col-3">
+                      <div className="companyLogo">
+                        <img
+                          src={info.companyLogo}
+                          alt=""
+                          className="logo"
+                        />
+                      </div>
+                    </div>
+                    <div className="col-md-9 col-7">
+                      <h1 className="fw-bold font-size-39">
+                        {info.companyName}
+                      </h1>
+                      <div className="fw-bold font-size-25">
+                        {new Date(
+                          info.dateOfJoining.seconds * 1000
+                        ).getFullYear()}
+                      </div>
+                    </div>
+                    <div className="col-md-1 col-1">
+                      <div className="back">
+                        <MdOutlineKeyboardArrowDown
+                          size={35}
+                          className="downIcon"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      className="prevSkillsContainer"
+                      style={{ display: prevSkills }}>
+                      <div className="row d-flex justify-content-center align-items-center progressBars">
+                        <div className="col-md-8">
+                          <div className="row">
+                            <div className="col-md-3 mb-3">
+                              <div class="circle-wrap">
+                                {calculateCommunicationRatings(
+                                  getRatingsByEmployerId(
+                                    employee.ratings,
+                                    info.employerId
+                                  )
+                                ) && (
+                                  <ProgressBar
+                                    value={calculateCommunicationRatings(
+                                      getRatingsByEmployerId(
+                                        employee.ratings,
+                                        info.employerId
+                                      )
+                                    ) || 0}
+                                  />
+                                )}
+                              </div>
+                              <p>Communication</p>
+                            </div>
+                            <div className="col-md-3 mb-3">
+                              <div class="circle-wrap">
+                                {calculateAttitudeRatings(
+                                  getRatingsByEmployerId(
+                                    employee.ratings,
+                                    info.employerId
+                                  )
+                                ) && (
+                                  <ProgressBar
+                                    value={calculateAttitudeRatings(
+                                      getRatingsByEmployerId(
+                                        employee.ratings,
+                                        info.employerId
+                                      )
+                                    ) || 0}
+                                  />
+                                )}
+                              </div>
+                              <p>Attitude</p>
+                            </div>
+                            <div className="col-md-3 mb-3">
+                              <div class="circle-wrap">
+                                {calculateAbilityToLearnRatings(
+                                  getRatingsByEmployerId(
+                                    employee.ratings,
+                                    info.employerId
+                                  )
+                                ) && (
+                                  <ProgressBar
+                                    value={calculateAbilityToLearnRatings(
+                                      getRatingsByEmployerId(
+                                        employee.ratings,
+                                        info.employerId
+                                      )
+                                    ) || 0}
+                                  />
+                                )}
+                              </div>
+                              <p>Ability To Learn</p>
+                            </div>
+                            <div className="col-md-3 mb-3">
+                              <div class="circle-wrap">
+                                {calculatePunctualityRatings(
+                                  getRatingsByEmployerId(
+                                    employee.ratings,
+                                    info.employerId
+                                  )
+                                ) && (
+                                  <ProgressBar
+                                    value={calculatePunctualityRatings(
+                                      getRatingsByEmployerId(
+                                        employee.ratings,
+                                        info.employerId
+                                      )
+                                    ) || 0}
+                                  />
+                                )}
+                              </div>
+                              <p>Punctuality</p>
+                            </div>
+                            <div className="col-md-3 mb-3">
+                              <div class="circle-wrap">
+                                {calculateCommitmentRatings(
+                                  getRatingsByEmployerId(
+                                    employee.ratings,
+                                    info.employerId
+                                  )
+                                ) && (
+                                  <ProgressBar
+                                    value={calculateCommitmentRatings(
+                                      getRatingsByEmployerId(
+                                        employee.ratings,
+                                        info.employerId
+                                      )
+                                    ) || 0}
+                                  />
+                                )}
+                              </div>
+                              <p>Commitment</p>
+                            </div>
+                            <div className="col-md-3 mb-3">
+                              <div class="circle-wrap">
+                                {calculateTrustworthinessRatings(
+                                  getRatingsByEmployerId(
+                                    employee.ratings,
+                                    info.employerId
+                                  )
+                                ) && (
+                                  <ProgressBar
+                                    value={calculateTrustworthinessRatings(
+                                      getRatingsByEmployerId(
+                                        employee.ratings,
+                                        info.employerId
+                                      )
+                                    ) || 0}
+                                  />
+                                )}
+                              </div>
+                              <p>Trustworthiness</p>
+                            </div>
+                            <div className="col-md-3 mb-3">
+                              <div class="circle-wrap">
+                                {calculateSkillRatings(
+                                  getRatingsByEmployerId(
+                                    employee.ratings,
+                                    info.employerId
+                                  )
+                                ) && (
+                                  <ProgressBar
+                                    value={calculateSkillRatings(
+                                      getRatingsByEmployerId(
+                                        employee.ratings,
+                                        info.employerId
+                                      )
+                                    ) || 0}
+                                  />
+                                )}
+                              </div>
+                              <p>Skill</p>
+                            </div>
+                            <div className="col-md-3 mb-3">
+                              <div class="circle-wrap">
+                                {calculateTeamPlayerRatings(
+                                  getRatingsByEmployerId(
+                                    employee.ratings,
+                                    info.employerId
+                                  )
+                                ) && (
+                                  <ProgressBar
+                                    value={calculateTeamPlayerRatings(
+                                      getRatingsByEmployerId(
+                                        employee.ratings,
+                                        info.employerId
+                                      )
+                                    ) || 0}
+                                  />
+                                )}
+                              </div>
+                              <p>Team Player</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-md-4 align-items-center d-flex flex-column">
+                          <p className="mb-0">Total</p>
+
+                          <div class="circle-wrap">
+                            {calculateTotalRatings(
+                              getRatingsByEmployerId(
+                                employee.ratings,
+                                info.employerId
+                              )
+                            ) && (
+                                <ProgressBar value={calculateTotalRatings(
+                                  getRatingsByEmployerId(
+                                    employee.ratings,
+                                    info.employerId
+                                  )
+                                ) || 0} />
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="row employerResult">
+                        <div>
+                          <p>
+                            <FaQuoteLeft
+                              size={30}
+                              className="quoteLeft"
+                            />
+                            This employee is marked as a{" "}
+                            <span className="text-color-green">
+                              {text(calculateTotalRatings(
+                                getRatingsByEmployerId(
+                                  employee.ratings,
+                                  info.employerId
+                                )
+                              ))} employee{" "}
+                            </span>{" "}
+                            by <strong>{info.companyName}</strong>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="divider my-3"></div>
+                  </div>
+                );
+              })}
           </div>
-        </section>}
+        </section>
+      )}
     </>
   );
 };
