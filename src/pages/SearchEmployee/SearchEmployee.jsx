@@ -89,14 +89,15 @@ export default function SearchEmployee() {
   };
 
   const handleLocationChange = (event) => {
-    filters.location = event.target.value;
+    filters.location = event;
   };
 
   const handleSelectChange = (e) => {
     filters.typeOfEmployment = e;
   };
 
-  // const search = () => {
+  const search = () => {
+    console.log(filters)
   //   if (filters.location) {
   //     const filteredData = employeeList.filter((item) =>
   //       item.typeOfEmployment.toLowerCase().includes(filters.location)
@@ -136,7 +137,7 @@ export default function SearchEmployee() {
   //     setEmployeeList(filters);
   //   }
   //   setQuery(filters.salary);
-  // };
+  };
 
   return (
     <div className="employer-home">
@@ -153,11 +154,14 @@ export default function SearchEmployee() {
         {user === "Employer" ? (
           <div className="input-box2 input-box">
             <img src={location} alt="Search" />
-            <input
-              type="text"
-              onChange={(e) => handleLocationChange(e)}
-              className="box-input"
+            <Select
+              onChange={(e) => { handleLocationChange(e) }}
+              className="box-select"
               placeholder="Location"
+              options={[{ value: "", label: "" }].concat(userDatas.data.companyLocations.map((option) => ({
+                value: option,
+                label: option,
+              })))}
             />
           </div>
         ) : (
@@ -171,6 +175,7 @@ export default function SearchEmployee() {
             className="box-select"
             placeholder="Job Type"
             options={[
+              { value: "", label: "" },
               { value: "Permanent Full-Time", label: "Permanent Full-Time" },
               { value: "Part-Time", label: "Part-Time" },
               { value: "Casual/Vacation", label: "Casual/Vacation" },
@@ -192,7 +197,7 @@ export default function SearchEmployee() {
         ) : (
           ""
         )}
-        {/* <button onClick={search}>Search</button> */}
+        <button onClick={search}>Search</button>
       </div>
       <div className="search-results">
         <div className="result-employees">
@@ -227,22 +232,15 @@ export default function SearchEmployee() {
                 image={Empty.PRESENTED_IMAGE_SIMPLE}
                 description="No Records"
               />
-            )}{
-              console.log(employeeList)}
+            )}
             {employeeList
-              .filter((item) => {
+              .filter(item => {
+                const { typeOfEmployment, designation, salary, location } = filters;
                 return (
-                  (filters?.typeOfEmployment.toLowerCase() === "" ||
-                    item?.typeOfEmployment.toLowerCase() ===
-                      filters?.typeOfEmployment.toLowerCase()) &&
-                  (filters?.designation.toLowerCase() === "" ||
-                    item?.designation.toLowerCase() ===
-                      filters?.designation.toLowerCase()) &&
-                  (filters?.salary === "" ||
-                    +item?.salary <= +filters?.salary) &&
-                  (filters?.location.toLowerCase() === "" ||
-                    item?.companyLocation.toLowerCase() ===
-                      filters?.location.toLowerCase())
+                  (typeOfEmployment === "" || item.typeOfEmployment.toLowerCase() === typeOfEmployment.toLowerCase()) &&
+                  (designation === "" || item.designation.toLowerCase() === designation.toLowerCase()) &&
+                  (salary === "" || +item?.salary <= +salary) &&
+                  (location === "" || item.companyLocation.toLowerCase() === location.toLowerCase())
                 );
               })
               .map((info) => {
