@@ -491,7 +491,7 @@ export async function rateEmployee(ratingData) {
     );
 
     if (ratingIndex !== -1) {
-      ratings[ratingIndex].ratedAtDate = new Date().toLocaleDateString();
+      ratings[ratingIndex].ratedAtDate = new Date().toLocaleDateString("en-GB");
       await updateDocument(
         Collections.employees,
         {
@@ -506,7 +506,7 @@ export async function rateEmployee(ratingData) {
         {
           lastRatings: arrayUnion({
             ratedById: ratingData.ratedById,
-            ratedAtDate: new Date().toLocaleDateString(),
+            ratedAtDate: new Date().toLocaleDateString("en-GB"),
           }),
         },
         ratingData.employeeId
@@ -586,7 +586,9 @@ export async function assessEmployee(assessData) {
     );
 
     if (ratingIndex !== -1) {
-      ratings[ratingIndex].assessmentDate = new Date().toLocaleDateString();
+      ratings[ratingIndex].assessmentDate = new Date().toLocaleDateString(
+        "en-GB"
+      );
       await updateDocument(
         Collections.employees,
         {
@@ -601,7 +603,7 @@ export async function assessEmployee(assessData) {
         {
           lastRatings: arrayUnion({
             ratedById: assessData.ratedById,
-            assessmentDate: new Date().toLocaleDateString(),
+            assessmentDate: new Date().toLocaleDateString("en-GB"),
           }),
         },
         assessData.employeeId

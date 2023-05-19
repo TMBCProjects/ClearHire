@@ -157,7 +157,7 @@ const Approval = () => {
                       </p>
                       <p className="mb-1">{info.companyLocation}</p>
                       <p className="mb-1">{info.employeeEmail}</p>
-                      <p className="mb-1">{new Date(info.dateOfJoining.seconds * 1000).toLocaleDateString()}</p>
+                      <p className="mb-1">{new Date(info.dateOfJoining.seconds * 1000).toLocaleDateString('en-GB')}</p>
                       <p className="mb-1">{info.salary} LPA</p>
                       <div className="row  mt-2">
                         <div className="col">

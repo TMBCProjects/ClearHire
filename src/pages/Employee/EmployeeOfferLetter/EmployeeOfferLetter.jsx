@@ -66,7 +66,7 @@ const EmployeeOfferLetter = () => {
           <p className="offerletter-text mt-5">
             <span className="text-color-green">Date Of Joining</span>
           </p>
-          <p className="offerletter-text">{new Date(item.dateOfJoining.seconds * 1000).toLocaleDateString()}</p>
+          <p className="offerletter-text">{new Date(item.dateOfJoining.seconds * 1000).toLocaleDateString('en-GB')}</p>
           <p className="offerletter-text mt-5">
             <span className="text-color-green">Salary</span>
           </p>

@@ -219,7 +219,7 @@ export default function Profile() {
           </div>
           <div>
             <p>Date of joining</p>
-            <p>{new Date(userDatas.data.dateOfJoining.seconds * 1000).toLocaleDateString()}</p>
+            <p>{new Date(userDatas.data.dateOfJoining.seconds * 1000).toLocaleDateString('en-GB')}</p>
           </div>
           <div>
             <p>Salary</p>

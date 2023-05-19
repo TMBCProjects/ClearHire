@@ -282,7 +282,7 @@ export async function rateCollegue(ratingData) {
     {
       lastRatings: arrayUnion({
         ratedById: ratingData.ratedById,
-        ratedAtDate: new Date().toLocaleDateString(),
+        ratedAtDate: new Date().toLocaleDateString("en-GB"),
       }),
     },
     ratingData.employeeId
