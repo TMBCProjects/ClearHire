@@ -20,7 +20,7 @@ const ViewEmployeeProfile = () => {
   const [prevSkills, setPrevSkills] = useState({});
   useEffect(() => {
     const fetchOfferDetails = async () => {
-      const data2 = await readEmployee(employeeDetails.id);
+      const data2 = await readEmployee(employeeDetails);
       setEmployee(data2);
     };
     fetchOfferDetails();
