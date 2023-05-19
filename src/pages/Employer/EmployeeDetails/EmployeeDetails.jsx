@@ -16,7 +16,7 @@ const EmployeeDetails = () => {
   const { from } = location.state;
   const employee = from;
   const [avgRatings, setAvgRatings] = useState({});
-  const [prevSkills, setPrevSkills] = useState("none");
+  const [prevSkills, setPrevSkills] = useState({});
   // console.log("info", from);
 
   // const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
@@ -259,9 +259,6 @@ const EmployeeDetails = () => {
     }
   }
 
-  const handlePrevCompanySkills = () => {
-    setPrevSkills(prevSkills === "none" ? "block" : "none");
-  };
 
   return (
     <>
@@ -664,12 +661,15 @@ const EmployeeDetails = () => {
                 ?.filter((info) => {
                   return info.employerId !== employee.currentEmployerId;
                 })
-              ?.map((info) => {
+                ?.map((info, index) => {
                 return (
                   <div
                     className="row d-flex align-items-center my-3"
                     onClick={() => {
-                      handlePrevCompanySkills();
+                      setPrevSkills((prevSkills) => ({
+                        ...prevSkills,
+                        [index]: !prevSkills[index],
+                      }));
                     }}
                     style={{ cursor: "pointer", transition: "all 3s ease-in" }}>
                     <div className="col-md-2 col-3">
@@ -699,8 +699,8 @@ const EmployeeDetails = () => {
                         />
                       </div>
                     </div>
-                    <div style={{ display: prevSkills }} className="divider my-3"></div>
-                    <div style={{ display: prevSkills }}>
+                    <div style={{ display: prevSkills[index] ? "block" : "none" }} className="divider my-3"></div>
+                    {prevSkills[index] && (
                       <div className="prevSkillsContainer">
                       <div className="row d-flex justify-content-center align-items-center progressBars">
                         <div className="col-md-8">
@@ -925,9 +925,9 @@ const EmployeeDetails = () => {
                           </p>
                         </div>
                       </div>
-                    </div>
+                      </div>
+                    )}
                     <div className="divider my-3"></div>
-                    </div>
                   </div>
                 );
               })}
