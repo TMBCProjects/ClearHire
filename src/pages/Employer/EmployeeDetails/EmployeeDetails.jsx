@@ -661,6 +661,13 @@ const EmployeeDetails = () => {
                 ?.filter((info) => {
                   return info.employerId !== employee.currentEmployerId;
                 })
+                ?.sort((a, b) => {
+                  return new Date(
+                    a.dateOfJoining.seconds * 1000
+                  ) - new Date(
+                    b.dateOfJoining.seconds * 1000
+                  );
+                })
                 ?.map((info, index) => {
                 return (
                   <div

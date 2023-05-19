@@ -93,7 +93,7 @@ const Assesment_Card = ({ info, employerId }) => {
             });
         }}>
         <img
-          src={pic}
+          src={info?.profileImage || pic}
           alt="manager-logo"></img>
         <ProgressBar
           value={
