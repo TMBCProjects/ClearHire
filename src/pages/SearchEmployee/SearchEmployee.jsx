@@ -25,6 +25,7 @@ const initialValues = {
   designation: "",
 };
 export default function SearchEmployee() {
+
   const userDatas = JSON.parse(sessionStorage.getItem("userData"));
   const user = sessionStorage.getItem("LoggedIn");
   const [employeeList, setEmployeeList] = useState([]);
@@ -38,8 +39,10 @@ export default function SearchEmployee() {
                 userDatas1.id,
                 userDatas1.data.currentEmployerId
               )
-              : [];
-        setEmployeeList(data);
+          : [];
+        if (setEmployeeList(data)) {
+          return;
+        }
       } catch (error) {
         console.log(error);
       }
@@ -48,16 +51,22 @@ export default function SearchEmployee() {
       try {
         const userDatas1 = JSON.parse(sessionStorage.getItem("userData"));
         const data = await readEmployees(userDatas1.id);
-        setEmployeeList(data);
+        if (setEmployeeList(data)) {
+          return;
+        }
       } catch (error) {
         console.log(error);
       }
     };
-    const user = sessionStorage.getItem("LoggedIn");
-    user === "Employer"
-      ? fetchEmployeeDetails()
-      : fetchCollegueDetails();
-  }, []);
+    if (user === "Employer") {
+      fetchEmployeeDetails()
+      // .then((data) =>
+      // setEmployeeList(data))
+    } else {
+      fetchCollegueDetails()
+    }
+
+  }, [user]);
 
   const handleInputChange = (event, field) => {
     setFilters((prevFilters) => ({
