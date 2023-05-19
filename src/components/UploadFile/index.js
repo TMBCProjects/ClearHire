@@ -9,7 +9,10 @@ export default function UploadPic({ name, url }) {
   const [fileData, setFileData] = useState("");
   useEffect(() => {
     if (url !== "") {
+      console.log(url);
       setFileLoading(true);
+    } else {
+      setFileLoading(false);
     }
   }, [url]);
   const handleFileUpload = async (event) => {
@@ -25,6 +28,9 @@ export default function UploadPic({ name, url }) {
   const removeImg = async (e) => {
     e.preventDefault();
     let fileData2 = url === "" ? fileData : url;
+    const userDatas = JSON.parse(sessionStorage.getItem("userData"));
+    userDatas.data.resume = "";
+    sessionStorage.setItem("userData", JSON.stringify(userDatas));
     setFileData(await deleteFile(Fields.resumes, fileData2));
     sessionStorage.removeItem("resume");
     setFileLoading(false);
