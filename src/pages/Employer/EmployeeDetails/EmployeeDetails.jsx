@@ -700,8 +700,8 @@ const EmployeeDetails = () => {
                       </div>
                     </div>
                     <div style={{ display: prevSkills }} className="divider my-3"></div>
-
-                    <div className="prevSkillsContainer" style={{ display: prevSkills }}>
+                    <div style={{ display: prevSkills }}>
+                      <div className="prevSkillsContainer">
                       <div className="row d-flex justify-content-center align-items-center progressBars">
                         <div className="col-md-8">
                           <div className="row">
@@ -927,6 +927,7 @@ const EmployeeDetails = () => {
                       </div>
                     </div>
                     <div className="divider my-3"></div>
+                    </div>
                   </div>
                 );
               })}
