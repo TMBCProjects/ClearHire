@@ -121,12 +121,14 @@ function App() {
                     <Route
                       path="/"
                       element={<SearchEmployee />}></Route>
+                    {/* <Route
+                      path="/EmployeeAssessment"
+                      element={<EmployeeAssessment />}></Route> */}
+                    {/*<Route path="/employer-approval" element={<Approval />}></Route>
+                   <Route path="/verification-request" element={<VerficationRequest />}></Route>*/}
                     <Route
                       path="/EmployeeAssessment"
-                      element={<EmployeeAssessment />}></Route>
-                    {/*<Route path="/employer-approval" element={<Approval />}></Route>
-                   <Route path="/verification-request" element={<VerficationRequest />}></Route>
-                  <Route path="/assessment" element={<Assessment />}></Route>*/}
+                      element={<Assessment />}></Route>
                     <Route
                       path="/employee-details"
                       element={<EmployeeDetails />}></Route>
