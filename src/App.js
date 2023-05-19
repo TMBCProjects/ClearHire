@@ -20,7 +20,6 @@ import EmployeeAssessment from "./pages/EmployeeAssessment/EmployeeAssessment";
 import EmployeeAssessmentForm from "./pages/EmployeeAssessment/EmployeeAssesmentForm";
 import Assessment from "./pages/Employee/Assessment/Assessment";
 import EmployerProfile from "./pages/Employer/Profile/Profile";
-import OfferList from "./pages/Employee/OfferList/Offers";
 import Requests from "./pages/Employer/Requests/Requests";
 import RequestApproval from "./pages/Employer/RequestApproval/RequestApproval";
 import ViewEmployeeProfile from "./pages/Employer/EmployeeDetails/ViewEmployeeProfile";
@@ -121,11 +120,6 @@ function App() {
                     <Route
                       path="/"
                       element={<SearchEmployee />}></Route>
-                    {/* <Route
-                      path="/EmployeeAssessment"
-                      element={<EmployeeAssessment />}></Route> */}
-                    {/*<Route path="/employer-approval" element={<Approval />}></Route>
-                   <Route path="/verification-request" element={<VerficationRequest />}></Route>*/}
                     <Route
                       path="/EmployeeAssessment"
                       element={<Assessment />}></Route>
