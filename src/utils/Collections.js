@@ -3,6 +3,8 @@ const Collections = {
   employers: "employers",
   offers: "offers",
   ratings: "ratings",
+  requests: "requests",
+  assessments: "assessments",
   Employee: "Employee",
   Employer: "Employer",
 };

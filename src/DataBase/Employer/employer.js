@@ -3,12 +3,17 @@ import Offer from "../../Modals/DB/Offer";
 import { Collections } from "../../utils/Collections";
 import {
   addDocument,
+  getDocument,
   getDocuments,
+  setDocument,
+  updateDocument,
   uploadFile,
 } from "../../utils/FirebaseUtils";
 import { Fields } from "../../utils/Fields";
 import { setCollection } from "../../utils/FirebaseUtils";
-import { query, where } from "firebase/firestore";
+import { arrayUnion, query, where } from "firebase/firestore";
+import Request from "../../Modals/DB/Request";
+import Assessment from "../../Modals/DB/Assessment";
 
 export default async function defaultFn() {}
 
@@ -173,107 +178,6 @@ export default async function defaultFn() {}
 //   }
 // }
 
-// export async function readTaskById(id) {
-//   const docRef = setDocument(Collections.tasks, id);
-//   try {
-//     const doc = await getDocument(docRef);
-//     let task = {};
-//     if (doc.exists()) {
-//       const promise = readCommunications(doc).then((communications) => {
-//         task = {
-//           id: doc.id,
-//           assigned: doc.data().assigned,
-//           companyName: doc.data().companyName,
-//           companyId: doc.data().companyId,
-//           clientId: doc.data().clientId,
-//           clientEmail: doc.data().clientEmail,
-//           clientName: doc.data().clientName,
-//           profileImage: doc.data().profileImage,
-//           corrections: doc.data().corrections,
-//           createdAt: doc.data().createdAt,
-//           createdBy: doc.data().createdBy,
-//           pauseTimeStamp:doc.data()?.pauseTimeStamp,
-//           startTimeStamp:doc.data()?.startTimeStamp,
-//           completedOn:doc.data()?.completedOn,
-//           createdByEmail: doc.data().createdByEmail,
-//           deadline: doc.data().deadline,
-//           isLive: doc.data().isLive,
-//           managerId: doc.data().managerId,
-//           status: doc.data().status,
-//           taskId: doc.data().taskId,
-//           teammateId: doc.data().teammateId,
-//           teammateName: doc.data().teammateName,
-//           title: doc.data().title,
-//           totalHours: doc.data().totalHours,
-//           highPriority: doc.data().highPriority,
-//           type: doc.data().type,
-//           communications: communications,
-//         };
-//       });
-//       await Promise.resolve(promise);
-//       return task;
-//     } else {
-//       return {};
-//     }
-//   } catch (error) {
-//     message.error("Error while fetching data", error);
-//     return {};
-//   }
-// }
-
-// export async function readCommunications(doc) {
-//   try {
-//     const communications = [];
-//     const querySnapshot = await getDocuments(
-//       query(
-//         setSubCollection(Collections.tasks, doc.id, Collections.communications),
-//         where(Fields.isVisible, "==", true)
-//       )
-//     );
-//     querySnapshot.forEach(async (doc) => {
-//       let communication = new Communication();
-//       communication = {
-//         id: doc.id,
-//         corrections: doc.data().corrections,
-//         correctionNo: doc.data().correctionNo,
-//         createdAt: doc.data().createdAt,
-//         createdBy: doc.data().createdBy,
-//         createdByEmail: doc.data().createdByEmail,
-//         isVisible: doc.data().isVisible,
-//         managerId: doc.data().managerId,
-//         teammateId: doc.data().teammateId,
-//         query: doc.data().query,
-//         queryId: doc.data().queryId,
-//         description: doc.data().description,
-//         type: doc.data().type,
-//       };
-//       switch (doc.data().type) {
-//         case "DESCRIPTION_ADDED":
-//           communication.description = doc.data().description;
-//           break;
-//         case "QUERY_ADDED":
-//           communication.query = doc.data().query;
-//           communication.queryNo = doc.data().queryNo;
-//           break;
-//         case "QUERY_REPLIED":
-//           communication.query = doc.data().query;
-//           communication.queryId = doc.data().queryId;
-//           communication.queryReplied = doc.data().queryReplied;
-//           break;
-//         case "CORRECTION_ADDED":
-//           communication.description = doc.data().description;
-//           break;
-//         default:
-//           break;
-//       }
-//       communications.push(communication);
-//     });
-//     return communications;
-//   } catch (err) {
-//     return [];
-//   }
-// }
-
 // export async function readTeammatesByMangerId(id) {
 //   let teamates = [];
 //   const teammatesRef = setCollection(Collections.teammates);
@@ -331,6 +235,48 @@ export default async function defaultFn() {}
 // }
 
 // fetch the employer details
+
+export async function readEmployee(id) {
+  try {
+    let employee = {};
+    const q = setDocument(Collections.employees, id);
+    const doc = await getDocument(q);
+    if (doc.exists()) {
+      const promise = readEmployeeRatings(doc.id).then((ratings) => {
+        employee = {
+          id: doc.id,
+          isActive: doc.data().isActive,
+          employeeName: doc.data().employeeName,
+          lastRatings: doc.data().lastRatings,
+          ratings: ratings,
+          employeeEmail: doc.data().employeeEmail,
+          profileImage: doc.data().profileImage,
+          dateOfBirth: doc.data().dateOfBirth,
+          role: doc.data().role,
+          currentEmployerId: doc.data().currentEmployerId,
+          employerIdList: doc.data().employerIdList,
+          designation: doc.data().designation,
+          salary: doc.data().salary,
+          companyName: doc.data().companyName,
+          companyLogo: doc.data().companyLogo,
+          companyLocation: doc.data().companyLocation,
+          typeOfEmployment: doc.data().typeOfEmployment,
+          offerLetter: doc.data().offerLetter,
+          dateOfJoining: doc.data().dateOfJoining,
+          employeeAadhaarCardNumber: doc.data().employeeAadhaarCardNumber,
+          portfolioLink: doc.data().portfolioLink,
+          resume: doc.data().resume,
+          skills: doc.data().skills,
+        };
+      });
+      await promise;
+    }
+    return employee;
+  } catch (error) {
+    console.error("Error while fetching data", error);
+    return {};
+  }
+}
 export async function readEmployees(employerId) {
   try {
     let employees = [];
@@ -341,59 +287,172 @@ export async function readEmployees(employerId) {
         where(Fields.isActive, "==", true)
       )
     );
+    const promises = [];
     querySnapshot.forEach(async (doc) => {
-      let employee = {
-        id: doc.id,
-        isActive: doc.data().isActive,
-        employeeName: doc.data().employeeName,
-        employeeEmail: doc.data().employeeEmail,
-        employeeCountry: doc.data().employeeCountry,
-        employeeState: doc.data().employeeState,
-        profileImage: doc.data().profileImage,
-        dateOfBirth: doc.data().dateOfBirth,
-        role: doc.data().role,
-        currentEmployerId: doc.data().currentEmployerId,
-        employerIdList: doc.data().employerIdList,
-        designation: doc.data().designation,
-        salary: doc.data().salary,
-        companyName: doc.data().companyName,
-        companyLogo: doc.data().companyLogo,
-        typeOfEmployment: doc.data().typeOfEmployment,
-        offerLetter: doc.data().offerLetter,
-        dateOfJoining: doc.data().dateOfJoining,
-        employeeAadhaarCardNumber: doc.data().employeeAadhaarCardNumber,
-        portfolioLink: doc.data().portfolioLink,
-        resume: doc.data().resume,
-        skills: doc.data().skills,
-      };
-      employees.push(employee);
+      const promise = readEmployeeRatings(doc.id).then((ratings) => {
+        let employee = {
+          id: doc.id,
+          isActive: doc.data().isActive,
+          lastRatings: doc.data().lastRatings,
+          ratings: ratings,
+          employeeName: doc.data().employeeName,
+          employeeEmail: doc.data().employeeEmail,
+          profileImage: doc.data().profileImage,
+          dateOfBirth: doc.data().dateOfBirth,
+          role: doc.data().role,
+          currentEmployerId: doc.data().currentEmployerId,
+          employerIdList: doc.data().employerIdList,
+          designation: doc.data().designation,
+          salary: doc.data().salary,
+          companyName: doc.data().companyName,
+          companyLogo: doc.data().companyLogo,
+          companyLocation: doc.data().companyLocation,
+          typeOfEmployment: doc.data().typeOfEmployment,
+          offerLetter: doc.data().offerLetter,
+          dateOfJoining: doc.data().dateOfJoining,
+          employeeAadhaarCardNumber: doc.data().employeeAadhaarCardNumber,
+          portfolioLink: doc.data().portfolioLink,
+          resume: doc.data().resume,
+          skills: doc.data().skills,
+        };
+        employees.push(employee);
+      });
+      promises.push(promise);
     });
+    await Promise.all(promises);
     return employees;
   } catch (error) {
     console.log(error);
   }
 }
+export async function readEmployeeRatings(employeeId) {
+  try {
+    let ratings = [];
+    const querySnapshot = await getDocuments(
+      query(
+        setCollection(Collections.ratings),
+        where(Fields.employeeId, "==", employeeId),
+        where(Fields.isActive, "==", true)
+      )
+    );
+    querySnapshot.forEach(async (doc) => {
+      let rating = {
+        id: doc.id,
+        isActive: doc.data().isActive,
+        companyName: doc.data().companyName,
+        ratedById: doc.data().ratedById,
+        ratedByEmail: doc.data().ratedByEmail,
+        ratedByRole: doc.data().ratedByRole,
+        ratedAt: doc.data().ratedAt,
+        ratedAtDate: doc.data().ratedAtDate,
+        employeeId: doc.data().employeeId,
+        employeeName: doc.data().employeeName,
+        employeeEmail: doc.data().employeeEmail,
+        communication: doc.data().communication,
+        attitude: doc.data().attitude,
+        abilityToLearn: doc.data().abilityToLearn,
+        punctuality: doc.data().punctuality,
+        commitment: doc.data().commitment,
+        trustworthiness: doc.data().trustworthiness,
+        skill: doc.data().skill,
+        teamPlayer: doc.data().teamPlayer,
+        note: doc.data().note,
+      };
+      ratings.push(rating);
+    });
+    return ratings;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
+// export async function readOfferReplies(employerId) {
+//   try {
+//     let offers = [];
+//     const querySnapshot = await getDocuments(
+//       query(
+//         setCollection(Collections.offers),
+//         where(Fields.employerId, "==", employerId),
+//         where(Fields.isActive, "==", true),
+//         where(Fields.isAccepted, "==", false)
+//       )
+//     );
+//     querySnapshot.forEach(async (doc) => {
+//       let offer = {
+//         id: doc.id,
+//         isActive: doc.data().isActive,
+//         isAccepted: doc.data().isAccepted,
+//         companyName: doc.data().companyName,
+//         companyLogo: doc.data().companyLogo,
+//         employerEmail: doc.data().employerEmail,
+//         employerId: doc.data().employerId,
+//         employeeId: doc.data().employeeId,
+//         employeeEmail: doc.data().employeeEmail,
+//         employeeName: doc.data().employeeName,
+//         companyLocation: doc.data().companyLocation,
+//         dateOfJoining: doc.data().dateOfJoining,
+//         typeOfEmployment: doc.data().typeOfEmployment,
+//         designation: doc.data().designation,
+//         salary: doc.data().salary,
+//         offerLetter: doc.data().offerLetter,
+//       };
+//       offers.push(offer);
+//     });
+//     return offers;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+export async function deleteOffer(offerId) {
+  await updateDocument(
+    Collections.offers,
+    {
+      isActive: false,
+    },
+    offerId
+  );
+}
 // function to onboard new employee
 export async function onboardEmployee(offerData) {
   const offerLetterFileUrl = await uploadFile(
     Fields.offerLetters,
-    offerData.name,
+    offerData.email,
     offerData.offerLetter
   );
   let offer = new Offer();
   offer = {
     isActive: true,
-    employeeName: offerData.name,
+    isAccepted: false,
     employeeEmail: offerData.email,
+    emailAvailable: offerData.emailAvailable,
+    companyLocation: offerData.companyLocation,
     dateOfJoining: offerData.dateOfJoining,
     employerEmail: offerData.employerEmail,
     employerId: offerData.employerId,
+    companyLogo: offerData.companyLogo,
     typeOfEmployment: offerData.typeOfEmployment,
     companyName: offerData.companyName,
     designation: offerData.designation,
     salary: offerData.salary,
     offerLetter: offerLetterFileUrl,
+  };
+  return await addDocument(Collections.offers, offer);
+}
+
+export async function requestEmployee(offerData) {
+  let offer = new Request();
+  offer = {
+    isActive: true,
+    isApproved: false,
+    employeeName: offerData.name,
+    employeeEmail: offerData.email,
+    employerEmail: offerData.employerEmail,
+    employerId: offerData.employerId,
+    companyLogo: offerData.companyLogo,
+    companyName: offerData.companyName,
+    designation: offerData.designation,
+    salary: offerData.salary,
+    offerId: offerData.id,
   };
   return await addDocument(Collections.offers, offer);
 }
@@ -404,11 +463,13 @@ export async function rateEmployee(ratingData) {
     isActive: true,
     companyName: ratingData.companyName,
     ratedById: ratingData.ratedById,
+    ratedByRole: ratingData.ratedByRole,
+    ratedAt: new Date(),
+    ratedAtDate: new Date().toDateString(),
     ratedByEmail: ratingData.ratedByEmail,
     employeeId: ratingData.employeeId,
     employeeName: ratingData.employeeName,
     employeeEmail: ratingData.employeeEmail,
-    dateOfReview: ratingData.dateOfReview,
     communication: ratingData.communication,
     attitude: ratingData.attitude,
     abilityToLearn: ratingData.abilityToLearn,
@@ -419,8 +480,169 @@ export async function rateEmployee(ratingData) {
     teamPlayer: ratingData.teamPlayer,
     note: ratingData.note,
   };
-  return await addDocument(Collections.ratings, rating);
+  const employeeRef = setDocument(Collections.employees, ratingData.employeeId);
+  const employeeSnapshot = await getDocument(employeeRef);
+
+  if (employeeSnapshot.exists()) {
+    const employeeData = employeeSnapshot.data();
+    const ratings = employeeData.lastRatings || [];
+    const ratingIndex = ratings.findIndex(
+      (rating) => rating.ratedById === ratingData.ratedById
+    );
+
+    if (ratingIndex !== -1) {
+      ratings[ratingIndex].ratedAtDate = new Date().toLocaleDateString();
+      await updateDocument(
+        Collections.employees,
+        {
+          lastRatings: ratings,
+        },
+        ratingData.employeeId
+      );
+      await addDocument(Collections.ratings, rating);
+    } else {
+      await updateDocument(
+        Collections.employees,
+        {
+          lastRatings: arrayUnion({
+            ratedById: ratingData.ratedById,
+            ratedAtDate: new Date().toLocaleDateString(),
+          }),
+        },
+        ratingData.employeeId
+      );
+    }
+  } else {
+    throw new Error(
+      `Employee document with ID ${ratingData.employeeId} not found`
+    );
+  }
 }
+export async function readAssessment(employeeId) {
+  try {
+    let assessmentQuestions = [];
+    const querySnapshot = await getDocuments(
+      query(
+        setCollection(Collections.assessments),
+        where(Fields.employeeId, "==", employeeId),
+        where(Fields.isActive, "==", true),
+        where(Fields.isAnswered, "==", true)
+      )
+    );
+    querySnapshot.forEach(async (doc) => {
+      let assessment = {
+        isActive: doc.data().isActive,
+        id: doc.id,
+        companyName: doc.data().companyName,
+        ratedById: doc.data().ratedById,
+        ratedByRole: doc.data().ratedByRole,
+        ratedAt: new Date(),
+        ratedAtDate: new Date().toDateString(),
+        ratedByEmail: doc.data().ratedByEmail,
+        employeeId: doc.data().employeeId,
+        employeeName: doc.data().employeeName,
+        ratings: doc.data().ratings,
+        employeeEmail: doc.data().employeeEmail,
+        title: doc.data().title,
+        description: doc.data().description,
+        questionsList: doc.data().questionsList,
+        answers: doc.data().answers,
+        isAnswered: doc.data().isAnswered,
+      };
+      assessmentQuestions.push(assessment);
+    });
+    return assessmentQuestions;
+  } catch (error) {
+    return [];
+    //console.log(error);
+  }
+}
+export async function assessEmployee(assessData) {
+  let assessment = new Assessment();
+  assessment = {
+    isActive: true,
+    isAnswered: false,
+    companyName: assessData.companyName,
+    ratedById: assessData.ratedById,
+    ratedByRole: assessData.ratedByRole,
+    ratedAt: new Date(),
+    ratedAtDate: new Date().toDateString(),
+    ratedByEmail: assessData.ratedByEmail,
+    employeeId: assessData.employeeId,
+    employeeName: assessData.employeeName,
+    employeeEmail: assessData.employeeEmail,
+    title: assessData.title,
+    description: assessData.description,
+    questionsList: assessData.questionsList,
+  };
+  const employeeRef = setDocument(Collections.employees, assessData.employeeId);
+  const employeeSnapshot = await getDocument(employeeRef);
+
+  if (employeeSnapshot.exists()) {
+    const employeeData = employeeSnapshot.data();
+    const ratings = employeeData.lastRatings || [];
+    const ratingIndex = ratings.findIndex(
+      (rating) => rating.ratedById === assessData.ratedById
+    );
+
+    if (ratingIndex !== -1) {
+      ratings[ratingIndex].assessmentDate = new Date().toLocaleDateString();
+      await updateDocument(
+        Collections.employees,
+        {
+          lastRatings: ratings,
+        },
+        assessData.employeeId
+      );
+      await addDocument(Collections.assessments, assessment);
+    } else {
+      await updateDocument(
+        Collections.employees,
+        {
+          lastRatings: arrayUnion({
+            ratedById: assessData.ratedById,
+            assessmentDate: new Date().toLocaleDateString(),
+          }),
+        },
+        assessData.employeeId
+      );
+    }
+  } else {
+    throw new Error(
+      `Employee document with ID ${assessData.employeeId} not found`
+    );
+  }
+}
+
+export async function rateAssessment(data, assessmentId) {
+  await updateDocument(
+    Collections.assessments,
+    {
+      ratings: data,
+    },
+    assessmentId
+  );
+}
+
+export async function sendRequestToViewAssesment(data) {
+  let newRequest = new Request();
+  newRequest = {
+    isApproved: false,
+    isActive: true,
+    companyName: data.companyName,
+    companyLogo: data.companyLogo,
+    employerEmail: data.employerEmail,
+    employeeName: data.employeeName,
+    employeeEmail: data.employeeEmail,
+    employerId: data.employerId,
+    emailAvailable: data.emailAvailable,
+  };
+  return await addDocument(Collections.requests, newRequest);
+}
+
+
+
+
 // export async function switchTask(id, oldTeammate, newTeammate, data) {
 //   addNotification({
 //     createdAt: newTeammate.createdAt,

@@ -3,18 +3,25 @@ import "./OnboardingForm.css";
 import add from "../../../images/add.svg";
 import { GoChevronLeft } from "react-icons/go";
 import { onboardEmployee } from "../../../DataBase/Employer/employer";
+import { useNavigate } from "react-router-dom";
+import { checkIfAvailable } from "../../../utils/FirebaseUtils";
+import { useEffect } from "react";
 
 const initialValues = {
-  name: "",
   email: "",
   designation: "",
   dateOfJoining: "",
   typeOfEmployment: "",
+  companyLocation: "",
   salary: "",
   offerLetter: "",
 };
 function OnboardingForm() {
+  let userDatas = JSON.parse(sessionStorage.getItem("userData"));
   const [values, setValues] = useState(initialValues);
+  const [emailAvailable, setEmailAvailable] = useState(false);
+
+  const navigate = useNavigate("");
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -23,6 +30,12 @@ function OnboardingForm() {
       [name]: value,
     });
   };
+
+  useEffect(() => {
+    checkIfAvailable(values.email)
+      .then((result) => setEmailAvailable(result))
+      .catch((error) => console.error(error));
+  }, [values.email]);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -35,10 +48,11 @@ function OnboardingForm() {
   };
 
   const handleSubmit = () => {
-    let userDatas = JSON.parse(sessionStorage.getItem("userData"));
     values.companyName = userDatas.data.companyName;
+    values.companyLogo = userDatas.data.companyLogo;
     values.employerEmail = userDatas.data.employerEmail;
     values.employerId = userDatas.id;
+    values.emailAvailable = !emailAvailable;
     onboardEmployee(values).then(() => {
       window.location.href = "/offerletter-sent";
     });
@@ -46,9 +60,13 @@ function OnboardingForm() {
 
   let [file, setFile] = useState("");
 
+  const handleBack = () => {
+    navigate("/employer-approval");
+  };
+
   return (
     <div className="createemp container">
-      <div className="back mt-2">
+      <div className="back mt-2" onClick={handleBack}>
         <GoChevronLeft style={{ color: "#9EC2AD" }} size={25} />
       </div>
       <div className="container-fluid" id="On-board">
@@ -56,16 +74,7 @@ function OnboardingForm() {
           <div className="col-12">
             <div className="onboard-form-1">
               <p className="onboard-heading">On-Board New Employee</p>
-              <div className="mx-auto">
-                <div className="form-item">
-                  <input
-                    type="text"
-                    className="form-control-1"
-                    placeholder="Name"
-                    name="name"
-                    onChange={handleInputChange}
-                  />
-                </div>
+              <div className="mx-auto d-flex flex-column justify-content-center align-items-center">
                 <div className="form-item email">
                   <input
                     type="email"
@@ -74,9 +83,21 @@ function OnboardingForm() {
                     name="email"
                     onChange={handleInputChange}
                   />
-                  <p>
-                    Not on clearhire - an email will be sent to them instead
-                  </p>
+                </div>
+                <p style={emailAvailable ? { color: "red", pointerEvents: "none" } : { display: "none" }}>
+                  Not on clearhire - an email will be sent to them instead
+                </p>
+                <div className="form-item ">
+                  <select
+                    name="companyLocation"
+                    id=""
+                    onChange={handleInputChange}
+                  >
+                    <option value="">Location*</option>
+                    {userDatas.data.companyLocations.map((info) => {
+                      return <option value={info}>{info}</option>;
+                    })}
+                  </select>
                 </div>
                 <div className="form-item ">
                   <select name="designation" id="" onChange={handleInputChange}>
@@ -86,16 +107,24 @@ function OnboardingForm() {
                     <option value="Video Editor">Video Editor</option>
                   </select>
                 </div>
-                <div className="form-item ">
-                  <select name="typeOfEmployment" id="" onChange={handleInputChange}>
+                <div className="form-items">
+                  <select
+                    name="typeOfEmployment"
+                    id="typeOfEmployment"
+                    onChange={handleInputChange}
+                  >
                     <option value="">Type Of Employment*</option>
-                    <option value="Permanent Full-Time">Permanent Full-Time</option>
+                    <option value="Permanent Full-Time">
+                      Permanent Full-Time
+                    </option>
                     <option value="Part-Time">Part-Time</option>
                     <option value="Casual/Vacation">Casual/Vacation</option>
                     <option value="Contract">Contract</option>
-                    <option value="Internship/Trainee">Internship/Trainee</option>
+                    <option value="Internship/Trainee">
+                      Internship/Trainee
+                    </option>
                   </select>
-                </div>
+                </div><br />
                 <div className="form-item">
                   <input
                     type="date"
@@ -106,30 +135,35 @@ function OnboardingForm() {
                   />
                 </div>
                 <div className="form-item">
-                  <input
-                    type="number"
-                    className="form-control-1"
-                    placeholder="Salary*"
-                    name="salary"
-                    onChange={handleInputChange}
-                  />
+                  <div className="form-control-container">
+                    <input
+                      type="number"
+                      className="form-control-2"
+                      placeholder="Salary*"
+                      name="salary"
+                      onChange={handleInputChange}
+                    />
+                    <span className="form-control-unit">LPA</span>
+
+                  </div>
                 </div>
-                <div className="form-item f-3">
+                <div className="form-item">
+                  <label htmlFor="file" className="file-input-label">
+                    {file !== "" ? file : "Upload Offer Letter"}
+                    <img src={add} alt="" />
+                  </label>
                   <input
                     type="file"
                     id="file"
+                    className="file-input"
                     name="offerLetter"
                     accept=".txt, .pdf"
                     onChange={(e) => {
                       handleFileChange(e);
                     }}
                   />
-                  <label for="file" className="custom-file-upload">
-                    {file !== "" ? file : "Upload Offer Letter"}
-                  </label>
-                  <span id="filename"></span>
-                  <img src={add} alt="" />
                 </div>
+
                 <div className="form-item">
                   <button
                     type="submit"

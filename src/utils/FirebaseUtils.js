@@ -1,6 +1,7 @@
 import {
   createUserWithEmailAndPassword,
   EmailAuthProvider,
+  fetchSignInMethodsForEmail,
   reauthenticateWithCredential,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
@@ -151,6 +152,16 @@ export async function changePasswordWithCurrentPassword(
     alert("Password updated. Account logged off for security.");
   } catch (error) {
     console.error(error);
+  }
+}
+
+export async function checkIfAvailable(email) {
+  try {
+    const signInMethods = await fetchSignInMethodsForEmail(auth, email);
+    return signInMethods.length === 0;
+  } catch (error) {
+    console.error(error);
+    return false;
   }
 }
 export async function uploadPhoto(file) {

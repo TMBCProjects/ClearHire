@@ -10,14 +10,22 @@ import SignupDone from "./pages/Signup/SignupDone";
 import Approval from "./pages/Employer/Approval/Approval";
 import SearchEmployee from "./pages/SearchEmployee/SearchEmployee";
 import Navbar from "./components/NavBar/Navbar";
-import VerficationRequest from "./pages/Employer/VerficationRequest/VerficationRequest";
+import VerficationRequest from "./pages/Employee/VerficationRequest/VerficationRequest";
 import OnboardingForm from "./pages/Employer/OnboardingForm/OnboardingForm";
 import OfferLetterSent from "./pages/Employer/OfferLetterSent/OfferLetterSent";
-import Employee from "./pages/Employer/EmployeeDetails/index";
+import EmployeeDetails from "./pages/Employer/EmployeeDetails/EmployeeDetails";
 import Profile from "./pages/Employee/Profile/Profile";
 import EmployeeOfferLetter from "./pages/Employee/EmployeeOfferLetter/EmployeeOfferLetter";
 import EmployeeAssessment from "./pages/EmployeeAssessment/EmployeeAssessment";
+import EmployeeAssessmentForm from "./pages/EmployeeAssessment/EmployeeAssesmentForm";
+import Assessment from "./pages/Employee/Assessment/Assessment";
 import EmployerProfile from "./pages/Employer/Profile/Profile";
+import OfferList from "./pages/Employee/OfferList/Offers";
+import Requests from "./pages/Employer/Requests/Requests";
+import RequestApproval from "./pages/Employer/RequestApproval/RequestApproval";
+import ViewEmployeeProfile from "./pages/Employer/EmployeeDetails/ViewEmployeeProfile";
+import ViewAssessment from "./pages/Employer/ViewAssessment/ViewAssessment";
+import Offers from "./pages/Employee/OfferList/Offers";
 
 function App() {
   return (
@@ -63,11 +71,27 @@ function App() {
                     path="/employer-approval"
                     element={<Approval />}></Route>
                   <Route
+                    path="/requests"
+                    element={<Requests />}></Route>
+                  <Route
+                    path="/approvalRequest-form"
+                    element={<RequestApproval />}></Route>
+                  <Route
+                    path="/ViewEmployeeProfile"
+                    element={<ViewEmployeeProfile />}></Route>
+
+                  <Route
+                    path="/Assessment-form"
+                    element={<EmployeeAssessmentForm />}></Route>
+                  <Route
                     path="/EmployeeAssessment"
                     element={<EmployeeAssessment />}></Route>
                   <Route
+                    path="/ViewAssessment"
+                    element={<ViewAssessment />}></Route>
+                  <Route
                     path="/employee-details"
-                    element={<Employee />}></Route>
+                    element={<EmployeeDetails />}></Route>
                   <Route
                     path="/onboarding-form"
                     element={<OnboardingForm />}></Route>
@@ -86,27 +110,32 @@ function App() {
                   <Navbar />
                   <Routes>
                     <Route
-                      path="/"
+                      path="/profile"
                       element={<Profile />}></Route>
                     <Route
                       path="/employeeOfferLetter"
                       element={<EmployeeOfferLetter />}></Route>
                     <Route
-                      path="/OfferLetter"
-                      element={<EmployeeOfferLetter />}></Route>
+                      path="/offerLetters"
+                      element={<Offers />}></Route>
                     <Route
-                      path="/colleagues"
+                      path="/"
                       element={<SearchEmployee />}></Route>
                     <Route
                       path="/EmployeeAssessment"
                       element={<EmployeeAssessment />}></Route>
-                    {/* <Route path="/employer-approval" element={<Approval />}></Route>
-                  <Route path="/verification-request" element={<VerficationRequest />}></Route>
-                  <Route path="/assessment" element={<Assessment />}></Route>
-                  <Route path="/employee-details" element={<Employee />}></Route> */}
+                    {/*<Route path="/employer-approval" element={<Approval />}></Route>
+                   <Route path="/verification-request" element={<VerficationRequest />}></Route>
+                  <Route path="/assessment" element={<Assessment />}></Route>*/}
+                    <Route
+                      path="/employee-details"
+                      element={<EmployeeDetails />}></Route>
                     <Route
                       path="/verification-request"
                       element={<VerficationRequest />}></Route>
+                    <Route
+                      path="/Assessment"
+                      element={<Assessment />}></Route>
                   </Routes>
                 </div>
               ) : (

@@ -1,98 +1,54 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import Add from "../../../assets/images/add.svg";
-import View from "../../../assets/images/view-doc.svg";
+import React, { useEffect, useState } from "react";
 import "./Offers.css";
+import { readOffers } from "../../../DataBase/Employee/employee";
+import { Link } from "react-router-dom";
 
 const Offers = () => {
+  const [offerList, setOfferList] = useState([]);
+
+  useEffect(() => {
+    const fetchEmployerDetails = async () => {
+      const userDatas = JSON.parse(sessionStorage.getItem("userData"));
+      const data = await readOffers(userDatas.data.employeeEmail);
+      setOfferList(data);
+    };
+    fetchEmployerDetails();
+  }, []);
+
   return (
     <div id="employer-approval">
       <div className="row d-flex justify-content-between align-items-center">
         <div className="col-md-6">
-          <h3 className="fw-bold fs-30">Sent Approvals (Pending)</h3>
-        </div>
-        <div className="col-md-6 d-flex justify-content-end align-items-center">
-          <div className="form-check form-check-inline mx-3">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="inlineRadioOptions"
-              id="inlineRadio1"
-              defaultValue="option1"
-              checked
-            />
-            <label
-              className="form-check-label filter-approval"
-              htmlFor="inlineRadio1"
-            >
-              All
-            </label>
-          </div>
-          <div className="form-check form-check-inline mx-3">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="inlineRadioOptions"
-              id="inlineRadio2"
-              defaultValue="option2"
-            />
-            <label
-              className="form-check-label filter-approval"
-              htmlFor="inlineRadio2"
-            >
-              Fresher
-            </label>
-          </div>
-          <div className="form-check form-check-inline mx-3">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="inlineRadioOptions"
-              id="inlineRadio3"
-              defaultValue="option3"
-            />
-            <label
-              className="form-check-label filter-approval"
-              htmlFor="inlineRadio3"
-            >
-              Not on clearhire
-            </label>
-          </div>
-          <div className="form-check form-check-inline">
-            <Link to={"/onboarding-form"} className="btn add-recruit">
-              <img src={Add} className="mr-5 add-icon" alt="addIcons" /> New Recruit
-            </Link>
-          </div>
+          <h3 className="fw-bold fs-30">Offers (Pending)</h3>
         </div>
       </div>
       <div className="row mt-3">
-        <div className="col-md-3 gy-3">
-          <div className="card">
-            <div className="card-body">
-              <h3 className="card-title fw-bold">Govarthini</h3>
-              <p className="card-text designation w-50 mt-2">
-                Graphic Designer
-              </p>
-              <p className="mb-1">Chennai, India</p>
-              <p className="mb-1">Govarthini1994@gmail.com</p>
-              <p className="mb-1">01-01-2023</p>
-              <p className="mb-1">500,000</p>
-              <div className="row  mt-2">
-                <div className="col">
-                  <p className="text-color-green fs-13 fw-bold">
-                    <img className="mr-5" src={View} alt="" /> View offer Letter
+        {offerList.map((info) => {
+          return (
+            <div className="col-md-3 gy-3">
+              <div className="card" key={info.id}>
+                <div className="card-body">
+                  <h3 className="card-title fw-bold">{info.companyName}</h3>
+                  <p className="card-text designation w-50 mt-2">
+                    {info.designation}
                   </p>
-                </div>
-                <div className="col">
-                  <button className="delete-btn">Delete</button>
+                  <p className="mb-1">{info.typeOfEmployment}</p>
+                  <p className="mb-1">{info.dateOfJoining}</p>
+                  <p className="mb-1">{info.salary}</p>
+                  <Link
+                    className="w-100 mt-3 btn btn-request"
+                    to={{
+                      pathname: "/employeeOfferLetter",
+                    }}
+                    state={{ from: info }}
+                  >
+                    View Offer
+                  </Link>
                 </div>
               </div>
-              <button className="w-100 mt-3 btn btn-request">
-                Request to view assessment
-              </button>
             </div>
-          </div>
-        </div>
+          );
+        })}
       </div>
     </div>
   );

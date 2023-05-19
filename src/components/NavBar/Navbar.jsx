@@ -49,7 +49,14 @@ export default function EmployerNavbar() {
             </div>
           </NavLink>
 
-          <NavLink
+          <NavLink activeclassname="active" to={"/requests"} className="navlink">
+            <div className="navitem">
+              <img src={search} alt="search-logo" className="logo navLink" />
+              &nbsp; Requests
+            </div>
+          </NavLink>
+
+          {/* <NavLink
             activeclassname="active"
             to={"/EmployeeAssessment"}
             className="navlink"
@@ -58,14 +65,18 @@ export default function EmployerNavbar() {
               <FileDoneOutlined />
               &nbsp; Assessment
             </div>
-          </NavLink>
+          </NavLink> */}
         </div>
       ) : (
         <div className="navbarBody">
-          <NavLink activeclassname="active" to={"/"} className="navlink">
+          <NavLink
+            activeclassname="active"
+            to={"/"}
+            className="navlink"
+          >
             <div className="navitem">
-              <img src={search} alt="search-logo" className="logo navLink" />
-              &nbsp; Your Profile
+              <img src={users} alt="search-logo" className="logo navLink" />
+              &nbsp; Colleagues
             </div>
           </NavLink>
 
@@ -86,23 +97,12 @@ export default function EmployerNavbar() {
 
           <NavLink
             activeclassname="active"
-            to={"/employeeOfferLetter"}
+            to={"/offerLetters"}
             className="navlink"
           >
             <div className="navitem">
               <img src={job} alt="search-logo" className="logo navLink" />
               &nbsp; Offer Letter
-            </div>
-          </NavLink>
-
-          <NavLink
-            activeclassname="active"
-            to={"/colleagues"}
-            className="navlink"
-          >
-            <div className="navitem">
-              <img src={users} alt="search-logo" className="logo navLink" />
-              &nbsp; Colleagues
             </div>
           </NavLink>
         </div>
@@ -111,37 +111,21 @@ export default function EmployerNavbar() {
         <button onClick={dropdown}></button>
         {open ? (
           <ul className="navbarDropdown">
-            {user === "Employer" ? (
-              <>
-                <li>
-                  <Link to={"/profile"}>View Profile</Link>
-                </li>{" "}
-                <hr />
-                <li>
-                  <a
-                    href="/"
-                    onClick={() => {
-                      logOut();
-                      window.location.reload();
-                    }}
-                  >
-                    Signout
-                  </a>
-                </li>
-              </>
-            ) : (
-              <li>
-                <a
-                  href="/"
-                  onClick={() => {
-                    logOut();
-                    window.location.reload();
-                  }}
-                >
-                  Signout
-                </a>
-              </li>
-            )}
+            <li>
+              <Link to={"/profile"}>View Profile</Link>
+            </li>{" "}
+            <hr />
+            <li>
+              <a
+                href="/"
+                onClick={() => {
+                  logOut();
+                  window.location.reload();
+                }}
+              >
+                Signout
+              </a>
+            </li>
           </ul>
         ) : (
           ""

@@ -7,7 +7,7 @@ import LoginUser, {
 } from "../../DataBase/Login/login";
 import "./Login.css";
 import { Link } from "react-router-dom";
-
+import Loader from '../Loader'
 const initialValues = {
   email: "",
   password: "",
@@ -15,6 +15,7 @@ const initialValues = {
 const Login = () => {
   const [values, setValues] = useState(initialValues);
   const [messageApi, contextHolder] = message.useMessage();
+  const [loading,setLoading]=useState(false)
   const navigate = useNavigate();
 
   const success = () => {
@@ -36,8 +37,10 @@ const Login = () => {
       [name]: value,
     });
   };
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault()
     try {
+      setLoading(true)
       let user = await LoginUser(values.email, values.password);
       if (user.photoURL === "Employer") {
         sessionStorage.setItem("LoggedIn", "Employer");
@@ -61,13 +64,21 @@ const Login = () => {
         navigate("/");
       }
     } catch (err) {
+      setLoading(false)
       error(err.message);
     }
   };
   return (
+    <>
+    
+    {
+      loading &&
+      <Loader text={"Logging in..."} color={"#000"} textColor={"#fff"}/>
+    }
     <div className="container-fluid" id="login">
+    
       {contextHolder}
-      <div className="container">
+      <div className="container" >
         <div className="row d-flex justify-content-center align-items-center">
           <div className="col-lg-5 col-12">
             <h1 className="heading  text-white fw-bold">
@@ -85,7 +96,7 @@ const Login = () => {
             <div className="login-form">
               <p className="login-heading">Login to your account</p>
 
-              <div className="w-75 mx-auto">
+              <form className="w-75 mx-auto">
                 <div className="mb-3">
                   <input
                     type="email"
@@ -111,14 +122,16 @@ const Login = () => {
                     <span className="text-color-green fw-bold">Click here</span>
                   </p>
                 </div>
-
+               
                 <div className="mb-3">
-                  <button
-                    type="submit"
-                    onClick={handleSubmit}
-                    className="btn login-btn"
-                  >
-                    Login
+               
+                <button
+                type="submit"
+                onClick={handleSubmit}
+                className="btn login-btn"
+                >
+               
+                Login
                   </button>
                 </div>
                 <div className="mb-3">
@@ -129,12 +142,14 @@ const Login = () => {
                     </Link>
                   </p>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>
       </div>
     </div>
+    </>
+    
   );
 };
 

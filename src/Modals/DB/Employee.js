@@ -2,11 +2,12 @@ export default class Employee {
   isActive = false;
   employeeName = "";
   employeeEmail = "";
-  employeeCountry = "";
-  employeeState = "";
+  companyLocations = "";
   profileImage = "";
   dateOfBirth = "";
   role = "";
+  lastRatings = "";
+  ratings = "";
   currentEmployerId = "";
   employerIdList = "";
   designation = "";
@@ -19,5 +20,6 @@ export default class Employee {
   employeeAadhaarCardNumber = "";
   portfolioLink = "";
   resume = "";
+  ratedAtDate = "";
   skills = [];
 }

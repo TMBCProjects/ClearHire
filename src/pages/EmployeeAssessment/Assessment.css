@@ -9,16 +9,27 @@
     background-color: #F5F7F9;
     padding: 2% 3%;
     height: 100%;
+    width: 100%;
+    margin: 0% 3% !important;
 }
 
 .back-cont {
     display: flex;
-    column-gap: 10px;
+    cursor: pointer;
+    justify-content: space-between;
+    width: 100%;
 }
 
-.back-cont img {
-    transform: rotate(90deg);
+.back-div {
+    width: 26vh;
+    display: flex;
+    flex-direction: row;
+    gap: 2vh;
 }
+
+/* .back-cont img {
+    transform: rotate(90deg);
+} */
 
 .back-cont h4 {
     font-size: 17px;
@@ -61,6 +72,7 @@
     display: flex;
     text-align: center;
     flex-wrap: wrap;
+    width: 47vh;
 }
 
 .circle-box {
@@ -141,7 +153,7 @@ svg {
 .text h6 {
     font-size: 16px;
     font-weight: 600;
-    margin-left: 10px;
+    margin-left: 25px;
     margin-top: 25px;
 }
 
@@ -225,6 +237,7 @@ svg {
     color: #00823B;
     width: 130px;
     height: 30px;
+    line-height: 30px;
     border-radius: 40px;
     margin-top: -1.5%;
 }
@@ -253,7 +266,7 @@ svg {
 }
 
 .note-text {
-    border: 1px solid #B2B2B2;
+    border: 2px solid #B2B2B2;
     margin-left: 15px;
     cursor: pointer;
     margin-top: 15px;
@@ -261,7 +274,7 @@ svg {
 }
 
 .note-text:hover {
-    border: 4px solid #00823B;
+    border: 2px solid #00823B;
 }
 
 .or h3 {
@@ -310,25 +323,20 @@ textarea:focus {
     margin-right: 7%;
 }
 
-.submit button {
-    font-size: 14px;
-    background-color: white;
-    padding: 12px 40px 12px 60px;
-    border: none;
-    color: #00823B;
-    border-radius: 5px;
-
-}
-
 .submit img {
     position: relative;
-    margin-top: 10px;
+    margin-right: 5px;
     width: 20px;
     height: 20px;
-    left: 3.5%;
     font-size: 18px;
+    transform: rotate(0deg);
 }
+@media (max-width:992px) {
+    .employe-details {
+        padding: 4% 0%;
+    }
 
+}
 @media (max-width:576px) {
     .employe-score {
         padding: 5% 0%;
@@ -354,8 +362,7 @@ textarea:focus {
     }
 
     .submit img {
-        margin-top: 15px;
-        left: 15%;
+    margin-right: 5px;
     }
 
     .submit {

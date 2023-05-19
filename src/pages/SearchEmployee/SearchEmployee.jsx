@@ -1,314 +1,190 @@
 import React, { useEffect, useState } from "react";
 import "./styles.css";
-import search from "../../assets/images/search.svg";
+import search1 from "../../assets/images/search.svg";
 import location from "../../assets/images/location.svg";
 import job from "../../assets/images/job.svg";
 import salary from "../../assets/images/salary.svg";
-import cross from "../../assets/images/cross.svg";
-import { Select, Checkbox, Slider } from "antd";
+import { Select, Empty } from "antd";
 import AssesmentCard from "../../components/Cards/AssesmentCard";
-import { readEmployeeDetails } from "../../DataBase/Employee/employee";
 
 import { readEmployees } from "../../DataBase/Employer/employer";
 import { readColleagues } from "../../DataBase/Employee/employee";
-const handleChange = (value) => {
-  console.log(`selected ${value}`);
+// const onChange = (e) => {
+//   alert(`checked = ${e.target.checked}`);
+// };
+
+// const checkBoxStyles = {
+//   marginLeft: "0.5rem",
+//   fontSize: "1.1rem",
+// };
+
+const initialValues = {
+  typeOfEmployment: "",
+  salary: "",
+  location: "",
+  designation: "",
 };
-const onChange = (e) => {
-  console.log(`checked = ${e.target.checked}`);
-};
-const formatter = (value) => `${value}LPA`;
-const formatter2 = (value) => `${value} %`;
-const marks = {
-  0: "1LPA",
-  49: "50LPA",
-};
-const marks2 = {
-  0: "0%",
-  100: "100%",
-};
-const options = [
-  {
-    value: "jack",
-    label: "Jack",
-  },
-  {
-    value: "lucy",
-    label: "Lucy",
-  },
-  {
-    value: "tom",
-    label: "Tom",
-  },
-];
 export default function SearchEmployee() {
+  const userDatas = JSON.parse(sessionStorage.getItem("userData"));
   const user = sessionStorage.getItem("LoggedIn");
-  const [employee, setEmployee] = useState([]);
-  const [employeeList, setEmployeeList] = useState([])
-
-
-  // function to fetch the employers data
-  const handleEmployeeDetails = async () => {
-    try {
-      const data = await readEmployeeDetails();
-      setEmployee(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const [employeeList, setEmployeeList] = useState([]);
+  const [filters, setFilters] = useState(initialValues);
   useEffect(() => {
-    const fetchEmployerDetails = async () => {
-      handleEmployeeDetails();
-      const user = sessionStorage.getItem("LoggedIn")
-      const userDatas = JSON.parse(sessionStorage.getItem("userData"))
-      const data = user === "Employee" ? await readColleagues(userDatas.data.currentEmployerId) : await readEmployees(userDatas.id);
-      setEmployeeList(data);
+    const fetchCollegueDetails = async () => {
+      try {
+        const userDatas1 = JSON.parse(sessionStorage.getItem("userData"));
+        const data = userDatas1.data.currentEmployerId
+              ? await readColleagues(
+                userDatas1.id,
+                userDatas1.data.currentEmployerId
+              )
+              : [];
+        setEmployeeList(data);
+      } catch (error) {
+        console.log(error);
+      }
     };
-    fetchEmployerDetails();
-  });
+    const fetchEmployeeDetails = async () => {
+      try {
+        const userDatas1 = JSON.parse(sessionStorage.getItem("userData"));
+        const data = await readEmployees(userDatas1.id);
+        setEmployeeList(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const user = sessionStorage.getItem("LoggedIn");
+    user === "Employer"
+      ? fetchEmployeeDetails()
+      : fetchCollegueDetails();
+  }, []);
+
+  const handleInputChange = (event, field) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [field]: event.target ? event.target.value : event,
+    }));
+  };
   return (
     <div className="employer-home">
-      <div className="search-inputs">
+      <div className="search-inputs" style={{ position: "absolute" }}>
         <div className="input-box1 input-box">
-          <img src={search} alt="Search" />
+          <img src={search1} alt="Search" />
           <input
             type="text"
+            name="designation"
+            onChange={(e) => handleInputChange(e, e.target.name)}
             className="box-input"
-            placeholder="Job title, company and keyword"
+            placeholder="Job Title / Designation"
           />
         </div>
         {user === "Employer" ? (
           <div className="input-box2 input-box">
             <img src={location} alt="Search" />
-            <input type="text" className="box-input" placeholder="Location" />
+            <Select
+              onChange={(e) => { handleInputChange(e, 'location') }}
+              className="box-select"
+              placeholder="Location"
+              options={[{ value: "", label: "" }].concat(userDatas.data.companyLocations.map((option) => ({
+                value: option,
+                label: option,
+              })))}
+            />
           </div>
         ) : (
           ""
         )}
         <div className="input-box3 input-box">
           <img src={job} alt="Search" />
-          <input type="text" className="box-input" placeholder="Job Type" />
+          <Select
+            type="text"
+            onChange={(e) => { handleInputChange(e, 'typeOfEmployment') }}
+            className="box-select"
+            placeholder="Type Of Employment"
+            options={[
+              { value: "", label: "" },
+              { value: "Permanent Full-Time", label: "Permanent Full-Time" },
+              { value: "Part-Time", label: "Part-Time" },
+              { value: "Casual/Vacation", label: "Casual/Vacation" },
+              { value: "Contract", label: "Contract" },
+              { value: "Internship/Trainee", label: "Internship/Trainee" },
+            ]}
+          />
         </div>
         {user === "Employer" ? (
-          <div className="input-box4 input-box">
+          <div className="input-box4 input-box ">
             <img src={salary} alt="Search" />
             <input
               type="text"
               className="box-input no-border"
+              name="salary"
               placeholder="Salary"
+              onChange={(e) => handleInputChange(e, e.target.name)}
             />
           </div>
         ) : (
           ""
         )}
 
-        <button>Search</button>
       </div>
       <div className="search-results">
-        <div className="search-settings">
-          <p
-            style={{
-              fontSize: "1.6rem",
-              fontWeight: "bolder",
-              letterSpacing: "-.47x",
-            }}
-          >
-            {user === "Employer" ? "Employee" : "Colleague"} Search Settings
-          </p>
-          <div className="dropdowns">
-            <div className="dropdown-select">
-              <p>Job Title</p>
-              <Select
-                mode="tags"
-                style={{
-                  width: "100%",
-                }}
-                onChange={handleChange}
-                options={options}
-              />
-            </div>
-            <div className="dropdown-select">
-              <p>Categories</p>
-              <Select
-                mode="tags"
-                style={{
-                  width: "100%",
-                }}
-                onChange={handleChange}
-                tokenSeparators={[","]}
-                options={options}
-              />
-            </div>
-            <div className="dropdown-select">
-              <p>Location</p>
-              <Select
-                mode="tags"
-                style={{
-                  width: "100%",
-                }}
-                onChange={handleChange}
-                tokenSeparators={[","]}
-                options={options}
-              />
-            </div>
-          </div>
-          <div className="checkboxes">
-            <p
-              style={{
-                fontSize: "1.6rem",
-                fontWeight: "bolder",
-                letterSpacing: "-.47x",
-              }}
-            >
-              Type of employement
-            </p>
-            <div className="checkboxes-div">
-              <Checkbox
-                style={{
-                  marginLeft: ".5rem",
-                  fontSize: "1.1rem",
-                }}
-                onChange={onChange}
-              >
-                Permanent Full-Time
-              </Checkbox>
-              <Checkbox
-                style={{
-                  marginLeft: ".5rem",
-                  fontSize: "1.1rem",
-                }}
-                onChange={onChange}
-              >
-                Part-Time
-              </Checkbox>
-              <Checkbox
-                style={{
-                  marginLeft: ".5rem",
-                  fontSize: "1.1rem",
-                }}
-                onChange={onChange}
-              >
-                Casual/Vacation
-              </Checkbox>
-              <Checkbox
-                style={{
-                  marginLeft: ".5rem",
-                  fontSize: "1.1rem",
-                }}
-                onChange={onChange}
-              >
-                Contact
-              </Checkbox>
-              <Checkbox
-                style={{
-                  marginLeft: ".5rem",
-                  fontSize: "1.1rem",
-                }}
-                onChange={onChange}
-              >
-                Internship/Trainee
-              </Checkbox>
-            </div>
-          </div>
-          {user === "Employer" ? (
-            <div className="ranges">
-              <p
-                style={{
-                  fontSize: "1.6rem",
-                  fontWeight: "bolder",
-                  letterSpacing: "-.47x",
-                }}
-              >
-                Salary Range
-              </p>
-              <div
-                className="ranges-div"
-                style={{
-                  width: "100%",
-                }}
-              >
-                <Slider
-                  tooltip={{
-                    formatter,
-                  }}
-                  marks={marks}
-                  min={1}
-                  max={50}
-                  trackStyle={{
-                    backgroundColor: "#00823B",
-                    height: ".3rem",
-                  }}
-                  handleStyle={{
-                    backgroundColor: "red",
-                  }}
-                />
-                <Slider
-                  tooltip={{
-                    formatter2,
-                  }}
-                  marks={marks2}
-                  trackStyle={{
-                    backgroundColor: "#00823B",
-                    height: ".3rem",
-                  }}
-                />
-              </div>
-            </div>
-          ) : (
-            ""
-          )}
-          <a className="clear-filter" href="/">
-            {" "}
-            <img src={cross} alt="cross" /> Clear all filters
-          </a>
-        </div>
         <div className="result-employees">
           <div className="row1">
-            {user === "Employer" ? (
+            {/* {user === "Employer" ? (
               <div className="row1-checkboxes">
-                <Checkbox
-                  style={{
-                    marginLeft: ".5rem",
-                    fontSize: "1.1rem",
-                  }}
-                  onChange={onChange}
-                >
+                <Checkbox style={checkBoxStyles} onChange={(e) => onChange(e)}>
                   Assessed
                 </Checkbox>
-                <Checkbox
-                  style={{
-                    marginLeft: ".5rem",
-                    fontSize: "1.1rem",
-                  }}
-                  onChange={onChange}
-                >
+                <Checkbox style={checkBoxStyles} onChange={(e) => onChange(e)}>
                   Pending
                 </Checkbox>
-                <Checkbox
-                  style={{
-                    marginLeft: ".5rem",
-                    fontSize: "1.1rem",
-                  }}
-                  onChange={onChange}
-                >
+                <Checkbox style={checkBoxStyles} onChange={(e) => onChange(e)}>
                   All
                 </Checkbox>
               </div>
             ) : (
               ""
-            )}
-            <div className="result-count">56 results</div>
+            )} */}
+            <div className="result-count">
+              {employeeList.length > 1 ? `${employeeList.length} records` : ""}
+            </div>
           </div>
-          <div className="row2">
-            {employeeList.map((info) => {
-              return <AssesmentCard value={30} name={info.employeeName} state={info.employeeState} country={info.employeeCountry} designation={info.designation} />
-            })}
-          
+          <div
+            className="row2"
+            style={
+              employeeList.length === 0 ? { justifyContent: "center" } : {}
+            }
+          >
+            {employeeList.length === 0 && (
+              <Empty
+                image={Empty.PRESENTED_IMAGE_SIMPLE}
+                description="No Records"
+              />
+            )}
+            {employeeList
+              .filter(item => {
+                const { typeOfEmployment, designation, salary, location } = filters;
+                return (
+                  (typeOfEmployment === "" || item.typeOfEmployment.toLowerCase() === typeOfEmployment.toLowerCase()) &&
+                  (designation === "" || item.designation.toLowerCase().includes(designation)) &&
+                  (salary === "" || +item?.salary <= +salary) &&
+                  (location === "" || item.companyLocation.toLowerCase() === location.toLowerCase())
+                );
+              })
+              .map((info) => {
+                return (
+                  <AssesmentCard
+                    info={info}
+                    employerId={userDatas.id}
+                    name={info.employeeName}
+                    companyLocation={info.companyLocation}
+                    designation={info.designation}
+                  />
+                );
+              })}
           </div>
         </div>
       </div>
     </div>
   );
-  
 }
-
