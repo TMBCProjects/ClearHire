@@ -252,6 +252,15 @@ export async function submitAssessment(answersList, questionId) {
     questionId
   );
 }
+export async function removeResumeLink(employeeId) {
+  await updateDocument(
+    Collections.employees,
+    {
+      resume: "",
+    },
+    employeeId
+  );
+}
 
 export async function rateCollegue(ratingData) {
   let rating = new Rating();
