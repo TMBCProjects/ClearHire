@@ -699,9 +699,9 @@ const EmployeeDetails = () => {
                         />
                       </div>
                     </div>
-                    <div
-                      className="prevSkillsContainer"
-                      style={{ display: prevSkills }}>
+                    <div style={{ display: prevSkills }} className="divider my-3"></div>
+
+                    <div className="prevSkillsContainer" style={{ display: prevSkills }}>
                       <div className="row d-flex justify-content-center align-items-center progressBars">
                         <div className="col-md-8">
                           <div className="row">
@@ -710,18 +710,18 @@ const EmployeeDetails = () => {
                                 {calculateCommunicationRatings(
                                   getRatingsByEmployerId(
                                     employee.ratings,
-                                    info.employerId
-                                  )
+                                    info.employerId)
                                 ) && (
                                   <ProgressBar
-                                    value={calculateCommunicationRatings(
-                                      getRatingsByEmployerId(
-                                        employee.ratings,
-                                        info.employerId
-                                      )
-                                    ) || 0}
-                                  />
-                                )}
+                                    value={
+                                      calculateCommunicationRatings(
+                                        getRatingsByEmployerId(
+                                          employee.ratings,
+                                          info.employerId)
+                                      ) || 0
+                                      }
+                                    />
+                                  )}
                               </div>
                               <p>Communication</p>
                             </div>
@@ -730,18 +730,20 @@ const EmployeeDetails = () => {
                                 {calculateAttitudeRatings(
                                   getRatingsByEmployerId(
                                     employee.ratings,
-                                    info.employerId
-                                  )
+
+                                    info.employerId)
                                 ) && (
                                   <ProgressBar
-                                    value={calculateAttitudeRatings(
-                                      getRatingsByEmployerId(
-                                        employee.ratings,
-                                        info.employerId
-                                      )
-                                    ) || 0}
-                                  />
-                                )}
+                                    value={
+                                      calculateAttitudeRatings(
+                                        getRatingsByEmployerId(
+                                          employee.ratings,
+
+                                          info.employerId)
+                                      ) || 0
+                                      }
+                                    />
+                                  )}
                               </div>
                               <p>Attitude</p>
                             </div>
@@ -750,18 +752,20 @@ const EmployeeDetails = () => {
                                 {calculateAbilityToLearnRatings(
                                   getRatingsByEmployerId(
                                     employee.ratings,
-                                    info.employerId
-                                  )
+
+                                    info.employerId)
                                 ) && (
                                   <ProgressBar
-                                    value={calculateAbilityToLearnRatings(
-                                      getRatingsByEmployerId(
-                                        employee.ratings,
-                                        info.employerId
-                                      )
-                                    ) || 0}
-                                  />
-                                )}
+                                    value={
+                                      calculateAbilityToLearnRatings(
+                                        getRatingsByEmployerId(
+                                          employee.ratings,
+
+                                          info.employerId)
+                                      ) || 0
+                                      }
+                                    />
+                                  )}
                               </div>
                               <p>Ability To Learn</p>
                             </div>
@@ -770,18 +774,20 @@ const EmployeeDetails = () => {
                                 {calculatePunctualityRatings(
                                   getRatingsByEmployerId(
                                     employee.ratings,
-                                    info.employerId
-                                  )
+
+                                    info.employerId)
                                 ) && (
                                   <ProgressBar
-                                    value={calculatePunctualityRatings(
-                                      getRatingsByEmployerId(
-                                        employee.ratings,
-                                        info.employerId
-                                      )
-                                    ) || 0}
-                                  />
-                                )}
+                                    value={
+                                      calculatePunctualityRatings(
+                                        getRatingsByEmployerId(
+                                          employee.ratings,
+
+                                          info.employerId)
+                                      ) || 0
+                                      }
+                                    />
+                                  )}
                               </div>
                               <p>Punctuality</p>
                             </div>
@@ -790,18 +796,20 @@ const EmployeeDetails = () => {
                                 {calculateCommitmentRatings(
                                   getRatingsByEmployerId(
                                     employee.ratings,
-                                    info.employerId
-                                  )
+
+                                    info.employerId)
                                 ) && (
                                   <ProgressBar
-                                    value={calculateCommitmentRatings(
-                                      getRatingsByEmployerId(
-                                        employee.ratings,
-                                        info.employerId
-                                      )
-                                    ) || 0}
-                                  />
-                                )}
+                                    value={
+                                      calculateCommitmentRatings(
+                                        getRatingsByEmployerId(
+                                          employee.ratings,
+
+                                          info.employerId)
+                                      ) || 0
+                                      }
+                                    />
+                                  )}
                               </div>
                               <p>Commitment</p>
                             </div>
@@ -810,18 +818,20 @@ const EmployeeDetails = () => {
                                 {calculateTrustworthinessRatings(
                                   getRatingsByEmployerId(
                                     employee.ratings,
-                                    info.employerId
-                                  )
+
+                                    info.employerId)
                                 ) && (
                                   <ProgressBar
-                                    value={calculateTrustworthinessRatings(
-                                      getRatingsByEmployerId(
-                                        employee.ratings,
-                                        info.employerId
-                                      )
-                                    ) || 0}
-                                  />
-                                )}
+                                    value={
+                                      calculateTrustworthinessRatings(
+                                        getRatingsByEmployerId(
+                                          employee.ratings,
+
+                                          info.employerId)
+                                      ) || 0
+                                      }
+                                    />
+                                  )}
                               </div>
                               <p>Trustworthiness</p>
                             </div>
@@ -830,18 +840,20 @@ const EmployeeDetails = () => {
                                 {calculateSkillRatings(
                                   getRatingsByEmployerId(
                                     employee.ratings,
-                                    info.employerId
-                                  )
+
+                                    info.employerId)
                                 ) && (
                                   <ProgressBar
-                                    value={calculateSkillRatings(
-                                      getRatingsByEmployerId(
-                                        employee.ratings,
-                                        info.employerId
-                                      )
-                                    ) || 0}
-                                  />
-                                )}
+                                    value={
+                                      calculateSkillRatings(
+                                        getRatingsByEmployerId(
+                                          employee.ratings,
+
+                                          info.employerId)
+                                      ) || 0
+                                      }
+                                    />
+                                  )}
                               </div>
                               <p>Skill</p>
                             </div>
@@ -850,18 +862,20 @@ const EmployeeDetails = () => {
                                 {calculateTeamPlayerRatings(
                                   getRatingsByEmployerId(
                                     employee.ratings,
-                                    info.employerId
-                                  )
+
+                                    info.employerId)
                                 ) && (
                                   <ProgressBar
-                                    value={calculateTeamPlayerRatings(
-                                      getRatingsByEmployerId(
-                                        employee.ratings,
-                                        info.employerId
-                                      )
-                                    ) || 0}
-                                  />
-                                )}
+                                    value={
+                                      calculateTeamPlayerRatings(
+                                        getRatingsByEmployerId(
+                                          employee.ratings,
+
+                                          info.employerId)
+                                      ) || 0
+                                      }
+                                    />
+                                  )}
                               </div>
                               <p>Team Player</p>
                             </div>
@@ -874,16 +888,20 @@ const EmployeeDetails = () => {
                             {calculateTotalRatings(
                               getRatingsByEmployerId(
                                 employee.ratings,
-                                info.employerId
-                              )
+
+                                info.employerId)
                             ) && (
-                                <ProgressBar value={calculateTotalRatings(
-                                  getRatingsByEmployerId(
-                                    employee.ratings,
-                                    info.employerId
-                                  )
-                                ) || 0} />
-                            )}
+                              <ProgressBar
+                                value={
+                                  calculateTotalRatings(
+                                    getRatingsByEmployerId(
+                                      employee.ratings,
+                                      info.employerId
+                                    )
+                                    ) || 0
+                                  }
+                                />
+                              )}
                           </div>
                         </div>
                       </div>
