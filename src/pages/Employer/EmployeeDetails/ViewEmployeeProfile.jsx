@@ -19,19 +19,19 @@ const ViewEmployeeProfile = () => {
   const [avgRatings, setAvgRatings] = useState({});
   const [prevSkills, setPrevSkills] = useState({});
   useEffect(() => {
-    const fetchOfferDetails = async () => {
+    const fetchDetails = async () => {
       const data2 = await readEmployee(employeeDetails);
       setEmployee(data2);
     };
-    fetchOfferDetails();
+    fetchDetails();
   }, [employeeDetails]);
 
   useEffect(() => {
-    const fetchOfferDetails = async () => {
+    const fetchDetails = async () => {
       const data2 = employee.ratings;
       calculateRatings(data2);
     };
-    fetchOfferDetails();
+    fetchDetails();
   }, [employee]);
 
   const calculateRatings = (ratings) => {
