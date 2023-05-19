@@ -426,7 +426,7 @@ export async function onboardEmployee(offerData) {
     employeeEmail: offerData.email,
     emailAvailable: offerData.emailAvailable,
     companyLocation: offerData.companyLocation,
-    dateOfJoining: offerData.dateOfJoining,
+    dateOfJoining: new Date(offerData.dateOfJoining),
     employerEmail: offerData.employerEmail,
     employerId: offerData.employerId,
     companyLogo: offerData.companyLogo,

@@ -40,8 +40,8 @@ export default function Offers() {
                     {info.designation}
                   </p>
                   <p className="mb-1">{info.typeOfEmployment}</p>
-                  <p className="mb-1">{info.dateOfJoining}</p>
-                  <p className="mb-1">{info.salary}</p>
+                  <p className="mb-1">{new Date(info.dateOfJoining.seconds * 1000).toLocaleDateString()}</p>
+                  <p className="mb-1">{info.salary} LPA</p>
                   <Link
                     className="w-100 mt-3 btn btn-request"
                     to={{
