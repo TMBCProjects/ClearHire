@@ -34,7 +34,7 @@ export default function Profile() {
 
   const calculateAge = (dob) => {
     const today = new Date();
-    const birthDate = new Date(dob);
+    const birthDate = new Date(dob.seconds * 1000);
     let years = today.getFullYear() - birthDate.getFullYear();
     const months = today.getMonth() - birthDate.getMonth();
     if (months < 0 || (months === 0 && today.getDate() < birthDate.getDate())) {
@@ -219,11 +219,11 @@ export default function Profile() {
           </div>
           <div>
             <p>Date of joining</p>
-            <p>{userDatas.data.dateOfJoining}</p>
+            <p>{new Date(userDatas.data.dateOfJoining.seconds * 1000).toLocaleDateString('en-GB')}</p>
           </div>
           <div>
             <p>Salary</p>
-            <p>{userDatas.data.salary} PA</p>
+            <p>{userDatas.data.salary} LPA</p>
           </div>
         </div>
       )}

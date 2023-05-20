@@ -223,7 +223,7 @@ export async function readAssessment(employeeId) {
         ratedById: doc.data().ratedById,
         ratedByRole: doc.data().ratedByRole,
         ratedAt: new Date(),
-        ratedAtDate: new Date().toDateString(),
+        ratedAtDate: new Date().toLocaleDateString("en-GB"),
         ratedByEmail: doc.data().ratedByEmail,
         employeeId: doc.data().employeeId,
         employeeName: doc.data().employeeName,
@@ -250,6 +250,15 @@ export async function submitAssessment(answersList, questionId) {
       isAnswered: true,
     },
     questionId
+  );
+}
+export async function removeResumeLink(employeeId) {
+  await updateDocument(
+    Collections.employees,
+    {
+      resume: "",
+    },
+    employeeId
   );
 }
 
@@ -282,7 +291,7 @@ export async function rateCollegue(ratingData) {
     {
       lastRatings: arrayUnion({
         ratedById: ratingData.ratedById,
-        ratedAtDate: new Date().toLocaleDateString(),
+        ratedAtDate: new Date().toLocaleDateString("en-GB"),
       }),
     },
     ratingData.employeeId

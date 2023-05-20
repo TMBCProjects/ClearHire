@@ -4,12 +4,16 @@ import "../UploadPic/UploadPic.css";
 import { deleteFile, uploadFile } from "../../utils/FirebaseUtils";
 import { Fields } from "../../utils/Fields";
 import { useEffect } from "react";
+import { removeResumeLink } from "../../DataBase/Employee/employee";
 export default function UploadPic({ name, url }) {
   const [fileLoading, setFileLoading] = useState(false);
   const [fileData, setFileData] = useState("");
   useEffect(() => {
     if (url !== "") {
+      console.log(url);
       setFileLoading(true);
+    } else {
+      setFileLoading(false);
     }
   }, [url]);
   const handleFileUpload = async (event) => {
@@ -24,11 +28,22 @@ export default function UploadPic({ name, url }) {
   };
   const removeImg = async (e) => {
     e.preventDefault();
-    let fileData2 = url === "" ? fileData : url;
-    setFileData(await deleteFile(Fields.resumes, fileData2));
+
+    const userDatas = JSON.parse(sessionStorage.getItem("userData"));
+    userDatas.data.resume = "";
+    sessionStorage.setItem("userData", JSON.stringify(userDatas));
+
+    if (url === "") {
+      setFileData(await deleteFile(Fields.resumes, fileData));
+    } else {
+      setFileData(await deleteFile(Fields.resumes, url));
+    }
+
+    await removeResumeLink(userDatas.id);
     sessionStorage.removeItem("resume");
     setFileLoading(false);
   };
+
   return (
     <div className="input profilepic">
       <div className="profilepicture">

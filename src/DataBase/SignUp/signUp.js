@@ -35,13 +35,15 @@ import { addDocument, createUser, updateUser } from "../../utils/FirebaseUtils";
 
 export async function addNewEmployee(docId, user) {
   var employee = new Employee();
+  const dateParts = user.dateOfBirth.split("/");
+  const timestamp = new Date(`${dateParts[2]}-${dateParts[0]}-${dateParts[1]}`);
   employee = {
     employeeName: user.name,
     role: user.role,
     profileImage: user.profileImage,
     isActive: true,
     employeeEmail: user.email,
-    dateOfBirth: user.dateOfBirth,
+    dateOfBirth: timestamp,
   };
   await addDocument(Collections.employees, employee, docId);
 }

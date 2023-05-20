@@ -18,31 +18,27 @@ import { readColleagues } from "../../DataBase/Employee/employee";
 //   fontSize: "1.1rem",
 // };
 
-const initialValues = {
-  typeOfEmployment: "",
-  salary: "",
-  location: "",
-  designation: "",
-};
 export default function SearchEmployee() {
-
   const userDatas = JSON.parse(sessionStorage.getItem("userData"));
   const user = sessionStorage.getItem("LoggedIn");
   const [employeeList, setEmployeeList] = useState([]);
-  const [filters, setFilters] = useState(initialValues);
+  const [filters, setFilters] = useState({
+    typeOfEmployment: "",
+    salary: "",
+    location: "",
+    designation: "",
+  });
   useEffect(() => {
     const fetchCollegueDetails = async () => {
       try {
         const userDatas1 = JSON.parse(sessionStorage.getItem("userData"));
         const data = userDatas1.data.currentEmployerId
-              ? await readColleagues(
-                userDatas1.id,
-                userDatas1.data.currentEmployerId
-              )
+          ? await readColleagues(
+            userDatas1.id,
+            userDatas1.data.currentEmployerId
+          )
           : [];
-        if (setEmployeeList(data)) {
-          return;
-        }
+        return data;
       } catch (error) {
         console.log(error);
       }
@@ -51,21 +47,20 @@ export default function SearchEmployee() {
       try {
         const userDatas1 = JSON.parse(sessionStorage.getItem("userData"));
         const data = await readEmployees(userDatas1.id);
-        if (setEmployeeList(data)) {
-          return;
-        }
+        return data;
       } catch (error) {
         console.log(error);
       }
     };
     if (user === "Employer") {
-      fetchEmployeeDetails()
-      // .then((data) =>
-      // setEmployeeList(data))
+      fetchEmployeeDetails().then((data) => {
+        setEmployeeList(data);
+      });
     } else {
-      fetchCollegueDetails()
+      fetchCollegueDetails().then((data) => {
+        setEmployeeList(data);
+      });
     }
-
   }, [user]);
 
   const handleInputChange = (event, field) => {
@@ -74,11 +69,17 @@ export default function SearchEmployee() {
       [field]: event.target ? event.target.value : event,
     }));
   };
+
   return (
     <div className="employer-home">
-      <div className="search-inputs" style={{ position: "absolute" }}>
+      <div
+        className="search-inputs"
+        style={{ position: "absolute" }}>
         <div className="input-box1 input-box">
-          <img src={search1} alt="Search" />
+          <img
+            src={search1}
+            alt="Search"
+          />
           <input
             type="text"
             name="designation"
@@ -89,25 +90,37 @@ export default function SearchEmployee() {
         </div>
         {user === "Employer" ? (
           <div className="input-box2 input-box">
-            <img src={location} alt="Search" />
+            <img
+              src={location}
+              alt="Search"
+            />
             <Select
-              onChange={(e) => { handleInputChange(e, 'location') }}
+              onChange={(e) => {
+                handleInputChange(e, "location");
+              }}
               className="box-select"
               placeholder="Location"
-              options={[{ value: "", label: "" }].concat(userDatas.data.companyLocations.map((option) => ({
-                value: option,
-                label: option,
-              })))}
+              options={[{ value: "", label: "" }].concat(
+                userDatas.data.companyLocations.map((option) => ({
+                  value: option,
+                  label: option,
+                }))
+              )}
             />
           </div>
         ) : (
           ""
         )}
         <div className="input-box3 input-box">
-          <img src={job} alt="Search" />
+          <img
+            src={job}
+            alt="Search"
+          />
           <Select
             type="text"
-            onChange={(e) => { handleInputChange(e, 'typeOfEmployment') }}
+            onChange={(e) => {
+              handleInputChange(e, "typeOfEmployment");
+            }}
             className="box-select"
             placeholder="Type Of Employment"
             options={[
@@ -122,7 +135,10 @@ export default function SearchEmployee() {
         </div>
         {user === "Employer" ? (
           <div className="input-box4 input-box ">
-            <img src={salary} alt="Search" />
+            <img
+              src={salary}
+              alt="Search"
+            />
             <input
               type="text"
               className="box-input no-border"
@@ -134,7 +150,6 @@ export default function SearchEmployee() {
         ) : (
           ""
         )}
-
       </div>
       <div className="search-results">
         <div className="result-employees">
@@ -162,8 +177,7 @@ export default function SearchEmployee() {
             className="row2"
             style={
               employeeList.length === 0 ? { justifyContent: "center" } : {}
-            }
-          >
+            }>
             {employeeList.length === 0 && (
               <Empty
                 image={Empty.PRESENTED_IMAGE_SIMPLE}
@@ -171,13 +185,19 @@ export default function SearchEmployee() {
               />
             )}
             {employeeList
-              .filter(item => {
-                const { typeOfEmployment, designation, salary, location } = filters;
+              .filter((item) => {
+                const { typeOfEmployment, designation, salary, location } =
+                  filters;
                 return (
-                  (typeOfEmployment === "" || item.typeOfEmployment.toLowerCase() === typeOfEmployment.toLowerCase()) &&
-                  (designation === "" || item.designation.toLowerCase().includes(designation)) &&
+                  (typeOfEmployment === "" ||
+                    item.typeOfEmployment.toLowerCase() ===
+                    typeOfEmployment.toLowerCase()) &&
+                  (designation === "" ||
+                    item.designation.toLowerCase().includes(designation)) &&
                   (salary === "" || +item?.salary <= +salary) &&
-                  (location === "" || item.companyLocation.toLowerCase() === location.toLowerCase())
+                  (location === "" ||
+                    item.companyLocation.toLowerCase() ===
+                    location.toLowerCase())
                 );
               })
               .map((info) => {
