@@ -66,7 +66,7 @@ export default function EmployeeAssesmentForm() {
                             <>
                                 <div className="form-1">
                                     <h1>{e.title}</h1><hr />
-                                    <h2>{e.description} {e.ratedAtDate}</h2>
+                                    <h2>{e.description}-{e.ratedAtDate}</h2>
                                 </div>
                                 <div><br />
                                     {e.questionsList.map((value, i) => (
