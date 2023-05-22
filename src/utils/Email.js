@@ -3,7 +3,7 @@ import axios from "axios";
 export default async function sendEmail(email, subject, output) {
   try {
     const res = await axios.post(
-      "https://us-central1-clearhire-28c23.cloudfunctions.net/sendMail",
+      "https://us-central1-clearhire-d91d9.cloudfunctions.net/sendMail",
       {
         subject,
         email,
