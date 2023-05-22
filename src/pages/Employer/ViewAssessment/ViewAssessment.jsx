@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import "./ViewAssessment.css";
-import arrow from "../../../images/arrow-dropup.svg";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Empty, Rate } from 'antd';
 import { useState } from 'react';
@@ -10,7 +9,6 @@ import { MdArrowBackIos } from 'react-icons/md';
 
 const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
 export default function EmployeeAssesmentForm() {
-    const [value, setValue] = useState(0);
     const location = useLocation();
     const { from } = location.state;
     const info = from;
@@ -18,9 +16,6 @@ export default function EmployeeAssesmentForm() {
     const [ratings, setRatings] = useState([])
 
     const navigate = useNavigate();
-    const handleBack = () => {
-        navigate("/");
-    };
 
 
     useEffect(() => {
@@ -33,7 +28,7 @@ export default function EmployeeAssesmentForm() {
             }
         };
         fetchAssessment();
-    }, [])
+    }, [info.id])
 
 
     const handleInputChange = (e, question_no, i) => {
