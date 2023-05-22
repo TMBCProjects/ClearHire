@@ -14,6 +14,7 @@ import { setCollection } from "../../utils/FirebaseUtils";
 import { arrayUnion, query, where } from "firebase/firestore";
 import Request from "../../Modals/DB/Request";
 import Assessment from "../../Modals/DB/Assessment";
+import sendEmail from "../../utils/Email";
 
 export default async function defaultFn() {}
 
@@ -436,6 +437,15 @@ export async function onboardEmployee(offerData) {
     salary: offerData.salary,
     offerLetter: offerLetterFileUrl,
   };
+  let subject = "Join Our Company Page on ClearHire";
+  const output = `
+    <p>Dear User,<br/><br/>
+      We invite you to join our company page on ClearHire as an employee. It's a fantastic platform to showcase your professional profile and connect with our network.<br/>
+      Create your profile now at <a href="https://clearhire.app">ClearHire</a>. Showcase your skills and experience to enhance your visibility.<br/>
+      We look forward to seeing you on ClearHire!<br/><br/>
+      Best regards,<br/>
+      ${offerData.companyName} team</p>`;
+  sendEmail(offerData.email, subject, output);
   return await addDocument(Collections.offers, offer);
 }
 
