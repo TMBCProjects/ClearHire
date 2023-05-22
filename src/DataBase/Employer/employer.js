@@ -425,6 +425,7 @@ export async function onboardEmployee(offerData) {
     isActive: true,
     isAccepted: false,
     employeeEmail: offerData.email,
+    employeeName: offerData.name,
     emailAvailable: offerData.emailAvailable,
     companyLocation: offerData.companyLocation,
     dateOfJoining: new Date(offerData.dateOfJoining),
@@ -437,9 +438,9 @@ export async function onboardEmployee(offerData) {
     salary: offerData.salary,
     offerLetter: offerLetterFileUrl,
   };
-  let subject = "Join Our Company Page on ClearHire";
+  const subject = "Join Our Company Page on ClearHire";
   const output = `
-    <p>Dear User,<br/><br/>
+    <p>Dear ${offerData.name},<br/><br/>
       We invite you to join our company page on ClearHire as an employee. It's a fantastic platform to showcase your professional profile and connect with our network.<br/>
       Create your profile now at <a href="https://clearhire.app">ClearHire</a>. Showcase your skills and experience to enhance your visibility.<br/>
       We look forward to seeing you on ClearHire!<br/><br/>

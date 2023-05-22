@@ -87,6 +87,16 @@ function OnboardingForm() {
                 <p style={emailAvailable ? { color: "red", pointerEvents: "none" } : { display: "none" }}>
                   Not on clearhire - an email will be sent to them instead
                 </p>
+
+                <div className="form-item">
+                  <input
+                    type="text"
+                    className="form-control-1"
+                    placeholder="Employee Name"
+                    name="name"
+                    onChange={handleInputChange}
+                  />
+                </div>
                 <div className="form-item ">
                   <select
                     name="companyLocation"
