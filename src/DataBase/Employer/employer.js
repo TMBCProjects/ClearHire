@@ -537,7 +537,7 @@ export async function readAssessment(employeeId) {
         ratedById: doc.data().ratedById,
         ratedByRole: doc.data().ratedByRole,
         ratedAt: new Date(),
-        ratedAtDate: new Date().toDateString(),
+        ratedAtDate: new Date().toLocaleDateString(),
         ratedByEmail: doc.data().ratedByEmail,
         employeeId: doc.data().employeeId,
         employeeName: doc.data().employeeName,
