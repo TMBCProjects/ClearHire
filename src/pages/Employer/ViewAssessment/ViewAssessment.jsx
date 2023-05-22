@@ -97,7 +97,7 @@ export default function EmployeeAssesmentForm() {
                                                 <p className='answer'>
                                                     {e?.ratings === undefined ?
                                                         <Rate tooltips={desc} style={{ fontSize: "40px", color: "green" }} value={ratings[i]?.rating || 0} onChange={(event) => handleInputChange(event, value.question_no, i)} />
-                                                        : <Rate style={{ fontSize: "40px", color: "blue" }} disabled value={e?.ratings[i]?.rating} />}</p> </div>
+                                                        : <Rate style={{ fontSize: "40px", color: "green" }} disabled value={e?.ratings[i]?.rating} />}</p> </div>
 
                                         </div>
                                     ))}
