@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Profile.css";
 import pic from "../../../assets/images/pic.png";
 
@@ -16,7 +16,7 @@ const Profile = () => {
         </h1>
         <div>
           <p>Company Website</p>
-          <p><a href={"https://" + userDatas.data.companyWebsite} target="_blank">{userDatas.data.companyWebsite}</a></p>
+          <p><a href={"https://" + userDatas.data.companyWebsite} target="_blank" rel="noreferrer">{userDatas.data.companyWebsite}</a></p>
         </div>
         <div>
           <p>Company Name</p>

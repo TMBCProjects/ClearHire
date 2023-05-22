@@ -1,16 +1,11 @@
 import React from "react";
 import "./Assessment.css";
-import { useNavigate } from "react-router-dom";
 import { Tabs } from 'antd';
 import EmployeeAssesmentForm from "./EmployeeAssesmentForm";
 import EmployeeSoftskills from "./EmployeeSoftskills";
 
 function EmployeeAssessment() {
 
-  const navigate = useNavigate();
-  const handleBack = () => {
-    navigate("/");
-  };
   const onChange = (key) => {
     console.log(key);
   };

@@ -4,11 +4,9 @@ import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 import {
-  InfoCircleFilled,
   LeftCircleOutlined,
   RightCircleOutlined,
 } from "@ant-design/icons";
-import { useEffect } from "react";
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const PdfViewer = ({ offerLetterUrl }) => {
