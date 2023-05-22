@@ -9,6 +9,7 @@ import { useEffect } from "react";
 
 const initialValues = {
   email: "",
+  name: "",
   designation: "",
   dateOfJoining: "",
   typeOfEmployment: "",
@@ -97,7 +98,7 @@ function OnboardingForm() {
                     onChange={handleInputChange}
                   />
                 </div>
-                <div className="form-item ">
+                <div className="form-item">
                   <select
                     name="companyLocation"
                     id=""
@@ -109,7 +110,7 @@ function OnboardingForm() {
                     })}
                   </select>
                 </div>
-                <div className="form-item ">
+                <div className="form-item">
                   <select name="designation" id="" onChange={handleInputChange}>
                     <option value="">Designation*</option>
                     <option value="Graphics Designer">Graphics Designer</option>
