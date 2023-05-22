@@ -25,8 +25,6 @@ export default function ForgotPassword() {
                 loading &&
                 <Loader text={"Sending mail..."} textColor={"#000"} />
             }
-
-
             <div className="fp-container">
                 <div className="fpHeader">
                     <span style={{ fontWeight: "bold" }}>Forgot Password?</span><br />

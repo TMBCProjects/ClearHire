@@ -42,6 +42,7 @@ export default function Profile() {
     }
     return years;
   };
+
   const handleSkillChange = (e, index) => {
     const { value } = e.target;
     const newState = skills.map((obj, id) => {
@@ -129,7 +130,6 @@ export default function Profile() {
     }
     score /= ratingsOfEmployer.length;
     colleagueScore /= ratingsOfEmployee.length;
-    // colleagueScore = 80;
     setAvgRatings({
       score: Math.ceil(score),
       colleagueScore: Math.ceil(colleagueScore),
