@@ -119,7 +119,9 @@ const Login = () => {
                 <div className="mb-3">
                   <p>
                     Forgot Password?{" "}
-                    <span className="text-color-green fw-bold">Click here</span>
+                      <Link to={"/forgot-password"} style={{
+                        textDecoration: "none"
+                      }}><span className="text-color-green fw-bold">Click here</span></Link>
                   </p>
                 </div>
                

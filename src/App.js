@@ -25,6 +25,7 @@ import RequestApproval from "./pages/Employer/RequestApproval/RequestApproval";
 import ViewEmployeeProfile from "./pages/Employer/EmployeeDetails/ViewEmployeeProfile";
 import ViewAssessment from "./pages/Employer/ViewAssessment/ViewAssessment";
 import Offers from "./pages/Employee/OfferList/Offers";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 
 function App() {
   return (
@@ -40,6 +41,9 @@ function App() {
               <Route
                 path="/signup"
                 element={<Signup />}></Route>
+              <Route
+                path="/forgot-password"
+                element={<ForgotPassword />}></Route>
               <Route
                 path="/signup-options"
                 element={<SignupOptions />}></Route>

@@ -30,7 +30,7 @@ function OfferLetterSent() {
           </p>
         </div>
         <div className="buttons">
-                    <button
+          <button
                         onClick={() => {
               window.location.href = "/employer-approval";
             }}>
