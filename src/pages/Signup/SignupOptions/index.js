@@ -4,10 +4,10 @@ import linkedin_icon from "../../../assets/images/linkedin-icon.svg";
 import mail_icon from "../../../assets/images/mail-icon.svg";
 import { useNavigate } from "react-router-dom";
 import { message } from "antd";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth } from "../../../firebase-config";
-import { checkUser } from "../../../DataBase/SignUp/signUp";
-import { readEmployee, readEmployer } from "../../../DataBase/Login/login";
+// import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+// import { auth } from "../../../firebase-config";
+// import { checkUser } from "../../../DataBase/SignUp/signUp";
+// import { readEmployee, readEmployer } from "../../../DataBase/Login/login";
 
 const Index = () => {
   const navigate = useNavigate();
