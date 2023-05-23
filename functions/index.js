@@ -21,7 +21,7 @@ exports.sendMail = functions.https.onRequest((req, res) => {
     },
   });
   let mailOption = {
-    from: `ClearHire <teamboapp@gmail.com>`, // sender address
+    from: `ClearHire <clearhire@gmail.com>`, // sender address
     to: email, // list of receivers
     subject: subject, // Subject line
     html: output, // html body
