@@ -11,14 +11,14 @@ import { message } from "antd";
 
 const Index = () => {
   const navigate = useNavigate();
-  const [messageApi, contextHolder] = message.useMessage();
-  const [loading, setLoading] = useState(false);
-  const success = () => {
-    messageApi.open({
-      type: "success",
-      content: "Login successful",
-    });
-  };
+  // const [messageApi, contextHolder] = message.useMessage();
+  // const [loading, setLoading] = useState(false);
+  // const success = () => {
+  //   messageApi.open({
+  //     type: "success",
+  //     content: "Login successful",
+  //   });
+  // };
 
   const handleLoginWithGoogle = () => {
     //   try {
