@@ -26,6 +26,8 @@ import ViewEmployeeProfile from "./pages/Employer/EmployeeDetails/ViewEmployeePr
 import ViewAssessment from "./pages/Employer/ViewAssessment/ViewAssessment";
 import Offers from "./pages/Employee/OfferList/Offers";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
+import SignupWithGoogle from "./components/SignupWithGoogle/SignupWithGoogle";
+import SignUpChooseUserGoogle from "./components/SignupWithGoogle/SignUpChooseUserGoogle";
 
 function App() {
   return (
@@ -44,9 +46,16 @@ function App() {
               <Route
                 path="/forgot-password"
                 element={<ForgotPassword />}></Route>
+
               <Route
                 path="/signup-options"
                 element={<SignupOptions />}></Route>
+              <Route
+                path="/signup-google-options"
+                element={<SignUpChooseUserGoogle />}></Route>
+              <Route
+                path="/signup-with-google"
+                element={<SignupWithGoogle />}></Route>
               <Route
                 path="/user-options"
                 element={<SignupChooseUser />}></Route>

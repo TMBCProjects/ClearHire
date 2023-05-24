@@ -51,14 +51,12 @@ const Login = () => {
             navigate("/");
           }
         } else {
-          navigate("/signup-with-google", {
-            state: {
-              email: data.user.email,
-              id: data.user.uid,
-              photoURL: data.user.photoURL,
-              name: data.user.displayName,
-            },
-          });
+          const userGoogle = {
+            email: data.user.email,
+            id: data.user.uid,
+          }
+          sessionStorage.setItem("userGoogle", JSON.stringify(userGoogle));
+          navigate("/signup-google-options");
         }
       });
     } catch (error) {

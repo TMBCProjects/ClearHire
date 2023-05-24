@@ -46,3 +46,7 @@ export async function registerLogin(user) {
   updateUser(user);
   await registerUser(cred.user.uid, user);
 }
+export async function registerGoogleLogin(user, id) {
+  updateUser(user);
+  await registerUser(id, user);
+}

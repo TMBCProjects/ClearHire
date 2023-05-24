@@ -109,9 +109,9 @@ export function updateUser(user) {
       user.role === Collections.Employee
         ? Collections.Employee
         : Collections.Employer,
-    // displayName: user.name,
   });
 }
+
 export function signIn(email, password) {
   return signInWithEmailAndPassword(auth, email, password);
 }
