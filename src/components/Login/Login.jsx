@@ -22,12 +22,6 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // const success = () => {
-  //   messageApi.open({
-  //     type: "success",
-  //     content: "Login successful",
-  //   });
-  // };
   const handleLoginWithGoogle = () => {
     try {
       const provider = new GoogleAuthProvider();
