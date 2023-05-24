@@ -46,10 +46,9 @@ function App() {
               <Route
                 path="/forgot-password"
                 element={<ForgotPassword />}></Route>
-
-              <Route
-                path="/signup-options"
-                element={<SignupOptions />}></Route>
+              {/* <Route
+                path="/user-options"
+                element={<SignupOptions />}></Route> */}
               <Route
                 path="/signup-google-options"
                 element={<SignUpChooseUserGoogle />}></Route>
@@ -57,7 +56,7 @@ function App() {
                 path="/signup-with-google"
                 element={<SignupWithGoogle />}></Route>
               <Route
-                path="/user-options"
+                path="/signup-options"
                 element={<SignupChooseUser />}></Route>
               <Route
                 path="/signup-done"
