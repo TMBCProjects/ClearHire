@@ -59,3 +59,30 @@
         text-align: center;
     }
 }
+
+.buttons {
+  margin-top: 1.3rem;
+  display: flex;
+  flex-direction: column;
+}
+.buttons button {
+  margin: 0.4rem 0;
+  padding: 0.9rem;
+  display: flex;
+  justify-content: center;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  align-items: center;
+  box-shadow: 0px 0px 14px #00000014;
+  border: 0;
+  font-weight: bold;
+  letter-spacing: .1rem;
+  font-size: .8rem;
+  transition: .3s ease;
+}
+.buttons button img{
+    margin-right: 1.2rem;
+    width: 1.6rem;
+}
+.buttons button:hover{
+    background: #69cd96 0% 0% no-repeat padding-box;
+}

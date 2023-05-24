@@ -1,6 +1,7 @@
 import { message } from "antd";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import linkedin_icon from "../../assets/images/linkedin-icon.svg";
 import LoginUser, {
   readEmployee,
   readEmployer,
@@ -8,6 +9,9 @@ import LoginUser, {
 import "./Login.css";
 import { Link } from "react-router-dom";
 import Loader from '../Loader'
+// import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+// import { auth } from "../../../firebase-config";
+// import { readEmployee, readEmployer, checkUser } from "../../../DataBase/Login/login";
 const initialValues = {
   email: "",
   password: "",
@@ -18,6 +22,56 @@ const Login = () => {
   const [loading,setLoading]=useState(false)
   const navigate = useNavigate();
 
+  // const success = () => {
+  //   messageApi.open({
+  //     type: "success",
+  //     content: "Login successful",
+  //   });
+  // };
+  const handleLoginWithGoogle = () => {
+    //   try {
+    //     const provider = new GoogleAuthProvider();
+    //     signInWithPopup(auth, provider).then(async (data) => {
+    //       const user = await checkUser(data.user.email);
+    //       if (user) {
+    //         setLoading(true);
+    //         if (user.photoURL === "Employer") {
+    //           sessionStorage.setItem("LoggedIn", "Employer");
+    //           const myObj = await readEmployer(user.uid);
+    //           const objStr = JSON.stringify(myObj);
+    //           sessionStorage.setItem("userData", objStr);
+    //           success();
+    //           setTimeout(() => {
+    //             window.location.reload();
+    //           }, 1000);
+    //           navigate("/");
+    //         } else if (user.photoURL === "Employee") {
+    //           sessionStorage.setItem("LoggedIn", "Employee");
+    //           const myObj = await readEmployee(user.uid);
+    //           const objStr = JSON.stringify(myObj);
+    //           sessionStorage.setItem("userData", objStr);
+    //           success();
+    //           setTimeout(() => {
+    //             window.location.reload();
+    //           }, 1000);
+    //           navigate("/");
+    //         }
+    //       } else {
+    //         navigate("/signup-with-google", {
+    //           state: {
+    //             email: data.user.email,
+    //             id: data.user.uid,
+    //             photoURL: data.user.photoURL,
+    //             name: data.user.displayName,
+    //           },
+    //         });
+    //       }
+    //     });
+    //   } catch (error) {
+    //     setLoading(false);
+    //     message.error(error);
+    //   }
+  };
   const success = () => {
     messageApi.open({
       type: "success",
@@ -144,7 +198,15 @@ const Login = () => {
                     </Link>
                   </p>
                 </div>
-              </form>
+                </form>
+                <div className="buttons">
+                  <button onClick={handleLoginWithGoogle}>
+                    <img
+                      src={linkedin_icon}
+                      alt="icon"
+                    />
+                    CONTINUE WITH GOOGLE
+                  </button></div>
             </div>
           </div>
         </div>
