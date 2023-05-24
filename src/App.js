@@ -31,7 +31,7 @@ import SignUpChooseUserGoogle from "./components/SignupWithGoogle/SignUpChooseUs
 
 function App() {
   return (
-    <div>
+    <div className="main">
       <Router>
         {!sessionStorage.getItem("LoggedIn") ? (
           <>

@@ -22,15 +22,10 @@
 }
 
 form {
-    width: 70vh;
+    width: 70vw;
 }
 
-@media(max-width:767px) {
 
-    form {
-        width: 95%;
-    }
-}
 
 label.control-label {
     padding: 1vh;
@@ -71,4 +66,16 @@ input {
 .signupBtn:hover {
     color: #fff;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+@media(max-width:767px) {
+
+    form {
+        width: 80vw;
+    }
+
+    .dropdowns {
+        gap: 0.2vh;
+        /* flex-direction: column; */
+    }
 }
