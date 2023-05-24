@@ -1,17 +1,17 @@
 import { message } from "antd";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import linkedin_icon from "../../assets/images/linkedin-icon.svg";
 import LoginUser, {
+  checkUser,
   readEmployee,
   readEmployer,
 } from "../../DataBase/Login/login";
 import "./Login.css";
 import { Link } from "react-router-dom";
 import Loader from '../Loader'
-// import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-// import { auth } from "../../../firebase-config";
-// import { readEmployee, readEmployer, checkUser } from "../../../DataBase/Login/login";
+import { GoogleOutlined } from "@ant-design/icons";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "../../firebase-config";
 const initialValues = {
   email: "",
   password: "",
@@ -29,48 +29,48 @@ const Login = () => {
   //   });
   // };
   const handleLoginWithGoogle = () => {
-    //   try {
-    //     const provider = new GoogleAuthProvider();
-    //     signInWithPopup(auth, provider).then(async (data) => {
-    //       const user = await checkUser(data.user.email);
-    //       if (user) {
-    //         setLoading(true);
-    //         if (user.photoURL === "Employer") {
-    //           sessionStorage.setItem("LoggedIn", "Employer");
-    //           const myObj = await readEmployer(user.uid);
-    //           const objStr = JSON.stringify(myObj);
-    //           sessionStorage.setItem("userData", objStr);
-    //           success();
-    //           setTimeout(() => {
-    //             window.location.reload();
-    //           }, 1000);
-    //           navigate("/");
-    //         } else if (user.photoURL === "Employee") {
-    //           sessionStorage.setItem("LoggedIn", "Employee");
-    //           const myObj = await readEmployee(user.uid);
-    //           const objStr = JSON.stringify(myObj);
-    //           sessionStorage.setItem("userData", objStr);
-    //           success();
-    //           setTimeout(() => {
-    //             window.location.reload();
-    //           }, 1000);
-    //           navigate("/");
-    //         }
-    //       } else {
-    //         navigate("/signup-with-google", {
-    //           state: {
-    //             email: data.user.email,
-    //             id: data.user.uid,
-    //             photoURL: data.user.photoURL,
-    //             name: data.user.displayName,
-    //           },
-    //         });
-    //       }
-    //     });
-    //   } catch (error) {
-    //     setLoading(false);
-    //     message.error(error);
-    //   }
+    try {
+      const provider = new GoogleAuthProvider();
+      signInWithPopup(auth, provider).then(async (data) => {
+        const user = await checkUser(data.user.email);
+        if (user) {
+          setLoading(true);
+          if (user.photoURL === "Employer") {
+            sessionStorage.setItem("LoggedIn", "Employer");
+            const myObj = await readEmployer(user.uid);
+            const objStr = JSON.stringify(myObj);
+            sessionStorage.setItem("userData", objStr);
+            success();
+            setTimeout(() => {
+              window.location.reload();
+            }, 1000);
+            navigate("/");
+          } else if (user.photoURL === "Employee") {
+            sessionStorage.setItem("LoggedIn", "Employee");
+            const myObj = await readEmployee(user.uid);
+            const objStr = JSON.stringify(myObj);
+            sessionStorage.setItem("userData", objStr);
+            success();
+            setTimeout(() => {
+              window.location.reload();
+            }, 1000);
+            navigate("/");
+          }
+        } else {
+          navigate("/signup-with-google", {
+            state: {
+              email: data.user.email,
+              id: data.user.uid,
+              photoURL: data.user.photoURL,
+              name: data.user.displayName,
+            },
+          });
+        }
+      });
+    } catch (error) {
+      setLoading(false);
+      message.error(error);
+    }
   };
   const success = () => {
     messageApi.open({
@@ -197,16 +197,19 @@ const Login = () => {
                       <span className="text-color-green fw-bold">Sign up</span>
                     </Link>
                   </p>
-                </div>
+                  </div><div className="divider-line">
+                    <hr />
+                    <div className="divider-text">Or</div>
+                    <hr />
+                  </div>
+                  <div className="buttons">
+                    <button onClick={handleLoginWithGoogle}>
+                      <GoogleOutlined style={{ fontSize: "30px", marginRight: "10px" }} />
+                      CONTINUE WITH GOOGLE
+                    </button>
+                  </div>
                 </form>
-                <div className="buttons">
-                  <button onClick={handleLoginWithGoogle}>
-                    <img
-                      src={linkedin_icon}
-                      alt="icon"
-                    />
-                    CONTINUE WITH GOOGLE
-                  </button></div>
+
             </div>
           </div>
         </div>
