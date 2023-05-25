@@ -4,7 +4,6 @@ import Home from "./pages/Home/Home";
 import Footer from "./components/Footer/Footer";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Signup from "./pages/Signup/SignupForm/Signup";
-import SignupOptions from "./pages/Signup/SignupOptions";
 import SignupChooseUser from "./pages/Signup/SignupChooseUser";
 import SignupDone from "./pages/Signup/SignupDone";
 import Approval from "./pages/Employer/Approval/Approval";
