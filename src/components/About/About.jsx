@@ -18,9 +18,9 @@ const About = () => {
         </div>
         <div className="col-md-6">
           <p className="about-text text-color-light">
-            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut
-            fugit, sed quia consequuntur magni dolores eos qui ratione
-            voluptatem sequ.
+            ClearHire is revolutionizing the hiring landscape by digitizing the preliminary
+            employee check process. We're committed to empowering employers with insightful,
+            reliable reviews and career histories, ensuring you make the best hiring decisions.
           </p>
         </div>
       </div>
@@ -31,10 +31,11 @@ const About = () => {
               <img src={SearchIcon} alt="" className="img-icon" />
             </div>{" "}
             <div className="card-heading">
-              <h5 className="card-title mt-3">Voluptate velit esse cillum.</h5>
+              <h5 className="card-title mt-3">Digital Employee Reviews</h5>
               <p className="card-text text-color-light">
-                Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
-                aut fugit, sed quia consequuntur magni.
+                Benefit from the convenience of digital employee reviews. Our platform
+                offers comprehensive feedback on potential hires, providing valuable insights
+                to guide your recruitment decisions.
               </p>
             </div>
           </div>
@@ -45,10 +46,11 @@ const About = () => {
               <img src={ChatIcon} alt="" className="img-icon" />
             </div>{" "}
             <div className="card-heading">
-              <h5 className="card-title mt-3">Voluptate velit esse cillum.</h5>
+              <h5 className="card-title mt-3">Career Track Records</h5>
               <p className="card-text text-color-light">
-                Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
-                aut fugit, sed quia consequuntur magni.
+                Dive into digital records of career histories. ClearHire provides a seamless
+                experience to explore an applicant's professional journey, assisting you to
+                strategize your hiring process.
               </p>
             </div>
           </div>
@@ -59,10 +61,11 @@ const About = () => {
               <img src={WorkIcon} alt="" className="img-icon" />
             </div>
             <div className="card-heading">
-              <h5 className="card-title mt-3">Voluptate velit esse cillum.</h5>
+              <h5 className="card-title mt-3">Simplified Preliminary Checks</h5>
               <p className="card-text text-color-light">
-                Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
-                aut fugit, sed quia consequuntur magni.
+                Say goodbye to tedious paperwork. ClearHire digitizes and simplifies
+                the preliminary employee check, helping you to save time and focus on
+                selecting the ideal candidate.
               </p>
             </div>
           </div>
@@ -79,9 +82,9 @@ const About = () => {
             cillum auptate
           </h3>
           <p className="text-color-light">
-            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut
-            fugit, sed quia consequuntur magni dolores eos qui ratione
-            voluptatem sequ.
+            At ClearHire, we're changing the face of recruitment by digitizing and simplifying
+            the preliminary employee check process. Our goal is to make your hiring decisions
+            easier and more strategic. Be part of the digital hiring revolution with us.
           </p>
         </div>
       </div>
