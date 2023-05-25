@@ -22,7 +22,7 @@
 }
 
 form {
-    width: 70vw;
+    width: 70vh;
 }
 
 
@@ -68,6 +68,13 @@ input {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
+@media(max-width:991px) {
+
+    .showPass {
+        margin-top: -2.2dvh;
+    }
+}
+
 @media(max-width:767px) {
 
     form {
@@ -77,5 +84,9 @@ input {
     .dropdowns {
         gap: 0.2vh;
         /* flex-direction: column; */
+    }
+
+    .showPass {
+        margin-top: -3.2dvh;
     }
 }
