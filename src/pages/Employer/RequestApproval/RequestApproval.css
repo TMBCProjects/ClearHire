@@ -4,7 +4,7 @@
 
 #On-board {
     margin-left: 0px;
-    background: #F5F7F9;
+    background: transparent;
     padding: 20px 0;
 }
 
@@ -138,5 +138,20 @@ input[type=file]::file-selector-button {
 @media(max-width:767px) {
     .login-form {
         width: 100%;
+    }
+}
+
+@media only screen and (min-device-width: 720px) and (max-device-width: 1280px) {
+    .form-item {
+        margin-bottom: 18px;
+    }
+
+    #On-board {
+        padding: 0;
+    }
+
+    .createemp.container {
+        display: flex;
+        padding: 1vh;
     }
 }

@@ -66,7 +66,7 @@ function OnboardingForm() {
   };
 
   return (
-    <div className="createemp container">
+    <div className="createemp container" style={{height: "auto"}}>
       <div className="back mt-2" onClick={handleBack}>
         <GoChevronLeft style={{ color: "#9EC2AD" }} size={25} />
       </div>

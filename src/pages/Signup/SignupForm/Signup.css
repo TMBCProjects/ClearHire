@@ -12,13 +12,15 @@
     cursor: pointer;
 }
 
-.signup-container {
+.signup-container.sign {
     display: grid;
     justify-content: center;
     justify-items: center;
     margin: auto;
     padding: 2vh;
     gap: 1vh;
+    overflow: scroll;
+    height: 81vh;
 }
 
 form {
