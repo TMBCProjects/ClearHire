@@ -34,9 +34,9 @@ export default function SearchEmployee() {
         const userDatas1 = JSON.parse(sessionStorage.getItem("userData"));
         const data = userDatas1.data.currentEmployerId
           ? await readColleagues(
-            userDatas1.id,
-            userDatas1.data.currentEmployerId
-          )
+              userDatas1.id,
+              userDatas1.data.currentEmployerId
+            )
           : [];
         return data;
       } catch (error) {
@@ -73,13 +73,11 @@ export default function SearchEmployee() {
   return (
     <div className="employer-home">
       <div
-        className="search-inputs"
-        style={{ position: "absolute" }}>
+        className="search-inputs mobile-filters"
+        style={{ position: "absolute" }}
+      >
         <div className="input-box1 input-box">
-          <img
-            src={search1}
-            alt="Search"
-          />
+          <img src={search1} alt="Search" />
           <input
             type="text"
             name="designation"
@@ -90,10 +88,7 @@ export default function SearchEmployee() {
         </div>
         {user === "Employer" ? (
           <div className="input-box2 input-box">
-            <img
-              src={location}
-              alt="Search"
-            />
+            <img src={location} alt="Search" />
             <Select
               onChange={(e) => {
                 handleInputChange(e, "location");
@@ -112,10 +107,7 @@ export default function SearchEmployee() {
           ""
         )}
         <div className="input-box3 input-box">
-          <img
-            src={job}
-            alt="Search"
-          />
+          <img src={job} alt="Search" />
           <Select
             type="text"
             onChange={(e) => {
@@ -135,10 +127,7 @@ export default function SearchEmployee() {
         </div>
         {user === "Employer" ? (
           <div className="input-box4 input-box ">
-            <img
-              src={salary}
-              alt="Search"
-            />
+            <img src={salary} alt="Search" />
             <input
               type="text"
               className="box-input no-border"
@@ -177,7 +166,8 @@ export default function SearchEmployee() {
             className="row2"
             style={
               employeeList.length === 0 ? { justifyContent: "center" } : {}
-            }>
+            }
+          >
             {employeeList.length === 0 && (
               <Empty
                 image={Empty.PRESENTED_IMAGE_SIMPLE}
@@ -191,13 +181,13 @@ export default function SearchEmployee() {
                 return (
                   (typeOfEmployment === "" ||
                     item.typeOfEmployment.toLowerCase() ===
-                    typeOfEmployment.toLowerCase()) &&
+                      typeOfEmployment.toLowerCase()) &&
                   (designation === "" ||
                     item.designation.toLowerCase().includes(designation)) &&
                   (salary === "" || +item?.salary <= +salary) &&
                   (location === "" ||
                     item.companyLocation.toLowerCase() ===
-                    location.toLowerCase())
+                      location.toLowerCase())
                 );
               })
               .map((info) => {

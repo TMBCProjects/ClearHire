@@ -89,4 +89,8 @@ input {
     .showPass {
         margin-top: -3.2dvh;
     }
+
+    .signup-container {
+        margin-bottom: 15rem !important;
+    }
 }

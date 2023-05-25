@@ -10,13 +10,25 @@ const Profile = () => {
         <h1 className="text-center text-color-green fw-bold font-size-30">
           <div className="profileHeader">
             <div className="profilePic">
-              <img src={userDatas.data.companyLogo || pic} alt="manager-logo" style={{ cursor: "pointer" }}></img>
+              <img
+                src={userDatas.data.companyLogo || pic}
+                alt="manager-logo"
+                style={{ cursor: "pointer" }}
+              ></img>
             </div>
           </div>
         </h1>
         <div>
           <p>Company Website</p>
-          <p><a href={"https://" + userDatas.data.companyWebsite} target="_blank" rel="noreferrer">{userDatas.data.companyWebsite}</a></p>
+          <p>
+            <a
+              href={"https://" + userDatas.data.companyWebsite}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {userDatas.data.companyWebsite}
+            </a>
+          </p>
         </div>
         <div>
           <p>Company Name</p>
@@ -28,7 +40,9 @@ const Profile = () => {
         </div>
         <div>
           <p>Location</p>
-          <p>{userDatas.data.companyState}, {userDatas.data.companyCountry}</p>
+          <p>
+            {userDatas.data.companyState} - {userDatas.data.companyCountry}
+          </p>
         </div>
       </div>
       {/* <div className="profileBody">

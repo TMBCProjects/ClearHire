@@ -73,3 +73,14 @@ input {
     color: #fff;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
+
+@media(max-width:767px) {
+    .dropdowns {
+        gap: 0.2vh;
+    }
+
+    .dropdowns select {
+        padding: 1vh;
+        margin-right: 3rem;
+    }
+}

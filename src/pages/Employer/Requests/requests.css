@@ -15,7 +15,7 @@
     font-size: 30px;
 }
 
-.mr-5 {  
+.mr-5 {
     margin-right: 5px;
 }
 
@@ -117,5 +117,9 @@
 
     .filter-approval {
         font-size: 16px;
+    }
+
+    .form-check {
+        padding-left: 0 !important;
     }
 }

@@ -82,7 +82,7 @@ const Requests = () => {
         <div className="col-md-6 ">
           <h3 className="fw-bold fs-30">Sent Approvals (Pending)</h3>
         </div>
-        <div className="col-md-6 d-flex justify-content-md-end justify-content-center align-items-center mobile-filters">
+        <div className="col-md-6 d-flex justify-content-md-end justify-content-md-center justify-content-between  align-items-center mobile-filters">
           <div className="form-check form-check-inline mx-3">
             <input
               className="form-check-input"
