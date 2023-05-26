@@ -56,6 +56,13 @@
     }
 }
 
+@media only screen and (min-device-width: 720px) and (max-device-width: 1280px) {
+    .about-team {
+        padding-left: 12vh !important;
+    }
+
+}
+
 @media(max-width:767px) {
     #about .card {
         text-align: center;

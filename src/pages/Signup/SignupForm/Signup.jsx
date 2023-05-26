@@ -163,7 +163,7 @@ export default function Signup() {
     <>
       {loading && <Loader text={"Signing up..."} textColor={"#000"} />}
 
-      <div className="signup-container">
+      <div className="signup-container sign">
         <div className="signupHeader">
           {user === "Employer" ? (
             <span style={{ fontWeight: "bold" }}>Employer Signup</span>
@@ -171,7 +171,7 @@ export default function Signup() {
             <span style={{ fontWeight: "bold" }}>Employee Signup</span>
           )}
         </div>
-        <form className="form-horizontal">
+        <form className="form-horizontal" style={{height: "100%"}}>
           <InputField
             label={"Email"}
             type={"email"}
