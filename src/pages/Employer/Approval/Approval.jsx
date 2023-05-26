@@ -88,11 +88,11 @@ const Approval = () => {
   return (
     <div id="employer-approval" className="container">
       <div className="row d-flex justify-content-between align-items-center">
-        <div className="col-md-6">
+        <div className="col-4">
           <h3 className="fw-bold fs-30">Sent Offers (Pending)</h3>
         </div>
-        <div className="col-md-6 d-flex justify-content-end align-items-center">
-          <div className="form-check form-check-inline mx-3">
+        <div className="col-8 d-flex justify-content-end align-items-center companyFilters mobileFilter">
+          <div className="form-check form-check-inline mx-0 mx-md-3">
             <input
               className="form-check-input"
               type="radio"
@@ -109,7 +109,7 @@ const Approval = () => {
             </label>
           </div>
 
-          <div className="form-check form-check-inline mx-3">
+          <div className="form-check form-check-inline mx-0 mx-md-3">
             <input
               className="form-check-input"
               type="radio"
@@ -157,7 +157,11 @@ const Approval = () => {
                       </p>
                       <p className="mb-1">{info.companyLocation}</p>
                       <p className="mb-1">{info.employeeEmail}</p>
-                      <p className="mb-1">{new Date(info.dateOfJoining.seconds * 1000).toLocaleDateString('en-GB')}</p>
+                      <p className="mb-1">
+                        {new Date(
+                          info.dateOfJoining.seconds * 1000
+                        ).toLocaleDateString("en-GB")}
+                      </p>
                       <p className="mb-1">{info.salary} LPA</p>
                       <div className="row  mt-2">
                         <div className="col">

@@ -112,20 +112,36 @@
 }
 
 /* media queries for small screens  */
-@media(max-width:767px) {
+
+@media(max-width:991px) {
     .fs-30 {
-        font-size: 25px;
+        font-size: 25px !important;
     }
+}
+
+@media(max-width:767px) {
+    /* #employer-approval {
+        padding: 2vh;
+    } */
+
+    .fs-30 {
+        font-size: 20px !important;
+    }
+
+    /* .companyFilters .form-check-inline {
+        display: none !important;
+    } */
 
     .filter-approval {
         font-size: 16px;
-     }
+    }
 }
 
-@media (max-width: 576px){
+@media (max-width: 576px) {
     .form-check-inline {
         margin-right: 0rem;
     }
+
     .justify-content-end {
         margin-top: 2%;
     }
