@@ -3,10 +3,15 @@
   src: local("helvetica"),
     url(./assets/fonts/HelveticaNeueW0187HvCnObl/HelveticaNeue\ Light.ttf) format("truetype");
 }
+
 @font-face {
   font-family: "helvetica-medium";
   src: local("helvetica-medium"),
     url(./assets/fonts/HelveticaNeueW0187HvCnObl/HelveticaNeueMed.ttf) format("truetype");
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 * {
