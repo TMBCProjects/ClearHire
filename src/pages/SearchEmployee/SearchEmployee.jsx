@@ -28,6 +28,10 @@ export default function SearchEmployee() {
     location: "",
     designation: "",
   });
+  const [filters2, setFilters2] = useState({
+    typeOfEmployment2: "",
+    designation2: "",
+  });
   useEffect(() => {
     const fetchCollegueDetails = async () => {
       try {
@@ -69,10 +73,17 @@ export default function SearchEmployee() {
       [field]: event.target ? event.target.value : event,
     }));
   };
-
+  const handleInput2Change = (event, field) => {
+    setFilters2((prevFilters2) => ({
+      ...prevFilters2,
+      [field]: event.target ? event.target.value : event,
+    }))
+  };
   return (
     <div className="employer-home">
-      <div
+
+      {user === "Employer" ? (
+        <div
         className="search-inputs mobile-filters"
         style={{ position: "absolute" }}
       >
@@ -81,12 +92,13 @@ export default function SearchEmployee() {
           <input
             type="text"
             name="designation"
-            onChange={(e) => handleInputChange(e, e.target.name)}
+              onChange={(e) => {
+                handleInputChange(e, e.target.name);
+              }}
             className="box-input"
             placeholder="Job Title / Designation"
           />
-        </div>
-        {user === "Employer" ? (
+          </div>
           <div className="input-box2 input-box">
             <img src={location} alt="Search" />
             <Select
@@ -103,15 +115,13 @@ export default function SearchEmployee() {
               )}
             />
           </div>
-        ) : (
-          ""
-        )}
         <div className="input-box3 input-box">
           <img src={job} alt="Search" />
           <Select
             type="text"
             onChange={(e) => {
               handleInputChange(e, "typeOfEmployment");
+
             }}
             className="box-select"
             placeholder="Type Of Employment"
@@ -124,8 +134,7 @@ export default function SearchEmployee() {
               { value: "Internship/Trainee", label: "Internship/Trainee" },
             ]}
           />
-        </div>
-        {user === "Employer" ? (
+          </div>
           <div className="input-box4 input-box ">
             <img src={salary} alt="Search" />
             <input
@@ -136,10 +145,43 @@ export default function SearchEmployee() {
               onChange={(e) => handleInputChange(e, e.target.name)}
             />
           </div>
-        ) : (
-          ""
-        )}
-      </div>
+        </div>
+      ) : (
+        <div
+          className="search-inputs mobile-filters"
+          style={{ position: "absolute" }}
+        >
+          <div className="input-box1 input-box">
+            <img src={search1} alt="Search" />
+            <input
+              type="text"
+              name="designation2"
+              onChange={(e) => { handleInput2Change(e, e.target.name) }}
+              className="box-input"
+              placeholder="Job Title / Designation"
+            />
+          </div>
+          <div className="input-box3 input-box">
+            <img src={job} alt="Search" />
+            <Select
+              type="text"
+              onChange={(e) => {
+                handleInput2Change(e, "typeOfEmployment2")
+              }}
+              className="box-select"
+              placeholder="Type Of Employment"
+              options={[
+                { value: "", label: "" },
+                { value: "Permanent Full-Time", label: "Permanent Full-Time" },
+                { value: "Part-Time", label: "Part-Time" },
+                { value: "Casual/Vacation", label: "Casual/Vacation" },
+                { value: "Contract", label: "Contract" },
+                { value: "Internship/Trainee", label: "Internship/Trainee" },
+              ]}
+            />
+          </div>
+        </div>
+      )}
       <div className="search-results">
         <div className="result-employees">
           <div className="row1">
@@ -178,16 +220,26 @@ export default function SearchEmployee() {
               .filter((item) => {
                 const { typeOfEmployment, designation, salary, location } =
                   filters;
+                const { typeOfEmployment2, designation2 } =
+                  filters2;
+                console.log(
+                  filters2, item)
                 return (
-                  (typeOfEmployment === "" ||
+                  user === "Employer" ? ((typeOfEmployment === "" ||
                     item.typeOfEmployment.toLowerCase() ===
-                      typeOfEmployment.toLowerCase()) &&
-                  (designation === "" ||
-                    item.designation.toLowerCase().includes(designation)) &&
-                  (salary === "" || +item?.salary <= +salary) &&
-                  (location === "" ||
-                    item.companyLocation.toLowerCase() ===
-                      location.toLowerCase())
+                    typeOfEmployment.toLowerCase()) &&
+                    (designation === "" ||
+                      item.designation.toLowerCase().includes(designation)) &&
+                    (salary === "" || +item?.salary <= +salary) &&
+                    (location === "" ||
+                      item.companyLocation.toLowerCase() ===
+                      location.toLowerCase())) :
+                    ((typeOfEmployment2 === "" ||
+                      item.typeOfEmployment ===
+                      typeOfEmployment2) &&
+                      (designation2 === "" ||
+                        item.designation.includes(designation2)) &&
+                      item.companyLocation === userDatas.data.companyLocation)
                 );
               })
               .map((info) => {

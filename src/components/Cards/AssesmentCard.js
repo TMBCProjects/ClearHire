@@ -55,30 +55,33 @@ const Assesment_Card = ({ info, employerId }) => {
   }
 
   const calculateRatings = (ratings) => {
-    let score = 0;
-    let ratingsOfEmployer = ratings.filter((rate) => {
-      return rate?.ratedByRole === "Employer";
-    });
+    if (ratings) {
+      let score = 0;
+      let ratingsOfEmployer = ratings.filter((rate) => {
+        return rate?.ratedByRole === "Employer";
+      });
 
-    for (let index = 0; index < ratingsOfEmployer.length; index++) {
-      const element = ratingsOfEmployer[index];
-      let temp =
-        +element.communication +
-        +element.attitude +
-        +element.abilityToLearn +
-        +element.punctuality +
-        +element.commitment +
-        +element.trustworthiness +
-        +element.skill +
-        +element.teamPlayer;
-      temp /= 8;
-      score += temp;
+      for (let index = 0; index < ratingsOfEmployer.length; index++) {
+        const element = ratingsOfEmployer[index];
+        let temp =
+          +element.communication +
+          +element.attitude +
+          +element.abilityToLearn +
+          +element.punctuality +
+          +element.commitment +
+          +element.trustworthiness +
+          +element.skill +
+          +element.teamPlayer;
+        temp /= 8;
+        score += temp;
+      }
+      score /= ratingsOfEmployer.length;
+      return Math.ceil(score);
     }
-    score /= ratingsOfEmployer.length;
-    return Math.ceil(score);
   };
   function getRatingsByEmployerId(ratings, employerId) {
-    return ratings.filter((rating) => rating.ratedById === employerId);
+    if (ratings)
+      return ratings.filter((rating) => rating.ratedById === employerId);
   }
   return (
     <div className="assess-card">
