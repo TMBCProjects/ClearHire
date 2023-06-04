@@ -45,12 +45,12 @@ function OnboardingForm() {
   const handleLocationChange = (e) => {
     setValues({
       ...values,
-      ["companyLocation"]: e,
+      "companyLocation": e,
     });
   }; const handleTypeChange = (e) => {
     setValues({
       ...values,
-      ["typeOfEmployment"]: e,
+      "typeOfEmployment": e,
     });
   };
 
