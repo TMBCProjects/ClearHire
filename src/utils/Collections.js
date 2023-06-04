@@ -5,6 +5,7 @@ const Collections = {
   ratings: "ratings",
   requests: "requests",
   assessments: "assessments",
+  designations: "designations",
   Employee: "Employee",
   Employer: "Employer",
 };
