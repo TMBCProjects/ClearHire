@@ -138,7 +138,7 @@ function App() {
                       element={<SearchEmployee />}></Route>
                     <Route
                       path="/EmployeeAssessment"
-                      element={<Assessment />}></Route>
+                      element={<EmployeeAssessment />}></Route>
                     <Route
                       path="/employee-details"
                       element={<EmployeeDetails />}></Route>

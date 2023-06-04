@@ -21,34 +21,39 @@ export async function readColleagues(employeeId, employerId) {
         where(Fields.isActive, "==", true)
       )
     );
+    const promises = [];
     querySnapshot.forEach(async (doc) => {
-      if (doc.id !== employeeId) {
-        let employee = {
-          id: doc.id,
-          isActive: doc.data().isActive,
-          employeeName: doc.data().employeeName,
-          lastRatings: doc.data().lastRatings,
-          employeeEmail: doc.data().employeeEmail,
-          companyLocation: doc.data().companyLocation,
-          profileImage: doc.data().profileImage,
-          dateOfBirth: doc.data().dateOfBirth,
-          role: doc.data().role,
-          currentEmployerId: doc.data().currentEmployerId,
-          employerIdList: doc.data().employerIdList,
-          designation: doc.data().designation,
-          salary: doc.data().salary,
-          companyName: doc.data().companyName,
-          companyLogo: doc.data().companyLogo,
-          typeOfEmployment: doc.data().typeOfEmployment,
-          offerLetter: doc.data().offerLetter,
-          dateOfJoining: doc.data().dateOfJoining,
-          employeeAadhaarCardNumber: doc.data().employeeAadhaarCardNumber,
-          portfolioLink: doc.data().portfolioLink,
-          resume: doc.data().resume,
-          skills: doc.data().skills,
-        };
-        employees.push(employee);
-      }
+      const promise = readColleagueRatings(doc.id).then((ratings) => {
+        if (doc.id !== employeeId) {
+          let employee = {
+            id: doc.id,
+            isActive: doc.data().isActive,
+            employeeName: doc.data().employeeName,
+            lastRatings: doc.data().lastRatings,
+            ratings: ratings,
+            employeeEmail: doc.data().employeeEmail,
+            companyLocation: doc.data().companyLocation,
+            profileImage: doc.data().profileImage,
+            dateOfBirth: doc.data().dateOfBirth,
+            role: doc.data().role,
+            currentEmployerId: doc.data().currentEmployerId,
+            employerIdList: doc.data().employerIdList,
+            designation: doc.data().designation,
+            salary: doc.data().salary,
+            companyName: doc.data().companyName,
+            companyLogo: doc.data().companyLogo,
+            typeOfEmployment: doc.data().typeOfEmployment,
+            offerLetter: doc.data().offerLetter,
+            dateOfJoining: doc.data().dateOfJoining,
+            employeeAadhaarCardNumber: doc.data().employeeAadhaarCardNumber,
+            portfolioLink: doc.data().portfolioLink,
+            resume: doc.data().resume,
+            skills: doc.data().skills,
+          };
+          employees.push(employee);
+        }
+      });
+      promises.push(promise);
     });
     return employees;
   } catch (error) {
@@ -164,7 +169,7 @@ export async function offerAccept(profileData, employeeId, offerId) {
     employeeId
   );
 }
-export async function readEmployeeRatings(employeeId) {
+export async function readColleagueRatings(employeeId) {
   try {
     let ratings = [];
     const querySnapshot = await getDocuments(

@@ -55,33 +55,30 @@ const Assesment_Card = ({ info, employerId }) => {
   }
 
   const calculateRatings = (ratings) => {
-    if (ratings) {
-      let score = 0;
-      let ratingsOfEmployer = ratings.filter((rate) => {
-        return rate?.ratedByRole === "Employer";
-      });
+    let score = 0;
+    let ratingsOfEmployer = ratings.filter((rate) => {
+      return rate?.ratedByRole === "Employer";
+    });
 
-      for (let index = 0; index < ratingsOfEmployer.length; index++) {
-        const element = ratingsOfEmployer[index];
-        let temp =
-          +element.communication +
-          +element.attitude +
-          +element.abilityToLearn +
-          +element.punctuality +
-          +element.commitment +
-          +element.trustworthiness +
-          +element.skill +
-          +element.teamPlayer;
-        temp /= 8;
-        score += temp;
-      }
-      score /= ratingsOfEmployer.length;
-      return Math.ceil(score);
+    for (let index = 0; index < ratingsOfEmployer.length; index++) {
+      const element = ratingsOfEmployer[index];
+      let temp =
+        +element.communication +
+        +element.attitude +
+        +element.abilityToLearn +
+        +element.punctuality +
+        +element.commitment +
+        +element.trustworthiness +
+        +element.skill +
+        +element.teamPlayer;
+      temp /= 8;
+      score += temp;
     }
+    score /= ratingsOfEmployer.length;
+    return Math.ceil(score);
   };
   function getRatingsByEmployerId(ratings, employerId) {
-    if (ratings)
-      return ratings.filter((rating) => rating.ratedById === employerId);
+    return ratings.filter((rating) => rating.ratedById === employerId);
   }
   return (
     <div className="assess-card">
@@ -170,14 +167,16 @@ const Assesment_Card = ({ info, employerId }) => {
               : "Assess Employee"}
           </button>
         </Link>
-        <Link
-          className="w-100 mt-3 btn"
-          to={{
-            pathname: "/ViewAssessment",
-          }}
-          state={{ from: info }}>
-          <button className="allow">View Assesment</button>
-        </Link>
+        {user === "Employer" && (
+          <Link
+            className="w-100 mt-3 btn"
+            to={{
+              pathname: "/ViewAssessment",
+            }}
+            state={{ from: info }}>
+            <button className="allow">View Assesment</button>
+          </Link>
+        )}
       </div>
     </div>
   );
