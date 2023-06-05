@@ -101,6 +101,33 @@ function EmployeeSoftskills() {
     }
     return "null";
   }
+
+  const calculateRatings = (ratings) => {
+    let score = 0;
+    let ratingsOfEmployer = ratings.filter((rate) => {
+      return rate?.ratedByRole === "Employer";
+    });
+
+    for (let index = 0; index < ratingsOfEmployer.length; index++) {
+      const element = ratingsOfEmployer[index];
+      let temp =
+        +element.communication +
+        +element.attitude +
+        +element.abilityToLearn +
+        +element.punctuality +
+        +element.commitment +
+        +element.trustworthiness +
+        +element.skill +
+        +element.teamPlayer;
+      temp /= 8;
+      score += temp;
+    }
+    score /= ratingsOfEmployer.length;
+    return Math.ceil(score);
+  };
+  function getRatingsByEmployerId(ratings, employerId) {
+    return ratings.filter((rating) => rating.ratedById === employerId);
+  }
     return (
       <div className="assesment container">
         <div className="back-cont">
@@ -130,7 +157,7 @@ function EmployeeSoftskills() {
             <div className="col-12 circles">
               <div className="col-6 circle-box">
                 <div className="circle" data-prog="95">
-                  <ProgressBar value={40} />
+                  <ProgressBar value={0} />
                 </div>
                 <div className="text">
                   <h6>Colleague Score</h6>
@@ -138,7 +165,11 @@ function EmployeeSoftskills() {
               </div>
               <div className="col-6 circle-box">
                 <div className="circle" data-prog="75">
-                  <ProgressBar value={40} />
+                  <ProgressBar value={
+                    calculateRatings(
+                      getRatingsByEmployerId(info?.ratings, userDatas.id)
+                    ) || 0
+                  } />
                 </div>
                 <div className="text ms-3">
                   <h6>Score</h6>
