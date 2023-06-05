@@ -25,7 +25,8 @@ const initialState = {
   };
 
 function EmployeeSoftskills() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const userDatas = JSON.parse(sessionStorage.getItem("userData"));
     const location = useLocation();
     const { from } = location.state;
     const info = from;
