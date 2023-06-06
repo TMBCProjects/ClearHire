@@ -56,11 +56,11 @@ const Assesment_Card = ({ info, employerId }) => {
 
   const calculateRatings = (ratings) => {
     let score = 0;
-    let ratingsOfEmployer = ratings.filter((rate) => {
+    let ratingsOfEmployer = ratings?.filter((rate) => {
       return rate?.ratedByRole === "Employer";
     });
 
-    for (let index = 0; index < ratingsOfEmployer.length; index++) {
+    for (let index = 0; index < ratingsOfEmployer?.length; index++) {
       const element = ratingsOfEmployer[index];
       let temp =
         +element.communication +
@@ -74,11 +74,11 @@ const Assesment_Card = ({ info, employerId }) => {
       temp /= 8;
       score += temp;
     }
-    score /= ratingsOfEmployer.length;
+    score /= ratingsOfEmployer?.length;
     return Math.ceil(score);
   };
   function getRatingsByEmployerId(ratings, employerId) {
-    return ratings.filter((rating) => rating.ratedById === employerId);
+    return ratings?.filter((rating) => rating.ratedById === employerId);
   }
   return (
     <div className="assess-card">
@@ -95,13 +95,15 @@ const Assesment_Card = ({ info, employerId }) => {
         <img
           src={info?.profileImage || pic}
           alt="manager-logo"></img>
-        <ProgressBar
-          value={
-            calculateRatings(
-              getRatingsByEmployerId(info?.ratings, userDatas.id)
-            ) || 0
-          }
-        />
+        {user === "Employer" && (
+          <ProgressBar
+            value={
+              calculateRatings(
+                getRatingsByEmployerId(info?.ratings, userDatas.id)
+              ) || 0
+            }
+          />
+        )}
       </div>
       <div
         className="headDesc"
@@ -117,14 +119,14 @@ const Assesment_Card = ({ info, employerId }) => {
           {info.employeeName}, {calculateAge(info.dateOfBirth)}
         </span>
         <span>{info.companyLocation}</span>
-        <span>{info.salary} LPA</span>
+        {user === "Employer" && <span>{info.salary} LPA</span>}
         <span
           style={{
             background: "#D7F2BC 0% 0% no-repeat padding-box",
             borderRadius: "9px",
-            width: "50%",
+            width: "40%",
             marginTop: ".5rem",
-            padding: ".5rem",
+            padding: ".rem",
             textAlign: "center",
             color: "#66BC11",
             fontWeight: "bold",
@@ -140,8 +142,8 @@ const Assesment_Card = ({ info, employerId }) => {
               findAssessmentDate(info?.lastRatings, employerId)
             )
               ? {
-                  pointerEvents: "none",
-                }
+                pointerEvents: "none",
+              }
               : {}
           }
           className="w-100 mt-3 btn"
@@ -167,14 +169,16 @@ const Assesment_Card = ({ info, employerId }) => {
               : "Assess Employee"}
           </button>
         </Link>
-        <Link
-          className="w-100 mt-3 btn"
-          to={{
-            pathname: "/ViewAssessment",
-          }}
-          state={{ from: info }}>
-          <button className="allow">View Assesment</button>
-        </Link>
+        {user === "Employer" && (
+          <Link
+            className="w-100 mt-3 btn"
+            to={{
+              pathname: "/ViewAssessment",
+            }}
+            state={{ from: info }}>
+            <button className="allow">View Assesment</button>
+          </Link>
+        )}
       </div>
     </div>
   );

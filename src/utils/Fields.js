@@ -11,6 +11,7 @@ const Fields = {
   employerEmail: "employerEmail",
   employerId: "employerId",
   employeeId: "employeeId",
+  companyId: "companyId",
   resumes: "resumes",
   isLive: "isLive",
 };

@@ -1,15 +1,13 @@
 .progressLow {
-    width: inherit;
-    height: inherit;
-    position: relative;
-  }
-  .progressLow .progress-icon {
-    font-size: 10px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
- 
+  width: inherit;
+  height: inherit;
+  position: relative;
+}
 
-  
+.progressLow .progress-icon {
+  font-size: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
