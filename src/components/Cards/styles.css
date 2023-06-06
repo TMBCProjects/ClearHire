@@ -1,9 +1,9 @@
 .assess-card {
     width: 25rem !important;
-    padding: 2vh;
+    padding: 1.2rem;
     background: white;
     margin-left: 0.5rem;
-
+    border-radius: 1rem;
 }
 
 .assess-card .managerlogo {
@@ -15,18 +15,23 @@
 }
 
 .assess-card .managerlogo img {
-    width: 25%;
+    width: 60px;
+    height: 60px;
+    border-radius: 80px;
+    object-fit: cover;
+
 }
 
 .assess-card .headDesc {
     display: flex;
     flex-direction: column;
     cursor: pointer;
+    font-size: .8rem;
 }
 
 .assess-card .headDesc span:nth-child(1) {
-    font-size: 1.3rem;
-    font-weight: bold;
+    font-size: 1rem;
+    font-weight: bolder;
 }
 
 .assess-card .allow {
@@ -36,9 +41,18 @@
     align-items: center;
 }
 
+.assess-card .btn button {
+    padding: .4rem;
+    font-size: .8rem;
+}
+
+.cardFooter {
+    margin: 0;
+}
+
 @media(max-width:767px) {
     .assess-card {
-        width: 24rem !important;
+        width: 20rem !important;
         margin-left: 0.8rem;
     }
 }

@@ -34,9 +34,9 @@ export default function SearchEmployee() {
         const userDatas1 = JSON.parse(sessionStorage.getItem("userData"));
         const data = userDatas1.data.currentEmployerId
           ? await readColleagues(
-              userDatas1.id,
-              userDatas1.data.currentEmployerId
-            )
+            userDatas1.id,
+            userDatas1.data.currentEmployerId
+          )
           : [];
         return data;
       } catch (error) {
@@ -73,8 +73,7 @@ export default function SearchEmployee() {
   return (
     <div className="employer-home">
       <div
-        className="search-inputs mobile-filters"
-        style={{ position: "absolute" }}
+        className="search-inputs"
       >
         <div className="input-box1 input-box">
           <img src={search1} alt="Search" />
@@ -175,22 +174,22 @@ export default function SearchEmployee() {
               />
             )}
             {employeeList
-              .filter((item) => {
+              ?.filter((item) => {
                 const { typeOfEmployment, designation, salary, location } =
                   filters;
                 return (
                   (typeOfEmployment === "" ||
                     item.typeOfEmployment.toLowerCase() ===
-                      typeOfEmployment.toLowerCase()) &&
+                    typeOfEmployment.toLowerCase()) &&
                   (designation === "" ||
                     item.designation.toLowerCase().includes(designation)) &&
                   (salary === "" || +item?.salary <= +salary) &&
                   (location === "" ||
                     item.companyLocation.toLowerCase() ===
-                      location.toLowerCase())
+                    location.toLowerCase())
                 );
               })
-              .map((info) => {
+              ?.map((info) => {
                 return (
                   <AssesmentCard
                     info={info}
