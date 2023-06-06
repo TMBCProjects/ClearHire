@@ -291,6 +291,7 @@ export async function rateCollegue(ratingData) {
     teamPlayer: ratingData.teamPlayer,
     note: ratingData.note,
   };
+  const docId = await addDocument(Collections.ratings, rating);
   await updateDocument(
     Collections.employees,
     {
@@ -301,7 +302,7 @@ export async function rateCollegue(ratingData) {
     },
     ratingData.employeeId
   );
-  return await addDocument(Collections.ratings, rating);
+  return docId;
 }
 
 // //READS
