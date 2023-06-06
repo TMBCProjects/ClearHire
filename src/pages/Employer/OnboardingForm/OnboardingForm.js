@@ -13,6 +13,7 @@ import { checkIfAvailable } from "../../../utils/FirebaseUtils";
 import { useEffect } from "react";
 import { Select, Space } from "antd";
 import { Button, Input, Divider, message } from "antd";
+import emailjs from 'emailjs-com'
 
 const initialValues = {
   email: "",
@@ -32,7 +33,12 @@ function OnboardingForm() {
   const [designations, setDesignations] = useState([]);
   const ipRef = useRef(null);
 
+  const [email, setEmail] = useState("")
   const navigate = useNavigate("");
+
+  const handleSenderEmail = (e) => {
+    setEmail(e.target.value)
+  }
 
   const handleInputChange = (e) => {
     console.log(e)
@@ -103,15 +109,25 @@ function OnboardingForm() {
     });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
     values.companyName = userDatas.data.companyName;
     values.companyLogo = userDatas.data.companyLogo;
     values.employerEmail = userDatas.data.employerEmail;
     values.employerId = userDatas.id;
     values.emailAvailable = !emailAvailable;
     onboardEmployee(values).then(() => {
-      window.location.href = "/offerletter-sent";
+     window.location.href = "/offerletter-sent";
     });
+
+    e.preventDefault();
+
+    emailjs.sendForm('service_cpytsjm', 'template_pwvg0ae', e.target, 'F3rrwZwcav-0a-BOW')
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
+      e.target.reset()
   };
 
   let [file, setFile] = useState("");
@@ -140,6 +156,7 @@ function OnboardingForm() {
             <div className="onboard-form-1">
               <p className="onboard-heading">On-Board New Employee</p>
               <div className="mx-auto d-flex flex-column justify-content-center align-items-center">
+                <form onSubmit={handleSubmit} style={{width: "100%", display: "contents"}}>
                 <div className="form-item email">
                   <input
                     type="email"
@@ -309,11 +326,13 @@ function OnboardingForm() {
                   <button
                     type="submit"
                     onClick={handleSubmit}
-                    className="send-btn">
+                    className="send-btn"
+                  >
                     <i className="fa-solid fa-plus s-1"></i>
                     Send Offer Letter
                   </button>
                 </div>
+                </form>
               </div>
             </div>
           </div>
