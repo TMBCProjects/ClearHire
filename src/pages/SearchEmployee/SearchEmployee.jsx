@@ -6,7 +6,6 @@ import job from "../../assets/images/job.svg";
 import salary from "../../assets/images/salary.svg";
 import { Select, Empty } from "antd";
 import AssesmentCard from "../../components/Cards/AssesmentCard";
-
 import { readEmployees } from "../../DataBase/Employer/employer";
 import { readColleagues } from "../../DataBase/Employee/employee";
 // const onChange = (e) => {
@@ -23,14 +22,10 @@ export default function SearchEmployee() {
   const user = sessionStorage.getItem("LoggedIn");
   const [employeeList, setEmployeeList] = useState([]);
   const [filters, setFilters] = useState({
-    typeOfEmployment: "Any",
+    typeOfEmployment: "",
     salary: "",
     location: "",
     designation: "",
-  });
-  const [filters2, setFilters2] = useState({
-    typeOfEmployment2: "Any",
-    designation2: "",
   });
   useEffect(() => {
     const fetchCollegueDetails = async () => {
@@ -38,14 +33,15 @@ export default function SearchEmployee() {
         const userDatas1 = JSON.parse(sessionStorage.getItem("userData"));
         const data = userDatas1.data.currentEmployerId
           ? await readColleagues(
-            userDatas1.id,
-            userDatas1.data.currentEmployerId
-          )
+              userDatas1.id,
+              userDatas1.data.currentEmployerId
+            )
           : [];
         return data;
       } catch (error) {
         console.log(error);
       }
+      
     };
     const fetchEmployeeDetails = async () => {
       try {
@@ -73,12 +69,7 @@ export default function SearchEmployee() {
       [field]: event.target ? event.target.value : event,
     }));
   };
-  const handleInput2Change = (event, field) => {
-    setFilters2((prevFilters2) => ({
-      ...prevFilters2,
-      [field]: event.target ? event.target.value : event,
-    }));
-  };
+
   return (
     <div className="employer-home">
       {
@@ -227,7 +218,8 @@ export default function SearchEmployee() {
             className="row2"
             style={
               employeeList.length === 0 ? { justifyContent: "center" } : {}
-            }>
+            }
+          >
             {employeeList.length === 0 && (
               <Empty
                 image={Empty.PRESENTED_IMAGE_SIMPLE}
@@ -254,7 +246,7 @@ export default function SearchEmployee() {
                 }
                 return true;
               })
-              ?.map((info) => {
+              .map((info) => {
                 return (
                   <AssesmentCard
                     info={info}

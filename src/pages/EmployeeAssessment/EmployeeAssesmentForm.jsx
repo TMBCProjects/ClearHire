@@ -193,7 +193,6 @@ export default function EmployeeAssesmentForm() {
           <img className='checkimg' src={check_1} alt="" width={20} />&nbsp;
           Submit
         </Button>
-
       </div>
 
 
