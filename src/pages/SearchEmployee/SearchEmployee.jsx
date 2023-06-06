@@ -27,6 +27,10 @@ export default function SearchEmployee() {
     location: "",
     designation: "",
   });
+  const [filters2, setFilters2] = useState({
+    typeOfEmployment: "",
+    designation: "",
+  });
   useEffect(() => {
     const fetchCollegueDetails = async () => {
       try {
@@ -65,6 +69,12 @@ export default function SearchEmployee() {
 
   const handleInputChange = (event, field) => {
     setFilters((prevFilters) => ({
+      ...prevFilters,
+      [field]: event.target ? event.target.value : event,
+    }));
+  };
+  const handleInput2Change = (event, field) => {
+    setFilters2((prevFilters) => ({
       ...prevFilters,
       [field]: event.target ? event.target.value : event,
     }));
