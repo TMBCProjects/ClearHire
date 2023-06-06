@@ -8,4 +8,5 @@ export default class Employer {
   companyLogo = "";
   companyEstablishmentYear = "";
   role = "";
+  assessmentType = "";
 }

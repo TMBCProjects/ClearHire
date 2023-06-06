@@ -14,6 +14,7 @@ export async function addNewEmployee(docId, user) {
     isActive: true,
     employeeEmail: user.email,
     dateOfBirth: timestamp,
+    assessmentType: user.assessmentType,
   };
   await addDocument(Collections.employees, employee, docId);
 }
@@ -28,6 +29,7 @@ export async function addNewEmployer(docId, user) {
     isActive: true,
     employerEmail: user.email,
     companyEstablishmentYear: user.companyEstablishmentYear,
+    assessmentType: user.assessmentType,
   };
   await addDocument(Collections.employers, employer, docId);
 }

@@ -15,13 +15,7 @@ const initialValues = {
   name: "",
   profileImage: "",
   role: "",
-};
-
-const onChange = (value) => {
-  console.log(`selected ${value}`);
-};
-const onSearch = (value) => {
-  console.log("search:", value);
+  assessmentType: "",
 };
 
 export default function Signup() {
@@ -102,6 +96,9 @@ export default function Signup() {
     setInputValue(e.target.value);
   };
 
+  const onAssessmentTypeChange = (event) => {
+    values.assessmentType = event;
+  };
   const handleSubmit = () => {
     values.profileImage = sessionStorage.getItem("profileImage");
     values.role = user;
@@ -358,17 +355,9 @@ export default function Signup() {
           <label className="control-label">Assessment</label>
           <div className="dropdowns">
             <Select
-              showSearch
               placeholder="Select assessment type"
-              className="w-100"
-              optionFilterProp="children"
-              onChange={onChange}
-              onSearch={onSearch}
-              filterOption={(input, option) =>
-                (option?.label ?? "")
-                  .toLowerCase()
-                  .includes(input.toLowerCase())
-              }
+              className="w-100 selectBoxAssessment"
+              onChange={(e) => onAssessmentTypeChange(e)}
               options={[
                 {
                   value: "Monthly",
