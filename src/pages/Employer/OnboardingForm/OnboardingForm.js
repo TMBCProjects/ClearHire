@@ -33,15 +33,15 @@ function OnboardingForm() {
   const [designations, setDesignations] = useState([]);
   const ipRef = useRef(null);
 
-  const [email, setEmail] = useState("")
+  // const [email, setEmail] = useState("")
   const navigate = useNavigate("");
 
-  const handleSenderEmail = (e) => {
-    setEmail(e.target.value)
-  }
+  // const handleSenderEmail = (e) => {
+  //   setEmail(e.target.value)
+  // }
 
   const handleInputChange = (e) => {
-    console.log(e)
+    console.log(e);
     const { name, value } = e.target;
     setValues({
       ...values,
@@ -51,12 +51,13 @@ function OnboardingForm() {
   const handleLocationChange = (e) => {
     setValues({
       ...values,
-      "companyLocation": e,
+      companyLocation: e,
     });
-  }; const handleTypeChange = (e) => {
+  };
+  const handleTypeChange = (e) => {
     setValues({
       ...values,
-      "typeOfEmployment": e,
+      typeOfEmployment: e,
     });
   };
 
@@ -79,7 +80,11 @@ function OnboardingForm() {
   const addDesignation = (e) => {
     e.preventDefault();
     if (designationName !== "") {
-      setDesignations(designations.concat([{ companyId: userDatas.id, designation: designationName }]));
+      setDesignations(
+        designations.concat([
+          { companyId: userDatas.id, designation: designationName },
+        ])
+      );
       writeDesignation(userDatas.id, designationName);
       setDesignationName("");
       setTimeout(() => {
@@ -116,18 +121,27 @@ function OnboardingForm() {
     values.employerId = userDatas.id;
     values.emailAvailable = !emailAvailable;
     onboardEmployee(values).then(() => {
-     window.location.href = "/offerletter-sent";
+      window.location.href = "/offerletter-sent";
     });
 
     e.preventDefault();
 
-    emailjs.sendForm('service_cpytsjm', 'template_pwvg0ae', e.target, 'F3rrwZwcav-0a-BOW')
-      .then((result) => {
+    emailjs
+      .sendForm(
+        "service_cpytsjm",
+        "template_pwvg0ae",
+        e.target,
+        "F3rrwZwcav-0a-BOW"
+      )
+      .then(
+        (result) => {
           console.log(result.text);
-      }, (error) => {
+        },
+        (error) => {
           console.log(error.text);
-      });
-      e.target.reset()
+        }
+      );
+    e.target.reset();
   };
 
   let [file, setFile] = useState("");
@@ -156,182 +170,181 @@ function OnboardingForm() {
             <div className="onboard-form-1">
               <p className="onboard-heading">On-Board New Employee</p>
               <div className="mx-auto d-flex flex-column justify-content-center align-items-center">
-                <form onSubmit={handleSubmit} style={{width: "100%", display: "contents"}}>
-                <div className="form-item email">
-                  <input
-                    type="email"
-                    className="form-control-1"
-                    placeholder="Email address"
-                    name="email"
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <p
-                  style={
-                    emailAvailable
-                      ? { color: "red", pointerEvents: "none" }
-                      : { display: "none" }
-                  }>
-                  Not on clearhire - an email will be sent to them instead
-                </p>
+                <form
+                  onSubmit={handleSubmit}
+                  style={{ width: "100%", display: "contents" }}>
+                  <div className="form-item email">
+                    <input
+                      type="email"
+                      className="form-control-1"
+                      placeholder="Email address"
+                      name="email"
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <p
+                    style={
+                      emailAvailable
+                        ? { color: "red", pointerEvents: "none" }
+                        : { display: "none" }
+                    }>
+                    Not on clearhire - an email will be sent to them instead
+                  </p>
 
-                <div className="form-item">
-                  <input
-                    type="text"
-                    className="form-control-1"
-                    placeholder="Employee Name"
-                    name="name"
-                    onChange={handleInputChange}
-                  />
-                </div>
+                  <div className="form-item">
+                    <input
+                      type="text"
+                      className="form-control-1"
+                      placeholder="Employee Name"
+                      name="name"
+                      onChange={handleInputChange}
+                    />
+                  </div>
 
-                <div className="form-item">
-                  <Select
-                    name="companyLocation"
-                    placeholder="Select Company Location"
-                    style={{ width: "100%" }}
-                    onChange={(e) => handleLocationChange(e)}
-
-                    options={userDatas.data.companyLocations
-                      .map((item) => ({
+                  <div className="form-item">
+                    <Select
+                      name="companyLocation"
+                      placeholder="Select Company Location"
+                      style={{ width: "100%" }}
+                      onChange={(e) => handleLocationChange(e)}
+                      options={userDatas.data.companyLocations.map((item) => ({
                         label: item,
                         value: item,
                       }))}
-                  />
-                </div>
+                    />
+                  </div>
 
-                <div className="form-item">
-                  <Select
-                    name="designation"
-                    placeholder="Select Designation"
-                    style={{ width: "100%" }}
-                    onChange={(e) => {
-                      onDesignationChange(e);
-                    }}
-                    dropdownRender={(menu) => (
-                      <>
-                        {menu}
-                        <Divider
-                          style={{
-                            margin: "8px 0",
-                          }}
-                        />
-                        <Space
-                          style={{
-                            padding: "0 8px 4px",
-                          }}>
-                          <Input
-                            placeholder="Add new designation"
-                            ref={ipRef}
-                            value={designationName}
-                            onChange={(e) => {
-                              onDesignationNameChange(e);
+                  <div className="form-item">
+                    <Select
+                      name="designation"
+                      placeholder="Select Designation"
+                      style={{ width: "100%" }}
+                      onChange={(e) => {
+                        onDesignationChange(e);
+                      }}
+                      dropdownRender={(menu) => (
+                        <>
+                          {menu}
+                          <Divider
+                            style={{
+                              margin: "8px 0",
                             }}
                           />
-                          <Button
-                            type="text"
-                            icon={<PlusOutlined />}
-                            onClick={(e) => addDesignation(e)}>
-                            Add
-                          </Button>
-                        </Space>
-                      </>
-                    )}
-                    options={designations
-                      .filter((item) => {
-                        return item.designation.includes(designationName);
-                      })
-                      .map((item) => ({
-                        label: item.designation,
-                        value: item.designation,
-                      }))}
-                  />
-                </div>
-                <div className="form-item">
-                  <Select
-                    name="typeOfEmployment"
-                    placeholder="Type Of Employment"
-                    id="typeOfEmployment"
-                    onChange={(e) => handleTypeChange(e)}
-                    style={{ width: "100%" }}
-                    options={[
-                      {
-                        label: "Permanent Full-Time",
-                        value: "Permanent Full-Time",
-                      },
-                      {
-                        label: "Part-Time",
-                        value: "Part-Time",
-                      },
-                      {
-                        label: "Casual/Vacation",
-                        value: "Casual/Vacation",
-                      },
-                      {
-                        label: "Contract",
-                        value: "Contract",
-                      },
-                      {
-                        label: "Internship/Trainee",
-                        value: "Internship/Trainee",
-                      },
-                    ]}
-                  />
-                </div>
-                <br />
-                <div className="form-item">
-                  <input
-                    type="date"
-                    className="form-control-1"
-                    placeholder="Date of Joining*"
-                    name="dateOfJoining"
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div className="form-item">
-                  <div className="form-control-container">
+                          <Space
+                            style={{
+                              padding: "0 8px 4px",
+                            }}>
+                            <Input
+                              placeholder="Add new designation"
+                              ref={ipRef}
+                              value={designationName}
+                              onChange={(e) => {
+                                onDesignationNameChange(e);
+                              }}
+                            />
+                            <Button
+                              type="text"
+                              icon={<PlusOutlined />}
+                              onClick={(e) => addDesignation(e)}>
+                              Add
+                            </Button>
+                          </Space>
+                        </>
+                      )}
+                      options={designations
+                        .filter((item) => {
+                          return item.designation.includes(designationName);
+                        })
+                        .map((item) => ({
+                          label: item.designation,
+                          value: item.designation,
+                        }))}
+                    />
+                  </div>
+                  <div className="form-item">
+                    <Select
+                      name="typeOfEmployment"
+                      placeholder="Type Of Employment"
+                      id="typeOfEmployment"
+                      onChange={(e) => handleTypeChange(e)}
+                      style={{ width: "100%" }}
+                      options={[
+                        {
+                          label: "Permanent Full-Time",
+                          value: "Permanent Full-Time",
+                        },
+                        {
+                          label: "Part-Time",
+                          value: "Part-Time",
+                        },
+                        {
+                          label: "Casual/Vacation",
+                          value: "Casual/Vacation",
+                        },
+                        {
+                          label: "Contract",
+                          value: "Contract",
+                        },
+                        {
+                          label: "Internship/Trainee",
+                          value: "Internship/Trainee",
+                        },
+                      ]}
+                    />
+                  </div>
+                  <br />
+                  <div className="form-item">
                     <input
-                      type="number"
-                      className="form-control-2"
-                      placeholder="Salary*"
-                      name="salary"
+                      type="date"
+                      className="form-control-1"
+                      placeholder="Date of Joining*"
+                      name="dateOfJoining"
                       onChange={handleInputChange}
                     />
-                    <span className="form-control-unit">LPA</span>
                   </div>
-                </div>
-                <div className="form-item">
-                  <label
-                    htmlFor="file"
-                    className="file-input-label">
-                    {file !== "" ? file : "Upload Offer Letter"}
-                    <img
-                      src={add}
-                      alt=""
+                  <div className="form-item">
+                    <div className="form-control-container">
+                      <input
+                        type="number"
+                        className="form-control-2"
+                        placeholder="Salary*"
+                        name="salary"
+                        onChange={handleInputChange}
+                      />
+                      <span className="form-control-unit">LPA</span>
+                    </div>
+                  </div>
+                  <div className="form-item">
+                    <label
+                      htmlFor="file"
+                      className="file-input-label">
+                      {file !== "" ? file : "Upload Offer Letter"}
+                      <img
+                        src={add}
+                        alt=""
+                      />
+                    </label>
+                    <input
+                      type="file"
+                      id="file"
+                      className="file-input"
+                      name="offerLetter"
+                      accept=".txt, .pdf"
+                      onChange={(e) => {
+                        handleFileChange(e);
+                      }}
                     />
-                  </label>
-                  <input
-                    type="file"
-                    id="file"
-                    className="file-input"
-                    name="offerLetter"
-                    accept=".txt, .pdf"
-                    onChange={(e) => {
-                      handleFileChange(e);
-                    }}
-                  />
-                </div>
+                  </div>
 
-                <div className="form-item">
-                  <button
-                    type="submit"
-                    onClick={handleSubmit}
-                    className="send-btn"
-                  >
-                    <i className="fa-solid fa-plus s-1"></i>
-                    Send Offer Letter
-                  </button>
-                </div>
+                  <div className="form-item">
+                    <button
+                      type="submit"
+                      onClick={handleSubmit}
+                      className="send-btn">
+                      <i className="fa-solid fa-plus s-1"></i>
+                      Send Offer Letter
+                    </button>
+                  </div>
                 </form>
               </div>
             </div>
