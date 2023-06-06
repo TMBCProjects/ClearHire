@@ -53,6 +53,15 @@ input {
     width: 100%;
 }
 
+.selectBoxAssessment .ant-select-selector {
+    border: 1px solid #00823B !important;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.selectBoxAssessment .ant-select-selector input {
+    padding: 1rem !important;
+}
+
 .signupBtn {
     width: 100%;
     height: 5vh;
@@ -63,6 +72,7 @@ input {
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     margin-top: 3vh;
 }
+
 
 .signupBtn:hover {
     color: #fff;
