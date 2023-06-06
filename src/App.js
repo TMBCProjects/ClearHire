@@ -70,7 +70,7 @@ function App() {
         ) : (
           <>
             {sessionStorage.getItem("LoggedIn") === "Employer" ? (
-              <div style={{ backgroundColor: "#F5F7F9", height: "100vh" }}>
+              <div style={{ backgroundColor: "#F5F7F9" }}>
                 <Navbar />
                 <Routes>
                   <Route
@@ -138,7 +138,7 @@ function App() {
                       element={<SearchEmployee />}></Route>
                     <Route
                       path="/EmployeeAssessment"
-                      element={<Assessment />}></Route>
+                      element={<EmployeeAssessment />}></Route>
                     <Route
                       path="/employee-details"
                       element={<EmployeeDetails />}></Route>
@@ -157,6 +157,7 @@ function App() {
           </>
         )}
         {/* <div className="footer shadow shadow-sm bg-light"> */}
+        <Footer />
         {/* </div> */}
       </Router>
     </div>

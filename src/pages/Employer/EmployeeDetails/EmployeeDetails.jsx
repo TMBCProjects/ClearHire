@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { MdArrowBackIos, MdOutlineKeyboardArrowDown } from "react-icons/md";
-import { FaQuoteLeft } from "react-icons/fa";
+import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
 import ViewFile from "../../../assets/images/view-doc.svg";
 import UrlLink from "../../../assets/images/link.svg";
 // import RightArrow from "../../../assets/images/right-arrow.png";
@@ -244,6 +244,18 @@ const EmployeeDetails = () => {
   };
   function getRatingsByEmployerId(ratings, employerId) {
     return ratings.filter((rating) => rating.ratedById === employerId);
+  }
+
+  function getLatestNoteByEmployerId(ratings, employerId) {
+    const filteredRatings = ratings
+      .filter((rating) => rating.employerId === employerId)
+      .sort((a, b) => b.ratedAt - a.ratedAt);
+
+    if (filteredRatings.length > 0) {
+      return filteredRatings[0].note;
+    }
+
+    return null;
   }
   function text(percentage) {
     if (percentage < 10) {
@@ -921,12 +933,15 @@ const EmployeeDetails = () => {
                             />
                             This employee is marked as a{" "}
                             <span className="text-color-green">
-                              {text(calculateTotalRatings(
-                                getRatingsByEmployerId(
+                                {getLatestNoteByEmployerId(
                                   employee.ratings,
                                   info.employerId
                                 )
-                              ))} employee{" "}
+                                }{" "}
+                                <FaQuoteRight
+                                  size={30}
+                                  className="quoteRight"
+                                />
                             </span>{" "}
                             by <strong>{info.companyName}</strong>
                           </p>
