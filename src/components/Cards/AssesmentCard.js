@@ -66,9 +66,11 @@ const Assesment_Card = ({ info, employerId }) => {
 
   const calculateRatings = (ratings) => {
     let score = 0;
-    let ratingsOfEmployer = ratings?.filter((rate) => {
-      return rate?.ratedByRole === "Employer";
-    });
+    let ratingsOfEmployer = ratings
+      ? ratings?.filter((rate) => {
+          return rate?.ratedByRole === "Employer";
+        })
+      : "";
 
     for (let index = 0; index < ratingsOfEmployer?.length; index++) {
       const element = ratingsOfEmployer[index];
