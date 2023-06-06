@@ -55,10 +55,9 @@ const RecruitmentCard = ({ info, employerId }) => {
                 from: info,
               },
             });
-        }}>
-        <img
-          src={info?.profileImage || pic}
-          alt="manager-logo"></img>
+        }}
+      >
+        <img src={info?.profileImage || pic} alt="manager-logo"></img>
         <ProgressBar
           value={
             calculateRatings(
@@ -76,7 +75,8 @@ const RecruitmentCard = ({ info, employerId }) => {
                 from: info,
               },
             });
-        }}>
+        }}
+      >
         <span>
           {info.employeeName}, {calculateAge(info.dateOfBirth)}
         </span>
@@ -87,7 +87,8 @@ const RecruitmentCard = ({ info, employerId }) => {
           to={{
             pathname: "/onboarding-form",
           }}
-          state={{ from: info }}>
+          state={{ from: info }}
+        >
           <button className="allow">Send Offer Letter</button>
         </Link>
       </div>
