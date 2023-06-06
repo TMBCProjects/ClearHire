@@ -158,7 +158,12 @@
 .result-employees .row2 {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 3rem !important;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  margin-top: 30rem;
+  z-index: inherit;
 }
 
 .ranges-div {

@@ -2,7 +2,7 @@
     position: relative;
     left: 0;
     bottom: 0;
-    z-index: -1;
+    display: none;
 }
 
 @media(max-width:767px) {
