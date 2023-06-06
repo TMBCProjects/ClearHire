@@ -62,14 +62,14 @@ export default function EmployeeAssesmentForm() {
                 <div className="form">
                     <form action="" className='assessform-1'>
                         {questions.length === 0 && <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="No Questions" />}
-                        {questions.map((e, i) => (
+                        {questions?.map((e, i) => (
                             <>
                                 <div className="form-1">
                                     <h1>{e.title}</h1><hr />
                                     <h2>{e.description}-{e.ratedAtDate}</h2>
                                 </div>
                                 <div><br />
-                                    {e.questionsList.map((value, i) => (
+                                    {e.questionsList?.map((value, i) => (
                                         <div>
                                             <div className="form-2" style={{ display: "flex" }}>
                                                 <label htmlFor="">Q{value.question_no}</label>
