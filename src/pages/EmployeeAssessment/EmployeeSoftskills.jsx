@@ -47,7 +47,7 @@ function EmployeeSoftskills() {
         [name]: value,
       });
     };
-  
+
 
     const handleSubmit = () => {
       let userDatas = JSON.parse(sessionStorage.getItem("userData"));
@@ -60,12 +60,16 @@ function EmployeeSoftskills() {
       values.employeeName = info.employeeName || "employeeName";
       values.employeeEmail = info.employeeEmail || "employeeEmail";
       values.profileImage = info.profileImage || pic;
-      role === "Employer" ? rateEmployee(values).then(() => {
-        window.location.href = "/";
-      }) :
+      if (role === "Employer") {
+        rateEmployee(values).then(() => {
+          window.location.href = "/";
+        })
+      }
+      if (role === "Employee") {
         rateCollegue(values).then(() => {
-          window.location.href = "/colleagues";
+          window.location.href = "/";
         });
+      }
     };
     const calculateAge = (dob) => {
         const today = new Date();

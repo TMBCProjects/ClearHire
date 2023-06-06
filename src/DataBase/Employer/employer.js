@@ -576,9 +576,9 @@ export async function rateEmployee(ratingData) {
     const ratingIndex = ratings.findIndex(
       (rating) => rating.ratedById === ratingData.ratedById
     );
-
     if (ratingIndex !== -1) {
       ratings[ratingIndex].ratedAtDate = new Date().toLocaleDateString("en-GB");
+      await addDocument(Collections.ratings, rating);
       await updateDocument(
         Collections.employees,
         {
@@ -586,8 +586,8 @@ export async function rateEmployee(ratingData) {
         },
         ratingData.employeeId
       );
-      await addDocument(Collections.ratings, rating);
     } else {
+      await addDocument(Collections.ratings, rating);
       await updateDocument(
         Collections.employees,
         {
