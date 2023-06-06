@@ -27,6 +27,7 @@ const initialState = {
 function EmployeeSoftskills() {
   const navigate = useNavigate();
   const userDatas = JSON.parse(sessionStorage.getItem("userData"));
+  let role = sessionStorage.getItem("LoggedIn");
   const location = useLocation();
   const { from } = location.state;
   const info = from;
@@ -158,7 +159,8 @@ function EmployeeSoftskills() {
             </h6>
           </div>
         </div>
-        <div className="col-xl-5 col-lg-6 col-md-6 col-12 employe-score">
+        {role === "Employer" &&
+          (<div className="col-xl-5 col-lg-6 col-md-6 col-12 employe-score">
           <div className="col-12 circles">
             <div className="col-6 circle-box">
               <div className="circle" data-prog="95">
@@ -181,7 +183,8 @@ function EmployeeSoftskills() {
               </div>
             </div>
           </div>
-        </div>
+          </div>)
+        }
       </div>
       <div className="row skill-assessment">
         <div className="col-xl-6 col-lg-6 skill-box-1">

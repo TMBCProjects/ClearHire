@@ -97,13 +97,15 @@ const Assesment_Card = ({ info, employerId }) => {
         <img
           src={info?.profileImage || pic}
           alt="manager-logo"></img>
-        <ProgressBar
-          value={
-            calculateRatings(
-              getRatingsByEmployerId(info?.ratings, userDatas.id)
-            ) || 0
-          }
-        />
+        {user === "Employer" && (
+          <ProgressBar
+            value={
+              calculateRatings(
+                getRatingsByEmployerId(info?.ratings, userDatas.id)
+              ) || 0
+            }
+          />
+        )}
       </div>
       <div
         className="headDesc"
@@ -119,7 +121,7 @@ const Assesment_Card = ({ info, employerId }) => {
           {info.employeeName}, {calculateAge(info.dateOfBirth)}
         </span>
         <span>{info.companyLocation}</span>
-        <span>{info.salary} LPA</span>
+        {user === "Employer" && <span>{info.salary} LPA</span>}
         <span
           style={{
             background: "#D7F2BC 0% 0% no-repeat padding-box",
