@@ -72,9 +72,7 @@ export default function SearchEmployee() {
 
   return (
     <div className="employer-home">
-      <div
-        className="search-inputs mobile-filters"
-      >
+      <div className="search-inputs mobile-filters" >
         <div className="input-box1 input-box">
           <img src={search1} alt="Search" />
           <input
