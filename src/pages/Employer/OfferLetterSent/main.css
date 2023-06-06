@@ -1,0 +1,12 @@
+.header-text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signup-options-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 10vh;
+}

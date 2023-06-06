@@ -12,7 +12,6 @@ export async function addNewEmployee(docId, user) {
     role: user.role,
     profileImage: user.profileImage,
     isActive: true,
-    resume: "",
     employeeEmail: user.email,
     dateOfBirth: timestamp,
   };
