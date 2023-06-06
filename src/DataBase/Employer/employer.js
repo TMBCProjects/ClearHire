@@ -452,6 +452,34 @@ export async function readEmployeeRatings(employeeId) {
 //     console.log(error);
 //   }
 // }
+export async function readDesignations(id) {
+  let data = [];
+  const querySnapshot = await getDocuments(
+    query(
+      setCollection(Collections.designations),
+      where(Fields.isActive, "==", true),
+      where(Fields.companyId, "==", id)
+    )
+  );
+  querySnapshot.forEach((doc) => {
+    let designation = {
+      id: doc.id,
+      designation: doc.data().designation,
+      companyId: doc.data().companyId,
+    };
+    data.push(designation);
+  });
+  return data;
+}
+export async function writeDesignation(companyId, name) {
+  let newRequest = new Request();
+  newRequest = {
+    isActive: true,
+    companyId: companyId,
+    designation: name,
+  };
+  return await addDocument(Collections.designations, newRequest);
+}
 export async function deleteOffer(offerId) {
   await updateDocument(
     Collections.offers,

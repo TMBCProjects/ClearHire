@@ -167,14 +167,16 @@ const Assesment_Card = ({ info, employerId }) => {
               : "Assess Employee"}
           </button>
         </Link>
-        <Link
-          className="w-100 mt-3 btn"
-          to={{
-            pathname: "/ViewAssessment",
-          }}
-          state={{ from: info }}>
-          <button className="allow">View Assesment</button>
-        </Link>
+        {user === "Employer" && (
+          <Link
+            className="w-100 mt-3 btn"
+            to={{
+              pathname: "/ViewAssessment",
+            }}
+            state={{ from: info }}>
+            <button className="allow">View Assesment</button>
+          </Link>
+        )}
       </div>
     </div>
   );
