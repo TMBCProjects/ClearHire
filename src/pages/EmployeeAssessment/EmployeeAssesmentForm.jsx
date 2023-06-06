@@ -134,99 +134,70 @@ export default function EmployeeAssesmentForm() {
         </div>
       </div>
       <div className="assess-form">
-        <div className="form">
-          <form action="" className="assessform-1">
-            <div className="form-1">
-              <input
-                type="text"
-                onChange={handleTitleChange}
-                placeholder="Untitled review form"
-                className="f-1"
-              />
-              <input
-                type="text"
-                onChange={handleDescChange}
-                placeholder="Description"
-                className="f-2"
-              />
-            </div>
-            {[...Array(qCount)].map((e, i) => (
-              <div key={i}>
-                <div className="form-2">
-                  <label htmlFor="">Q{i + 1}</label>
-                  <input
-                    type="text"
-                    id={i}
-                    defaultValue={qType[i].question}
-                    onChange={(e) => handleQuesChange(e, i)}
-                    placeholder="Enter Question"
-                    className="f-3"
-                  />
-                </div>
 
-                <div className="form-3">
-                  <label htmlFor="">Answer type</label>
-                  <Dropdown
-                    values={ansType}
-                    type={"text"}
-                    name={"Choose Answer type"}
-                    id={"type" + i}
-                    onChange={(e) => handleQuesTypeChange(e, i)}
-                  />
-                </div>
-                {checkSelect(i) && (
-                  <div style={{ marginBottom: "4vh" }} id={"options" + i}>
-                    <div style={{ display: "flex", flexDirection: "column" }}>
-                      <input
-                        type="text"
-                        onChange={(e) => handle1Change(e, i)}
-                        placeholder="Enter Options"
-                        className="chkbx"
-                      />
-                      <input
-                        type="text"
-                        onChange={(e) => handle2Change(e, i)}
-                        placeholder="Enter Options"
-                        className="chkbx"
-                      />
-                      <input
-                        type="text"
-                        onChange={(e) => handle3Change(e, i)}
-                        placeholder="Enter Options"
-                        className="chkbx"
-                      />
-                      <input
-                        type="text"
-                        onChange={(e) => handle4Change(e, i)}
-                        placeholder="Enter Options"
-                        className="chkbx"
-                      />
-                    </div>
-                  </div>
-                )}
-                <Button onClick={() => delques(i)}>Delete Question</Button>
-                <hr />
-              </div>
-            ))}
-          </form>
-          <div className="add">
-            <button className="add-btn" onClick={addques}>
-              <img src={add} alt="addIcon" />
-              &nbsp; Add question
-            </button>
+        <form action="" className='assessform-1'>
+          <div className="form-1">
+            <input type="text" onChange={handleTitleChange} placeholder='Untitled review form' className='f-1' />
+            <input type="text" onChange={handleDescChange} placeholder='Description' className='f-2' />
           </div>
+          {[...Array(qCount)].map((e, i) => (
+            <div key={i}>
+              <div className="form-2">
+                <label htmlFor="">Q{i + 1}</label>
+                <input type="text" id={i} defaultValue={qType[i].question} onChange={(e) => handleQuesChange(e, i)} placeholder='Enter Question' className='f-34 f-3' />
+              </div>
 
-          <Button
-            onClick={submitQues}
-            disabled={hasOneMonthPassed(
-              findAssessmentDate(info.ratings, info.currentEmployerId)
-            )}
-          >
-            <img className="checkimg" src={check_1} alt="" width={20} />
-            &nbsp; Submit
-          </Button>
-        </div>
+              <div className="form-3">
+                <label htmlFor="">Answer type</label>
+                <Dropdown
+                  values={ansType}
+                  type={"text"}
+                  name={"Choose Answer type"}
+                  id={"type" + i}
+                  onChange={(e) => handleQuesTypeChange(e, i)}
+                />
+              </div>
+              {checkSelect(i) &&
+                <div style={{ marginBottom: "4vh" }} id={"options" + i}>
+                  <div style={{ display: "flex", flexDirection: 'column' }}>
+                    <input type="text" onChange={(e) => handle1Change(e, i)} placeholder='Enter Options' className='chkbx' />
+                    <input type="text" onChange={(e) => handle2Change(e, i)} placeholder='Enter Options' className='chkbx' />
+                    <input type="text" onChange={(e) => handle3Change(e, i)} placeholder='Enter Options' className='chkbx' />
+                    <input type="text" onChange={(e) => handle4Change(e, i)} placeholder='Enter Options' className='chkbx' />
+                  </div>
+                </div>
+              }
+              <Button onClick={() => delques(i)}>Delete Question</Button>
+              <hr />
+            </div>
+          ))}
+
+        </form>
+
+
+
       </div>
+      <div className='form-buttons'>
+
+        <Button onClick={addques}>
+          <img src={add} alt="addIcon" />
+          &nbsp;
+          Add question</Button>
+
+        <Button onClick={submitQues}
+          disabled={
+            hasOneMonthPassed(
+              findAssessmentDate(info.ratings, info.currentEmployerId)
+            )
+          }>
+          <img className='checkimg' src={check_1} alt="" width={20} />&nbsp;
+          Submit
+        </Button>
+      </div>
+
+
+
     </div>
-  );
+
+  )
 }

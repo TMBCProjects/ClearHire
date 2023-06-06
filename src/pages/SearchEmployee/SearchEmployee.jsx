@@ -38,9 +38,9 @@ export default function SearchEmployee() {
         const userDatas1 = JSON.parse(sessionStorage.getItem("userData"));
         const data = userDatas1.data.currentEmployerId
           ? await readColleagues(
-              userDatas1.id,
-              userDatas1.data.currentEmployerId
-            )
+            userDatas1.id,
+            userDatas1.data.currentEmployerId
+          )
           : [];
         return data;
       } catch (error) {
@@ -81,25 +81,39 @@ export default function SearchEmployee() {
   };
   return (
     <div className="employer-home">
-      {user === "Employer" && (
-        <div
-          className="search-inputs mobile-filters"
-          style={{ position: "absolute" }}>
-          <div className="input-box1 input-box">
-            <img
-              src={search1}
-              alt="Search"
-            />
-            <input
-              type="text"
-              name="designation"
-              onChange={(e) => {
-                handleInputChange(e, e.target.name);
-              }}
-              className="box-input"
-              placeholder="Job Title / Designation"
-            />
-          </div>
+      <div
+        className="search-inputs"
+      >
+        <div className="input-box1 input-box">
+          <img src={search1} alt="Search" />
+          <input
+            type="text"
+            name="designation"
+            onChange={(e) => handleInputChange(e, e.target.name)}
+            className="box-input"
+            placeholder="Job Title / Designation"
+          />
+        </div>
+        {user === "Employer" ? (
+//       {user === "Employer" && (
+//         <div
+//           className="search-inputs mobile-filters"
+//           style={{ position: "absolute" }}>
+//           <div className="input-box1 input-box">
+//             <img
+//               src={search1}
+//               alt="Search"
+//             />
+//             <input
+//               type="text"
+//               name="designation"
+//               onChange={(e) => {
+//                 handleInputChange(e, e.target.name);
+//               }}
+//               className="box-input"
+//               placeholder="Job Title / Designation"
+//             />
+//           </div>
           <div className="input-box2 input-box">
             <img
               src={location}
@@ -235,14 +249,18 @@ export default function SearchEmployee() {
             )}
             {employeeList
               ?.filter((item) => {
-                const { typeOfEmployment, designation, salary, location } = filters;
-                const { typeOfEmployment2, designation2 } = filters2;
-                if (user === "Employer") {
+              const { typeOfEmployment, designation, salary, location } =
+                  filters;
                 return (
-                  (typeOfEmployment === "Any" || item.typeOfEmployment.toLowerCase() === typeOfEmployment.toLowerCase()) &&
-                  (designation === "" || item.designation.toLowerCase().includes(designation.toLowerCase())) &&
+                  (typeOfEmployment === "" ||
+                    item.typeOfEmployment.toLowerCase() ===
+                    typeOfEmployment.toLowerCase()) &&
+                  (designation === "" ||
+                    item.designation.toLowerCase().includes(designation)) &&
                   (salary === "" || +item?.salary <= +salary) &&
-                  (location === "" || item.companyLocation.toLowerCase() === location.toLowerCase())
+                  (location === "" ||
+                    item.companyLocation.toLowerCase() ===
+                    location.toLowerCase())
                 );
                 } else if (user === "Employee") {
                   return (
@@ -253,7 +271,7 @@ export default function SearchEmployee() {
                 }
                 return true;
               })
-              .map((info) => {
+              ?.map((info) => {
                 return (
                   <AssesmentCard
                     info={info}
