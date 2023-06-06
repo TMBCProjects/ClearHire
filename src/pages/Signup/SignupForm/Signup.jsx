@@ -1,4 +1,4 @@
-import { Button } from "antd";
+import { Button, Select } from "antd";
 import React, { useState, useEffect, useRef } from "react";
 import Dropdown from "../../../components/Dropdrowns/Dropdown";
 import InputField from "../../../components/Input/InputField";
@@ -15,6 +15,7 @@ const initialValues = {
   name: "",
   profileImage: "",
   role: "",
+  assessmentType: "",
 };
 
 export default function Signup() {
@@ -24,6 +25,7 @@ export default function Signup() {
     { length: 123 },
     (_, i) => new Date().getFullYear() - i
   );
+
   let date = Array.from({ length: 31 }, (_, i) => i + 1);
   let month = Array.from({ length: 12 }, (_, i) => i + 1);
   var selectedYear = "";
@@ -94,6 +96,9 @@ export default function Signup() {
     setInputValue(e.target.value);
   };
 
+  const onAssessmentTypeChange = (event) => {
+    values.assessmentType = event;
+  };
   const handleSubmit = () => {
     values.profileImage = sessionStorage.getItem("profileImage");
     values.role = user;
@@ -171,7 +176,7 @@ export default function Signup() {
             <span style={{ fontWeight: "bold" }}>Employee Signup</span>
           )}
         </div>
-        <form className="form-horizontal" style={{height: "100%"}}>
+        <form className="form-horizontal" style={{ height: "100%" }}>
           <InputField
             label={"Email"}
             type={"email"}
@@ -347,6 +352,32 @@ export default function Signup() {
               </div>
             </>
           )}
+          <label className="control-label">Assessment</label>
+          <div className="dropdowns">
+            <Select
+              placeholder="Select assessment type"
+              className="w-100 selectBoxAssessment"
+              onChange={(e) => onAssessmentTypeChange(e)}
+              options={[
+                {
+                  value: "Monthly",
+                  label: "Monthly",
+                },
+                {
+                  value: "Once in 3 months",
+                  label: "Once in 3 months",
+                },
+                {
+                  value: "Twice a year",
+                  label: "Twice a year",
+                },
+                {
+                  value: "Annualy",
+                  label: "Annualy",
+                },
+              ]}
+            />
+          </div>
           <Button className="signupBtn" onClick={handleSubmit}>
             Signup
           </Button>

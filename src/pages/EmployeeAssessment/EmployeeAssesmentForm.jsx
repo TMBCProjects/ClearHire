@@ -1,26 +1,28 @@
-import React from 'react'
+import React from "react";
 import "./Assessmentform.css";
 import arrow from "../../images/arrow-dropup.svg";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button } from 'antd';
-import add from "../../assets/images/add.svg"
-import { useState } from 'react';
+import { Button } from "antd";
+import add from "../../assets/images/add.svg";
+import { useState } from "react";
 import check_1 from "../../images/Check-1.svg";
-import Dropdown from '../../components/Dropdrowns/Dropdown';
-import { assessEmployee } from '../../DataBase/Employer/employer';
+import Dropdown from "../../components/Dropdrowns/Dropdown";
+import { assessEmployee } from "../../DataBase/Employer/employer";
 
 export default function EmployeeAssesmentForm() {
   const location = useLocation();
   const { from } = location.state;
   const info = from;
-  const ansType = ["Short Answer", "MCQ", "Select"]
-  const [qCount, setQCount] = useState(1)
+  const ansType = ["Short Answer", "MCQ", "Select"];
+  const [qCount, setQCount] = useState(1);
   const [questions, setQuestions] = useState({
     title: "",
     description: "",
-    questionsList: []
-  })
-  const [qType, setQType] = useState([{ question_no: 1, question: "", type: "", option: [] }])
+    questionsList: [],
+  });
+  const [qType, setQType] = useState([
+    { question_no: 1, question: "", type: "", option: [] },
+  ]);
   // var questionDetails = []
 
   const navigate = useNavigate();
@@ -28,20 +30,23 @@ export default function EmployeeAssesmentForm() {
     navigate("/");
   };
   const handleTitleChange = (event) => {
-    setQuestions(title => ({ ...title, title: event.target.value }))
-  }
+    setQuestions((title) => ({ ...title, title: event.target.value }));
+  };
   const handleDescChange = (event) => {
-    setQuestions(description => ({ ...description, description: event.target.value }))
-  }
+    setQuestions((description) => ({
+      ...description,
+      description: event.target.value,
+    }));
+  };
   const handleQuesChange = (e, i) => {
-    setQType(prevQType => {
+    setQType((prevQType) => {
       const updatedQType = [...prevQType];
       updatedQType[i] = { ...updatedQType[i], question: e.target.value };
       return updatedQType;
     });
   };
   const handleQuesTypeChange = (e, i) => {
-    setQType(prevQType => {
+    setQType((prevQType) => {
       const updatedQType = [...prevQType];
       updatedQType[i] = { ...updatedQType[i], type: e.target.value };
       return updatedQType;
@@ -50,47 +55,54 @@ export default function EmployeeAssesmentForm() {
 
   const handle1Change = (e, i) => {
     qType[i].option[0] = e.target.value;
-  }
+  };
   const handle2Change = (e, i) => {
     qType[i].option[1] = e.target.value;
-  }
+  };
   const handle3Change = (e, i) => {
     qType[i].option[2] = e.target.value;
-  }
+  };
   const handle4Change = (e, i) => {
     qType[i].option[3] = e.target.value;
-  }
+  };
   const submitQues = () => {
-    questions.questionsList = qType
+    questions.questionsList = qType;
     let userDatas = JSON.parse(sessionStorage.getItem("userData"));
     let role = sessionStorage.getItem("LoggedIn");
     questions.companyName = userDatas.data.companyName;
     questions.ratedById = userDatas.id;
     questions.ratedByRole = role;
-    questions.ratedByEmail = userDatas.data.employerEmail || userDatas.data.employeeEmail;
+    questions.ratedByEmail =
+      userDatas.data.employerEmail || userDatas.data.employeeEmail;
     questions.employeeId = info.id || "employeeId";
     questions.employeeName = info.employeeName || "employeeName";
     questions.employeeEmail = info.employeeEmail || "employeeEmail";
-    assessEmployee(questions).then(() => { window.location.href = "/"; })
-  }
+    assessEmployee(questions).then(() => {
+      window.location.href = "/";
+    });
+  };
   const checkSelect = (i) => {
     const selectedType = qType[i].type;
     return selectedType === "Select" || selectedType === "MCQ";
-  }
+  };
 
   const addques = () => {
-    setQCount(qCount + 1)
-    const newObject = { question_no: qCount + 1, question: "", type: "", option: [] };
-    setQType(qType.concat(newObject))
-  }
+    setQCount(qCount + 1);
+    const newObject = {
+      question_no: qCount + 1,
+      question: "",
+      type: "",
+      option: [],
+    };
+    setQType(qType.concat(newObject));
+  };
   const delques = (i) => {
     if (qCount > 1) {
-      setQCount(qCount - 1)
-      const list = qType.slice(0, i).concat(
-        qType.slice(i + 1, qCount))
-      setQType(list)
+      setQCount(qCount - 1);
+      const list = qType.slice(0, i).concat(qType.slice(i + 1, qCount));
+      setQType(list);
     }
-  }
+  };
 
   function hasOneMonthPassed(date) {
     if (date === "null") {
@@ -117,7 +129,7 @@ export default function EmployeeAssesmentForm() {
     <div className="assessment">
       <div className="head">
         <div className="back-div" onClick={handleBack}>
-          <img src={arrow} alt="" />
+          <img src={arrow} alt="" style={{ transform: "rotate(90deg)" }} />
           <h4>Employee Assessment</h4>
         </div>
       </div>
@@ -181,7 +193,6 @@ export default function EmployeeAssesmentForm() {
           <img className='checkimg' src={check_1} alt="" width={20} />&nbsp;
           Submit
         </Button>
-
       </div>
 
 

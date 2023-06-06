@@ -50,12 +50,75 @@ function App() {
                 {/* <Route
                 path="/user-options"
                 element={<SignupOptions />}></Route> */}
-                <Route
-                  path="/signup-google-options"
-                  element={<SignUpChooseUserGoogle />}></Route>
-                <Route
-                  path="/signup-with-google"
-                  element={<SignupWithGoogle />}></Route>
+              <Route
+                path="/signup-google-options"
+                element={<SignUpChooseUserGoogle />}></Route>
+              <Route
+                path="/signup-with-google"
+                element={<SignupWithGoogle />}></Route>
+
+              <Route
+                path="/signup-options"
+                element={<SignupChooseUser />}></Route>
+              <Route
+                path="/signup-done"
+                element={<SignupDone />}></Route>
+              <Route
+                path="/Profile"
+                element={<Profile />}></Route>
+            </Routes>
+          </>
+        ) : (
+          <>
+            {sessionStorage.getItem("LoggedIn") === "Employer" ? (
+              <div style={{ backgroundColor: "#F5F7F9" }}>
+                <Navbar />
+                <Routes>
+                  <Route
+                    path="/"
+                    element={<SearchEmployee />}></Route>
+                  <Route
+                    path="/profile"
+                    element={<EmployerProfile />}></Route>
+                  <Route
+                    path="/employer-approval"
+                    element={<Approval />}></Route>
+                  <Route
+                    path="/requests"
+                    element={<Requests />}></Route>
+                  <Route
+                    path="/approvalRequest-form"
+                    element={<RequestApproval />}></Route>
+                  <Route
+                    path="/ViewEmployeeProfile"
+                    element={<ViewEmployeeProfile />}></Route>
+
+                  <Route
+                    path="/Assessment-form"
+                    element={<EmployeeAssessmentForm />}></Route>
+                  <Route
+                    path="/EmployeeAssessment"
+                    element={<EmployeeAssessment />}></Route>
+                  <Route
+                    path="/ViewAssessment"
+                    element={<ViewAssessment />}></Route>
+                  <Route
+                    path="/employee-details"
+                    element={<EmployeeDetails />}></Route>
+                  <Route
+                    path="/onboarding-form"
+                    element={<OnboardingForm />}></Route>
+                  <Route
+                    path="/offerletter-sent"
+                    element={<OfferLetterSent />}></Route>
+                  <Route
+                    path="/recruitment-pool"
+                    element={<RecruitmentPool />}></Route>
+                </Routes>
+              </div>
+            ) : (
+              ""
+            )}
 
                 <Route
                   path="/signup-options"
