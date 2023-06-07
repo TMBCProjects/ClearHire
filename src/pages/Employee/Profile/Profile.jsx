@@ -6,7 +6,7 @@ import InputField from "../../../components/Input/InputField";
 import { Slider, Col, message } from "antd";
 import UploadFile from "../../../components/UploadFile";
 import { MinusOutlined } from "@ant-design/icons";
-import { profileUpdate, readEmployeeRatings } from "../../../DataBase/Employee/employee";
+import { profileUpdate, readColleagueRatings } from "../../../DataBase/Employee/employee";
 import ProgressBar from "../../../components/ProgressBar";
 
 export default function Profile() {
@@ -26,7 +26,7 @@ export default function Profile() {
       if (userDatas.data.skills) {
         setSkills(userDatas.data.skills);
       }
-      const data2 = await readEmployeeRatings(userDatas.id);
+      const data2 = await readColleagueRatings(userDatas.id);
       calculateRatings(data2);
     };
     fetchOfferDetails();
@@ -34,7 +34,8 @@ export default function Profile() {
 
   const calculateAge = (dob) => {
     const today = new Date();
-    const birthDate = new Date(dob.seconds * 1000);
+    // const birthDate = new Date(dob.seconds * 1000);
+    const birthDate = new Date();
     let years = today.getFullYear() - birthDate.getFullYear();
     const months = today.getMonth() - birthDate.getMonth();
     if (months < 0 || (months === 0 && today.getDate() < birthDate.getDate())) {

@@ -452,6 +452,34 @@ export async function readEmployeeRatings(employeeId) {
 //     console.log(error);
 //   }
 // }
+export async function readDesignations(id) {
+  let data = [];
+  const querySnapshot = await getDocuments(
+    query(
+      setCollection(Collections.designations),
+      where(Fields.isActive, "==", true),
+      where(Fields.companyId, "==", id)
+    )
+  );
+  querySnapshot.forEach((doc) => {
+    let designation = {
+      id: doc.id,
+      designation: doc.data().designation,
+      companyId: doc.data().companyId,
+    };
+    data.push(designation);
+  });
+  return data;
+}
+export async function writeDesignation(companyId, name) {
+  let newRequest = new Request();
+  newRequest = {
+    isActive: true,
+    companyId: companyId,
+    designation: name,
+  };
+  return await addDocument(Collections.designations, newRequest);
+}
 export async function deleteOffer(offerId) {
   await updateDocument(
     Collections.offers,
@@ -523,8 +551,8 @@ export async function rateEmployee(ratingData) {
     companyName: ratingData.companyName,
     ratedById: ratingData.ratedById,
     ratedByRole: ratingData.ratedByRole,
-    ratedAt: new Date(),
-    ratedAtDate: new Date().toDateString(),
+    ratedAt: ratingData.time,
+    ratedAtDate: ratingData.time,
     ratedByEmail: ratingData.ratedByEmail,
     employeeId: ratingData.employeeId,
     employeeName: ratingData.employeeName,
@@ -548,9 +576,9 @@ export async function rateEmployee(ratingData) {
     const ratingIndex = ratings.findIndex(
       (rating) => rating.ratedById === ratingData.ratedById
     );
-
     if (ratingIndex !== -1) {
-      ratings[ratingIndex].ratedAtDate = new Date().toLocaleDateString("en-GB");
+      ratings[ratingIndex].ratedAtDate = ratingData.time;
+      await addDocument(Collections.ratings, rating);
       await updateDocument(
         Collections.employees,
         {
@@ -558,14 +586,14 @@ export async function rateEmployee(ratingData) {
         },
         ratingData.employeeId
       );
-      await addDocument(Collections.ratings, rating);
     } else {
+      await addDocument(Collections.ratings, rating);
       await updateDocument(
         Collections.employees,
         {
           lastRatings: arrayUnion({
             ratedById: ratingData.ratedById,
-            ratedAtDate: new Date().toLocaleDateString("en-GB"),
+            ratedAtDate: ratingData.time
           }),
         },
         ratingData.employeeId

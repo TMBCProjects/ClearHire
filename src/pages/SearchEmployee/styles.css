@@ -1,9 +1,9 @@
 .employer-home {
   display: flex;
   flex-direction: column;
-  width: 100%;
   height: auto;
-  padding-bottom: 3vh
+  padding-bottom: 4rem;
+  overflow-x: hidden;
 }
 
 .search-inputs {
@@ -13,8 +13,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
-  top: 5.2rem !important;
+  top: 4.4rem;
   z-index: 1;
 }
 
@@ -74,12 +73,15 @@
 }
 
 .search-results {
-  margin-top: 4rem;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 50vh;
   display: flex;
+  height: auto;
+  overflow-y: auto;
+  background-color: #F5F7F9;
+  flex-wrap: wrap;
+  width: 100vw;
+  overflow-x: hidden;
 }
 
 .search-settings {
@@ -105,7 +107,9 @@
 }
 
 .result-employees {
-  flex: .75;
+  padding: 1rem 2rem;
+  padding-top: 0;
+  margin-left: 4rem;
 }
 
 .dropdown-select p {
@@ -158,7 +162,11 @@
 .result-employees .row2 {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 3rem !important;
+  justify-content: center;
+  width: 100vw;
+  height: auto;
+  z-index: inherit;
 }
 
 .ranges-div {
@@ -176,6 +184,12 @@
 
   .search-inputs {
     display: none;
+  }
+
+  .result-employees {
+    padding: 1rem 2rem;
+    padding-top: 0;
+    margin-left: 0rem;
   }
 
   /* .mobile-filters {

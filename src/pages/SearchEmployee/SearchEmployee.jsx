@@ -6,7 +6,6 @@ import job from "../../assets/images/job.svg";
 import salary from "../../assets/images/salary.svg";
 import { Select, Empty } from "antd";
 import AssesmentCard from "../../components/Cards/AssesmentCard";
-
 import { readEmployees } from "../../DataBase/Employer/employer";
 import { readColleagues } from "../../DataBase/Employee/employee";
 // const onChange = (e) => {
@@ -42,6 +41,7 @@ export default function SearchEmployee() {
       } catch (error) {
         console.log(error);
       }
+      
     };
     const fetchEmployeeDetails = async () => {
       try {
@@ -74,7 +74,6 @@ export default function SearchEmployee() {
     <div className="employer-home">
       <div
         className="search-inputs mobile-filters"
-        style={{ position: "absolute" }}
       >
         <div className="input-box1 input-box">
           <img src={search1} alt="Search" />

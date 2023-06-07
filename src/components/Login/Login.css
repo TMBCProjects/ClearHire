@@ -50,15 +50,6 @@
 }
 
 
-@media(max-width:767px) {
-    .login-form {
-        width: 100%;
-    }
-
-    .text-light {
-        text-align: center;
-    }
-}
 
 .buttons {
   display: flex;
@@ -102,4 +93,20 @@
   margin: 0 10px;
   border: none;
   border-top: 1px solid gray;
+}
+
+@media(max-width: 567px){
+    /* .divider-line {
+        margin-top: 12%;
+    } */
+}
+
+@media(max-width:767px) {
+    .login-form {
+        width: 100%;
+    }
+
+    .text-light {
+        text-align: center;
+    }
 }
