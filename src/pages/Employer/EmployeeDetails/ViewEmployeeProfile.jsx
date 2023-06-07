@@ -201,8 +201,8 @@ const ViewEmployeeProfile = () => {
   }
   function getLatestNoteByEmployerId(ratings, employerId) {
     const filteredRatings = ratings
-      .filter((rating) => rating.employerId === employerId)
-      .sort((a, b) => b.ratedAt - a.ratedAt);
+      .filter((rating) => rating.ratedById === employerId)
+      .sort((a, b) => b.ratedAt - a.ratedAt)
 
     if (filteredRatings.length > 0) {
       return filteredRatings[0].note;
