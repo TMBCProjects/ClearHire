@@ -62,7 +62,7 @@ export default function EmployeeAssesmentForm() {
                 <div className="form">
                     <form action="" className='assessform-1'>
                         {questions.length === 0 && <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="No Questions" />}
-                        {questions?.map((e, i) => (
+                        {questions.sort((a, b) => { return new Date(a.ratedAt) < new Date(b.ratedAt) }).filter((e, index) => { return index === 0 })?.map((e, i) => (
                             <>
                                 <div className="form-1">
                                     <h1>{e.title}</h1><hr />

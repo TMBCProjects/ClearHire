@@ -930,8 +930,7 @@ const EmployeeDetails = () => {
                             <FaQuoteLeft
                               size={30}
                               className="quoteLeft"
-                            />
-                            This employee is marked as a{" "}
+                              />
                             <span className="text-color-green">
                                 {getLatestNoteByEmployerId(
                                   employee.ratings,
