@@ -191,6 +191,9 @@
     padding-top: 0;
     margin-left: 0rem;
   }
+  .result-employees .row2 {
+    margin: 2rem 0 6rem 0;
+  }
 
   /* .mobile-filters {
     background: url('../../assets/images/filter-filled.png');

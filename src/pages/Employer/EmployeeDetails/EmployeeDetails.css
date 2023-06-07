@@ -345,7 +345,7 @@
 
     .employerResult {
         padding: 1.5rem;
-        margin: 1rem auto;
+        margin: 2rem !important;
     }
 
     .employerResult p {
@@ -378,6 +378,12 @@
     .view-resume-btn,
     .portfolio-text {
         font-size: 14px;
+    }
+    .main-container {
+        padding: 2vh 2vh 15vh 2vh;
+    }
+    .mb-3{
+        width: 50% !important;
     }
 }
 

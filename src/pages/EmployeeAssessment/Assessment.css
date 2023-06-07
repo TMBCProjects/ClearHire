@@ -298,7 +298,11 @@ textarea:focus {
     }
 
 }
-
+@media (max-width:767px) {
+  svg{
+    font-size: 30px !important;
+  }
+}
 @media (max-width:576px) {
     .employe-score {
         padding: 5% 0%;
