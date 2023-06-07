@@ -4,6 +4,7 @@
   height: auto;
   padding-bottom: 4rem;
   overflow-x: hidden;
+  height: 100vh;
 }
 
 .search-inputs {

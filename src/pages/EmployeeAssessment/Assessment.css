@@ -299,8 +299,17 @@ textarea:focus {
 
 }
 @media (max-width:767px) {
-  svg{
+  /* svg{
     font-size: 30px !important;
+  } */
+  .skill-assessment {
+    margin: 0% !important;
+  }
+  .employe-prof {
+    padding-bottom: 20px;
+  }
+  .note-head h3 {
+    margin-top: -4%;
   }
 }
 @media (max-width:576px) {
