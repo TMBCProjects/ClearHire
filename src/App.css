@@ -1,9 +1,12 @@
 @media(max-width:767px) {
   .main {
     overflow-x: hidden;
+    height: 150vh !important;
+
+    
   }
 }
 
 .main {
-  min-height: calc(100vh - 34px);
+  min-height: calc(130vh - 34px);
 }
