@@ -76,8 +76,8 @@ export default function EmployeeAssesmentForm() {
                         width={600}
                     >{questions
                         .sort((a, b) => { return new Date(a.ratedAt) - new Date(b.ratedAt) })
-                        ?.map((e, i) => {
-                            return (<div style={{ display: "flex" }}><p style={{ fontSize: "30px" }}>{e.title} - {e.ratedAtDate} -{" "}
+                            ?.map((e) => {
+                                return (<div key={e.id} style={{ display: "flex" }}><p style={{ fontSize: "30px" }}>{e.title} - {e.ratedAtDate} -{" "}
                                 <Button onClick={() => { setModal2Open(true); setHistoryOpen(e.id) }}><EyeOutlined /></Button>
                                 <Modal
                                     title="Assessment History"
