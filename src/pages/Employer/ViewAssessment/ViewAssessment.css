@@ -225,4 +225,7 @@
         width: 40%;
         padding: 0;
     }
+    .assessment {
+        padding-bottom: 15vh;
+    }
 }

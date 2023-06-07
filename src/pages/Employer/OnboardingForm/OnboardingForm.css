@@ -152,6 +152,9 @@ input[type=file]::file-selector-button {
     .login-form {
         width: 100%;
     }
+    #On-board {
+        height: 130vh;
+    }
 }
 .form-item {
   margin-bottom: 20px;
