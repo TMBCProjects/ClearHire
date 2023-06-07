@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import "./ViewAssessment.css";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button, Empty, Rate } from 'antd';
+import { Button, Empty, Modal, Rate } from 'antd';
 import { useState } from 'react';
 import check_1 from "../../../images/Check-1.svg";
 import { rateAssessment, readAssessment } from '../../../DataBase/Employer/employer';
@@ -14,6 +14,8 @@ export default function EmployeeAssesmentForm() {
     const info = from;
     const [questions, setQuestions] = useState([])
     const [ratings, setRatings] = useState([])
+    const [modalOpen, setModalOpen] = useState(false);
+    const [modal2Open, setModal2Open] = useState(false);
 
     const navigate = useNavigate();
 
@@ -59,14 +61,31 @@ export default function EmployeeAssesmentForm() {
                     <MdArrowBackIos size={22} className="backIcon" />
                 </div></div>
             <div className="assess-form">
+
                 <div className="form">
+                    <Button style={{ float: "right" }} onClick={() => setModalOpen(true)}> History</Button>
+                    <Modal
+                        title="Assessment History"
+                        centered
+                        open={modalOpen}
+                        onOk={() => setModalOpen(false)}
+                        onCancel={() => setModalOpen(false)}
+                        width={1000}
+                    >{questions
+                        .sort((a, b) => { return new Date(a.ratedAt) < new Date(b.ratedAt) })
+                        ?.filter((e, index) => { return index === 0 })
+                        ?.map((e, i) => {
+                            return (<div>{e.title} - {e.ratedAtDate} -{" "}
+                                <Button onClick={() => setModal2Open(true)}>Open</Button></div>)
+                        })}
+                    </Modal>
                     <form action="" className='assessform-1'>
                         {questions.length === 0 && <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="No Questions" />}
                         {questions.sort((a, b) => { return new Date(a.ratedAt) < new Date(b.ratedAt) }).filter((e, index) => { return index === 0 })?.map((e, i) => (
-                            <>
+                            <>LATEST ASSESSMENT - {e.ratedAtDate}
                                 <div className="form-1">
                                     <h1>{e.title}</h1><hr />
-                                    <h2>{e.description} - {e.ratedAtDate}</h2>
+                                    <h2>{e.description}</h2>
                                 </div>
                                 <div><br />
                                     {e.questionsList?.map((value, i) => (
