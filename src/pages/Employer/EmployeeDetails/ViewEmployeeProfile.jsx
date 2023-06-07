@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { MdArrowBackIos, MdOutlineKeyboardArrowDown } from "react-icons/md";
-import { FaQuoteLeft } from "react-icons/fa";
+import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
 import ViewFile from "../../../assets/images/view-doc.svg";
 import UrlLink from "../../../assets/images/link.svg";
 import CompanyLogo from "../../../assets/images/company-logo.png";
@@ -199,20 +199,17 @@ const ViewEmployeeProfile = () => {
   function getRatingsByEmployerId(ratings, employerId) {
     return ratings.filter((rating) => rating.ratedById === employerId);
   }
-  function text(percentage) {
-    if (percentage < 10) {
-      return "Worst";
-    } else if (percentage >= 10 && percentage < 30) {
-      return "Poor";
-    } else if (percentage >= 30 && percentage < 55) {
-      return "Good";
-    } else if (percentage >= 55 && percentage < 80) {
-      return "Very Good";
-    } else {
-      return "Great";
-    }
-  }
+  function getLatestNoteByEmployerId(ratings, employerId) {
+    const filteredRatings = ratings
+      .filter((rating) => rating.employerId === employerId)
+      .sort((a, b) => b.ratedAt - a.ratedAt);
 
+    if (filteredRatings.length > 0) {
+      return filteredRatings[0].note;
+    }
+
+    return null;
+  }
   return (
     <>
       <div className="main-container">
@@ -867,18 +864,21 @@ const ViewEmployeeProfile = () => {
                           <div className="row employerResult">
                             <div>
                               <p>
+
                                 <FaQuoteLeft
                                   size={30}
                                   className="quoteLeft"
                                 />
-                                This employee is marked as a{" "}
                                 <span className="text-color-green">
-                                  {text(calculateTotalRatings(
-                                    getRatingsByEmployerId(
-                                      employee.ratings,
-                                      info.employerId
-                                    )
-                                  ))} employee{" "}
+                                  {getLatestNoteByEmployerId(
+                                    employee.ratings,
+                                    info.employerId
+                                  )
+                                  }{" "}
+                                  <FaQuoteRight
+                                    size={30}
+                                    className="quoteRight"
+                                  />
                                 </span>{" "}
                                 by <strong>{info.companyName}</strong>
                               </p>
