@@ -81,6 +81,7 @@
   background-color: #F5F7F9;
   flex-wrap: wrap;
   width: 100vw;
+  overflow-x: hidden;
 }
 
 .search-settings {
