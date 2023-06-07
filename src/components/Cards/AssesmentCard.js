@@ -56,9 +56,11 @@ const Assesment_Card = ({ info, employerId }) => {
 
   const calculateRatings = (ratings) => {
     let score = 0;
-    let ratingsOfEmployer = ratings?.filter((rate) => {
-      return rate?.ratedByRole === "Employer";
-    });
+    let ratingsOfEmployer = ratings
+      ? ratings?.filter((rate) => {
+          return rate?.ratedByRole === "Employer";
+        })
+      : "";
 
     for (let index = 0; index < ratingsOfEmployer?.length; index++) {
       const element = ratingsOfEmployer[index];
@@ -91,10 +93,9 @@ const Assesment_Card = ({ info, employerId }) => {
                 from: info,
               },
             });
-        }}>
-        <img
-          src={info?.profileImage || pic}
-          alt="manager-logo"></img>
+        }}
+      >
+        <img src={info?.profileImage || pic} alt="manager-logo"></img>
         {user === "Employer" && (
           <ProgressBar
             value={
@@ -114,7 +115,8 @@ const Assesment_Card = ({ info, employerId }) => {
                 from: info,
               },
             });
-        }}>
+        }}
+      >
         <span>
           {info.employeeName}, {calculateAge(info.dateOfBirth)}
         </span>
@@ -130,7 +132,8 @@ const Assesment_Card = ({ info, employerId }) => {
             textAlign: "center",
             color: "#66BC11",
             fontWeight: "bold",
-          }}>
+          }}
+        >
           {info.designation}
         </span>
       </div>
@@ -142,15 +145,16 @@ const Assesment_Card = ({ info, employerId }) => {
               findAssessmentDate(info?.lastRatings, employerId)
             )
               ? {
-                pointerEvents: "none",
-              }
+                  pointerEvents: "none",
+                }
               : {}
           }
           className="w-100 mt-3 btn"
           to={{
             pathname: "/EmployeeAssessment",
           }}
-          state={{ from: info }}>
+          state={{ from: info }}
+        >
           <button
             className="allow"
             style={
@@ -160,7 +164,8 @@ const Assesment_Card = ({ info, employerId }) => {
               )
                 ? { color: "#d2dee8", backgroundColor: "#eef8ff" }
                 : {}
-            }>
+            }
+          >
             {hasOneMonthPassed(
               findRatedAtDate(info?.lastRatings, employerId),
               findAssessmentDate(info?.lastRatings, employerId)
@@ -175,7 +180,8 @@ const Assesment_Card = ({ info, employerId }) => {
             to={{
               pathname: "/ViewAssessment",
             }}
-            state={{ from: info }}>
+            state={{ from: info }}
+          >
             <button className="allow">View Assesment</button>
           </Link>
         )}
