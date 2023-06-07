@@ -578,17 +578,16 @@ const ViewEmployeeProfile = () => {
                         size={30}
                         className="quoteLeft"
                       />
-                      This employee is marked as a{" "}
                       <span className="text-color-green">
-                        {text(
-                          calculateTotalRatings(
-                            getRatingsByEmployerId(
-                              employee.ratings,
-                              employee.currentEmployerId
-                            )
-                          )
-                        )}{" "}
-                        employee{" "}
+                        {getLatestNoteByEmployerId(
+                          employee.ratings,
+                          info.employerId
+                        )
+                        }{" "}
+                        <FaQuoteRight
+                          size={30}
+                          className="quoteRight"
+                        />
                       </span>{" "}
                       by <strong>{info.companyName}</strong>
                     </p>
