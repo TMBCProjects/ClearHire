@@ -8,5 +8,5 @@
 }
 
 .main {
-  min-height: calc(130vh - 34px);
+  min-height: calc(auto - 34px);
 }

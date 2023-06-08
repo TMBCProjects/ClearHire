@@ -24,7 +24,7 @@ function EmployeeAssessment() {
 
 
   return (
-    <div className="assesment container">
+    <div className="emp-assesment container">
       <div className="back-cont">
         <div className="col">
           {sessionStorage.getItem("LoggedIn") === "Employer" ?

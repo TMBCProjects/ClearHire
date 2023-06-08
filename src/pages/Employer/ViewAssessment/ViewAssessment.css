@@ -7,7 +7,9 @@
 .assessment {
     background-color: #F5F7F9;
     padding-bottom: 5vh;
+    height: 80vh !important;
 }
+
 
 .head {
     width: 100%;
@@ -102,6 +104,7 @@
 
 .form-2a {
     margin-top: 0px;
+    margin-bottom: 35px;
 }
 
 .form-3 {
@@ -196,24 +199,50 @@
 
 .question {
     border: none !important;
-    width: 33%;
+    width: 80%;
     box-shadow: none;
     background-color: #F5F7F9;
     margin-left: 15px;
-    padding: 15px 10px;
+    padding: 15px 10px 15px 40px;
     border-radius: 7px;
+    transition: 0.5s;
 }
-
+.question:hover {
+    border: 1px solid green !important;
+    color: #00823B;
+    background-color: white;
+}
 .answer {
+    border: none !important;
+    width: 50%;
+    height: 100%;
+    box-shadow: none;
+    background-color: #F5F7F9;
+    margin-left: 25px;
+    padding: 10px 0px 10px 25px;
+    border-radius: 7px;
+    margin-bottom: 0px !important;
+    transition: 0.5s;
+}
+.answer:hover {
+    border: 1px solid green !important;
+    color: #00823B;
+    background-color: white;
+}
+.answer1 {
     border: none !important;
     width: 33%;
     box-shadow: none;
     background-color: #ffffff;
-    margin-left: 15px;
-    padding: 10px 1px;
+    margin-left: 25px;
+    padding: 0px 0px 0px 25px;
     border-radius: 7px;
+    margin-bottom: 0px !important;
+    height: 100%;
 }
-
+.answer1 svg{
+    font-size: 30px;
+}
 .radio {
     width: 5%;
     box-shadow: none;
