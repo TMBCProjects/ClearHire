@@ -31,6 +31,16 @@ const Assesment_Card = ({ info, employerId }) => {
     const diffInMs2 = currentDate - specificDate2;
     return diffInMs <= oneMonthInMs && diffInMs2 <= oneMonthInMs;
   }
+  function hasOneMonthPassedOne(date) {
+    if (date === "null") {
+      return false;
+    }
+    const specificDate = new Date(date);
+    const oneMonthInMs = 30 * 24 * 60 * 60 * 1000;
+    const currentDate = new Date();
+    const diffInMs = currentDate - specificDate;
+    return diffInMs <= oneMonthInMs;
+  }
   function findRatedAtDate(ratingsArray, desiredId) {
     if (ratingsArray !== undefined) {
       for (let i = 0; i < ratingsArray.length; i++) {
@@ -93,9 +103,10 @@ const Assesment_Card = ({ info, employerId }) => {
                 from: info,
               },
             });
-        }}
-      >
-        <img src={info?.profileImage || pic} alt="manager-logo"></img>
+        }}>
+        <img
+          src={info?.profileImage || pic}
+          alt="manager-logo"></img>
         {user === "Employer" && (
           <ProgressBar
             value={
@@ -115,8 +126,7 @@ const Assesment_Card = ({ info, employerId }) => {
                 from: info,
               },
             });
-        }}
-      >
+        }}>
         <span>
           {info.employeeName}, {calculateAge(info.dateOfBirth)}
         </span>
@@ -132,56 +142,87 @@ const Assesment_Card = ({ info, employerId }) => {
             textAlign: "center",
             color: "#66BC11",
             fontWeight: "bold",
-          }}
-        >
+          }}>
           {info.designation}
         </span>
       </div>
       <div className="cardFooter">
-        <Link
-          style={
-            hasOneMonthPassed(
-              findRatedAtDate(info?.lastRatings, employerId),
-              findAssessmentDate(info?.lastRatings, employerId)
-            )
-              ? {
-                  pointerEvents: "none",
-                }
-              : {}
-          }
-          className="w-100 mt-3 btn"
-          to={{
-            pathname: "/EmployeeAssessment",
-          }}
-          state={{ from: info }}
-        >
-          <button
-            className="allow"
+        {user === "Employer" && (
+          <Link
             style={
               hasOneMonthPassed(
                 findRatedAtDate(info?.lastRatings, employerId),
                 findAssessmentDate(info?.lastRatings, employerId)
               )
-                ? { color: "#d2dee8", backgroundColor: "#eef8ff" }
+                ? {
+                    pointerEvents: "none",
+                  }
                 : {}
             }
-          >
-            {hasOneMonthPassed(
-              findRatedAtDate(info?.lastRatings, employerId),
-              findAssessmentDate(info?.lastRatings, employerId)
-            )
-              ? "Assessment Done"
-              : "Assess Employee"}
-          </button>
-        </Link>
+            className="w-100 mt-3 btn"
+            to={{
+              pathname: "/EmployeeAssessment",
+            }}
+            state={{ from: info }}>
+            <button
+              className="allow"
+              style={
+                hasOneMonthPassed(
+                  findRatedAtDate(info?.lastRatings, employerId),
+                  findAssessmentDate(info?.lastRatings, employerId)
+                )
+                  ? { color: "#d2dee8", backgroundColor: "#eef8ff" }
+                  : {}
+              }>
+              {hasOneMonthPassed(
+                findRatedAtDate(info?.lastRatings, employerId),
+                findAssessmentDate(info?.lastRatings, employerId)
+              )
+                ? "Assessment Done"
+                : "Assess Employee"}
+            </button>
+          </Link>
+        )}
+        {user === "Employee" && (
+          <Link
+            style={
+              hasOneMonthPassedOne(
+                findRatedAtDate(info?.lastRatings, employerId)
+              )
+                ? {
+                    pointerEvents: "none",
+                  }
+                : {}
+            }
+            className="w-100 mt-3 btn"
+            to={{
+              pathname: "/EmployeeAssessment",
+            }}
+            state={{ from: info }}>
+            <button
+              className="allow"
+              style={
+                hasOneMonthPassedOne(
+                  findRatedAtDate(info?.lastRatings, employerId)
+                )
+                  ? { color: "#d2dee8", backgroundColor: "#eef8ff" }
+                  : {}
+              }>
+              {hasOneMonthPassedOne(
+                findRatedAtDate(info?.lastRatings, employerId)
+              )
+                ? "Assessment Done"
+                : "Assess Employee"}
+            </button>
+          </Link>
+        )}
         {user === "Employer" && (
           <Link
             className="w-100 mt-3 btn"
             to={{
               pathname: "/ViewAssessment",
             }}
-            state={{ from: info }}
-          >
+            state={{ from: info }}>
             <button className="allow">View Assesment</button>
           </Link>
         )}
