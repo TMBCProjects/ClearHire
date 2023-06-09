@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Select, Space } from "antd";
-import { Button, Input, message } from "antd";
+import { Button, Input } from "antd";
 import { Tag, Tooltip, theme } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import "./SignupWithGoogle.css";
@@ -9,17 +9,7 @@ import InputField from "../../components/Input/InputField";
 import UploadPic from "../../components/UploadPic/UploadPic";
 import { registerGoogleLogin } from "../../DataBase/SignUp/signUp";
 import Loader from "../../components/Loader";
-// import {
-//   writeDesignation,
-//   readCompanies,
-//   writeCompany,
-//   registerUser,
-// } from "../../DataBase/SignUp/signUp";
 
-const onFinish = (values) => {};
-const onFinishFailed = (errorInfo) => {
-  message.error("Failed:", errorInfo);
-};
 
 const initialValues = {
   email: "",
