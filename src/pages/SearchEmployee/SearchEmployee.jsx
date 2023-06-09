@@ -146,7 +146,21 @@ export default function SearchEmployee() {
               ""
             )} */}
             <div className="result-count">
-              {employeeList?.length > 1 ? `${employeeList
+              {employeeList?.filter((item) => {
+                const { typeOfEmployment, designation, salary, location } =
+                  filters;
+                return (
+                  (typeOfEmployment === "" ||
+                    item.typeOfEmployment.toLowerCase() ===
+                    typeOfEmployment.toLowerCase()) &&
+                  (designation === "" ||
+                    item.designation.toLowerCase().includes(designation)) &&
+                  (salary === "" || +item?.salary <= +salary) &&
+                  (location === "" ||
+                    item.companyLocation.toLowerCase() ===
+                    location.toLowerCase())
+                );
+              })?.length > 1 ? `${employeeList
                 .filter((item) => {
                   const { typeOfEmployment, designation, salary, location } =
                     filters;
@@ -167,7 +181,21 @@ export default function SearchEmployee() {
           <div
             className="row2"
             style={
-              employeeList?.length === 0 ? { justifyContent: "center" } : {}
+              employeeList?.filter((item) => {
+                const { typeOfEmployment, designation, salary, location } =
+                  filters;
+                return (
+                  (typeOfEmployment === "" ||
+                    item.typeOfEmployment.toLowerCase() ===
+                    typeOfEmployment.toLowerCase()) &&
+                  (designation === "" ||
+                    item.designation.toLowerCase().includes(designation)) &&
+                  (salary === "" || +item?.salary <= +salary) &&
+                  (location === "" ||
+                    item.companyLocation.toLowerCase() ===
+                    location.toLowerCase())
+                );
+              })?.length === 0 ? { justifyContent: "center" } : {}
             }
           >
             {employeeList
