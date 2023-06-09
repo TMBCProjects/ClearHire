@@ -30,12 +30,11 @@ export default function SearchEmployee() {
   useEffect(() => {
     const fetchCollegueDetails = async () => {
       try {
-        const userDatas1 = JSON.parse(sessionStorage.getItem("userData"));
         const data = await readColleagues(
-            userDatas1.id,
-            userDatas1?.data?.currentEmployerId
+          userDatas.id,
+          userDatas?.data?.currentEmployerId
         )
-        filters.location = userDatas1?.data?.companyLocation;
+        filters.location = userDatas?.data?.companyLocation;
         return data;
       } catch (error) {
         console.log(error);
@@ -43,8 +42,7 @@ export default function SearchEmployee() {
     };
     const fetchEmployeeDetails = async () => {
       try {
-        const userDatas1 = JSON.parse(sessionStorage.getItem("userData"));
-        const data = await readEmployees(userDatas1.id);
+        const data = await readEmployees(userDatas.id);
         return data;
       } catch (error) {
         console.log(error);
@@ -59,7 +57,7 @@ export default function SearchEmployee() {
         setEmployeeList(data);
       });
     }
-  }, [user]);
+  }, [user, userDatas]);
 
   const handleInputChange = (event, field) => {
     setFilters((prevFilters) => ({
