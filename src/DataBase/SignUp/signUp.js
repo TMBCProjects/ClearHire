@@ -14,7 +14,6 @@ export async function addNewEmployee(docId, user) {
     isActive: true,
     employeeEmail: user.email,
     dateOfBirth: timestamp,
-    assessmentType: user.assessmentType,
   };
   await addDocument(Collections.employees, employee, docId);
 }
