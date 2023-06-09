@@ -31,13 +31,11 @@ export default function SearchEmployee() {
     const fetchCollegueDetails = async () => {
       try {
         const userDatas1 = JSON.parse(sessionStorage.getItem("userData"));
-        const data = []
-        if (userDatas1?.data?.currentEmployerId) {
-          await readColleagues(
+        const data = await readColleagues(
             userDatas1.id,
             userDatas1?.data?.currentEmployerId
-          )
-        }
+        )
+        filters.location = userDatas1?.data?.companyLocation;
         return data;
       } catch (error) {
         console.log(error);
