@@ -156,41 +156,6 @@ function App() {
             </>
           </>
         )}
-        {sessionStorage.getItem("LoggedIn") === "Employee" ? (
-          <div style={{ backgroundColor: "#F5F7F9", height: "100vh" }}>
-            <Navbar />
-            <Routes>
-              <Route
-                path="/profile"
-                element={<Profile />}></Route>
-              <Route
-                path="/employeeOfferLetter"
-                element={<EmployeeOfferLetter />}></Route>
-              <Route
-                path="/offerLetters"
-                element={<Offers />}></Route>
-              <Route
-                path="/"
-                element={<SearchEmployee />}></Route>
-              <Route
-                path="/EmployeeAssessment"
-                element={<EmployeeAssessment />}></Route>
-              <Route
-                path="/employee-details"
-                element={<EmployeeDetails />}></Route>
-              <Route
-                path="/verification-request"
-                element={<VerficationRequest />}></Route>
-              <Route
-                path="/Assessment"
-                element={<Assessment />}></Route>
-            </Routes>
-          </div>
-        ) : (
-          ""
-        )}
-
-
       </Router>
       <Footer />
     </div>

@@ -74,7 +74,8 @@ export default function EmployeeAssesmentForm() {
                         onOk={() => setModalOpen(false)}
                         onCancel={() => setModalOpen(false)}
                         width={600}
-                    >{questions
+                    >{questions.length === 0 && <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="No Assessments" />}
+                        {questions
                         .sort((a, b) => { return new Date(a.ratedAt) - new Date(b.ratedAt) })
                             ?.map((e) => {
                                 return (<div key={e.id} style={{ display: "flex" }}><p style={{ fontSize: "30px" }}>{e.title} - {e.ratedAtDate} -{" "}
