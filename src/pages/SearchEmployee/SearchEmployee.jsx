@@ -31,11 +31,12 @@ export default function SearchEmployee() {
     const fetchCollegueDetails = async () => {
       try {
         const userDatas1 = JSON.parse(sessionStorage.getItem("userData"));
-        const data = await readColleagues(
-          userDatas1.id,
-          userDatas1?.data?.currentEmployerId
-        )
-        filters.location = userDatas1?.data?.companyLocation;
+        const data = userDatas1?.data?.currentEmployerId
+          ? await readColleagues(
+            userDatas1.id,
+            userDatas1?.data?.currentEmployerId
+          )
+          : [];
         return data;
       } catch (error) {
         console.log(error);
@@ -52,12 +53,10 @@ export default function SearchEmployee() {
     };
     if (user === "Employer") {
       fetchEmployeeDetails().then((data) => {
-        console.log(data)
         setEmployeeList(data);
       });
     } else {
       fetchCollegueDetails().then((data) => {
-        console.log(data)
         setEmployeeList(data);
       });
     }
@@ -202,7 +201,7 @@ export default function SearchEmployee() {
               />
             )}
             {employeeList
-              ?.filter((item) => {
+              .filter((item) => {
                 const { typeOfEmployment, designation, salary, location } =
                   filters;
                 return (
@@ -217,7 +216,7 @@ export default function SearchEmployee() {
                     location.toLowerCase())
                 );
               })
-              ?.map((info) => {
+              .map((info) => {
                 return (
                   <AssesmentCard
                     info={info}
