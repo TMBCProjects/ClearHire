@@ -15,6 +15,7 @@ import { arrayUnion, query, where } from "firebase/firestore";
 import Request from "../../Modals/DB/Request";
 import Assessment from "../../Modals/DB/Assessment";
 import sendEmail from "../../utils/Email";
+import Verification from "../../Modals/DB/Verification";
 
 export default async function defaultFn() {}
 
@@ -236,7 +237,6 @@ export default async function defaultFn() {}
 // }
 
 // fetch the employer details
-;
 export async function readUnemployed() {
   try {
     let employees = [];
@@ -593,7 +593,7 @@ export async function rateEmployee(ratingData) {
         {
           lastRatings: arrayUnion({
             ratedById: ratingData.ratedById,
-            ratedAtDate: ratingData.time
+            ratedAtDate: ratingData.time,
           }),
         },
         ratingData.employeeId
@@ -729,7 +729,27 @@ export async function sendRequestToViewAssesment(data) {
   return await addDocument(Collections.requests, newRequest);
 }
 
-
+export async function sendVerificationRequest(data) {
+  let newVerfication = new Verification();
+  newVerfication = {
+    isActive: false,
+    isVerified: false,
+    referenceNumber: data.referenceNumber,
+    employeeFirstName: data.employeeFirstName,
+    employeeLastName: data.employeeLastName,
+    datesEmployedFrom: data.datesEmployedFrom,
+    datesEmployedTo: data.datesEmployedTo,
+    employeeDesignation: data.employeeDesignation,
+    reasonForLeaving: data.reasonForLeaving,
+    employeeCompanyLocation: data.employeeCompanyLocation,
+    typeOfEmployment: data.typeOfEmployment,
+    questions: data.questions,
+    verifiedByName: data.verifiedByName,
+    verifiedByDesignation: data.verifiedByDesignation,
+    verifiedByDepartment: data.verifiedByDepartment,
+  };
+  return await addDocument(Collections.verfications, newVerfication);
+}
 
 
 // export async function switchTask(id, oldTeammate, newTeammate, data) {
