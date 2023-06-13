@@ -16,7 +16,6 @@ export default class Verification {
   questions = [];
   verificationByEmail = "";
   verificationByName = "";
-  verificationByName = "";
   verificationByDesignation = "";
   verificationByDepartment = "";
   changes = {};
