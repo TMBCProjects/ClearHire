@@ -380,9 +380,10 @@ export async function readVerifications(employerId) {
     let employees = [];
     const querySnapshot = await getDocuments(
       query(
-        setCollection(Collections.employees),
-        where(Fields.currentEmployerId, "==", employerId),
-        where(Fields.isActive, "==", true)
+        setCollection(Collections.verfications),
+        where(Fields.verificationByEmail, "==", employerId),
+        where(Fields.isActive, "==", true),
+        where(Fields.isVerified, "==", false)
       )
     );
     const promises = [];
