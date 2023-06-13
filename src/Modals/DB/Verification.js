@@ -12,8 +12,10 @@ export default class Verification {
   employeeCompanyLocation = "";
   typeOfEmployment = "";
   questions = [];
-  verifiedByName = "";
-  verifiedByDesignation = "";
-  verifiedByDepartment = "";
+  verificationByEmail = "";
+  verificationByName = "";
+  verificationByName = "";
+  verificationByDesignation = "";
+  verificationByDepartment = "";
   changes = {};
 }
