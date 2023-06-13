@@ -57,6 +57,7 @@ export async function readColleagues(employeeId, employerId) {
           promises.push(promise);
         }
     });
+    await Promise.all(promises);
     return employees;
   } catch (error) {
     console.log(error);
