@@ -326,6 +326,7 @@ export async function readEmployee(id) {
     return {};
   }
 }
+
 export async function readEmployees(employerId) {
   try {
     let employees = [];

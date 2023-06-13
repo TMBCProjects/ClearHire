@@ -4,6 +4,7 @@ export default class Verification {
   referenceNumber = "";
   employeeFirstName = "";
   employeeLastName = "";
+  employeeEmail = "";
   datesEmployedFrom = "";
   datesEmployedTo = "";
   employeeDesignation = "";
@@ -11,8 +12,8 @@ export default class Verification {
   employeeCompanyLocation = "";
   typeOfEmployment = "";
   questions = [];
-  changes = {};
   verifiedByName = "";
   verifiedByDesignation = "";
   verifiedByDepartment = "";
+  changes = {};
 }
