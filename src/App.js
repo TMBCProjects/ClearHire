@@ -91,7 +91,6 @@ function App() {
                   <Route
                     path="/ViewEmployeeProfile"
                     element={<ViewEmployeeProfile />}></Route>
-
                   <Route
                     path="/Assessment-form"
                     element={<EmployeeAssessmentForm />}></Route>
@@ -125,9 +124,7 @@ function App() {
               <Route
                 path="/signup-done"
                 element={<SignupDone />}></Route>
-              <Route
-                path="/Profile"
-                element={<Profile />}></Route>
+
             </Routes>
           </>
         )}

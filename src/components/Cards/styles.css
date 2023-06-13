@@ -19,7 +19,27 @@
     height: 60px;
     border-radius: 80px;
     object-fit: cover;
+    margin-bottom: 1rem;
+    transition: opacity 4s;
+    animation: fade 6s ease-in;
+}
 
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.4;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 .assess-card .headDesc {
