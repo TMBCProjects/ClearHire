@@ -375,51 +375,88 @@ export async function readEmployees(employerId) {
     console.log(error);
   }
 }
-export async function readVerifications(employerId) {
+export async function readNotVerifications(employerEmail) {
   try {
-    let employees = [];
+    let verfications = [];
     const querySnapshot = await getDocuments(
       query(
         setCollection(Collections.verfications),
-        where(Fields.verificationByEmail, "==", employerId),
+        where(Fields.verificationByEmail, "==", employerEmail),
         where(Fields.isActive, "==", true),
         where(Fields.isVerified, "==", false)
       )
     );
-    const promises = [];
     querySnapshot.forEach(async (doc) => {
-      const promise = readEmployeeRatings(doc.id).then((ratings) => {
-        let employee = {
-          id: doc.id,
-          isActive: doc.data().isActive,
-          lastRatings: doc.data().lastRatings,
-          ratings: ratings,
-          employeeName: doc.data().employeeName,
-          employeeEmail: doc.data().employeeEmail,
-          profileImage: doc.data().profileImage,
-          dateOfBirth: doc.data().dateOfBirth,
-          role: doc.data().role,
-          currentEmployerId: doc.data().currentEmployerId,
-          employerIdList: doc.data().employerIdList,
-          designation: doc.data().designation,
-          salary: doc.data().salary,
-          companyName: doc.data().companyName,
-          companyLogo: doc.data().companyLogo,
-          companyLocation: doc.data().companyLocation,
-          typeOfEmployment: doc.data().typeOfEmployment,
-          offerLetter: doc.data().offerLetter,
-          dateOfJoining: doc.data().dateOfJoining,
-          employeeAadhaarCardNumber: doc.data().employeeAadhaarCardNumber,
-          portfolioLink: doc.data().portfolioLink,
-          resume: doc.data().resume,
-          skills: doc.data().skills,
-        };
-        employees.push(employee);
-      });
-      promises.push(promise);
+      let verfication = {
+        id: doc.id,
+        isActive: doc.data().isActive,
+        lastRatings: doc.data().lastRatings,
+        employeeName: doc.data().employeeName,
+        employeeEmail: doc.data().employeeEmail,
+        profileImage: doc.data().profileImage,
+        dateOfBirth: doc.data().dateOfBirth,
+        role: doc.data().role,
+        currentEmployerId: doc.data().currentEmployerId,
+        employerIdList: doc.data().employerIdList,
+        designation: doc.data().designation,
+        salary: doc.data().salary,
+        companyName: doc.data().companyName,
+        companyLogo: doc.data().companyLogo,
+        companyLocation: doc.data().companyLocation,
+        typeOfEmployment: doc.data().typeOfEmployment,
+        offerLetter: doc.data().offerLetter,
+        dateOfJoining: doc.data().dateOfJoining,
+        employeeAadhaarCardNumber: doc.data().employeeAadhaarCardNumber,
+        portfolioLink: doc.data().portfolioLink,
+        resume: doc.data().resume,
+        skills: doc.data().skills,
+      };
+      verfications.push(verfication);
     });
-    await Promise.all(promises);
-    return employees;
+    return verfications;
+  } catch (error) {
+    console.log(error);
+  }
+}
+export async function readVerifiedVerifications(employerId) {
+  try {
+    let verfications = [];
+    const querySnapshot = await getDocuments(
+      query(
+        setCollection(Collections.verfications),
+        where(Fields.employerId, "==", employerId),
+        where(Fields.isActive, "==", true),
+        where(Fields.isVerified, "==", true)
+      )
+    );
+    querySnapshot.forEach(async (doc) => {
+      let verfication = {
+        id: doc.id,
+        isActive: doc.data().isActive,
+        lastRatings: doc.data().lastRatings,
+        employeeName: doc.data().employeeName,
+        employeeEmail: doc.data().employeeEmail,
+        profileImage: doc.data().profileImage,
+        dateOfBirth: doc.data().dateOfBirth,
+        role: doc.data().role,
+        currentEmployerId: doc.data().currentEmployerId,
+        employerIdList: doc.data().employerIdList,
+        designation: doc.data().designation,
+        salary: doc.data().salary,
+        companyName: doc.data().companyName,
+        companyLogo: doc.data().companyLogo,
+        companyLocation: doc.data().companyLocation,
+        typeOfEmployment: doc.data().typeOfEmployment,
+        offerLetter: doc.data().offerLetter,
+        dateOfJoining: doc.data().dateOfJoining,
+        employeeAadhaarCardNumber: doc.data().employeeAadhaarCardNumber,
+        portfolioLink: doc.data().portfolioLink,
+        resume: doc.data().resume,
+        skills: doc.data().skills,
+      };
+      verfications.push(verfication);
+    });
+    return verfications;
   } catch (error) {
     console.log(error);
   }

@@ -1,6 +1,8 @@
 export default class Verification {
   isActive = false;
   isVerified = false;
+  employerEmail = "";
+  employerId = "";
   referenceNumber = "";
   employeeFirstName = "";
   employeeLastName = "";
