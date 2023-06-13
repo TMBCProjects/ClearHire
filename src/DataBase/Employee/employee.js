@@ -11,7 +11,7 @@ import {
 } from "../../utils/FirebaseUtils";
 import Rating from "../../Modals/DB/Rating";
 
-export default async function defaultFn() {}
+export default async function defaultFn() { }
 
 export async function readColleagues(employeeId, employerId) {
   try {
@@ -294,7 +294,7 @@ export async function rateCollegue(ratingData) {
     teamPlayer: ratingData.teamPlayer,
     note: ratingData.note,
   };
-  
+
   const employeeRef = setDocument(Collections.employees, ratingData.employeeId);
   const employeeSnapshot = await getDocument(employeeRef);
   if (employeeSnapshot.exists()) {
