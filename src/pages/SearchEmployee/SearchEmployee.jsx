@@ -76,12 +76,7 @@ export default function SearchEmployee() {
     const fetchCollegueDetails = async () => {
       try {
         const userDatas1 = JSON.parse(sessionStorage.getItem("userData"));
-        const data = userDatas1?.data?.currentEmployerId
-          ? await readColleagues(
-              userDatas1.id,
-              userDatas1?.data?.currentEmployerId
-            )
-          : [];
+        const data = await readColleagues(userDatas1.id, userDatas1.data.currentEmployerId);
         return data;
       } catch (error) {
         console.log(error);
@@ -133,7 +128,7 @@ export default function SearchEmployee() {
             placeholder="Job Title / Designation"
           />
         </div>
-        {user === "Employer" ? (
+        {user === "Employer" && (
           <div className="input-box2 input-box">
             <img src={location} alt="Search" />
             <Select
@@ -142,16 +137,14 @@ export default function SearchEmployee() {
               }}
               className="box-select"
               placeholder="Location"
-              options={[{ value: "clear", label: "All" }].concat(
-                userDatas.data.companyLocations.map((option) => ({
+              options={[{ value: "", label: "" }].concat(
+                userDatas?.data?.companyLocations.map((option) => ({
                   value: option,
                   label: option,
                 }))
               )}
             />
           </div>
-        ) : (
-          ""
         )}
         <div className="input-box3 input-box">
           <img src={job} alt="Search" />
@@ -172,7 +165,7 @@ export default function SearchEmployee() {
             ]}
           />
         </div>
-        {user === "Employer" ? (
+        {user === "Employer" && (
           <div className="input-box4 input-box ">
             <img src={salary} alt="Search" />
             <input
@@ -183,8 +176,6 @@ export default function SearchEmployee() {
               onChange={(e) => handleFilters(e, e.target.name)}
             />
           </div>
-        ) : (
-          ""
         )}
       </div>
       <div className="search-results">
@@ -228,12 +219,26 @@ export default function SearchEmployee() {
           <div
             className="row2"
             style={
-              employeeList?.length === 0 ? { justifyContent: "center" } : {}
+              employeeList?.filter((item) => {
+                const { typeOfEmployment, designation, salary, location } =
+                  filters;
+                return (
+                  (typeOfEmployment === "" ||
+                    item.typeOfEmployment.toLowerCase() ===
+                    typeOfEmployment.toLowerCase()) &&
+                  (designation === "" ||
+                    item.designation.toLowerCase().includes(designation)) &&
+                  (salary === "" || +item?.salary <= +salary) &&
+                  (location === "" ||
+                    item.companyLocation.toLowerCase() ===
+                    location.toLowerCase())
+                );
+              })?.length === 0 ? { justifyContent: "center" } : {}
             }
           >
             {employeeList.length === 0 && !isColleguesLoading && !isEmployeesLoading &&
             {employeeList
-              .filter((item) => {
+              ?.filter((item) => {
                 const { typeOfEmployment, designation, salary, location } =
                   filters;
                 return (
