@@ -8,14 +8,6 @@ import { Select, Empty } from "antd";
 import AssesmentCard from "../../components/Cards/AssesmentCard";
 import { readEmployees } from "../../DataBase/Employer/employer";
 import { readColleagues } from "../../DataBase/Employee/employee";
-// const onChange = (e) => {
-//   alert(`checked = ${e.target.checked}`);
-// };
-
-// const checkBoxStyles = {
-//   marginLeft: "0.5rem",
-//   fontSize: "1.1rem",
-// };
 
 export default function SearchEmployee() {
   const userDatas = JSON.parse(sessionStorage.getItem("userData"));
