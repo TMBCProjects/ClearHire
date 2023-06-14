@@ -10,6 +10,8 @@ import { useQuery } from "react-query";
 import { fetchCollegueDetails, fetchEmployeeDetails } from "./helper";
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
 import { Avatar, Card, Skeleton } from 'antd';
+import { readColleagues } from "../../DataBase/Employee/employee";
+import { readEmployees } from "../../DataBase/Employer/employer";
 const { Meta } = Card;
 
 export default function SearchEmployee() {
@@ -95,10 +97,6 @@ export default function SearchEmployee() {
       fetchEmployeeDetails().then((data) => {
         setEmployeeList(data);
       });
-    } else {
-      fetchCollegueDetails().then((data) => {
-        setEmployeeList(data);
-      });
     }
     else if (field === 'location') {
       setEmployeeList(() => {
@@ -113,6 +111,12 @@ export default function SearchEmployee() {
       })
 
     }
+    else {
+      fetchCollegueDetails().then((data) => {
+        setEmployeeList(data);
+      });
+    }
+    
   };
 
   return (
@@ -200,8 +204,8 @@ export default function SearchEmployee() {
               {!isColleguesLoading && !isEmployeesLoading && employeeList?.length + ' records'}
               {employeeList?.length > 1 ? `${employeeList
                 .filter((item) => {
-                  const { typeOfEmployment, designation, salary, location } =
-                    filters;
+                  // const { typeOfEmployment, designation, salary, location } =
+                  //   filters;
                   return (
                     (typeOfEmployment === "" ||
                       item.typeOfEmployment.toLowerCase() ===
@@ -220,8 +224,8 @@ export default function SearchEmployee() {
             className="row2"
             style={
               employeeList?.filter((item) => {
-                const { typeOfEmployment, designation, salary, location } =
-                  filters;
+                // const { typeOfEmployment, designation, salary, location } =
+                //   filters;
                 return (
                   (typeOfEmployment === "" ||
                     item.typeOfEmployment.toLowerCase() ===
@@ -236,11 +240,11 @@ export default function SearchEmployee() {
               })?.length === 0 ? { justifyContent: "center" } : {}
             }
           >
-            {employeeList.length === 0 && !isColleguesLoading && !isEmployeesLoading &&
+            {employeeList.length === 0 && !isColleguesLoading && !isEmployeesLoading}
             {employeeList
               ?.filter((item) => {
-                const { typeOfEmployment, designation, salary, location } =
-                  filters;
+                // const { typeOfEmployment, designation, salary, location } =
+                //   filters;
                 return (
                   (typeOfEmployment === "" ||
                     item.typeOfEmployment.toLowerCase() ===
@@ -257,7 +261,7 @@ export default function SearchEmployee() {
                 image={Empty.PRESENTED_IMAGE_SIMPLE}
                 description="No Records"
               />
-            }
+            )}
             {
               isColleguesLoading || isEmployeesLoading ?
                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(() => {
@@ -289,4 +293,5 @@ export default function SearchEmployee() {
       </div>
     </div>
   );
+}
 }
