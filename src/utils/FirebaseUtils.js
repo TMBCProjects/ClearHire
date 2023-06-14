@@ -3,6 +3,7 @@ import {
   EmailAuthProvider,
   fetchSignInMethodsForEmail,
   reauthenticateWithCredential,
+  sendEmailVerification,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut,
@@ -115,7 +116,13 @@ export function updateUser(user) {
 export function signIn(email, password) {
   return signInWithEmailAndPassword(auth, email, password);
 }
-
+export function verifyEmailId() {
+  try {
+    sendEmailVerification(auth);
+  } catch (error) {
+    console.error(error);
+  }
+}
 export function resetPassword(email) {
   try {
     sendPasswordResetEmail(auth, email)

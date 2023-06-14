@@ -1,4 +1,4 @@
-import { message } from "antd";
+import { Modal, message } from "antd";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginUser, {
@@ -12,6 +12,7 @@ import Loader from "../Loader";
 import { GoogleOutlined } from "@ant-design/icons";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../../firebase-config";
+import { verifyEmailId } from "../../utils/FirebaseUtils";
 const initialValues = {
   email: "",
   password: "",
@@ -20,6 +21,9 @@ const Login = () => {
   const [values, setValues] = useState(initialValues);
   const [messageApi, contextHolder] = message.useMessage();
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false);
+  const [modalText, setModalText] = useState('Do you want a new Email Verification Link to be sent to your registered mailId?');
   const navigate = useNavigate();
 
   const handleLoginWithGoogle = () => {
@@ -76,6 +80,12 @@ const Login = () => {
       content: "Login failed. Invalid email or password.",
     });
   };
+  const errorNotVerified = (err) => {
+    messageApi.open({
+      type: "error",
+      content: "Your Email Id is not verified."
+    });
+  };
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setValues({
@@ -88,6 +98,7 @@ const Login = () => {
     try {
       setLoading(true);
       let user = await LoginUser(values.email, values.password);
+      if (user.emailVerified) {
       if (user.photoURL === "Employer") {
         sessionStorage.setItem("LoggedIn", "Employer");
         const myObj = await readEmployer(user.uid);
@@ -109,10 +120,30 @@ const Login = () => {
         }, 1000);
         navigate("/");
       }
+      } else {
+        setLoading(false);
+        errorNotVerified();
+        showModal()
+      }
     } catch (err) {
       setLoading(false);
       error(err.message);
     }
+  };
+  const showModal = () => {
+    setOpen(true);
+  };
+  const handleOk = () => {
+    setModalText('Email Verification Link is sent to your mail Id.');
+    verifyEmailId()
+    setConfirmLoading(true);
+    setTimeout(() => {
+      setOpen(false);
+      setConfirmLoading(false);
+    }, 5000);
+  };
+  const handleCancel = () => {
+    setOpen(false);
   };
   return (
     <>
@@ -128,6 +159,15 @@ const Login = () => {
         id="login">
         {contextHolder}
         <div className="container">
+          <Modal
+            title="Email Verification"
+            open={open}
+            onOk={handleOk}
+            confirmLoading={confirmLoading}
+            onCancel={handleCancel}
+          >
+            <p>{modalText}</p>
+          </Modal>
           <div className="row d-flex justify-content-center align-items-center">
             <div className="col-lg-5 col-12">
               <h1 className="heading  text-white fw-bold">
@@ -187,6 +227,8 @@ const Login = () => {
                       className="btn login-btn">
                       Login
                     </button>
+                  </div>
+                  <div className="mb-3">
                   </div>
                   <div className="mb-3">
                     <p>

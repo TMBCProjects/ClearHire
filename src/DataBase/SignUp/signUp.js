@@ -43,6 +43,7 @@ export async function registerUser(doc, user) {
 
 export async function registerLogin(user) {
   const cred = await createUser(user);
+  cred.sendEmailVerification();
   updateUser(user);
   await registerUser(cred.user.uid, user);
 }
