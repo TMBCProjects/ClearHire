@@ -6,13 +6,16 @@ import job from "../../assets/images/job.svg";
 import salary from "../../assets/images/salary.svg";
 import { Select, Empty } from "antd";
 import AssesmentCard from "../../components/Cards/AssesmentCard";
-import { useQuery } from "react-query";
-import { fetchCollegueDetails, fetchEmployeeDetails } from "./helper";
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
-import { Avatar, Card, Skeleton } from 'antd';
-import { readColleagues } from "../../DataBase/Employee/employee";
 import { readEmployees } from "../../DataBase/Employer/employer";
-const { Meta } = Card;
+import { readColleagues } from "../../DataBase/Employee/employee";
+// const onChange = (e) => {
+//   alert(`checked = ${e.target.checked}`);
+// };
+
+// const checkBoxStyles = {
+//   marginLeft: "0.5rem",
+//   fontSize: "1.1rem",
+// };
 
 export default function SearchEmployee() {
   const userDatas = JSON.parse(sessionStorage.getItem("userData"));
@@ -47,8 +50,7 @@ export default function SearchEmployee() {
       fetchEmployeeDetails().then((data) => {
         setEmployeeList(data);
       });
-    }
-    else {
+    } else {
       fetchCollegueDetails().then((data) => {
         setEmployeeList(data);
       });
@@ -160,8 +162,8 @@ export default function SearchEmployee() {
                 );
               })?.length > 1 ? `${employeeList
                 .filter((item) => {
-                  // const { typeOfEmployment, designation, salary, location } =
-                  //   filters;
+                  const { typeOfEmployment, designation, salary, location } =
+                    filters;
                   return (
                     (typeOfEmployment === "" ||
                       item.typeOfEmployment.toLowerCase() ===
@@ -180,8 +182,8 @@ export default function SearchEmployee() {
             className="row2"
             style={
               employeeList?.filter((item) => {
-                // const { typeOfEmployment, designation, salary, location } =
-                //   filters;
+                const { typeOfEmployment, designation, salary, location } =
+                  filters;
                 return (
                   (typeOfEmployment === "" ||
                     item.typeOfEmployment.toLowerCase() ===
@@ -196,11 +198,10 @@ export default function SearchEmployee() {
               })?.length === 0 ? { justifyContent: "center" } : {}
             }
           >
-            {employeeList.length === 0 && !isColleguesLoading && !isEmployeesLoading}
             {employeeList
               ?.filter((item) => {
-                // const { typeOfEmployment, designation, salary, location } =
-                //   filters;
+                const { typeOfEmployment, designation, salary, location } =
+                  filters;
                 return (
                   (typeOfEmployment === "" ||
                     item.typeOfEmployment.toLowerCase() ===
@@ -218,32 +219,33 @@ export default function SearchEmployee() {
                   description="No Records"
                 />
               )}
-            {
-              isColleguesLoading || isEmployeesLoading ?
-                [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(() => {
-                  return (
-                    <Card
-                      className="assess-card"
-                    >
-                      <Skeleton loading={true} avatar active>
-                      </Skeleton>
-                    </Card>
-                  )
-                })
-                :
-                employeeList
-                  ?.map((info) => {
-                    return (
-                      <AssesmentCard
-                        info={info}
-                        employerId={userDatas.id}
-                        name={info.employeeName}
-                        companyLocation={info.companyLocation}
-                        designation={info.designation}
-                      />
-                    );
-                  })
-            }
+            {employeeList
+              ?.filter((item) => {
+                const { typeOfEmployment, designation, salary, location } =
+                  filters;
+                return (
+                  (typeOfEmployment === "" ||
+                    item.typeOfEmployment.toLowerCase() ===
+                    typeOfEmployment.toLowerCase()) &&
+                  (designation === "" ||
+                    item.designation.toLowerCase().includes(designation)) &&
+                  (salary === "" || +item?.salary <= +salary) &&
+                  (location === "" ||
+                    item.companyLocation.toLowerCase() ===
+                    location.toLowerCase())
+                );
+              })
+              ?.map((info) => {
+                return (
+                  <AssesmentCard
+                    info={info}
+                    employerId={userDatas?.id}
+                    name={info.employeeName}
+                    companyLocation={info.companyLocation}
+                    designation={info.designation}
+                  />
+                );
+              })}
           </div>
         </div>
       </div>
