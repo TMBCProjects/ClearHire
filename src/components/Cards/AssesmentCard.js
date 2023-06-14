@@ -34,6 +34,56 @@ const Assesment_Card = ({ info, employerId }) => {
     const diffInMs2 = currentDate - specificDate2;
     return diffInMs <= oneMonthInMs && diffInMs2 <= oneMonthInMs;
   }
+  function hasThreeMonthsPassed(date, date2) {
+    if (date === "null" || date2 === "null") {
+      return false;
+    }
+    const specificDate = new Date(date);
+    const specificDate2 = new Date(date2);
+    const threeMonthsInMs = 3 * 30 * 24 * 60 * 60 * 1000; // Assuming three months have 90 days
+    const currentDate = new Date();
+    const diffInMs = currentDate - specificDate;
+    const diffInMs2 = currentDate - specificDate2;
+    return diffInMs <= threeMonthsInMs && diffInMs2 <= threeMonthsInMs;
+  }
+  function hasSixMonthsPassed(date, date2) {
+    if (date === "null" || date2 === "null") {
+      return false;
+    }
+    const specificDate = new Date(date);
+    const specificDate2 = new Date(date2);
+    const sixMonthsInMs = 6 * 30 * 24 * 60 * 60 * 1000; // Assuming six months have 180 days
+    const currentDate = new Date();
+    const diffInMs = currentDate - specificDate;
+    const diffInMs2 = currentDate - specificDate2;
+    return diffInMs <= sixMonthsInMs && diffInMs2 <= sixMonthsInMs;
+  }
+  function hasOneYearPassed(date, date2) {
+    if (date === "null" || date2 === "null") {
+      return false;
+    }
+    const specificDate = new Date(date);
+    const specificDate2 = new Date(date2);
+    const oneYearInMs = 365 * 24 * 60 * 60 * 1000; // Assuming a year has 365 days
+    const currentDate = new Date();
+    const diffInMs = currentDate - specificDate;
+    const diffInMs2 = currentDate - specificDate2;
+    return diffInMs <= oneYearInMs && diffInMs2 <= oneYearInMs;
+  }
+
+  function duration(date1, date2) {
+    const type = userDatas.data.assessmentType;
+    if (type === "Monthly") {
+      return hasOneMonthPassed(date1, date2);
+    } else if (type === "Once in 3 months") {
+      return hasThreeMonthsPassed(date1, date2);
+    } else if (type === "Twice a year") {
+      return hasSixMonthsPassed(date1, date2);
+    } else if (type === "Annualy") {
+      return hasOneYearPassed(date1, date2);
+    }
+  }
+
   function hasOneMonthPassedOne(date) {
     if (date === "null") {
       return false;
@@ -107,14 +157,18 @@ const Assesment_Card = ({ info, employerId }) => {
               },
             });
         }}>
-        {
-          !isImageLoaded && <Avatar style={{ marginBottom: "1rem" }} size={64} icon={<UserOutlined />} />
-        }
+        {!isImageLoaded && (
+          <Avatar
+            style={{ marginBottom: "1rem" }}
+            size={64}
+            icon={<UserOutlined />}
+          />
+        )}
         <img
           src={info?.profileImage || pic}
-          alt="manager-logo" loading="lazy"
-          onLoad={() => setIsImageLoaded(true)}
-        ></img>
+          alt="manager-logo"
+          loading="lazy"
+          onLoad={() => setIsImageLoaded(true)}></img>
         {user === "Employer" && (
           <ProgressBar
             value={
@@ -158,7 +212,7 @@ const Assesment_Card = ({ info, employerId }) => {
         {user === "Employer" && (
           <Link
             style={
-              hasOneMonthPassed(
+              duration(
                 findRatedAtDate(info?.lastRatings, employerId),
                 findAssessmentDate(info?.lastRatings, employerId)
               )
@@ -175,14 +229,14 @@ const Assesment_Card = ({ info, employerId }) => {
             <button
               className="allow"
               style={
-                hasOneMonthPassed(
+                duration(
                   findRatedAtDate(info?.lastRatings, employerId),
                   findAssessmentDate(info?.lastRatings, employerId)
                 )
                   ? { color: "#d2dee8", backgroundColor: "#eef8ff" }
                   : {}
               }>
-              {hasOneMonthPassed(
+              {duration(
                 findRatedAtDate(info?.lastRatings, employerId),
                 findAssessmentDate(info?.lastRatings, employerId)
               )
