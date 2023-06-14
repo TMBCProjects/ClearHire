@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 //import image from "../../assets/images/Image.png"
 import pic from "../../assets/images/pic.png";
 import ProgressBar from "../ProgressBar";
 import "./styles.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { Avatar } from "antd";
+import { UserOutlined } from "@ant-design/icons";
 const Assesment_Card = ({ info, employerId }) => {
   const userDatas = JSON.parse(sessionStorage.getItem("userData"));
   const user = sessionStorage.getItem("LoggedIn");
   const navigate = useNavigate();
+  const [isImageLoaded, setIsImageLoaded] = useState(false)
   const calculateAge = (dob) => {
     const today = new Date();
     const birthDate = new Date(dob.seconds * 1000);
@@ -104,9 +107,14 @@ const Assesment_Card = ({ info, employerId }) => {
               },
             });
         }}>
+        {
+          !isImageLoaded && <Avatar style={{ marginBottom: "1rem" }} size={64} icon={<UserOutlined />} />
+        }
         <img
           src={info?.profileImage || pic}
-          alt="manager-logo"></img>
+          alt="manager-logo" loading="lazy"
+          onLoad={() => setIsImageLoaded(true)}
+        ></img>
         {user === "Employer" && (
           <ProgressBar
             value={
