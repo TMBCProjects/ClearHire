@@ -8,9 +8,7 @@ import { Select, Empty } from "antd";
 import AssesmentCard from "../../components/Cards/AssesmentCard";
 import { useQuery } from "react-query";
 import { fetchCollegueDetails, fetchEmployeeDetails } from "./helper";
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
-import { Avatar, Card, Skeleton } from 'antd';
-const { Meta } = Card;
+import { Card, Skeleton } from 'antd';
 
 export default function SearchEmployee() {
   const userDatas = JSON.parse(sessionStorage.getItem("userData"));
@@ -73,37 +71,6 @@ export default function SearchEmployee() {
         }
 
       })
-    const fetchCollegueDetails = async () => {
-      try {
-        const userDatas1 = JSON.parse(sessionStorage.getItem("userData"));
-        const data = userDatas1?.data?.currentEmployerId
-          ? await readColleagues(
-              userDatas1.id,
-              userDatas1?.data?.currentEmployerId
-            )
-          : [];
-        return data;
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    const fetchEmployeeDetails = async () => {
-      try {
-        const userDatas1 = JSON.parse(sessionStorage.getItem("userData"));
-        const data = await readEmployees(userDatas1.id);
-        return data;
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    if (user === "Employer") {
-      fetchEmployeeDetails().then((data) => {
-        setEmployeeList(data);
-      });
-    } else {
-      fetchCollegueDetails().then((data) => {
-        setEmployeeList(data);
-      });
     }
     else if (field === 'location') {
       setEmployeeList(() => {
@@ -207,22 +174,7 @@ export default function SearchEmployee() {
             )} */}
             <div className="result-count">
               {!isColleguesLoading && !isEmployeesLoading && employeeList?.length + ' records'}
-              {employeeList?.length > 1 ? `${employeeList
-                .filter((item) => {
-                  const { typeOfEmployment, designation, salary, location } =
-                    filters;
-                  return (
-                    (typeOfEmployment === "" ||
-                      item.typeOfEmployment.toLowerCase() ===
-                      typeOfEmployment.toLowerCase()) &&
-                    (designation === "" ||
-                      item.designation.toLowerCase().includes(designation)) &&
-                    (salary === "" || +item?.salary <= +salary) &&
-                    (location === "" ||
-                      item.companyLocation.toLowerCase() ===
-                      location.toLowerCase())
-                  );
-                }).length} records` : ""}
+
             </div>
           </div>
           <div
@@ -232,22 +184,7 @@ export default function SearchEmployee() {
             }
           >
             {employeeList.length === 0 && !isColleguesLoading && !isEmployeesLoading &&
-            {employeeList
-              .filter((item) => {
-                const { typeOfEmployment, designation, salary, location } =
-                  filters;
-                return (
-                  (typeOfEmployment === "" ||
-                    item.typeOfEmployment.toLowerCase() ===
-                    typeOfEmployment.toLowerCase()) &&
-                  (designation === "" ||
-                    item.designation.toLowerCase().includes(designation)) &&
-                  (salary === "" || +item?.salary <= +salary) &&
-                  (location === "" ||
-                    item.companyLocation.toLowerCase() ===
-                    location.toLowerCase())
-                );
-              })?.length === 0 && (
+
               <Empty
                 image={Empty.PRESENTED_IMAGE_SIMPLE}
                 description="No Records"
