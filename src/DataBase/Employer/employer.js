@@ -582,16 +582,17 @@ export async function sendVerificationRequest(data) {
   return await addDocument(Collections.verfications, newVerfication);
 }
 export async function sendVerifiedVerification(data,id) {
-  let newVerfication = new Verification();
-  newVerfication = {
-    isActive: false,
-    isVerified: true,
-    changes: data.changes,
-    verificationByName: data.verificationByName,
-    verificationByDesignation: data.verificationByDesignation,
-    verificationByDepartment: data.verificationByDepartment,
-  };
-  return await updateDocument(Collections.verfications, newVerfication,id);
+  await updateDocument(
+    Collections.verfications,
+    {
+      isVerified: true,
+      changes: data.changes,
+      verificationByName: data.verificationByName,
+      verificationByDesignation: data.verificationByDesignation,
+      verificationByDepartment: data.verificationByDepartment,
+    },
+    id
+  );
 }
 export async function writeDesignation(companyId, name) {
   let newRequest = new Request();
