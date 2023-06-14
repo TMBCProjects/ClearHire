@@ -28,6 +28,7 @@ import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import SignupWithGoogle from "./components/SignupWithGoogle/SignupWithGoogle";
 import SignUpChooseUserGoogle from "./components/SignupWithGoogle/SignUpChooseUserGoogle";
 import RecruitmentPool from "./pages/Employer/RecruitmentPool/RecruitmentPool";
+import SendResgination from "./pages/Employer/sendResignation/sendResgination";
 
 function App() {
   return (
@@ -112,6 +113,9 @@ function App() {
                   <Route
                     path="/recruitment-pool"
                     element={<RecruitmentPool />}></Route>
+                  <Route
+                    path="/send-resignation"
+                    element={<SendResgination />}></Route>
                 </Routes>
               </div>
             ) : (
