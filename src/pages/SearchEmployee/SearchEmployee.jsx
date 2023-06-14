@@ -8,11 +8,7 @@ import { Select, Empty } from "antd";
 import AssesmentCard from "../../components/Cards/AssesmentCard";
 import { useQuery } from "react-query";
 import { fetchCollegueDetails, fetchEmployeeDetails } from "./helper";
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
-import { Avatar, Card, Skeleton } from 'antd';
-import { readColleagues } from "../../DataBase/Employee/employee";
-import { readEmployees } from "../../DataBase/Employer/employer";
-const { Meta } = Card;
+import { Card, Skeleton } from 'antd';
 
 export default function SearchEmployee() {
   const userDatas = JSON.parse(sessionStorage.getItem("userData"));
@@ -75,28 +71,6 @@ export default function SearchEmployee() {
         }
 
       })
-    const fetchCollegueDetails = async () => {
-      try {
-        const userDatas1 = JSON.parse(sessionStorage.getItem("userData"));
-        const data = await readColleagues(userDatas1.id, userDatas1.data.currentEmployerId);
-        return data;
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    const fetchEmployeeDetails = async () => {
-      try {
-        const userDatas1 = JSON.parse(sessionStorage.getItem("userData"));
-        const data = await readEmployees(userDatas1.id);
-        return data;
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    if (user === "Employer") {
-      fetchEmployeeDetails().then((data) => {
-        setEmployeeList(data);
-      });
     }
     else if (field === 'location') {
       setEmployeeList(() => {
@@ -111,12 +85,6 @@ export default function SearchEmployee() {
       })
 
     }
-    else {
-      fetchCollegueDetails().then((data) => {
-        setEmployeeList(data);
-      });
-    }
-    
   };
 
   return (
@@ -132,7 +100,7 @@ export default function SearchEmployee() {
             placeholder="Job Title / Designation"
           />
         </div>
-        {user === "Employer" && (
+        {user === "Employer" ? (
           <div className="input-box2 input-box">
             <img src={location} alt="Search" />
             <Select
@@ -141,14 +109,16 @@ export default function SearchEmployee() {
               }}
               className="box-select"
               placeholder="Location"
-              options={[{ value: "", label: "" }].concat(
-                userDatas?.data?.companyLocations.map((option) => ({
+              options={[{ value: "clear", label: "All" }].concat(
+                userDatas.data.companyLocations.map((option) => ({
                   value: option,
                   label: option,
                 }))
               )}
             />
           </div>
+        ) : (
+          ""
         )}
         <div className="input-box3 input-box">
           <img src={job} alt="Search" />
@@ -169,7 +139,7 @@ export default function SearchEmployee() {
             ]}
           />
         </div>
-        {user === "Employer" && (
+        {user === "Employer" ? (
           <div className="input-box4 input-box ">
             <img src={salary} alt="Search" />
             <input
@@ -180,6 +150,8 @@ export default function SearchEmployee() {
               onChange={(e) => handleFilters(e, e.target.name)}
             />
           </div>
+        ) : (
+          ""
         )}
       </div>
       <div className="search-results">
@@ -202,66 +174,22 @@ export default function SearchEmployee() {
             )} */}
             <div className="result-count">
               {!isColleguesLoading && !isEmployeesLoading && employeeList?.length + ' records'}
-              {employeeList?.length > 1 ? `${employeeList
-                .filter((item) => {
-                  // const { typeOfEmployment, designation, salary, location } =
-                  //   filters;
-                  return (
-                    (typeOfEmployment === "" ||
-                      item.typeOfEmployment.toLowerCase() ===
-                      typeOfEmployment.toLowerCase()) &&
-                    (designation === "" ||
-                      item.designation.toLowerCase().includes(designation)) &&
-                    (salary === "" || +item?.salary <= +salary) &&
-                    (location === "" ||
-                      item.companyLocation.toLowerCase() ===
-                      location.toLowerCase())
-                  );
-                }).length} records` : ""}
+
             </div>
           </div>
           <div
             className="row2"
             style={
-              employeeList?.filter((item) => {
-                // const { typeOfEmployment, designation, salary, location } =
-                //   filters;
-                return (
-                  (typeOfEmployment === "" ||
-                    item.typeOfEmployment.toLowerCase() ===
-                    typeOfEmployment.toLowerCase()) &&
-                  (designation === "" ||
-                    item.designation.toLowerCase().includes(designation)) &&
-                  (salary === "" || +item?.salary <= +salary) &&
-                  (location === "" ||
-                    item.companyLocation.toLowerCase() ===
-                    location.toLowerCase())
-                );
-              })?.length === 0 ? { justifyContent: "center" } : {}
+              employeeList?.length === 0 ? { justifyContent: "center" } : {}
             }
           >
-            {employeeList.length === 0 && !isColleguesLoading && !isEmployeesLoading}
-            {employeeList
-              ?.filter((item) => {
-                // const { typeOfEmployment, designation, salary, location } =
-                //   filters;
-                return (
-                  (typeOfEmployment === "" ||
-                    item.typeOfEmployment.toLowerCase() ===
-                    typeOfEmployment.toLowerCase()) &&
-                  (designation === "" ||
-                    item.designation.toLowerCase().includes(designation)) &&
-                  (salary === "" || +item?.salary <= +salary) &&
-                  (location === "" ||
-                    item.companyLocation.toLowerCase() ===
-                    location.toLowerCase())
-                );
-              })?.length === 0 && (
+            {employeeList.length === 0 && !isColleguesLoading && !isEmployeesLoading &&
+
               <Empty
                 image={Empty.PRESENTED_IMAGE_SIMPLE}
                 description="No Records"
               />
-            )}
+            }
             {
               isColleguesLoading || isEmployeesLoading ?
                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(() => {
@@ -293,5 +221,4 @@ export default function SearchEmployee() {
       </div>
     </div>
   );
-}
 }
