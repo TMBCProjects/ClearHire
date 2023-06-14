@@ -133,9 +133,9 @@ const Login = () => {
   const showModal = () => {
     setOpen(true);
   };
-  const handleOk = () => {
+  const handleOk = async () => {
     setModalText('Email Verification Link is sent to your mail Id.');
-    verifyEmailId()
+    await verifyEmailId();
     setConfirmLoading(true);
     setTimeout(() => {
       setOpen(false);
