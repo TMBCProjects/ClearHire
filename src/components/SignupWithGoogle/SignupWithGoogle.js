@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Space } from "antd";
-import { Button, Input, message } from "antd";
+import { Select, Space } from "antd";
+import { Button, Input } from "antd";
 import { Tag, Tooltip, theme } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import "./SignupWithGoogle.css";
@@ -9,17 +9,7 @@ import InputField from "../../components/Input/InputField";
 import UploadPic from "../../components/UploadPic/UploadPic";
 import { registerGoogleLogin } from "../../DataBase/SignUp/signUp";
 import Loader from "../../components/Loader";
-// import {
-//   writeDesignation,
-//   readCompanies,
-//   writeCompany,
-//   registerUser,
-// } from "../../DataBase/SignUp/signUp";
 
-const onFinish = (values) => {};
-const onFinishFailed = (errorInfo) => {
-  message.error("Failed:", errorInfo);
-};
 
 const initialValues = {
   email: "",
@@ -122,6 +112,10 @@ const SignupWithGoogle = () => {
       ...values,
       dateOfBirth: newDateOfBirth,
     });
+  };
+
+  const onAssessmentTypeChange = (event) => {
+    values.assessmentType = event;
   };
 
   const handleMonthChange = (e) => {
@@ -347,11 +341,50 @@ const SignupWithGoogle = () => {
               </div>
             </>
           )}
+
+          {user === "Employer" ? (
+            <>
+              <label className="control-label">Assessment</label>
+              <div className="dropdowns">
+                <Select
+                  placeholder="Select assessment type"
+                  className="w-100 selectBoxAssessment"
+                  onChange={(e) => onAssessmentTypeChange(e)}
+                  options={[
+                    {
+                      value: "Monthly",
+                      label: "Monthly",
+                    },
+                    {
+                      value: "Once in 3 months",
+                      label: "Once in 3 months",
+                    },
+                    {
+                      value: "Twice a year",
+                      label: "Twice a year",
+                    },
+                    {
+                      value: "Annualy",
+                      label: "Annualy",
+                    },
+                  ]}
+                />
+              </div>
+            </>
+          ) : (
+            <></>
+          )}
           <Button
             className="signupBtn"
             onClick={handleSubmit}>
             Signup
           </Button>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
         </form>
       </div>
     </>

@@ -352,7 +352,8 @@ export default function Signup() {
               </div>
             </>
           )}
-          <label className="control-label">Assessment</label>
+
+          {user === "Employer" ? (<><label className="control-label">Assessment</label>
           <div className="dropdowns">
             <Select
               placeholder="Select assessment type"
@@ -377,10 +378,10 @@ export default function Signup() {
                 },
               ]}
             />
-          </div>
+            </div></>) : (<></>)}
           <Button className="signupBtn" onClick={handleSubmit}>
             Signup
-          </Button>
+          </Button><br /><br /><br /><br /><br /><br />
         </form>
       </div>
     </>
