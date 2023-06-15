@@ -137,6 +137,9 @@ export default function SearchEmployee() {
             ) : (
               ""
             )} */}
+            {/* <div className="result-count">
+              {employeeList?.length > 1 ? `${employeeList.length} records` : ""}
+            </div> */}
             <div className="result-count">
               {employeeList?.filter((item) => {
                 const { typeOfEmployment, designation, salary, location } =
@@ -190,6 +193,12 @@ export default function SearchEmployee() {
               })?.length === 0 ? { justifyContent: "center" } : {}
             }
           >
+            {employeeList?.length === 0 && (
+              <Empty
+                image={Empty.PRESENTED_IMAGE_SIMPLE}
+                description="No Records"
+              />
+            )}
             {employeeList
               ?.filter((item) => {
                 const { typeOfEmployment, designation, salary, location } =
@@ -218,13 +227,13 @@ export default function SearchEmployee() {
                 return (
                   (typeOfEmployment === "" ||
                     item.typeOfEmployment.toLowerCase() ===
-                    typeOfEmployment.toLowerCase()) &&
+                      typeOfEmployment.toLowerCase()) &&
                   (designation === "" ||
                     item.designation.toLowerCase().includes(designation)) &&
                   (salary === "" || +item?.salary <= +salary) &&
                   (location === "" ||
                     item.companyLocation.toLowerCase() ===
-                    location.toLowerCase())
+                      location.toLowerCase())
                 );
               })
               ?.map((info) => {

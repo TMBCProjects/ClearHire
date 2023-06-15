@@ -1,5 +1,5 @@
 #login {
-    margin: 30px auto 0px;
+    margin: 30px auto 30px auto;
     background: var(--bg-dark);
     padding: 60px 0;
 }
@@ -14,7 +14,7 @@
 .login-form {
     border-radius: 0;
     background-color: white !important;
-    width: 625px;
+    width: 100%;
     padding: 20px;
 
 }
@@ -52,50 +52,54 @@
 
 
 .buttons {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
+
 .buttons button {
-  margin: 0.1rem 0;
-  padding: 0.9rem;
-  display: flex;
-  justify-content: center;
-  background: #ffffff 0% 0% no-repeat padding-box;
-  align-items: center;
-  box-shadow: 0px 0px 14px #00000014;
-  border: 0;
-  font-weight: bold;
-  letter-spacing: .1rem;
-  font-size: .8rem;
-  transition: .3s ease;
+    margin: 0.1rem 0;
+    padding: 0.9rem;
+    display: flex;
+    justify-content: center;
+    background: #ffffff 0% 0% no-repeat padding-box;
+    align-items: center;
+    box-shadow: 0px 0px 14px #00000014;
+    border: 0;
+    font-weight: bold;
+    letter-spacing: .1rem;
+    font-size: .8rem;
+    transition: .3s ease;
 }
-.buttons button img{
+
+.buttons button img {
     margin-right: 1.2rem;
     width: 1.6rem;
 }
-.buttons button:hover{
+
+.buttons button:hover {
     background: #69cd96 0% 0% no-repeat padding-box;
 }
+
 .divider-text {
-  text-align: center;
-  margin: 20px 0;
-  font-size: 18px;
-  color: gray;
+    text-align: center;
+    margin: 20px 0;
+    font-size: 18px;
+    color: gray;
 }
 
 .divider-line {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .divider-line hr {
-  flex-grow: 1;
-  margin: 0 10px;
-  border: none;
-  border-top: 1px solid gray;
+    flex-grow: 1;
+    margin: 0 10px;
+    border: none;
+    border-top: 1px solid gray;
 }
 
-@media(max-width: 567px){
+@media(max-width: 567px) {
     /* .divider-line {
         margin-top: 12%;
     } */

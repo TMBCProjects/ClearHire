@@ -7,41 +7,28 @@ import DateField from "../../../components/Input/DateFiled";
 import DropDownField from "../../../components/Input/DropDownField";
 import { PlusOutlined } from "@ant-design/icons";
 import { Button } from "antd";
+import Dropdown from "../../../components/Dropdrowns/Dropdown";
 
-const initialValues = {
-  referenceNumber: "",
-  employerEmail: "",
-  employerId: "",
-  requestingCompanyName: "",
-  employeeFirstName: "",
-  employeeLastName: "",
-  datesEmployedFrom: "",
-  datesEmployedTo: "",
-  employeeDesignation: "",
-  reasonForLeaving: "",
-  employeeCompanyLocation: "",
-  typeOfEmployment: "",
-  questions: "",
-  verificationByEmail: "",
-};
 const VerifyCandidate = () => {
-  const userDatas = JSON.parse(sessionStorage.getItem("userData"));
-  const [values, setValues] = useState(initialValues);
+  const [qCount, setQCount] = useState(1);
+  const [CandidateDetails, setCandidateDetails] = useState([]);
+  const ansType = ["Short Answer", "MCQ", "Select"];
+  const addques = () => {
+    setQCount(qCount + 1);
+  };
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setValues({
-      ...values,
-      [name]: value,
+    setCandidateDetails(...CandidateDetails, {
+      [e.target.name]: e.target.value,
     });
   };
-  const onTypeOfEmploymentChange = (event) => {
-    values.typeOfEmployment = event;
+  const onSubmit = () => {
+    console.log(CandidateDetails);
   };
-  const handleSubmit = () => {
-    values.employerEmail = userDatas.data.employerEmail;
-    values.employerId = userDatas.id;
-    values.requestingCompanyName = userDatas.data.companyName;
-    console.log(values);
+
+  const delques = () => {
+    if (qCount > 1) {
+      setQCount(qCount - 1);
+    }
   };
   return (
     <div
@@ -89,7 +76,7 @@ const VerifyCandidate = () => {
           label={"Reference Number"}
           type={"text"}
           name={"referenceNumber"}
-          value={values.referenceNumber}
+          // value={values.email}
           onChange={handleInputChange}
           placeholder={"Enter candidate's reference number"}
         />
@@ -104,16 +91,16 @@ const VerifyCandidate = () => {
         <InputField
           label={"First Name"}
           type={"text"}
-          name={"employeeFirstName"}
-          value={values.employeeFirstName}
+          name={"firstName"}
+          // value={values.email}
           onChange={handleInputChange}
           placeholder={"Enter candidate's first name"}
         />
         <InputField
           label={"Last Name"}
           type={"text"}
-          name={"employeeLastName"}
-          value={values.employeeLastName}
+          name={"lastName"}
+          // value={values.email}
           onChange={handleInputChange}
           placeholder={"Enter candidate's last name"}
         />
@@ -131,8 +118,8 @@ const VerifyCandidate = () => {
           <DateField
             label={"Employed From"}
             type={"text"}
-            name={"datesEmployedFrom"}
-            value={values.datesEmployedFrom}
+            name={"companyName"}
+            // value={values.email}
             onChange={handleInputChange}
             placeholder={"From"}
           />
@@ -144,8 +131,8 @@ const VerifyCandidate = () => {
           <DateField
             label={"Employed To"}
             type={"text"}
-            name={"datesEmployedTo"}
-            value={values.datesEmployedTo}
+            name={"companyName"}
+            // value={values.email}
             onChange={handleInputChange}
             placeholder={"To"}
           />
@@ -157,8 +144,8 @@ const VerifyCandidate = () => {
           <InputField
             label={"Designation"}
             type={"text"}
-            name={"employeeDesignation"}
-            value={values.employeeDesignation}
+            name={"companyName"}
+            // value={values.email}
             onChange={handleInputChange}
             placeholder={"Enter candidate's designation"}
           />
@@ -170,8 +157,8 @@ const VerifyCandidate = () => {
         <TextArea
           label={"Reason for Leaving"}
           type={"text"}
-          name={"reasonForLeaving"}
-          value={values.reasonForLeaving}
+          name={"companyName"}
+          // value={values.email}
           onChange={handleInputChange}
           placeholder={"Write candidate's reason for leaving"}
         />
@@ -186,17 +173,17 @@ const VerifyCandidate = () => {
         <InputField
           label={"Location"}
           type={"text"}
-          name={"employeeCompanyLocation"}
-          value={values.employeeCompanyLocation}
+          name={"companyName"}
+          // value={values.email}
           onChange={handleInputChange}
           placeholder={"Enter candidate's previous work location"}
         />
         <DropDownField
           label={"Full time/Part time"}
           type={"text"}
-          name={"typeOfEmployment"}
-          value={values.typeOfEmployment}
-          onChange={onTypeOfEmploymentChange}
+          name={"companyName"}
+          // value={values.email}
+          onChange={handleInputChange}
           placeholder={"Enter candidate's work type"}
           options={[
             { value: "Permanent Full-Time", label: "Permanent Full-Time" },
@@ -207,62 +194,92 @@ const VerifyCandidate = () => {
           ]}
         />
       </div>
+      {/* <div className="d-flex align-self-start mt-3" style={{ width: '100%' }}>
+                <YesOrNo
+                    label={"Is the candidate eligible for Rehire?"}
+                    type={"text"}
+                    options={[
+                        {
+                            label: 'Yes',
+                            value: 'Yes',
+                        },
+                        {
+                            label: 'No',
+                            value: 'No',
+                        }
+                    ]}
+                />
+
+            </div>
+            <div className="d-flex align-self-start mt-3" style={{ width: '100%' }}>
+                <YesOrNo
+                    label={"Is the document(Experience letter) authentic?"}
+                    type={"text"}
+                    options={[
+                        {
+                            label: 'Yes',
+                            value: 'Yes',
+                        },
+                        {
+                            label: 'No',
+                            value: 'No',
+                        }
+                    ]}
+                />
+
+            </div>
+            <div className="d-flex align-self-start mt-3" style={{ width: '100%' }}>
+                <YesOrNo
+                    label={"How did the candidate's way of relieving?"}
+                    type={"text"}
+                    options={[
+                        {
+                            label: 'Yes',
+                            value: 'Yes',
+                        },
+                        {
+                            label: 'No',
+                            value: 'No',
+                        }
+                    ]}
+                    placeholder={
+                        "Enter the company name."
+                    }
+                />
+
+            </div> */}
+      {[...Array(qCount)].map((e, i) => (
+        <div style={{ width: "100%" }}>
+          <div key={i}>
+            <div className="form-2">
+              <label htmlFor="">Q{i + 1}</label>
+              <input
+                type="text"
+                id={i}
+                //defaultValue={qType[i].question}
+                //onChange={(e) => handleQuesChange(e, i)}
+                placeholder="Enter Question"
+                className="f-34 f-3"
+                style={{ width: "85%", backgroundColor: "white" }}
+              />
+            </div>
+
+            <div className="form-3">
+              <Dropdown
+                values={ansType}
+                type={"text"}
+                name={"Choose Answer type"}
+                id={"type" + i}
+                //onChange={(e) => handleQuesTypeChange(e, i)}
+              />
+            </div>
+          </div>
+        </div>
+      ))}
+      {qCount > 1 && <Button onClick={() => delques()}>Delete Question</Button>}
+
       <div
-        className="d-flex align-self-start mt-3"
-        style={{ width: "100%" }}>
-        <YesOrNo
-          label={"Is the candidate eligible for Rehire?"}
-          type={"text"}
-          options={[
-            {
-              label: "Yes",
-              value: "Yes",
-            },
-            {
-              label: "No",
-              value: "No",
-            },
-          ]}
-        />
-      </div>
-      <div
-        className="d-flex align-self-start mt-3"
-        style={{ width: "100%" }}>
-        <YesOrNo
-          label={"Is the document(Experience letter) authentic?"}
-          type={"text"}
-          options={[
-            {
-              label: "Yes",
-              value: "Yes",
-            },
-            {
-              label: "No",
-              value: "No",
-            },
-          ]}
-        />
-      </div>
-      <div
-        className="d-flex align-self-start mt-3"
-        style={{ width: "100%" }}>
-        <YesOrNo
-          label={"How did the candidate's way of relieving?"}
-          type={"text"}
-          options={[
-            {
-              label: "Yes",
-              value: "Yes",
-            },
-            {
-              label: "No",
-              value: "No",
-            },
-          ]}
-          placeholder={"Enter the company name."}
-        />
-      </div>
-      <div
+        onClick={addques}
         className="d-flex align-self-start mt-4"
         style={{
           width: "100%",
@@ -274,11 +291,12 @@ const VerifyCandidate = () => {
         <PlusOutlined style={{ marginTop: ".3rem", marginRight: ".6rem" }} />
         <p>Add more questions</p>
       </div>
+
       <div
         className="d-flex align-self-start flex-column mt-3"
         style={{ width: "100%" }}>
         <p style={{ fontWeight: "bold", fontSize: "1.1rem" }}>
-          Enter the Email Id of the person who will verify the candidate
+          Enter the details of the person who verified the candidate
         </p>
         <div
           className="d-flex"
@@ -289,10 +307,26 @@ const VerifyCandidate = () => {
           }}>
           <InputField
             type={"text"}
-            name={"verificationByEmail"}
-            value={values.verificationByEmail}
+            name={"companyName"}
+            // value={values.email}
             onChange={handleInputChange}
-            placeholder={"Email"}
+            placeholder={"Name"}
+          />
+          <InputField
+            type={"text"}
+            name={"companyName"}
+            // value={values.email}
+            onChange={handleInputChange}
+            placeholder={"Designation"}
+          />
+        </div>
+        <div style={{ width: "49%" }}>
+          <InputField
+            type={"text"}
+            name={"companyName"}
+            // value={values.email}
+            onChange={handleInputChange}
+            placeholder={"Department"}
           />
         </div>
       </div>
@@ -304,7 +338,7 @@ const VerifyCandidate = () => {
           previous employer of the candidate
         </p>
         <Button
-          onClick={handleSubmit}
+          onClick={(e) => onSubmit(e)}
           className="signupBtn mt-0">
           Submit
         </Button>
