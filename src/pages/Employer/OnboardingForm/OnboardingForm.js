@@ -340,7 +340,7 @@ function OnboardingForm() {
                     <button
                       type="submit"
                       // onClick={handleSubmit}
-                      className="send-btn">
+                      className="send-btn mb-4">
                       <i className="fa-solid fa-plus s-1"></i>
                       Send Offer Letter
                     </button>
