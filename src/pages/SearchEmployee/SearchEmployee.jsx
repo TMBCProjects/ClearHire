@@ -154,24 +154,9 @@ export default function SearchEmployee() {
             ) : (
               ""
             )} */}
-            <div className="result-count">
-              {employeeList?.length > 1 ? `${employeeList
-                .filter((item) => {
-                  const { typeOfEmployment, designation, salary, location } =
-                    filters;
-                  return (
-                    (typeOfEmployment === "" ||
-                      item.typeOfEmployment.toLowerCase() ===
-                      typeOfEmployment.toLowerCase()) &&
-                    (designation === "" ||
-                      item.designation.toLowerCase().includes(designation)) &&
-                    (salary === "" || +item?.salary <= +salary) &&
-                    (location === "" ||
-                      item.companyLocation.toLowerCase() ===
-                      location.toLowerCase())
-                  );
-                }).length} records` : ""}
-            </div>
+            {/* <div className="result-count">
+              {employeeList?.length > 1 ? `${employeeList.length} records` : ""}
+            </div> */}
           </div>
           <div
             className="row2"
@@ -179,22 +164,7 @@ export default function SearchEmployee() {
               employeeList?.length === 0 ? { justifyContent: "center" } : {}
             }
           >
-            {employeeList
-              .filter((item) => {
-                const { typeOfEmployment, designation, salary, location } =
-                  filters;
-                return (
-                  (typeOfEmployment === "" ||
-                    item.typeOfEmployment.toLowerCase() ===
-                    typeOfEmployment.toLowerCase()) &&
-                  (designation === "" ||
-                    item.designation.toLowerCase().includes(designation)) &&
-                  (salary === "" || +item?.salary <= +salary) &&
-                  (location === "" ||
-                    item.companyLocation.toLowerCase() ===
-                    location.toLowerCase())
-                );
-              })?.length === 0 && (
+            {employeeList?.length === 0 && (
               <Empty
                 image={Empty.PRESENTED_IMAGE_SIMPLE}
                 description="No Records"
@@ -207,13 +177,13 @@ export default function SearchEmployee() {
                 return (
                   (typeOfEmployment === "" ||
                     item.typeOfEmployment.toLowerCase() ===
-                    typeOfEmployment.toLowerCase()) &&
+                      typeOfEmployment.toLowerCase()) &&
                   (designation === "" ||
                     item.designation.toLowerCase().includes(designation)) &&
                   (salary === "" || +item?.salary <= +salary) &&
                   (location === "" ||
                     item.companyLocation.toLowerCase() ===
-                    location.toLowerCase())
+                      location.toLowerCase())
                 );
               })
               .map((info) => {
