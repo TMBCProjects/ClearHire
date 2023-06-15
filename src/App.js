@@ -29,7 +29,7 @@ import SignupWithGoogle from "./components/SignupWithGoogle/SignupWithGoogle";
 import SignUpChooseUserGoogle from "./components/SignupWithGoogle/SignUpChooseUserGoogle";
 import RecruitmentPool from "./pages/Employer/RecruitmentPool/RecruitmentPool";
 import SendResgination from "./pages/Employer/sendResignation/sendResgination";
-
+import VerifyCandidate from './pages/Employer/VerifyCandidate/VerifyCandidate'
 function App() {
   return (
     <div className="main">
@@ -71,7 +71,7 @@ function App() {
         ) : (
           <>
             {sessionStorage.getItem("LoggedIn") === "Employer" ? (
-              <div style={{ backgroundColor: "#F5F7F9", height: "100vh" }}>
+              <div>
                 <Navbar />
                 <Routes>
                   <Route
@@ -116,6 +116,9 @@ function App() {
                   <Route
                     path="/send-resignation"
                     element={<SendResgination />}></Route>
+                  <Route
+                    path="/verify-candidate"
+                    element={<VerifyCandidate />}></Route>
                 </Routes>
               </div>
             ) : (

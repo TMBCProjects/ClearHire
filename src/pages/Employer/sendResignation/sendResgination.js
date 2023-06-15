@@ -4,11 +4,11 @@ import InputField from '../../../components/Input/InputField';
 
 function SendResgination() {
     return (
-        <div className="signup-container sign">
+        <div className="signup-container py-3">
             <div className="signupHeader">
                 <span style={{ fontWeight: "bold", color: "#00823B" }}>Enter the Receiver's Details</span>
             </div>
-            <form className="form-horizontal" style={{ height: "100%" }}>
+            <form className="form-horizontal p-4" style={{ height: "100%" }}>
                 <InputField
                     label={"Company Name"}
                     type={"text"}
