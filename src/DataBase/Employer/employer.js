@@ -567,6 +567,7 @@ export async function sendVerificationRequest(data) {
     isVerified: false,
     referenceNumber: data.referenceNumber,
     employerEmail: data.employerEmail,
+    requestingCompanyName: data.requestingCompanyName,
     employerId: data.employerId,
     employeeFirstName: data.employeeFirstName,
     employeeLastName: data.employeeLastName,
