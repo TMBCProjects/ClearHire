@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './VerifyCandidate.css'
 import InputField from '../../../components/Input/InputField';
 import TextArea from '../../../components/Input/TextArea';
@@ -7,8 +7,27 @@ import DateField from '../../../components/Input/DateFiled';
 import DropDownField from '../../../components/Input/DropDownField'
 import { PlusOutlined } from "@ant-design/icons";
 import { Button } from 'antd';
+import Dropdown from "../../../components/Dropdrowns/Dropdown";
 
 const VerifyCandidate = () => {
+    const [qCount, setQCount] = useState(1);
+    const [CandidateDetails, setCandidateDetails] = useState([])
+    const ansType = ["Short Answer", "MCQ", "Select"];
+    const addques = () => {
+        setQCount(qCount + 1);
+    }
+    const handleInputChange = (e) => {
+        setCandidateDetails(...CandidateDetails, { [e.target.name]: e.target.value })
+    }
+    const onSubmit = () => {
+        console.log(CandidateDetails)
+    }
+
+    const delques = () => {
+        if (qCount > 1) {
+            setQCount(qCount - 1);
+        }
+    };
     return (
         <div className='container flex-column d-flex justify-content-center align-items-center py-5' style={{
             width: '45rem'
@@ -43,7 +62,7 @@ const VerifyCandidate = () => {
                     type={"text"}
                     name={"referenceNumber"}
                     // value={values.email}
-                    // onChange={handleInputChange}
+                    onChange={handleInputChange}
                     placeholder={
                         "Enter candidate's reference number"
                     }
@@ -59,7 +78,7 @@ const VerifyCandidate = () => {
                     type={"text"}
                     name={"firstName"}
                     // value={values.email}
-                    // onChange={handleInputChange}
+                    onChange={handleInputChange}
                     placeholder={
                         "Enter candidate's first name"
                     }
@@ -69,7 +88,7 @@ const VerifyCandidate = () => {
                     type={"text"}
                     name={"lastName"}
                     // value={values.email}
-                    // onChange={handleInputChange}
+                    onChange={handleInputChange}
                     placeholder={
                         "Enter candidate's last name"
                     }
@@ -87,7 +106,7 @@ const VerifyCandidate = () => {
                         type={"text"}
                         name={"companyName"}
                         // value={values.email}
-                        // onChange={handleInputChange}
+                        onChange={handleInputChange}
                         placeholder={
                             "From"
                         }
@@ -101,7 +120,7 @@ const VerifyCandidate = () => {
                         type={"text"}
                         name={"companyName"}
                         // value={values.email}
-                        // onChange={handleInputChange}
+                        onChange={handleInputChange}
                         placeholder={
                             "To"
                         }
@@ -117,7 +136,7 @@ const VerifyCandidate = () => {
                         type={"text"}
                         name={"companyName"}
                         // value={values.email}
-                        // onChange={handleInputChange}
+                        onChange={handleInputChange}
                         placeholder={
                             "Enter candidate's designation"
                         }
@@ -130,7 +149,7 @@ const VerifyCandidate = () => {
                     type={"text"}
                     name={"companyName"}
                     // value={values.email}
-                    // onChange={handleInputChange}
+                    onChange={handleInputChange}
                     placeholder={
                         "Write candidate's reason for leaving"
                     }
@@ -146,7 +165,7 @@ const VerifyCandidate = () => {
                     type={"text"}
                     name={"companyName"}
                     // value={values.email}
-                    // onChange={handleInputChange}
+                    onChange={handleInputChange}
                     placeholder={
                         "Enter candidate's previous work location"
                     }
@@ -156,7 +175,7 @@ const VerifyCandidate = () => {
                     type={"text"}
                     name={"companyName"}
                     // value={values.email}
-                    // onChange={handleInputChange}
+                    onChange={handleInputChange}
                     placeholder={
                         "Enter candidate's work type"
                     }
@@ -169,7 +188,7 @@ const VerifyCandidate = () => {
                     ]}
                 />
             </div>
-            <div className="d-flex align-self-start mt-3" style={{ width: '100%' }}>
+            {/* <div className="d-flex align-self-start mt-3" style={{ width: '100%' }}>
                 <YesOrNo
                     label={"Is the candidate eligible for Rehire?"}
                     type={"text"}
@@ -222,11 +241,42 @@ const VerifyCandidate = () => {
                     }
                 />
 
-            </div>
-            <div className="d-flex align-self-start mt-4" style={{ width: '100%', color: 'green', fontSize: '1.1rem', cursor: 'pointer', fontWeight: 'bold' }}>
+            </div> */}
+            {[...Array(qCount)].map((e, i) => (
+                <div style={{ width: "100%" }}>
+                    <div key={i}>
+                        <div className="form-2">
+                            <label htmlFor="">Q{i + 1}</label>
+                            <input type="text" id={i}
+                                //defaultValue={qType[i].question} 
+                                //onChange={(e) => handleQuesChange(e, i)} 
+                                placeholder='Enter Question'
+                                className='f-34 f-3'
+                                style={{ width: "85%", backgroundColor: 'white' }} />
+                        </div>
+
+                        <div className="form-3">
+                            <Dropdown
+                                values={ansType}
+                                type={"text"}
+                                name={"Choose Answer type"}
+                                id={"type" + i}
+                            //onChange={(e) => handleQuesTypeChange(e, i)}
+                            />
+                        </div>
+                    </div>
+                </div>
+            ))}
+            {qCount > 1 &&
+                <Button onClick={() => delques()}>Delete Question</Button>
+            }
+
+            <div onClick={addques} className="d-flex align-self-start mt-4" style={{ width: '100%', color: 'green', fontSize: '1.1rem', cursor: 'pointer', fontWeight: 'bold' }}>
                 <PlusOutlined style={{ marginTop: '.3rem', marginRight: '.6rem' }} />
                 <p>Add more questions</p>
             </div>
+
+
             <div className="d-flex align-self-start flex-column mt-3" style={{ width: '100%' }}>
                 <p style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>Enter the details of the person who verified the candidate</p>
                 <div className='d-flex' style={{
@@ -238,7 +288,7 @@ const VerifyCandidate = () => {
                         type={"text"}
                         name={"companyName"}
                         // value={values.email}
-                        // onChange={handleInputChange}
+                        onChange={handleInputChange}
                         placeholder={
                             "Name"
                         }
@@ -247,7 +297,7 @@ const VerifyCandidate = () => {
                         type={"text"}
                         name={"companyName"}
                         // value={values.email}
-                        // onChange={handleInputChange}
+                        onChange={handleInputChange}
                         placeholder={
                             "Designation"
                         }
@@ -258,7 +308,7 @@ const VerifyCandidate = () => {
                         type={"text"}
                         name={"companyName"}
                         // value={values.email}
-                        // onChange={handleInputChange}
+                        onChange={handleInputChange}
                         placeholder={
                             "Department"
                         }
@@ -268,7 +318,7 @@ const VerifyCandidate = () => {
             </div>
             <div className="d-flex align-self-start flex-column my-3" style={{ width: '100%' }}>
                 <p style={{ fontSize: '.8rem', textAlign: 'center' }}>*By clicking the submit button, you are sending this form to the previous employer of the candidate</p>
-                <Button className="signupBtn mt-0">Submit</Button>
+                <Button onClick={(e) => onSubmit(e)} className="signupBtn mt-0">Submit</Button>
 
             </div>
 
