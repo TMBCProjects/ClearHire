@@ -14,6 +14,11 @@
   display: none;
 }
 
+html,
+body {
+  background-color: #F5F7F9 !important;
+}
+
 * {
   font-family: "helvetica";
   margin: 0;

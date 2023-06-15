@@ -1,6 +1,7 @@
 const Fields = {
   isActive: "isActive",
   isApproved: "isApproved",
+  isVerified: "isVerified",
   isAccepted: "isAccepted",
   isAnswered: "isAnswered",
   offerLetters: "offerLetters",

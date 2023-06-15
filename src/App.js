@@ -28,7 +28,8 @@ import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import SignupWithGoogle from "./components/SignupWithGoogle/SignupWithGoogle";
 import SignUpChooseUserGoogle from "./components/SignupWithGoogle/SignUpChooseUserGoogle";
 import RecruitmentPool from "./pages/Employer/RecruitmentPool/RecruitmentPool";
-
+import SendResgination from "./pages/Employer/sendResignation/sendResgination";
+import VerifyCandidate from './pages/Employer/VerifyCandidate/VerifyCandidate'
 function App() {
   return (
     <div className="main">
@@ -84,7 +85,6 @@ function App() {
                     path="/ViewEmployeeProfile"
                     element={<ViewEmployeeProfile />}
                   ></Route>
-
                   <Route
                     path="/Assessment-form"
                     element={<EmployeeAssessmentForm />}
@@ -111,8 +111,13 @@ function App() {
                   ></Route>
                   <Route
                     path="/recruitment-pool"
-                    element={<RecruitmentPool />}
-                  ></Route>
+                    element={<RecruitmentPool />}></Route>
+                  <Route
+                    path="/send-resignation"
+                    element={<SendResgination />}></Route>
+                  <Route
+                    path="/verify-candidate"
+                    element={<VerifyCandidate />}></Route>
                 </Routes>
               </div>
             ) : (
