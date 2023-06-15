@@ -249,7 +249,7 @@ const EmployeeDetails = () => {
   function getLatestNoteByEmployerId(ratings, employerId) {
     const filteredRatings = ratings
       .filter((rating) => rating.ratedById === employerId)
-      .sort((a, b) => b.ratedAt - a.ratedAt)
+      .sort((a, b) => b.ratedAt - a.ratedAt);
 
     if (filteredRatings.length > 0) {
       return filteredRatings[0].note;
@@ -257,7 +257,6 @@ const EmployeeDetails = () => {
 
     return null;
   }
-
 
   return (
     <>
@@ -268,21 +267,15 @@ const EmployeeDetails = () => {
               className="back me-3"
               onClick={() => {
                 navigate("/");
-              }}>
-              <MdArrowBackIos
-                size={22}
-                className="backIcon"
-              />
+              }}
+            >
+              <MdArrowBackIos size={22} className="backIcon" />
             </div>
             <span className="employeeDetailsText">Employee Details</span>
           </div>
           <div className="col-6 d-flex justify-content-end">
             <button className="btn">
-              <img
-                src={ViewFile}
-                alt=""
-                className="viewIcon"
-              />
+              <img src={ViewFile} alt="" className="viewIcon" />
               <a
                 className="text-color-green fw-bold"
                 href={employee.resume}
@@ -290,7 +283,8 @@ const EmployeeDetails = () => {
                 rel="noreferrer"
                 style={{
                   textDecoration: "none",
-                }}>
+                }}
+              >
                 View Resume
               </a>
             </button>
@@ -298,12 +292,9 @@ const EmployeeDetails = () => {
               className="btn portfolio-btn"
               href={`https://${employee.portfolioLink}`}
               target="_blank"
-              rel="noreferrer">
-              <img
-                src={UrlLink}
-                alt=""
-                className="linkIcon"
-              />
+              rel="noreferrer"
+            >
+              <img src={UrlLink} alt="" className="linkIcon" />
               <span className=" fw-bold">Portfolio</span>
             </a>
           </div>
@@ -311,11 +302,7 @@ const EmployeeDetails = () => {
         <div className="row mt-5 d-flex justify-content-center align-items-center mb-5">
           <div className="col-md-8 col-12 d-flex align-items-start">
             <div className="employeeImg">
-              <img
-                src={employee?.profileImage}
-                alt=""
-                className="empImg"
-              />
+              <img src={employee?.profileImage} alt="" className="empImg" />
             </div>
             <div className="employeeDetails">
               <h3>{employee?.employeeName}</h3>
@@ -359,9 +346,7 @@ const EmployeeDetails = () => {
             {employee?.skills?.map((skill) => {
               return (
                 // <Slider {...settings}>
-                <div
-                  className="skills"
-                  key={skill}>
+                <div className="skills" key={skill}>
                   <p className="title">{skill.skillName}</p>
                   <ProgressBar value={skill.value} />
                 </div>
@@ -395,11 +380,7 @@ const EmployeeDetails = () => {
                   </div>
                   <div className="col-3">
                     <div className="companyLogo">
-                      <img
-                        src={info.companyLogo}
-                        alt=""
-                        className="logo"
-                      />
+                      <img src={info.companyLogo} alt="" className="logo" />
                     </div>
                   </div>
                   <div className="col-md-9 col-7">
@@ -423,17 +404,17 @@ const EmployeeDetails = () => {
                               employee.currentEmployerId
                             )
                           ) && (
-                              <ProgressBar
-                                value={
-                                  calculateCommunicationRatings(
-                                    getRatingsByEmployerId(
-                                      employee.ratings,
-                                      employee.currentEmployerId
-                                    )
-                                  ) || 0
-                                }
-                              />
-                            )}
+                            <ProgressBar
+                              value={
+                                calculateCommunicationRatings(
+                                  getRatingsByEmployerId(
+                                    employee.ratings,
+                                    employee.currentEmployerId
+                                  )
+                                ) || 0
+                              }
+                            />
+                          )}
                         </div>
                         <p>Communication</p>
                       </div>
@@ -445,17 +426,17 @@ const EmployeeDetails = () => {
                               employee.currentEmployerId
                             )
                           ) && (
-                              <ProgressBar
-                                value={
-                                  calculateAttitudeRatings(
-                                    getRatingsByEmployerId(
-                                      employee.ratings,
-                                      employee.currentEmployerId
-                                    )
-                                  ) || 0
-                                }
-                              />
-                            )}
+                            <ProgressBar
+                              value={
+                                calculateAttitudeRatings(
+                                  getRatingsByEmployerId(
+                                    employee.ratings,
+                                    employee.currentEmployerId
+                                  )
+                                ) || 0
+                              }
+                            />
+                          )}
                         </div>
                         <p>Attitude</p>
                       </div>
@@ -467,17 +448,17 @@ const EmployeeDetails = () => {
                               employee.currentEmployerId
                             )
                           ) && (
-                              <ProgressBar
-                                value={
-                                  calculateAbilityToLearnRatings(
-                                    getRatingsByEmployerId(
-                                      employee.ratings,
-                                      employee.currentEmployerId
-                                    )
-                                  ) || 0
-                                }
-                              />
-                            )}
+                            <ProgressBar
+                              value={
+                                calculateAbilityToLearnRatings(
+                                  getRatingsByEmployerId(
+                                    employee.ratings,
+                                    employee.currentEmployerId
+                                  )
+                                ) || 0
+                              }
+                            />
+                          )}
                         </div>
                         <p>Ability To Learn</p>
                       </div>
@@ -489,17 +470,17 @@ const EmployeeDetails = () => {
                               employee.currentEmployerId
                             )
                           ) && (
-                              <ProgressBar
-                                value={
-                                  calculatePunctualityRatings(
-                                    getRatingsByEmployerId(
-                                      employee.ratings,
-                                      employee.currentEmployerId
-                                    )
-                                  ) || 0
-                                }
-                              />
-                            )}
+                            <ProgressBar
+                              value={
+                                calculatePunctualityRatings(
+                                  getRatingsByEmployerId(
+                                    employee.ratings,
+                                    employee.currentEmployerId
+                                  )
+                                ) || 0
+                              }
+                            />
+                          )}
                         </div>
                         <p>Punctuality</p>
                       </div>
@@ -511,17 +492,17 @@ const EmployeeDetails = () => {
                               employee.currentEmployerId
                             )
                           ) && (
-                              <ProgressBar
-                                value={
-                                  calculateCommitmentRatings(
-                                    getRatingsByEmployerId(
-                                      employee.ratings,
-                                      employee.currentEmployerId
-                                    )
-                                  ) || 0
-                                }
-                              />
-                            )}
+                            <ProgressBar
+                              value={
+                                calculateCommitmentRatings(
+                                  getRatingsByEmployerId(
+                                    employee.ratings,
+                                    employee.currentEmployerId
+                                  )
+                                ) || 0
+                              }
+                            />
+                          )}
                         </div>
                         <p>Commitment</p>
                       </div>
@@ -533,17 +514,17 @@ const EmployeeDetails = () => {
                               employee.currentEmployerId
                             )
                           ) && (
-                              <ProgressBar
-                                value={
-                                  calculateTrustworthinessRatings(
-                                    getRatingsByEmployerId(
-                                      employee.ratings,
-                                      employee.currentEmployerId
-                                    )
-                                  ) || 0
-                                }
-                              />
-                            )}
+                            <ProgressBar
+                              value={
+                                calculateTrustworthinessRatings(
+                                  getRatingsByEmployerId(
+                                    employee.ratings,
+                                    employee.currentEmployerId
+                                  )
+                                ) || 0
+                              }
+                            />
+                          )}
                         </div>
                         <p>Trustworthiness</p>
                       </div>
@@ -555,17 +536,17 @@ const EmployeeDetails = () => {
                               employee.currentEmployerId
                             )
                           ) && (
-                              <ProgressBar
-                                value={
-                                  calculateSkillRatings(
-                                    getRatingsByEmployerId(
-                                      employee.ratings,
-                                      employee.currentEmployerId
-                                    )
-                                  ) || 0
-                                }
-                              />
-                            )}
+                            <ProgressBar
+                              value={
+                                calculateSkillRatings(
+                                  getRatingsByEmployerId(
+                                    employee.ratings,
+                                    employee.currentEmployerId
+                                  )
+                                ) || 0
+                              }
+                            />
+                          )}
                         </div>
                         <p>Skill</p>
                       </div>
@@ -577,17 +558,17 @@ const EmployeeDetails = () => {
                               employee.currentEmployerId
                             )
                           ) && (
-                              <ProgressBar
-                                value={
-                                  calculateTeamPlayerRatings(
-                                    getRatingsByEmployerId(
-                                      employee.ratings,
-                                      employee.currentEmployerId
-                                    )
-                                  ) || 0
-                                }
-                              />
-                            )}
+                            <ProgressBar
+                              value={
+                                calculateTeamPlayerRatings(
+                                  getRatingsByEmployerId(
+                                    employee.ratings,
+                                    employee.currentEmployerId
+                                  )
+                                ) || 0
+                              }
+                            />
+                          )}
                         </div>
                         <p>Team Player</p>
                       </div>
@@ -603,38 +584,30 @@ const EmployeeDetails = () => {
                           employee.currentEmployerId
                         )
                       ) && (
-                          <ProgressBar
-                            value={
-                              calculateTotalRatings(
-                                getRatingsByEmployerId(
-                                  employee.ratings,
-                                  employee.currentEmployerId
-                                )
-                              ) || 0
-                            }
-                          />
-                        )}
+                        <ProgressBar
+                          value={
+                            calculateTotalRatings(
+                              getRatingsByEmployerId(
+                                employee.ratings,
+                                employee.currentEmployerId
+                              )
+                            ) || 0
+                          }
+                        />
+                      )}
                     </div>
                   </div>
                 </div>
                 <div className="row employerResult">
                   <div>
                     <p>
-
-                      <FaQuoteLeft
-                        size={30}
-                        className="quoteLeft"
-                      />
+                      <FaQuoteLeft size={30} className="quoteLeft" />
                       <span className="text-color-green">
                         {getLatestNoteByEmployerId(
                           employee.ratings,
                           info.employerId
-                        )
-                        }{" "}
-                        <FaQuoteRight
-                          size={30}
-                          className="quoteRight"
-                        />
+                        )}{" "}
+                        <FaQuoteRight size={30} className="quoteRight" />
                       </span>{" "}
                       by <strong>{info.companyName}</strong>
                     </p>
@@ -656,18 +629,17 @@ const EmployeeDetails = () => {
                 <h1>Previous Companies</h1>
               </div>
             </div>
-              {employee?.employerIdList
-                ?.filter((info) => {
-                  return info.employerId !== employee.currentEmployerId;
-                })
-                ?.sort((a, b) => {
-                  return new Date(
-                    a.dateOfJoining.seconds * 1000
-                  ) - new Date(
-                    b.dateOfJoining.seconds * 1000
-                  );
-                })
-                ?.map((info, index) => {
+            {employee?.employerIdList
+              ?.filter((info) => {
+                return info.employerId !== employee.currentEmployerId;
+              })
+              ?.sort((a, b) => {
+                return (
+                  new Date(a.dateOfJoining.seconds * 1000) -
+                  new Date(b.dateOfJoining.seconds * 1000)
+                );
+              })
+              ?.map((info, index) => {
                 return (
                   <div
                     className="row d-flex align-items-center my-3"
@@ -677,14 +649,11 @@ const EmployeeDetails = () => {
                         [index]: !prevSkills[index],
                       }));
                     }}
-                    style={{ cursor: "pointer", transition: "all 3s ease-in" }}>
+                    style={{ cursor: "pointer", transition: "all 3s ease-in" }}
+                  >
                     <div className="col-md-2 col-3">
                       <div className="companyLogo">
-                        <img
-                          src={info.companyLogo}
-                          alt=""
-                          className="logo"
-                        />
+                        <img src={info.companyLogo} alt="" className="logo" />
                       </div>
                     </div>
                     <div className="col-md-9 col-7">
@@ -705,234 +674,250 @@ const EmployeeDetails = () => {
                         />
                       </div>
                     </div>
-                    <div style={{ display: prevSkills[index] ? "block" : "none" }} className="divider my-3"></div>
+                    <div
+                      style={{ display: prevSkills[index] ? "block" : "none" }}
+                      className="divider my-3"
+                    ></div>
                     {prevSkills[index] && (
                       <div className="prevSkillsContainer">
-                      <div className="row d-flex justify-content-center align-items-center progressBars">
-                        <div className="col-md-8">
-                          <div className="row">
-                            <div className="col-md-3 mb-3">
-                              <div class="circle-wrap">
-                                {calculateCommunicationRatings(
-                                  getRatingsByEmployerId(
-                                    employee.ratings,
-                                    info.employerId)
-                                ) && (
-                                  <ProgressBar
-                                    value={
-                                      calculateCommunicationRatings(
-                                        getRatingsByEmployerId(
-                                          employee.ratings,
-                                          info.employerId)
-                                      ) || 0
-                                      }
-                                    />
-                                  )}
-                              </div>
-                              <p>Communication</p>
-                            </div>
-                            <div className="col-md-3 mb-3">
-                              <div class="circle-wrap">
-                                {calculateAttitudeRatings(
-                                  getRatingsByEmployerId(
-                                    employee.ratings,
-
-                                    info.employerId)
-                                ) && (
-                                  <ProgressBar
-                                    value={
-                                      calculateAttitudeRatings(
-                                        getRatingsByEmployerId(
-                                          employee.ratings,
-
-                                          info.employerId)
-                                      ) || 0
-                                      }
-                                    />
-                                  )}
-                              </div>
-                              <p>Attitude</p>
-                            </div>
-                            <div className="col-md-3 mb-3">
-                              <div class="circle-wrap">
-                                {calculateAbilityToLearnRatings(
-                                  getRatingsByEmployerId(
-                                    employee.ratings,
-
-                                    info.employerId)
-                                ) && (
-                                  <ProgressBar
-                                    value={
-                                      calculateAbilityToLearnRatings(
-                                        getRatingsByEmployerId(
-                                          employee.ratings,
-
-                                          info.employerId)
-                                      ) || 0
-                                      }
-                                    />
-                                  )}
-                              </div>
-                              <p>Ability To Learn</p>
-                            </div>
-                            <div className="col-md-3 mb-3">
-                              <div class="circle-wrap">
-                                {calculatePunctualityRatings(
-                                  getRatingsByEmployerId(
-                                    employee.ratings,
-
-                                    info.employerId)
-                                ) && (
-                                  <ProgressBar
-                                    value={
-                                      calculatePunctualityRatings(
-                                        getRatingsByEmployerId(
-                                          employee.ratings,
-
-                                          info.employerId)
-                                      ) || 0
-                                      }
-                                    />
-                                  )}
-                              </div>
-                              <p>Punctuality</p>
-                            </div>
-                            <div className="col-md-3 mb-3">
-                              <div class="circle-wrap">
-                                {calculateCommitmentRatings(
-                                  getRatingsByEmployerId(
-                                    employee.ratings,
-
-                                    info.employerId)
-                                ) && (
-                                  <ProgressBar
-                                    value={
-                                      calculateCommitmentRatings(
-                                        getRatingsByEmployerId(
-                                          employee.ratings,
-
-                                          info.employerId)
-                                      ) || 0
-                                      }
-                                    />
-                                  )}
-                              </div>
-                              <p>Commitment</p>
-                            </div>
-                            <div className="col-md-3 mb-3">
-                              <div class="circle-wrap">
-                                {calculateTrustworthinessRatings(
-                                  getRatingsByEmployerId(
-                                    employee.ratings,
-
-                                    info.employerId)
-                                ) && (
-                                  <ProgressBar
-                                    value={
-                                      calculateTrustworthinessRatings(
-                                        getRatingsByEmployerId(
-                                          employee.ratings,
-
-                                          info.employerId)
-                                      ) || 0
-                                      }
-                                    />
-                                  )}
-                              </div>
-                              <p>Trustworthiness</p>
-                            </div>
-                            <div className="col-md-3 mb-3">
-                              <div class="circle-wrap">
-                                {calculateSkillRatings(
-                                  getRatingsByEmployerId(
-                                    employee.ratings,
-
-                                    info.employerId)
-                                ) && (
-                                  <ProgressBar
-                                    value={
-                                      calculateSkillRatings(
-                                        getRatingsByEmployerId(
-                                          employee.ratings,
-
-                                          info.employerId)
-                                      ) || 0
-                                      }
-                                    />
-                                  )}
-                              </div>
-                              <p>Skill</p>
-                            </div>
-                            <div className="col-md-3 mb-3">
-                              <div class="circle-wrap">
-                                {calculateTeamPlayerRatings(
-                                  getRatingsByEmployerId(
-                                    employee.ratings,
-
-                                    info.employerId)
-                                ) && (
-                                  <ProgressBar
-                                    value={
-                                      calculateTeamPlayerRatings(
-                                        getRatingsByEmployerId(
-                                          employee.ratings,
-
-                                          info.employerId)
-                                      ) || 0
-                                      }
-                                    />
-                                  )}
-                              </div>
-                              <p>Team Player</p>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-md-4 align-items-center d-flex flex-column">
-                          <p className="mb-0">Total</p>
-
-                          <div class="circle-wrap">
-                            {calculateTotalRatings(
-                              getRatingsByEmployerId(
-                                employee.ratings,
-
-                                info.employerId)
-                            ) && (
-                              <ProgressBar
-                                value={
-                                  calculateTotalRatings(
+                        <div className="row d-flex justify-content-center align-items-center progressBars">
+                          <div className="col-md-8">
+                            <div className="row">
+                              <div className="col-md-3 mb-3">
+                                <div class="circle-wrap">
+                                  {calculateCommunicationRatings(
                                     getRatingsByEmployerId(
                                       employee.ratings,
                                       info.employerId
                                     )
+                                  ) && (
+                                    <ProgressBar
+                                      value={
+                                        calculateCommunicationRatings(
+                                          getRatingsByEmployerId(
+                                            employee.ratings,
+                                            info.employerId
+                                          )
+                                        ) || 0
+                                      }
+                                    />
+                                  )}
+                                </div>
+                                <p>Communication</p>
+                              </div>
+                              <div className="col-md-3 mb-3">
+                                <div class="circle-wrap">
+                                  {calculateAttitudeRatings(
+                                    getRatingsByEmployerId(
+                                      employee.ratings,
+
+                                      info.employerId
+                                    )
+                                  ) && (
+                                    <ProgressBar
+                                      value={
+                                        calculateAttitudeRatings(
+                                          getRatingsByEmployerId(
+                                            employee.ratings,
+
+                                            info.employerId
+                                          )
+                                        ) || 0
+                                      }
+                                    />
+                                  )}
+                                </div>
+                                <p>Attitude</p>
+                              </div>
+                              <div className="col-md-3 mb-3">
+                                <div class="circle-wrap">
+                                  {calculateAbilityToLearnRatings(
+                                    getRatingsByEmployerId(
+                                      employee.ratings,
+
+                                      info.employerId
+                                    )
+                                  ) && (
+                                    <ProgressBar
+                                      value={
+                                        calculateAbilityToLearnRatings(
+                                          getRatingsByEmployerId(
+                                            employee.ratings,
+
+                                            info.employerId
+                                          )
+                                        ) || 0
+                                      }
+                                    />
+                                  )}
+                                </div>
+                                <p>Ability To Learn</p>
+                              </div>
+                              <div className="col-md-3 mb-3">
+                                <div class="circle-wrap">
+                                  {calculatePunctualityRatings(
+                                    getRatingsByEmployerId(
+                                      employee.ratings,
+
+                                      info.employerId
+                                    )
+                                  ) && (
+                                    <ProgressBar
+                                      value={
+                                        calculatePunctualityRatings(
+                                          getRatingsByEmployerId(
+                                            employee.ratings,
+
+                                            info.employerId
+                                          )
+                                        ) || 0
+                                      }
+                                    />
+                                  )}
+                                </div>
+                                <p>Punctuality</p>
+                              </div>
+                              <div className="col-md-3 mb-3">
+                                <div class="circle-wrap">
+                                  {calculateCommitmentRatings(
+                                    getRatingsByEmployerId(
+                                      employee.ratings,
+
+                                      info.employerId
+                                    )
+                                  ) && (
+                                    <ProgressBar
+                                      value={
+                                        calculateCommitmentRatings(
+                                          getRatingsByEmployerId(
+                                            employee.ratings,
+
+                                            info.employerId
+                                          )
+                                        ) || 0
+                                      }
+                                    />
+                                  )}
+                                </div>
+                                <p>Commitment</p>
+                              </div>
+                              <div className="col-md-3 mb-3">
+                                <div class="circle-wrap">
+                                  {calculateTrustworthinessRatings(
+                                    getRatingsByEmployerId(
+                                      employee.ratings,
+
+                                      info.employerId
+                                    )
+                                  ) && (
+                                    <ProgressBar
+                                      value={
+                                        calculateTrustworthinessRatings(
+                                          getRatingsByEmployerId(
+                                            employee.ratings,
+
+                                            info.employerId
+                                          )
+                                        ) || 0
+                                      }
+                                    />
+                                  )}
+                                </div>
+                                <p>Trustworthiness</p>
+                              </div>
+                              <div className="col-md-3 mb-3">
+                                <div class="circle-wrap">
+                                  {calculateSkillRatings(
+                                    getRatingsByEmployerId(
+                                      employee.ratings,
+
+                                      info.employerId
+                                    )
+                                  ) && (
+                                    <ProgressBar
+                                      value={
+                                        calculateSkillRatings(
+                                          getRatingsByEmployerId(
+                                            employee.ratings,
+
+                                            info.employerId
+                                          )
+                                        ) || 0
+                                      }
+                                    />
+                                  )}
+                                </div>
+                                <p>Skill</p>
+                              </div>
+                              <div className="col-md-3 mb-3">
+                                <div class="circle-wrap">
+                                  {calculateTeamPlayerRatings(
+                                    getRatingsByEmployerId(
+                                      employee.ratings,
+
+                                      info.employerId
+                                    )
+                                  ) && (
+                                    <ProgressBar
+                                      value={
+                                        calculateTeamPlayerRatings(
+                                          getRatingsByEmployerId(
+                                            employee.ratings,
+
+                                            info.employerId
+                                          )
+                                        ) || 0
+                                      }
+                                    />
+                                  )}
+                                </div>
+                                <p>Team Player</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="col-md-4 align-items-center d-flex flex-column">
+                            <p className="mb-0">Total</p>
+
+                            <div class="circle-wrap">
+                              {calculateTotalRatings(
+                                getRatingsByEmployerId(
+                                  employee.ratings,
+
+                                  info.employerId
+                                )
+                              ) && (
+                                <ProgressBar
+                                  value={
+                                    calculateTotalRatings(
+                                      getRatingsByEmployerId(
+                                        employee.ratings,
+                                        info.employerId
+                                      )
                                     ) || 0
                                   }
                                 />
                               )}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="row employerResult">
-                        <div>
-                          <p>
-                            <FaQuoteLeft
-                              size={30}
-                              className="quoteLeft"
-                              />
-                            <span className="text-color-green">
+                        <div className="row employerResult">
+                          <div>
+                            <p>
+                              <FaQuoteLeft size={30} className="quoteLeft" />
+                              <span className="text-color-green">
                                 {getLatestNoteByEmployerId(
                                   employee.ratings,
                                   info.employerId
-                                )
-                                }{" "}
+                                )}{" "}
                                 <FaQuoteRight
                                   size={30}
                                   className="quoteRight"
                                 />
-                            </span>{" "}
-                            by <strong>{info.companyName}</strong>
-                          </p>
+                              </span>{" "}
+                              by <strong>{info.companyName}</strong>
+                            </p>
+                          </div>
                         </div>
-                      </div>
                       </div>
                     )}
                     <div className="divider my-3"></div>
