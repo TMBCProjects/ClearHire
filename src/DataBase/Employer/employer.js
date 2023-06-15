@@ -502,6 +502,7 @@ export async function readEmployeeRatings(employeeId) {
   }
 }
 
+
 // export async function readOfferReplies(employerId) {
 //   try {
 //     let offers = [];
@@ -557,6 +558,41 @@ export async function readDesignations(id) {
     data.push(designation);
   });
   return data;
+}
+
+export async function sendVerificationRequest(data) {
+  let newVerfication = new Verification();
+  newVerfication = {
+    isActive: true,
+    isVerified: false,
+    referenceNumber: data.referenceNumber,
+    employerEmail: data.employerEmail,
+    employerId: data.employerId,
+    employeeFirstName: data.employeeFirstName,
+    employeeLastName: data.employeeLastName,
+    datesEmployedFrom: data.datesEmployedFrom,
+    datesEmployedTo: data.datesEmployedTo,
+    employeeDesignation: data.employeeDesignation,
+    reasonForLeaving: data.reasonForLeaving,
+    employeeCompanyLocation: data.employeeCompanyLocation,
+    typeOfEmployment: data.typeOfEmployment,
+    questions: data.questions,
+    verificationByEmail: data.verificationByEmail,
+  };
+  return await addDocument(Collections.verfications, newVerfication);
+}
+export async function sendVerifiedVerification(data,id) {
+  await updateDocument(
+    Collections.verfications,
+    {
+      isVerified: true,
+      changes: data.changes,
+      verificationByName: data.verificationByName,
+      verificationByDesignation: data.verificationByDesignation,
+      verificationByDepartment: data.verificationByDepartment,
+    },
+    id
+  );
 }
 export async function writeDesignation(companyId, name) {
   let newRequest = new Request();
@@ -814,28 +850,6 @@ export async function sendRequestToViewAssesment(data) {
     emailAvailable: data.emailAvailable,
   };
   return await addDocument(Collections.requests, newRequest);
-}
-
-export async function sendVerificationRequest(data) {
-  let newVerfication = new Verification();
-  newVerfication = {
-    isActive: false,
-    isVerified: false,
-    referenceNumber: data.referenceNumber,
-    employeeFirstName: data.employeeFirstName,
-    employeeLastName: data.employeeLastName,
-    datesEmployedFrom: data.datesEmployedFrom,
-    datesEmployedTo: data.datesEmployedTo,
-    employeeDesignation: data.employeeDesignation,
-    reasonForLeaving: data.reasonForLeaving,
-    employeeCompanyLocation: data.employeeCompanyLocation,
-    typeOfEmployment: data.typeOfEmployment,
-    questions: data.questions,
-    verifiedByName: data.verifiedByName,
-    verifiedByDesignation: data.verifiedByDesignation,
-    verifiedByDepartment: data.verifiedByDepartment,
-  };
-  return await addDocument(Collections.verfications, newVerfication);
 }
 
 
