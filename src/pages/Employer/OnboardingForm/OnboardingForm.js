@@ -13,7 +13,7 @@ import { checkIfAvailable } from "../../../utils/FirebaseUtils";
 import { useEffect } from "react";
 import { Select, Space } from "antd";
 import { Button, Input, Divider, message } from "antd";
-import emailjs from 'emailjs-com'
+import emailjs from "emailjs-com";
 
 const initialValues = {
   email: "",
@@ -151,28 +151,20 @@ function OnboardingForm() {
   };
 
   return (
-    <div
-      className="createemp container"
-      style={{ height: "auto" }}>
-      <div
-        className="back mt-2"
-        onClick={handleBack}>
-        <GoChevronLeft
-          style={{ color: "#9EC2AD" }}
-          size={25}
-        />
+    <div className="createemp container" style={{ height: "auto" }}>
+      <div className="back mt-2" onClick={handleBack}>
+        <GoChevronLeft style={{ color: "#9EC2AD" }} size={25} />
       </div>
-      <div
-        className="container-fluid"
-        id="On-board">
+      <div className="container-fluid" id="On-board">
         <div className="row d-flex  align-items-center">
           <div className="col-12">
             <div className="onboard-form-1">
               <p className="onboard-heading">On-Board New Employee</p>
-              <div className="mx-auto d-flex flex-column justify-content-center align-items-center">
+              <div className="mx-auto d-flex flex-column justify-content-center align-items-center mb-5">
                 <form
                   onSubmit={handleSubmit}
-                  style={{ width: "100%", display: "contents" }}>
+                  style={{ width: "100%", display: "contents" }}
+                >
                   <div className="form-item email">
                     <input
                       type="email"
@@ -187,7 +179,8 @@ function OnboardingForm() {
                       emailAvailable
                         ? { color: "red", pointerEvents: "none" }
                         : { display: "none" }
-                    }>
+                    }
+                  >
                     Not on clearhire - an email will be sent to them instead
                   </p>
 
@@ -233,7 +226,8 @@ function OnboardingForm() {
                           <Space
                             style={{
                               padding: "0 8px 4px",
-                            }}>
+                            }}
+                          >
                             <Input
                               placeholder="Add new designation"
                               ref={ipRef}
@@ -245,7 +239,8 @@ function OnboardingForm() {
                             <Button
                               type="text"
                               icon={<PlusOutlined />}
-                              onClick={(e) => addDesignation(e)}>
+                              onClick={(e) => addDesignation(e)}
+                            >
                               Add
                             </Button>
                           </Space>
@@ -315,14 +310,9 @@ function OnboardingForm() {
                     </div>
                   </div>
                   <div className="form-item">
-                    <label
-                      htmlFor="file"
-                      className="file-input-label">
+                    <label htmlFor="file" className="file-input-label">
                       {file !== "" ? file : "Upload Offer Letter"}
-                      <img
-                        src={add}
-                        alt=""
-                      />
+                      <img src={add} alt="" />
                     </label>
                     <input
                       type="file"
@@ -340,7 +330,8 @@ function OnboardingForm() {
                     <button
                       type="submit"
                       // onClick={handleSubmit}
-                      className="send-btn mb-4">
+                      className="send-btn"
+                    >
                       <i className="fa-solid fa-plus s-1"></i>
                       Send Offer Letter
                     </button>
