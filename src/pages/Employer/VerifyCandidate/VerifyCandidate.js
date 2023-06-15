@@ -12,6 +12,7 @@ const initialValues = {
   referenceNumber: "",
   employerEmail: "",
   employerId: "",
+  requestingCompanyName: "",
   employeeFirstName: "",
   employeeLastName: "",
   datesEmployedFrom: "",
@@ -24,6 +25,7 @@ const initialValues = {
   verificationByEmail: "",
 };
 const VerifyCandidate = () => {
+  const userDatas = JSON.parse(sessionStorage.getItem("userData"));
   const [values, setValues] = useState(initialValues);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -31,6 +33,15 @@ const VerifyCandidate = () => {
       ...values,
       [name]: value,
     });
+  };
+  const onTypeOfEmploymentChange = (event) => {
+    values.typeOfEmployment = event;
+  };
+  const handleSubmit = () => {
+    values.employerEmail = userDatas.data.employerEmail;
+    values.employerId = userDatas.id;
+    values.requestingCompanyName = userDatas.data.companyName;
+    console.log(values);
   };
   return (
     <div
@@ -78,7 +89,7 @@ const VerifyCandidate = () => {
           label={"Reference Number"}
           type={"text"}
           name={"referenceNumber"}
-          // value={values.email}
+          value={values.referenceNumber}
           onChange={handleInputChange}
           placeholder={"Enter candidate's reference number"}
         />
@@ -93,16 +104,16 @@ const VerifyCandidate = () => {
         <InputField
           label={"First Name"}
           type={"text"}
-          name={"firstName"}
-          // value={values.email}
+          name={"employeeFirstName"}
+          value={values.employeeFirstName}
           onChange={handleInputChange}
           placeholder={"Enter candidate's first name"}
         />
         <InputField
           label={"Last Name"}
           type={"text"}
-          name={"lastName"}
-          // value={values.email}
+          name={"employeeLastName"}
+          value={values.employeeLastName}
           onChange={handleInputChange}
           placeholder={"Enter candidate's last name"}
         />
@@ -120,8 +131,8 @@ const VerifyCandidate = () => {
           <DateField
             label={"Employed From"}
             type={"text"}
-            name={"companyName"}
-            // value={values.email}
+            name={"datesEmployedFrom"}
+            value={values.datesEmployedFrom}
             onChange={handleInputChange}
             placeholder={"From"}
           />
@@ -133,8 +144,8 @@ const VerifyCandidate = () => {
           <DateField
             label={"Employed To"}
             type={"text"}
-            name={"companyName"}
-            // value={values.email}
+            name={"datesEmployedTo"}
+            value={values.datesEmployedTo}
             onChange={handleInputChange}
             placeholder={"To"}
           />
@@ -146,8 +157,8 @@ const VerifyCandidate = () => {
           <InputField
             label={"Designation"}
             type={"text"}
-            name={"companyName"}
-            // value={values.email}
+            name={"employeeDesignation"}
+            value={values.employeeDesignation}
             onChange={handleInputChange}
             placeholder={"Enter candidate's designation"}
           />
@@ -159,8 +170,8 @@ const VerifyCandidate = () => {
         <TextArea
           label={"Reason for Leaving"}
           type={"text"}
-          name={"companyName"}
-          // value={values.email}
+          name={"reasonForLeaving"}
+          value={values.reasonForLeaving}
           onChange={handleInputChange}
           placeholder={"Write candidate's reason for leaving"}
         />
@@ -175,17 +186,17 @@ const VerifyCandidate = () => {
         <InputField
           label={"Location"}
           type={"text"}
-          name={"companyName"}
-          // value={values.email}
+          name={"employeeCompanyLocation"}
+          value={values.employeeCompanyLocation}
           onChange={handleInputChange}
           placeholder={"Enter candidate's previous work location"}
         />
         <DropDownField
           label={"Full time/Part time"}
           type={"text"}
-          name={"companyName"}
-          // value={values.email}
-          onChange={handleInputChange}
+          name={"typeOfEmployment"}
+          value={values.typeOfEmployment}
+          onChange={onTypeOfEmploymentChange}
           placeholder={"Enter candidate's work type"}
           options={[
             { value: "Permanent Full-Time", label: "Permanent Full-Time" },
@@ -267,7 +278,7 @@ const VerifyCandidate = () => {
         className="d-flex align-self-start flex-column mt-3"
         style={{ width: "100%" }}>
         <p style={{ fontWeight: "bold", fontSize: "1.1rem" }}>
-          Enter the details of the person who verified the candidate
+          Enter the Email Id of the person who will verify the candidate
         </p>
         <div
           className="d-flex"
@@ -278,26 +289,10 @@ const VerifyCandidate = () => {
           }}>
           <InputField
             type={"text"}
-            name={"companyName"}
-            // value={values.email}
+            name={"verificationByEmail"}
+            value={values.verificationByEmail}
             onChange={handleInputChange}
-            placeholder={"Name"}
-          />
-          <InputField
-            type={"text"}
-            name={"companyName"}
-            // value={values.email}
-            onChange={handleInputChange}
-            placeholder={"Designation"}
-          />
-        </div>
-        <div style={{ width: "49%" }}>
-          <InputField
-            type={"text"}
-            name={"companyName"}
-            // value={values.email}
-            onChange={handleInputChange}
-            placeholder={"Department"}
+            placeholder={"Email"}
           />
         </div>
       </div>
@@ -308,7 +303,11 @@ const VerifyCandidate = () => {
           *By clicking the submit button, you are sending this form to the
           previous employer of the candidate
         </p>
-        <Button className="signupBtn mt-0">Submit</Button>
+        <Button
+          onClick={handleSubmit}
+          className="signupBtn mt-0">
+          Submit
+        </Button>
       </div>
     </div>
   );

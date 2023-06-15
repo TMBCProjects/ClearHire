@@ -570,8 +570,10 @@ export async function sendVerificationRequest(data) {
     employerId: data.employerId,
     employeeFirstName: data.employeeFirstName,
     employeeLastName: data.employeeLastName,
-    datesEmployedFrom: data.datesEmployedFrom,
-    datesEmployedTo: data.datesEmployedTo,
+    datesEmployedFrom: new Date(data.datesEmployedFrom).toLocaleDateString(
+      "en-GB"
+    ),
+    datesEmployedTo: new Date(data.datesEmployedTo).toLocaleDateString("en-GB"),
     employeeDesignation: data.employeeDesignation,
     reasonForLeaving: data.reasonForLeaving,
     employeeCompanyLocation: data.employeeCompanyLocation,

@@ -3,6 +3,7 @@ export default class Verification {
   isVerified = false;
   employerEmail = "";
   employerId = "";
+  requestingCompanyName = "";
   referenceNumber = "";
   employeeFirstName = "";
   employeeLastName = "";
