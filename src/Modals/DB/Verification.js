@@ -3,6 +3,7 @@ export default class Verification {
   isVerified = false;
   employerEmail = "";
   employerId = "";
+  requestingCompanyName = "";
   referenceNumber = "";
   employeeFirstName = "";
   employeeLastName = "";
@@ -13,7 +14,8 @@ export default class Verification {
   reasonForLeaving = "";
   employeeCompanyLocation = "";
   typeOfEmployment = "";
-  questions = [];
+  questionsList = [];
+  answersForQuestionList = [];
   verificationByEmail = "";
   verificationByName = "";
   verificationByDesignation = "";

@@ -567,18 +567,22 @@ export async function sendVerificationRequest(data) {
     isVerified: false,
     referenceNumber: data.referenceNumber,
     employerEmail: data.employerEmail,
+    requestingCompanyName: data.requestingCompanyName,
     employerId: data.employerId,
     employeeFirstName: data.employeeFirstName,
     employeeLastName: data.employeeLastName,
-    datesEmployedFrom: data.datesEmployedFrom,
-    datesEmployedTo: data.datesEmployedTo,
+    datesEmployedFrom: new Date(data.datesEmployedFrom).toLocaleDateString(
+      "en-GB"
+    ),
+    datesEmployedTo: new Date(data.datesEmployedTo).toLocaleDateString("en-GB"),
     employeeDesignation: data.employeeDesignation,
     reasonForLeaving: data.reasonForLeaving,
     employeeCompanyLocation: data.employeeCompanyLocation,
     typeOfEmployment: data.typeOfEmployment,
-    questions: data.questions,
+    questionsList: data.questionsList,
     verificationByEmail: data.verificationByEmail,
   };
+  console.log(newVerfication);
   return await addDocument(Collections.verfications, newVerfication);
 }
 export async function sendVerifiedVerification(data,id) {
@@ -587,6 +591,7 @@ export async function sendVerifiedVerification(data,id) {
     {
       isVerified: true,
       changes: data.changes,
+      answersForQuestionList: data.answersForQuestionList,
       verificationByName: data.verificationByName,
       verificationByDesignation: data.verificationByDesignation,
       verificationByDepartment: data.verificationByDepartment,
