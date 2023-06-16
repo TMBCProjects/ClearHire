@@ -30,6 +30,7 @@ import SignUpChooseUserGoogle from "./components/SignupWithGoogle/SignUpChooseUs
 import RecruitmentPool from "./pages/Employer/RecruitmentPool/RecruitmentPool";
 import SendResgination from "./pages/Employer/sendResignation/sendResgination";
 import VerifyCandidate from './pages/Employer/VerifyCandidate/VerifyCandidate'
+import ViewVerification from "./pages/Employer/ViewVerification/ViewVerification";
 function App() {
   return (
     <div className="main">
@@ -118,6 +119,9 @@ function App() {
                   <Route
                     path="/verify-candidate"
                     element={<VerifyCandidate />}></Route>
+                  <Route
+                    path="/view-verification"
+                    element={<ViewVerification />}></Route>
                 </Routes>
               </div>
             ) : (

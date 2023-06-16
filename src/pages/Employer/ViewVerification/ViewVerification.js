@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import './VerifyCandidate.css'
 import InputField from '../../../components/Input/InputField';
 import TextArea from '../../../components/Input/TextArea';
 import YesOrNo from '../../../components/Input/YesOrNo';
@@ -8,8 +7,9 @@ import DropDownField from '../../../components/Input/DropDownField'
 import { PlusOutlined } from "@ant-design/icons";
 import { Button } from 'antd';
 import Dropdown from "../../../components/Dropdrowns/Dropdown";
+import "../ViewVerification/ViewVerification.css"
 
-const VerifyCandidate = () => {
+const ViewVerification = () => {
     const [qCount, setQCount] = useState(1);
     const [CandidateDetails, setCandidateDetails] = useState([])
     const ansType = ["Short Answer", "MCQ", "Select"];
@@ -37,64 +37,218 @@ const VerifyCandidate = () => {
                     fontWeight: "500",
                     fontSize: '2.4em',
 
-                }}>Verify your Candidate</h1>
+                }}>Candidate details to be verified</h1>
                 <p style={{
                     width: '600px',
                     fontSize: '1rem',
                     textAlign: 'center',
                     fontWeight: '500'
-                }}>Entering the details of candidate and send it to candidate's previous company to veryfy candidate's details</p>
+                }}>Fill this form to help the current employer to verify your previous candidate.</p>
             </div>
-            <div className='d-flex justify-content-center align-items-center my-5'
-                style={{
-                    borderTop: "1px solid #000",
-                    borderBottom: "1px solid #000",
-                    padding: "1rem",
-                    paddingBottom: "0",
-                    width: '45rem'
-                }}
-            >
-                <p style={{ fontWeight: 'bold', fontSize: '1.5rem' }}>Enter the details provide by the company</p>
-            </div>
-            <div className="d-flex" style={{ width: '50%', alignSelf: 'flex-start' }}>
-                <InputField
-                    label={"Reference Number"}
-                    type={"text"}
-                    name={"referenceNumber"}
-                    // value={values.email}
-                    onChange={handleInputChange}
-                    placeholder={
-                        "Enter candidate's reference number"
-                    }
-                />
+
+            <div className="d-flex align-self-start mt-3" style={{
+                justifyContent: "space-between",
+                width: "100%",
+                gap: '1rem'
+            }}>
+                <div className='questions'>
+                    <span>Reference Number</span>
+                    <YesOrNo
+                        label={"1445345654"}
+                        type={"text"}
+                        options={[
+                            {
+                                label: 'Correct',
+                                value: 'Correct',
+                            },
+                            {
+                                label: 'Incorrect',
+                                value: 'Incorrect',
+                            }
+                        ]}
+                    />
+                </div>
+
+                <div className='questions'>
+                    <span>Candidate Name</span>
+                    <YesOrNo
+                        label={"Ken Adams"}
+                        type={"text"}
+                        options={[
+                            {
+                                label: 'Correct',
+                                value: 'Correct',
+                            },
+                            {
+                                label: 'Incorrect',
+                                value: 'Incorrect',
+                            }
+                        ]}
+                    />
+                </div>
+
+
             </div>
             <div className="d-flex align-self-start mt-3" style={{
                 justifyContent: "space-between",
                 width: "100%",
                 gap: '1rem'
             }}>
-                <InputField
-                    label={"First Name"}
-                    type={"text"}
-                    name={"firstName"}
-                    // value={values.email}
-                    onChange={handleInputChange}
-                    placeholder={
-                        "Enter candidate's first name"
-                    }
-                />
-                <InputField
-                    label={"Last Name"}
-                    type={"text"}
-                    name={"lastName"}
-                    // value={values.email}
-                    onChange={handleInputChange}
-                    placeholder={
-                        "Enter candidate's last name"
-                    }
-                />
+                <div className='questions'>
+                    <span>Dates Employed</span>
+                    <YesOrNo
+                        label={"12/08/2015 to 22/01/2020"}
+                        type={"text"}
+                        options={[
+                            {
+                                label: 'Correct',
+                                value: 'Correct',
+                            },
+                            {
+                                label: 'Incorrect',
+                                value: 'Incorrect',
+                            }
+                        ]}
+                    />
+                </div>
+
+                <div className='questions'>
+                    <span>Designation</span>
+                    <YesOrNo
+                        label={"Software Engineer"}
+                        type={"text"}
+                        options={[
+                            {
+                                label: 'Correct',
+                                value: 'Correct',
+                            },
+                            {
+                                label: 'Incorrect',
+                                value: 'Incorrect',
+                            }
+                        ]}
+                    />
+                </div>
             </div>
+
+            <div className="d-flex mt-3" style={{
+                width: "100%",
+            }}>
+                <div className='questions' style={{width: "100%"}}>
+                    <span>Reason for leaving</span>
+                    <YesOrNo
+                        label={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."}
+                        type={"text"}
+                        options={[
+                            {
+                                label: 'Correct',
+                                value: 'Correct',
+                            },
+                            {
+                                label: 'Incorrect',
+                                value: 'Incorrect',
+                            }
+                        ]}
+                    />
+                </div>
+            </div>
+
             <div className="d-flex align-self-start mt-3" style={{
+                justifyContent: "space-between",
+                width: "100%",
+                gap: '1rem'
+            }}>
+                <div className='questions'>
+                    <span>Location</span>
+                    <YesOrNo
+                        label={"Trichy"}
+                        type={"text"}
+                        options={[
+                            {
+                                label: 'Correct',
+                                value: 'Correct',
+                            },
+                            {
+                                label: 'Incorrect',
+                                value: 'Incorrect',
+                            }
+                        ]}
+                    />
+                </div>
+
+                <div className='questions'>
+                    <span>Work Type</span>
+                    <YesOrNo
+                        label={"Permanent full-time"}
+                        type={"text"}
+                        options={[
+                            {
+                                label: 'Correct',
+                                value: 'Correct',
+                            },
+                            {
+                                label: 'Incorrect',
+                                value: 'Incorrect',
+                            }
+                        ]}
+                    />
+                </div>
+            </div>
+            <div className="d-flex align-self-start mt-3" style={{ width: '100%' }}>
+                <YesOrNo
+                    label={"Is the candidate eligible for Rehire?"}
+                    type={"text"}
+                    options={[
+                        {
+                            label: 'Yes',
+                            value: 'Yes',
+                        },
+                        {
+                            label: 'No',
+                            value: 'No',
+                        }
+                    ]}
+                />
+
+            </div>
+            <div className="d-flex align-self-start mt-3" style={{ width: '100%' }}>
+                <YesOrNo
+                    label={"Is the document(Experience letter) authentic?"}
+                    type={"text"}
+                    options={[
+                        {
+                            label: 'Yes',
+                            value: 'Yes',
+                        },
+                        {
+                            label: 'No',
+                            value: 'No',
+                        }
+                    ]}
+                />
+
+            </div>
+            <div className="d-flex align-self-start mt-3" style={{ width: '100%' }}>
+                <YesOrNo
+                    label={"How did the candidate's way of relieving?"}
+                    type={"text"}
+                    options={[
+                        {
+                            label: 'Yes',
+                            value: 'Yes',
+                        },
+                        {
+                            label: 'No',
+                            value: 'No',
+                        }
+                    ]}
+                    placeholder={
+                        "Enter the company name."
+                    }
+                />
+
+            </div>
+            {/* <div className="d-flex align-self-start mt-3" style={{
                 width: '100%',
                 gap: '1.4rem'
             }}>
@@ -188,7 +342,7 @@ const VerifyCandidate = () => {
                     ]}
                 />
             </div>
-            
+           
             {[...Array(qCount)].map((e, i) => (
                 <div style={{ width: "100%" }}>
                     <div key={i}>
@@ -262,7 +416,7 @@ const VerifyCandidate = () => {
                     />
                 </div>
 
-            </div>
+            </div> */}
             <div className="d-flex align-self-start flex-column my-3" style={{ width: '100%' }}>
                 <p style={{ fontSize: '.8rem', textAlign: 'center' }}>*By clicking the submit button, you are sending this form to the previous employer of the candidate</p>
                 <Button onClick={(e) => onSubmit(e)} className="signupBtn mt-0">Submit</Button>
@@ -273,4 +427,4 @@ const VerifyCandidate = () => {
     )
 }
 
-export default VerifyCandidate
+export default ViewVerification
