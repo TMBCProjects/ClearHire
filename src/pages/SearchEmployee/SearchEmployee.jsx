@@ -193,12 +193,6 @@ export default function SearchEmployee() {
               })?.length === 0 ? { justifyContent: "center" } : {}
             }
           >
-            {employeeList?.length === 0 && (
-              <Empty
-                image={Empty.PRESENTED_IMAGE_SIMPLE}
-                description="No Records"
-              />
-            )}
             {employeeList
               ?.filter((item) => {
                 const { typeOfEmployment, designation, salary, location } =
