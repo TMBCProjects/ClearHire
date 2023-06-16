@@ -91,8 +91,8 @@ const Approval = () => {
         <div className="col-4">
           <h3 className="fw-bold fs-30">Sent Offers (Pending)</h3>
         </div>
-        <div className="col-8 d-flex justify-content-end align-items-center companyFilters mobileFilter">
-          <div className="form-check form-check-inline mx-0 mx-md-3">
+        <div className="col-8 d-flex justify-content-end align-items-center">
+          <div className="form-check form-check-inline mx-0 mx-md-3 companyFilters">
             <input
               className="form-check-input"
               type="radio"
@@ -109,7 +109,7 @@ const Approval = () => {
             </label>
           </div>
 
-          <div className="form-check form-check-inline mx-0 mx-md-3">
+          <div className="form-check form-check-inline mx-0 mx-md-3 companyFilters">
             <input
               className="form-check-input"
               type="radio"

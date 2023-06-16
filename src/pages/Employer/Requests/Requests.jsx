@@ -79,11 +79,11 @@ const Requests = () => {
   return (
     <div id="employer-approval" className="container">
       <div className="row d-flex justify-content-between align-items-center">
-        <div className="col-md-6 ">
+        <div className="col-6 ">
           <h3 className="fw-bold fs-30">Sent Approvals (Pending)</h3>
         </div>
-        <div className="col-md-6 d-flex justify-content-md-end justify-content-md-center justify-content-between  align-items-center mobile-filters">
-          <div className="form-check form-check-inline mx-3">
+        <div className="col-6 d-flex justify-content-md-end justify-content-md-center justify-content-between  align-items-center">
+          <div className="form-check form-check-inline mx-3 requestFilters">
             <input
               className="form-check-input"
               type="radio"
@@ -100,7 +100,7 @@ const Requests = () => {
             </label>
           </div>
 
-          <div className="form-check form-check-inline mx-3">
+          <div className="form-check form-check-inline mx-3 requestFilters">
             <input
               className="form-check-input"
               type="radio"

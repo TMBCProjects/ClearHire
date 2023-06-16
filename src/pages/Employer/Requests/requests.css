@@ -122,4 +122,8 @@
     .form-check {
         padding-left: 0 !important;
     }
+
+    .requestFilters {
+        display: none !important;
+    }
 }
