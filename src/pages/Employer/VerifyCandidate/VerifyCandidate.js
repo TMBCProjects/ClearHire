@@ -57,7 +57,7 @@ const VerifyCandidate = () => {
     console.log(CandidateDetails);
     sendVerificationRequest(CandidateDetails)
       .then(() => {
-        window.location.href = "/";
+        // window.location.href = "/";
       })
       .catch((err) => {
         alert(err);
@@ -157,7 +157,7 @@ const VerifyCandidate = () => {
           <DateField
             label={"Employed From"}
             type={"text"}
-            name={"employedFrom"}
+            name={"datesEmployedFrom"}
             // value={values.email}
             onChange={handleInputChange}
             placeholder={"From"}
@@ -170,7 +170,7 @@ const VerifyCandidate = () => {
           <DateField
             label={"Employed To"}
             type={"text"}
-            name={"employedTo"}
+            name={"datesEmployedTo"}
             // value={values.email}
             onChange={handleInputChange}
             placeholder={"To"}
