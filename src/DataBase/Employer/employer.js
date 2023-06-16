@@ -579,7 +579,7 @@ export async function sendVerificationRequest(data) {
     reasonForLeaving: data.reasonForLeaving,
     employeeCompanyLocation: data.employeeCompanyLocation,
     typeOfEmployment: data.typeOfEmployment,
-    questions: data.questions,
+    questionsList: data.questionsList,
     verificationByEmail: data.verificationByEmail,
   };
   return await addDocument(Collections.verfications, newVerfication);

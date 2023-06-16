@@ -14,7 +14,8 @@ export default class Verification {
   reasonForLeaving = "";
   employeeCompanyLocation = "";
   typeOfEmployment = "";
-  questions = [];
+  questionsList = [];
+  answersForQuestionList = [];
   verificationByEmail = "";
   verificationByName = "";
   verificationByDesignation = "";

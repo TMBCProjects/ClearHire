@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./VerifyCandidate.css";
 import InputField from "../../../components/Input/InputField";
 import TextArea from "../../../components/Input/TextArea";
-import YesOrNo from "../../../components/Input/YesOrNo";
 import DateField from "../../../components/Input/DateFiled";
 import DropDownField from "../../../components/Input/DropDownField";
 import { PlusOutlined } from "@ant-design/icons";
@@ -10,9 +9,11 @@ import { Button } from "antd";
 import Dropdown from "../../../components/Dropdrowns/Dropdown";
 
 const VerifyCandidate = () => {
+  const userDatas = JSON.parse(sessionStorage.getItem("userData"));
   const [qCount, setQCount] = useState(1);
   const [CandidateDetails, setCandidateDetails] = useState([]);
-  const ansType = ["Short Answer", "MCQ", "Select"];
+  const [questionsList, setQuestionsList] = useState([]);
+  const ansType = ["Short Answer", "Yes/No"];
   const addques = () => {
     setQCount(qCount + 1);
   };
@@ -22,7 +23,36 @@ const VerifyCandidate = () => {
       [e.target.name]: e.target.value,
     }));
   };
+  const handleTypeChange = (e) => {
+    setCandidateDetails((CandidateDetails) => ({
+      ...CandidateDetails,
+      typeOfEmployment: e,
+    }));
+  };
+  const handleQuestionChange = (e, i, field) => {
+    setQuestionsList((questionsList) => {
+      const updatedQuestionsList = [...questionsList];
+      updatedQuestionsList[i] = {
+        ...updatedQuestionsList[i],
+        [field]: e.target.value,
+      };
+      return updatedQuestionsList;
+    });
+  };
+
+  const handleQuesChange = (e, i) => {
+    handleQuestionChange(e, i, "question");
+  };
+
+  const handleQuesTypeChange = (e, i) => {
+    handleQuestionChange(e, i, "questionType");
+  };
+
   const onSubmit = () => {
+    CandidateDetails.employerId = userDatas.id;
+    CandidateDetails.employerEmail = userDatas.data.employerEmail;
+    CandidateDetails.requestingCompanyName = userDatas.data.companyName;
+    CandidateDetails.questionsList = questionsList;
     console.log(CandidateDetails);
   };
 
@@ -184,7 +214,7 @@ const VerifyCandidate = () => {
           type={"text"}
           name={"workType"}
           // value={values.email}
-          onChange={handleInputChange}
+          onChange={handleTypeChange}
           placeholder={"Enter candidate's work type"}
           options={[
             { value: "Permanent Full-Time", label: "Permanent Full-Time" },
@@ -205,7 +235,7 @@ const VerifyCandidate = () => {
                 type="text"
                 id={i}
                 //defaultValue={qType[i].question}
-                //onChange={(e) => handleQuesChange(e, i)}
+                onChange={(e) => handleQuesChange(e, i)}
                 placeholder="Enter Question"
                 className="f-34 f-3"
                 style={{ width: "85%", backgroundColor: "white" }}
@@ -218,7 +248,7 @@ const VerifyCandidate = () => {
                 type={"text"}
                 name={"Choose Answer type"}
                 id={"type" + i}
-                //onChange={(e) => handleQuesTypeChange(e, i)}
+                onChange={(e) => handleQuesTypeChange(e, i)}
               />
             </div>
           </div>
@@ -255,26 +285,10 @@ const VerifyCandidate = () => {
           }}>
           <InputField
             type={"text"}
-            name={"Name"}
+            name={"verificationByEmail"}
             // value={values.email}
             onChange={handleInputChange}
-            placeholder={"Name"}
-          />
-          <InputField
-            type={"text"}
-            name={"EmpDesignation"}
-            // value={values.email}
-            onChange={handleInputChange}
-            placeholder={"Designation"}
-          />
-        </div>
-        <div style={{ width: "49%" }}>
-          <InputField
-            type={"text"}
-            name={"Department"}
-            // value={values.email}
-            onChange={handleInputChange}
-            placeholder={"Department"}
+            placeholder={"verificationByEmail"}
           />
         </div>
       </div>
