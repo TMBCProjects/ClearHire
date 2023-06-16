@@ -41,7 +41,7 @@ const Profile = () => {
         <div>
           <p>Location</p>
           <p>
-            {userDatas.data.companyState} - {userDatas.data.companyCountry}
+            {userDatas.data.companyLocations.map((item) => { return (<p>{item}</p>) })}
           </p>
         </div>
       </div>

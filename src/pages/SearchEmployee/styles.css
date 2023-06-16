@@ -165,7 +165,7 @@
   flex-wrap: wrap;
   gap: 3rem !important;
   justify-content: center;
-  width: 100vw;
+  /* width: 100vw; */
   height: auto;
   z-index: inherit;
 }
@@ -218,4 +218,10 @@
   }
 
 
+}
+
+@media (max-width:576px) {
+  .assess-card .btn button {
+    font-size: .7rem;
+  }
 }

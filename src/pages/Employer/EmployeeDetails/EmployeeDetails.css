@@ -329,6 +329,15 @@
 
 /* media queries for mobile menu  */
 @media (max-width:767px) {
+    .main-container {
+        padding: 1vh 5vh;
+    }
+
+    .portfolio-btn {
+        display: flex;
+        margin: auto;
+    }
+
     .companyLogo {
         width: 70px;
         height: 70px;
@@ -386,7 +395,11 @@
         width: 50% !important;
     }
 }
-
+@media (max-width:567px) {
+    .employeeDetails p {
+        font-size: 16px;
+    }
+}
 
 
 .prevSkillsContainer {
