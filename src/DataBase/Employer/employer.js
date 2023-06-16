@@ -582,6 +582,7 @@ export async function sendVerificationRequest(data) {
     questionsList: data.questionsList,
     verificationByEmail: data.verificationByEmail,
   };
+  console.log(newVerfication);
   return await addDocument(Collections.verfications, newVerfication);
 }
 export async function sendVerifiedVerification(data,id) {

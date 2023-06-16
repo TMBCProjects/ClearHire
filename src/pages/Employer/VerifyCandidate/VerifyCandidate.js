@@ -7,6 +7,7 @@ import DropDownField from "../../../components/Input/DropDownField";
 import { PlusOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import Dropdown from "../../../components/Dropdrowns/Dropdown";
+import { sendVerificationRequest } from "../../../DataBase/Employer/employer";
 
 const VerifyCandidate = () => {
   const userDatas = JSON.parse(sessionStorage.getItem("userData"));
@@ -54,6 +55,13 @@ const VerifyCandidate = () => {
     CandidateDetails.requestingCompanyName = userDatas.data.companyName;
     CandidateDetails.questionsList = questionsList;
     console.log(CandidateDetails);
+    sendVerificationRequest(CandidateDetails)
+      .then(() => {
+        window.location.href = "/";
+      })
+      .catch((err) => {
+        alert(err);
+      });
   };
 
   const delques = () => {
@@ -122,7 +130,7 @@ const VerifyCandidate = () => {
         <InputField
           label={"First Name"}
           type={"text"}
-          name={"firstName"}
+          name={"employeeFirstName"}
           // value={values.email}
           onChange={handleInputChange}
           placeholder={"Enter candidate's first name"}
@@ -130,7 +138,7 @@ const VerifyCandidate = () => {
         <InputField
           label={"Last Name"}
           type={"text"}
-          name={"lastName"}
+          name={"employeeLastName"}
           // value={values.email}
           onChange={handleInputChange}
           placeholder={"Enter candidate's last name"}
@@ -175,7 +183,7 @@ const VerifyCandidate = () => {
           <InputField
             label={"Designation"}
             type={"text"}
-            name={"designation"}
+            name={"employeeDesignation"}
             // value={values.email}
             onChange={handleInputChange}
             placeholder={"Enter candidate's designation"}
@@ -188,7 +196,7 @@ const VerifyCandidate = () => {
         <TextArea
           label={"Reason for Leaving"}
           type={"text"}
-          name={"reason"}
+          name={"reasonForLeaving"}
           // value={values.email}
           onChange={handleInputChange}
           placeholder={"Write candidate's reason for leaving"}
@@ -204,7 +212,7 @@ const VerifyCandidate = () => {
         <InputField
           label={"Location"}
           type={"text"}
-          name={"workLocation"}
+          name={"employeeCompanyLocation"}
           // value={values.email}
           onChange={handleInputChange}
           placeholder={"Enter candidate's previous work location"}
