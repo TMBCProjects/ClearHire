@@ -314,7 +314,7 @@ textarea:focus {
 }
 @media (max-width:576px) {
     .employe-score {
-        padding: 5% 0%;
+        padding: 2% 0%;
 
     }
 
@@ -342,5 +342,42 @@ textarea:focus {
 
     .submit {
         margin: 20px 0px !important;
+    }
+
+    .prof-text {
+        width: 250px;
+    }
+    .prof-img img {
+        width: 80px;
+        height: 80px;
+    }
+    .text h6 {
+        margin-left: 1rem;
+    }
+    .heading h3 {
+        font-size: 14px;
+        width: 100px;
+    }
+    .circle-box {
+        justify-content: start;
+        width: 30% !important;
+    }
+    .slider-1 {
+        justify-content: start;
+    }
+    .range-1 {
+        width: 100%;
+        height: 2px;
+    }
+    .slied {
+        margin-left: -8%;
+        width: 25% !important;
+    }
+    .note {
+        padding: 6% 0% 1.5% 0% !important;
+    }
+    .note-0 {
+        width: 50% !important;
+        padding: 0% !important;
     }
 }

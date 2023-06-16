@@ -328,6 +328,12 @@
 }
 
 /* media queries for mobile menu  */
+@media (max-width:992px) {
+    .progressBars p {
+        font-size: 15px;
+        padding-top: 10px;
+    }
+}
 @media (max-width:767px) {
     .main-container {
         padding: 1vh 5vh;

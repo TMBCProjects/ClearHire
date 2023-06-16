@@ -182,7 +182,9 @@
   .search-settings {
     display: none;
   }
-
+  .assess-card .btn button {
+    font-size: .7rem;
+  }
   .search-inputs {
     display: none;
   }
