@@ -17,9 +17,10 @@ const VerifyCandidate = () => {
     setQCount(qCount + 1);
   };
   const handleInputChange = (e) => {
-    setCandidateDetails(...CandidateDetails, {
+    setCandidateDetails((CandidateDetails) => ({
+      ...CandidateDetails,
       [e.target.name]: e.target.value,
-    });
+    }));
   };
   const onSubmit = () => {
     console.log(CandidateDetails);
@@ -118,7 +119,7 @@ const VerifyCandidate = () => {
           <DateField
             label={"Employed From"}
             type={"text"}
-            name={"companyName"}
+            name={"employedFrom"}
             // value={values.email}
             onChange={handleInputChange}
             placeholder={"From"}
@@ -131,7 +132,7 @@ const VerifyCandidate = () => {
           <DateField
             label={"Employed To"}
             type={"text"}
-            name={"companyName"}
+            name={"employedTo"}
             // value={values.email}
             onChange={handleInputChange}
             placeholder={"To"}
@@ -144,7 +145,7 @@ const VerifyCandidate = () => {
           <InputField
             label={"Designation"}
             type={"text"}
-            name={"companyName"}
+            name={"designation"}
             // value={values.email}
             onChange={handleInputChange}
             placeholder={"Enter candidate's designation"}
@@ -157,7 +158,7 @@ const VerifyCandidate = () => {
         <TextArea
           label={"Reason for Leaving"}
           type={"text"}
-          name={"companyName"}
+          name={"reason"}
           // value={values.email}
           onChange={handleInputChange}
           placeholder={"Write candidate's reason for leaving"}
@@ -173,7 +174,7 @@ const VerifyCandidate = () => {
         <InputField
           label={"Location"}
           type={"text"}
-          name={"companyName"}
+          name={"workLocation"}
           // value={values.email}
           onChange={handleInputChange}
           placeholder={"Enter candidate's previous work location"}
@@ -181,7 +182,7 @@ const VerifyCandidate = () => {
         <DropDownField
           label={"Full time/Part time"}
           type={"text"}
-          name={"companyName"}
+          name={"workType"}
           // value={values.email}
           onChange={handleInputChange}
           placeholder={"Enter candidate's work type"}
@@ -194,60 +195,7 @@ const VerifyCandidate = () => {
           ]}
         />
       </div>
-      {/* <div className="d-flex align-self-start mt-3" style={{ width: '100%' }}>
-                <YesOrNo
-                    label={"Is the candidate eligible for Rehire?"}
-                    type={"text"}
-                    options={[
-                        {
-                            label: 'Yes',
-                            value: 'Yes',
-                        },
-                        {
-                            label: 'No',
-                            value: 'No',
-                        }
-                    ]}
-                />
 
-            </div>
-            <div className="d-flex align-self-start mt-3" style={{ width: '100%' }}>
-                <YesOrNo
-                    label={"Is the document(Experience letter) authentic?"}
-                    type={"text"}
-                    options={[
-                        {
-                            label: 'Yes',
-                            value: 'Yes',
-                        },
-                        {
-                            label: 'No',
-                            value: 'No',
-                        }
-                    ]}
-                />
-
-            </div>
-            <div className="d-flex align-self-start mt-3" style={{ width: '100%' }}>
-                <YesOrNo
-                    label={"How did the candidate's way of relieving?"}
-                    type={"text"}
-                    options={[
-                        {
-                            label: 'Yes',
-                            value: 'Yes',
-                        },
-                        {
-                            label: 'No',
-                            value: 'No',
-                        }
-                    ]}
-                    placeholder={
-                        "Enter the company name."
-                    }
-                />
-
-            </div> */}
       {[...Array(qCount)].map((e, i) => (
         <div style={{ width: "100%" }}>
           <div key={i}>
@@ -307,14 +255,14 @@ const VerifyCandidate = () => {
           }}>
           <InputField
             type={"text"}
-            name={"companyName"}
+            name={"Name"}
             // value={values.email}
             onChange={handleInputChange}
             placeholder={"Name"}
           />
           <InputField
             type={"text"}
-            name={"companyName"}
+            name={"EmpDesignation"}
             // value={values.email}
             onChange={handleInputChange}
             placeholder={"Designation"}
@@ -323,7 +271,7 @@ const VerifyCandidate = () => {
         <div style={{ width: "49%" }}>
           <InputField
             type={"text"}
-            name={"companyName"}
+            name={"Department"}
             // value={values.email}
             onChange={handleInputChange}
             placeholder={"Department"}
