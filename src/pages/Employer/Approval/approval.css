@@ -135,6 +135,10 @@
     .filter-approval {
         font-size: 16px;
     }
+
+    .companyFilters {
+        display: none !important;
+    }
 }
 
 @media (max-width: 576px) {

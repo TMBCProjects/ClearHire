@@ -53,6 +53,7 @@ export default function EmployerNavbar() {
   return (
     <>
       <Drawer
+        title="Clearhire"
         placement={"left"}
         width={500}
         onClose={onMenuClose}
