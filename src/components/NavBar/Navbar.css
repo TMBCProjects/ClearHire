@@ -86,9 +86,23 @@
         right: 0rem;
     }
 
-    .navbarBody {
-        display: flex;
-        justify-content: space-evenly;
-        gap: 2vh;
+    .mobileNavbar {
+        display: block;
+
     }
+
+
+
+    .mobileNavbar .navitem {
+        padding: 10px;
+    }
+
+    .navbarHeader {
+        order: 2;
+    }
+
+    .navbarFoot {
+        order: 3;
+    }
+
 }

@@ -54,7 +54,7 @@
 @media(max-width:767px) {
     .assess-card {
         width: 20rem !important;
-        margin-left: 0.8rem;
+        /* margin-left: 0.8rem; */
     }
 
 }
