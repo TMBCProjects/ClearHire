@@ -130,7 +130,7 @@ function App() {
 
             <>
               {sessionStorage.getItem("LoggedIn") === "Employee" ? (
-                <div style={{ backgroundColor: "#F5F7F9", height: "auto" }}>
+                <div style={{ backgroundColor: "#F5F7F9", height: "100vh" }}>
                   <Navbar />
                   <Routes>
                     <Route path="/profile" element={<Profile />}></Route>
