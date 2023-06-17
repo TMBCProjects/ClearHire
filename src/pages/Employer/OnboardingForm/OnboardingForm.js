@@ -121,27 +121,15 @@ function OnboardingForm() {
     values.employerId = userDatas.id;
     values.emailAvailable = !emailAvailable;
     onboardEmployee(values).then(() => {
-      window.location.href = "/offerletter-sent";
-    });
-
-    e.preventDefault();
-
-    emailjs
-      .sendForm(
+      emailjs.sendForm(
         "service_cpytsjm",
         "template_pwvg0ae",
         e.target,
         "F3rrwZwcav-0a-BOW"
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-        },
-        (error) => {
-          console.log(error.text);
-        }
       );
-    e.target.reset();
+      window.location.href = "/offerletter-sent";
+    });
+
   };
 
   let [file, setFile] = useState("");
