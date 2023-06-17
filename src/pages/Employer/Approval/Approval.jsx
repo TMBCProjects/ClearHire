@@ -124,14 +124,6 @@ const Approval = () => {
         width={500}
         onClose={onMenuClose}
         open={menuOpen}
-        extra={
-          <Space>
-            <Button onClick={onMenuClose}>Cancel</Button>
-            <Button type="primary" onClick={onMenuClose}>
-              OK
-            </Button>
-          </Space>
-        }
       >
         <div className="form-check form-check-inline mx-0 mx-md-3 d-block">
           <input
@@ -166,6 +158,12 @@ const Approval = () => {
             Not on ClearHire
           </label>
         </div>
+        <Space className="mt-3 d-flex justify-content-end">
+          <Button onClick={onMenuClose}>Cancel</Button>
+          <Button type="primary" onClick={onMenuClose}>
+            OK
+          </Button>
+        </Space>
       </Drawer>
       <div id="employer-approval" className="container">
         <div className="row d-flex justify-content-between align-items-center">
