@@ -12,6 +12,7 @@ const ViewVerification = () => {
   const fetchedDetails = from;
   const [qCount, setQCount] = useState(1);
   const [checkDetails, setCheckDetails] = useState([]);
+  const [changes, setChanges] = useState([]);
   const [CandidateDetails, setCandidateDetails] = useState([]);
   const [questionsList, setQuestionsList] = useState([]);
   useEffect(() => {
@@ -33,8 +34,21 @@ const ViewVerification = () => {
       [e.target.name]: e.target.value,
     }));
   };
+  const handleInput2Change = (e) => {
+    setCandidateDetails((CandidateDetails) => ({
+      ...CandidateDetails,
+      [e.target.name]: e.target.value,
+    }));
+  };
+  const handleChange = (e) => {
+    setChanges((changes) => ({
+      ...changes,
+      [e.target.name]: e.target.value,
+    }));
+  };
   const onSubmit = () => {
     CandidateDetails.questionsList = questionsList;
+    // CandidateDetails.changes = changes;
     CandidateDetails.checkDetails = checkDetails;
     console.log(CandidateDetails);
   };
@@ -406,48 +420,43 @@ const ViewVerification = () => {
             <div onClick={addques} className="d-flex align-self-start mt-4" style={{ width: '100%', color: 'green', fontSize: '1.1rem', cursor: 'pointer', fontWeight: 'bold' }}>
                 <PlusOutlined style={{ marginTop: '.3rem', marginRight: '.6rem' }} />
                 <p>Add more questions</p>
-            </div>
+            </div>*/}
 
-
-            <div className="d-flex align-self-start flex-column mt-3" style={{ width: '100%' }}>
-                <p style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>Enter the details of the person who verified the candidate</p>
-                <div className='d-flex' style={{
-                    justifyContent: "space-around",
-                    gap: '1rem',
-                    marginLeft: '0'
-                }}>
-                    <InputField
-                        type={"text"}
-                        name={"Name"}
-                        // value={values.email}
-                        onChange={handleInputChange}
-                        placeholder={
-                            "Name"
-                        }
-                    />
-                    <InputField
-                        type={"text"}
-                        name={"EmpDesignation"}
-                        // value={values.email}
-                        onChange={handleInputChange}
-                        placeholder={
-                            "Designation"
-                        }
-                    />
-                </div>
-                <div style={{ width: '49%' }}>
-                    <InputField
-                        type={"text"}
-                        name={"Department"}
-                        // value={values.email}
-                        onChange={handleInputChange}
-                        placeholder={
-                            "Department"
-                        }
-                    />
-                </div>
-
-            </div> */}
+      <div
+        className="d-flex align-self-start flex-column mt-3"
+        style={{ width: "100%" }}>
+        <p style={{ fontWeight: "bold", fontSize: "1.1rem" }}>
+          Enter the details of the person who verified the candidate
+        </p>
+        <div
+          className="d-flex"
+          style={{
+            justifyContent: "space-around",
+            gap: "1rem",
+            marginLeft: "0",
+          }}>
+          <InputField
+            type={"text"}
+            name={"verificationByName"}
+            onChange={handleInput2Change}
+            placeholder={"Name"}
+          />
+          <InputField
+            type={"text"}
+            name={"verificationByDesignation"}
+            onChange={handleInput2Change}
+            placeholder={"Designation"}
+          />
+        </div>
+        <div style={{ width: "49%" }}>
+          <InputField
+            type={"text"}
+            name={"verificationByDepartment"}
+            onChange={handleInput2Change}
+            placeholder={"Department"}
+          />
+        </div>
+      </div>
       <div
         className="d-flex align-self-start flex-column my-3"
         style={{ width: "100%" }}>
