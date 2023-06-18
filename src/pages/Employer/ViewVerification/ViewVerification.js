@@ -9,8 +9,12 @@ import { Button } from "antd";
 import Dropdown from "../../../components/Dropdrowns/Dropdown";
 import "../ViewVerification/ViewVerification.css";
 import { readNotVerifiedVerifications } from "../../../DataBase/Employer/employer";
+import { useLocation } from "react-router-dom";
 
 const ViewVerification = () => {
+  const location = useLocation();
+  const { from } = location.state;
+  const fetchedDetails = from;
   const [qCount, setQCount] = useState(1);
   const [CandidateDetails, setCandidateDetails] = useState([]);
   const ansType = ["Short Answer", "Yes/No"];
