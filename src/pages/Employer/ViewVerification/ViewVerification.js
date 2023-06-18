@@ -13,24 +13,12 @@ import { readNotVerifiedVerifications } from "../../../DataBase/Employer/employe
 const ViewVerification = () => {
   const [qCount, setQCount] = useState(1);
   const [CandidateDetails, setCandidateDetails] = useState([]);
-  const ansType = ["Short Answer", "MCQ", "Select"];
-  useEffect(() => {
-    const fetchVerificationDetails = async () => {
-      try {
-        const userDatas = JSON.parse(sessionStorage.getItem("userData"));
-        const data = await readNotVerifiedVerifications(userDatas.id);
-        return data;
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchVerificationDetails().then((data) => {
-      setCandidateDetails(data);
-    });
-  }, []);
+  const ansType = ["Short Answer", "Yes/No"];
+
   const addques = () => {
     setQCount(qCount + 1);
   };
+
   const handleInputChange = (e) => {
     setCandidateDetails((CandidateDetails) => ({
       ...CandidateDetails,
