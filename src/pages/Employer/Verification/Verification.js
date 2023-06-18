@@ -1,8 +1,7 @@
 import { Empty } from 'antd'
-import React from 'react'
+import React, { useState, useEffect } from "react";
 import { readNotVerifiedVerifications } from "../../../DataBase/Employer/employer";
-import { useEffect } from "react";
-import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Verification() {
   const [CandidateDetails, setCandidateDetails] = useState([]);
@@ -24,10 +23,42 @@ function Verification() {
   }, []);
   return (
     <div>
-      <Empty
-        image={Empty.PRESENTED_IMAGE_SIMPLE}
-        description="No Records"
-      />
+      {CandidateDetails.length > 0 ? (
+        CandidateDetails?.filter((info) => {
+          return info.isActive === true;
+        }).map((info) => {
+          return (
+            <div className="col-md-3 gy-3">
+              <div className="card">
+                <div className="card-body">
+                  <h4 className="card-title fw-bold">
+                    {info.requestingCompanyName}
+                  </h4>{" "}
+                  requesting Verification of
+                  <p className="mb-1">
+                    {info.employeeFirstName + " " + info.employeeLastName}
+                  </p>
+                  <Link
+                    className="w-100 mt-3 btn"
+                    to={{
+                      pathname: "/view-verification",
+                    }}
+                    state={{ from: info }}>
+                    <button className="w-100 mt-3 btn btn-assessment">
+                      Verify
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          );
+        })
+      ) : (
+        <Empty
+          image={Empty.PRESENTED_IMAGE_SIMPLE}
+          description="No Records"
+        />
+      )}
     </div>
   );
 }

@@ -1,14 +1,7 @@
-import React, { useEffect, useState } from "react";
-import InputField from "../../../components/Input/InputField";
-import TextArea from "../../../components/Input/TextArea";
+import React, { useState } from "react";
 import YesOrNo from "../../../components/Input/YesOrNo";
-import DateField from "../../../components/Input/DateFiled";
-import DropDownField from "../../../components/Input/DropDownField";
-import { PlusOutlined } from "@ant-design/icons";
 import { Button } from "antd";
-import Dropdown from "../../../components/Dropdrowns/Dropdown";
 import "../ViewVerification/ViewVerification.css";
-import { readNotVerifiedVerifications } from "../../../DataBase/Employer/employer";
 import { useLocation } from "react-router-dom";
 
 const ViewVerification = () => {
@@ -18,7 +11,6 @@ const ViewVerification = () => {
   const [qCount, setQCount] = useState(1);
   const [CandidateDetails, setCandidateDetails] = useState([]);
   const ansType = ["Short Answer", "Yes/No"];
-
   const addques = () => {
     setQCount(qCount + 1);
   };

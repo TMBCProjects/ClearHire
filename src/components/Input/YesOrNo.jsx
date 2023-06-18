@@ -11,6 +11,7 @@ export default function InputField(props) {
             <Radio.Group
                 options={props.options}
                 onChange={props.onChange}
+                name={props.name}
                 optionType="button"
                 size='large'
                 buttonStyle="outlined"
