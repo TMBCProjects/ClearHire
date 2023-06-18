@@ -299,6 +299,12 @@ textarea:focus {
 
 }
 
+@media(max-width: 767px) {
+    .skill-assessment {
+        width: 500px;
+    }
+}
+
 @media (max-width:576px) {
     .employe-score {
         padding: 5% 0%;
@@ -308,6 +314,7 @@ textarea:focus {
     .skill-assessment {
         padding: 2% 0%;
         margin: 0% 0% !important;
+        width: 440px;
     }
 
     .note-head h3 {
