@@ -75,7 +75,7 @@ const ViewVerification = () => {
         <div className="questions">
           <span>Reference Number</span>
           <YesOrNo
-            label={"1445345654"}
+            label={fetchedDetails.referenceNumber}
             type={"text"}
             options={[
               {
@@ -93,7 +93,11 @@ const ViewVerification = () => {
         <div className="questions">
           <span>Candidate Name</span>
           <YesOrNo
-            label={"Ken Adams"}
+            label={
+              fetchedDetails.employeeFirstName +
+              " " +
+              fetchedDetails.employeeLastName
+            }
             type={"text"}
             options={[
               {
@@ -118,7 +122,11 @@ const ViewVerification = () => {
         <div className="questions">
           <span>Dates Employed</span>
           <YesOrNo
-            label={"12/08/2015 to 22/01/2020"}
+            label={
+              fetchedDetails.datesEmployedFrom +
+              " to " +
+              fetchedDetails.datesEmployedTo
+            }
             type={"text"}
             options={[
               {
@@ -136,7 +144,7 @@ const ViewVerification = () => {
         <div className="questions">
           <span>Designation</span>
           <YesOrNo
-            label={"Software Engineer"}
+            label={fetchedDetails.employeeDesignation}
             type={"text"}
             options={[
               {
@@ -162,9 +170,7 @@ const ViewVerification = () => {
           style={{ width: "100%" }}>
           <span>Reason for leaving</span>
           <YesOrNo
-            label={
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-            }
+            label={fetchedDetails.reasonForLeaving}
             type={"text"}
             options={[
               {
@@ -190,7 +196,7 @@ const ViewVerification = () => {
         <div className="questions">
           <span>Location</span>
           <YesOrNo
-            label={"Trichy"}
+            label={fetchedDetails.employeeCompanyLocation}
             type={"text"}
             options={[
               {
@@ -208,7 +214,7 @@ const ViewVerification = () => {
         <div className="questions">
           <span>Work Type</span>
           <YesOrNo
-            label={"Permanent full-time"}
+            label={fetchedDetails.typeOfEmployment}
             type={"text"}
             options={[
               {
