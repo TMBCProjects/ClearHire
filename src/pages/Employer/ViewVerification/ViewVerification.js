@@ -49,7 +49,7 @@ const ViewVerification = () => {
   const onSubmit = () => {
     CandidateDetails.questionsList = questionsList;
     // CandidateDetails.changes = changes;
-    CandidateDetails.checkDetails = checkDetails;
+    // CandidateDetails.checkDetails = checkDetails;
     console.log(CandidateDetails);
   };
 
