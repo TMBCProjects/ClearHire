@@ -78,6 +78,7 @@ const ViewVerification = () => {
             name={"referenceNumber"}
             label={fetchedDetails.referenceNumber}
             type={"text"}
+            onChange={handleInputChange}
             options={[
               {
                 label: "Correct",
@@ -100,6 +101,7 @@ const ViewVerification = () => {
               fetchedDetails.employeeLastName
             }
             name={"employeeName"}
+            onChange={handleInputChange}
             type={"text"}
             options={[
               {
@@ -130,6 +132,7 @@ const ViewVerification = () => {
               fetchedDetails.datesEmployedTo
             }
             name={"datesEmployed"}
+            onChange={handleInputChange}
             type={"text"}
             options={[
               {
@@ -150,6 +153,7 @@ const ViewVerification = () => {
             label={fetchedDetails.employeeDesignation}
             type={"text"}
             name={"employeeDesignation"}
+            onChange={handleInputChange}
             options={[
               {
                 label: "Correct",
@@ -176,6 +180,7 @@ const ViewVerification = () => {
           <YesOrNo
             label={fetchedDetails.reasonForLeaving}
             name={"reasonForLeaving"}
+            onChange={handleInputChange}
             type={"text"}
             options={[
               {
@@ -204,6 +209,7 @@ const ViewVerification = () => {
             name={"employeeCompanyLocation"}
             label={fetchedDetails.employeeCompanyLocation}
             type={"text"}
+            onChange={handleInputChange}
             options={[
               {
                 label: "Correct",
@@ -223,6 +229,7 @@ const ViewVerification = () => {
             label={fetchedDetails.typeOfEmployment}
             name={"typeOfEmployment"}
             type={"text"}
+            onChange={handleInputChange}
             options={[
               {
                 label: "Correct",
