@@ -7,12 +7,22 @@ import { onSnapshot, query, where } from "firebase/firestore";
 import { Fields } from "../../../utils/Fields";
 import { getDocuments, setCollection } from "../../../utils/FirebaseUtils";
 import { Collections } from "../../../utils/Collections";
-import { SendOutlined } from "@ant-design/icons";
-import { Empty } from "antd";
+import { FilterOutlined, SendOutlined } from "@ant-design/icons";
+import { Button, Drawer, Empty, Space } from "antd";
 
 const Requests = () => {
   const [requests, setRequests] = useState([]);
   const [notOnClearHire, setNotOnClearHire] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const showMenu = () => {
+    setMenuOpen(true);
+  };
+
+  const onMenuClose = () => {
+    setMenuOpen(false);
+  };
 
   useEffect(() => {
     const userDatas = JSON.parse(sessionStorage.getItem("userData"));
@@ -76,100 +86,172 @@ const Requests = () => {
     };
   }, []);
 
-  return (
-    <div id="employer-approval" className="container">
-      <div className="row d-flex justify-content-between align-items-center">
-        <div className="col-6 ">
-          <h3 className="fw-bold fs-30">Sent Approvals (Pending)</h3>
-        </div>
-        <div className="col-6 d-flex justify-content-md-end justify-content-md-center justify-content-between  align-items-center">
-          <div className="form-check form-check-inline mx-3 requestFilters">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="inlineRadioOptions"
-              id="inlineRadio1"
-              onClick={() => setNotOnClearHire(false)}
-              checked={!notOnClearHire}
-            />
-            <label
-              className="form-check-label filter-approval"
-              htmlFor="inlineRadio1"
-            >
-              On ClearHire
-            </label>
-          </div>
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
 
-          <div className="form-check form-check-inline mx-3 requestFilters">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="inlineRadioOptions"
-              onClick={() => setNotOnClearHire(true)}
-              id="inlineRadio2"
-              checked={notOnClearHire}
-            />
-            <label
-              className="form-check-label filter-approval"
-              htmlFor="inlineRadio2"
-            >
-              Not on ClearHire
-            </label>
+    // Add event listener to window resize
+    window.addEventListener("resize", handleResize);
+
+    // Initial check on component mount
+    handleResize();
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  return (
+    <>
+      <Drawer
+        title="Filter By Company"
+        placement={"bottom"}
+        width={500}
+        onClose={onMenuClose}
+        open={menuOpen}
+      >
+        <div className="form-check form-check-inline mx-3 d-block">
+          <input
+            className="form-check-input"
+            type="radio"
+            name="inlineRadioOptions"
+            id="inlineRadio1"
+            onClick={() => setNotOnClearHire(false)}
+            checked={!notOnClearHire}
+          />
+          <label
+            className="form-check-label filter-approval"
+            htmlFor="inlineRadio1"
+          >
+            On ClearHire
+          </label>
+        </div>
+
+        <div className="form-check form-check-inline mx-3  d-block">
+          <input
+            className="form-check-input"
+            type="radio"
+            name="inlineRadioOptions"
+            onClick={() => setNotOnClearHire(true)}
+            id="inlineRadio2"
+            checked={notOnClearHire}
+          />
+          <label
+            className="form-check-label filter-approval"
+            htmlFor="inlineRadio2"
+          >
+            Not on ClearHire
+          </label>
+        </div>
+        <Space className="mt-3 d-flex justify-content-end">
+          <Button onClick={onMenuClose}>Cancel</Button>
+          <Button type="primary" onClick={onMenuClose}>
+            OK
+          </Button>
+        </Space>
+      </Drawer>
+      <div id="employer-approval" className="container">
+        <div className="row d-flex justify-content-between align-items-center">
+          <div className="col-6 ">
+            <h3 className="fw-bold fs-30">Sent Approvals (Pending)</h3>
           </div>
-          <div className="form-check form-check-inline">
-            <Link to={"/approvalRequest-form"} className="btn add-recruit">
-              <SendOutlined style={{ fontSize: "15px" }} /> Send Request
-            </Link>
+          <div className="col-6 d-flex justify-content-md-center justify-content-md-between align-items-center filter">
+            {isMobile ? (
+              <FilterOutlined style={{ width: "25px" }} onClick={showMenu} />
+            ) : (
+              <>
+                <div className="form-check form-check-inline mx-3 requestFilters">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="inlineRadioOptions"
+                    id="inlineRadio1"
+                    onClick={() => setNotOnClearHire(false)}
+                    checked={!notOnClearHire}
+                  />
+                  <label
+                    className="form-check-label filter-approval"
+                    htmlFor="inlineRadio1"
+                  >
+                    On ClearHire
+                  </label>
+                </div>
+
+                <div className="form-check form-check-inline mx-3 requestFilters">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="inlineRadioOptions"
+                    onClick={() => setNotOnClearHire(true)}
+                    id="inlineRadio2"
+                    checked={notOnClearHire}
+                  />
+                  <label
+                    className="form-check-label filter-approval"
+                    htmlFor="inlineRadio2"
+                  >
+                    Not on ClearHire
+                  </label>
+                </div>
+              </>
+            )}
+            <div className="form-check form-check-inline">
+              <Link to={"/approvalRequest-form"} className="btn add-recruit">
+                <SendOutlined style={{ fontSize: "15px" }} /> Send Request
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="row mt-3">
-        {requests.length > 0 ? (
-          requests
-            ?.filter((info) => {
-              return notOnClearHire
-                ? info.emailAvailable === false
-                : info.emailAvailable === true;
-            })
-            .map((info) => {
-              return (
-                <div className="col-md-3 gy-3">
-                  <div className="card">
-                    <div className="card-body">
-                      <h3 className="card-title fw-bold">
-                        {info.employeeName}
-                      </h3>
-                      <p className="mb-1">{info.employeeEmail}</p>
-                      {info.isApproved === true ? (
-                        <Link
-                          className="w-100 mt-3 btn"
-                          to={{
-                            pathname: "/ViewEmployeeProfile",
-                          }}
-                          state={{ from: info.employeeId }}
-                        >
-                          <button className="w-100 mt-3 btn btn-assessment">
-                            View Employee Profile
+        <div className="row mt-3">
+          {requests.length > 0 ? (
+            requests
+              ?.filter((info) => {
+                return notOnClearHire
+                  ? info.emailAvailable === false
+                  : info.emailAvailable === true;
+              })
+              .map((info) => {
+                return (
+                  <div className="col-md-3 gy-3">
+                    <div className="card">
+                      <div className="card-body">
+                        <h3 className="card-title fw-bold">
+                          {info.employeeName}
+                        </h3>
+                        <p className="mb-1">{info.employeeEmail}</p>
+                        {info.isApproved === true ? (
+                          <Link
+                            className="w-100 mt-3 btn"
+                            to={{
+                              pathname: "/ViewEmployeeProfile",
+                            }}
+                            state={{ from: info.employeeId }}
+                          >
+                            <button className="w-100 mt-3 btn btn-assessment">
+                              View Employee Profile
+                            </button>
+                          </Link>
+                        ) : (
+                          <button className="w-100 mt-3 btn btn-request-sent">
+                            Request sent
                           </button>
-                        </Link>
-                      ) : (
-                        <button className="w-100 mt-3 btn btn-request-sent">
-                          Request sent
-                        </button>
-                      )}
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })
-        ) : (
-          <Empty
-            image={Empty.PRESENTED_IMAGE_SIMPLE}
-            description="No Records"
-          />
-        )}
+                );
+              })
+          ) : (
+            <Empty
+              image={Empty.PRESENTED_IMAGE_SIMPLE}
+              description="No Records"
+            />
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

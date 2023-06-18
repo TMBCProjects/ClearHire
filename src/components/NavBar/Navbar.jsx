@@ -11,6 +11,8 @@ import users from "../../assets/images/users.png";
 import job from "../../assets/images/job.svg";
 import { MenuOutlined } from "@ant-design/icons";
 import { Button, Drawer, Space } from "antd";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPeopleGroup, faUserPlus, faHandshake } from '@fortawesome/free-solid-svg-icons';
 
 export default function EmployerNavbar() {
   const [isMobile, setIsMobile] = useState(false);
@@ -74,7 +76,9 @@ export default function EmployerNavbar() {
               className="navlink"
             >
               <div className="navitem">
-                <img src={onBoard} alt="search-logo" className="logo navLink" />
+              <FontAwesomeIcon
+                    icon={faHandshake}
+                    style={{ color: "green", fontSize: "x-large" }} />
                 &nbsp; On-Board
               </div>
             </NavLink>
@@ -85,7 +89,9 @@ export default function EmployerNavbar() {
               className="navlink"
             >
               <div className="navitem">
-                <img src={search} alt="search-logo" className="logo navLink" />
+              <FontAwesomeIcon
+                    icon={faUserPlus}
+                    style={{ color: "green", fontSize: "x-large" }} />
                 &nbsp; Requests
               </div>
             </NavLink>
@@ -96,10 +102,28 @@ export default function EmployerNavbar() {
               className="navlink"
             >
               <div className="navitem">
-                <img src={search} alt="search-logo" className="logo navLink" />
+              <FontAwesomeIcon
+                    icon={faPeopleGroup}
+                    style={{ color: "green", fontSize: "x-large" }}
+                  />
                 &nbsp; Recruitment Pool
               </div>
             </NavLink>
+
+            <NavLink
+                activeclassname="active"
+                to={"/verification"}
+                className="navlink"
+              >
+                <div className="navitem">
+                  <img
+                    src={verification}
+                    alt="search-logo"
+                    className="logo navLink"
+                  />
+                  &nbsp; Verification
+                </div>
+              </NavLink>
           </div>
         ) : (
           <div className="mobileNavbar">
@@ -177,11 +201,9 @@ export default function EmployerNavbar() {
                 className="navlink"
               >
                 <div className="navitem">
-                  <img
-                    src={onBoard}
-                    alt="search-logo"
-                    className="logo navLink"
-                  />
+                  <FontAwesomeIcon
+                    icon={faHandshake}
+                    style={{ color: "green", fontSize: "x-large" }} />
                   &nbsp; On-Board
                 </div>
               </NavLink>
@@ -192,11 +214,9 @@ export default function EmployerNavbar() {
                 className="navlink"
               >
                 <div className="navitem">
-                  <img
-                    src={search}
-                    alt="search-logo"
-                    className="logo navLink"
-                  />
+                  <FontAwesomeIcon
+                    icon={faUserPlus}
+                    style={{ color: "green", fontSize: "x-large" }} />
                   &nbsp; Requests
                 </div>
               </NavLink>
@@ -207,12 +227,26 @@ export default function EmployerNavbar() {
                 className="navlink"
               >
                 <div className="navitem">
+                  <FontAwesomeIcon
+                    icon={faPeopleGroup}
+                    style={{ color: "green", fontSize: "x-large" }}
+                  />
+                  &nbsp; Recruitment Pool
+                </div>
+              </NavLink>
+
+              <NavLink
+                activeclassname="active"
+                to={"/verification"}
+                className="navlink"
+              >
+                <div className="navitem">
                   <img
-                    src={search}
+                    src={verification}
                     alt="search-logo"
                     className="logo navLink"
                   />
-                  &nbsp; Recruitment Pool
+                  &nbsp; Verification
                 </div>
               </NavLink>
             </div>

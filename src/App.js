@@ -31,6 +31,7 @@ import RecruitmentPool from "./pages/Employer/RecruitmentPool/RecruitmentPool";
 import SendResgination from "./pages/Employer/sendResignation/sendResgination";
 import VerifyCandidate from './pages/Employer/VerifyCandidate/VerifyCandidate'
 import ViewVerification from "./pages/Employer/ViewVerification/ViewVerification";
+import Verification from "./pages/Employer/Verification/Verification";
 function App() {
   return (
     <div className="main">
@@ -122,7 +123,11 @@ function App() {
                   <Route
                     path="/view-verification"
                     element={<ViewVerification />}></Route>
+                  <Route
+                    path="/verification"
+                    element={<Verification />}></Route>
                 </Routes>
+
               </div>
             ) : (
               ""
