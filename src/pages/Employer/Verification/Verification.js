@@ -13,7 +13,6 @@ function Verification() {
         const data = await readNotVerifiedVerifications(
           userDatas.data.employerEmail
         );
-        console.log(data);
         return data;
       } catch (error) {
         console.log(error);

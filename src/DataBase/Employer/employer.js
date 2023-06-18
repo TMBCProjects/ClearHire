@@ -382,11 +382,9 @@ export async function readNotVerifiedVerifications(employerEmail) {
       query(
         setCollection(Collections.verfications),
         where(Fields.verificationByEmail, "==", employerEmail),
-        where(Fields.isActive, "==", true),
         where(Fields.isVerified, "==", false)
       )
     );
-    console.log(employerEmail);
     querySnapshot.forEach((doc) => {
       let verfication = {
         isActive: doc.data().isActive,
