@@ -3,33 +3,42 @@ import YesOrNo from "../../../components/Input/YesOrNo";
 import { Button } from "antd";
 import "../ViewVerification/ViewVerification.css";
 import { useLocation } from "react-router-dom";
+import InputField from "../../../components/Input/InputField";
+import { useEffect } from "react";
 
 const ViewVerification = () => {
   const location = useLocation();
   const { from } = location.state;
   const fetchedDetails = from;
   const [qCount, setQCount] = useState(1);
+  const [checkDetails, setCheckDetails] = useState([]);
   const [CandidateDetails, setCandidateDetails] = useState([]);
-  const ansType = ["Short Answer", "Yes/No"];
-  const addques = () => {
-    setQCount(qCount + 1);
+  const [questionsList, setQuestionsList] = useState([]);
+  useEffect(() => {
+    setQuestionsList(fetchedDetails.questionsList);
+  }, [fetchedDetails]);
+  const handleAnswerChange = (e, i) => {
+    setQuestionsList((questionsList) => {
+      const updatedQuestionsList = [...questionsList];
+      updatedQuestionsList[i] = {
+        ...updatedQuestionsList[i],
+        answer: e,
+      };
+      return updatedQuestionsList;
+    });
   };
-
   const handleInputChange = (e) => {
-    setCandidateDetails((CandidateDetails) => ({
-      ...CandidateDetails,
+    setCheckDetails((checkDetails) => ({
+      ...checkDetails,
       [e.target.name]: e.target.value,
     }));
   };
   const onSubmit = () => {
+    CandidateDetails.answersForQuestionList = questionsList;
+    CandidateDetails.checkDetails = checkDetails;
     console.log(CandidateDetails);
   };
 
-  const delques = () => {
-    if (qCount > 1) {
-      setQCount(qCount - 1);
-    }
-  };
   return (
     <div
       className="container flex-column d-flex justify-content-center align-items-center py-5"
@@ -235,61 +244,41 @@ const ViewVerification = () => {
           />
         </div>
       </div>
-      <div
-        className="d-flex align-self-start mt-3"
-        style={{ width: "100%" }}>
-        <YesOrNo
-          label={"Is the candidate eligible for Rehire?"}
-          type={"text"}
-          options={[
-            {
-              label: "Yes",
-              value: "Yes",
-            },
-            {
-              label: "No",
-              value: "No",
-            },
-          ]}
-        />
-      </div>
-      <div
-        className="d-flex align-self-start mt-3"
-        style={{ width: "100%" }}>
-        <YesOrNo
-          label={"Is the document(Experience letter) authentic?"}
-          type={"text"}
-          options={[
-            {
-              label: "Yes",
-              value: "Yes",
-            },
-            {
-              label: "No",
-              value: "No",
-            },
-          ]}
-        />
-      </div>
-      <div
-        className="d-flex align-self-start mt-3"
-        style={{ width: "100%" }}>
-        <YesOrNo
-          label={"How did the candidate's way of relieving?"}
-          type={"text"}
-          options={[
-            {
-              label: "Yes",
-              value: "Yes",
-            },
-            {
-              label: "No",
-              value: "No",
-            },
-          ]}
-          placeholder={"Enter the company name."}
-        />
-      </div>
+      {fetchedDetails.questionsList.map((info, i) => {
+        return (
+          <div
+            className="d-flex align-self-start mt-3"
+            style={{ width: "100%" }}>
+            {info.questionType === "Yes/No" && (
+              <YesOrNo
+                label={info.question}
+                type={"text"}
+                onChange={(e) => handleAnswerChange(e.target.value, i)}
+                options={[
+                  {
+                    label: "Yes",
+                    value: "Yes",
+                  },
+                  {
+                    label: "No",
+                    value: "No",
+                  },
+                ]}
+              />
+            )}
+
+            {info.questionType === "Short Answer" && (
+              <InputField
+                label={info.question}
+                type={"text"}
+                onChange={(e) => handleAnswerChange(e.target.value, i)}
+                placeholder={"Type your answer here"}
+              />
+            )}
+          </div>
+        );
+      })}
+
       {/* <div className="d-flex align-self-start mt-3" style={{
                 width: '100%',
                 gap: '1.4rem'
