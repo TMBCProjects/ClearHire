@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
-import InputField from '../../../components/Input/InputField';
-import TextArea from '../../../components/Input/TextArea';
-import YesOrNo from '../../../components/Input/YesOrNo';
-import DateField from '../../../components/Input/DateFiled';
-import DropDownField from '../../../components/Input/DropDownField'
+import React, { useEffect, useState } from "react";
+import InputField from "../../../components/Input/InputField";
+import TextArea from "../../../components/Input/TextArea";
+import YesOrNo from "../../../components/Input/YesOrNo";
+import DateField from "../../../components/Input/DateFiled";
+import DropDownField from "../../../components/Input/DropDownField";
 import { PlusOutlined } from "@ant-design/icons";
-import { Button } from 'antd';
+import { Button } from "antd";
 import Dropdown from "../../../components/Dropdrowns/Dropdown";
-import "../ViewVerification/ViewVerification.css"
+import "../ViewVerification/ViewVerification.css";
 import { readNotVerifiedVerifications } from "../../../DataBase/Employer/employer";
 
 const ViewVerification = () => {
@@ -27,7 +27,7 @@ const ViewVerification = () => {
     fetchVerificationDetails().then((data) => {
       setCandidateDetails(data);
     });
-  }, [user]);
+  }, []);
   const addques = () => {
     setQCount(qCount + 1);
   };
@@ -472,4 +472,4 @@ const ViewVerification = () => {
   );
 };
 
-export default ViewVerification
+export default ViewVerification;
