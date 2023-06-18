@@ -6,7 +6,7 @@ import InputField from "../../../components/Input/InputField";
 import { Slider, Col, message } from "antd";
 import UploadFile from "../../../components/UploadFile";
 import { MinusOutlined } from "@ant-design/icons";
-import { profileUpdate, readEmployeeRatings } from "../../../DataBase/Employee/employee";
+import { profileUpdate, readColleagueRatings } from "../../../DataBase/Employee/employee";
 import ProgressBar from "../../../components/ProgressBar";
 
 export default function Profile() {
@@ -26,7 +26,7 @@ export default function Profile() {
       if (userDatas.data.skills) {
         setSkills(userDatas.data.skills);
       }
-      const data2 = await readEmployeeRatings(userDatas.id);
+      const data2 = await readColleagueRatings(userDatas.id);
       calculateRatings(data2);
     };
     fetchOfferDetails();
@@ -34,7 +34,8 @@ export default function Profile() {
 
   const calculateAge = (dob) => {
     const today = new Date();
-    const birthDate = new Date(dob);
+    // const birthDate = new Date(dob.seconds * 1000);
+    const birthDate = new Date();
     let years = today.getFullYear() - birthDate.getFullYear();
     const months = today.getMonth() - birthDate.getMonth();
     if (months < 0 || (months === 0 && today.getDate() < birthDate.getDate())) {
@@ -42,6 +43,7 @@ export default function Profile() {
     }
     return years;
   };
+
   const handleSkillChange = (e, index) => {
     const { value } = e.target;
     const newState = skills.map((obj, id) => {
@@ -129,7 +131,6 @@ export default function Profile() {
     }
     score /= ratingsOfEmployer.length;
     colleagueScore /= ratingsOfEmployee.length;
-    // colleagueScore = 80;
     setAvgRatings({
       score: Math.ceil(score),
       colleagueScore: Math.ceil(colleagueScore),
@@ -219,11 +220,11 @@ export default function Profile() {
           </div>
           <div>
             <p>Date of joining</p>
-            <p>{userDatas.data.dateOfJoining}</p>
+            <p>{new Date(userDatas.data.dateOfJoining.seconds * 1000).toLocaleDateString('en-GB')}</p>
           </div>
           <div>
             <p>Salary</p>
-            <p>{userDatas.data.salary} PA</p>
+            <p>{userDatas.data.salary} LPA</p>
           </div>
         </div>
       )}

@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react'
 import "./AssessmentForm.css";
-import arrow from "../../../images/arrow-dropup.svg";
-import { useNavigate } from "react-router-dom";
 import { Button, Empty } from 'antd';
 import { useState } from 'react';
 import check_1 from "../../../images/Check-1.svg";
@@ -12,12 +10,6 @@ export default function EmployeeAssesmentForm() {
   const [questions, setQuestions] = useState([])
   const [answers, setAnswers] = useState([])
   //const [checkedItems ,setCheckedItems] = useState([])
-  const checkedItems = []
-  const ques_no = []
-  const navigate = useNavigate();
-  const handleBack = () => {
-    navigate("/");
-  };
 
 
   useEffect(() => {
@@ -31,7 +23,6 @@ export default function EmployeeAssesmentForm() {
       }
     };
     fetchAssessment();
-    console.log(questions)
   }, [])
 
   const handleChange = (event, question_no, i) => {

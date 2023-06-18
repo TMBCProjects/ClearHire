@@ -3,6 +3,7 @@ import {
   EmailAuthProvider,
   fetchSignInMethodsForEmail,
   reauthenticateWithCredential,
+  sendEmailVerification,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut,
@@ -99,8 +100,22 @@ export function getDocument(query) {
   return getDoc(query);
 }
 
-export function createUser(user) {
-  return createUserWithEmailAndPassword(auth, user.email, user.password);
+export async function createUser(userData) {
+  const userAuth = await createUserWithEmailAndPassword(
+    auth,
+    userData.email,
+    userData.password
+  );
+  await sendEmailVerification(userAuth.user);
+  return userAuth;
+}
+
+export async function verifyEmailId() {
+  try {
+    await sendEmailVerification(auth.currentUser);
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 export function updateUser(user) {
@@ -109,13 +124,12 @@ export function updateUser(user) {
       user.role === Collections.Employee
         ? Collections.Employee
         : Collections.Employer,
-    // displayName: user.name,
   });
 }
+
 export function signIn(email, password) {
   return signInWithEmailAndPassword(auth, email, password);
 }
-
 export function resetPassword(email) {
   try {
     sendPasswordResetEmail(auth, email)

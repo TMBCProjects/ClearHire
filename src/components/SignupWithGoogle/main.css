@@ -1,0 +1,28 @@
+.choose-user-buttons{
+    flex-direction: row !important;
+}
+.choose-user-buttons button{
+    margin: .5rem 1rem !important;
+    width:18rem;
+}
+.choose-user-option-box{
+    align-items: center;
+    width: 39rem !important;
+}
+
+.buttons a{
+    text-decoration: none;
+}
+
+@media(max-width:767px) {
+    .choose-user-buttons{
+        flex-wrap: wrap !important;
+    }
+    .choose-user-buttons{
+        justify-content: center;
+    }
+    .choose-user-buttons button{
+        margin: .5rem 0rem !important;
+        width:18rem;
+    }
+}

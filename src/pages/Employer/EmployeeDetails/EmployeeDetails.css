@@ -152,6 +152,13 @@
 
 }
 
+@media(max-width:767px) {
+    .inside-skills {
+        margin: 0;
+        max-width: 100%;
+    }
+}
+
 /* width */
 .inside-skills::-webkit-scrollbar {
     width: 10px;
@@ -322,6 +329,15 @@
 
 /* media queries for mobile menu  */
 @media (max-width:767px) {
+    .main-container {
+        padding: 1vh 5vh;
+    }
+
+    .portfolio-btn {
+        display: flex;
+        margin: auto;
+    }
+
     .companyLogo {
         width: 70px;
         height: 70px;
@@ -372,6 +388,8 @@
     .portfolio-text {
         font-size: 14px;
     }
+
+
 }
 
 

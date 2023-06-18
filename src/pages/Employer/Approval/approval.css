@@ -2,6 +2,10 @@
     padding: 5vh;
 }
 
+.filter{
+    justify-content: end;
+}
+
 .add-recruit {
     background: #FFFFFF 0% 0% no-repeat padding-box;
     box-shadow: 0px 0px 33px #00000012;
@@ -112,20 +116,45 @@
 }
 
 /* media queries for small screens  */
-@media(max-width:767px) {
+
+@media(max-width:991px) {
     .fs-30 {
-        font-size: 25px;
+        font-size: 25px !important;
     }
+}
+
+@media(max-width:767px) {
+    /* #employer-approval {
+        padding: 2vh;
+    } */
+
+    .fs-30 {
+        font-size: 20px !important;
+    }
+
+    /* .companyFilters .form-check-inline {
+        display: none !important;
+    } */
 
     .filter-approval {
         font-size: 16px;
-     }
+    }
+
+    .companyFilters {
+        display: none !important;
+    }
+
+    .filter{
+        flex-direction: row-reverse !important;
+        justify-content: right !important;
+    }
 }
 
-@media (max-width: 576px){
+@media (max-width: 576px) {
     .form-check-inline {
         margin-right: 0rem;
     }
+
     .justify-content-end {
         margin-top: 2%;
     }

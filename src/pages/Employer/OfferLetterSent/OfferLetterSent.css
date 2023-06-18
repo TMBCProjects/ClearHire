@@ -1,0 +1,27 @@
+.header-text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.signup-options-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 10vh;
+}
+
+/* ======================responsive====================== */
+@media(max-width: 567px){
+    .header-text p {
+      text-align: center;
+    }
+}
+
+@media(max-width: 768px){
+
+  .signup-options-container{
+    margin: 10vh 0;
+  }
+}

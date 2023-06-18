@@ -4,17 +4,31 @@ import "./approval.css";
 import { useState } from "react";
 import { useEffect } from "react";
 import { deleteOffer } from "../../../DataBase/Employer/employer";
-import { FileTextOutlined, PlusOutlined } from "@ant-design/icons";
+import {
+  FileTextOutlined,
+  FilterOutlined,
+  PlusOutlined,
+} from "@ant-design/icons";
 import { getDocuments, setCollection } from "../../../utils/FirebaseUtils";
 import { onSnapshot, query, where } from "firebase/firestore";
 import { Collections } from "../../../utils/Collections";
 import { Fields } from "../../../utils/Fields";
-import { Empty, Modal } from "antd";
+import { Button, Drawer, Empty, Modal, Space } from "antd";
 
 const Approval = () => {
   const [offerReplies, setOfferReplies] = useState([]);
   const [notOnClearHire, setNotOnClearHire] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const showMenu = () => {
+    setMenuOpen(true);
+  };
+
+  const onMenuClose = () => {
+    setMenuOpen(false);
+  };
 
   useEffect(() => {
     const userDatas = JSON.parse(sessionStorage.getItem("userData"));
@@ -85,129 +99,205 @@ const Approval = () => {
     deleteOffer(offerId);
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    // Add event listener to window resize
+    window.addEventListener("resize", handleResize);
+
+    // Initial check on component mount
+    handleResize();
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
-    <div id="employer-approval" className="container">
-      <div className="row d-flex justify-content-between align-items-center">
-        <div className="col-md-6">
-          <h3 className="fw-bold fs-30">Sent Offers (Pending)</h3>
+    <>
+      <Drawer
+        title="Filter By Company"
+        placement={"bottom"}
+        width={500}
+        onClose={onMenuClose}
+        open={menuOpen}
+      >
+        <div className="form-check form-check-inline mx-0 mx-md-3 d-block">
+          <input
+            className="form-check-input"
+            type="radio"
+            name="inlineRadioOptions"
+            id="inlineRadio1"
+            onClick={() => setNotOnClearHire(false)}
+            checked={!notOnClearHire}
+          />
+          <label
+            className="form-check-label filter-approval"
+            htmlFor="inlineRadio1"
+          >
+            On ClearHire
+          </label>
         </div>
-        <div className="col-md-6 d-flex justify-content-end align-items-center">
-          <div className="form-check form-check-inline mx-3">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="inlineRadioOptions"
-              id="inlineRadio1"
-              onClick={() => setNotOnClearHire(false)}
-              checked={!notOnClearHire}
-            />
-            <label
-              className="form-check-label filter-approval"
-              htmlFor="inlineRadio1"
-            >
-              On ClearHire
-            </label>
-          </div>
 
-          <div className="form-check form-check-inline mx-3">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="inlineRadioOptions"
-              onClick={() => setNotOnClearHire(true)}
-              id="inlineRadio2"
-              checked={notOnClearHire}
-            />
-            <label
-              className="form-check-label filter-approval"
-              htmlFor="inlineRadio2"
-            >
-              Not on ClearHire
-            </label>
+        <div className="form-check form-check-inline mx-0 mx-md-3 d-block">
+          <input
+            className="form-check-input"
+            type="radio"
+            name="inlineRadioOptions"
+            onClick={() => setNotOnClearHire(true)}
+            id="inlineRadio2"
+            checked={notOnClearHire}
+          />
+          <label
+            className="form-check-label filter-approval"
+            htmlFor="inlineRadio2"
+          >
+            Not on ClearHire
+          </label>
+        </div>
+        <Space className="mt-3 d-flex justify-content-end">
+          <Button onClick={onMenuClose}>Cancel</Button>
+          <Button type="primary" onClick={onMenuClose}>
+            OK
+          </Button>
+        </Space>
+      </Drawer>
+      <div id="employer-approval" className="container">
+        <div className="row d-flex justify-content-between align-items-center">
+          <div className="col-4">
+            <h3 className="fw-bold fs-30">Sent Offers (Pending)</h3>
           </div>
+          <div className="col-8 d-flex align-items-center filter">
+            {isMobile ? (
+              <FilterOutlined style={{ width: "25px" }} onClick={showMenu} />
+            ) : (
+              <>
+                <div className="form-check form-check-inline mx-0 mx-md-3 companyFilters">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="inlineRadioOptions"
+                    id="inlineRadio1"
+                    onClick={() => setNotOnClearHire(false)}
+                    checked={!notOnClearHire}
+                  />
+                  <label
+                    className="form-check-label filter-approval"
+                    htmlFor="inlineRadio1"
+                  >
+                    On ClearHire
+                  </label>
+                </div>
 
-          <div className="form-check form-check-inline">
-            <Link to={"/onboarding-form"} className="btn add-recruit">
-              <PlusOutlined
-                style={{ fontSize: "20px", fontWeight: "bolder" }}
-              />{" "}
-              Add Recruit
-            </Link>
+                <div className="form-check form-check-inline mx-0 mx-md-3 companyFilters">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="inlineRadioOptions"
+                    onClick={() => setNotOnClearHire(true)}
+                    id="inlineRadio2"
+                    checked={notOnClearHire}
+                  />
+                  <label
+                    className="form-check-label filter-approval"
+                    htmlFor="inlineRadio2"
+                  >
+                    Not on ClearHire
+                  </label>
+                </div>
+              </>
+            )}
+
+            <div className="form-check form-check-inline">
+              <Link to={"/onboarding-form"} className="btn add-recruit">
+                <PlusOutlined
+                  style={{ fontSize: "20px", fontWeight: "bolder" }}
+                />{" "}
+                Add Recruit
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="row mt-3">
-        {offerReplies && offerReplies.length > 0 ? (
-          offerReplies
-            ?.filter((info) => {
-              return notOnClearHire
-                ? info.emailAvailable === false
-                : info.emailAvailable === true;
-            })
-            .map((info) => {
-              return (
-                <div className="col-md-3 gy-3">
-                  <div className="card">
-                    <div className="card-body">
-                      <h3 className="card-title fw-bold">
-                        {info.employeeName}
-                      </h3>
-                      <p className="card-text designation w-75 mt-2">
-                        {info.designation}
-                      </p>
-                      <p className="mb-1">{info.companyLocation}</p>
-                      <p className="mb-1">{info.employeeEmail}</p>
-                      <p className="mb-1">{info.dateOfJoining}</p>
-                      <p className="mb-1">{info.salary}</p>
-                      <div className="row  mt-2">
-                        <div className="col">
-                          <p
-                            className="text-color-green fs-13 fw-bold"
-                            style={{ cursor: "pointer" }}
-                            onClick={() => setModalOpen(true)}
-                          >
-                            <FileTextOutlined style={{ fontSize: "20px" }} />{" "}
-                            View offer Letter
-                          </p>
-                          <Modal
-                            title="OFFER LETTER"
-                            centered
-                            open={modalOpen}
-                            onOk={() => setModalOpen(false)}
-                            onCancel={() => setModalOpen(false)}
-                            width={1000}
-                          >
-                            <embed
-                              width={950}
-                              height={680}
-                              src={info.offerLetter}
-                            />
-                          </Modal>
-                        </div>
-                        <div className="col">
-                          <button
-                            onClick={() => {
-                              handleDelete(info.id);
-                            }}
-                            className="delete-btn"
-                          >
-                            Delete
-                          </button>
+        <div className="row mt-3">
+          {offerReplies && offerReplies.length > 0 ? (
+            offerReplies
+              ?.filter((info) => {
+                return notOnClearHire
+                  ? info.emailAvailable === false
+                  : info.emailAvailable === true;
+              })
+              .map((info) => {
+                return (
+                  <div className="col-md-3 gy-3">
+                    <div className="card">
+                      <div className="card-body">
+                        <h3 className="card-title fw-bold">
+                          {info.employeeName}
+                        </h3>
+                        <p className="card-text designation w-75 mt-2">
+                          {info.designation}
+                        </p>
+                        <p className="mb-1">{info.companyLocation}</p>
+                        <p className="mb-1">{info.employeeEmail}</p>
+                        <p className="mb-1">
+                          {new Date(
+                            info.dateOfJoining.seconds * 1000
+                          ).toLocaleDateString("en-GB")}
+                        </p>
+                        <p className="mb-1">{info.salary} LPA</p>
+                        <div className="row  mt-2">
+                          <div className="col">
+                            <p
+                              className="text-color-green fs-13 fw-bold"
+                              style={{ cursor: "pointer" }}
+                              onClick={() => setModalOpen(true)}
+                            >
+                              <FileTextOutlined style={{ fontSize: "20px" }} />{" "}
+                              View offer Letter
+                            </p>
+                            <Modal
+                              title="OFFER LETTER"
+                              centered
+                              open={modalOpen}
+                              onOk={() => setModalOpen(false)}
+                              onCancel={() => setModalOpen(false)}
+                              width={1000}
+                            >
+                              <embed
+                                width={950}
+                                height={680}
+                                src={info.offerLetter}
+                              />
+                            </Modal>
+                          </div>
+                          <div className="col">
+                            <button
+                              onClick={() => {
+                                handleDelete(info.id);
+                              }}
+                              className="delete-btn"
+                            >
+                              Delete
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              );
-            })
-        ) : (
-          <Empty
-            image={Empty.PRESENTED_IMAGE_SIMPLE}
-            description="No Records"
-          />
-        )}
+                );
+              })
+          ) : (
+            <Empty
+              image={Empty.PRESENTED_IMAGE_SIMPLE}
+              description="No Records"
+            />
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -22,4 +22,5 @@ export default class Employee {
   resume = "";
   ratedAtDate = "";
   skills = [];
+  assessmentType = "";
 }

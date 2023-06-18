@@ -1,16 +1,11 @@
 import React from "react";
 import "./Assessment.css";
-import { useNavigate } from "react-router-dom";
 import { Tabs } from 'antd';
 import EmployeeAssesmentForm from "./EmployeeAssesmentForm";
 import EmployeeSoftskills from "./EmployeeSoftskills";
 
 function EmployeeAssessment() {
 
-  const navigate = useNavigate();
-  const handleBack = () => {
-    navigate("/");
-  };
   const onChange = (key) => {
     console.log(key);
   };
@@ -32,13 +27,13 @@ function EmployeeAssessment() {
     <div className="assesment container">
       <div className="back-cont">
         <div className="col">
-        {sessionStorage.getItem("LoggedIn") === "Employer" ? 
+          {sessionStorage.getItem("LoggedIn") === "Employer" ?
 
-          <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
-          :
-          <EmployeeSoftskills />
-        }
-         </div>
+            <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
+            :
+            <EmployeeSoftskills />
+          }
+        </div>
       </div>
     </div>
   );

@@ -1,13 +1,13 @@
-import { Button } from "antd";
+import { Button, Select } from "antd";
 import React, { useState, useEffect, useRef } from "react";
 import Dropdown from "../../../components/Dropdrowns/Dropdown";
 import InputField from "../../../components/Input/InputField";
 import UploadPic from "../../../components/UploadPic/UploadPic";
 import { registerLogin } from "../../../DataBase/SignUp/signUp";
 import "../SignupForm/Signup.css";
-import Loader from '../../../components/Loader'
-import { PlusOutlined } from '@ant-design/icons';
-import { Input, Space, Tag, Tooltip, theme } from 'antd';
+import Loader from "../../../components/Loader";
+import { PlusOutlined } from "@ant-design/icons";
+import { Input, Space, Tag, Tooltip, theme } from "antd";
 
 const initialValues = {
   email: "",
@@ -15,15 +15,17 @@ const initialValues = {
   name: "",
   profileImage: "",
   role: "",
+  assessmentType: "",
 };
 
 export default function Signup() {
   const [values, setValues] = useState(initialValues);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   let year = Array.from(
     { length: 123 },
     (_, i) => new Date().getFullYear() - i
   );
+
   let date = Array.from({ length: 31 }, (_, i) => i + 1);
   let month = Array.from({ length: 12 }, (_, i) => i + 1);
   var selectedYear = "";
@@ -32,9 +34,9 @@ export default function Signup() {
   const { token } = theme.useToken();
   const [tags, setTags] = useState([]);
   const [inputVisible, setInputVisible] = useState(false);
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
   const [editInputIndex, setEditInputIndex] = useState(-2);
-  const [editInputValue, setEditInputValue] = useState('');
+  const [editInputValue, setEditInputValue] = useState("");
   const inputRef = useRef(null);
   const editInputRef = useRef(null);
   useEffect(() => {
@@ -47,7 +49,6 @@ export default function Signup() {
   }, [inputValue]);
   const handleClose = (removedTag) => {
     const newTags = tags.filter((tag) => tag !== removedTag);
-    console.log(newTags);
     setTags(newTags);
   };
   const showInput = () => {
@@ -59,7 +60,7 @@ export default function Signup() {
       setTags([...tags, inputValue]);
     }
     setInputVisible(false);
-    setInputValue('');
+    setInputValue("");
   };
   const handleEditInputChange = (e) => {
     setEditInputValue(e.target.value);
@@ -69,19 +70,21 @@ export default function Signup() {
     newTags[editInputIndex] = editInputValue;
     setTags(newTags);
     setEditInputIndex(-1);
-    setInputValue('');
+    setInputValue("");
   };
   const tagInputStyle = {
-    verticalAlign: 'top',
-    paddingBottom: "2vh"
+    verticalAlign: "top",
+    paddingBottom: "2vh",
   };
   const tagPlusStyle = {
     background: token.colorBgContainer,
-    borderStyle: '1px solid #00823B ',
-    padding: "2vh",
+    borderStyle: "1px solid #00823B ",
+    padding: "1.5vh",
     display: "flex",
     alignItems: "center",
-    gap:"1vh"
+    gap: "1vh",
+    justifyContent: "center",
+    fontSize: "16px",
   };
 
   const handleInputChange = (e) => {
@@ -91,24 +94,27 @@ export default function Signup() {
       [name]: value,
     });
     setInputValue(e.target.value);
-
   };
 
+  const onAssessmentTypeChange = (event) => {
+    values.assessmentType = event;
+  };
   const handleSubmit = () => {
     values.profileImage = sessionStorage.getItem("profileImage");
     values.role = user;
     if (user === "Employer") {
       values.companyLocations = tags;
-      console.log(values);
     }
     setLoading(true);
-    registerLogin(values).then(() => {
-      sessionStorage.removeItem("profileImage");
-      window.location.href = "/signup-done";
-    }).catch((err) => {
-      setLoading(false)
-      alert(err);
-    });
+    registerLogin(values)
+      .then(() => {
+        sessionStorage.removeItem("profileImage");
+        window.location.href = "/signup-done";
+      })
+      .catch((err) => {
+        setLoading(false);
+        alert(err);
+      });
   };
 
   const handleYearChange = (e) => {
@@ -123,8 +129,9 @@ export default function Signup() {
     const selectedYear = e.target.value;
     values.dateOfBirth =
       values.dateOfBirth === undefined ? "" : values.dateOfBirth;
-    const newDateOfBirth = `${values.dateOfBirth.split("/")[0]}/${values.dateOfBirth.split("/")[1]
-      }/${selectedYear}`;
+    const newDateOfBirth = `${values.dateOfBirth.split("/")[0]}/${
+      values.dateOfBirth.split("/")[1]
+    }/${selectedYear}`;
     setValues({
       ...values,
       dateOfBirth: newDateOfBirth,
@@ -135,8 +142,9 @@ export default function Signup() {
     const selectedMonth = e.target.value;
     values.dateOfBirth =
       values.dateOfBirth === undefined ? "" : values.dateOfBirth;
-    const newDateOfBirth = `${selectedMonth}/${values.dateOfBirth.split("/")[1]
-      }/${values.dateOfBirth.split("/")[2]}`;
+    const newDateOfBirth = `${selectedMonth}/${
+      values.dateOfBirth.split("/")[1]
+    }/${values.dateOfBirth.split("/")[2]}`;
     setValues({
       ...values,
       dateOfBirth: newDateOfBirth,
@@ -147,8 +155,9 @@ export default function Signup() {
     const selectedDate = e.target.value;
     values.dateOfBirth =
       values.dateOfBirth === undefined ? "" : values.dateOfBirth;
-    const newDateOfBirth = `${values.dateOfBirth.split("/")[0]
-      }/${selectedDate}/${values.dateOfBirth.split("/")[2]}`;
+    const newDateOfBirth = `${
+      values.dateOfBirth.split("/")[0]
+    }/${selectedDate}/${values.dateOfBirth.split("/")[2]}`;
     setValues({
       ...values,
       dateOfBirth: newDateOfBirth,
@@ -157,13 +166,9 @@ export default function Signup() {
 
   return (
     <>
-    {
-      loading && 
-      <Loader text={"Signing up..." }textColor={"#000"}/>  
-    }
+      {loading && <Loader text={"Signing up..."} textColor={"#000"} />}
 
-
-      <div className="signup-container">
+      <div className="signup-container sign">
         <div className="signupHeader">
           {user === "Employer" ? (
             <span style={{ fontWeight: "bold" }}>Employer Signup</span>
@@ -171,7 +176,7 @@ export default function Signup() {
             <span style={{ fontWeight: "bold" }}>Employee Signup</span>
           )}
         </div>
-        <form className="form-horizontal">
+        <form className="form-horizontal" style={{ height: "100%" }}>
           <InputField
             label={"Email"}
             type={"email"}
@@ -224,77 +229,81 @@ export default function Signup() {
 
           {user === "Employer" ? (
             <>
-            <label className="control-label">Company Location</label>
-            <Space size={[0, 8]} wrap style={{display: "block", paddingBottom: "3vh"}}>
-      <Space size={[0, 8]} wrap>
-        {tags.map((tag, index) => {
-          if (editInputIndex === index) {
-            return (
-              <Input
-                ref={editInputRef}
-                key={tag}
-                size="small"
-                style={tagInputStyle}
-                value={editInputValue}
-                onChange={handleEditInputChange}
-                onBlur={handleEditInputConfirm}
-                onPressEnter={handleEditInputConfirm}
-              />
-            );
-          }
-          const isLongTag = tag.length > 20;
-          const tagElem = (
-            <Tag
-              key={tag}
-              closable={index !== -1}
-              style={{
-                userSelect: 'none',
-              }}
-              onClose={() => handleClose(tag)}
-            >
-              <span
-                style={{padding: "1vh", fontSize: "larger"}}
-                onDoubleClick={(e) => {
-                  if (index !== 0) {
-                    setEditInputIndex(index);
-                    setEditInputValue(tag);
-                    e.preventDefault();
-                  }
-                }}
+              <label className="control-label">Company Location</label>
+              <Space
+                size={[0, 8]}
+                wrap
+                style={{ display: "block", paddingBottom: "1vh" }}
               >
-                {isLongTag ? `${tag.slice(0, 20)}...` : tag}
-              </span>
-            </Tag>
-          );
-          return isLongTag ? (
-            <Tooltip title={tag} key={tag}>
-              {tagElem}
-            </Tooltip>
-          ) : (
-            tagElem
-          );
-        })}
-      </Space>
-      {inputVisible ? (
-        <Input
-          ref={inputRef}
-          type="text"
-          size="small"
-          style={tagInputStyle}
-          value={inputValue}
-          onChange={handleInputChange}
-          onBlur={handleInputConfirm}
-          onPressEnter={handleInputConfirm}
-        />
-      ) : (
-        <Tag style={tagPlusStyle} onClick={showInput}>
-          <PlusOutlined /> Add Location
-        </Tag>
-      )}
-    </Space>
+                <Space size={[0, 8]} wrap>
+                  {tags.map((tag, index) => {
+                    if (editInputIndex === index) {
+                      return (
+                        <Input
+                          ref={editInputRef}
+                          key={tag}
+                          size="small"
+                          style={tagInputStyle}
+                          value={editInputValue}
+                          onChange={handleEditInputChange}
+                          onBlur={handleEditInputConfirm}
+                          onPressEnter={handleEditInputConfirm}
+                        />
+                      );
+                    }
+                    const isLongTag = tag.length > 20;
+                    const tagElem = (
+                      <Tag
+                        key={tag}
+                        closable={index !== -1}
+                        style={{
+                          userSelect: "none",
+                        }}
+                        onClose={() => handleClose(tag)}
+                      >
+                        <span
+                          style={{ padding: "1vh", fontSize: "larger" }}
+                          onDoubleClick={(e) => {
+                            if (index !== 0) {
+                              setEditInputIndex(index);
+                              setEditInputValue(tag);
+                              e.preventDefault();
+                            }
+                          }}
+                        >
+                          {isLongTag ? `${tag.slice(0, 20)}...` : tag}
+                        </span>
+                      </Tag>
+                    );
+                    return isLongTag ? (
+                      <Tooltip title={tag} key={tag}>
+                        {tagElem}
+                      </Tooltip>
+                    ) : (
+                      tagElem
+                    );
+                  })}
+                </Space>
+                {inputVisible ? (
+                  <Input
+                    ref={inputRef}
+                    type="text"
+                    size="small"
+                    style={tagInputStyle}
+                    value={inputValue}
+                    onChange={handleInputChange}
+                    onBlur={handleInputConfirm}
+                    onPressEnter={handleInputConfirm}
+                  />
+                ) : (
+                  <Tag style={tagPlusStyle} onClick={showInput}>
+                    <PlusOutlined /> Add Location
+                  </Tag>
+                )}
+              </Space>
             </>
           ) : (
-              <></>
+            <></>
           )}
           {user === "Employer" ? (
             <label className="control-label">Company Logo</label>
@@ -305,7 +314,9 @@ export default function Signup() {
 
           {user === "Employer" ? (
             <>
-              <label className="control-label">Company Establishment Date</label>
+              <label className="control-label">
+                Company Establishment Date
+              </label>
               <div className="dropdowns">
                 <Dropdown
                   values={year}
@@ -341,12 +352,38 @@ export default function Signup() {
               </div>
             </>
           )}
+
+          {user === "Employer" ? (<><label className="control-label">Assessment</label>
+          <div className="dropdowns">
+            <Select
+              placeholder="Select assessment type"
+              className="w-100 selectBoxAssessment"
+              onChange={(e) => onAssessmentTypeChange(e)}
+              options={[
+                {
+                  value: "Monthly",
+                  label: "Monthly",
+                },
+                {
+                  value: "Once in 3 months",
+                  label: "Once in 3 months",
+                },
+                {
+                  value: "Twice a year",
+                  label: "Twice a year",
+                },
+                {
+                  value: "Annualy",
+                  label: "Annualy",
+                },
+              ]}
+            />
+            </div></>) : (<></>)}
           <Button className="signupBtn" onClick={handleSubmit}>
             Signup
-          </Button>
+          </Button><br /><br /><br /><br /><br /><br />
         </form>
       </div>
     </>
-
   );
 }
