@@ -75,6 +75,7 @@ const ViewVerification = () => {
         <div className="questions">
           <span>Reference Number</span>
           <YesOrNo
+            name={"referenceNumber"}
             label={fetchedDetails.referenceNumber}
             type={"text"}
             options={[
@@ -98,6 +99,7 @@ const ViewVerification = () => {
               " " +
               fetchedDetails.employeeLastName
             }
+            name={"employeeName"}
             type={"text"}
             options={[
               {
@@ -127,6 +129,7 @@ const ViewVerification = () => {
               " to " +
               fetchedDetails.datesEmployedTo
             }
+            name={"datesEmployed"}
             type={"text"}
             options={[
               {
@@ -146,6 +149,7 @@ const ViewVerification = () => {
           <YesOrNo
             label={fetchedDetails.employeeDesignation}
             type={"text"}
+            name={"employeeDesignation"}
             options={[
               {
                 label: "Correct",
@@ -171,6 +175,7 @@ const ViewVerification = () => {
           <span>Reason for leaving</span>
           <YesOrNo
             label={fetchedDetails.reasonForLeaving}
+            name={"reasonForLeaving"}
             type={"text"}
             options={[
               {
@@ -196,6 +201,7 @@ const ViewVerification = () => {
         <div className="questions">
           <span>Location</span>
           <YesOrNo
+            name={"employeeCompanyLocation"}
             label={fetchedDetails.employeeCompanyLocation}
             type={"text"}
             options={[
@@ -215,6 +221,7 @@ const ViewVerification = () => {
           <span>Work Type</span>
           <YesOrNo
             label={fetchedDetails.typeOfEmployment}
+            name={"typeOfEmployment"}
             type={"text"}
             options={[
               {
