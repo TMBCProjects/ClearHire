@@ -584,7 +584,7 @@ export async function sendVerifiedVerification(data,id) {
     {
       isVerified: true,
       changes: data.changes,
-      answersForQuestionList: data.answersForQuestionList,
+      questionsList: data.questionsList,
       verificationByName: data.verificationByName,
       verificationByDesignation: data.verificationByDesignation,
       verificationByDepartment: data.verificationByDepartment,

@@ -34,7 +34,7 @@ const ViewVerification = () => {
     }));
   };
   const onSubmit = () => {
-    CandidateDetails.answersForQuestionList = questionsList;
+    CandidateDetails.questionsList = questionsList;
     CandidateDetails.checkDetails = checkDetails;
     console.log(CandidateDetails);
   };
