@@ -375,7 +375,7 @@ export async function readEmployees(employerId) {
     console.log(error);
   }
 }
-export async function readNotVerifications(employerEmail) {
+export async function readNotVerifiedVerifications(employerEmail) {
   try {
     let verfications = [];
     const querySnapshot = await getDocuments(
