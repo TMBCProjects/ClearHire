@@ -157,7 +157,7 @@ const Requests = () => {
           <div className="col-6 ">
             <h3 className="fw-bold fs-30">Sent Approvals (Pending)</h3>
           </div>
-          <div className="col-6 d-flex justify-content-md-end justify-content-md-center justify-content-md-between justify-content-end  align-items-center">
+          <div className="col-6 d-flex justify-content-md-center justify-content-md-between align-items-center filter">
             {isMobile ? (
               <FilterOutlined style={{ width: "25px" }} onClick={showMenu} />
             ) : (

@@ -170,7 +170,7 @@ const Approval = () => {
           <div className="col-4">
             <h3 className="fw-bold fs-30">Sent Offers (Pending)</h3>
           </div>
-          <div className="col-8 d-flex justify-content-end align-items-center">
+          <div className="col-8 d-flex align-items-center filter">
             {isMobile ? (
               <FilterOutlined style={{ width: "25px" }} onClick={showMenu} />
             ) : (

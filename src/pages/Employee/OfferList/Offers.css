@@ -120,4 +120,8 @@
     .filter-approval {
         font-size: 16px;
     }
+
+    #employer-approval {
+        padding: 2vh;
+    }
 }
