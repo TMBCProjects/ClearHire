@@ -1,5 +1,6 @@
 export default class Employee {
   isActive = false;
+  isVerified = false;
   employeeName = "";
   employeeEmail = "";
   companyLocations = "";
