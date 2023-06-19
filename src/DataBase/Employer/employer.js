@@ -386,8 +386,8 @@ export async function readNotVerifiedVerifications(employerEmail) {
     );
     querySnapshot.forEach((doc) => {
       let verfication = {
+        id: doc.id,
         isActive: doc.data().isActive,
-        isVerified: doc.data().isVerified,
         referenceNumber: doc.data().referenceNumber,
         employerEmail: doc.data().employerEmail,
         requestingCompanyName: doc.data().requestingCompanyName,
@@ -421,30 +421,27 @@ export async function readVerifiedVerifications(employerId) {
         where(Fields.isVerified, "==", true)
       )
     );
-    querySnapshot.forEach(async (doc) => {
+    querySnapshot.forEach((doc) => {
       let verfication = {
         id: doc.id,
-        isActive: doc.data().isActive,
-        lastRatings: doc.data().lastRatings,
-        employeeName: doc.data().employeeName,
-        employeeEmail: doc.data().employeeEmail,
-        profileImage: doc.data().profileImage,
-        dateOfBirth: doc.data().dateOfBirth,
-        role: doc.data().role,
-        currentEmployerId: doc.data().currentEmployerId,
-        employerIdList: doc.data().employerIdList,
-        designation: doc.data().designation,
-        salary: doc.data().salary,
-        companyName: doc.data().companyName,
-        companyLogo: doc.data().companyLogo,
-        companyLocation: doc.data().companyLocation,
+        referenceNumber: doc.data().referenceNumber,
+        employerEmail: doc.data().employerEmail,
+        requestingCompanyName: doc.data().requestingCompanyName,
+        employerId: doc.data().employerId,
+        employeeFirstName: doc.data().employeeFirstName,
+        employeeLastName: doc.data().employeeLastName,
+        datesEmployedFrom: doc.data().datesEmployedFrom,
+        datesEmployedTo: doc.data().datesEmployedTo,
+        employeeDesignation: doc.data().employeeDesignation,
+        reasonForLeaving: doc.data().reasonForLeaving,
+        employeeCompanyLocation: doc.data().employeeCompanyLocation,
         typeOfEmployment: doc.data().typeOfEmployment,
-        offerLetter: doc.data().offerLetter,
-        dateOfJoining: doc.data().dateOfJoining,
-        employeeAadhaarCardNumber: doc.data().employeeAadhaarCardNumber,
-        portfolioLink: doc.data().portfolioLink,
-        resume: doc.data().resume,
-        skills: doc.data().skills,
+        questionsList: doc.data().questionsList,
+        verificationByEmail: doc.data().verificationByEmail,
+        verificationByName: doc.data().verificationByName,
+        verificationByDesignation: doc.data().verificationByDesignation,
+        verificationByDepartment: doc.data().verificationByDepartment,
+        changes: doc.data().changes,
       };
       verfications.push(verfication);
     });
@@ -493,7 +490,6 @@ export async function readEmployeeRatings(employeeId) {
     console.log(error);
   }
 }
-
 
 // export async function readOfferReplies(employerId) {
 //   try {
@@ -574,10 +570,10 @@ export async function sendVerificationRequest(data) {
     questionsList: data.questionsList,
     verificationByEmail: data.verificationByEmail,
   };
-  console.log(newVerfication);
   return await addDocument(Collections.verfications, newVerfication);
 }
-export async function sendVerifiedVerification(data,id) {
+export async function sendVerifiedVerification(data, id) {
+  console.log(id);
   await updateDocument(
     Collections.verfications,
     {

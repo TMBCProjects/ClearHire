@@ -15,7 +15,6 @@ export default class Verification {
   employeeCompanyLocation = "";
   typeOfEmployment = "";
   questionsList = [];
-  answersForQuestionList = [];
   verificationByEmail = "";
   verificationByName = "";
   verificationByDesignation = "";
