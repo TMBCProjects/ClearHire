@@ -121,14 +121,25 @@ function OnboardingForm() {
     values.employerId = userDatas.id;
     values.emailAvailable = !emailAvailable;
     onboardEmployee(values).then(() => {
-      emailjs.sendForm(
-        "service_cpytsjm",
-        "template_pwvg0ae",
-        e.target,
-        "F3rrwZwcav-0a-BOW"
-      );
       window.location.href = "/offerletter-sent";
     });
+
+    e.preventDefault();
+
+    emailjs.sendForm(
+      "service_cpytsjm",
+      "template_pwvg0ae",
+      e.target,
+      "F3rrwZwcav-0a-BOW"
+    )
+    .then(
+      (result) => {
+        console.log(result.text)
+      },
+      (error) => {
+        console.log(error.text)
+      }
+    )
 
   };
 
