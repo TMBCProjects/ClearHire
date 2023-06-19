@@ -1,6 +1,6 @@
 import { Empty } from 'antd'
 import React, { useState, useEffect } from "react";
-import { readVerifications } from "../../../DataBase/Employer/employer";
+import { readNotVerifiedVerifications } from "../../../DataBase/Employer/employer";
 import { Link } from "react-router-dom";
 
 function Verification() {
@@ -10,7 +10,9 @@ function Verification() {
     const fetchVerificationDetails = async () => {
       try {
         const userDatas = JSON.parse(sessionStorage.getItem("userData"));
-        const data = await readVerifications(userDatas.data.employerEmail);
+        const data = await readNotVerifiedVerifications(
+          userDatas.data.employerEmail
+        );
         return data;
       } catch (error) {
         console.log(error);
@@ -32,52 +34,6 @@ function Verification() {
             Verify a Candidate
           </button>
         </Link>
-        <div className="form-check form-check-inline mx-3 requestFilters">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="inlineRadioOptions"
-            id="inlineRadio1"
-            onClick={() => setVerification(false)}
-            checked={!verification}
-          />
-          <label
-            className="form-check-label filter-approval"
-            htmlFor="inlineRadio1">
-            Verification Completed
-          </label>
-        </div>
-
-        <div className="form-check form-check-inline mx-3 requestFilters">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="inlineRadioOptions"
-            onClick={() => setVerification(true)}
-            id="inlineRadio2"
-            checked={verification}
-          />
-          <label
-            className="form-check-label filter-approval"
-            htmlFor="inlineRadio2">
-            Verification Requests
-          </label>
-        </div>
-        <div className="form-check form-check-inline mx-3 requestFilters">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="inlineRadioOptions"
-            onClick={() => setVerification(true)}
-            id="inlineRadio2"
-            checked={verification}
-          />
-          <label
-            className="form-check-label filter-approval"
-            htmlFor="inlineRadio2">
-            Verification Requests
-          </label>
-        </div>
       </div>
       <div>
         {CandidateDetails.length > 0 ? (
