@@ -1,0 +1,13 @@
+.add-verification {
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #00823B !important;
+    color: #00823B !important;
+    padding: 10px 14px !important;
+    box-shadow: 0px 0px 33px #00000012;
+    border-radius: 39px !important;
+    font-weight: 600 !important;
+    float: right;
+    width: auto;
+    text-decoration: none;
+    margin-right: 5vh;
+}

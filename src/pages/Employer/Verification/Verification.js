@@ -2,6 +2,9 @@ import { Empty } from 'antd'
 import React, { useState, useEffect } from "react";
 import { readNotVerifiedVerifications } from "../../../DataBase/Employer/employer";
 import { Link } from "react-router-dom";
+import { SendOutlined } from '@ant-design/icons';
+import { Tabs } from 'antd';
+import "../Verification/Verification.css";
 
 function Verification() {
   const [CandidateDetails, setCandidateDetails] = useState([]);
@@ -22,18 +25,28 @@ function Verification() {
       setCandidateDetails(data);
     });
   }, []);
+  const items = [
+    {
+      key: '1',
+      label: `Verified Candidates`,
+    },
+    {
+      key: '2',
+      label: `Verification Request`,
+      //children: <EmployeeAssesmentForm />,
+    }
+  ];
   return (
     <div>
+      <Tabs
+        defaultActiveKey="1"
+        centered
+        items={items}
+      />
       <div>
-        <Link
-          className="w-50 mt-3 btn"
-          to={{
-            pathname: "/verify-candidate",
-          }}>
-          <button className="w-100 mt-3 btn btn-assessment">
-            Verify a Candidate
-          </button>
-        </Link>
+          <Link to={"/verify-candidate"} className="add-verification">
+            Verify a candidate
+          </Link>
       </div>
       <div>
         {CandidateDetails.length > 0 ? (
