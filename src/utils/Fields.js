@@ -7,6 +7,7 @@ const Fields = {
   offerLetters: "offerLetters",
   profileImages: "profileImages",
   currentEmployerId: "currentEmployerId",
+  verificationByEmail: "verificationByEmail",
   companyLocation: "companyLocation",
   employeeEmail: "employeeEmail",
   employerEmail: "employerEmail",

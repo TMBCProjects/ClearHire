@@ -41,7 +41,6 @@ function OnboardingForm() {
   // }
 
   const handleInputChange = (e) => {
-    console.log(e);
     const { name, value } = e.target;
     setValues({
       ...values,

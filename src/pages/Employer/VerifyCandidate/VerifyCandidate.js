@@ -54,10 +54,9 @@ const VerifyCandidate = () => {
     CandidateDetails.employerEmail = userDatas.data.employerEmail;
     CandidateDetails.requestingCompanyName = userDatas.data.companyName;
     CandidateDetails.questionsList = questionsList;
-    console.log(CandidateDetails);
     sendVerificationRequest(CandidateDetails)
       .then(() => {
-        // window.location.href = "/";
+        window.location.href = "/";
       })
       .catch((err) => {
         alert(err);

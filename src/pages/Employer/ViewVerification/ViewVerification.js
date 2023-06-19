@@ -1,254 +1,299 @@
-import React, { useState } from 'react'
-import InputField from '../../../components/Input/InputField';
-import TextArea from '../../../components/Input/TextArea';
-import YesOrNo from '../../../components/Input/YesOrNo';
-import DateField from '../../../components/Input/DateFiled';
-import DropDownField from '../../../components/Input/DropDownField'
-import { PlusOutlined } from "@ant-design/icons";
-import { Button } from 'antd';
-import Dropdown from "../../../components/Dropdrowns/Dropdown";
-import "../ViewVerification/ViewVerification.css"
+import React, { useState } from "react";
+import YesOrNo from "../../../components/Input/YesOrNo";
+import { Button } from "antd";
+import "../ViewVerification/ViewVerification.css";
+import { useLocation } from "react-router-dom";
+import InputField from "../../../components/Input/InputField";
+import { useEffect } from "react";
 
 const ViewVerification = () => {
-    const [qCount, setQCount] = useState(1);
-    const [CandidateDetails, setCandidateDetails] = useState([])
-    const ansType = ["Short Answer", "MCQ", "Select"];
-    const addques = () => {
-        setQCount(qCount + 1);
-    }
-    const handleInputChange = (e) => {
-        setCandidateDetails((CandidateDetails) => ({ ...CandidateDetails, [e.target.name]: e.target.value }));
-    }
-    const onSubmit = () => {
-        console.log(CandidateDetails)
-    }
+  const location = useLocation();
+  const { from } = location.state;
+  const fetchedDetails = from;
+  const [qCount, setQCount] = useState(1);
+  const [checkDetails, setCheckDetails] = useState([]);
+  const [changes, setChanges] = useState([]);
+  const [CandidateDetails, setCandidateDetails] = useState([]);
+  const [questionsList, setQuestionsList] = useState([]);
+  useEffect(() => {
+    setQuestionsList(fetchedDetails.questionsList);
+  }, [fetchedDetails]);
+  const handleAnswerChange = (e, i) => {
+    setQuestionsList((questionsList) => {
+      const updatedQuestionsList = [...questionsList];
+      updatedQuestionsList[i] = {
+        ...updatedQuestionsList[i],
+        answer: e,
+      };
+      return updatedQuestionsList;
+    });
+  };
+  const handleInputChange = (e) => {
+    setCheckDetails((checkDetails) => ({
+      ...checkDetails,
+      [e.target.name]: e.target.value,
+    }));
+  };
+  const handleInput2Change = (e) => {
+    setCandidateDetails((CandidateDetails) => ({
+      ...CandidateDetails,
+      [e.target.name]: e.target.value,
+    }));
+  };
+  const handleChange = (e) => {
+    setChanges((changes) => ({
+      ...changes,
+      [e.target.name]: e.target.value,
+    }));
+  };
+  const onSubmit = () => {
+    CandidateDetails.questionsList = questionsList;
+    // CandidateDetails.changes = changes;
+    // CandidateDetails.checkDetails = checkDetails;
+    console.log(CandidateDetails);
+  };
 
-    const delques = () => {
-        if (qCount > 1) {
-            setQCount(qCount - 1);
-        }
-    };
-    return (
-        <div className='container flex-column d-flex justify-content-center align-items-center py-5' style={{
-            width: '45rem'
+  return (
+    <div
+      className="container flex-column d-flex justify-content-center align-items-center py-5"
+      style={{
+        width: "45rem",
+      }}>
+      <div className="d-flex flex-column align-items-center">
+        <h1
+          className="text-success mb-3"
+          style={{
+            fontWeight: "500",
+            fontSize: "2.4em",
+          }}>
+          Candidate details to be verified
+        </h1>
+        <p
+          style={{
+            width: "600px",
+            fontSize: "1rem",
+            textAlign: "center",
+            fontWeight: "500",
+          }}>
+          Fill this form to help the current employer to verify your previous
+          candidate.
+        </p>
+      </div>
+
+      <div
+        className="d-flex align-self-start mt-3"
+        style={{
+          justifyContent: "space-between",
+          width: "100%",
+          gap: "1rem",
         }}>
-            <div className='d-flex flex-column align-items-center'>
-                <h1 className='text-success mb-3' style={{
-                    fontWeight: "500",
-                    fontSize: '2.4em',
+        <div className="questions">
+          <span>Reference Number</span>
+          <YesOrNo
+            name={"referenceNumber"}
+            label={fetchedDetails.referenceNumber}
+            type={"text"}
+            onChange={handleInputChange}
+            options={[
+              {
+                label: "Correct",
+                value: "Correct",
+              },
+              {
+                label: "Incorrect",
+                value: "Incorrect",
+              },
+            ]}
+          />
+        </div>
 
-                }}>Candidate details to be verified</h1>
-                <p style={{
-                    width: '600px',
-                    fontSize: '1rem',
-                    textAlign: 'center',
-                    fontWeight: '500'
-                }}>Fill this form to help the current employer to verify your previous candidate.</p>
-            </div>
+        <div className="questions">
+          <span>Candidate Name</span>
+          <YesOrNo
+            label={
+              fetchedDetails.employeeFirstName +
+              " " +
+              fetchedDetails.employeeLastName
+            }
+            name={"employeeName"}
+            onChange={handleInputChange}
+            type={"text"}
+            options={[
+              {
+                label: "Correct",
+                value: "Correct",
+              },
+              {
+                label: "Incorrect",
+                value: "Incorrect",
+              },
+            ]}
+          />
+        </div>
+      </div>
+      <div
+        className="d-flex align-self-start mt-3"
+        style={{
+          justifyContent: "space-between",
+          width: "100%",
+          gap: "1rem",
+        }}>
+        <div className="questions">
+          <span>Dates Employed</span>
+          <YesOrNo
+            label={
+              fetchedDetails.datesEmployedFrom +
+              " to " +
+              fetchedDetails.datesEmployedTo
+            }
+            name={"datesEmployed"}
+            onChange={handleInputChange}
+            type={"text"}
+            options={[
+              {
+                label: "Correct",
+                value: "Correct",
+              },
+              {
+                label: "Incorrect",
+                value: "Incorrect",
+              },
+            ]}
+          />
+        </div>
 
-            <div className="d-flex align-self-start mt-3" style={{
-                justifyContent: "space-between",
-                width: "100%",
-                gap: '1rem'
-            }}>
-                <div className='questions'>
-                    <span>Reference Number</span>
-                    <YesOrNo
-                        label={"1445345654"}
-                        type={"text"}
-                        options={[
-                            {
-                                label: 'Correct',
-                                value: 'Correct',
-                            },
-                            {
-                                label: 'Incorrect',
-                                value: 'Incorrect',
-                            }
-                        ]}
-                    />
-                </div>
+        <div className="questions">
+          <span>Designation</span>
+          <YesOrNo
+            label={fetchedDetails.employeeDesignation}
+            type={"text"}
+            name={"employeeDesignation"}
+            onChange={handleInputChange}
+            options={[
+              {
+                label: "Correct",
+                value: "Correct",
+              },
+              {
+                label: "Incorrect",
+                value: "Incorrect",
+              },
+            ]}
+          />
+        </div>
+      </div>
 
-                <div className='questions'>
-                    <span>Candidate Name</span>
-                    <YesOrNo
-                        label={"Ken Adams"}
-                        type={"text"}
-                        options={[
-                            {
-                                label: 'Correct',
-                                value: 'Correct',
-                            },
-                            {
-                                label: 'Incorrect',
-                                value: 'Incorrect',
-                            }
-                        ]}
-                    />
-                </div>
+      <div
+        className="d-flex mt-3"
+        style={{
+          width: "100%",
+        }}>
+        <div
+          className="questions"
+          style={{ width: "100%" }}>
+          <span>Reason for leaving</span>
+          <YesOrNo
+            label={fetchedDetails.reasonForLeaving}
+            name={"reasonForLeaving"}
+            onChange={handleInputChange}
+            type={"text"}
+            options={[
+              {
+                label: "Correct",
+                value: "Correct",
+              },
+              {
+                label: "Incorrect",
+                value: "Incorrect",
+              },
+            ]}
+          />
+        </div>
+      </div>
 
+      <div
+        className="d-flex align-self-start mt-3"
+        style={{
+          justifyContent: "space-between",
+          width: "100%",
+          gap: "1rem",
+        }}>
+        <div className="questions">
+          <span>Location</span>
+          <YesOrNo
+            name={"employeeCompanyLocation"}
+            label={fetchedDetails.employeeCompanyLocation}
+            type={"text"}
+            onChange={handleInputChange}
+            options={[
+              {
+                label: "Correct",
+                value: "Correct",
+              },
+              {
+                label: "Incorrect",
+                value: "Incorrect",
+              },
+            ]}
+          />
+        </div>
 
-            </div>
-            <div className="d-flex align-self-start mt-3" style={{
-                justifyContent: "space-between",
-                width: "100%",
-                gap: '1rem'
-            }}>
-                <div className='questions'>
-                    <span>Dates Employed</span>
-                    <YesOrNo
-                        label={"12/08/2015 to 22/01/2020"}
-                        type={"text"}
-                        options={[
-                            {
-                                label: 'Correct',
-                                value: 'Correct',
-                            },
-                            {
-                                label: 'Incorrect',
-                                value: 'Incorrect',
-                            }
-                        ]}
-                    />
-                </div>
+        <div className="questions">
+          <span>Work Type</span>
+          <YesOrNo
+            label={fetchedDetails.typeOfEmployment}
+            name={"typeOfEmployment"}
+            type={"text"}
+            onChange={handleInputChange}
+            options={[
+              {
+                label: "Correct",
+                value: "Correct",
+              },
+              {
+                label: "Incorrect",
+                value: "Incorrect",
+              },
+            ]}
+          />
+        </div>
+      </div>
+      {fetchedDetails.questionsList.map((info, i) => {
+        return (
+          <div
+            className="d-flex align-self-start mt-3"
+            style={{ width: "100%" }}>
+            {info.questionType === "Yes/No" && (
+              <YesOrNo
+                label={info.question}
+                type={"text"}
+                onChange={(e) => handleAnswerChange(e.target.value, i)}
+                options={[
+                  {
+                    label: "Yes",
+                    value: "Yes",
+                  },
+                  {
+                    label: "No",
+                    value: "No",
+                  },
+                ]}
+              />
+            )}
 
-                <div className='questions'>
-                    <span>Designation</span>
-                    <YesOrNo
-                        label={"Software Engineer"}
-                        type={"text"}
-                        options={[
-                            {
-                                label: 'Correct',
-                                value: 'Correct',
-                            },
-                            {
-                                label: 'Incorrect',
-                                value: 'Incorrect',
-                            }
-                        ]}
-                    />
-                </div>
-            </div>
+            {info.questionType === "Short Answer" && (
+              <InputField
+                label={info.question}
+                type={"text"}
+                onChange={(e) => handleAnswerChange(e.target.value, i)}
+                placeholder={"Type your answer here"}
+              />
+            )}
+          </div>
+        );
+      })}
 
-            <div className="d-flex mt-3" style={{
-                width: "100%",
-            }}>
-                <div className='questions' style={{width: "100%"}}>
-                    <span>Reason for leaving</span>
-                    <YesOrNo
-                        label={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."}
-                        type={"text"}
-                        options={[
-                            {
-                                label: 'Correct',
-                                value: 'Correct',
-                            },
-                            {
-                                label: 'Incorrect',
-                                value: 'Incorrect',
-                            }
-                        ]}
-                    />
-                </div>
-            </div>
-
-            <div className="d-flex align-self-start mt-3" style={{
-                justifyContent: "space-between",
-                width: "100%",
-                gap: '1rem'
-            }}>
-                <div className='questions'>
-                    <span>Location</span>
-                    <YesOrNo
-                        label={"Trichy"}
-                        type={"text"}
-                        options={[
-                            {
-                                label: 'Correct',
-                                value: 'Correct',
-                            },
-                            {
-                                label: 'Incorrect',
-                                value: 'Incorrect',
-                            }
-                        ]}
-                    />
-                </div>
-
-                <div className='questions'>
-                    <span>Work Type</span>
-                    <YesOrNo
-                        label={"Permanent full-time"}
-                        type={"text"}
-                        options={[
-                            {
-                                label: 'Correct',
-                                value: 'Correct',
-                            },
-                            {
-                                label: 'Incorrect',
-                                value: 'Incorrect',
-                            }
-                        ]}
-                    />
-                </div>
-            </div>
-            <div className="d-flex align-self-start mt-3" style={{ width: '100%' }}>
-                <YesOrNo
-                    label={"Is the candidate eligible for Rehire?"}
-                    type={"text"}
-                    options={[
-                        {
-                            label: 'Yes',
-                            value: 'Yes',
-                        },
-                        {
-                            label: 'No',
-                            value: 'No',
-                        }
-                    ]}
-                />
-
-            </div>
-            <div className="d-flex align-self-start mt-3" style={{ width: '100%' }}>
-                <YesOrNo
-                    label={"Is the document(Experience letter) authentic?"}
-                    type={"text"}
-                    options={[
-                        {
-                            label: 'Yes',
-                            value: 'Yes',
-                        },
-                        {
-                            label: 'No',
-                            value: 'No',
-                        }
-                    ]}
-                />
-
-            </div>
-            <div className="d-flex align-self-start mt-3" style={{ width: '100%' }}>
-                <YesOrNo
-                    label={"How did the candidate's way of relieving?"}
-                    type={"text"}
-                    options={[
-                        {
-                            label: 'Yes',
-                            value: 'Yes',
-                        },
-                        {
-                            label: 'No',
-                            value: 'No',
-                        }
-                    ]}
-                    placeholder={
-                        "Enter the company name."
-                    }
-                />
-
-            </div>
-            {/* <div className="d-flex align-self-start mt-3" style={{
+      {/* <div className="d-flex align-self-start mt-3" style={{
                 width: '100%',
                 gap: '1.4rem'
             }}>
@@ -375,56 +420,58 @@ const ViewVerification = () => {
             <div onClick={addques} className="d-flex align-self-start mt-4" style={{ width: '100%', color: 'green', fontSize: '1.1rem', cursor: 'pointer', fontWeight: 'bold' }}>
                 <PlusOutlined style={{ marginTop: '.3rem', marginRight: '.6rem' }} />
                 <p>Add more questions</p>
-            </div>
+            </div>*/}
 
+      <div
+        className="d-flex align-self-start flex-column mt-3"
+        style={{ width: "100%" }}>
+        <p style={{ fontWeight: "bold", fontSize: "1.1rem" }}>
+          Enter the details of the person who verified the candidate
+        </p>
+        <div
+          className="d-flex"
+          style={{
+            justifyContent: "space-around",
+            gap: "1rem",
+            marginLeft: "0",
+          }}>
+          <InputField
+            type={"text"}
+            name={"verificationByName"}
+            onChange={handleInput2Change}
+            placeholder={"Name"}
+          />
+          <InputField
+            type={"text"}
+            name={"verificationByDesignation"}
+            onChange={handleInput2Change}
+            placeholder={"Designation"}
+          />
+        </div>
+        <div style={{ width: "49%" }}>
+          <InputField
+            type={"text"}
+            name={"verificationByDepartment"}
+            onChange={handleInput2Change}
+            placeholder={"Department"}
+          />
+        </div>
+      </div>
+      <div
+        className="d-flex align-self-start flex-column my-3"
+        style={{ width: "100%" }}>
+        <p style={{ fontSize: ".8rem", textAlign: "center" }}>
+          *By clicking the submit button, you are sending this form to the
+          previous employer of the candidate
+        </p>
+        <Button
+          onClick={(e) => onSubmit(e)}
+          className="signupBtn mt-0">
+          Submit
+        </Button>
+      </div>
+    </div>
+  );
+};
 
-            <div className="d-flex align-self-start flex-column mt-3" style={{ width: '100%' }}>
-                <p style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>Enter the details of the person who verified the candidate</p>
-                <div className='d-flex' style={{
-                    justifyContent: "space-around",
-                    gap: '1rem',
-                    marginLeft: '0'
-                }}>
-                    <InputField
-                        type={"text"}
-                        name={"Name"}
-                        // value={values.email}
-                        onChange={handleInputChange}
-                        placeholder={
-                            "Name"
-                        }
-                    />
-                    <InputField
-                        type={"text"}
-                        name={"EmpDesignation"}
-                        // value={values.email}
-                        onChange={handleInputChange}
-                        placeholder={
-                            "Designation"
-                        }
-                    />
-                </div>
-                <div style={{ width: '49%' }}>
-                    <InputField
-                        type={"text"}
-                        name={"Department"}
-                        // value={values.email}
-                        onChange={handleInputChange}
-                        placeholder={
-                            "Department"
-                        }
-                    />
-                </div>
-
-            </div> */}
-            <div className="d-flex align-self-start flex-column my-3" style={{ width: '100%' }}>
-                <p style={{ fontSize: '.8rem', textAlign: 'center' }}>*By clicking the submit button, you are sending this form to the previous employer of the candidate</p>
-                <Button onClick={(e) => onSubmit(e)} className="signupBtn mt-0">Submit</Button>
-
-            </div>
-
-        </div >
-    )
-}
-
-export default ViewVerification
+export default ViewVerification;
