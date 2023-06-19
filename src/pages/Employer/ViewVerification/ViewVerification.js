@@ -8,12 +8,13 @@ import { useEffect } from "react";
 import DateField from "../../../components/Input/DateFiled";
 import TextArea from "../../../components/Input/TextArea";
 import DropDownField from "../../../components/Input/DropDownField";
+import { sendVerifiedVerification } from "../../../DataBase/Employer/employer";
 
 const ViewVerification = () => {
   const location = useLocation();
   const { from } = location.state;
   const fetchedDetails = from;
-  const [qCount, setQCount] = useState(1);
+  console.log(fetchedDetails);
   const [checkDetails, setCheckDetails] = useState([]);
   const [changes, setChanges] = useState([]);
   const [CandidateDetails, setCandidateDetails] = useState([]);
@@ -57,10 +58,11 @@ const ViewVerification = () => {
     }));
   };
   const onSubmit = () => {
-    //CandidateDetails.questionsList = questionsList;
-    // CandidateDetails.changes = changes;
-    // CandidateDetails.checkDetails = checkDetails;
-    console.log(checkDetails);
+    CandidateDetails.questionsList = questionsList;
+    CandidateDetails.changes = changes;
+    sendVerifiedVerification(CandidateDetails, fetchedDetails.id).then(() => {
+      window.location.href = "/verification";
+    });
   };
 
   return (
@@ -116,17 +118,17 @@ const ViewVerification = () => {
             ]}
           />
 
-          {checkDetails.referenceNumber === "Incorrect" &&
+          {checkDetails.referenceNumber === "Incorrect" && (
             <div>
               <InputField
                 type={"text"}
-                name={"referenceCorrectNumber"}
+                name={"referenceNumber"}
                 //value={values.name}
-                onChange={handleInputChange}
-                placeholder={"Enter the correct reference number."}
+                onChange={handleChange}
+                placeholder={fetchedDetails.referenceNumber}
               />
             </div>
-          }
+          )}
         </div>
 
         <div className="questions">
@@ -151,25 +153,25 @@ const ViewVerification = () => {
               },
             ]}
           />
-          {checkDetails.employeeName === "Incorrect" &&
+          {checkDetails.employeeName === "Incorrect" && (
             <div>
               <InputField
                 type={"text"}
-                name={"firstName"}
+                name={"employeeFirstName"}
                 //value={values.name}
-                onChange={handleInputChange}
-                placeholder={"Enter the correct first name."}
+                onChange={handleChange}
+                placeholder={fetchedDetails.employeeFirstName}
               />
 
               <InputField
                 type={"text"}
-                name={"lastName"}
+                name={"employeeLastName"}
                 //value={values.name}
-                onChange={handleInputChange}
-                placeholder={"Enter the correct last name."}
+                onChange={handleChange}
+                placeholder={fetchedDetails.employeeLastName}
               />
             </div>
-          }
+          )}
         </div>
       </div>
       <div
@@ -202,26 +204,26 @@ const ViewVerification = () => {
             ]}
           />
 
-          {checkDetails.datesEmployed === "Incorrect" &&
+          {checkDetails.datesEmployed === "Incorrect" && (
             <div>
               <DateField
                 label={"Employed From"}
                 type={"text"}
                 name={"dateEmployedFrom"}
                 // value={values.email}
-                onChange={handleInputChange}
-                placeholder={"From"}
+                onChange={handleChange}
+                placeholder={fetchedDetails.datesEmployedFrom}
               />
               <DateField
                 label={"Employed to"}
                 type={"text"}
                 name={"dateEmployedTo"}
                 // value={values.email}
-                onChange={handleInputChange}
-                placeholder={"To"}
+                onChange={handleChange}
+                placeholder={fetchedDetails.datesEmployedTo}
               />
             </div>
-          }
+          )}
         </div>
 
         <div className="questions">
@@ -243,17 +245,17 @@ const ViewVerification = () => {
             ]}
           />
 
-          {checkDetails.employeeDesignation === "Incorrect" &&
+          {checkDetails.employeeDesignation === "Incorrect" && (
             <div>
               <InputField
                 type={"text"}
-                name={"employeeCorrectDesignation"}
+                name={"employeeDesignation"}
                 //value={values.name}
-                onChange={handleInputChange}
-                placeholder={"Enter the correct designation."}
+                onChange={handleChange}
+                placeholder={fetchedDetails.employeeDesignation}
               />
             </div>
-          }
+          )}
         </div>
       </div>
 
@@ -282,17 +284,17 @@ const ViewVerification = () => {
               },
             ]}
           />
-          {checkDetails.reasonForLeaving === "Incorrect" &&
+          {checkDetails.reasonForLeaving === "Incorrect" && (
             <div>
               <TextArea
                 type={"textarea"}
-                name={"employeeCorrectReason"}
+                name={"reasonForLeaving"}
                 //value={values.name}
-                onChange={handleInputChange}
-                placeholder={"Enter the correct reason."}
+                onChange={handleChange}
+                placeholder={fetchedDetails.reasonForLeaving}
               />
             </div>
-          }
+          )}
         </div>
       </div>
 
@@ -321,17 +323,17 @@ const ViewVerification = () => {
               },
             ]}
           />
-          {checkDetails.employeeCompanyLocation === "Incorrect" &&
+          {checkDetails.employeeCompanyLocation === "Incorrect" && (
             <div>
               <InputField
                 type={"text"}
-                name={"employeeCorrectCompanyLocation"}
+                name={"employeeCompanyLocation"}
                 //value={values.name}
-                onChange={handleInputChange}
-                placeholder={"Enter the correct location."}
+                onChange={handleChange}
+                placeholder={fetchedDetails.employeeCompanyLocation}
               />
             </div>
-          }
+          )}
         </div>
 
         <div className="questions">
@@ -352,16 +354,19 @@ const ViewVerification = () => {
               },
             ]}
           />
-          {checkDetails.employeeCompanyLocation === "Incorrect" &&
+          {checkDetails.typeOfEmployment === "Incorrect" && (
             <div>
               <DropDownField
                 type={"text"}
-                name={"CorrectworkType"}
+                name={"typeOfEmployment"}
                 // value={values.email}
-                onChange={handleTypeChange}
-                placeholder={"Enter candidate's correct work type"}
+                onChange={handleChange}
+                placeholder={fetchedDetails.typeOfEmployment}
                 options={[
-                  { value: "Permanent Full-Time", label: "Permanent Full-Time" },
+                  {
+                    value: "Permanent Full-Time",
+                    label: "Permanent Full-Time",
+                  },
                   { value: "Part-Time", label: "Part-Time" },
                   { value: "Casual/Vacation", label: "Casual/Vacation" },
                   { value: "Contract", label: "Contract" },
@@ -369,8 +374,7 @@ const ViewVerification = () => {
                 ]}
               />
             </div>
-          }
-
+          )}
         </div>
       </div>
       {fetchedDetails.questionsList.map((info, i) => {
@@ -407,135 +411,6 @@ const ViewVerification = () => {
           </div>
         );
       })}
-
-      {/* <div className="d-flex align-self-start mt-3" style={{
-                width: '100%',
-                gap: '1.4rem'
-            }}>
-                <div style={{
-                    flex: '.25'
-                }}>
-                    <DateField
-                        label={"Employed From"}
-                        type={"text"}
-                        name={"employedFrom"}
-                        // value={values.email}
-                        onChange={handleInputChange}
-                        placeholder={
-                            "From"
-                        }
-                    />
-                </div>
-                <div style={{
-                    flex: '.25'
-                }}>
-                    <DateField
-                        label={"Employed To"}
-                        type={"text"}
-                        name={"employedTo"}
-                        // value={values.email}
-                        onChange={handleInputChange}
-                        placeholder={
-                            "To"
-                        }
-                    />
-                </div>
-                <div style={
-                    {
-                        flex: ".5"
-                    }
-                }>
-                    <InputField
-                        label={"Designation"}
-                        type={"text"}
-                        name={"designation"}
-                        // value={values.email}
-                        onChange={handleInputChange}
-                        placeholder={
-                            "Enter candidate's designation"
-                        }
-                    />
-                </div>
-            </div>
-            <div className="d-flex align-self-start mt-3" style={{ width: '100%' }}>
-                <TextArea
-                    label={"Reason for Leaving"}
-                    type={"text"}
-                    name={"reason"}
-                    // value={values.email}
-                    onChange={handleInputChange}
-                    placeholder={
-                        "Write candidate's reason for leaving"
-                    }
-                />
-            </div>
-            <div className="d-flex align-self-start mt-3" style={{
-                justifyContent: "space-between",
-                width: "100%",
-                gap: '1rem'
-            }}>
-                <InputField
-                    label={"Location"}
-                    type={"text"}
-                    name={"workLocation"}
-                    // value={values.email}
-                    onChange={handleInputChange}
-                    placeholder={
-                        "Enter candidate's previous work location"
-                    }
-                />
-                <DropDownField
-                    label={"Full time/Part time"}
-                    type={"text"}
-                    name={"workType"}
-                    // value={values.email}
-                    onChange={handleInputChange}
-                    placeholder={
-                        "Enter candidate's work type"
-                    }
-                    options={[
-                        { value: "Permanent Full-Time", label: "Permanent Full-Time" },
-                        { value: "Part-Time", label: "Part-Time" },
-                        { value: "Casual/Vacation", label: "Casual/Vacation" },
-                        { value: "Contract", label: "Contract" },
-                        { value: "Internship/Trainee", label: "Internship/Trainee" },
-                    ]}
-                />
-            </div>
-           
-            {[...Array(qCount)].map((e, i) => (
-                <div style={{ width: "100%" }}>
-                    <div key={i}>
-                        <div className="form-2">
-                            <label htmlFor="">Q{i + 1}</label>
-                            <input type="text" id={i}
-                                //defaultValue={qType[i].question} 
-                                //onChange={(e) => handleQuesChange(e, i)} 
-                                placeholder='Enter Question'
-                                className='f-34 f-3'
-                                style={{ width: "85%", backgroundColor: 'white' }} />
-                        </div>
-
-                        <div className="form-3">
-                            <Dropdown
-                                values={ansType}
-                                type={"text"}
-                                name={"Choose Answer type"}
-                                id={"type" + i}
-                            //onChange={(e) => handleQuesTypeChange(e, i)}
-                            />
-                        </div>
-                    </div>
-                </div>
-            ))}
-            {qCount > 1 &&
-                <Button onClick={() => delques()}>Delete Question</Button>
-            }
-
-            <div onClick={addques} className="d-flex align-self-start mt-4" style={{ width: '100%', color: 'green', fontSize: '1.1rem', cursor: 'pointer', fontWeight: 'bold' }}>
-                <PlusOutlined style={{ marginTop: '.3rem', marginRight: '.6rem' }} />
-                <p>Add more questions</p>
-            </div>*/}
 
       <div
         className="d-flex align-self-start flex-column mt-3"

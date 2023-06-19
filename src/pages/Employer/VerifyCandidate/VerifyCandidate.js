@@ -56,7 +56,7 @@ const VerifyCandidate = () => {
     CandidateDetails.questionsList = questionsList;
     sendVerificationRequest(CandidateDetails)
       .then(() => {
-        window.location.href = "/";
+        window.location.href = "/verification";
       })
       .catch((err) => {
         alert(err);
