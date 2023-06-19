@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import YesOrNo from "../../../components/Input/YesOrNo";
-import { Button } from "antd";
+import { Button, DatePicker } from "antd";
 import "../ViewVerification/ViewVerification.css";
 import { useLocation } from "react-router-dom";
 import InputField from "../../../components/Input/InputField";
 import { useEffect } from "react";
+import DateField from "../../../components/Input/DateFiled";
+import TextArea from "../../../components/Input/TextArea";
+import DropDownField from "../../../components/Input/DropDownField";
 
 const ViewVerification = () => {
   const location = useLocation();
@@ -34,6 +37,13 @@ const ViewVerification = () => {
       [e.target.name]: e.target.value,
     }));
   };
+
+  const handleTypeChange = (e) => {
+    setCandidateDetails((checkDetails) => ({
+      ...checkDetails,
+      CorrectTypeOfEmployment: e,
+    }));
+  };
   const handleInput2Change = (e) => {
     setCandidateDetails((CandidateDetails) => ({
       ...CandidateDetails,
@@ -47,10 +57,10 @@ const ViewVerification = () => {
     }));
   };
   const onSubmit = () => {
-    CandidateDetails.questionsList = questionsList;
+    //CandidateDetails.questionsList = questionsList;
     // CandidateDetails.changes = changes;
     // CandidateDetails.checkDetails = checkDetails;
-    console.log(CandidateDetails);
+    console.log(checkDetails);
   };
 
   return (
@@ -105,6 +115,18 @@ const ViewVerification = () => {
               },
             ]}
           />
+
+          {checkDetails.referenceNumber === "Incorrect" &&
+            <div>
+              <InputField
+                type={"text"}
+                name={"referenceCorrectNumber"}
+                //value={values.name}
+                onChange={handleInputChange}
+                placeholder={"Enter the correct reference number."}
+              />
+            </div>
+          }
         </div>
 
         <div className="questions">
@@ -129,6 +151,25 @@ const ViewVerification = () => {
               },
             ]}
           />
+          {checkDetails.employeeName === "Incorrect" &&
+            <div>
+              <InputField
+                type={"text"}
+                name={"firstName"}
+                //value={values.name}
+                onChange={handleInputChange}
+                placeholder={"Enter the correct first name."}
+              />
+
+              <InputField
+                type={"text"}
+                name={"lastName"}
+                //value={values.name}
+                onChange={handleInputChange}
+                placeholder={"Enter the correct last name."}
+              />
+            </div>
+          }
         </div>
       </div>
       <div
@@ -160,6 +201,27 @@ const ViewVerification = () => {
               },
             ]}
           />
+
+          {checkDetails.datesEmployed === "Incorrect" &&
+            <div>
+              <DateField
+                label={"Employed From"}
+                type={"text"}
+                name={"dateEmployedFrom"}
+                // value={values.email}
+                onChange={handleInputChange}
+                placeholder={"From"}
+              />
+              <DateField
+                label={"Employed to"}
+                type={"text"}
+                name={"dateEmployedTo"}
+                // value={values.email}
+                onChange={handleInputChange}
+                placeholder={"To"}
+              />
+            </div>
+          }
         </div>
 
         <div className="questions">
@@ -180,6 +242,18 @@ const ViewVerification = () => {
               },
             ]}
           />
+
+          {checkDetails.employeeDesignation === "Incorrect" &&
+            <div>
+              <InputField
+                type={"text"}
+                name={"employeeCorrectDesignation"}
+                //value={values.name}
+                onChange={handleInputChange}
+                placeholder={"Enter the correct designation."}
+              />
+            </div>
+          }
         </div>
       </div>
 
@@ -208,6 +282,17 @@ const ViewVerification = () => {
               },
             ]}
           />
+          {checkDetails.reasonForLeaving === "Incorrect" &&
+            <div>
+              <TextArea
+                type={"textarea"}
+                name={"employeeCorrectReason"}
+                //value={values.name}
+                onChange={handleInputChange}
+                placeholder={"Enter the correct reason."}
+              />
+            </div>
+          }
         </div>
       </div>
 
@@ -236,6 +321,17 @@ const ViewVerification = () => {
               },
             ]}
           />
+          {checkDetails.employeeCompanyLocation === "Incorrect" &&
+            <div>
+              <InputField
+                type={"text"}
+                name={"employeeCorrectCompanyLocation"}
+                //value={values.name}
+                onChange={handleInputChange}
+                placeholder={"Enter the correct location."}
+              />
+            </div>
+          }
         </div>
 
         <div className="questions">
@@ -256,6 +352,25 @@ const ViewVerification = () => {
               },
             ]}
           />
+          {checkDetails.employeeCompanyLocation === "Incorrect" &&
+            <div>
+              <DropDownField
+                type={"text"}
+                name={"CorrectworkType"}
+                // value={values.email}
+                onChange={handleTypeChange}
+                placeholder={"Enter candidate's correct work type"}
+                options={[
+                  { value: "Permanent Full-Time", label: "Permanent Full-Time" },
+                  { value: "Part-Time", label: "Part-Time" },
+                  { value: "Casual/Vacation", label: "Casual/Vacation" },
+                  { value: "Contract", label: "Contract" },
+                  { value: "Internship/Trainee", label: "Internship/Trainee" },
+                ]}
+              />
+            </div>
+          }
+
         </div>
       </div>
       {fetchedDetails.questionsList.map((info, i) => {
