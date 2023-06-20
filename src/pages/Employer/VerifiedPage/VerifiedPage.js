@@ -75,11 +75,7 @@ const VerifiedPage = () => {
                       <span>Candidate Name:</span>&nbsp;
                       <span>
                         <b>
-                          {info.changes.employeeFirstName ||
-                            info.employeeFirstName +
-                              " " +
-                              info.changes.employeeLastName ||
-                            info.employeeLastName}
+                          {info.employeeFirstName + " " + info.employeeLastName}
                         </b>
                       </span>
                     </div>
@@ -88,10 +84,8 @@ const VerifiedPage = () => {
                       <span>Dates Employed:</span>&nbsp;
                       <span>
                         <b>
-                          {info.changes.datesEmployedFrom ||
-                            info.datesEmployedFrom +
-                              " to " +
-                              info.changes.datesEmployedTo ||
+                          {info.datesEmployedFrom +
+                            " to " +
                             info.datesEmployedTo}
                         </b>
                       </span>
