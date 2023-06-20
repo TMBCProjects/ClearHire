@@ -8,9 +8,8 @@ import ProgressBar from "../../components/ProgressBar";
 import { rateEmployee } from "../../DataBase/Employer/employer";
 import { useLocation, useNavigate } from "react-router-dom";
 import { rateCollegue } from "../../DataBase/Employee/employee";
-import { Button } from 'antd';
+import { Button } from "antd";
 import axios from "axios";
-
 
 const initialState = {
   dateOfReview: new Date(),
@@ -23,7 +22,7 @@ const initialState = {
   skill: 0,
   teamPlayer: 0,
   note: "",
-  time: ""
+  time: "",
 };
 
 function EmployeeSoftskills() {
@@ -42,7 +41,7 @@ function EmployeeSoftskills() {
   let [rangeSkill_6, setRangeSkill_6] = useState(0);
   let [rangeSkill_7, setRangeSkill_7] = useState(0);
   let [rangeSkill_8, setRangeSkill_8] = useState(0);
-  let [time, setTime] = useState([])
+  let [time, setTime] = useState([]);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setValues({
@@ -51,18 +50,17 @@ function EmployeeSoftskills() {
     });
   };
 
-
-  const handleSubmit = async() => {
-    await axios("https://worldtimeapi.org/api/ip")
-    .then(data => {
-      values.time = data.data.datetime.substr(11, 8)
+  const handleSubmit = async () => {
+    await axios("https://worldtimeapi.org/api/ip").then((data) => {
+      values.time = data.data.datetime.substr(11, 8);
     });
     let userDatas = JSON.parse(sessionStorage.getItem("userData"));
     let role = sessionStorage.getItem("LoggedIn");
     values.companyName = userDatas.data.companyName;
     values.ratedById = userDatas.id;
     values.ratedByRole = role;
-    values.ratedByEmail = userDatas.data.employerEmail || userDatas.data.employeeEmail;
+    values.ratedByEmail =
+      userDatas.data.employerEmail || userDatas.data.employeeEmail;
     values.employeeId = info.id || "employeeId";
     values.employeeName = info.employeeName || "employeeName";
     values.employeeEmail = info.employeeEmail || "employeeEmail";
@@ -70,14 +68,14 @@ function EmployeeSoftskills() {
     if (role === "Employer") {
       rateEmployee(values).then(() => {
         window.location.href = "/";
-      })
+      });
     }
     if (role === "Employee") {
       rateCollegue(values).then(() => {
         window.location.href = "/";
       });
     }
-    console.log(values)
+    console.log(values);
   };
   const calculateAge = (dob) => {
     const today = new Date();
@@ -161,15 +159,13 @@ function EmployeeSoftskills() {
             <h6>
               {info.designation} at {info.companyName}
             </h6>
-            <h6>
-              {info.companyLocation}
-            </h6>
+            <h6>{info.companyLocation}</h6>
           </div>
         </div>
-        {role === "Employer" &&
-          (<div className="col-xl-5 col-lg-6 col-md-6 col-12 employe-score">
+        {role === "Employer" && (
+          <div className="col-xl-5 col-lg-6 col-md-6 col-12 employe-score">
             <div className="col-12 circles">
-              <div className="col-6 circle-box">
+              <div className="col-md-6 circle-box">
                 <div className="circle" data-prog="95">
                   <ProgressBar value={0} />
                 </div>
@@ -177,29 +173,31 @@ function EmployeeSoftskills() {
                   <h6>Colleague Score</h6>
                 </div>
               </div>
-              <div className="col-6 circle-box">
+              <div className="col-md-6 circle-box">
                 <div className="circle" data-prog="75">
-                  <ProgressBar value={
-                    calculateRatings(
-                      getRatingsByEmployerId(info?.ratings, userDatas.id)
-                    ) || 0
-                  } />
+                  <ProgressBar
+                    value={
+                      calculateRatings(
+                        getRatingsByEmployerId(info?.ratings, userDatas.id)
+                      ) || 0
+                    }
+                  />
                 </div>
-                <div className="text ms-3">
+                <div className="text">
                   <h6>Score</h6>
                 </div>
               </div>
             </div>
-          </div>)
-        }
+          </div>
+        )}
       </div>
       <div className="row skill-assessment">
         <div className="col-xl-6 col-lg-6 skill-box-1">
           <div className="col-12 slider-1">
-            <div className="col-3  heading">
+            <div className="col-md-3 col-5  heading">
               <h3>Communication</h3>
             </div>
-            <div className="col-6 slied">
+            <div className="col-md-6 col-5 slied">
               <input
                 type="range"
                 className="range-1"
@@ -218,10 +216,10 @@ function EmployeeSoftskills() {
             </div>
           </div>
           <div className="slider-1">
-            <div className="col-3 heading">
+            <div className="col-md-3 col-5 heading">
               <h3>Attitude</h3>
             </div>
-            <div className="col-6 slied">
+            <div className="col-md-6 col-5 slied">
               <input
                 type="range"
                 className="range-1"
@@ -240,10 +238,10 @@ function EmployeeSoftskills() {
             </div>
           </div>
           <div className="slider-1">
-            <div className="col-3 heading">
+            <div className="col-md-3 col-5 heading">
               <h3>Ability to learn</h3>
             </div>
-            <div className="col-6 slied">
+            <div className="col-md-6 col-5 slied">
               <input
                 type="range"
                 className="range-1"
@@ -262,10 +260,10 @@ function EmployeeSoftskills() {
             </div>
           </div>
           <div className="slider-1">
-            <div className="col-3 heading">
+            <div className="col-md-3 col-5 heading">
               <h3>Punctuality</h3>
             </div>
-            <div className="col-6 slied">
+            <div className="col-md-6 col-5 slied">
               <input
                 type="range"
                 className="range-1"
@@ -287,10 +285,10 @@ function EmployeeSoftskills() {
 
         <div className="col-xl-6 col-lg-6 skill-box-2">
           <div className="col-12 slider-1">
-            <div className="col-3 heading">
+            <div className="col-md-3 col-5 heading">
               <h3>Commitment</h3>
             </div>
-            <div className="col-6 slied">
+            <div className="col-md-6 col-5 slied">
               <input
                 type="range"
                 className="range-1"
@@ -309,10 +307,10 @@ function EmployeeSoftskills() {
             </div>
           </div>
           <div className="slider-1">
-            <div className="col-3 heading">
+            <div className="col-md-3 col-5 heading">
               <h3>Trustworthiness</h3>
             </div>
-            <div className="col-6 slied">
+            <div className="col-md-6 col-5 slied">
               <input
                 type="range"
                 className="range-1"
@@ -331,10 +329,10 @@ function EmployeeSoftskills() {
             </div>
           </div>
           <div className="slider-1">
-            <div className="col-3 heading">
+            <div className="col-md-3 col-5 heading">
               <h3>Skill</h3>
             </div>
-            <div className="col-6 slied">
+            <div className="col-md-6 col-5 slied">
               <input
                 type="range"
                 className="range-1"
@@ -353,10 +351,10 @@ function EmployeeSoftskills() {
             </div>
           </div>
           <div className="slider-1">
-            <div className="col-3 heading">
+            <div className="col-md-3 col-5 heading">
               <h3>Team Player</h3>
             </div>
-            <div className="col-6 slied">
+            <div className="col-md-6 col-5 slied">
               <input
                 type="range"
                 className="range-1"
@@ -462,17 +460,18 @@ function EmployeeSoftskills() {
         </div>
       </div>
       <div className="submit">
-        <Button onClick={handleSubmit}
-          disabled={
-            hasOneMonthPassed(
-              findRatedAtDate(info.lastRatings, info.currentEmployerId)
-            )
-          }>
-          <img className='checkimg' src={check_1} alt="" width={20} />
-          Submit Assessment</Button>
+        <Button
+          onClick={handleSubmit}
+          disabled={hasOneMonthPassed(
+            findRatedAtDate(info.lastRatings, info.currentEmployerId)
+          )}
+        >
+          <img className="checkimg" src={check_1} alt="" width={20} />
+          Submit Assessment
+        </Button>
       </div>
     </div>
-  )
+  );
 }
 
-export default EmployeeSoftskills
+export default EmployeeSoftskills;
