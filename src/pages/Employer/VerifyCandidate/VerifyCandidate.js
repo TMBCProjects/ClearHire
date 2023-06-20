@@ -70,26 +70,30 @@ const VerifyCandidate = () => {
   };
   return (
     <div
-      className="container flex-column d-flex justify-content-center align-items-center py-5"
+      className="verifyContainer container flex-column d-flex justify-content-center align-items-center py-5"
       style={{
         width: "45rem",
-      }}>
+      }}
+    >
       <div className="d-flex flex-column align-items-center">
         <h1
-          className="text-success mb-3"
+          className="text-success mb-3 verifyHeading"
           style={{
             fontWeight: "500",
             fontSize: "2.4em",
-          }}>
+          }}
+        >
           Verify your Candidate
         </h1>
         <p
+          className="smallText"
           style={{
             width: "600px",
             fontSize: "1rem",
             textAlign: "center",
             fontWeight: "500",
-          }}>
+          }}
+        >
           Entering the details of candidate and send it to candidate's previous
           company to veryfy candidate's details
         </p>
@@ -102,14 +106,16 @@ const VerifyCandidate = () => {
           padding: "1rem",
           paddingBottom: "0",
           width: "45rem",
-        }}>
-        <p style={{ fontWeight: "bold", fontSize: "1.5rem" }}>
+        }}
+      >
+        <p
+          className="detailsText"
+          style={{ fontWeight: "bold", fontSize: "1.5rem" }}
+        >
           Enter the details provide by the company
         </p>
       </div>
-      <div
-        className="d-flex"
-        style={{ width: "50%", alignSelf: "flex-start" }}>
+      <div className="d-flex" style={{ width: "50%", alignSelf: "flex-start" }}>
         <InputField
           label={"Reference Number"}
           type={"text"}
@@ -125,7 +131,8 @@ const VerifyCandidate = () => {
           justifyContent: "space-between",
           width: "100%",
           gap: "1rem",
-        }}>
+        }}
+      >
         <InputField
           label={"First Name"}
           type={"text"}
@@ -148,11 +155,13 @@ const VerifyCandidate = () => {
         style={{
           width: "100%",
           gap: "1.4rem",
-        }}>
+        }}
+      >
         <div
           style={{
             flex: ".25",
-          }}>
+          }}
+        >
           <DateField
             label={"Employed From"}
             type={"text"}
@@ -165,7 +174,8 @@ const VerifyCandidate = () => {
         <div
           style={{
             flex: ".25",
-          }}>
+          }}
+        >
           <DateField
             label={"Employed To"}
             type={"text"}
@@ -178,7 +188,8 @@ const VerifyCandidate = () => {
         <div
           style={{
             flex: ".5",
-          }}>
+          }}
+        >
           <InputField
             label={"Designation"}
             type={"text"}
@@ -189,9 +200,7 @@ const VerifyCandidate = () => {
           />
         </div>
       </div>
-      <div
-        className="d-flex align-self-start mt-3"
-        style={{ width: "100%" }}>
+      <div className="d-flex align-self-start mt-3" style={{ width: "100%" }}>
         <TextArea
           label={"Reason for Leaving"}
           type={"text"}
@@ -207,7 +216,8 @@ const VerifyCandidate = () => {
           justifyContent: "space-between",
           width: "100%",
           gap: "1rem",
-        }}>
+        }}
+      >
         <InputField
           label={"Location"}
           type={"text"}
@@ -272,14 +282,16 @@ const VerifyCandidate = () => {
           fontSize: "1.1rem",
           cursor: "pointer",
           fontWeight: "bold",
-        }}>
+        }}
+      >
         <PlusOutlined style={{ marginTop: ".3rem", marginRight: ".6rem" }} />
         <p>Add more questions</p>
       </div>
 
       <div
         className="d-flex align-self-start flex-column mt-3"
-        style={{ width: "100%" }}>
+        style={{ width: "100%" }}
+      >
         <p style={{ fontWeight: "bold", fontSize: "1.1rem" }}>
           Enter the details of the person who verified the candidate
         </p>
@@ -289,7 +301,8 @@ const VerifyCandidate = () => {
             justifyContent: "space-around",
             gap: "1rem",
             marginLeft: "0",
-          }}>
+          }}
+        >
           <InputField
             type={"text"}
             name={"verificationByEmail"}
@@ -301,14 +314,13 @@ const VerifyCandidate = () => {
       </div>
       <div
         className="d-flex align-self-start flex-column my-3"
-        style={{ width: "100%" }}>
+        style={{ width: "100%" }}
+      >
         <p style={{ fontSize: ".8rem", textAlign: "center" }}>
           *By clicking the submit button, you are sending this form to the
           previous employer of the candidate
         </p>
-        <Button
-          onClick={(e) => onSubmit(e)}
-          className="signupBtn mt-0">
+        <Button onClick={(e) => onSubmit(e)} className="signupBtn mt-0">
           Submit
         </Button>
       </div>
