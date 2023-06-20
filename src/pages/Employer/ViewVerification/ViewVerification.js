@@ -50,6 +50,12 @@ const ViewVerification = () => {
       [e.target.name]: e.target.value,
     }));
   };
+  const handleDateChange = (e) => {
+    setChanges((changes) => ({
+      ...changes,
+      [e.target.name]: new Date(e.target.value).toLocaleDateString("en-GB"),
+    }));
+  };
   const onSubmit = () => {
     CandidateDetails.questionsList = questionsList;
     CandidateDetails.changes = changes;
@@ -199,15 +205,15 @@ const ViewVerification = () => {
               <DateField
                 label={"Employed From"}
                 type={"text"}
-                name={"dateEmployedFrom"}
-                onChange={handleChange}
+                name={"datesEmployedFrom"}
+                onChange={handleDateChange}
                 placeholder={fetchedDetails.datesEmployedFrom}
               />
               <DateField
                 label={"Employed to"}
                 type={"text"}
-                name={"dateEmployedTo"}
-                onChange={handleChange}
+                name={"datesEmployedTo"}
+                onChange={handleDateChange}
                 placeholder={fetchedDetails.datesEmployedTo}
               />
             </div>
