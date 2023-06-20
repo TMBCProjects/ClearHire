@@ -14,7 +14,6 @@ const ViewVerification = () => {
   const location = useLocation();
   const { from } = location.state;
   const fetchedDetails = from;
-  console.log(fetchedDetails);
   const [checkDetails, setCheckDetails] = useState([]);
   const [changes, setChanges] = useState([]);
   const [CandidateDetails, setCandidateDetails] = useState([]);
@@ -39,12 +38,6 @@ const ViewVerification = () => {
     }));
   };
 
-  const handleTypeChange = (e) => {
-    setCandidateDetails((checkDetails) => ({
-      ...checkDetails,
-      CorrectTypeOfEmployment: e,
-    }));
-  };
   const handleInput2Change = (e) => {
     setCandidateDetails((CandidateDetails) => ({
       ...CandidateDetails,
@@ -123,7 +116,6 @@ const ViewVerification = () => {
               <InputField
                 type={"text"}
                 name={"referenceNumber"}
-                //value={values.name}
                 onChange={handleChange}
                 placeholder={fetchedDetails.referenceNumber}
               />
@@ -158,7 +150,6 @@ const ViewVerification = () => {
               <InputField
                 type={"text"}
                 name={"employeeFirstName"}
-                //value={values.name}
                 onChange={handleChange}
                 placeholder={fetchedDetails.employeeFirstName}
               />
@@ -166,7 +157,6 @@ const ViewVerification = () => {
               <InputField
                 type={"text"}
                 name={"employeeLastName"}
-                //value={values.name}
                 onChange={handleChange}
                 placeholder={fetchedDetails.employeeLastName}
               />
@@ -210,7 +200,6 @@ const ViewVerification = () => {
                 label={"Employed From"}
                 type={"text"}
                 name={"dateEmployedFrom"}
-                // value={values.email}
                 onChange={handleChange}
                 placeholder={fetchedDetails.datesEmployedFrom}
               />
@@ -218,7 +207,6 @@ const ViewVerification = () => {
                 label={"Employed to"}
                 type={"text"}
                 name={"dateEmployedTo"}
-                // value={values.email}
                 onChange={handleChange}
                 placeholder={fetchedDetails.datesEmployedTo}
               />
@@ -250,7 +238,6 @@ const ViewVerification = () => {
               <InputField
                 type={"text"}
                 name={"employeeDesignation"}
-                //value={values.name}
                 onChange={handleChange}
                 placeholder={fetchedDetails.employeeDesignation}
               />
@@ -289,7 +276,6 @@ const ViewVerification = () => {
               <TextArea
                 type={"textarea"}
                 name={"reasonForLeaving"}
-                //value={values.name}
                 onChange={handleChange}
                 placeholder={fetchedDetails.reasonForLeaving}
               />
@@ -328,7 +314,6 @@ const ViewVerification = () => {
               <InputField
                 type={"text"}
                 name={"employeeCompanyLocation"}
-                //value={values.name}
                 onChange={handleChange}
                 placeholder={fetchedDetails.employeeCompanyLocation}
               />
@@ -359,7 +344,6 @@ const ViewVerification = () => {
               <DropDownField
                 type={"text"}
                 name={"typeOfEmployment"}
-                // value={values.email}
                 onChange={handleChange}
                 placeholder={fetchedDetails.typeOfEmployment}
                 options={[
