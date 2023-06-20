@@ -166,13 +166,18 @@ export default function Profile() {
       offerLetter: userDatas.data.offerLetter,
       dateOfJoining: userDatas.data.dateOfJoining,
     }
-    acceptResignation(data, userDatas.id)
-    sessionStorage.clear()
-    setTimeout(()=>{
-      window.location.href = "/"
-    },1000)
+    acceptResignation(data, userDatas.id).then(() => {
+      const user = JSON.parse(sessionStorage.getItem("userData"))
+      user.data.currentEmployerId = "";
+      sessionStorage.setItem("userData", JSON.stringify(user));
+    })
+
   }; const rejectResignationRequest = () => {
-    rejectResignation(userDatas.id)
+    rejectResignation(userDatas.id).then(() => {
+      const user = JSON.parse(sessionStorage.getItem("userData"))
+      user.data.isResignationSent = false;
+      sessionStorage.setItem("userData", JSON.stringify(user));
+    })
   }; 
   return (
     <div className="profile">

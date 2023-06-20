@@ -19,7 +19,11 @@ const EmployeeDetails = () => {
   const [avgRatings, setAvgRatings] = useState({});
   const [prevSkills, setPrevSkills] = useState({});
   const removeFromJob = () => {
-    sendResignation(employee.id)
+    sendResignation(employee.id).then(() => {
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 1000);
+    })
      var data = {
       service_id: "service_cpytsjm",
       template_id: "template_quwx4ya",
@@ -258,7 +262,7 @@ const EmployeeDetails = () => {
               </a>
             </button>
 
-            <Button onClick={removeFromJob} className="default">
+            <Button onClick={removeFromJob} disabled={employee.isResignationSent} title={employee.isResignationSent ? "Resignation Sent Already!" : "Want to send Resignation?"} className="default">
               Send Resignation
             </Button>
             <a

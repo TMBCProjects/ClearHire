@@ -19,222 +19,6 @@ import Verification from "../../Modals/DB/Verification";
 export default async function defaultFn() {}
 
 // //READS
-// export async function readTasksByManager(managerId) {
-//   try {
-//     const tasks = [];
-//     const querySnapshot = await getDocuments(
-//       query(
-//         setCollection(Collections.tasks),
-//         where(Fields.managerId, "==", managerId),
-//         where(Fields.isLive, "==", true)
-//       )
-//     );
-//     const promises = [];
-//     querySnapshot.forEach((doc) => {
-//       const promise = readCommunications(doc).then((communications) => {
-//         const task = {
-//           id: doc.id,
-//           assigned: doc.data().assigned,
-//           companyName: doc.data().companyName,
-//           companyId: doc.data().companyId,
-//           clientId: doc.data().clientId,
-//           clientEmail: doc.data().clientEmail,
-//           profileImage: doc.data().profileImage,
-//           clientName: doc.data().clientName,
-//           corrections: doc.data().corrections,
-//           createdAt: doc.data().createdAt,
-//           createdBy: doc.data().createdBy,
-//           createdByEmail: doc.data().createdByEmail,
-//           deadline: doc.data().deadline,
-//           isLive: doc.data().isLive,
-//           managerId: doc.data().managerId,
-//           status: doc.data().status,
-//           pauseTimeStamp:doc.data()?.pauseTimeStamp,
-//           startTimeStamp:doc.data()?.startTimeStamp,
-//           completedOn:doc.data().completedOn,
-//           taskId: doc.data().taskId,
-//           teammateId: doc.data().teammateId,
-//           teammateName: doc.data().teammateName,
-//           title: doc.data().title,
-//           totalHours: doc.data().totalHours,
-//           highPriority: doc.data().highPriority,
-//           type: doc.data().type,
-//           communications: communications,
-//         };
-//         tasks.push(task);
-//       });
-//       promises.push(promise);
-//     });
-//     await Promise.all(promises);
-
-//     sessionStorage.setItem("tasks", JSON.stringify(tasks));
-//     //sessionStorage.setItem("tasks", tasks);
-//     return tasks;
-//   } catch (err) {
-//     return [];
-//   }
-// }
-
-// export async function readApprovedTasksByManager(managerId) {
-//   try {
-//     const tasks = [];
-//     const querySnapshot = await getDocuments(
-//       query(
-//         setCollection(Collections.tasks),
-//         where(Fields.managerId, "==", managerId),
-//         where(Fields.status, "==", Fields.APPROVED),
-//         where(Fields.isLive, "==", false)
-//       )
-//     );
-//     const promises = [];
-//     querySnapshot.forEach((doc) => {
-//       const promise = readCommunications(doc).then((communications) => {
-//         const task = {
-//           id: doc.id,
-//           assigned: doc.data().assigned,
-//           companyName: doc.data().companyName,
-//           companyId: doc.data().companyId,
-//           clientId: doc.data().clientId,
-//           clientEmail: doc.data().clientEmail,
-//           profileImage: doc.data().profileImage,
-//           clientName: doc.data().clientName,
-//           corrections: doc.data().corrections,
-//           createdAt: doc.data().createdAt,
-//           createdBy: doc.data().createdBy,
-//           createdByEmail: doc.data().createdByEmail,
-//           pauseTimeStamp: doc.data()?.pauseTimeStamp,
-//           startTimeStamp: doc.data()?.startTimeStamp,
-//           completedOn: doc.data()?.completedOn,
-//           deadline: doc.data().deadline,
-//           isLive: doc.data().isLive,
-//           managerId: doc.data().managerId,
-//           status: doc.data().status,
-//           taskId: doc.data().taskId,
-//           teammateId: doc.data().teammateId,
-//           teammateName: doc.data().teammateName,
-//           title: doc.data().title,
-//           totalHours: doc.data().totalHours,
-//           highPriority: doc.data().highPriority,
-//           type: doc.data().type,
-//           communications: communications,
-//         };
-//         tasks.push(task);
-//       });
-//       promises.push(promise);
-//     });
-//     await Promise.all(promises);
-//     return tasks;
-//   } catch (err) {
-//     return [];
-//   }
-// }
-// export async function readArchivedTasksByManager(managerId) {
-//   try {
-//     const tasks = [];
-//     const querySnapshot = await getDocuments(
-//       query(
-//         setCollection(Collections.tasks),
-//         where(Fields.managerId, "==", managerId),
-//         where(Fields.status, "==", Fields.ARCHIVED),
-//         where(Fields.isLive, "==", false)
-//       )
-//     );
-//     const promises = [];
-//     querySnapshot.forEach((doc) => {
-//       const promise = readCommunications(doc).then((communications) => {
-//         const task = {
-//           id: doc.id,
-//           assigned: doc.data().assigned,
-//           companyName: doc.data().companyName,
-//           companyId: doc.data().companyId,
-//           clientId: doc.data().clientId,
-//           clientEmail: doc.data().clientEmail,
-//           profileImage: doc.data().profileImage,
-//           clientName: doc.data().clientName,
-//           corrections: doc.data().corrections,
-//           createdAt: doc.data().createdAt,
-//           createdBy: doc.data().createdBy,
-//           createdByEmail: doc.data().createdByEmail,
-//           deadline: doc.data().deadline,
-//           isLive: doc.data().isLive,
-//           managerId: doc.data().managerId,
-//           status: doc.data().status,
-//           taskId: doc.data().taskId,
-//           teammateId: doc.data().teammateId,
-//           teammateName: doc.data().teammateName,
-//           title: doc.data().title,
-//           totalHours: doc.data().totalHours,
-//           highPriority: doc.data().highPriority,
-//           type: doc.data().type,
-//           communications: communications,
-//         };
-//         tasks.push(task);
-//       });
-//       promises.push(promise);
-//     });
-//     await Promise.all(promises);
-//     return tasks;
-//   } catch (err) {
-//     return [];
-//   }
-// }
-
-// export async function readTeammatesByMangerId(id) {
-//   let teamates = [];
-//   const teammatesRef = setCollection(Collections.teammates);
-//   const q = query(teammatesRef, where(Fields.currentManagerId, "==", id));
-//   const querySnapshot = await getDocuments(q);
-//   querySnapshot.forEach((doc) => {
-//     let teamate = {
-//       id: doc.id,
-//       data: doc.data(),
-//     };
-//     teamates.push(teamate);
-//   });
-//   return teamates;
-// }
-
-// export async function readClientsByMangerId(id) {
-//   let clients = [];
-//   const clientsRef = setCollection(Collections.clients);
-//   const q = query(clientsRef, where(Fields.managerId, "==", id));
-//   const querySnapshot = await getDocuments(q);
-//   querySnapshot.forEach((doc) => {
-//     let client = {
-//       id: doc.id,
-//       data: doc.data(),
-//     };
-//     clients.push(client);
-//   });
-//   return clients;
-// }
-
-// export async function readTypesByMangerId(id) {
-//   let types = [];
-//   const typesRef = setCollection(Collections.types);
-//   const q = query(typesRef, where(Fields.managerId, "==", id));
-//   const querySnapshot = await getDocuments(q);
-//   querySnapshot.forEach((doc) => {
-//     let type = {
-//       id: doc.id,
-//       data: doc.data(),
-//     };
-//     types.push(type);
-//   });
-//   return types;
-// }
-// function convertStringToDate(dateString, timeString) {
-//   const dateParts = dateString.split("/");
-//   const timeParts = timeString.split(":");
-//   const year = parseInt(dateParts[2]);
-//   const month = parseInt(dateParts[1]) - 1;
-//   const day = parseInt(dateParts[0]);
-//   const hours = parseInt(timeParts[0]);
-//   const minutes = parseInt(timeParts[1]);
-//   const seconds = parseInt(timeParts[2]);
-//   return new Date(year, month, day, hours, minutes, seconds);
-// }
-
 // fetch the employer details
 export async function readUnemployed() {
   try {
@@ -252,6 +36,7 @@ export async function readUnemployed() {
         let employee = {
           id: doc.id,
           isActive: doc.data().isActive,
+          isResignationSent: doc.data().isResignationSent,
           lastRatings: doc.data().lastRatings,
           ratings: ratings,
           employeeName: doc.data().employeeName,
@@ -294,6 +79,7 @@ export async function readEmployee(id) {
         employee = {
           id: doc.id,
           isActive: doc.data().isActive,
+          isResignationSent: doc.data().isResignationSent,
           employeeName: doc.data().employeeName,
           lastRatings: doc.data().lastRatings,
           ratings: ratings,
@@ -342,6 +128,7 @@ export async function readEmployees(employerId) {
         let employee = {
           id: doc.id,
           isActive: doc.data().isActive,
+          isResignationSent: doc.data().isResignationSent,
           lastRatings: doc.data().lastRatings,
           ratings: ratings,
           employeeName: doc.data().employeeName,
