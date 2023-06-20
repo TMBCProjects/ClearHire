@@ -57,6 +57,7 @@ const VerifiedPage = () => {
                   View Verification
                 </Button>
                 <Modal
+                  width={800}
                   title={info.employeeFirstName + " " + info.employeeLastName}
                   open={isModalOpen}
                   onOk={handleOk}
@@ -66,7 +67,17 @@ const VerifiedPage = () => {
                       <span>Reference Number:</span>&nbsp;
                       <span>
                         <b>
-                          {info.changes.referenceNumber || info.referenceNumber}
+                          {info.changes.referenceNumber ? (
+                            <span>
+                              <s>{info.referenceNumber}</s>{" "}
+                              <span style={{ color: "red" }}>X</span>{" "}
+                              <span>{info.changes.referenceNumber}</span>
+                            </span>
+                          ) : (
+                            <span>
+                              <b>{info.referenceNumber}</b>
+                            </span>
+                          )}
                         </b>
                       </span>
                     </div>
@@ -75,7 +86,51 @@ const VerifiedPage = () => {
                       <span>Candidate Name:</span>&nbsp;
                       <span>
                         <b>
-                          {info.employeeFirstName + " " + info.employeeLastName}
+                          {info.changes.employeeFirstName ||
+                          info.changes.employeeLastName ? (
+                            <span>
+                              <b>
+                                {info.changes.employeeFirstName && (
+                                  <span>
+                                    <s
+                                      style={{
+                                        textDecoration: "line-through",
+                                      }}>
+                                      {info.employeeFirstName}{" "}
+                                      {info.employeeLastName}
+                                    </s>{" "}
+                                    <span style={{ color: "red" }}>X</span>{" "}
+                                    <span>
+                                      {info.changes.employeeFirstName}{" "}
+                                      {info.employeeLastName}
+                                    </span>{" "}
+                                  </span>
+                                )}
+                                {info.changes.employeeLastName && (
+                                  <span>
+                                    <s
+                                      style={{
+                                        textDecoration: "line-through",
+                                      }}>
+                                      {info.employeeFirstName}{" "}
+                                      {info.employeeLastName}
+                                    </s>{" "}
+                                    <span style={{ color: "red" }}>X</span>{" "}
+                                    <span>
+                                      {info.employeeFirstName}{" "}
+                                      {info.changes.employeeLastName}
+                                    </span>
+                                  </span>
+                                )}
+                              </b>
+                            </span>
+                          ) : (
+                            <span>
+                              <b>
+                                {info.employeeFirstName} {info.employeeLastName}
+                              </b>
+                            </span>
+                          )}
                         </b>
                       </span>
                     </div>
@@ -84,9 +139,58 @@ const VerifiedPage = () => {
                       <span>Dates Employed:</span>&nbsp;
                       <span>
                         <b>
-                          {info.datesEmployedFrom +
-                            " to " +
-                            info.datesEmployedTo}
+                          {info.changes.datesEmployedFrom ||
+                          info.changes.datesEmployedTo ? (
+                            <span>
+                              <b>
+                                {info.changes.datesEmployedFrom && (
+                                  <span>
+                                    <s
+                                      style={{
+                                        textDecoration: "line-through",
+                                      }}>
+                                      {info.datesEmployedFrom}
+                                      {" to "}
+                                      {info.datesEmployedTo}
+                                    </s>{" "}
+                                    <span style={{ color: "red" }}>X</span>{" "}
+                                    <span>
+                                      {info.changes.datesEmployedFrom}
+                                      {" to "}
+                                      {info.datesEmployedTo}
+                                    </span>{" "}
+                                  </span>
+                                )}
+
+                                {info.changes.datesEmployedTo && (
+                                  <span>
+                                    <s
+                                      style={{
+                                        textDecoration: "line-through",
+                                      }}>
+                                      {info.datesEmployedFrom}
+                                      {" to "}
+                                      {info.datesEmployedTo}
+                                    </s>{" "}
+                                    <span style={{ color: "red" }}>X</span>{" "}
+                                    <span>
+                                      {info.datesEmployedFrom}
+                                      {" to "}
+                                      {info.changes.datesEmployedTo}
+                                    </span>{" "}
+                                  </span>
+                                )}
+                              </b>
+                            </span>
+                          ) : (
+                            <span>
+                              <b>
+                                {info.datesEmployedFrom}
+                                {" to "}
+                                {info.datesEmployedTo}
+                              </b>
+                            </span>
+                          )}
                         </b>
                       </span>
                     </div>
@@ -95,8 +199,19 @@ const VerifiedPage = () => {
                       <span>Designation:</span>&nbsp;
                       <span>
                         <b>
-                          {info.changes.employeeDesignation ||
-                            info.employeeDesignation}
+                          {info.changes.employeeDesignation ? (
+                            <span>
+                              <s style={{ textDecoration: "line-through" }}>
+                                {info.employeeDesignation}
+                              </s>{" "}
+                              <span style={{ color: "red" }}>X</span>{" "}
+                              <span>{info.changes.employeeDesignation}</span>
+                            </span>
+                          ) : (
+                            <span>
+                              <b>{info.employeeDesignation}</b>
+                            </span>
+                          )}
                         </b>
                       </span>
                     </div>
@@ -105,8 +220,21 @@ const VerifiedPage = () => {
                       <span>Reason for leaving:</span>&nbsp;
                       <span>
                         <b>
-                          {info.changes.reasonForLeaving ||
-                            info.reasonForLeaving}
+                          {info.changes.reasonForLeaving ? (
+                            <span>
+                              <span style={{ color: "red" }}>X</span>{" "}
+                              <s style={{ textDecoration: "line-through" }}>
+                                {info.reasonForLeaving}
+                              </s>
+                              <p>
+                                <span>{info.changes.reasonForLeaving}</span>
+                              </p>
+                            </span>
+                          ) : (
+                            <span>
+                              <b>{info.reasonForLeaving}</b>
+                            </span>
+                          )}
                         </b>
                       </span>
                     </div>
@@ -115,8 +243,21 @@ const VerifiedPage = () => {
                       <span>Location:</span>&nbsp;
                       <span>
                         <b>
-                          {info.changes.employeeCompanyLocation ||
-                            info.employeeCompanyLocation}
+                          {info.changes.employeeCompanyLocation ? (
+                            <span>
+                              <s style={{ textDecoration: "line-through" }}>
+                                {info.employeeCompanyLocation}
+                              </s>{" "}
+                              <span style={{ color: "red" }}>X</span>{" "}
+                              <span>
+                                {info.changes.employeeCompanyLocation}
+                              </span>
+                            </span>
+                          ) : (
+                            <span>
+                              <b>{info.employeeCompanyLocation}</b>
+                            </span>
+                          )}
                         </b>
                       </span>
                     </div>
@@ -125,8 +266,19 @@ const VerifiedPage = () => {
                       <span>Work Type:</span>&nbsp;
                       <span>
                         <b>
-                          {info.changes.typeOfEmployment ||
-                            info.typeOfEmployment}
+                          {info.changes.typeOfEmployment ? (
+                            <span>
+                              <s style={{ textDecoration: "line-through" }}>
+                                {info.typeOfEmployment}
+                              </s>{" "}
+                              <span style={{ color: "red" }}>X</span>{" "}
+                              <span>{info.changes.typeOfEmployment}</span>
+                            </span>
+                          ) : (
+                            <span>
+                              <b>{info.typeOfEmployment}</b>
+                            </span>
+                          )}
                         </b>
                       </span>
                     </div>
