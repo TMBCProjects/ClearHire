@@ -16,7 +16,6 @@ const $ = window.$;
 export default function VerficationRequest() {
   const userDatas = JSON.parse(sessionStorage.getItem("userData"));
   const [requestData, setRequestData] = useState([]);
-  var email = "";
   useEffect(() => {
     const fetchRequests = async () => {
       const data = await getRequests(userDatas.data.employeeEmail);
@@ -48,7 +47,6 @@ export default function VerficationRequest() {
     }).fail(function (error) {
       alert('Oops... ' + JSON.stringify(error));
     });
-    requestData
   };
   const denyAccess = (data) => {
     rejectRequest(data);
