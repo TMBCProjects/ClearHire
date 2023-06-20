@@ -9,7 +9,7 @@ import {
   getRequests,
   rejectRequest,
 } from "../../../DataBase/Employee/employee";
-
+import emailjs from "emailjs-com";
 export default function VerficationRequest() {
   const userDatas = JSON.parse(sessionStorage.getItem("userData"));
   const [requestData, setRequestData] = useState([]);
@@ -22,8 +22,26 @@ export default function VerficationRequest() {
     fetchRequests();
   }, [userDatas]);
 
-  const allowAccess = (data) => {
-    acceptRequest(userDatas.id, data);
+  const allowAccess = (e) => {
+    acceptRequest(userDatas.id, requestData[0].id);
+    e.preventDefault();
+
+    emailjs
+    .sendForm(
+        "service_cpytsjm",
+        "template_6yal3s3",
+        e.target,
+        "F3rrwZwcav-0a-BOW"
+    )
+    .then(
+        (result) => {
+            console.log(result.text);
+        },
+        (error) => {
+            console.log(error.text);
+        }
+    );
+
   };
   const denyAccess = (data) => {
     rejectRequest(data);
@@ -33,7 +51,13 @@ export default function VerficationRequest() {
       <div className="vreqHeader">
         <span>Access Requests</span>
       </div>
-
+      <form 
+      onSubmit={allowAccess}
+      >
+        <div style={{visibility: "hidden"}}>
+        <input name="name" value={userDatas.data.employeeName} />
+        <input name="email" value={"scintillantmail@gmail.com"} />
+        </div>
       <div
         className="vreqbody"
         style={{
@@ -68,16 +92,21 @@ export default function VerficationRequest() {
             </div>
 
             <div className="cardFooter">
-              <button className="allow" onClick={() => allowAccess(request.id)}>
+              <button className="allow" 
+              // onClick={(e) => allowAccess(e,request.id)}
+              type="submit"
+              >
                 Allow Access&nbsp;<img src={check} alt="check"></img>
               </button>
-              <button className="deny" onClick={() => denyAccess(request.id)}>
+              <button className="deny"
+               onClick={() => denyAccess(request.id)}>
                 Deny&nbsp;<img src={close} alt="close"></img>
               </button>
             </div>
           </div>
         ))}
       </div>
+      </form>
     </div>
   );
 }
