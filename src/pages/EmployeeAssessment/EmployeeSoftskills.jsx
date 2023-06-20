@@ -26,6 +26,8 @@ const initialState = {
   time: "",
 };
 
+const $ = window.$;
+
 function EmployeeSoftskills() {
   const navigate = useNavigate();
   const userDatas = JSON.parse(sessionStorage.getItem("userData"));
