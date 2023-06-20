@@ -9,7 +9,6 @@ import {
   getRequests,
   rejectRequest,
 } from "../../../DataBase/Employee/employee";
-import emailjs from "emailjs-com";
 
 const $ = window.$;
 

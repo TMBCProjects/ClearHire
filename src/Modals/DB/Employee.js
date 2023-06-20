@@ -1,9 +1,10 @@
 export default class Employee {
   isActive = false;
   isVerified = false;
+  isResignationSent = false;
   employeeName = "";
   employeeEmail = "";
-  companyLocations = "";
+  companyLocation = "";
   profileImage = "";
   dateOfBirth = "";
   role = "";

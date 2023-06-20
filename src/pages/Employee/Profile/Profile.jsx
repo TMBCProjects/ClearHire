@@ -6,7 +6,7 @@ import InputField from "../../../components/Input/InputField";
 import { Slider, Col, message } from "antd";
 import UploadFile from "../../../components/UploadFile";
 import { MinusOutlined } from "@ant-design/icons";
-import { profileUpdate, readColleagueRatings } from "../../../DataBase/Employee/employee";
+import { profileUpdate, readColleagueRatings, rejectResignation } from "../../../DataBase/Employee/employee";
 import ProgressBar from "../../../components/ProgressBar";
 import UploadPic from "../../../components/UploadPic/UploadPic";
 
@@ -153,6 +153,22 @@ export default function Profile() {
     message.success("Profile updated successfully");
   };
 
+  const acceptResignationRequest = () => {
+    const data = {
+      currentEmployerId: userDatas.data.currentEmployerId,
+      companyLocation: userDatas.data.companyLocation,
+      designation: userDatas.data.designation,
+      salary: userDatas.data.salary,
+      companyName: userDatas.data.companyName,
+      companyLogo: userDatas.data.companyLogo,
+      typeOfEmployment: userDatas.data.typeOfEmployment,
+      offerLetter: userDatas.data.offerLetter,
+      dateOfJoining: userDatas.data.dateOfJoining,
+    }
+    acceptResignation(data, userDatas.id)
+  }; const rejectResignationRequest = () => {
+    rejectResignation(userDatas.id)
+  }; 
   return (
     <div className="profile">
       <div className="profileHeader">
@@ -241,6 +257,17 @@ export default function Profile() {
             <p>Salary</p>
             <p>{userDatas.data.salary} LPA</p>
           </div>
+          {userDatas.data.isResignationSent &&
+            <div>
+              <p>The company has requested to leave the job</p>
+              <p>
+                <Button onClick={acceptResignationRequest} className="default">
+                  Accept
+                </Button>
+                <Button onClick={rejectResignationRequest} className="default">
+                  Reject
+                </Button></p>
+            </div>}
         </div>
       )}
 

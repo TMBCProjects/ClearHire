@@ -13,7 +13,6 @@ import { checkIfAvailable } from "../../../utils/FirebaseUtils";
 import { useEffect } from "react";
 import { Select, Space } from "antd";
 import { Button, Input, Divider, message } from "antd";
-import emailjs from "emailjs-com";
 
 const initialValues = {
   email: "",

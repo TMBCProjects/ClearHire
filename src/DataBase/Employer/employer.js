@@ -587,6 +587,15 @@ export async function sendVerifiedVerification(data, id) {
     id
   );
 }
+export async function sendResignation(id) {
+  await updateDocument(
+    Collections.employees,
+    {
+      isResignationSent: true,
+    },
+    id
+  );
+}
 export async function writeDesignation(companyId, name) {
   let newRequest = new Request();
   newRequest = {
