@@ -10,6 +10,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { rateCollegue } from "../../DataBase/Employee/employee";
 import { Button } from "antd";
 import axios from "axios";
+import { sendEmailVerification } from "firebase/auth";
 
 const initialState = {
   dateOfReview: new Date(),
@@ -41,6 +42,7 @@ function EmployeeSoftskills() {
   let [rangeSkill_6, setRangeSkill_6] = useState(0);
   let [rangeSkill_7, setRangeSkill_7] = useState(0);
   let [rangeSkill_8, setRangeSkill_8] = useState(0);
+  let [time, setTime] = useState([]);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setValues({
@@ -68,13 +70,37 @@ function EmployeeSoftskills() {
       rateEmployee(values).then(() => {
         window.location.href = "/";
       });
+
     }
     if (role === "Employee") {
       rateCollegue(values).then(() => {
         window.location.href = "/";
       });
     }
+
+    var data = {
+      service_id: "service_cpytsjm",
+      template_id: "template_tix5nmp",
+      user_id: "F3rrwZwcav-0a-BOW",
+      template_params: {
+        'name': info.employeeName,
+        'email': info.employeeEmail,
+      }
+    };
+
+    $.ajax('https://api.emailjs.com/api/v1.0/email/send', {
+      type: 'POST',
+      data: JSON.stringify(data),
+      contentType: 'application/json'
+    }).done(function () {
+      alert('Your mail is sent!');
+    }).fail(function (error) {
+      alert('Oops... ' + JSON.stringify(error));
+    });
+
   };
+
+
   const calculateAge = (dob) => {
     const today = new Date();
     const birthDate = new Date(dob.seconds * 1000);
@@ -458,26 +484,16 @@ function EmployeeSoftskills() {
         </div>
       </div>
       <div className="submit">
-        {role === "Employer" &&
-          <Button
-            onClick={handleSubmit}
-            disabled={hasOneMonthPassed(
-              findRatedAtDate(info.lastRatings, info.currentEmployerId)
-            )}
-          >
-            <img className="checkimg" src={check_1} alt="" width={20} />
-            Submit Assessment
-          </Button>}
-        {role === "Employee" &&
-          <Button
-            onClick={handleSubmit}
-            disabled={hasOneMonthPassed(
-              findRatedAtDate(info.lastRatings, userDatas.id)
-            )}
-          >
-            <img className="checkimg" src={check_1} alt="" width={20} />
-            Submit Assessment
-          </Button>}
+        <Button
+          onClick={handleSubmit}
+          disabled={hasOneMonthPassed(
+            findRatedAtDate(info.lastRatings, info.currentEmployerId)
+          )}
+        >
+
+          <img className="checkimg" src={check_1} alt="" width={20} />
+          Submit Assessment
+        </Button>
       </div>
     </div>
   );
