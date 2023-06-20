@@ -32,7 +32,7 @@ function OnboardingForm() {
   const [designationName, setDesignationName] = useState("");
   const [designations, setDesignations] = useState([]);
   const ipRef = useRef(null);
-
+  const form = useRef();
   // const [email, setEmail] = useState("")
   const navigate = useNavigate("");
 
@@ -123,22 +123,25 @@ function OnboardingForm() {
     });
 
     e.preventDefault();
+    var data = {
+      service_id: "service_cpytsjm",
+      template_id: "template_pwvg0ae",
+      user_id: "F3rrwZwcav-0a-BOW",
+      template_params: {
+        'name': values.name,
+        'email': values.email,
+      }
+    };
 
-    emailjs
-      .sendForm(
-        "service_cpytsjm",
-        "template_pwvg0ae",
-        e.target,
-        "F3rrwZwcav-0a-BOW"
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
+    $.ajax('https://api.emailjs.com/api/v1.0/email/send', {
+      type: 'POST',
+      data: JSON.stringify(data),
+      contentType: 'application/json'
+    }).done(function () {
+      alert('Your mail is sent!');
+    }).fail(function (error) {
+      alert('Oops... ' + JSON.stringify(error));
+    });
   };
 
   let [file, setFile] = useState("");
@@ -161,7 +164,9 @@ function OnboardingForm() {
                 <form
                   onSubmit={handleSubmit}
                   style={{ width: "100%", display: "contents" }}
+                  ref={form}
                 >
+                  
                   <div className="form-item email">
                     <input
                       type="email"
