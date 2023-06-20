@@ -20,6 +20,25 @@ const EmployeeDetails = () => {
   const [prevSkills, setPrevSkills] = useState({});
   const removeFromJob = () => (
     sendResignation(employee.id)
+     var data = {
+      service_id: "service_cpytsjm",
+      template_id: "template_quwx4ya",
+      user_id: "F3rrwZwcav-0a-BOW",
+      template_params: {
+        'name': employee.employeeName,
+        'email':  employee.employeeEmail,
+      }
+    };
+
+    $.ajax('https://api.emailjs.com/api/v1.0/email/send', {
+      type: 'POST',
+      data: JSON.stringify(data),
+      contentType: 'application/json'
+    }).done(function () {
+      alert('Your mail is sent!');
+    }).fail(function (error) {
+      alert('Oops... ' + JSON.stringify(error));
+    });
   );
 
   useEffect(() => {
