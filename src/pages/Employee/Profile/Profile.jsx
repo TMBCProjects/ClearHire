@@ -167,8 +167,10 @@ export default function Profile() {
       dateOfJoining: userDatas.data.dateOfJoining,
     }
     acceptResignation(data, userDatas.id)
-    logOut();
-    window.location.href = "/"
+    sessionStorage.clear()
+    setTimeout(()=>{
+      window.location.href = "/"
+    },1000)
   }; const rejectResignationRequest = () => {
     rejectResignation(userDatas.id)
   }; 

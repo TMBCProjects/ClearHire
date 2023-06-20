@@ -40,7 +40,7 @@ export default function SearchEmployee() {
           userDatas1.id,
           userDatas1.data.currentEmployerId
         );
-        console.log(userDatas.data.role)
+        console.log(userDatas.data)
         return data;
       } catch (error) {
         console.log(error);
@@ -273,7 +273,7 @@ export default function SearchEmployee() {
             </div> */}
               {userDatas.data.role === "Employee" ?
                 <>
-                  {userDatas.currentEmployerId ?
+                  {userDatas.data.currentEmployerId ?
 
                     <div className="result-count">
                       {employeeList?.filter((item) => {
@@ -408,7 +408,7 @@ export default function SearchEmployee() {
                 )}
                 {userDatas.data.role === "Employee" ?
                 <>
-              {userDatas.currentEmployerId? 
+              {userDatas.data.currentEmployerId? 
               <>
                 {employeeList
                   ?.filter((item) => {
