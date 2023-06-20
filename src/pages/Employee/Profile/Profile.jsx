@@ -34,8 +34,7 @@ export default function Profile() {
 
   const calculateAge = (dob) => {
     const today = new Date();
-    // const birthDate = new Date(dob.seconds * 1000);
-    const birthDate = new Date();
+    const birthDate = new Date(dob.seconds * 1000);
     let years = today.getFullYear() - birthDate.getFullYear();
     const months = today.getMonth() - birthDate.getMonth();
     if (months < 0 || (months === 0 && today.getDate() < birthDate.getDate())) {
