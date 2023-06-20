@@ -75,7 +75,6 @@ function EmployeeSoftskills() {
         window.location.href = "/";
       });
     }
-    console.log(values);
   };
   const calculateAge = (dob) => {
     const today = new Date();

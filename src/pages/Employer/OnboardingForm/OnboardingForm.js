@@ -65,7 +65,6 @@ function OnboardingForm() {
       try {
         let userDatas = JSON.parse(sessionStorage.getItem("userData"));
         const data = await readDesignations(userDatas.id);
-        console.log(data);
         setDesignations(data);
       } catch (err) {
         message.error(err);

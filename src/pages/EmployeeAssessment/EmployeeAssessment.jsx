@@ -7,7 +7,7 @@ import EmployeeSoftskills from "./EmployeeSoftskills";
 function EmployeeAssessment() {
 
   const onChange = (key) => {
-    console.log(key);
+    // console.log(key);
   };
   const items = [
     {

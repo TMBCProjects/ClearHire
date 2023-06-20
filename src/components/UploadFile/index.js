@@ -10,7 +10,6 @@ export default function UploadPic({ name, url }) {
   const [fileData, setFileData] = useState("");
   useEffect(() => {
     if (url !== "") {
-      console.log(url);
       setFileLoading(true);
     } else {
       setFileLoading(false);
