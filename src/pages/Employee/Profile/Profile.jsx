@@ -9,6 +9,7 @@ import { MinusOutlined } from "@ant-design/icons";
 import { acceptResignation, profileUpdate, readColleagueRatings, rejectResignation } from "../../../DataBase/Employee/employee";
 import ProgressBar from "../../../components/ProgressBar";
 import UploadPic from "../../../components/UploadPic/UploadPic";
+import { logOut } from "../../../utils/FirebaseUtils";
 
 export default function Profile() {
   const [avgRatings, setAvgRatings] = useState({});
@@ -166,6 +167,8 @@ export default function Profile() {
       dateOfJoining: userDatas.data.dateOfJoining,
     }
     acceptResignation(data, userDatas.id)
+    logOut();
+    window.location.href = "/"
   }; const rejectResignationRequest = () => {
     rejectResignation(userDatas.id)
   }; 
@@ -261,7 +264,7 @@ export default function Profile() {
             <div>
               <p>The company has requested to leave the job</p>
               <p>
-                <Button onClick={acceptResignationRequest} className="default">
+                <Button style={{marginRight:"2vh"}} onClick={acceptResignationRequest} className="success" >
                   Accept
                 </Button>
                 <Button onClick={rejectResignationRequest} className="default">

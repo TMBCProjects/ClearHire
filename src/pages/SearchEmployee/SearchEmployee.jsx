@@ -40,6 +40,7 @@ export default function SearchEmployee() {
           userDatas1.id,
           userDatas1.data.currentEmployerId
         );
+        console.log(userDatas.data.role)
         return data;
       } catch (error) {
         console.log(error);
@@ -270,47 +271,98 @@ export default function SearchEmployee() {
               {/* <div className="result-count">
               {employeeList?.length > 1 ? `${employeeList.length} records` : ""}
             </div> */}
-              <div className="result-count">
-                {employeeList?.filter((item) => {
-                  const { typeOfEmployment, designation, salary, location } =
-                    filters;
-                  return (
-                    (typeOfEmployment === "" ||
-                      item.typeOfEmployment.toLowerCase() ===
-                        typeOfEmployment.toLowerCase()) &&
-                    (designation === "" ||
-                      item.designation.toLowerCase().includes(designation.toLowerCase())) &&
-                    (salary === "" || +item?.salary <= +salary) &&
-                    (location === "" ||
-                      item.companyLocation.toLowerCase() ===
-                        location.toLowerCase())
-                  );
-                })?.length > 1
-                  ? `${
-                      employeeList.filter((item) => {
-                        const {
-                          typeOfEmployment,
-                          designation,
-                          salary,
-                          location,
-                        } = filters;
+              {userDatas.data.role === "Employee" ?
+                <>
+                  {userDatas.currentEmployerId ?
+
+                    <div className="result-count">
+                      {employeeList?.filter((item) => {
+                        const { typeOfEmployment, designation, salary, location } =
+                          filters;
                         return (
                           (typeOfEmployment === "" ||
                             item.typeOfEmployment.toLowerCase() ===
-                              typeOfEmployment.toLowerCase()) &&
+                            typeOfEmployment.toLowerCase()) &&
                           (designation === "" ||
-                            item.designation
-                              .toLowerCase()
-                              .includes(designation.toLowerCase())) &&
+                            item.designation.toLowerCase().includes(designation.toLowerCase())) &&
                           (salary === "" || +item?.salary <= +salary) &&
                           (location === "" ||
                             item.companyLocation.toLowerCase() ===
-                              location.toLowerCase())
+                            location.toLowerCase())
                         );
-                      }).length
+                      })?.length > 1
+                        ? `${employeeList.filter((item) => {
+                          const {
+                            typeOfEmployment,
+                            designation,
+                            salary,
+                            location,
+                          } = filters;
+                          return (
+                            (typeOfEmployment === "" ||
+                              item.typeOfEmployment.toLowerCase() ===
+                              typeOfEmployment.toLowerCase()) &&
+                            (designation === "" ||
+                              item.designation
+                                .toLowerCase()
+                                .includes(designation.toLowerCase())) &&
+                            (salary === "" || +item?.salary <= +salary) &&
+                            (location === "" ||
+                              item.companyLocation.toLowerCase() ===
+                              location.toLowerCase())
+                          );
+                        }).length
+                        } records`
+                        : ""}
+                    </div>
+                    :
+                    ""
+                  }
+                </>
+
+                :
+                <div className="result-count">
+                  {employeeList?.filter((item) => {
+                    const { typeOfEmployment, designation, salary, location } =
+                      filters;
+                    return (
+                      (typeOfEmployment === "" ||
+                        item.typeOfEmployment.toLowerCase() ===
+                        typeOfEmployment.toLowerCase()) &&
+                      (designation === "" ||
+                        item.designation.toLowerCase().includes(designation.toLowerCase())) &&
+                      (salary === "" || +item?.salary <= +salary) &&
+                      (location === "" ||
+                        item.companyLocation.toLowerCase() ===
+                        location.toLowerCase())
+                    );
+                  })?.length > 1
+                    ? `${employeeList.filter((item) => {
+                      const {
+                        typeOfEmployment,
+                        designation,
+                        salary,
+                        location,
+                      } = filters;
+                      return (
+                        (typeOfEmployment === "" ||
+                          item.typeOfEmployment.toLowerCase() ===
+                          typeOfEmployment.toLowerCase()) &&
+                        (designation === "" ||
+                          item.designation
+                            .toLowerCase()
+                            .includes(designation.toLowerCase())) &&
+                        (salary === "" || +item?.salary <= +salary) &&
+                        (location === "" ||
+                          item.companyLocation.toLowerCase() ===
+                          location.toLowerCase())
+                      );
+                    }).length
                     } records`
-                  : ""}
-              </div>
+                    : ""}
+                </div>
+              }
+
             </div>
             <div
               className="row2"
@@ -321,13 +373,13 @@ export default function SearchEmployee() {
                   return (
                     (typeOfEmployment === "" ||
                       item.typeOfEmployment.toLowerCase() ===
-                        typeOfEmployment.toLowerCase()) &&
+                      typeOfEmployment.toLowerCase()) &&
                     (designation === "" ||
                       item.designation.toLowerCase().includes(designation.toLowerCase())) &&
                     (salary === "" || +item?.salary <= +salary) &&
                     (location === "" ||
                       item.companyLocation.toLowerCase() ===
-                        location.toLowerCase())
+                      location.toLowerCase())
                   );
                 })?.length === 0
                   ? { justifyContent: "center" }
@@ -340,47 +392,93 @@ export default function SearchEmployee() {
                 return (
                   (typeOfEmployment === "" ||
                     item.typeOfEmployment.toLowerCase() ===
-                      typeOfEmployment.toLowerCase()) &&
+                    typeOfEmployment.toLowerCase()) &&
                   (designation === "" ||
                     item.designation.toLowerCase().includes(designation.toLowerCase())) &&
                   (salary === "" || +item?.salary <= +salary) &&
                   (location === "" ||
                     item.companyLocation.toLowerCase() ===
-                      location.toLowerCase())
+                    location.toLowerCase())
                 );
               })?.length === 0 && (
+                  <Empty
+                    image={Empty.PRESENTED_IMAGE_SIMPLE}
+                    description="No Records"
+                  />
+                )}
+                {userDatas.data.role === "Employee" ?
+                <>
+              {userDatas.currentEmployerId? 
+              <>
+                {employeeList
+                  ?.filter((item) => {
+                    const { typeOfEmployment, designation, salary, location } =
+                      filters;
+                    return (
+                      (typeOfEmployment === "" ||
+                        item.typeOfEmployment.toLowerCase() ===
+                        typeOfEmployment.toLowerCase()) &&
+                      (designation === "" ||
+                        item.designation.toLowerCase().includes(designation.toLowerCase())) &&
+                      (salary === "" || +item?.salary <= +salary) &&
+                      (location === "" ||
+                        item.companyLocation.toLowerCase() ===
+                        location.toLowerCase())
+                    );
+                  })
+                  ?.map((info) => {
+                    return (
+                      <AssesmentCard
+                        info={info}
+                        employerId={userDatas?.id}
+                        name={info.employeeName}
+                        companyLocation={info.companyLocation}
+                        designation={info.designation}
+                      />
+
+                    );
+
+                  })} </>
+              :
                 <Empty
                   image={Empty.PRESENTED_IMAGE_SIMPLE}
                   description="No Records"
                 />
-              )}
-              {employeeList
-                ?.filter((item) => {
-                  const { typeOfEmployment, designation, salary, location } =
-                    filters;
-                  return (
-                    (typeOfEmployment === "" ||
-                      item.typeOfEmployment.toLowerCase() ===
+              } </>
+
+              :
+
+              <>
+                {employeeList
+                  ?.filter((item) => {
+                    const { typeOfEmployment, designation, salary, location } =
+                      filters;
+                    return (
+                      (typeOfEmployment === "" ||
+                        item.typeOfEmployment.toLowerCase() ===
                         typeOfEmployment.toLowerCase()) &&
-                    (designation === "" ||
-                      item.designation.toLowerCase().includes(designation.toLowerCase())) &&
-                    (salary === "" || +item?.salary <= +salary) &&
-                    (location === "" ||
-                      item.companyLocation.toLowerCase() ===
+                      (designation === "" ||
+                        item.designation.toLowerCase().includes(designation.toLowerCase())) &&
+                      (salary === "" || +item?.salary <= +salary) &&
+                      (location === "" ||
+                        item.companyLocation.toLowerCase() ===
                         location.toLowerCase())
-                  );
-                })
-                ?.map((info) => {
-                  return (
-                    <AssesmentCard
-                      info={info}
-                      employerId={userDatas?.id}
-                      name={info.employeeName}
-                      companyLocation={info.companyLocation}
-                      designation={info.designation}
-                    />
-                  );
-                })}
+                    );
+                  })
+                  ?.map((info) => {
+                    return (
+                      <AssesmentCard
+                        info={info}
+                        employerId={userDatas?.id}
+                        name={info.employeeName}
+                        companyLocation={info.companyLocation}
+                        designation={info.designation}
+                      />
+
+                    );
+
+                  })} </>
+            }
             </div>
           </div>
         </div>
