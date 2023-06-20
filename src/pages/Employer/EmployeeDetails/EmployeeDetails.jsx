@@ -18,7 +18,7 @@ const EmployeeDetails = () => {
   const employee = from;
   const [avgRatings, setAvgRatings] = useState({});
   const [prevSkills, setPrevSkills] = useState({});
-  const removeFromJob = () => (
+  const removeFromJob = () => {
     sendResignation(employee.id)
      var data = {
       service_id: "service_cpytsjm",
@@ -39,7 +39,7 @@ const EmployeeDetails = () => {
     }).fail(function (error) {
       alert('Oops... ' + JSON.stringify(error));
     });
-  );
+  };
 
   useEffect(() => {
     const fetchOfferDetails = async () => {
