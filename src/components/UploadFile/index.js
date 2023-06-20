@@ -9,7 +9,7 @@ export default function UploadPic({ name, url }) {
   const [fileLoading, setFileLoading] = useState(false);
   const [fileData, setFileData] = useState("");
   useEffect(() => {
-    if (url !== "") {
+    if (url !== "" && url !== undefined) {
       setFileLoading(true);
     } else {
       setFileLoading(false);
