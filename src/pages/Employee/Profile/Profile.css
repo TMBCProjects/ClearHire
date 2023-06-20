@@ -50,6 +50,7 @@
 .profileBody button img {
     width: 2vh;
 }
+
 .profileBody button {
     padding: 1vh;
     cursor: pointer;
@@ -91,9 +92,10 @@
 
 }
 
-.skill-item{
+.skill-item {
     display: flex;
 }
+
 .sliderpercent {
     background-color: #E2F0E8;
     width: 5vh;
@@ -109,7 +111,7 @@
 
 .profileFooter {
     margin-top: 5vh;
-    
+    margin-bottom: 3rem;
 }
 
 .profileFooter button {
