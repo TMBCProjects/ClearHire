@@ -32,6 +32,7 @@ import SendResgination from "./pages/Employer/sendResignation/sendResgination";
 import VerifyCandidate from './pages/Employer/VerifyCandidate/VerifyCandidate'
 import ViewVerification from "./pages/Employer/ViewVerification/ViewVerification";
 import Verification from "./pages/Employer/Verification/Verification";
+import VerifiedPage from "./pages/Employer/VerifiedPage/VerifiedPage";
 function App() {
   return (
     <div className="main">
@@ -126,6 +127,9 @@ function App() {
                   <Route
                     path="/verification"
                     element={<Verification />}></Route>
+                  <Route
+                    path="/verifiedPage"
+                    element={<VerifiedPage />}></Route>
                 </Routes>
 
               </div>
