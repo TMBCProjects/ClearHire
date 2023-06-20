@@ -10,7 +10,7 @@ import "./EmployeeDetails.css";
 import { Button } from "antd"
 import { useLocation, useNavigate } from "react-router-dom";
 import { sendResignation } from "../../../DataBase/Employer/employer";
-
+const $ = window.$;
 const EmployeeDetails = () => {
   const location = useLocation();
   const navigate = useNavigate();
