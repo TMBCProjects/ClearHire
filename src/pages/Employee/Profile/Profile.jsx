@@ -159,7 +159,7 @@ export default function Profile() {
         <div className="profilePic">
           <img
             src={userDatas.data.profileImage}
-            alt={"No Photo Uploaded"}
+            alt={"Not Uploaded"}
             style={{ cursor: "pointer" }}
           ></img>
         </div>

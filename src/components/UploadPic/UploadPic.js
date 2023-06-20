@@ -12,7 +12,7 @@ export default function UploadPic({ url }) {
     if (url) {
       setPhotoLoading(true);
     }
-  }, []);
+  }, [url]);
   const handleFileUpload = async (event) => {
     const imageUrl = await uploadPhoto(event.target.files[0]);
     setProfileImage(imageUrl);
