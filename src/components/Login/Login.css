@@ -90,6 +90,14 @@
 .divider-line {
     display: flex;
     align-items: center;
+    margin-top: 2rem;
+
+}
+
+@media(max-width:767px) {
+    .divider-line {
+        margin-top: 7.75rem;
+    }
 }
 
 .divider-line hr {
