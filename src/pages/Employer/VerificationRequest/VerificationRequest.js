@@ -25,7 +25,13 @@ export default function VerificationRequest() {
     }, []);
   return (
     <div className="cards">
-    {CandidateDetails.map((info) => {
+      {CandidateDetails.length === 0 && (
+        <Empty
+          image={Empty.PRESENTED_IMAGE_SIMPLE}
+          description="No Records"
+        />
+      )}
+      {CandidateDetails.map((info) => {
         return (
           <div className="col-md-3 gy-3 p-4">
             <div className="card">
@@ -51,14 +57,7 @@ export default function VerificationRequest() {
             </div>
           </div>
         );
-      })
-    // ) : (
-    //   <Empty
-    //     image={Empty.PRESENTED_IMAGE_SIMPLE}
-    //     description="No Records"
-    //   />
-    // )}
-    }
+      })}
     </div>
-  )
+  );
 }
