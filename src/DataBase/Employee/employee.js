@@ -269,6 +269,35 @@ export async function removeResumeLink(employeeId) {
     employeeId
   );
 }
+
+export async function acceptResignation(data, id) {
+  await updateDocument(
+    Collections.employees,
+    {
+      prevCompanies: arrayUnion(data),
+      currentEmployerId: "",
+      companyLocation: "",
+      designation: "",
+      salary: "",
+      companyName: "",
+      companyLogo: "",
+      typeOfEmployment: "",
+      offerLetter: "",
+      dateOfJoining: "",
+      isResignationSent: false,
+    },
+    id
+  );
+}
+export async function rejectResignation(data, id) {
+  await updateDocument(
+    Collections.employees,
+    {
+      isResignationSent: false,
+    },
+    id
+  );
+}
 export async function removeImageLink(employeeId) {
   await updateDocument(
     Collections.employees,

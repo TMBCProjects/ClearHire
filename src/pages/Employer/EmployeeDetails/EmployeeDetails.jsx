@@ -9,6 +9,7 @@ import ProgressBar from "../../../components/ProgressBar";
 import "./EmployeeDetails.css";
 import { Button } from "antd"
 import { useLocation, useNavigate } from "react-router-dom";
+import { sendResignation } from "../../../DataBase/Employer/employer";
 
 const EmployeeDetails = () => {
   const location = useLocation();
@@ -17,60 +18,9 @@ const EmployeeDetails = () => {
   const employee = from;
   const [avgRatings, setAvgRatings] = useState({});
   const [prevSkills, setPrevSkills] = useState({});
-  // console.log("info", from);
-
-  // const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
-  //   <img
-  //     src={LeftArrow}
-  //     alt="prevArrow"
-  //     {...props}
-  //   />
-  // );
-
-  // const SlickArrowRight = ({ currentSlide, slideCount, ...props }) => (
-  //   <img
-  //     src={RightArrow}
-  //     alt="nextArrow"
-  //     {...props}
-  //   />
-  // );
-
-  // const settings = {
-  //   dots: false,
-  //   infinite: false,
-  //   speed: 500,
-  //   slidesToShow: 4,
-  //   slidesToScroll: 1,
-  //   initialSlide: 0,
-  //   responsive: [
-  //     {
-  //       breakpoint: 1024,
-  //       settings: {
-  //         slidesToShow: 3,
-  //         slidesToScroll: 3,
-  //         infinite: true,
-  //         dots: true,
-  //       },
-  //     },
-  //     {
-  //       breakpoint: 600,
-  //       settings: {
-  //         slidesToShow: 2,
-  //         slidesToScroll: 2,
-  //         initialSlide: 2,
-  //       },
-  //     },
-  //     {
-  //       breakpoint: 480,
-  //       settings: {
-  //         slidesToShow: 1,
-  //         slidesToScroll: 1,
-  //       },
-  //     },
-  //   ],
-  //   prevArrow: <SlickArrowLeft />,
-  //   nextArrow: <SlickArrowRight />,
-  // };
+  const removeFromJob = () => (
+    sendResignation(employee.id)
+  );
 
   useEffect(() => {
     const fetchOfferDetails = async () => {
@@ -289,8 +239,8 @@ const EmployeeDetails = () => {
               </a>
             </button>
 
-            <Button className="default">
-            send Resignation
+            <Button onClick={removeFromJob} className="default">
+              Send Resignation
             </Button>
             <a
               className="btn portfolio-btn"
