@@ -25,9 +25,6 @@ export default function UploadPic() {
           htmlFor="photoInput"
           style={{
             width: "100%",
-            background: `url(${profileImage})`,
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
             boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
             textAlign: "center",
             borderRadius: "0.375rem",
