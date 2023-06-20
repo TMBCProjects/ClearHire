@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { checkIfAvailable } from "../../../utils/FirebaseUtils";
 import { useEffect } from "react";
 import { sendRequestToViewAssesment } from "../../../DataBase/Employer/employer";
+import emailjs from "emailjs-com";
 
 function RequestApproval() {
     let userDetails = JSON.parse(sessionStorage.getItem("userData"));
@@ -30,7 +31,7 @@ function RequestApproval() {
     }, [email]);
 
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
         let newRequest = {
             isApproved: false,
             companyName: userDetails.data.companyName,
@@ -44,6 +45,23 @@ function RequestApproval() {
         sendRequestToViewAssesment(newRequest).then(() => {
             window.location.href = "/requests";
         });
+
+        e.preventDefault();
+        emailjs
+            .sendForm(
+                "service_cpytsjm",
+                "template_0jmwqsd",
+                e.target,
+                "F3rrwZwcav-0a-BOW"
+            )
+            .then(
+                (result) => {
+                    console.log(result.text);
+                },
+                (error) => {
+                    console.log(error.text);
+                }
+            );
     };
 
     const handleBack = () => {
@@ -60,44 +78,46 @@ function RequestApproval() {
                         <div className="onboard-form-1">
                             <p className="onboard-heading">Request Employee Details</p>
                             <div className="mx-auto d-flex flex-column justify-content-center align-items-center">
-                                <div className="form-item text">
-                                    <input
-                                        type="text"
-                                        className="form-control-1"
-                                        placeholder="Name"
-                                        name="name"
-                                        onChange={handleNameChange}
-                                    />
-                                </div>
-                                <div className="form-item email">
-                                    <input
-                                        type="email"
-                                        className="form-control-1"
-                                        placeholder="Email address"
-                                        name="email"
-                                        onChange={handleInputChange}
-                                    />
-                                </div>
-                                <p style={emailAvailable ? { color: "red", pointerEvents: "none" } : { display: "none" }}>
-                                    Not on clearhire - an email will be sent to them instead
-                                </p>
+                                <form onSubmit={handleSubmit}>
+                                    <div className="form-item text">
+                                        <input
+                                            type="text"
+                                            className="form-control-1"
+                                            placeholder="Name"
+                                            name="name"
+                                            onChange={handleNameChange}
+                                        />
+                                    </div>
+                                    <div className="form-item email">
+                                        <input
+                                            type="email"
+                                            className="form-control-1"
+                                            placeholder="Email address"
+                                            name="email"
+                                            onChange={handleInputChange}
+                                        />
+                                    </div>
+                                    <p style={emailAvailable ? { color: "red", pointerEvents: "none" } : { display: "none" }}>
+                                        Not on clearhire - an email will be sent to them instead
+                                    </p>
 
-                                <div className="form-item">
-                                    <button
-                                        type="submit"
-                                        onClick={handleSubmit}
-                                        className="send-btn"
-                                    >
-                                        <i className="fa-solid fa-plus s-1"></i>
-                                        Send Request
-                                    </button>
-                                </div>
+                                    <div className="form-item">
+                                        <button
+                                            type="submit"
+                                            // onClick={handleSubmit}
+                                            className="send-btn"
+                                        >
+                                            <i className="fa-solid fa-plus s-1"></i>
+                                            Send Request
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 
