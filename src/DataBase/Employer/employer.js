@@ -574,7 +574,6 @@ export async function sendVerificationRequest(data) {
   return await addDocument(Collections.verfications, newVerfication);
 }
 export async function sendVerifiedVerification(data, id) {
-  console.log(id);
   await updateDocument(
     Collections.verfications,
     {
