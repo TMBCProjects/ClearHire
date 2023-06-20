@@ -161,6 +161,20 @@ export async function readEmployees(employerId) {
     console.log(error);
   }
 }
+
+export async function employerProfileUpdate(profileData, employerId) {
+  await updateDocument(Collections.employers, profileData, employerId);
+}
+
+export async function removeLogoLink(employerId) {
+  await updateDocument(
+    Collections.employers,
+    {
+      companyLogo: "",
+    },
+    employerId
+  );
+}
 export async function readNotVerifiedVerifications(employerEmail) {
   try {
     let verfications = [];

@@ -4,6 +4,7 @@ import "../UploadPic/UploadPic.css"
 import { deletePhoto, uploadPhoto } from "../../utils/FirebaseUtils";
 import { useEffect } from "react";
 import { removeImageLink } from "../../DataBase/Employee/employee";
+import { removeLogoLink } from "../../DataBase/Employer/employer";
 
 export default function UploadPic({ url }) {
   const [photoLoading, setPhotoLoading] = useState(false);
@@ -21,15 +22,24 @@ export default function UploadPic({ url }) {
   };
   const removeImg = async (e) => {
     e.preventDefault();
+    const role = sessionStorage.getItem("LoggedIn");
     const userDatas = JSON.parse(sessionStorage.getItem("userData"));
-    userDatas.data.profileImage = "";
+    if (role === "Employer") {
+      userDatas.data.companyLogo = "";
+    } else if (role === "Employee") {
+      userDatas.data.profileImage = "";
+    }
     sessionStorage.setItem("userData", JSON.stringify(userDatas));
     if (url === "") {
       setProfileImage(await deletePhoto(profileImage));
     } else {
       setProfileImage(await deletePhoto(url));
     }
-    await removeImageLink(userDatas.id);
+    if (role === "Employer") {
+      await removeLogoLink(userDatas.id);
+    } else if (role === "Employee") {
+      await removeImageLink(userDatas.id);
+    }
     sessionStorage.removeItem("profileImage");
     setPhotoLoading(false);
   };

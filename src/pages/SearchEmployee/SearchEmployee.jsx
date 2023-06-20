@@ -40,7 +40,6 @@ export default function SearchEmployee() {
           userDatas1.id,
           userDatas1.data.currentEmployerId
         );
-        console.log(userDatas.data)
         return data;
       } catch (error) {
         console.log(error);
