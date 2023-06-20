@@ -159,11 +159,11 @@ export default function Profile() {
         <div className="profilePic">
           <img
             src={userDatas.data.profileImage}
-            alt="manager-logo"
+            alt={userDatas.data.profileImage}
             style={{ cursor: "pointer" }}
           ></img>
         </div>
-        <UploadPic />
+        <UploadPic url={userDatas.data.profileImage} />
 
         <div className="name">
           <span style={{ fontWeight: "bold" }}>
