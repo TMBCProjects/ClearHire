@@ -22,6 +22,18 @@ const Assesment_Card = ({ info, employerId }) => {
     }
     return years;
   };
+  
+  function hasOneMonthPassedOne(date) {
+    if (date === "null") {
+      return false;
+    }
+    const specificDate = new Date(date.split("/").reverse().join("/"));
+    const oneMonthInMs = 30 * 24 * 60 * 60 * 1000;
+    const currentDate = new Date();
+    const diffInMs = currentDate - specificDate;
+    return diffInMs <= oneMonthInMs;
+  }
+
   function hasOneMonthPassed(date, date2) {
     if (date === "null" || date2 === "null") {
       return false;
@@ -84,16 +96,6 @@ const Assesment_Card = ({ info, employerId }) => {
     }
   }
 
-  function hasOneMonthPassedOne(date) {
-    if (date === "null") {
-      return false;
-    }
-    const specificDate = new Date(date);
-    const oneMonthInMs = 30 * 24 * 60 * 60 * 1000;
-    const currentDate = new Date();
-    const diffInMs = currentDate - specificDate;
-    return diffInMs <= oneMonthInMs;
-  }
   function findRatedAtDate(ratingsArray, desiredId) {
     if (ratingsArray !== undefined) {
       for (let i = 0; i < ratingsArray.length; i++) {
@@ -249,7 +251,7 @@ const Assesment_Card = ({ info, employerId }) => {
           <Link
             style={
               hasOneMonthPassedOne(
-                findRatedAtDate(info?.lastRatings, employerId)
+                findRatedAtDate(info?.lastRatings, userDatas.id)
               )
                 ? {
                     pointerEvents: "none",
@@ -265,13 +267,13 @@ const Assesment_Card = ({ info, employerId }) => {
               className="allow"
               style={
                 hasOneMonthPassedOne(
-                  findRatedAtDate(info?.lastRatings, employerId)
+                  findRatedAtDate(info?.lastRatings, userDatas.id)
                 )
                   ? { color: "#d2dee8", backgroundColor: "#eef8ff" }
                   : {}
               }>
               {hasOneMonthPassedOne(
-                findRatedAtDate(info?.lastRatings, employerId)
+                findRatedAtDate(info?.lastRatings, userDatas.id)
               )
                 ? "Assessment Done"
                 : "Assess Employee"}

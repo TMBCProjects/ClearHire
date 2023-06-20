@@ -278,7 +278,7 @@ export async function rateCollegue(ratingData) {
     ratedById: ratingData.ratedById,
     ratedByRole: ratingData.ratedByRole,
     ratedAt: new Date(),
-    ratedAtDate: new Date().toDateString(),
+    ratedAtDate: new Date().toLocaleDateString("en-GB"),
     ratedByEmail: ratingData.ratedByEmail,
     employeeId: ratingData.employeeId,
     employeeName: ratingData.employeeName,

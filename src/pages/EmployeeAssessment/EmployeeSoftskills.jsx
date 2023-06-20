@@ -41,7 +41,6 @@ function EmployeeSoftskills() {
   let [rangeSkill_6, setRangeSkill_6] = useState(0);
   let [rangeSkill_7, setRangeSkill_7] = useState(0);
   let [rangeSkill_8, setRangeSkill_8] = useState(0);
-  let [time, setTime] = useState([]);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setValues({
@@ -459,15 +458,26 @@ function EmployeeSoftskills() {
         </div>
       </div>
       <div className="submit">
-        <Button
-          onClick={handleSubmit}
-          disabled={hasOneMonthPassed(
-            findRatedAtDate(info.lastRatings, info.currentEmployerId)
-          )}
-        >
-          <img className="checkimg" src={check_1} alt="" width={20} />
-          Submit Assessment
-        </Button>
+        {role === "Employer" &&
+          <Button
+            onClick={handleSubmit}
+            disabled={hasOneMonthPassed(
+              findRatedAtDate(info.lastRatings, info.currentEmployerId)
+            )}
+          >
+            <img className="checkimg" src={check_1} alt="" width={20} />
+            Submit Assessment
+          </Button>}
+        {role === "Employee" &&
+          <Button
+            onClick={handleSubmit}
+            disabled={hasOneMonthPassed(
+              findRatedAtDate(info.lastRatings, userDatas.id)
+            )}
+          >
+            <img className="checkimg" src={check_1} alt="" width={20} />
+            Submit Assessment
+          </Button>}
       </div>
     </div>
   );
