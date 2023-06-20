@@ -3,6 +3,7 @@ import { CloseOutlined, UploadOutlined } from "@ant-design/icons";
 import "../UploadPic/UploadPic.css"
 import { deletePhoto, uploadPhoto } from "../../utils/FirebaseUtils";
 import { useEffect } from "react";
+import { removeImageLink } from "../../DataBase/Employee/employee";
 
 export default function UploadPic({ url }) {
   const [photoLoading, setPhotoLoading] = useState(false);
@@ -10,7 +11,6 @@ export default function UploadPic({ url }) {
   useEffect(() => {
     if (url) {
       setPhotoLoading(true);
-      setProfileImage(url);
     }
   }, []);
   const handleFileUpload = async (event) => {
@@ -21,7 +21,15 @@ export default function UploadPic({ url }) {
   };
   const removeImg = async (e) => {
     e.preventDefault();
-    setProfileImage(await deletePhoto(profileImage));
+    const userDatas = JSON.parse(sessionStorage.getItem("userData"));
+    userDatas.data.profileImage = "";
+    sessionStorage.setItem("userData", JSON.stringify(userDatas));
+    if (url === "") {
+      setProfileImage(await deletePhoto(profileImage));
+    } else {
+      setProfileImage(await deletePhoto(url));
+    }
+    await removeImageLink(userDatas.id);
     sessionStorage.removeItem("profileImage");
     setPhotoLoading(false);
   };
