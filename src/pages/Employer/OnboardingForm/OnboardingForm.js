@@ -125,21 +125,21 @@ function OnboardingForm() {
 
     e.preventDefault();
 
-    emailjs.sendForm(
-      "service_cpytsjm",
-      "template_pwvg0ae",
-      e.target,
-      "F3rrwZwcav-0a-BOW"
-    )
-    .then(
-      (result) => {
-        console.log(result.text)
-      },
-      (error) => {
-        console.log(error.text)
-      }
-    )
-
+    emailjs
+      .sendForm(
+        "service_cpytsjm",
+        "template_pwvg0ae",
+        e.target,
+        "F3rrwZwcav-0a-BOW"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
   };
 
   let [file, setFile] = useState("");
