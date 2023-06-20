@@ -58,9 +58,7 @@ export default function VerficationRequest() {
         <p>{requestData.companyEmail}</p>
 
       </div>
-      <form 
-      // onSubmit={allowAccess}
-      >
+
       <div
         className="vreqbody"
         style={{
@@ -110,7 +108,6 @@ export default function VerficationRequest() {
           </div>
         ))}
       </div>
-      </form>
     </div>
   );
 }
