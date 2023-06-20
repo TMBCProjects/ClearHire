@@ -381,7 +381,8 @@ export async function readNotVerifiedVerifications(employerEmail) {
       query(
         setCollection(Collections.verfications),
         where(Fields.verificationByEmail, "==", employerEmail),
-        where(Fields.isVerified, "==", false)
+        where(Fields.isVerified, "==", false),
+        where(Fields.isActive, "==", true)
       )
     );
     querySnapshot.forEach((doc) => {

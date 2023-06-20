@@ -44,17 +44,15 @@ function Verification() {
         items={items}
       />
       <div>
-          <Link to={"/verify-candidate"} className="add-verification">
-            Verify a candidate
-          </Link>
+        <Link
+          to={"/verify-candidate"}
+          className="add-verification">
+          Verify a candidate
+        </Link>
       </div>
       <div>
         {CandidateDetails.length > 0 ? (
-          CandidateDetails?.filter((info) => {
-            return verification === true
-              ? info.isActive === true && info.isVerified === true
-              : info.isActive === true && info.isVerified === false;
-          }).map((info) => {
+          CandidateDetails?.map((info) => {
             return (
               <div className="col-md-3 gy-3">
                 <div className="card">
