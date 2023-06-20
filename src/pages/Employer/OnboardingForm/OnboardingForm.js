@@ -25,6 +25,9 @@ const initialValues = {
   salary: "",
   offerLetter: "",
 };
+
+const $ = window.$;
+
 function OnboardingForm() {
   let userDatas = JSON.parse(sessionStorage.getItem("userData"));
   const [values, setValues] = useState(initialValues);

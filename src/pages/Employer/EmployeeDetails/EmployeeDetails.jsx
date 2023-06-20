@@ -7,7 +7,7 @@ import UrlLink from "../../../assets/images/link.svg";
 // import LeftArrow from "../../../assets/images/left-arrow.png";
 import ProgressBar from "../../../components/ProgressBar";
 import "./EmployeeDetails.css";
-
+import { Button } from "antd"
 import { useLocation, useNavigate } from "react-router-dom";
 
 const EmployeeDetails = () => {
@@ -288,6 +288,10 @@ const EmployeeDetails = () => {
                 View Resume
               </a>
             </button>
+
+            <Button className="default">
+            send Resignation
+            </Button>
             <a
               className="btn portfolio-btn"
               href={`https://${employee.portfolioLink}`}
