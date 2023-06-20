@@ -9,12 +9,10 @@ const Banner = () => {
       <div className="row align-items-center d-flex">
         <div className="col-md-6 ">
           <h1 className="banner-heading">
-            <span className="text-color-green">Digitize Your Recruitment </span>with ClearHire
+            <span className="text-color-green">Revolutionize Your Recruitment </span>
           </h1>
           <p className="banner-text mt-3">
-            Streamline your hiring process with ClearHire. We provide a digital
-            platform to perform comprehensive preliminary checks on potential hires,
-            simplifying your recruitment journey.
+            Navigate the hiring process with confidence using ClearHire. Our platform offers detailed track records of potential recruits, helping you make informed decisions and hire the right candidate every time.
 
           </p>
           <div

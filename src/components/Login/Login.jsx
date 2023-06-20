@@ -171,14 +171,11 @@ const Login = () => {
           <div className="row d-flex justify-content-center align-items-center">
             <div className="col-lg-5 col-12">
               <h1 className="heading  text-white fw-bold">
-                Eprehenderit in{" "}
-                <span className="text-color-green">voluptate velit</span> esse
-                cillum auptate
+                Embrace the{" "}
+                <span className="text-color-green">Future of Hiring</span>
               </h1>
               <p className="text-light mt-3">
-                Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
-                aut fugit, sed quia consequuntur magni dolores eos qui ratione
-                voluptatem sequ.
+                With features like AI-generated recommendation letters, ClearHire is redefining the recruitment landscape. Join us in revolutionizing the way businesses hire and manage their employees.
               </p>
             </div>
             <div className="col-lg-6 col-12">

@@ -12,15 +12,14 @@ const About = () => {
       <div className="row d-flex justify-between align-items-start">
         <div className="col-md-6">
           <h3 className="text-heading">
-            <span className="text-color-green">voluptate velit</span> esse
-            cillum auptate
+            <span className="text-color-green">Empower Your Team Management</span>
           </h3>
         </div>
         <div className="col-md-6">
           <p className="about-text text-color-light">
-            ClearHire is revolutionizing the hiring landscape by digitizing the preliminary
-            employee check process. We're committed to empowering employers with insightful,
-            reliable reviews and career histories, ensuring you make the best hiring decisions.
+            ClearHire isn't just for hiring. Take control of your team's development with our
+            sophisticated rating system, offering assessment of soft skills and KPIs. Provide
+            instant feedback and foster a culture of continuous improvement and accountability.
           </p>
         </div>
       </div>
@@ -76,15 +75,13 @@ const About = () => {
           <img src={Team} alt="" className="team-img" />
         </div>
         <div className="col-md-6 about-team">
-          <h2>About Us</h2>
           <h3 className="text-heading">
-            <span className="text-color-green">voluptate velit</span> esse
-            cillum auptate
+            <span className="text-color-green">Experience Seamless Onboarding</span>
           </h3>
           <p className="text-color-light">
-            At ClearHire, we're changing the face of recruitment by digitizing and simplifying
-            the preliminary employee check process. Our goal is to make your hiring decisions
-            easier and more strategic. Be part of the digital hiring revolution with us.
+            Streamline your onboarding process with ClearHire. Create a seamless transition for
+            new employees, reducing administrative hassle and enhancing their first impressions
+            of your organization.
           </p>
         </div>
       </div>
