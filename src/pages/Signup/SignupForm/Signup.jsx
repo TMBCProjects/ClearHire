@@ -8,6 +8,7 @@ import "../SignupForm/Signup.css";
 import Loader from "../../../components/Loader";
 import { PlusOutlined } from "@ant-design/icons";
 import { Input, Space, Tag, Tooltip, theme } from "antd";
+import emailjs from "emailjs-com";
 
 const initialValues = {
   email: "",
@@ -21,6 +22,7 @@ const initialValues = {
 export default function Signup() {
   const [values, setValues] = useState(initialValues);
   const [loading, setLoading] = useState(false);
+  const form = useRef();
   let year = Array.from(
     { length: 123 },
     (_, i) => new Date().getFullYear() - i
@@ -99,7 +101,7 @@ export default function Signup() {
   const onAssessmentTypeChange = (event) => {
     values.assessmentType = event;
   };
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
     values.profileImage = sessionStorage.getItem("profileImage");
     values.role = user;
     if (user === "Employer") {
@@ -115,6 +117,22 @@ export default function Signup() {
         setLoading(false);
         alert(err);
       });
+    e.preventDefault();
+      emailjs
+      .sendForm(
+        "service_cpytsjm",
+        "template_p7qh9y5",
+        e.target,
+        "F3rrwZwcav-0a-BOW"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
   };
 
   const handleYearChange = (e) => {
@@ -176,7 +194,7 @@ export default function Signup() {
             <span style={{ fontWeight: "bold" }}>Employee Signup</span>
           )}
         </div>
-        <form className="form-horizontal" style={{ height: "100%" }}>
+        <form ref={form} onSubmit={handleSubmit} className="form-horizontal" style={{ height: "100%" }}>
           <InputField
             label={"Email"}
             type={"email"}
@@ -379,9 +397,9 @@ export default function Signup() {
               ]}
             />
             </div></>) : (<></>)}
-          <Button className="signupBtn" onClick={handleSubmit}>
+          <button type="submit" className="signupBtn" >
             Signup
-          </Button><br /><br /><br /><br /><br /><br />
+          </button><br /><br /><br /><br /><br /><br />
         </form>
       </div>
     </>
