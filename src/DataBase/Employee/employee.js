@@ -269,7 +269,15 @@ export async function removeResumeLink(employeeId) {
     employeeId
   );
 }
-
+export async function removeImageLink(employeeId) {
+  await updateDocument(
+    Collections.employees,
+    {
+      profileImage: "",
+    },
+    employeeId
+  );
+}
 export async function rateCollegue(ratingData) {
   let rating = new Rating();
   rating = {
@@ -278,7 +286,7 @@ export async function rateCollegue(ratingData) {
     ratedById: ratingData.ratedById,
     ratedByRole: ratingData.ratedByRole,
     ratedAt: new Date(),
-    ratedAtDate: new Date().toDateString(),
+    ratedAtDate: new Date().toLocaleDateString("en-GB"),
     ratedByEmail: ratingData.ratedByEmail,
     employeeId: ratingData.employeeId,
     employeeName: ratingData.employeeName,

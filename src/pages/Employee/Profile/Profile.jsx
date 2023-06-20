@@ -8,6 +8,7 @@ import UploadFile from "../../../components/UploadFile";
 import { MinusOutlined } from "@ant-design/icons";
 import { profileUpdate, readColleagueRatings } from "../../../DataBase/Employee/employee";
 import ProgressBar from "../../../components/ProgressBar";
+import UploadPic from "../../../components/UploadPic/UploadPic";
 
 export default function Profile() {
   const [avgRatings, setAvgRatings] = useState({});
@@ -137,13 +138,17 @@ export default function Profile() {
   };
   const handleSubmit = () => {
     let resume = sessionStorage.getItem("resume");
+    let profile = sessionStorage.getItem("profileImage");
     if (resume) {
       values.resume = resume;
+    } if (profile) {
+      values.profileImage = profile;
     }
     values.skills = skills;
     profileUpdate(values, userDatas.id).then(() => {
       updateUserData(values);
       sessionStorage.removeItem("resume");
+      sessionStorage.removeItem("profileImage");
     });
     message.success("Profile updated successfully");
   };
@@ -154,10 +159,11 @@ export default function Profile() {
         <div className="profilePic">
           <img
             src={userDatas.data.profileImage}
-            alt="manager-logo"
+            alt={"No Photo Uploaded"}
             style={{ cursor: "pointer" }}
           ></img>
         </div>
+        <UploadPic url={userDatas.data.profileImage} />
 
         <div className="name">
           <span style={{ fontWeight: "bold" }}>
