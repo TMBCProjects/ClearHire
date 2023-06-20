@@ -279,7 +279,7 @@ export default function SearchEmployee() {
                       item.typeOfEmployment.toLowerCase() ===
                         typeOfEmployment.toLowerCase()) &&
                     (designation === "" ||
-                      item.designation.toLowerCase().includes(designation)) &&
+                      item.designation.toLowerCase().includes(designation.toLowerCase())) &&
                     (salary === "" || +item?.salary <= +salary) &&
                     (location === "" ||
                       item.companyLocation.toLowerCase() ===
@@ -301,7 +301,7 @@ export default function SearchEmployee() {
                           (designation === "" ||
                             item.designation
                               .toLowerCase()
-                              .includes(designation)) &&
+                              .includes(designation.toLowerCase())) &&
                           (salary === "" || +item?.salary <= +salary) &&
                           (location === "" ||
                             item.companyLocation.toLowerCase() ===
@@ -323,7 +323,7 @@ export default function SearchEmployee() {
                       item.typeOfEmployment.toLowerCase() ===
                         typeOfEmployment.toLowerCase()) &&
                     (designation === "" ||
-                      item.designation.toLowerCase().includes(designation)) &&
+                      item.designation.toLowerCase().includes(designation.toLowerCase())) &&
                     (salary === "" || +item?.salary <= +salary) &&
                     (location === "" ||
                       item.companyLocation.toLowerCase() ===
@@ -342,7 +342,7 @@ export default function SearchEmployee() {
                     item.typeOfEmployment.toLowerCase() ===
                       typeOfEmployment.toLowerCase()) &&
                   (designation === "" ||
-                    item.designation.toLowerCase().includes(designation)) &&
+                    item.designation.toLowerCase().includes(designation.toLowerCase())) &&
                   (salary === "" || +item?.salary <= +salary) &&
                   (location === "" ||
                     item.companyLocation.toLowerCase() ===
@@ -363,7 +363,7 @@ export default function SearchEmployee() {
                       item.typeOfEmployment.toLowerCase() ===
                         typeOfEmployment.toLowerCase()) &&
                     (designation === "" ||
-                      item.designation.toLowerCase().includes(designation)) &&
+                      item.designation.toLowerCase().includes(designation.toLowerCase())) &&
                     (salary === "" || +item?.salary <= +salary) &&
                     (location === "" ||
                       item.companyLocation.toLowerCase() ===
