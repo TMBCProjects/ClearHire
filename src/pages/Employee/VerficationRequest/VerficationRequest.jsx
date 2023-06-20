@@ -10,10 +10,13 @@ import {
   rejectRequest,
 } from "../../../DataBase/Employee/employee";
 import emailjs from "emailjs-com";
+
+const $ = window.$;
+
 export default function VerficationRequest() {
   const userDatas = JSON.parse(sessionStorage.getItem("userData"));
   const [requestData, setRequestData] = useState([]);
-
+  var email = "";
   useEffect(() => {
     const fetchRequests = async () => {
       const data = await getRequests(userDatas.data.employeeEmail);
@@ -22,26 +25,30 @@ export default function VerficationRequest() {
     fetchRequests();
   }, [userDatas]);
 
-  const allowAccess = (e) => {
-    acceptRequest(userDatas.id, requestData[0].id);
+
+  const allowAccess = (e,data) => {
+    acceptRequest(userDatas.id, data);
     e.preventDefault();
+    var data = {
+      service_id: "service_cpytsjm",
+      template_id: "template_pwvg0ae",
+      user_id: "F3rrwZwcav-0a-BOW",
+      template_params: {
+        'name': userDatas.data.employeeName,
+        'email': requestData[0].employerEmail,
+      }
+    };
 
-    emailjs
-    .sendForm(
-        "service_cpytsjm",
-        "template_6yal3s3",
-        e.target,
-        "F3rrwZwcav-0a-BOW"
-    )
-    .then(
-        (result) => {
-            console.log(result.text);
-        },
-        (error) => {
-            console.log(error.text);
-        }
-    );
-
+    $.ajax('https://api.emailjs.com/api/v1.0/email/send', {
+      type: 'POST',
+      data: JSON.stringify(data),
+      contentType: 'application/json'
+    }).done(function () {
+      alert('Your mail is sent!');
+    }).fail(function (error) {
+      alert('Oops... ' + JSON.stringify(error));
+    });
+    requestData
   };
   const denyAccess = (data) => {
     rejectRequest(data);
@@ -50,14 +57,12 @@ export default function VerficationRequest() {
     <div className="vreq">
       <div className="vreqHeader">
         <span>Access Requests</span>
+        <p>{requestData.companyEmail}</p>
+
       </div>
       <form 
-      onSubmit={allowAccess}
+      // onSubmit={allowAccess}
       >
-        <div style={{visibility: "hidden"}}>
-        <input name="name" value={userDatas.data.employeeName} />
-        <input name="email" value={"scintillantmail@gmail.com"} />
-        </div>
       <div
         className="vreqbody"
         style={{
@@ -76,6 +81,7 @@ export default function VerficationRequest() {
               <div className="companylogo">
                 <img
                   src={request.companyLogo || image}
+
                   alt="company-logo"
                 ></img>
               </div>
@@ -93,8 +99,8 @@ export default function VerficationRequest() {
 
             <div className="cardFooter">
               <button className="allow" 
-              // onClick={(e) => allowAccess(e,request.id)}
-              type="submit"
+              onClick={(e) => allowAccess(e,request.id)}
+              // type="submit"
               >
                 Allow Access&nbsp;<img src={check} alt="check"></img>
               </button>
