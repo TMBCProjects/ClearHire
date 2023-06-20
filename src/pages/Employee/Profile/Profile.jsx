@@ -156,12 +156,22 @@ export default function Profile() {
   return (
     <div className="profile">
       <div className="profileHeader">
-        <div className="profilePic">
+        <div className="profilePic" style={{ position: "relative" }} >
           <img
             src={userDatas.data.profileImage}
-            alt={"Not Uploaded"}
-            style={{ cursor: "pointer" }}
+            alt=""
           ></img>
+          <p
+            className="altText"
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
+          >
+            No Image Uploaded
+          </p>
         </div>
         <UploadPic url={userDatas.data.profileImage} />
 
