@@ -3,10 +3,10 @@ import "./Profile.css";
 import Add from "../../../assets/images/add.svg";
 import Check from "../../../assets/images/Check.svg";
 import InputField from "../../../components/Input/InputField";
-import { Slider, Col, message } from "antd";
+import { Slider, Col, message, Button } from "antd";
 import UploadFile from "../../../components/UploadFile";
 import { MinusOutlined } from "@ant-design/icons";
-import { profileUpdate, readColleagueRatings, rejectResignation } from "../../../DataBase/Employee/employee";
+import { acceptResignation, profileUpdate, readColleagueRatings, rejectResignation } from "../../../DataBase/Employee/employee";
 import ProgressBar from "../../../components/ProgressBar";
 import UploadPic from "../../../components/UploadPic/UploadPic";
 
@@ -177,7 +177,7 @@ export default function Profile() {
             src={userDatas.data.profileImage}
             alt=""
           ></img>
-          <p
+          {!userDatas.data.profileImage && <p
             className="altText"
             style={{
               position: "absolute",
@@ -187,7 +187,7 @@ export default function Profile() {
             }}
           >
             No Image Uploaded
-          </p>
+          </p>}
         </div>
         <UploadPic url={userDatas.data.profileImage} />
 
