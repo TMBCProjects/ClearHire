@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../../assets/images/logo.svg";
 import search from "../../assets/images/search2.svg";
-import onBoard from "../../assets/images/onBoard.svg";
 import verification from "../../assets/images/verification.svg";
 import "../NavBar/Navbar.css";
 import { FileDoneOutlined } from "@ant-design/icons";
@@ -10,7 +9,7 @@ import { logOut } from "../../utils/FirebaseUtils";
 import users from "../../assets/images/users.png";
 import job from "../../assets/images/job.svg";
 import { MenuOutlined } from "@ant-design/icons";
-import { Button, Drawer, Space } from "antd";
+import { Drawer } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPeopleGroup,

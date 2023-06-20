@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Assessment.css";
 import pic from "../../images/download.jpg";
 import check_1 from "../../images/Check-1.svg";

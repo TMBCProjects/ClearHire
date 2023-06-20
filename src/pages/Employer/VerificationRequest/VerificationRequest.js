@@ -1,28 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { readNotVerifiedVerifications } from "../../../DataBase/Employer/employer";
-import { Empty } from 'antd'
-import { SendOutlined } from '@ant-design/icons';
+import { Empty } from "antd";
 import { Link } from "react-router-dom";
 
 export default function VerificationRequest() {
-    const [CandidateDetails, setCandidateDetails] = useState([]);
-    const [verification, setVerification] = useState([]);
-    useEffect(() => {
-      const fetchVerificationDetails = async () => {
-        try {
-          const userDatas = JSON.parse(sessionStorage.getItem("userData"));
-          const data = await readNotVerifiedVerifications(
-            userDatas.data.employerEmail
-          );
-          return data;
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      fetchVerificationDetails().then((data) => {
-        setCandidateDetails(data);
-      });
-    }, []);
+  const [CandidateDetails, setCandidateDetails] = useState([]);
+  useEffect(() => {
+    const fetchVerificationDetails = async () => {
+      try {
+        const userDatas = JSON.parse(sessionStorage.getItem("userData"));
+        const data = await readNotVerifiedVerifications(
+          userDatas.data.employerEmail
+        );
+        return data;
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchVerificationDetails().then((data) => {
+      setCandidateDetails(data);
+    });
+  }, []);
   return (
     <div className="cards">
       {CandidateDetails.length === 0 && (

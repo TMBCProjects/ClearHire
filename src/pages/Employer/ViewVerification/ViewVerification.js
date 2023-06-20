@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import YesOrNo from "../../../components/Input/YesOrNo";
-import { Button, DatePicker } from "antd";
+import { Button } from "antd";
 import "../ViewVerification/ViewVerification.css";
 import { useLocation } from "react-router-dom";
 import InputField from "../../../components/Input/InputField";
