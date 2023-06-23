@@ -13,8 +13,11 @@ const Profile = () => {
     JSON.parse(sessionStorage.getItem("userData"))
   );
   const [values, setValues] = useState({});
-  const [location, setLocation] = useState(0);
+  const [location, setLocation] = useState("");
   const [viewTextbox, setViewTextbox] = useState(false);
+  useEffect(() => {
+    setValues({ companyLocations: userDatas.data.companyLocations })
+  }, [userDatas])
   const handleInputChange = (e) => {
     setLocation(e.target.value);
   };
@@ -28,7 +31,6 @@ const Profile = () => {
     setUserDatas(JSON.parse(sessionStorage.getItem("userData")));
   };
   const handleSubmit = () => {
-    values.companyLocations = userDatas.data.companyLocations
     let profile = sessionStorage.getItem("profileImage");
     if (profile) {
       values.companyLogo = profile;
