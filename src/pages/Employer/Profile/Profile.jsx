@@ -6,20 +6,19 @@ import UploadPic from "../../../components/UploadPic/UploadPic";
 import { employerProfileUpdate } from "../../../DataBase/Employer/employer";
 import InputField from "../../../components/Input/InputField";
 import { CloseSquareOutlined, PlusSquareOutlined } from "@ant-design/icons";
+import { useEffect } from "react";
 
 const Profile = () => {
   const [userDatas, setUserDatas] = useState(
     JSON.parse(sessionStorage.getItem("userData"))
   );
   const [values, setValues] = useState({});
+  const [location, setLocation] = useState(0);
   const [viewTextbox, setViewTextbox] = useState(false);
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setValues({
-      ...values,
-      [name]: value,
-    });
+    setLocation(e.target.value);
   };
+
   const updateUserData = (data) => {
     const newData = Object.assign({}, userDatas);
     if (data) {
@@ -29,9 +28,13 @@ const Profile = () => {
     setUserDatas(JSON.parse(sessionStorage.getItem("userData")));
   };
   const handleSubmit = () => {
+    values.companyLocations = userDatas.data.companyLocations
     let profile = sessionStorage.getItem("profileImage");
     if (profile) {
       values.companyLogo = profile;
+    }
+    if (location !== "") {
+      values.companyLocations = [...values.companyLocations, location];
     }
     employerProfileUpdate(values, userDatas.id).then(() => {
       updateUserData(values);
@@ -87,7 +90,7 @@ const Profile = () => {
           <p>{userDatas.data.companyEstablishmentYear}</p>
         </div>
         <div>
-          <p>Location {viewTextbox ? <CloseSquareOutlined style={{ cursor: "pointer" }} onClick={() => { setViewTextbox(!viewTextbox); }} /> : <PlusSquareOutlined style={{ cursor: "pointer" }} onClick={() => { setViewTextbox(!viewTextbox); }} />}</p>
+          <p>Location {viewTextbox ? <CloseSquareOutlined style={{ cursor: "pointer" }} onClick={() => { setLocation(""); setViewTextbox(!viewTextbox); }} /> : <PlusSquareOutlined style={{ cursor: "pointer" }} onClick={() => { setViewTextbox(!viewTextbox); }} />}</p>
 
           <p>
             {userDatas.data.companyLocations.map((item) => { return (<p>{item}</p>) })}
@@ -96,6 +99,7 @@ const Profile = () => {
               <InputField
                 type={"text"}
                 name={"companyLocations"}
+                value={location}
                 onChange={(e) => {
                   handleInputChange(e);
                 }}
