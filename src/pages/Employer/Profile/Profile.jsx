@@ -88,7 +88,7 @@ const Profile = () => {
           <p>{userDatas.data.companyEstablishmentYear}</p>
         </div>
         <div>
-          <p>Location {viewTextbox ? <CloseSquareOutlined style={{ cursor: "pointer" }} onClick={() => { setViewTextbox(true); }} /> : <PlusSquareOutlined style={{ cursor: "pointer" }} onClick={() => { setViewTextbox(false); }} />}</p>
+          <p>Location {viewTextbox ? <CloseSquareOutlined style={{ cursor: "pointer" }} onClick={() => { setViewTextbox(!viewTextbox); }} /> : <PlusSquareOutlined style={{ cursor: "pointer" }} onClick={() => { setViewTextbox(!viewTextbox); }} />}</p>
 
           <p>
             {userDatas.data.companyLocations.map((item) => { return (<p>{item}</p>) })}
