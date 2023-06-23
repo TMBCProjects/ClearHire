@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./Profile.css";
-import Add from "../../../assets/images/add.svg";
 import { message } from "antd";
 import Check from "../../../assets/images/Check.svg";
 import UploadPic from "../../../components/UploadPic/UploadPic";
