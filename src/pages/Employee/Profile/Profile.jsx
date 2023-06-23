@@ -9,7 +9,6 @@ import { MinusOutlined } from "@ant-design/icons";
 import { acceptResignation, profileUpdate, readColleagueRatings, rejectResignation } from "../../../DataBase/Employee/employee";
 import ProgressBar from "../../../components/ProgressBar";
 import UploadPic from "../../../components/UploadPic/UploadPic";
-import { logOut } from "../../../utils/FirebaseUtils";
 
 export default function Profile() {
   const [avgRatings, setAvgRatings] = useState({});

@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import "./Profile.css";
-import pic from "../../../assets/images/pic.png";
+import Add from "../../../assets/images/add.svg";
 import { message } from "antd";
 import Check from "../../../assets/images/Check.svg";
 import UploadPic from "../../../components/UploadPic/UploadPic";
 import { employerProfileUpdate } from "../../../DataBase/Employer/employer";
+import InputField from "../../../components/Input/InputField";
+import { CloseSquareOutlined, PlusSquareOutlined } from "@ant-design/icons";
 
 const Profile = () => {
   const [userDatas, setUserDatas] = useState(
     JSON.parse(sessionStorage.getItem("userData"))
   );
   const [values, setValues] = useState({});
+  const [viewTextbox, setViewTextbox] = useState(false);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setValues({
@@ -33,6 +36,7 @@ const Profile = () => {
     }
     employerProfileUpdate(values, userDatas.id).then(() => {
       updateUserData(values);
+      setViewTextbox(false);
       sessionStorage.removeItem("profileImage");
     });
     message.success("Profile updated successfully");
@@ -84,9 +88,20 @@ const Profile = () => {
           <p>{userDatas.data.companyEstablishmentYear}</p>
         </div>
         <div>
-          <p>Location</p>
+          <p>Location {viewTextbox ? <CloseSquareOutlined style={{ cursor: "pointer" }} onClick={() => { setViewTextbox(true); }} /> : <PlusSquareOutlined style={{ cursor: "pointer" }} onClick={() => { setViewTextbox(false); }} />}</p>
+
           <p>
             {userDatas.data.companyLocations.map((item) => { return (<p>{item}</p>) })}
+            <div
+              style={{ display: viewTextbox ? 'block' : 'none' }}>
+              <InputField
+                type={"text"}
+                name={"companyLocations"}
+                onChange={(e) => {
+                  handleInputChange(e);
+                }}
+                placeholder={`Type a New Location`}
+              /></div>
           </p>
         </div>
       </div>
