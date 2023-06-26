@@ -23,7 +23,11 @@ export default function EmployerNavbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const showMenu = () => {
-    setMenuOpen(true);
+    if (!menuOpen) {
+      setMenuOpen(true);
+    } else {
+      setMenuOpen(false);
+    }
   };
 
   const onMenuClose = () => {
@@ -63,9 +67,10 @@ export default function EmployerNavbar() {
         width={500}
         onClose={onMenuClose}
         open={menuOpen}
+        headerStyle={{ display: "none" }}
       >
         {user === "Employer" ? (
-          <div className="mobileNavbar">
+          <div className="mobileNavbar mt-4">
             <NavLink activeclassname="active" to={"/"} className="navlink">
               <div className="navitem">
                 <img src={search} alt="search-logo" className="logo navLink" />
@@ -131,7 +136,7 @@ export default function EmployerNavbar() {
             </NavLink>
           </div>
         ) : (
-          <div className="mobileNavbar">
+          <div className="mobileNavbar mt-4">
             <NavLink activeclassname="active" to={"/"} className="navlink">
               <div className="navitem">
                 <img src={users} alt="search-logo" className="logo navLink" />
