@@ -7,7 +7,7 @@ import UrlLink from "../../../assets/images/link.svg";
 // import LeftArrow from "../../../assets/images/left-arrow.png";
 import ProgressBar from "../../../components/ProgressBar";
 import "./EmployeeDetails.css";
-import { Button } from "antd"
+import { Button } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
 import { sendResignation } from "../../../DataBase/Employer/employer";
 const $ = window.$;
@@ -23,26 +23,28 @@ const EmployeeDetails = () => {
       setTimeout(() => {
         window.location.href = "/";
       }, 1000);
-    })
-     var data = {
+    });
+    var data = {
       service_id: "service_cpytsjm",
       template_id: "template_quwx4ya",
       user_id: "F3rrwZwcav-0a-BOW",
       template_params: {
-        'name': employee.employeeName,
-        'email':  employee.employeeEmail,
-      }
+        name: employee.employeeName,
+        email: employee.employeeEmail,
+      },
     };
 
-    $.ajax('https://api.emailjs.com/api/v1.0/email/send', {
-      type: 'POST',
+    $.ajax("https://api.emailjs.com/api/v1.0/email/send", {
+      type: "POST",
       data: JSON.stringify(data),
-      contentType: 'application/json'
-    }).done(function () {
-      alert('Your mail is sent!');
-    }).fail(function (error) {
-      alert('Oops... ' + JSON.stringify(error));
-    });
+      contentType: "application/json",
+    })
+      .done(function () {
+        alert("Your mail is sent!");
+      })
+      .fail(function (error) {
+        alert("Oops... " + JSON.stringify(error));
+      });
   };
 
   useEffect(() => {
@@ -262,7 +264,16 @@ const EmployeeDetails = () => {
               </a>
             </button>
 
-            <Button onClick={removeFromJob} disabled={employee.isResignationSent} title={employee.isResignationSent ? "Resignation Sent Already!" : "Want to send Resignation?"} className="default">
+            <Button
+              onClick={removeFromJob}
+              disabled={employee.isResignationSent}
+              title={
+                employee.isResignationSent
+                  ? "Resignation Sent Already!"
+                  : "Want to send Resignation?"
+              }
+              className="default"
+            >
               Send Resignation
             </Button>
             <a
