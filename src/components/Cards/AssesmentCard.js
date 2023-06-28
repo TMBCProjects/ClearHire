@@ -156,7 +156,9 @@ const Assesment_Card = ({ info, employerId }) => {
   };
 
   const addFeedback = () => {
-    addFeedbackToEmployee(info, feedback, userDatas);
+    addFeedbackToEmployee(info, feedback, userDatas).then(() => {
+      setFeedback("");
+    });
   };
 
   const feedbackComponent = (
