@@ -162,9 +162,15 @@ const Assesment_Card = ({ info, employerId }) => {
   const feedbackComponent = (
     <Form style={{ width: "250px", height: "auto" }}>
       <Form.Item>
-        <Input.TextArea placeholder="Your feedback" />
+        <Input.TextArea
+          onChange={handleFeedbackChange}
+          placeholder="Your feedback"
+        />
       </Form.Item>
-      <Button type="primary" htmlType="submit">
+      <Button
+        onClick={addFeedback}
+        type="primary"
+        htmlType="submit">
         Send Feedback
       </Button>
     </Form>
