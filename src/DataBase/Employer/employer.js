@@ -568,14 +568,15 @@ export async function addFeedbackToEmployee(info, content, user) {
   feedback = {
     isActive: true,
     employerId: user.id,
-    companyName: user.companyName,
-    employerEmail: user.employerEmail,
+    companyName: user.data.companyName,
+    employerEmail: user.data.employerEmail,
     feedbackAt: new Date(),
     employeeId: info.id,
     employeeName: info.employeeName,
     employeeEmail: info.employeeEmail,
     feedback: content,
   };
+  console.log(feedback);
   await addDocument(Collections.feedbacks, feedback);
 }
 
