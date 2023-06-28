@@ -158,7 +158,7 @@ const Assesment_Card = ({ info, employerId }) => {
   const addFeedback = () => {
     addFeedbackToEmployee(info, feedback, userDatas);
   };
-  // handleFeedback
+
   const feedbackComponent = (
     <Form style={{ width: "250px", height: "auto" }}>
       <Form.Item>
@@ -186,8 +186,7 @@ const Assesment_Card = ({ info, employerId }) => {
                 from: info,
               },
             });
-        }}
-      >
+        }}>
         {!isImageLoaded && (
           <Avatar
             style={{ marginBottom: "1rem" }}
@@ -199,19 +198,21 @@ const Assesment_Card = ({ info, employerId }) => {
           src={info?.profileImage || pic}
           alt="manager-logo"
           loading="lazy"
-          onLoad={() => setIsImageLoaded(true)}
-        ></img>
+          onLoad={() => setIsImageLoaded(true)}></img>
         {user === "Employer" && (
           <div className="d-flex justify-content-center align-items-center">
             <Popover
               placement="left"
               content={feedbackComponent}
-              title="Employee's Feedback"
-            >
+              title="Employee's Feedback">
               <Button
                 className="d-flex align-items-center me-3"
-                icon={<MdOutlineFeedback size={18} className="me-1" />}
-              >
+                icon={
+                  <MdOutlineFeedback
+                    size={18}
+                    className="me-1"
+                  />
+                }>
                 {" "}
                 Feedback
               </Button>
@@ -235,8 +236,7 @@ const Assesment_Card = ({ info, employerId }) => {
                 from: info,
               },
             });
-        }}
-      >
+        }}>
         <span>
           {info.employeeName}, {calculateAge(info.dateOfBirth)}
         </span>
@@ -252,8 +252,7 @@ const Assesment_Card = ({ info, employerId }) => {
             textAlign: "center",
             color: "#66BC11",
             fontWeight: "bold",
-          }}
-        >
+          }}>
           {info.designation}
         </span>
       </div>
@@ -274,8 +273,7 @@ const Assesment_Card = ({ info, employerId }) => {
             to={{
               pathname: "/EmployeeAssessment",
             }}
-            state={{ from: info }}
-          >
+            state={{ from: info }}>
             <button
               className="allow"
               style={
@@ -285,8 +283,7 @@ const Assesment_Card = ({ info, employerId }) => {
                 )
                   ? { color: "#d2dee8", backgroundColor: "#eef8ff" }
                   : {}
-              }
-            >
+              }>
               {duration(
                 findRatedAtDate(info?.lastRatings, employerId),
                 findAssessmentDate(info?.lastRatings, employerId)
@@ -311,8 +308,7 @@ const Assesment_Card = ({ info, employerId }) => {
             to={{
               pathname: "/EmployeeAssessment",
             }}
-            state={{ from: info }}
-          >
+            state={{ from: info }}>
             <button
               className="allow"
               style={
@@ -321,8 +317,7 @@ const Assesment_Card = ({ info, employerId }) => {
                 )
                   ? { color: "#d2dee8", backgroundColor: "#eef8ff" }
                   : {}
-              }
-            >
+              }>
               {hasOneMonthPassedOne(
                 findRatedAtDate(info?.lastRatings, userDatas.id)
               )
@@ -337,8 +332,7 @@ const Assesment_Card = ({ info, employerId }) => {
             to={{
               pathname: "/ViewAssessment",
             }}
-            state={{ from: info }}
-          >
+            state={{ from: info }}>
             <button className="allow">View Assesment</button>
           </Link>
         )}
