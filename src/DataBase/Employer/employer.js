@@ -15,6 +15,7 @@ import { arrayUnion, query, where } from "firebase/firestore";
 import Request from "../../Modals/DB/Request";
 import Assessment from "../../Modals/DB/Assessment";
 import Verification from "../../Modals/DB/Verification";
+import InstantFeedback from "../../Modals/DB/InstantFeedback";
 
 export default async function defaultFn() {}
 
@@ -561,6 +562,24 @@ export async function readAssessment(employeeId) {
     //console.log(error);
   }
 }
+
+export async function addFeedbackToEmployee(info, feedback, user) {
+  let feedback = new InstantFeedback();
+  feedback = {
+    isActive: true,
+    employerId: user.id,
+    companyName: user.companyName,
+    employerEmail: user.employerEmail,
+    feedbackAt: new Date(),
+    employeeId: info.id,
+    employeeName: info.employeeName,
+    employeeEmail: info.employeeEmail,
+    feedback: feedback,
+  };
+  await addDocument(Collections.feedbacks, feedback);
+}
+
+
 export async function assessEmployee(assessData) {
   let assessment = new Assessment();
   assessment = {

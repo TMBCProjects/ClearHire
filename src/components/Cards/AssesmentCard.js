@@ -7,11 +7,13 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
+import { addFeedbackToEmployee } from "../../DataBase/Employer/employer";
 const Assesment_Card = ({ info, employerId }) => {
   const userDatas = JSON.parse(sessionStorage.getItem("userData"));
   const user = sessionStorage.getItem("LoggedIn");
+  const [feedback, setFeedback] = useState("");
   const navigate = useNavigate();
-  const [isImageLoaded, setIsImageLoaded] = useState(false)
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
   const calculateAge = (dob) => {
     const today = new Date();
     const birthDate = new Date(dob.seconds * 1000);
@@ -22,7 +24,7 @@ const Assesment_Card = ({ info, employerId }) => {
     }
     return years;
   };
-  
+
   function hasOneMonthPassedOne(date) {
     if (date === "null") {
       return false;
@@ -147,6 +149,14 @@ const Assesment_Card = ({ info, employerId }) => {
   function getRatingsByEmployerId(ratings, employerId) {
     return ratings?.filter((rating) => rating.ratedById === employerId);
   }
+
+  const handleFeedbackChange = (event) => {
+    setFeedback(event.target.value);
+  };
+
+  const addFeedback = () => {
+    addFeedbackToEmployee(info, feedback, userDatas);
+  };
   return (
     <div className="assess-card">
       <div
