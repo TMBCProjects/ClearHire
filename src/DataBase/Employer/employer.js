@@ -563,7 +563,7 @@ export async function readAssessment(employeeId) {
   }
 }
 
-export async function addFeedbackToEmployee(info, feedback, user) {
+export async function addFeedbackToEmployee(info, content, user) {
   let feedback = new InstantFeedback();
   feedback = {
     isActive: true,
@@ -574,7 +574,7 @@ export async function addFeedbackToEmployee(info, feedback, user) {
     employeeId: info.id,
     employeeName: info.employeeName,
     employeeEmail: info.employeeEmail,
-    feedback: feedback,
+    feedback: content,
   };
   await addDocument(Collections.feedbacks, feedback);
 }
