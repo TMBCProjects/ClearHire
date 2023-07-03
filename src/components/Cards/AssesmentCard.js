@@ -166,6 +166,7 @@ const Assesment_Card = ({ info, employerId }) => {
     <Form style={{ width: "250px", height: "auto" }}>
       <Form.Item>
         <Input.TextArea
+          value={feedback}
           onChange={handleFeedbackChange}
           placeholder="Your feedback"
         />
