@@ -201,34 +201,60 @@ const Assesment_Card = ({ info, employerId }) => {
       >
         {!isImageLoaded && (
           <Avatar
+            onClick={() => {
+              user === "Employer" &&
+                navigate("/employee-details", {
+                  state: {
+                    from: info,
+                  },
+                });
+            }}
             style={{ marginBottom: "1rem" }}
             size={64}
             icon={<UserOutlined />}
           />
         )}
         <img
+          onClick={() => {
+            user === "Employer" &&
+              navigate("/employee-details", {
+                state: {
+                  from: info,
+                },
+              });
+          }}
           src={info?.profileImage || pic}
           alt="manager-logo"
           loading="lazy"
-          onLoad={() => setIsImageLoaded(true)}
-        ></img>
+          onLoad={() => setIsImageLoaded(true)}></img>
         {user === "Employer" && (
           <div className="d-flex justify-content-center align-items-center">
             <Popover
               trigger="click"
               placement="left"
               content={feedbackComponent}
-              title="Employee's Feedback"
-            >
+              title="Employee's Feedback">
               <Button
                 className="d-flex align-items-center me-3"
-                icon={<MdOutlineFeedback size={18} className="me-1" />}
-              >
+                icon={
+                  <MdOutlineFeedback
+                    size={18}
+                    className="me-1"
+                  />
+                }>
                 {" "}
                 Feedback
               </Button>
             </Popover>
             <ProgressBar
+              onClick={() => {
+                user === "Employer" &&
+                  navigate("/employee-details", {
+                    state: {
+                      from: info,
+                    },
+                  });
+              }}
               value={
                 calculateRatings(
                   getRatingsByEmployerId(info?.ratings, userDatas.id)
@@ -247,8 +273,7 @@ const Assesment_Card = ({ info, employerId }) => {
                 from: info,
               },
             });
-        }}
-      >
+        }}>
         <span>
           {info.employeeName}, {calculateAge(info.dateOfBirth)}
         </span>
@@ -264,8 +289,7 @@ const Assesment_Card = ({ info, employerId }) => {
             textAlign: "center",
             color: "#66BC11",
             fontWeight: "bold",
-          }}
-        >
+          }}>
           {info.designation}
         </span>
       </div>
@@ -286,8 +310,7 @@ const Assesment_Card = ({ info, employerId }) => {
             to={{
               pathname: "/EmployeeAssessment",
             }}
-            state={{ from: info }}
-          >
+            state={{ from: info }}>
             <button
               className="allow"
               style={
@@ -297,8 +320,7 @@ const Assesment_Card = ({ info, employerId }) => {
                 )
                   ? { color: "#d2dee8", backgroundColor: "#eef8ff" }
                   : {}
-              }
-            >
+              }>
               {duration(
                 findRatedAtDate(info?.lastRatings, employerId),
                 findAssessmentDate(info?.lastRatings, employerId)
@@ -323,8 +345,7 @@ const Assesment_Card = ({ info, employerId }) => {
             to={{
               pathname: "/EmployeeAssessment",
             }}
-            state={{ from: info }}
-          >
+            state={{ from: info }}>
             <button
               className="allow"
               style={
@@ -333,8 +354,7 @@ const Assesment_Card = ({ info, employerId }) => {
                 )
                   ? { color: "#d2dee8", backgroundColor: "#eef8ff" }
                   : {}
-              }
-            >
+              }>
               {hasOneMonthPassedOne(
                 findRatedAtDate(info?.lastRatings, userDatas.id)
               )
@@ -349,8 +369,7 @@ const Assesment_Card = ({ info, employerId }) => {
             to={{
               pathname: "/ViewAssessment",
             }}
-            state={{ from: info }}
-          >
+            state={{ from: info }}>
             <button className="allow">View Assesment</button>
           </Link>
         )}
