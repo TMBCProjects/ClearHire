@@ -562,6 +562,38 @@ export async function readAssessment(employeeId) {
     //console.log(error);
   }
 }
+export async function readFeedbacks(employeeId) {
+  try {
+    let feedbacks = [];
+    const querySnapshot = await getDocuments(
+      query(
+        setCollection(Collections.feedbacks),
+        where(Fields.employeeId, "==", employeeId),
+        where(Fields.isActive, "==", true)
+      )
+    );
+    querySnapshot.forEach(async (doc) => {
+      let feedback = {
+        id: doc.id,
+        isActive: doc.data().isActive,
+        companyName: doc.data().companyName,
+        companyLogo: doc.data().companyLogo,
+        employerId: doc.data().employerId,
+        employerEmail: doc.data().employerEmail,
+        feedbackAt: doc.data().feedbackAt,
+        feedback: doc.data().feedback,
+        employeeId: doc.data().employeeId,
+        employeeName: doc.data().employeeName,
+        employeeEmail: doc.data().employeeEmail,
+      };
+      feedbacks.push(feedback);
+    });
+    return feedbacks;
+  } catch (error) {
+    return [];
+    //console.log(error);
+  }
+}
 
 export async function addFeedbackToEmployee(info, content, user) {
   let feedback = new InstantFeedback();
@@ -576,7 +608,6 @@ export async function addFeedbackToEmployee(info, content, user) {
     employeeEmail: info.employeeEmail,
     feedback: content,
   };
-  console.log(feedback);
   await addDocument(Collections.feedbacks, feedback);
 }
 
