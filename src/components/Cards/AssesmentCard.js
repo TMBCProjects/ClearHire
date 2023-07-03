@@ -220,7 +220,7 @@ const Assesment_Card = ({ info, employerId }) => {
               title="Employee's Feedback"
             >
               <Button
-                className="d-flex align-items-center me-3"
+                className="d-flex align-items-center me-3 feedbackBtn"
                 icon={<MdOutlineFeedback size={18} className="me-1" />}
               >
                 {" "}
