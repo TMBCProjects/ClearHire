@@ -605,6 +605,7 @@ const EmployeeDetails = () => {
                     </p>
                   </div>
                 </div>
+                Instant Feedbacks
                 {feedbacks.map((feed) => {
                   return (
                     <div className="row employerResult">
