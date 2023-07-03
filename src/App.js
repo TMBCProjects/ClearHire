@@ -29,13 +29,16 @@ import SignupWithGoogle from "./components/SignupWithGoogle/SignupWithGoogle";
 import SignUpChooseUserGoogle from "./components/SignupWithGoogle/SignUpChooseUserGoogle";
 import RecruitmentPool from "./pages/Employer/RecruitmentPool/RecruitmentPool";
 import SendResgination from "./pages/Employer/sendResignation/sendResgination";
-import VerifyCandidate from './pages/Employer/VerifyCandidate/VerifyCandidate'
+import VerifyCandidate from "./pages/Employer/VerifyCandidate/VerifyCandidate";
 import ViewVerification from "./pages/Employer/ViewVerification/ViewVerification";
 import Verification from "./pages/Employer/Verification/Verification";
 import VerifiedPage from "./pages/Employer/VerifiedPage/VerifiedPage";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (
     <div className="main">
+      <ToastContainer position="bottom-left" />
       <Router>
         {!sessionStorage.getItem("LoggedIn") ? (
           <>
@@ -114,24 +117,29 @@ function App() {
                   ></Route>
                   <Route
                     path="/recruitment-pool"
-                    element={<RecruitmentPool />}></Route>
+                    element={<RecruitmentPool />}
+                  ></Route>
                   <Route
                     path="/send-resignation"
-                    element={<SendResgination />}></Route>
+                    element={<SendResgination />}
+                  ></Route>
                   <Route
                     path="/verify-candidate"
-                    element={<VerifyCandidate />}></Route>
+                    element={<VerifyCandidate />}
+                  ></Route>
                   <Route
                     path="/view-verification"
-                    element={<ViewVerification />}></Route>
+                    element={<ViewVerification />}
+                  ></Route>
                   <Route
                     path="/verification"
-                    element={<Verification />}></Route>
+                    element={<Verification />}
+                  ></Route>
                   <Route
                     path="/verifiedPage"
-                    element={<VerifiedPage />}></Route>
+                    element={<VerifiedPage />}
+                  ></Route>
                 </Routes>
-
               </div>
             ) : (
               ""
