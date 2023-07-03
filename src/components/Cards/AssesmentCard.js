@@ -156,9 +156,10 @@ const Assesment_Card = ({ info, employerId }) => {
   };
 
   const addFeedback = () => {
-    addFeedbackToEmployee(info, feedback, userDatas).then(() => {
-      setFeedback("");
-    });
+    if (feedback !== "")
+      addFeedbackToEmployee(info, feedback, userDatas).then(() => {
+        setFeedback("");
+      });
   };
 
   const feedbackComponent = (
@@ -181,14 +182,15 @@ const Assesment_Card = ({ info, employerId }) => {
     <div className="assess-card">
       <div
         className="managerlogo"
-        onClick={() => {
-          user === "Employer" &&
-            navigate("/employee-details", {
-              state: {
-                from: info,
-              },
-            });
-        }}>
+        // onClick={() => {
+        //   user === "Employer" &&
+        //     navigate("/employee-details", {
+        //       state: {
+        //         from: info,
+        //       },
+        //     });
+        // }}
+      >
         {!isImageLoaded && (
           <Avatar
             style={{ marginBottom: "1rem" }}
