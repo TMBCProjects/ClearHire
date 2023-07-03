@@ -188,17 +188,7 @@ const Assesment_Card = ({ info, employerId }) => {
   );
   return (
     <div className="assess-card">
-      <div
-        className="managerlogo"
-        // onClick={() => {
-        //   user === "Employer" &&
-        //     navigate("/employee-details", {
-        //       state: {
-        //         from: info,
-        //       },
-        //     });
-        // }}
-      >
+      <div className="managerlogo">
         {!isImageLoaded && (
           <Avatar
             onClick={() => {
