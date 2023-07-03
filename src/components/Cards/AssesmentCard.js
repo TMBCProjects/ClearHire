@@ -237,14 +237,6 @@ const Assesment_Card = ({ info, employerId }) => {
               </Button>
             </Popover>
             <ProgressBar
-              onClick={() => {
-                user === "Employer" &&
-                  navigate("/employee-details", {
-                    state: {
-                      from: info,
-                    },
-                  });
-              }}
               value={
                 calculateRatings(
                   getRatingsByEmployerId(info?.ratings, userDatas.id)
