@@ -18,7 +18,7 @@ const EmployeeDetails = () => {
   const employee = from;
   const [avgRatings, setAvgRatings] = useState({});
   const [prevSkills, setPrevSkills] = useState({});
-  const [feedbacks, setFeedbacks] = useState({});
+  const [feedbacks, setFeedbacks] = useState([]);
 
   const removeFromJob = () => {
     sendResignation(employee.id).then(() => {
@@ -605,8 +605,8 @@ const EmployeeDetails = () => {
                     </p>
                   </div>
                 </div>
-                Instant Feedbacks
-                {feedbacks?.map((feed) => {
+                {feedbacks.length === 0 ? "" : "Instant Feedbacks"}
+                {feedbacks !== [] && feedbacks?.map((feed) => {
                   return (
                     <div className="row employerResult">
                       <div>
