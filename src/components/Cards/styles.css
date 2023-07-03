@@ -58,3 +58,14 @@
     }
 
 }
+
+.feedbackBtn:hover {
+    background-color: transparent;
+    border: 1px solid #00823B !important;
+}
+
+.feedbackBtn:hover,
+.feedback svg,
+.feedback span {
+    color: #00823B !important;
+}
