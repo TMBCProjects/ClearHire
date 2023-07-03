@@ -175,7 +175,12 @@ const Assesment_Card = ({ info, employerId }) => {
           placeholder="Your feedback"
         />
       </Form.Item>
-      <Button onClick={addFeedback} type="primary" htmlType="submit">
+      <Button
+        onClick={addFeedback}
+        type="primary"
+        htmlType="submit"
+        style={{ background: "#00823B" }}
+      >
         Send Feedback
       </Button>
     </Form>
