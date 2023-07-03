@@ -156,7 +156,9 @@ const Assesment_Card = ({ info, employerId }) => {
   };
 
   const addFeedback = () => {
-    addFeedbackToEmployee(info, feedback, userDatas);
+    addFeedbackToEmployee(info, feedback, userDatas).then(() => {
+      setFeedback("");
+    });
   };
 
   const feedbackComponent = (
@@ -202,6 +204,7 @@ const Assesment_Card = ({ info, employerId }) => {
         {user === "Employer" && (
           <div className="d-flex justify-content-center align-items-center">
             <Popover
+              trigger="click"
               placement="left"
               content={feedbackComponent}
               title="Employee's Feedback">

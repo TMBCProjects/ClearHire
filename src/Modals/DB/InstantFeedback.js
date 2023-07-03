@@ -4,6 +4,7 @@ export default class InstantFeedback {
   employerId = "";
   companyName = "";
   feedbackAt = "";
+  feedback = "";
   companyLogo = "";
   employeeName = "";
   employeeId = "";

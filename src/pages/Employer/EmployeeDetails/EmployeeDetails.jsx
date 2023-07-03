@@ -9,7 +9,7 @@ import ProgressBar from "../../../components/ProgressBar";
 import "./EmployeeDetails.css";
 import { Button } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
-import { sendResignation } from "../../../DataBase/Employer/employer";
+import { readFeedbacks, sendResignation } from "../../../DataBase/Employer/employer";
 const $ = window.$;
 const EmployeeDetails = () => {
   const location = useLocation();
@@ -18,6 +18,8 @@ const EmployeeDetails = () => {
   const employee = from;
   const [avgRatings, setAvgRatings] = useState({});
   const [prevSkills, setPrevSkills] = useState({});
+  const [feedbacks, setFeedbacks] = useState([]);
+
   const removeFromJob = () => {
     sendResignation(employee.id).then(() => {
       setTimeout(() => {
@@ -49,6 +51,8 @@ const EmployeeDetails = () => {
 
   useEffect(() => {
     const fetchOfferDetails = async () => {
+      const data = await readFeedbacks(employee.id);
+      setFeedbacks(data);
       const data2 = employee.ratings;
       calculateRatings(data2);
     };
@@ -601,6 +605,22 @@ const EmployeeDetails = () => {
                     </p>
                   </div>
                 </div>
+                {feedbacks.length === 0 ? "" : "Instant Feedbacks"}
+                {feedbacks !== [] && feedbacks?.map((feed) => {
+                  return (
+                    <div className="row employerResult">
+                      <div>
+                        <p>
+                          <FaQuoteLeft size={30} className="quoteLeft" />
+                          <span className="text-color-green">
+                            {feed.feedback}{" "}
+                            <FaQuoteRight size={30} className="quoteRight" />
+                          </span>{" "}
+                          by <strong>{feed.companyName}</strong>
+                        </p>
+                      </div>
+                    </div>)
+                })}
               </div>
             );
           })}
