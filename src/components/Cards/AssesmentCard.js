@@ -16,6 +16,8 @@ const Assesment_Card = ({ info, employerId }) => {
   const [feedback, setFeedback] = useState("");
   const navigate = useNavigate();
   const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [success, setSuccess] = useState(false);
   const calculateAge = (dob) => {
     const today = new Date();
     const birthDate = new Date(dob.seconds * 1000);
@@ -151,7 +153,10 @@ const Assesment_Card = ({ info, employerId }) => {
   function getRatingsByEmployerId(ratings, employerId) {
     return ratings?.filter((rating) => rating.ratedById === employerId);
   }
-
+  const handleOpenChange = (newOpen) => {
+    setOpen(newOpen);
+    setSuccess(false);
+  };
   const handleFeedbackChange = (event) => {
     setFeedback(event.target.value);
   };
@@ -160,8 +165,9 @@ const Assesment_Card = ({ info, employerId }) => {
     if (feedback !== "") {
       addFeedbackToEmployee(info, feedback, userDatas).then(() => {
         setFeedback("");
+        setSuccess(true);
       });
-      toast.success("Feedback sent successfully !");
+      // toast.success("Feedback sent successfully !");
     } else {
       toast.error("Please add the feedback !");
     }
@@ -170,18 +176,22 @@ const Assesment_Card = ({ info, employerId }) => {
   const feedbackComponent = (
     <Form style={{ width: "250px", height: "auto" }}>
       <Form.Item>
-        <Input.TextArea
-          value={feedback}
-          onChange={handleFeedbackChange}
-          placeholder="Your feedback"
-        />
+        {success ? (
+          <>Feedback sent successfully !</>
+        ) : (
+          <Input.TextArea
+            value={feedback}
+            onChange={handleFeedbackChange}
+            placeholder="Your feedback"
+          />
+        )}
       </Form.Item>
       <Button
         onClick={addFeedback}
+        disabled={success}
         type="primary"
         htmlType="submit"
-        style={{ background: "#00823B" }}
-      >
+        style={{ background: "#00823B" }}>
         Send Feedback
       </Button>
     </Form>
@@ -222,6 +232,8 @@ const Assesment_Card = ({ info, employerId }) => {
             <Popover
               trigger="click"
               placement="left"
+              open={open}
+              onOpenChange={handleOpenChange}
               content={feedbackComponent}
               title="Employee's Feedback">
               <Button
