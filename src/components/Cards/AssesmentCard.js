@@ -16,6 +16,7 @@ const Assesment_Card = ({ info, employerId }) => {
   const [feedback, setFeedback] = useState("");
   const navigate = useNavigate();
   const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [open, setOpen] = useState(false);
   const calculateAge = (dob) => {
     const today = new Date();
     const birthDate = new Date(dob.seconds * 1000);
@@ -151,7 +152,9 @@ const Assesment_Card = ({ info, employerId }) => {
   function getRatingsByEmployerId(ratings, employerId) {
     return ratings?.filter((rating) => rating.ratedById === employerId);
   }
-
+  const handleOpenChange = (newOpen) => {
+    setOpen(newOpen);
+  };
   const handleFeedbackChange = (event) => {
     setFeedback(event.target.value);
   };
@@ -160,6 +163,7 @@ const Assesment_Card = ({ info, employerId }) => {
     if (feedback !== "") {
       addFeedbackToEmployee(info, feedback, userDatas).then(() => {
         setFeedback("");
+        setOpen(false);
       });
       toast.success("Feedback sent successfully !");
     } else {
@@ -180,8 +184,7 @@ const Assesment_Card = ({ info, employerId }) => {
         onClick={addFeedback}
         type="primary"
         htmlType="submit"
-        style={{ background: "#00823B" }}
-      >
+        style={{ background: "#00823B" }}>
         Send Feedback
       </Button>
     </Form>
@@ -222,6 +225,8 @@ const Assesment_Card = ({ info, employerId }) => {
             <Popover
               trigger="click"
               placement="left"
+              open={open}
+              onOpenChange={handleOpenChange}
               content={feedbackComponent}
               title="Employee's Feedback">
               <Button
