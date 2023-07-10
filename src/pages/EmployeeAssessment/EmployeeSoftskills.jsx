@@ -10,7 +10,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { rateCollegue } from "../../DataBase/Employee/employee";
 import { Button } from "antd";
 import axios from "axios";
-import { sendEmailVerification } from "firebase/auth";
 
 const initialState = {
   dateOfReview: new Date(),
@@ -44,7 +43,6 @@ function EmployeeSoftskills() {
   let [rangeSkill_6, setRangeSkill_6] = useState(0);
   let [rangeSkill_7, setRangeSkill_7] = useState(0);
   let [rangeSkill_8, setRangeSkill_8] = useState(0);
-  let [time, setTime] = useState([]);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setValues({

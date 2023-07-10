@@ -18,6 +18,12 @@ export default function RecruitmentPool() {
     useEffect(() => {
         const fetchEmployeeDetails = async () => {
             try {
+                setFilters({
+                    typeOfEmployment: "",
+                    salary: "",
+                    location: "",
+                    designation: "",
+                })
                 const data = await readUnemployed();
                 return data;
             } catch (error) {

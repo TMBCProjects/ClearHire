@@ -27,7 +27,7 @@ export default function VerficationRequest() {
   const allowAccess = (e,data) => {
     acceptRequest(userDatas.id, data);
     e.preventDefault();
-    var data = {
+    var datas = {
       service_id: "service_cpytsjm",
       template_id: "template_pwvg0ae",
       user_id: "F3rrwZwcav-0a-BOW",
@@ -39,7 +39,7 @@ export default function VerficationRequest() {
 
     $.ajax('https://api.emailjs.com/api/v1.0/email/send', {
       type: 'POST',
-      data: JSON.stringify(data),
+      data: JSON.stringify(datas),
       contentType: 'application/json'
     }).done(function () {
       alert('Your mail is sent!');
