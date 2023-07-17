@@ -8,13 +8,13 @@ import { Select, Empty, Drawer, Space, Button } from "antd";
 import AssesmentCard from "../../components/Cards/AssesmentCard";
 import { readEmployees } from "../../DataBase/Employer/employer";
 import { readColleagues } from "../../DataBase/Employee/employee";
-import { FilterOutlined } from "@ant-design/icons";
+import suitcase from "../../assets/images/suitcase.png"
 
 export default function SearchEmployee() {
   const userDatas = JSON.parse(sessionStorage.getItem("userData"));
   const user = sessionStorage.getItem("LoggedIn");
   const [employeeList, setEmployeeList] = useState([]);
-
+  const [open, setOpen] = useState(false)
   const [filters, setFilters] = useState({
     typeOfEmployment: "",
     salary: "",
@@ -178,210 +178,87 @@ export default function SearchEmployee() {
         </Space>
       </Drawer>
       <div className="employer-home">
-        {isMobile ? (
-          <FilterOutlined
-            style={{ width: "25px", margin: "1rem" }}
-            onClick={showMenu}
-          />
-        ) : (
-          <div className="search-inputs mobile-filters">
-            <div className="input-box1 input-box">
-              <img src={search1} alt="Search" />
-              <input
-                type="text"
-                name="designation"
-                onChange={(e) => handleInputChange(e, e.target.name)}
-                className={`box-input ${isMobile} && w-100 ms-0 p-2`}
-                placeholder="Job Title / Designation"
-              />
-            </div>
-            {user === "Employer" && (
-              <div className="input-box2 input-box">
-                <img src={location} alt="Search" />
-                <Select
-                  onChange={(e) => {
-                    handleInputChange(e, "location");
-                  }}
-                  className={`box-select ms-2 ${isMobile} && w-100`}
-                  placeholder="Location"
-                  options={[{ value: "", label: "" }].concat(
-                    userDatas?.data?.companyLocations.map((option) => ({
-                      value: option,
-                      label: option,
-                    }))
-                  )}
-                />
+        <div>
+          <div className="filters">
+            <div className="col-sm-4 col-sm-offset-4" style={{width: "100%"}}>
+              <div className="panel-group">
+                <div className="panel panel-default">
+                  <div className="panel-heading">
+                    <h4 className="panel-title">
+                      <div className="filtersdiv" onClick={() => setOpen(!open)}>
+                        <div>
+                        <img src={suitcase} alt="job" />
+                        <span>Job Title</span>
+                        </div>
+                        <span>+</span>
+                      </div>
+                    </h4>
+                  </div>
+                  <div className={open ? "panel-collapse" : "panel-collapse panel-close"}>
+                    <ul className="list-group">
+                      <li className="list-group-item">One</li>
+                      <li className="list-group-item">Two</li>
+                      <li className="list-group-item">Three</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
-            )}
-            <div className="input-box3 input-box">
-              <img src={job} alt="Search" />
-              <Select
-                type="text"
-                onChange={(e) => {
-                  handleInputChange(e, "typeOfEmployment");
-                }}
-                className={`box-select ms-2 ${isMobile} && w-100`}
-                placeholder="Type Of Employment"
-                options={[
-                  { value: "", label: "" },
-                  {
-                    value: "Permanent Full-Time",
-                    label: "Permanent Full-Time",
-                  },
-                  { value: "Part-Time", label: "Part-Time" },
-                  { value: "Casual/Vacation", label: "Casual/Vacation" },
-                  { value: "Contract", label: "Contract" },
-                  { value: "Internship/Trainee", label: "Internship/Trainee" },
-                ]}
-              />
+
             </div>
-            {user === "Employer" && (
-              <div className="input-box4 input-box ">
-                <img src={salary} alt="Search" />
-                <input
-                  type="text"
-                  className={`box-input no-border ms-2 ${isMobile} && w-100 ms-0 p-2`}
-                  name="salary"
-                  placeholder="Salary"
-                  onChange={(e) => handleInputChange(e, e.target.name)}
-                />
+
+            <div className="col-sm-4 col-sm-offset-4" style={{width: "100%"}}>
+              <div className="panel-group">
+                <div className="panel panel-default">
+                  <div className="panel-heading">
+                    <h4 className="panel-title">
+                      <div className="filtersdiv" onClick={() => setOpen(!open)}>
+                        <div>
+                        <img src={suitcase} alt="job" />
+                        <span>Experience</span>
+                        </div>
+                        <span>+</span>
+                      </div>
+                    </h4>
+                  </div>
+                  <div className={open ? "panel-collapse" : "panel-collapse panel-close"}>
+                    <ul className="list-group">
+                      <li className="list-group-item">One</li>
+                      <li className="list-group-item">Two</li>
+                      <li className="list-group-item">Three</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
-            )}
-          </div>
-        )}
-        <div className="search-results">
-          <div className="result-employees">
-            <div className="row1">
-              {/* {user === "Employer" ? (
-              <div className="row1-checkboxes">
-                <Checkbox style={checkBoxStyles} onChange={(e) => onChange(e)}>
-                  Assessed
-                </Checkbox>
-                <Checkbox style={checkBoxStyles} onChange={(e) => onChange(e)}>
-                  Pending
-                </Checkbox>
-                <Checkbox style={checkBoxStyles} onChange={(e) => onChange(e)}>
-                  All
-                </Checkbox>
-              </div>
-            ) : (
-              ""
-            )} */}
-              {/* <div className="result-count">
-              {employeeList?.length > 1 ? `${employeeList.length} records` : ""}
-            </div> */}
-              <div className="result-count">
-                {employeeList?.filter((item) => {
-                  const { typeOfEmployment, designation, salary, location } =
-                    filters;
-                  return (
-                    (typeOfEmployment === "" ||
-                      item.typeOfEmployment.toLowerCase() ===
-                        typeOfEmployment.toLowerCase()) &&
-                    (designation === "" ||
-                      item.designation.toLowerCase().includes(designation)) &&
-                    (salary === "" || +item?.salary <= +salary) &&
-                    (location === "" ||
-                      item.companyLocation.toLowerCase() ===
-                        location.toLowerCase())
-                  );
-                })?.length > 1
-                  ? `${
-                      employeeList.filter((item) => {
-                        const {
-                          typeOfEmployment,
-                          designation,
-                          salary,
-                          location,
-                        } = filters;
-                        return (
-                          (typeOfEmployment === "" ||
-                            item.typeOfEmployment.toLowerCase() ===
-                              typeOfEmployment.toLowerCase()) &&
-                          (designation === "" ||
-                            item.designation
-                              .toLowerCase()
-                              .includes(designation)) &&
-                          (salary === "" || +item?.salary <= +salary) &&
-                          (location === "" ||
-                            item.companyLocation.toLowerCase() ===
-                              location.toLowerCase())
-                        );
-                      }).length
-                    } records`
-                  : ""}
-              </div>
+
             </div>
-            <div
-              className="row2"
-              style={
-                employeeList?.filter((item) => {
-                  const { typeOfEmployment, designation, salary, location } =
-                    filters;
-                  return (
-                    (typeOfEmployment === "" ||
-                      item.typeOfEmployment.toLowerCase() ===
-                        typeOfEmployment.toLowerCase()) &&
-                    (designation === "" ||
-                      item.designation.toLowerCase().includes(designation)) &&
-                    (salary === "" || +item?.salary <= +salary) &&
-                    (location === "" ||
-                      item.companyLocation.toLowerCase() ===
-                        location.toLowerCase())
-                  );
-                })?.length === 0
-                  ? { justifyContent: "center" }
-                  : {}
-              }
-            >
-              {employeeList?.filter((item) => {
-                const { typeOfEmployment, designation, salary, location } =
-                  filters;
-                return (
-                  (typeOfEmployment === "" ||
-                    item.typeOfEmployment.toLowerCase() ===
-                      typeOfEmployment.toLowerCase()) &&
-                  (designation === "" ||
-                    item.designation.toLowerCase().includes(designation)) &&
-                  (salary === "" || +item?.salary <= +salary) &&
-                  (location === "" ||
-                    item.companyLocation.toLowerCase() ===
-                      location.toLowerCase())
-                );
-              })?.length === 0 && (
-                <Empty
-                  image={Empty.PRESENTED_IMAGE_SIMPLE}
-                  description="No Records"
-                />
-              )}
-              {employeeList
-                ?.filter((item) => {
-                  const { typeOfEmployment, designation, salary, location } =
-                    filters;
-                  return (
-                    (typeOfEmployment === "" ||
-                      item.typeOfEmployment.toLowerCase() ===
-                        typeOfEmployment.toLowerCase()) &&
-                    (designation === "" ||
-                      item.designation.toLowerCase().includes(designation)) &&
-                    (salary === "" || +item?.salary <= +salary) &&
-                    (location === "" ||
-                      item.companyLocation.toLowerCase() ===
-                        location.toLowerCase())
-                  );
-                })
-                ?.map((info) => {
-                  return (
-                    <AssesmentCard
-                      info={info}
-                      employerId={userDatas?.id}
-                      name={info.employeeName}
-                      companyLocation={info.companyLocation}
-                      designation={info.designation}
-                    />
-                  );
-                })}
+
+            <div className="col-sm-4 col-sm-offset-4" style={{width: "100%"}}>
+              <div className="panel-group">
+                <div className="panel panel-default">
+                  <div className="panel-heading">
+                    <h4 className="panel-title">
+                      <div className="filtersdiv" onClick={() => setOpen(!open)}>
+                        <div>
+                        <img src={suitcase} alt="job" />
+                        <span>Score</span>
+                        </div>
+                        <span>+</span>
+                      </div>
+                    </h4>
+                  </div>
+                  <div className={open ? "panel-collapse" : "panel-collapse panel-close"}>
+                    <ul className="list-group">
+                      <li className="list-group-item">One</li>
+                      <li className="list-group-item">Two</li>
+                      <li className="list-group-item">Three</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
             </div>
+
+            <Button type="primary" style={{width: "88%", margin: "3vh", height: "5vh", borderRadius: "1vh"}}>Apply Filter</Button>
           </div>
         </div>
       </div>

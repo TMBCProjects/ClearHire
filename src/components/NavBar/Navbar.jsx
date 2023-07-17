@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../../assets/images/logo.svg";
 import search from "../../assets/images/search2.svg";
-import onBoard from "../../assets/images/onBoard.svg";
 import verification from "../../assets/images/verification.svg";
 import "../NavBar/Navbar.css";
 import { FileDoneOutlined } from "@ant-design/icons";
@@ -10,9 +9,14 @@ import { logOut } from "../../utils/FirebaseUtils";
 import users from "../../assets/images/users.png";
 import job from "../../assets/images/job.svg";
 import { MenuOutlined } from "@ant-design/icons";
-import { Button, Drawer, Space } from "antd";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPeopleGroup, faUserPlus, faHandshake } from '@fortawesome/free-solid-svg-icons';
+import { Drawer } from "antd";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPeopleGroup,
+  faUserPlus,
+  faHandshake,
+} from "@fortawesome/free-solid-svg-icons";
+import { Slant as Hamburger, Slant } from 'hamburger-react'
 
 export default function EmployerNavbar() {
   const [isMobile, setIsMobile] = useState(false);
@@ -20,7 +24,11 @@ export default function EmployerNavbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const showMenu = () => {
-    setMenuOpen(true);
+    if (!menuOpen) {
+      setMenuOpen(true);
+    } else {
+      setMenuOpen(false);
+    }
   };
 
   const onMenuClose = () => {
@@ -60,13 +68,13 @@ export default function EmployerNavbar() {
         width={500}
         onClose={onMenuClose}
         open={menuOpen}
+        headerStyle={{ display: "none" }}
       >
         {user === "Employer" ? (
-          <div className="mobileNavbar">
+          <div className="mobileNavbar mt-4">
             <NavLink activeclassname="active" to={"/"} className="navlink">
               <div className="navitem">
-                <img src={search} alt="search-logo" className="logo navLink" />
-                &nbsp; Your Employees
+                Your Employees
               </div>
             </NavLink>
 
@@ -76,10 +84,7 @@ export default function EmployerNavbar() {
               className="navlink"
             >
               <div className="navitem">
-              <FontAwesomeIcon
-                    icon={faHandshake}
-                    style={{ color: "green", fontSize: "x-large" }} />
-                &nbsp; On-Board
+                On-Board
               </div>
             </NavLink>
 
@@ -89,10 +94,7 @@ export default function EmployerNavbar() {
               className="navlink"
             >
               <div className="navitem">
-              <FontAwesomeIcon
-                    icon={faUserPlus}
-                    style={{ color: "green", fontSize: "x-large" }} />
-                &nbsp; Requests
+                Requests
               </div>
             </NavLink>
 
@@ -102,31 +104,22 @@ export default function EmployerNavbar() {
               className="navlink"
             >
               <div className="navitem">
-              <FontAwesomeIcon
-                    icon={faPeopleGroup}
-                    style={{ color: "green", fontSize: "x-large" }}
-                  />
-                &nbsp; Recruitment Pool
+                Recruitment Pool
               </div>
             </NavLink>
 
             <NavLink
-                activeclassname="active"
-                to={"/verification"}
-                className="navlink"
-              >
-                <div className="navitem">
-                  <img
-                    src={verification}
-                    alt="search-logo"
-                    className="logo navLink"
-                  />
-                  &nbsp; Verification
-                </div>
-              </NavLink>
+              activeclassname="active"
+              to={"/verification"}
+              className="navlink"
+            >
+              <div className="navitem">
+                Verification
+              </div>
+            </NavLink>
           </div>
         ) : (
-          <div className="mobileNavbar">
+          <div className="mobileNavbar mt-4">
             <NavLink activeclassname="active" to={"/"} className="navlink">
               <div className="navitem">
                 <img src={users} alt="search-logo" className="logo navLink" />
@@ -186,12 +179,7 @@ export default function EmployerNavbar() {
             <div className={isMobile ? "mobileNav" : "navbarBody"}>
               <NavLink activeclassname="active" to={"/"} className="navlink">
                 <div className="navitem">
-                  <img
-                    src={search}
-                    alt="search-logo"
-                    className="logo navLink"
-                  />
-                  &nbsp; Your Employees
+                  Your Employees
                 </div>
               </NavLink>
 
@@ -201,10 +189,7 @@ export default function EmployerNavbar() {
                 className="navlink"
               >
                 <div className="navitem">
-                  <FontAwesomeIcon
-                    icon={faHandshake}
-                    style={{ color: "green", fontSize: "x-large" }} />
-                  &nbsp; On-Board
+                  On-Board
                 </div>
               </NavLink>
 
@@ -214,10 +199,7 @@ export default function EmployerNavbar() {
                 className="navlink"
               >
                 <div className="navitem">
-                  <FontAwesomeIcon
-                    icon={faUserPlus}
-                    style={{ color: "green", fontSize: "x-large" }} />
-                  &nbsp; Requests
+                  Requests
                 </div>
               </NavLink>
 
@@ -227,11 +209,7 @@ export default function EmployerNavbar() {
                 className="navlink"
               >
                 <div className="navitem">
-                  <FontAwesomeIcon
-                    icon={faPeopleGroup}
-                    style={{ color: "green", fontSize: "x-large" }}
-                  />
-                  &nbsp; Recruitment Pool
+                  Recruitment Pool
                 </div>
               </NavLink>
 
@@ -241,14 +219,41 @@ export default function EmployerNavbar() {
                 className="navlink"
               >
                 <div className="navitem">
-                  <img
-                    src={verification}
-                    alt="search-logo"
-                    className="logo navLink"
-                  />
-                  &nbsp; Verification
+                  Verification
                 </div>
               </NavLink>
+
+              <div className="navbarFoot">
+                <Slant onToggle={toggled => {
+                  if (toggled) {
+                    setOpen(true);
+                  } else {
+                    setOpen(false);
+                  }
+                }} />
+
+                {open ? (
+                  <ul className="navbarDropdown">
+                    <li>
+                      <Link to={"/profile"}>View Profile</Link>
+                    </li>{" "}
+                    <hr />
+                    <li>
+                      <a
+                        href="/"
+                        onClick={() => {
+                          logOut();
+                          window.location.reload();
+                        }}
+                      >
+                        Signout
+                      </a>
+                    </li>
+                  </ul>
+                ) : (
+                  ""
+                )}
+              </div>
             </div>
           )
         ) : isMobile ? (
@@ -297,32 +302,14 @@ export default function EmployerNavbar() {
                 &nbsp; Assessment
               </div>
             </NavLink>
+
+            <div className="navbarFoot" onClick={dropdown}>
+
+              <Slant onClick={dropdown} />
+            </div>
           </div>
         )}
-        <div className="navbarFoot">
-          <button onClick={dropdown}></button>
-          {open ? (
-            <ul className="navbarDropdown">
-              <li>
-                <Link to={"/profile"}>View Profile</Link>
-              </li>{" "}
-              <hr />
-              <li>
-                <a
-                  href="/"
-                  onClick={() => {
-                    logOut();
-                    window.location.reload();
-                  }}
-                >
-                  Signout
-                </a>
-              </li>
-            </ul>
-          ) : (
-            ""
-          )}
-        </div>
+
       </div>
     </>
   );
