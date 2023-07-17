@@ -200,7 +200,7 @@
 
 }
 
-.filtersdiv{
+.filtersdiv {
   display: flex;
   align-items: center;
   background-color: #fcfcfc;
@@ -211,6 +211,18 @@
   font-size: medium;
   font-weight: 600;
   border: 1px #d1d1d1b8 solid;
+  flex-direction: column;
+}
+
+.filtersimg {
+  width: 20%;
+  padding: 1vh;
+}
+
+.eachfilter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* media queries for small devices  */
