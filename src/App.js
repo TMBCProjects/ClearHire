@@ -70,7 +70,7 @@ function App() {
           <>
             {sessionStorage.getItem("LoggedIn") === "Employer" ? (
               <div style={{ backgroundColor: "#e9edf3", height: "100vh" }}>
-                <div style={{ marginInline: "7vh" }}>
+                <div style={{ marginInline: "5vh" }}>
 
                   <Navbar />
                   <Routes>
@@ -138,7 +138,7 @@ function App() {
             <>
               {sessionStorage.getItem("LoggedIn") === "Employee" ? (
                 <div style={{ backgroundColor: "#e9edf3", height: "100vh" }}>
-                  <div style={{ marginInline: "7vh" }}>
+                  <div style={{ marginInline: "5vh" }}>
                     <Navbar />
                     <Routes>
                       <Route path="/profile" element={<Profile />}></Route>

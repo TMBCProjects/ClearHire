@@ -28,18 +28,20 @@ export default function SearchEmployee() {
     designation: "",
   });
   const [isMobile, setIsMobile] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
   const [selectedTags, setSelectedTags] = useState([]);
   const { CheckableTag } = Tag;
   const JTData = ['Senior Designer', 'Senior Graphic Designer', 'Human Resource', 'Video Editor', 'UI UX Designer'
     , 'Developer', 'Client Servicing'];
   const formatter = (value) => `${value}%`;
-  const showMenu = () => {
-    setMenuOpen(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
   };
-
-  const onMenuClose = () => {
-    setMenuOpen(false);
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
   };
 
   const handleTagChange = (tag, checked) => {
@@ -242,7 +244,7 @@ export default function SearchEmployee() {
               }
               actions={[
                 <><SettingOutlined key="setting" /> Access</>,
-                <><EditOutlined key="edit" onClick={showModal}/> Rate</>,
+                <><EditOutlined key="edit" onClick={showModal} /> Rate</>,
                 <><EllipsisOutlined key="ellipsis" />More</>,
               ]}
             >
@@ -258,10 +260,13 @@ export default function SearchEmployee() {
         </div>
       </div>
 
-      <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+      <Modal title="Add quick feedback for Courtney" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+        <input type="text" className="searchip" placeholder="Write here" style={{ margin: 0, width: "100%" }} />
+        <Slider
+          tooltip={{
+            formatter,
+          }}
+        />
       </Modal>
     </>
   );

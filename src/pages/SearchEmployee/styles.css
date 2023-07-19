@@ -7,6 +7,10 @@
   margin-top: 8vh;
 }
 
+.search{
+  width: 100%;
+}
+
 .search-inputs {
   width: inherit;
   background-color: white;
@@ -214,6 +218,30 @@
   flex-direction: column;
 }
 
+.panel-collapse{
+  width: 100%;
+}
+
+.searchip{
+  background-color: #dbe3ef;
+  border: none !important;
+  border-radius: 2vh !important;
+  padding: 2vh;
+  margin-left: 3vh;
+  margin-right: 2vh;
+  width: 67%;
+  outline: none;
+}
+
+.searchbtn{
+  width: 3%;
+  height: 6vh;
+  border: none;
+  background: #1f4aff;
+  border-radius: 2vh;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
 .filtersimg {
   width: 20%;
   padding: 1vh;
@@ -225,6 +253,25 @@
   align-items: center;
 }
 
+.empCards{
+  float: right;
+  width: 75%;
+  padding: 3vh;
+}
+
+.ant-card-cover{
+  background: white;
+  border-radius: 2vh;
+}
+
+.ant-card-actions{
+  border-bottom-left-radius: 2vh;
+  border-bottom-right-radius: 2vh;
+}
+
+.ant-card-body{
+  padding: 16px !important
+}
 /* media queries for small devices  */
 
 @media (max-width:767px) {
