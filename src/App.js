@@ -32,13 +32,9 @@ import SendResgination from "./pages/Employer/sendResignation/sendResgination";
 import VerifyCandidate from "./pages/Employer/VerifyCandidate/VerifyCandidate";
 import ViewVerification from "./pages/Employer/ViewVerification/ViewVerification";
 import Verification from "./pages/Employer/Verification/Verification";
-import VerifiedPage from "./pages/Employer/VerifiedPage/VerifiedPage";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (
     <div className="main">
-      <ToastContainer position="bottom-left" />
       <Router>
         {!sessionStorage.getItem("LoggedIn") ? (
           <>
@@ -73,82 +69,15 @@ function App() {
         ) : (
           <>
             {sessionStorage.getItem("LoggedIn") === "Employer" ? (
-<<<<<<< HEAD
-              <div style={{ backgroundColor: "#F5F7F9", height: "100vh" }}>
-                <Navbar />
-                <Routes>
-                  <Route path="/" element={<SearchEmployee />}></Route>
-                  <Route path="/profile" element={<EmployerProfile />}></Route>
-                  <Route
-                    path="/employer-approval"
-                    element={<Approval />}
-                  ></Route>
-                  <Route path="/requests" element={<Requests />}></Route>
-                  <Route
-                    path="/approvalRequest-form"
-                    element={<RequestApproval />}
-                  ></Route>
-                  <Route
-                    path="/ViewEmployeeProfile"
-                    element={<ViewEmployeeProfile />}
-                  ></Route>
-                  <Route
-                    path="/Assessment-form"
-                    element={<EmployeeAssessmentForm />}
-                  ></Route>
-                  <Route
-                    path="/EmployeeAssessment"
-                    element={<EmployeeAssessment />}
-                  ></Route>
-                  <Route
-                    path="/ViewAssessment"
-                    element={<ViewAssessment />}
-                  ></Route>
-                  <Route
-                    path="/employee-details"
-                    element={<EmployeeDetails />}
-                  ></Route>
-                  <Route
-                    path="/onboarding-form"
-                    element={<OnboardingForm />}
-                  ></Route>
-                  <Route
-                    path="/offerletter-sent"
-                    element={<OfferLetterSent />}
-                  ></Route>
-                  <Route
-                    path="/recruitment-pool"
-                    element={<RecruitmentPool />}
-                  ></Route>
-                  <Route
-                    path="/send-resignation"
-                    element={<SendResgination />}
-                  ></Route>
-                  <Route
-                    path="/verify-candidate"
-                    element={<VerifyCandidate />}
-                  ></Route>
-                  <Route
-                    path="/view-verification"
-                    element={<ViewVerification />}
-                  ></Route>
-                  <Route
-                    path="/verification"
-                    element={<Verification />}
-                  ></Route>
-                  <Route
-                    path="/verifiedPage"
-                    element={<VerifiedPage />}
-                  ></Route>
-                </Routes>
-=======
               <div style={{ backgroundColor: "#e9edf3", height: "100vh" }}>
                 <div style={{ marginInline: "5vh" }}>
-
                   <Navbar />
                   <Routes>
                     <Route path="/" element={<SearchEmployee />}></Route>
-                    <Route path="/profile" element={<EmployerProfile />}></Route>
+                    <Route
+                      path="/profile"
+                      element={<EmployerProfile />}
+                    ></Route>
                     <Route
                       path="/employer-approval"
                       element={<Approval />}
@@ -188,22 +117,26 @@ function App() {
                     ></Route>
                     <Route
                       path="/recruitment-pool"
-                      element={<RecruitmentPool />}></Route>
+                      element={<RecruitmentPool />}
+                    ></Route>
                     <Route
                       path="/send-resignation"
-                      element={<SendResgination />}></Route>
+                      element={<SendResgination />}
+                    ></Route>
                     <Route
                       path="/verify-candidate"
-                      element={<VerifyCandidate />}></Route>
+                      element={<VerifyCandidate />}
+                    ></Route>
                     <Route
                       path="/view-verification"
-                      element={<ViewVerification />}></Route>
+                      element={<ViewVerification />}
+                    ></Route>
                     <Route
                       path="/verification"
-                      element={<Verification />}></Route>
+                      element={<Verification />}
+                    ></Route>
                   </Routes>
                 </div>
->>>>>>> 0486839eea31216c894b56d81a9efd1f341f19fd
               </div>
             ) : (
               ""
@@ -234,7 +167,10 @@ function App() {
                         path="/verification-request"
                         element={<VerficationRequest />}
                       ></Route>
-                      <Route path="/Assessment" element={<Assessment />}></Route>
+                      <Route
+                        path="/Assessment"
+                        element={<Assessment />}
+                      ></Route>
                     </Routes>
                   </div>
                 </div>
