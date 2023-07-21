@@ -73,6 +73,7 @@ function App() {
         ) : (
           <>
             {sessionStorage.getItem("LoggedIn") === "Employer" ? (
+<<<<<<< HEAD
               <div style={{ backgroundColor: "#F5F7F9", height: "100vh" }}>
                 <Navbar />
                 <Routes>
@@ -140,6 +141,69 @@ function App() {
                     element={<VerifiedPage />}
                   ></Route>
                 </Routes>
+=======
+              <div style={{ backgroundColor: "#e9edf3", height: "100vh" }}>
+                <div style={{ marginInline: "5vh" }}>
+
+                  <Navbar />
+                  <Routes>
+                    <Route path="/" element={<SearchEmployee />}></Route>
+                    <Route path="/profile" element={<EmployerProfile />}></Route>
+                    <Route
+                      path="/employer-approval"
+                      element={<Approval />}
+                    ></Route>
+                    <Route path="/requests" element={<Requests />}></Route>
+                    <Route
+                      path="/approvalRequest-form"
+                      element={<RequestApproval />}
+                    ></Route>
+                    <Route
+                      path="/ViewEmployeeProfile"
+                      element={<ViewEmployeeProfile />}
+                    ></Route>
+                    <Route
+                      path="/Assessment-form"
+                      element={<EmployeeAssessmentForm />}
+                    ></Route>
+                    <Route
+                      path="/EmployeeAssessment"
+                      element={<EmployeeAssessment />}
+                    ></Route>
+                    <Route
+                      path="/ViewAssessment"
+                      element={<ViewAssessment />}
+                    ></Route>
+                    <Route
+                      path="/employee-details"
+                      element={<EmployeeDetails />}
+                    ></Route>
+                    <Route
+                      path="/onboarding-form"
+                      element={<OnboardingForm />}
+                    ></Route>
+                    <Route
+                      path="/offerletter-sent"
+                      element={<OfferLetterSent />}
+                    ></Route>
+                    <Route
+                      path="/recruitment-pool"
+                      element={<RecruitmentPool />}></Route>
+                    <Route
+                      path="/send-resignation"
+                      element={<SendResgination />}></Route>
+                    <Route
+                      path="/verify-candidate"
+                      element={<VerifyCandidate />}></Route>
+                    <Route
+                      path="/view-verification"
+                      element={<ViewVerification />}></Route>
+                    <Route
+                      path="/verification"
+                      element={<Verification />}></Route>
+                  </Routes>
+                </div>
+>>>>>>> 0486839eea31216c894b56d81a9efd1f341f19fd
               </div>
             ) : (
               ""
@@ -147,30 +211,32 @@ function App() {
 
             <>
               {sessionStorage.getItem("LoggedIn") === "Employee" ? (
-                <div style={{ backgroundColor: "#F5F7F9", height: "100vh" }}>
-                  <Navbar />
-                  <Routes>
-                    <Route path="/profile" element={<Profile />}></Route>
-                    <Route
-                      path="/employeeOfferLetter"
-                      element={<EmployeeOfferLetter />}
-                    ></Route>
-                    <Route path="/offerLetters" element={<Offers />}></Route>
-                    <Route path="/" element={<SearchEmployee />}></Route>
-                    <Route
-                      path="/EmployeeAssessment"
-                      element={<EmployeeAssessment />}
-                    ></Route>
-                    <Route
-                      path="/employee-details"
-                      element={<EmployeeDetails />}
-                    ></Route>
-                    <Route
-                      path="/verification-request"
-                      element={<VerficationRequest />}
-                    ></Route>
-                    <Route path="/Assessment" element={<Assessment />}></Route>
-                  </Routes>
+                <div style={{ backgroundColor: "#e9edf3", height: "100vh" }}>
+                  <div style={{ marginInline: "5vh" }}>
+                    <Navbar />
+                    <Routes>
+                      <Route path="/profile" element={<Profile />}></Route>
+                      <Route
+                        path="/employeeOfferLetter"
+                        element={<EmployeeOfferLetter />}
+                      ></Route>
+                      <Route path="/offerLetters" element={<Offers />}></Route>
+                      <Route path="/" element={<SearchEmployee />}></Route>
+                      <Route
+                        path="/EmployeeAssessment"
+                        element={<EmployeeAssessment />}
+                      ></Route>
+                      <Route
+                        path="/employee-details"
+                        element={<EmployeeDetails />}
+                      ></Route>
+                      <Route
+                        path="/verification-request"
+                        element={<VerficationRequest />}
+                      ></Route>
+                      <Route path="/Assessment" element={<Assessment />}></Route>
+                    </Routes>
+                  </div>
                 </div>
               ) : (
                 ""

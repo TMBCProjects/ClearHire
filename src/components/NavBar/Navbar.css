@@ -1,13 +1,14 @@
 .empnavbar {
     display: flex;
-    /* box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; */
     border-bottom: 1px solid #cfcfcf;
     padding-block: 2vh;
-    justify-content: space-around;
+    justify-content: space-between;
     background: white;
     position: sticky;
-    top: 0;
-    z-index: 9999;
+    top: 5vh;
+    z-index: 11;
+    border-radius: 2vh;
+    padding-inline: 4vh;
 }
 
 .logo.navLink {
@@ -20,23 +21,21 @@
 }
 
 .active {
-    font-weight: 600;
-    text-decoration: none;
-    color: black;
-    border-bottom: 5px solid #00823B;
-    border-radius: 3px;
-    height: 192%;
+    color: #1f4aff;
 }
 
 .navbarBody {
     display: flex;
     align-items: center;
-    gap: 10vh;
+    gap: 7vh;
+}
+
+.navitem {
+    font-weight: 800;
 }
 
 .navbarBody a:hover {
-    color: black;
-    font-weight: 600;
+    color: #1f4aff;
 }
 
 .navbarFoot button {
@@ -68,6 +67,7 @@
     background: white;
     border-radius: 0.4rem;
     z-index: 9;
+    width: 8%;
 }
 
 .navbarDropdown li a {
